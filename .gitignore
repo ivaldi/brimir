@@ -13,3 +13,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# No scaffold css
+app/assets/stylesheets/scaffolds.css.scss
