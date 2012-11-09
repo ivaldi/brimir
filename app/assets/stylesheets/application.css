@@ -21,3 +21,33 @@
 .reveal-modal form{
   margin: 0;
 }
+
+.attachments li{
+  line-height: 1.2;
+}
+
+.attachments img{
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  padding: 2px;
+  background: #fff;
+  float: left;
+}
+
+.attachments strong{
+  display: block;
+}
+
+.attachments .meta{
+  font-size: 13px;
+}
+
+.group:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	line-height: 0;
+	height: 0;
+}
+ 

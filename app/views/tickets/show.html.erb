@@ -1,9 +1,17 @@
 <div class="row">
   <div class="nine columns">
     <div class="panel">
-      <h1>Dit is de titel van een ticket</h1>
-      <h5 class="subheader">Door <a href="#">lodewijk@theperfectwedding.nl</a> op 12 november</h5>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fringilla fermentum est, id eleifend est congue sed. In interdum molestie tortor, eget condimentum felis eleifend vel. Phasellus mi urna, cursus porta ornare quis, posuere non elit. Nunc dictum metus quis nunc auctor eget scelerisque sem cursus. Cras feugiat viverra congue. Nunc dapibus dui semper est vestibulum vel suscipit risus elementum. Nulla facilisi. Curabitur varius dignissim lectus, porttitor fringilla nunc viverra eget. Donec sed diam id lacus dapibus facilisis. Mauris fermentum est ut massa feugiat rutrum. Praesent congue adipiscing enim sit amet convallis.</p>
+      <h1><%= @ticket.subject %></h1>
+      <h5 class="subheader">By <a href="#"><%= @ticket.from %></a> on <%= l @ticket.created_at, format: :long %></h5>
+      <p><%= @ticket.content %></p>
+      <hr />
+      <ul class="block-grid three-up attachments" data-clearing>
+        <li class="group">
+          <a href="#"><img src="http://placehold.it/50x50" /></a>
+          <strong>Filename.pdf</strong>
+          <span class="meta">1.3mb &middot; <a href="#">view</a> &middot; <a href="#" target="_blank">download</a></span>
+        </li>
+      </ul>
     </div>
     
     <ul class="accordion">
@@ -14,6 +22,14 @@
         <div class="content">
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <hr />
+          <ul class="block-grid three-up attachments" data-clearing>
+            <li class="group">
+              <a href="#"><img src="http://placehold.it/50x50" /></a>
+              <strong>Filename.pdf</strong>
+              <span class="meta">1.3mb &middot; <a href="#">view</a> &middot; <a href="#" target="_blank">download</a></span>
+            </li>
+          </ul>
         </div>
       </li>
       <li>
@@ -38,22 +54,41 @@
     
     <ul class="button-group radius">
       <li>
-        <a href="#" class="button regular radius">Reply all</a>
+        <a class="button regular radius" data-reveal-id="reply-ticket">Add reply</a>
       </li>
       <li>
-        <a href="#" class="button regular radius">New note</a>
+        <a class="button regular radius" data-reveal-id="note-ticket">New internal note</a>
       </li>
     </ul>
     
   </div>
   <div class="three columns">
     <ul class="side-nav">
-      <li><a href="#" data-reveal-id="assign-ticket">Assign ticket</a></li> 
+      <li><a data-reveal-id="assign-ticket">Assign ticket</a></li> 
       <li><a href="#">Close ticket</a></li>
       <li><a href="#">Delete ticket</a></li>
       <li class="divider"></li> 
-      <li><a href="#">Reply to ticket</a></li>
-      <li><a href="#">New note</a></li>            
+      <li><a href="#" data-reveal-id="reply-ticket">Reply to ticket</a></li>
+      <li><a href="#" data-reveal-id="note-ticket">New note</a></li>            
     </ul>
   </div>
 </div>
+
+<div id="reply-ticket" class="reveal-modal large">
+  <h3>Write your reply</h3>
+  <form>
+    <textarea placeholder="Type your reply. The client will receive this reply via email."></textarea>
+    <input type="submit" class="button" value="Send reply" />
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+<div id="note-ticket" class="reveal-modal large">
+  <h3>Write your internal note</h3>
+  <form>
+    <textarea placeholder="Type your note. The client will notice anything of this message."></textarea>
+    <input type="submit" class="button" value="Post internal note" />
+  </form>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+

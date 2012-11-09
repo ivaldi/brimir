@@ -4,97 +4,63 @@
 <!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
-<head>
-	<meta charset="utf-8" />
-	
-	<!-- Uncomment to make IE8 render like IE7 -->
-	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
-	
-	<!-- Set the viewport width to device width for mobile -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
-  
-	<!-- Included CSS Files -->
-	<%= stylesheet_link_tag    "application" %>
-	
-	<!-- Included JS Files  -->
-	<%= javascript_include_tag "application" %>
-  
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <nav class="top-bar">
-    <ul>
-      <li class="name">
-        <h1>
-          <a href="#">
-            Brimir
-          </a>
-        </h1>
-      </li>
-      <li class="toggle-topbar"><a href="#"></a></li>
-    </ul>
-  
-    <section>
-      <!--<ul class="left">
-        <li class="divider"></li>
-        <li>
-          <a href="#">Tickets</a>
-        </li>
-        <li class="divider"></li>
-      </ul>-->
-      <ul class="right">
-        <li class="divider"></li>
-        <li class="has-dropdown">
-          <a href="#">Sem</a>
-          <ul class="dropdown">
-            <li>
-              <a href="#">Settings</a>
-            </li>
-            <li>
-              <a href="#">Logout</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </section>
-  </nav>
-  <%= yield %>
-  <div id="assign-ticket" class="reveal-modal small">
-    <h3>Assign this ticket to...</h3>
-    <form>
-      <p>
-        <select>
-          <option>Nobody</option>
-          <option>Sem</option>
-          <option>Frank</option>        
-        </select>
-      </p>
-      <input type="submit" class="button" value="Assign!" />
-    </form>
-    <a class="close-reveal-modal">&#215;</a>
-  </div>
-  <div id="reassign-ticket" class="reveal-modal small">
-    <h3>Reassign this ticket to...</h3>
-    <form>
-      <p>
-        <select>
-          <option>Nobody</option>
-          <option>Sem</option>
-          <option>Frank</option>        
-        </select>
-      </p>
-      <input type="submit" class="button" value="Reassign!" />      
-    </form>
-    <a class="close-reveal-modal">&#215;</a>
-  </div>
-  <div id="reply-ticket" class="reveal-modal large">
-    <h3>Reply to ticket</h3>
-    <form>
+  <head>
+      <meta charset="utf-8" />
       
-    </form>
-  </div>
+      <!-- Uncomment to make IE8 render like IE7 -->
+      <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+      
+      <!-- Set the viewport width to device width for mobile -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+      <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+    
+      <!-- Included CSS Files -->
+      <%= stylesheet_link_tag    "application" %>
+      
+      <!-- Included JS Files  -->
+      <%= javascript_include_tag "application" %>
+    
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <nav class="top-bar">
+      <ul>
+        <li class="name">
+          <h1>
+            <a href="#">
+              Brimir
+            </a>
+          </h1>
+        </li>
+        <li class="toggle-topbar"><a href="#"></a></li>
+      </ul>
+      <section>
+        <!--<ul class="left">
+          <li class="divider"></li>
+          <li>
+            <a href="#">Tickets</a>
+          </li>
+          <li class="divider"></li>
+        </ul>-->
+        <ul class="right">
+          <li class="divider"></li>
+          <li class="has-dropdown">
+            <a href="#">Sem</a>
+            <ul class="dropdown">
+              <li>
+                <a href="#">Settings</a>
+              </li>
+              <li>
+                <a href="#">Logout</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+    
+    <%= yield %>
 
-</body>
+  </body>
 </html>
