@@ -19,6 +19,23 @@
         </th>
       </thead>
       <tbody>
+        <% @tickets.each do |ticket| %>
+          <tr>
+            <td>
+              <span class="label round"><%= ticket.status %></span>
+              <a href="#">Dit is de titel van een ingeschoten e-mail</a>
+            </td>
+            <td>
+              <a href="mailto:#">lodewijk@theperfectwedding.nl</a>
+            </td>
+            <td>
+              <a href="#" data-reveal-id="assign-ticket"><em>Nobody</em></a>
+            </td>
+            <td>
+              <%= l ticket.created_at, format: :short %>
+            </td>
+          </tr>
+        <% end %>
         <tr>
           <td>
             <span class="label round">New</span>

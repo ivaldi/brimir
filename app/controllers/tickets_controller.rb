@@ -3,5 +3,6 @@ class TicketsController < ApplicationController
   end
 
   def index
+    @tickets = Ticket.all
   end
 end
