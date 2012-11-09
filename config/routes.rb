@@ -4,7 +4,7 @@ Helpdesksysteem::Application.routes.draw do
 
   resources :users
 
-  resources :tickets, only: [:index, :show]
+  resources :tickets, only: [:index, :show, :update]
 
   root :to => 'tickets#index'
 
