@@ -1,50 +1,70 @@
-<nav class="top-bar">
-  <ul>
-    <li class="name">
-      <h1>
-        <a href="#">
-          Brimir
-        </a>
-      </h1>
-    </li>
-    <li class="toggle-topbar"><a href="#"></a></li>
-  </ul>
-
-  <section>
-    <!--<ul class="left">
-      <li class="divider"></li>
-      <li>
-        <a href="#">Tickets</a>
-      </li>
-      <li class="divider"></li>
-    </ul>-->
-    <ul class="right">
-      <li class="divider"></li>
-      <li class="has-dropdown">
-        <a href="#">Sem</a>
-        <ul class="dropdown">
-          <li>
-            <a href="#">Settings</a>
-          </li>
-          <li>
-            <a href="#">Logout</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-</nav>
-
 <div class="row">
   <div class="twelve columns">
-    <h2>Alle tickets</h2>
-    <table>
+    <h2>Tickets</h2>
+    <!--<dl class="sub-nav">
+      <dt>Filter:</dt>
+      <dd class="active"><a href="#">All</a></dd>
+      <dd><a href="#">Yours</a></dd>
+      <dd><a href="#">Assigned</a></dd>
+      <dd><a href="#">Closed</a></dd>
+      <dd><a href="#">Deleted</a></dd>
+    </dl>-->
+    <table class="full">
       <thead>
         <tr>
-          <th>Titel</th>
-          <th>Afzender</th>
+          <th width="50%">Title</th>
+          <th>Sender</th>
+          <th>Assigned to</th>          
+          <th>Reported on</th>
         </th>
       </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="label round">New</span>
+            <a href="#">Dit is de titel van een ingeschoten e-mail</a>
+          </td>
+          <td>
+            <a href="mailto:#">lodewijk@theperfectwedding.nl</a>
+          </td>
+          <td>
+            <a href="#" data-reveal-id="assign-ticket"><em>Nobody</em></a>
+          </td>
+          <td>
+            9 november
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="label success round">Yours</span>
+            <a href="#">Dit is de titel van een ingeschoten e-mail</a>
+          </td>
+          <td>
+            <a href="mailto:#">lodewijk@theperfectwedding.nl</a>
+          </td>
+          <td>
+            Sem
+          </td>
+          <td>
+            9 november
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <a href="#">Dit is de titel van een ingeschoten e-mail</a>
+          </td>
+          <td>
+            <a href="mailto:#">lodewijk@theperfectwedding.nl</a>
+          </td>
+          <td>
+            Frank
+          </td>
+          <td>
+            9 november
+          </td>
+        </tr>
+
+      </tbody>
     </table>
   </div>
 </div>
