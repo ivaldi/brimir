@@ -22,11 +22,10 @@
         <% @tickets.each do |ticket| %>
           <tr>
             <td>
-              <span class="label round"><%= ticket.status %></span>
-              <a href="#">Dit is de titel van een ingeschoten e-mail</a>
+              <a href="#"><%= ticket.subject %></a>
             </td>
             <td>
-              <a href="mailto:#">lodewijk@theperfectwedding.nl</a>
+              <a href="mailto:<%= ticket.from %>"><%= ticket.from %></a>
             </td>
             <td>
               <a href="#" data-reveal-id="assign-ticket"><em>Nobody</em></a>
