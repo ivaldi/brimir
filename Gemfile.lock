@@ -120,7 +120,7 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.1)
       rack (>= 1.0)
-    zurb-foundation (3.0.9)
+    zurb-foundation (3.2.0)
       compass (>= 0.12.2)
       modular-scale (>= 1.0.2)
       rake
@@ -138,4 +138,4 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)
-  zurb-foundation
+  zurb-foundation (~> 3.2.0)
