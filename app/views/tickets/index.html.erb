@@ -16,7 +16,7 @@
           <th>Sender</th>
           <th>Assigned to</th>          
           <th>Reported on</th>
-        </th>
+        </tr>
       </thead>
       <tbody>
         <% @tickets.each do |ticket| %>
@@ -49,15 +49,4 @@
   </div>
 </div>
 
-<div id="assign-ticket" class="reveal-modal small">
-  <h3>Assign this ticket to...</h3>
-
-  <%= form_for Ticket.new, remote: true, method: :put do |f| %>
-    <p>
-      <%= f.select :assignee_id, options_from_collection_for_select(@users, 'id', 'email'), prompt: 'nobody' %>
-    </p>
-    <%= f.submit 'Assign', class: 'button' %>
-  <% end %>
-
-  <a class="close-reveal-modal">&#215;</a>
-</div>
+<%= render 'assign_form', { ticket: Ticket.new } %>
