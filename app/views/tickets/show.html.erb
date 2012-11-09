@@ -1,9 +1,11 @@
 <div class="row">
   <div class="nine columns">
+
     <div class="panel">
       <h1><%= @ticket.subject %></h1>
       <h5 class="subheader">By <a href="#"><%= @ticket.from %></a> on <%= l @ticket.created_at, format: :long %></h5>
       <p><%= @ticket.content %></p>
+      <%#
       <hr />
       <ul class="block-grid three-up attachments" data-clearing>
         <li class="group">
@@ -12,8 +14,9 @@
           <span class="meta">1.3mb &middot; <a href="#">view</a> &middot; <a href="#" target="_blank">download</a></span>
         </li>
       </ul>
+      %>
     </div>
-    
+<%#
     <ul class="accordion">
       <li class="active">
         <div class="title">
@@ -60,16 +63,18 @@
         <a class="button regular radius" data-reveal-id="note-ticket">New internal note</a>
       </li>
     </ul>
-    
+%>
   </div>
   <div class="three columns">
     <ul class="side-nav">
-      <li><a href="#" data-reveal-id="assign-ticket">Assign ticket</a></li> 
+      <li><a href="#" data-reveal-id="assign-ticket">Assign ticket</a></li>
+<%#
       <li><a href="#">Close ticket</a></li>
       <li><a href="#">Delete ticket</a></li>
       <li class="divider"></li> 
       <li><a href="#" data-reveal-id="reply-ticket">Reply to ticket</a></li>
       <li><a href="#" data-reveal-id="note-ticket">New note</a></li>            
+%>
     </ul>
   </div>
 </div>
