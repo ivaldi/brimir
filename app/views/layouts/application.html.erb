@@ -24,6 +24,53 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <nav class="top-bar">
+    <ul>
+      <li class="name">
+        <h1>
+          <a href="#">
+            Brimir
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar"><a href="#"></a></li>
+    </ul>
+  
+    <section>
+      <!--<ul class="left">
+        <li class="divider"></li>
+        <li>
+          <a href="#">Tickets</a>
+        </li>
+        <li class="divider"></li>
+      </ul>-->
+      <ul class="right">
+        <li class="divider"></li>
+        <li class="has-dropdown">
+          <a href="#">Sem</a>
+          <ul class="dropdown">
+            <li>
+              <a href="#">Settings</a>
+            </li>
+            <li>
+              <a href="#">Logout</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </nav>
   <%= yield %>
+  <div id="assign-ticket" class="reveal-modal medium">
+    <h3>Assign this ticket to...</h3>
+    <form>
+      <select>
+        <option>Nobody</option>
+        <option>Sem</option>
+        <option>Frank</option>        
+      </select>
+    </form>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
 </body>
 </html>

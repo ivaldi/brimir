@@ -1,4 +1,6 @@
 Helpdesksysteem::Application.routes.draw do
+  get "tickets/show"
+
   devise_for :users
 
   resources :users
