@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   def show
     @ticket = Ticket.find(params[:id])
+    @users = User.all
   end
 
   def index

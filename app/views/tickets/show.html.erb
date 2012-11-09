@@ -64,7 +64,7 @@
   </div>
   <div class="three columns">
     <ul class="side-nav">
-      <li><a data-reveal-id="assign-ticket">Assign ticket</a></li> 
+      <li><a href="#" data-reveal-id="assign-ticket">Assign ticket</a></li> 
       <li><a href="#">Close ticket</a></li>
       <li><a href="#">Delete ticket</a></li>
       <li class="divider"></li> 
@@ -92,3 +92,4 @@
   <a class="close-reveal-modal">&#215;</a>
 </div>
 
+<%= render 'assign_form', { ticket: @ticket } %>

@@ -1,0 +1,13 @@
+<div id="assign-ticket" class="reveal-modal small">
+  <h3>Assign this ticket to...</h3>
+
+  <%= form_for ticket, remote: true, method: :put do |f| %>
+    <p>
+      <%= f.select :assignee_id, options_from_collection_for_select(@users, 'id', 'email', ticket.id), include_blank: 'Nobody' %>
+    </p>
+    <%= f.submit 'Assign', class: 'button' %>
+  <% end %>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
