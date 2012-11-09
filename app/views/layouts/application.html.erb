@@ -28,7 +28,7 @@
       <ul>
         <li class="name">
           <h1>
-            <a href="#">
+            <a href="<%= root_path %>">
               Brimir
             </a>
           </h1>
@@ -43,20 +43,22 @@
           </li>
           <li class="divider"></li>
         </ul>-->
+        <% if user_signed_in? %>
         <ul class="right">
           <li class="divider"></li>
           <li class="has-dropdown">
-            <a href="#">Sem</a>
+            <a href="#"><%= current_user.email %></a>
             <ul class="dropdown">
               <li>
                 <a href="#">Settings</a>
               </li>
               <li>
-                <a href="#">Logout</a>
+   	            <%= link_to 'Sign out', :destroy_user_session, method: :delete %>
               </li>
             </ul>
           </li>
         </ul>
+   	    <% end %>
       </section>
     </nav>
     
