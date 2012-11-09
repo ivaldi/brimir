@@ -22,7 +22,7 @@
         <% @tickets.each do |ticket| %>
           <tr>
             <td>
-              <a href="#"><%= ticket.subject %></a>
+              <%= link_to ticket.subject, ticket %>
             </td>
             <td>
               <a href="mailto:<%= ticket.from %>"><%= ticket.from %></a>
