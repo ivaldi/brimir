@@ -1,9 +1,9 @@
 <div class="row">
   <div class="nine columns">
     <div class="panel">
-      <h1>Dit is de titel van een ticket</h1>
-      <h5 class="subheader">Door <a href="#">lodewijk@theperfectwedding.nl</a> op 12 november</h5>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur fringilla fermentum est, id eleifend est congue sed. In interdum molestie tortor, eget condimentum felis eleifend vel. Phasellus mi urna, cursus porta ornare quis, posuere non elit. Nunc dictum metus quis nunc auctor eget scelerisque sem cursus. Cras feugiat viverra congue. Nunc dapibus dui semper est vestibulum vel suscipit risus elementum. Nulla facilisi. Curabitur varius dignissim lectus, porttitor fringilla nunc viverra eget. Donec sed diam id lacus dapibus facilisis. Mauris fermentum est ut massa feugiat rutrum. Praesent congue adipiscing enim sit amet convallis.</p>
+      <h1><%= @ticket.subject %></h1>
+      <h5 class="subheader">By <a href="#"><%= @ticket.from %></a> on <%= l @ticket.created_at, format: :long %></h5>
+      <p><%= @ticket.content %></p>
     </div>
     
     <ul class="accordion">
