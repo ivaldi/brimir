@@ -61,16 +61,34 @@
     </section>
   </nav>
   <%= yield %>
-  <div id="assign-ticket" class="reveal-modal medium">
+  <div id="assign-ticket" class="reveal-modal small">
     <h3>Assign this ticket to...</h3>
     <form>
-      <select>
-        <option>Nobody</option>
-        <option>Sem</option>
-        <option>Frank</option>        
-      </select>
+      <p>
+        <select>
+          <option>Nobody</option>
+          <option>Sem</option>
+          <option>Frank</option>        
+        </select>
+      </p>
+      <input type="submit" class="button" value="Assign!" />
     </form>
     <a class="close-reveal-modal">&#215;</a>
   </div>
+  <div id="reassign-ticket" class="reveal-modal small">
+    <h3>Reassign this ticket to...</h3>
+    <form>
+      <p>
+        <select>
+          <option>Nobody</option>
+          <option>Sem</option>
+          <option>Frank</option>        
+        </select>
+      </p>
+      <input type="submit" class="button" value="Reassign!" />      
+    </form>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+
 </body>
 </html>
