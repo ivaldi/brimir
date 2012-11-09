@@ -20,7 +20,7 @@
       </thead>
       <tbody>
         <% @tickets.each do |ticket| %>
-          <tr>
+          <tr data-ticket-url="<%= ticket_url(ticket) %>">
             <td>
               <% if !ticket.assignee %>
                 <span class="label round">New</span>
@@ -32,11 +32,11 @@
             <td>
               <a href="mailto:<%= ticket.from %>"><%= ticket.from %></a>
             </td>
-            <td>
+            <td class="assignee">
               <% if ticket.assignee %>
-                <a href="#" data-reveal-id="reassign-ticket"><%= ticket.assignee.email %></a>
+                <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
               <% else %>
-                <a href="#" data-reveal-id="assign-ticket"><em>Nobody</em></a>
+                <a data-assignee-id="" href="#">Nobody</a>
               <% end %>
             </td>
             <td>
@@ -51,30 +51,13 @@
 
 <div id="assign-ticket" class="reveal-modal small">
   <h3>Assign this ticket to...</h3>
-  <form>
-    <p>
-      <select>
-        <option>Nobody</option>
-        <option>Sem</option>
-        <option>Frank</option>        
-      </select>
-    </p>
-    <input type="submit" class="button" value="Assign!" />
-  </form>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
-<div id="reassign-ticket" class="reveal-modal small">
-  <h3>Reassign this ticket to...</h3>
-  <form>
-    <p>
-      <select>
-        <option>Nobody</option>
-        <option>Sem</option>
-        <option>Frank</option>        
-      </select>
-    </p>
-    <input type="submit" class="button" value="Reassign!" />      
-  </form>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
 
+  <%= form_for Ticket.new, remote: true, method: :put do |f| %>
+    <p>
+      <%= f.select :assignee_id, options_from_collection_for_select(@users, 'id', 'email'), prompt: 'nobody' %>
+    </p>
+    <%= f.submit 'Assign', class: 'button' %>
+  <% end %>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>
