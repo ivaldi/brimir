@@ -36,7 +36,7 @@
               <% if ticket.assignee %>
                 <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
               <% else %>
-                <a data-assignee-id="" href="#">Nobody</a>
+                <a data-assignee-id="" href="#"><em>Nobody</em></a>
               <% end %>
             </td>
             <td>
