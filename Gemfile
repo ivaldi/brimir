@@ -45,3 +45,6 @@ gem 'devise'
 
 # Pagination
 gem 'will_paginate'
+
+# Attachments, thumbnails etc
+gem 'paperclip'

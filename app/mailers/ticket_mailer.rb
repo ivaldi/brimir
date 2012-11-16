@@ -3,11 +3,12 @@ class TicketMailer < ActionMailer::Base
 
   def receive(email)
     content = ''
+
     if email.multipart?
       if email.html_part
-        content = email.text_part.body.decoded
+        content = email.html_part.body.decoded
       else 
-        content = email.html_part.body.decoded 
+        content = email.text_part.body.decoded 
       end
     else
       content = email.body.decoded
@@ -24,8 +25,18 @@ class TicketMailer < ActionMailer::Base
 
       email.attachments.each do |attachment|
 
-        ticket.attachments.create()
+        file = StringIO.new(attachment.decoded)
 
+        # add needed fields for paperclip
+        file.class.class_eval {
+            attr_accessor :original_filename, :content_type
+        }
+
+        file.original_filename = attachment.filename
+        file.content_type = attachment.mime_type 
+
+        a = ticket.attachments.create(file: file)
+        a.save! # FIXME do we need this because of paperclip?
       end
 
     end

@@ -12,7 +12,7 @@
         <ul class="block-grid three-up attachments" data-clearing>
           <% @ticket.attachments.each do |attachment| %>
             <li class="group">
-              <a href="#"><img src="http://placehold.it/50x50" /></a>
+              <a href="#"><img src="<%= attchment.url_for(:thumb) %>" /></a>
               <strong>Filename.pdf</strong>
               <span class="meta">1.3mb &middot; <a href="#">view</a> &middot; <a href="#" target="_blank">download</a></span>
             </li>
