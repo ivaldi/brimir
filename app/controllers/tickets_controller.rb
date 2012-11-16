@@ -2,11 +2,24 @@ class TicketsController < ApplicationController
   def show
     @ticket = Ticket.find(params[:id])
     @users = User.all
+    @statuses = Status.all
   end
 
   def index
-    @tickets = Ticket.all
     @users = User.all
+    @statuses = Status.all
+
+    @tickets = Ticket.order(:created_at)
+
+    if !params[:status_id].nil?
+      @tickets = @tickets.where(status_id: params[:status_id])
+    end
+
+    if !params[:assignee_id].nil?
+      @tickets = @tickets.where(assignee_id: params[:assignee_id])
+    end
+
+    @tickets = @tickets.page(params[:page])
   end
 
   def update

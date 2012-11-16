@@ -1,17 +1,44 @@
 <div class="row">
   <div class="twelve columns">
     <h2>Tickets</h2>
-    <!--<dl class="sub-nav">
-      <dt>Filter:</dt>
-      <dd class="active"><a href="#">All</a></dd>
-      <dd><a href="#">Yours</a></dd>
-      <dd><a href="#">Assigned</a></dd>
-      <dd><a href="#">Closed</a></dd>
-      <dd><a href="#">Deleted</a></dd>
-    </dl>-->
+
+
+    <dl class="sub-nav">
+      <dt>Assignee:</dt>
+
+      <%= active_elem_if 'dd', params[:assignee_id].nil? do
+          link_to 'All', tickets_path(params.merge(assignee_id: nil))
+        end %>
+
+      <%= active_elem_if 'dd', params[:assignee_id] == current_user.id.to_s do
+          link_to 'Yours', tickets_path(params.merge(assignee_id: current_user.id))
+        end %>
+
+      <%= active_elem_if 'dd', params[:assignee_id] == '0' do
+          link_to 'Unassigned', tickets_path(params.merge(assignee_id: 0))
+        end %>
+    </dl>
+
+    <dl class="sub-nav">
+      <dt>Status:</dt>
+
+      <%= active_elem_if 'dd', params[:status_id].nil? do
+          link_to 'All', tickets_path(params.merge(status_id: nil))
+        end %>
+
+      <% @statuses.each do |status| %>
+
+        <%= active_elem_if 'dd', params[:status_id] == status.id.to_s do
+            link_to status.name, tickets_path(params.merge(status_id: status.id))
+          end %>
+
+      <% end %>
+    </dl>
+
     <table class="full">
       <thead>
         <tr>
+          <th>Status</th>
           <th width="50%">Title</th>
           <th>Sender</th>
           <th>Assigned to</th>          
@@ -21,16 +48,19 @@
       <tbody>
         <% @tickets.each do |ticket| %>
           <tr data-ticket-url="<%= ticket_url(ticket) %>">
+            <td class="status">
+              <a data-status-id="<%= ticket.status.id %>" href="#"><%= ticket.status.name %></a>
+            </td>
             <td>
               <% if !ticket.assignee %>
-                <span class="label round">New</span>
+                <span class="label alert round">Unassigned</span>
               <% elsif ticket.assignee == current_user %>
                 <span class="label success round">Yours</span>
               <% end %>
               <%= link_to ticket.subject, ticket %>
             </td>
             <td>
-              <a href="mailto:<%= ticket.from %>"><%= ticket.from %></a>
+              <%= ticket.from %>
             </td>
             <td class="assignee">
               <% if ticket.assignee %>
@@ -46,7 +76,10 @@
         <% end %>
       </tbody>
     </table>
+
+    <%= will_paginate @tickets %>
   </div>
 </div>
 
 <%= render 'assign_form', { ticket: Ticket.new } %>
+<%= render 'change_status_form', { ticket: Ticket.new } %>

@@ -2,7 +2,9 @@
   <div class="nine columns">
 
     <div class="panel">
-      <h1><%= @ticket.subject %></h1>
+      <h1>
+        <%= @ticket.subject %>
+      </h1>
       <h5 class="subheader">By <a href="#"><%= @ticket.from %></a> on <%= l @ticket.created_at, format: :long %></h5>
       <p><%= @ticket.content %></p>
       <%#
@@ -67,14 +69,21 @@
   </div>
   <div class="three columns">
     <ul class="side-nav">
-      <li><a href="#" data-reveal-id="assign-ticket">Assign ticket</a></li>
-<%#
-      <li><a href="#">Close ticket</a></li>
-      <li><a href="#">Delete ticket</a></li>
-      <li class="divider"></li> 
-      <li><a href="#" data-reveal-id="reply-ticket">Reply to ticket</a></li>
-      <li><a href="#" data-reveal-id="note-ticket">New note</a></li>            
-%>
+      <li>
+        Assignee:
+        <a href="#" data-reveal-id="assign-ticket">
+        <% if !@ticket.assignee %>
+          Nobody
+        <% else %>
+          <%= @ticket.assignee.email %>
+        <% end %>
+        </a>
+      </li>
+      <li>Status:
+        <a href="#" data-reveal-id="change-status">
+          <%= @ticket.status.name %>
+        </a>
+      </li>
     </ul>
   </div>
 </div>
@@ -98,3 +107,4 @@
 </div>
 
 <%= render 'assign_form', { ticket: @ticket } %>
+<%= render 'change_status_form', { ticket: @ticket } %>
