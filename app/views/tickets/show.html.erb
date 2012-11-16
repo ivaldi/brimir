@@ -12,9 +12,9 @@
         <ul class="block-grid three-up attachments" data-clearing>
           <% @ticket.attachments.each do |attachment| %>
             <li class="group">
-              <a href="#"><img src="<%= attchment.url_for(:thumb) %>" /></a>
-              <strong>Filename.pdf</strong>
-              <span class="meta">1.3mb &middot; <a href="#">view</a> &middot; <a href="#" target="_blank">download</a></span>
+              <a href="<%= attachment.file.url %>"><img src="<%= attachment.file.url(:thumb) %>" /></a>
+              <strong><%= attachment.file_file_name %></strong>
+              <span class="meta"><%= number_to_human_size(attachment.file.size()) %> &middot; <%= link_to 'download', attachment.file.url %></span>
             </li>
           <% end %>
         </ul>
