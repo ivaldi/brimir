@@ -18,7 +18,7 @@ class TicketMailer < ActionMailer::Base
       from: email.from.join(', '),
       subject: email.subject,
       content: content,
-      status_id: Status.where(name: 'New')
+      status_id: Status.where(name: 'Open')
     })
 
     if email.has_attachments?
