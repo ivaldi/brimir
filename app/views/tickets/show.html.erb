@@ -6,17 +6,19 @@
         <%= @ticket.subject %>
       </h1>
       <h5 class="subheader">By <a href="#"><%= @ticket.from %></a> on <%= l @ticket.created_at, format: :long %></h5>
-      <p><%= @ticket.content %></p>
-      <%#
-      <hr />
-      <ul class="block-grid three-up attachments" data-clearing>
-        <li class="group">
-          <a href="#"><img src="http://placehold.it/50x50" /></a>
-          <strong>Filename.pdf</strong>
-          <span class="meta">1.3mb &middot; <a href="#">view</a> &middot; <a href="#" target="_blank">download</a></span>
-        </li>
-      </ul>
-      %>
+      <%= @ticket.content.html_safe %>
+      <% if @ticket.attachments %>
+        <hr />
+        <ul class="block-grid three-up attachments" data-clearing>
+          <% @ticket.attachments.each do |attachment| %>
+            <li class="group">
+              <a href="#"><img src="http://placehold.it/50x50" /></a>
+              <strong>Filename.pdf</strong>
+              <span class="meta">1.3mb &middot; <a href="#">view</a> &middot; <a href="#" target="_blank">download</a></span>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
 <%#
     <ul class="accordion">
