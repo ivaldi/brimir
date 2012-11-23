@@ -3,6 +3,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @users = User.all
     @statuses = Status.all
+    @reply = Reply.new
   end
 
   def index

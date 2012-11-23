@@ -13,7 +13,7 @@
         <pre><%= @ticket.content %></pre>
       <% end %>
 
-      <% if @ticket.attachments %>
+      <% if @ticket.attachments.size > 0 %>
         <hr />
         <ul class="block-grid three-up attachments">
           <% @ticket.attachments.each do |attachment| %>
@@ -26,7 +26,7 @@
         </ul>
       <% end %>
     </div>
-<%#
+
     <ul class="accordion">
       <li class="active">
         <div class="title">
@@ -73,7 +73,7 @@
         <a class="button regular radius" data-reveal-id="note-ticket">New internal note</a>
       </li>
     </ul>
-%>
+
   </div>
   <div class="three columns">
     <ul class="side-nav">
@@ -98,10 +98,10 @@
 
 <div id="reply-ticket" class="reveal-modal large">
   <h3>Write your reply</h3>
-  <form>
-    <textarea placeholder="Type your reply. The client will receive this reply via email."></textarea>
-    <input type="submit" class="button" value="Send reply" />
-  </form>
+  <%= form_for @reply, remote: true do |r| %>
+    <%= r.text_area :content, placeholder: 'Type your reply. The client will receive this reply via email.' %>
+    <%= r.submit value: 'Send reply', class: 'button' %>
+  <% end %>
   <a class="close-reveal-modal">&#215;</a>
 </div>
 

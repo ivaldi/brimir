@@ -1,6 +1,11 @@
 class TicketMailer < ActionMailer::Base
   default from: "from@example.com"
 
+  def reply(reply)
+    @reply = reply
+    mail(to: 'frank@ivaldi.nl', subject: '')
+  end
+
   def receive(email)
     content = ''
 
