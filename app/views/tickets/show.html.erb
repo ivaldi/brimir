@@ -50,9 +50,6 @@
       <li>
         <a class="button regular radius" data-reveal-id="reply-ticket">Add reply</a>
       </li>
-      <li>
-        <a class="button regular radius" data-reveal-id="note-ticket">New internal note</a>
-      </li>
     </ul>
 
   </div>
@@ -84,15 +81,6 @@
     <%= r.text_area :content, placeholder: 'Type your reply. The client will receive this reply via email.' %>
     <%= r.submit value: 'Send reply', class: 'button' %>
   <% end %>
-  <a class="close-reveal-modal">&#215;</a>
-</div>
-
-<div id="note-ticket" class="reveal-modal large">
-  <h3>Write your internal note</h3>
-  <form>
-    <textarea placeholder="Type your note. The client will notice anything of this message."></textarea>
-    <input type="submit" class="button" value="Post internal note" />
-  </form>
   <a class="close-reveal-modal">&#215;</a>
 </div>
 
