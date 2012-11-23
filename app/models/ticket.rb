@@ -1,5 +1,5 @@
 class Ticket < ActiveRecord::Base
-  attr_accessible :content, :from, :subject, :status_id, :assignee_id
+  attr_accessible :content, :from, :subject, :status_id, :assignee_id, :message_id
 
   validates_presence_of :status_id
 

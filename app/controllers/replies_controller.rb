@@ -10,7 +10,13 @@ class RepliesController < ApplicationController
     respond_to do |format|
       if @reply.save
 
-        TicketMailer.reply(@reply).deliver
+        mail = TicketMailer.reply(@reply)
+
+        mail.deliver
+
+        # save message id for later reference
+        @reply.message_id = mail.message_id
+        @reply.save
 
         format.html { redirect_to @reply, notice: 'Reply was successfully created.' }
         format.json { render json: @reply, status: :created, location: @reply }

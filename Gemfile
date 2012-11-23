@@ -37,8 +37,10 @@ gem 'jquery-rails'
 # Deploy with Capistrano
 # gem 'capistrano'
 
-# To use debugger
-# gem 'debugger'
+group :development do
+  # To use debugger
+  gem 'debugger'
+end
 
 # Authentication
 gem 'devise'

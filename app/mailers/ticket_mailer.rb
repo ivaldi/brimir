@@ -3,7 +3,27 @@ class TicketMailer < ActionMailer::Base
 
   def reply(reply)
     @reply = reply
-    mail(to: 'frank@ivaldi.nl', subject: '')
+
+    replies_without_current = reply.ticket.replies.select do |r|
+      r != reply
+    end
+
+
+    references = replies_without_current.collect do |r|
+      '<' + r.message_id + '>'
+    end
+
+    headers['References'] = references.join(' ')
+
+    if replies_without_current.size == 0
+      reply_to = reply.ticket
+    else
+      reply_to = replies_without_current.last
+    end
+
+    headers['In-Reply-To'] = '<' + reply_to.message_id + '>'
+
+    mail = mail(to: 'frank@ivaldi.nl', subject: '')
   end
 
   def receive(email)
@@ -23,7 +43,8 @@ class TicketMailer < ActionMailer::Base
       from: email.from.join(', '),
       subject: email.subject,
       content: content,
-      status_id: Status.where(name: 'Open')
+      status_id: Status.where(name: 'Open'),
+      message_id: email.message_id
     })
 
     if email.has_attachments?
