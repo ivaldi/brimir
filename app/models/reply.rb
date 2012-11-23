@@ -1,5 +1,5 @@
 class Reply < ActiveRecord::Base
-  attr_accessible :content, :ticket_id, :message_id
+  attr_accessible :content, :ticket_id, :message_id, :user_id
 
   validates_presence_of :content
 

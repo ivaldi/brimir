@@ -8,7 +8,6 @@ class TicketMailer < ActionMailer::Base
       r != reply
     end
 
-
     references = replies_without_current.collect do |r|
       '<' + r.message_id + '>'
     end
@@ -39,13 +38,41 @@ class TicketMailer < ActionMailer::Base
       content = email.body.decoded
     end
 
-    ticket = Ticket.create({
-      from: email.from.join(', '),
-      subject: email.subject,
-      content: content,
-      status_id: Status.where(name: 'Open'),
-      message_id: email.message_id
-    })
+
+    # is this a reply to a ticket or to another reply?
+    response_to = Ticket.find_by_message_id(email.in_reply_to)
+
+    if !response_to
+      response_to = Reply.find_by_message_id(email.in_reply_to)
+    end
+
+    from_user = User.find_by_email(email.from.first)
+
+    if !from_user
+      password_length = 12
+      password = Devise.friendly_token.first(password_length)
+      from_user = User.create(email: email.from.first, password: password, password_confirmation: password)
+    end
+
+    if response_to
+
+      incoming = Reply.create({
+        content: content,
+        ticket_id: response_to.id,
+        user_id: from_user.id
+      })
+
+    else
+
+      incoming = Ticket.create({
+        user_id: from_user.id,
+        subject: email.subject,
+        content: content,
+        status_id: Status.where(name: 'Open').first.id,
+        message_id: email.message_id
+      })
+
+    end
 
     if email.has_attachments?
 
@@ -61,7 +88,7 @@ class TicketMailer < ActionMailer::Base
         file.original_filename = attachment.filename
         file.content_type = attachment.mime_type 
 
-        a = ticket.attachments.create(file: file)
+        a = incoming.attachments.create(file: file)
         a.save! # FIXME do we need this because of paperclip?
       end
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123135316) do
+ActiveRecord::Schema.define(:version => 20121123150835) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -46,7 +46,6 @@ ActiveRecord::Schema.define(:version => 20121123135316) do
   end
 
   create_table "tickets", :force => true do |t|
-    t.string   "from"
     t.string   "subject"
     t.text     "content"
     t.datetime "created_at",  :null => false
@@ -54,11 +53,13 @@ ActiveRecord::Schema.define(:version => 20121123135316) do
     t.integer  "status_id"
     t.integer  "assignee_id"
     t.string   "message_id"
+    t.integer  "user_id"
   end
 
   add_index "tickets", ["assignee_id"], :name => "index_tickets_on_assignee_id"
   add_index "tickets", ["message_id"], :name => "index_tickets_on_message_id"
   add_index "tickets", ["status_id"], :name => "index_tickets_on_status_id"
+  add_index "tickets", ["user_id"], :name => "index_tickets_on_user_id"
 
   create_table "users", :force => true do |t|
     t.datetime "created_at",                             :null => false

@@ -60,7 +60,7 @@
               <%= link_to ticket.subject, ticket %>
             </td>
             <td>
-              <%= ticket.from %>
+              <%= ticket.user.email %>
             </td>
             <td class="assignee">
               <% if ticket.assignee %>
