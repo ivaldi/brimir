@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123130634) do
+ActiveRecord::Schema.define(:version => 20121123131557) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -31,9 +31,11 @@ ActiveRecord::Schema.define(:version => 20121123130634) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "ticket_id"
+    t.integer  "user_id"
   end
 
   add_index "replies", ["ticket_id"], :name => "index_replies_on_ticket_id"
+  add_index "replies", ["user_id"], :name => "index_replies_on_user_id"
 
   create_table "statuses", :force => true do |t|
     t.string   "name"

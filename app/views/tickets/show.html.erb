@@ -21,28 +21,30 @@
       <% end %>
     </div>
 
-    <ul class="accordion">
+    <% if @ticket.replies.size > 0 %>
+      <ul class="accordion">
 
-      <% @ticket.replies.each do |reply| %>
+        <% @ticket.replies.each do |reply| %>
 
-        <li>
-          <div class="title">
-            <h5><span class="label">Sem</span> <small><%= l reply.created_at, format: :short %></small></h5>
-          </div>
-          <div class="content">
-            <%= reply.content %>
-            <% if reply.attachments.size > 0 %>
-              <hr />
-              <ul class="block-grid three-up attachments">
-                <%= render reply.attachments %>
-              </ul>
-            <% end %>
-          </div>
-        </li>
+          <li>
+            <div class="title">
+              <h5><span class="label"><%= reply.user.email %></span> <small><%= l reply.created_at, format: :short %></small></h5>
+            </div>
+            <div class="content">
+              <%= reply.content %>
+              <% if reply.attachments.size > 0 %>
+                <hr />
+                <ul class="block-grid three-up attachments">
+                  <%= render reply.attachments %>
+                </ul>
+              <% end %>
+            </div>
+          </li>
 
-      <% end %>
+        <% end %>
 
-    </ul>
+      </ul>
+    <% end %>
     
     <ul class="button-group radius">
       <li>

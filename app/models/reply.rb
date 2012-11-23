@@ -4,6 +4,7 @@ class Reply < ActiveRecord::Base
   validates_presence_of :content
 
   belongs_to :ticket
+  belongs_to :user
 
   has_many :attachments, as: :attachable, dependent: :destroy
 end

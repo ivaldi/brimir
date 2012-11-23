@@ -42,10 +42,13 @@ class RepliesController < ApplicationController
   def create
     @reply = Reply.new(params[:reply])
 
-    TicketMailer.reply(@reply).deliver
+    @reply.user = current_user
 
     respond_to do |format|
       if @reply.save
+
+        TicketMailer.reply(@reply).deliver
+
         format.html { redirect_to @reply, notice: 'Reply was successfully created.' }
         format.json { render json: @reply, status: :created, location: @reply }
         format.js { render }
