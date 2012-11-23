@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Helpdesksysteem::Application.load_tasks
+Brimir::Application.load_tasks

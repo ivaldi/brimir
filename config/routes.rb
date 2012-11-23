@@ -1,4 +1,4 @@
-Helpdesksysteem::Application.routes.draw do
+Brimir::Application.routes.draw do
 
   resources :replies, only: [ :create ]
 
