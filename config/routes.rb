@@ -1,6 +1,6 @@
 Helpdesksysteem::Application.routes.draw do
 
-  resources :replies
+  resources :replies, only: [:create]
 
   devise_for :users
 
