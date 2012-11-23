@@ -6,5 +6,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :status
   belongs_to :assignee, class_name: 'User'
 
-  has_many :attachments, as: :attachable
+  has_many :attachments, as: :attachable, dependent: :destroy
+
+  has_many :replies, dependent: :destroy
 end

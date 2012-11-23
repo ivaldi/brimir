@@ -1,0 +1,6 @@
+<li class="group">
+  <a href="<%= attachment.file.url %>"><img src="<%= attachment.file.url(:thumb) %>" /></a>
+  <strong><%= attachment.file_file_name %></strong>
+  <span class="meta"><%= number_to_human_size(attachment.file.size()) %> &middot; <%= link_to 'download', attachment.file.url %></span>
+</li>
+

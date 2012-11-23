@@ -16,53 +16,32 @@
       <% if @ticket.attachments.size > 0 %>
         <hr />
         <ul class="block-grid three-up attachments">
-          <% @ticket.attachments.each do |attachment| %>
-            <li class="group">
-              <a href="<%= attachment.file.url %>"><img src="<%= attachment.file.url(:thumb) %>" /></a>
-              <strong><%= attachment.file_file_name %></strong>
-              <span class="meta"><%= number_to_human_size(attachment.file.size()) %> &middot; <%= link_to 'download', attachment.file.url %></span>
-            </li>
-          <% end %>
+          <%= render @ticket.attachments %>
         </ul>
       <% end %>
     </div>
 
     <ul class="accordion">
-      <li class="active">
-        <div class="title">
-          <h5><span class="label">Sem</span> Dit is de eerste reactie <small>13 november</small></h5>
-        </div>
-        <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <hr />
-          <ul class="block-grid three-up attachments" data-clearing>
-            <li class="group">
-              <a href="#"><img src="http://placehold.it/50x50" /></a>
-              <strong>Filename.pdf</strong>
-              <span class="meta">1.3mb &middot; <a href="#">view</a> &middot; <a href="#" target="_blank">download</a></span>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li>
-        <div class="title">
-          <h5><span class="label success">client</span> Dit is de tweede reactie <small>14 november</small></h5>
-        </div>
-        <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-      </li>
-      <li>
-        <div class="title">
-          <h5><span class="label">Sem</span> Dit is de derde reactie <small>15 november</small></h5>
-        </div>
-        <div class="content">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-      </li>
+
+      <% @ticket.replies.each do |reply| %>
+
+        <li>
+          <div class="title">
+            <h5><span class="label">Sem</span> <small><%= l reply.created_at, format: :short %></small></h5>
+          </div>
+          <div class="content">
+            <%= reply.content %>
+            <% if reply.attachments.size > 0 %>
+              <hr />
+              <ul class="block-grid three-up attachments">
+                <%= render reply.attachments %>
+              </ul>
+            <% end %>
+          </div>
+        </li>
+
+      <% end %>
+
     </ul>
     
     <ul class="button-group radius">
@@ -99,6 +78,7 @@
 <div id="reply-ticket" class="reveal-modal large">
   <h3>Write your reply</h3>
   <%= form_for @reply, remote: true do |r| %>
+    <%= r.hidden_field :ticket_id, value: @ticket.id %>
     <%= r.text_area :content, placeholder: 'Type your reply. The client will receive this reply via email.' %>
     <%= r.submit value: 'Send reply', class: 'button' %>
   <% end %>
