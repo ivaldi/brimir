@@ -3,7 +3,7 @@
 
   <%= form_for ticket, remote: true, method: :put do |f| %>
     <p>
-      <%= f.select :assignee_id, options_from_collection_for_select(@users, 'id', 'email', ticket.id), include_blank: 'Nobody' %>
+      <%= f.select :assignee_id, options_from_collection_for_select(@users, 'id', 'email', ticket.assignee_id), include_blank: 'Nobody' %>
     </p>
     <%= f.submit 'Assign', class: 'button' %>
   <% end %>

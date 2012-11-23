@@ -1,0 +1,14 @@
+<div id="change-status" class="reveal-modal small">
+  <h3>Change status to...</h3>
+
+  <%= form_for ticket, remote: true, method: :put do |f| %>
+    <p>
+      <%= f.select :status_id, options_from_collection_for_select(@statuses, 'id', 'name', ticket.status_id) %>
+    </p>
+    <%= f.submit 'Change', class: 'button' %>
+  <% end %>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
+

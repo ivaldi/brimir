@@ -40,4 +40,11 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'debugger'
 
+# Authentication
 gem 'devise'
+
+# Pagination
+gem 'will_paginate'
+
+# Attachments, thumbnails etc
+gem 'paperclip'

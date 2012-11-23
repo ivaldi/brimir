@@ -20,3 +20,5 @@ app/assets/stylesheets/scaffolds.css.scss
 # temp files
 *.swp
 .DS_Store
+
+public/system
