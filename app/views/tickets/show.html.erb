@@ -27,7 +27,7 @@
               <h5><span class="label"><%= reply.user.email %></span> <small><%= l reply.created_at, format: :short %></small></h5>
             </div>
             <div class="content">
-              <%= reply.content %>
+              <%= reply.content.html_safe %>
               <% if reply.attachments.size > 0 %>
                 <hr />
                 <ul class="block-grid three-up attachments">
