@@ -32,10 +32,10 @@ class TicketMailer < ActionMailer::Base
       if email.html_part
         content = email.html_part.body.decoded
       else 
-        content = email.text_part.body.decoded 
+        content = '<pre>' + email.text_part.body.decoded + '</pre>'
       end
     else
-      content = email.body.decoded
+      content = '<pre>' + email.body.decoded + '</pre>'
     end
 
 

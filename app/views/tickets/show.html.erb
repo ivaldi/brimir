@@ -7,11 +7,7 @@
       </h1>
       <h5 class="subheader">By <a href="#"><%= @ticket.user.email %></a> on <%= l @ticket.created_at, format: :long %></h5>
 
-      <% if @ticket.content.include? '<p' or @ticket.content.include? '<br' %>
-        <%= @ticket.content.html_safe %>
-      <% else %>
-        <pre><%= @ticket.content %></pre>
-      <% end %>
+      <%= @ticket.content.html_safe %>
 
       <% if @ticket.attachments.size > 0 %>
         <hr />
