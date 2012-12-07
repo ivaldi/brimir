@@ -21,6 +21,9 @@ app/assets/stylesheets/scaffolds.css.scss
 *.swp
 .DS_Store
 
+# uploads
 public/system
 
+# Capistrano deploy details
 config/deploy.rb
+Capfile
