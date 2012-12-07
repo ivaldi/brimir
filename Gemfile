@@ -5,7 +5,6 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -40,6 +39,17 @@ gem 'jquery-rails'
 group :development do
   # To use debugger
   gem 'debugger'
+
+  gem 'sqlite3'
+
+  # Deploy with Capistrano
+  gem 'capistrano'
+  gem 'rvm-capistrano'
+end
+
+group :production do
+  # PostgreSQL for production
+  gem 'pg'
 end
 
 # Authentication

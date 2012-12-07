@@ -22,3 +22,5 @@ app/assets/stylesheets/scaffolds.css.scss
 .DS_Store
 
 public/system
+
+config/deploy.rb
