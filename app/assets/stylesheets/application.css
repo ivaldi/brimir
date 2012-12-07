@@ -50,4 +50,15 @@
 	line-height: 0;
 	height: 0;
 }
+
+.sub-nav.filter{
+	float: right;
+	margin-top: 25px;
+	margin-left: 30px;
+	margin-bottom: -20px;
+}
+
+.filter-title{
+	float: left;
+}
  

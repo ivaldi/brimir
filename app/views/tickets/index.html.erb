@@ -1,9 +1,9 @@
 <div class="row">
   <div class="twelve columns">
-    <h2>Tickets</h2>
+    <h2 class="filter-title">Tickets</h2>
 
 
-    <dl class="sub-nav">
+    <dl class="sub-nav filter">
       <dt>Assignee:</dt>
 
       <%= active_elem_if 'dd', params[:assignee_id].nil? do
@@ -19,7 +19,7 @@
         end %>
     </dl>
 
-    <dl class="sub-nav">
+    <dl class="sub-nav filter">
       <dt>Status:</dt>
 
       <%= active_elem_if 'dd', params[:status_id].nil? do
