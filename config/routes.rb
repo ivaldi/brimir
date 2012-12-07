@@ -6,7 +6,7 @@ Brimir::Application.routes.draw do
 
   resources :users
 
-  resources :tickets, only: [ :index, :show, :update ]
+  resources :tickets, only: [ :index, :show, :update, :create ]
 
   root :to => 'tickets#index'
 

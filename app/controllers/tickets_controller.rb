@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketsController < ApplicationController
+  before_filter :authenticate_user!, except: [ :create ] 
+
   def show
     @ticket = Ticket.find(params[:id])
     @users = User.all
@@ -52,5 +54,13 @@ class TicketsController < ApplicationController
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def create
+    require 'mail'
+
+    message = Mail.new(params[:message])
+
+    TicketMailer.receive(message)
   end
 end
