@@ -38,7 +38,7 @@ class TicketMailer < ActionMailer::Base
 
     headers['In-Reply-To'] = '<' + reply_to.message_id + '>'
 
-    mail = mail(to: 'frank@ivaldi.nl', subject: '')
+    mail = mail(to: reply_to.user.email, subject: '')
   end
 
   def receive(email)
