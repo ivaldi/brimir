@@ -12,10 +12,8 @@
       
       <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
     
-      <!-- Included CSS Files -->
       <%= stylesheet_link_tag    "application" %>
       
-      <!-- Included JS Files  -->
       <%= javascript_include_tag "application" %>
     
     <%= csrf_meta_tags %>
@@ -46,9 +44,6 @@
           <li class="has-dropdown">
             <a href="#"><%= current_user.email %></a>
             <ul class="dropdown">
-              <li>
-                <a href="#">Settings</a>
-              </li>
               <li>
    	            <%= link_to 'Sign out', :destroy_user_session, method: :delete %>
               </li>
