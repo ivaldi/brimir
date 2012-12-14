@@ -46,12 +46,12 @@ class TicketMailer < ActionMailer::Base
 
     if email.multipart?
       if email.html_part
-        content = email.html_part.body.decoded
+        content = email.html_part.body.decoded.force_encoding(email.html_part.charset).encode('UTF-8')
       else 
-        content = '<pre>' + email.text_part.body.decoded + '</pre>'
+        content = '<pre>' + email.text_part.body.decoded.force_encoding(email.text_part.charset).encode('UTF-8') + '</pre>'
       end
     else
-      content = '<pre>' + email.body.decoded + '</pre>'
+      content = '<pre>' + email.body.decoded.force_encoding(email.charset).encode('UTF-8') + '</pre>'
     end
 
 
