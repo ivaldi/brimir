@@ -51,7 +51,11 @@ class TicketMailer < ActionMailer::Base
         content = '<pre>' + email.text_part.body.decoded.force_encoding(email.text_part.charset).encode('UTF-8') + '</pre>'
       end
     else
-      content = '<pre>' + email.body.decoded.force_encoding(email.charset).encode('UTF-8') + '</pre>'
+      if email.charset
+        content = '<pre>' + email.body.decoded.force_encoding(email.charset).encode('UTF-8') + '</pre>'
+      else
+        content = '<pre>' + email.body.decoded.encode('UTF-8') + '</pre>'
+      end
     end
 
 
@@ -67,12 +71,12 @@ class TicketMailer < ActionMailer::Base
     if !from_user
       password_length = 12
       password = Devise.friendly_token.first(password_length)
-      from_user = User.create(email: email.from.first, password: password, password_confirmation: password)
+      from_user = User.create!(email: email.from.first, password: password, password_confirmation: password)
     end
 
     if response_to
 
-      incoming = Reply.create({
+      incoming = Reply.create!({
         content: content,
         ticket_id: response_to.id,
         user_id: from_user.id
@@ -80,7 +84,7 @@ class TicketMailer < ActionMailer::Base
 
     else
 
-      incoming = Ticket.create({
+      incoming = Ticket.create!({
         user_id: from_user.id,
         subject: email.subject,
         content: content,
@@ -109,6 +113,8 @@ class TicketMailer < ActionMailer::Base
       end
 
     end
+
+    return incoming
 
   end
 

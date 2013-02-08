@@ -61,6 +61,10 @@ class TicketsController < ApplicationController
 
     message = Mail.new(params[:message])
 
-    TicketMailer.receive(message)
+    @ticket = TicketMailer.receive(message)
+
+    respond_to do |format|
+      format.json { render json: @ticket, status: :created }
+    end
   end
 end
