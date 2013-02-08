@@ -65,7 +65,12 @@ class TicketMailer < ActionMailer::Base
       response_to = Ticket.find_by_message_id(email.in_reply_to)
 
       if !response_to
+
         response_to = Reply.find_by_message_id(email.in_reply_to)
+        ticket_id = response_to.ticket_id
+
+      else
+        ticket_id = response_to.id
       end
     end
 
@@ -81,7 +86,7 @@ class TicketMailer < ActionMailer::Base
 
       incoming = Reply.create!({
         content: content,
-        ticket_id: response_to.ticket_id,
+        ticket_id: ticket_id,
         user_id: from_user.id,
         message_id: email.message_id
       })
