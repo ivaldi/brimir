@@ -15,7 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketMailer < ActionMailer::Base
-  default from: "from@example.com"
 
   def reply(reply)
     @reply = reply
