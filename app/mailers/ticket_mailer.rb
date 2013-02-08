@@ -67,10 +67,10 @@ class TicketMailer < ActionMailer::Base
       if !response_to
 
         response_to = Reply.find_by_message_id(email.in_reply_to)
-        ticket_id = response_to.ticket_id
+        ticket = response_to.ticket
 
       else
-        ticket_id = response_to.id
+        ticket = response_to
       end
     end
 
@@ -83,10 +83,12 @@ class TicketMailer < ActionMailer::Base
     end
 
     if response_to
+      ticket.status = Status.where(name: 'Open').first
+      ticket.save
 
       incoming = Reply.create!({
         content: content,
-        ticket_id: ticket_id,
+        ticket_id: ticket.id,
         user_id: from_user.id,
         message_id: email.message_id
       })
