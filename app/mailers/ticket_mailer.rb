@@ -59,11 +59,13 @@ class TicketMailer < ActionMailer::Base
     end
 
 
-    # is this a reply to a ticket or to another reply?
-    response_to = Ticket.find_by_message_id(email.in_reply_to)
+    if email.in_reply_to
+      # is this a reply to a ticket or to another reply?
+      response_to = Ticket.find_by_message_id(email.in_reply_to)
 
-    if !response_to
-      response_to = Reply.find_by_message_id(email.in_reply_to)
+      if !response_to
+        response_to = Reply.find_by_message_id(email.in_reply_to)
+      end
     end
 
     from_user = User.find_by_email(email.from.first)
