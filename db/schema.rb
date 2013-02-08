@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123150835) do
+ActiveRecord::Schema.define(:version => 20130208144341) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -74,6 +74,8 @@ ActiveRecord::Schema.define(:version => 20121123150835) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.boolean  "agent"
+    t.text     "signature"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

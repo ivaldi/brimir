@@ -33,13 +33,26 @@ class TicketMailer < ActionMailer::Base
       reply_to = reply.ticket
       subject = reply_to.subject
     else
-      reply_to = replies_without_current.last
+      reply_to = replies_without_current.order(:id).last
       subject = replies_without_current.first.ticket.subject
     end
 
     headers['In-Reply-To'] = '<' + reply_to.message_id + '>'
 
-    mail = mail(to: reply_to.user.email, subject: 'Re: ' + subject)
+    mail(to: reply_to.user.email, subject: 'Re: ' + subject)
+  end
+
+  def notify_agents(ticket, reply)
+
+    agents = []
+
+    ticket.replies.each do |reply|
+      if reply.user.agent
+        agents.append(reply.user.email)
+      end
+    end
+
+    mail(to: agents.uniq, subject: 'New reply to: ' + ticket.subject)
   end
 
   def receive(email)
@@ -124,6 +137,8 @@ class TicketMailer < ActionMailer::Base
       end
 
     end
+
+    TicketMailer.notify_agents(ticket).deliver
 
     return incoming
 
