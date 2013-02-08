@@ -81,7 +81,7 @@ class TicketMailer < ActionMailer::Base
 
       incoming = Reply.create!({
         content: content,
-        ticket_id: response_to.id,
+        ticket_id: response_to.ticket_id,
         user_id: from_user.id,
         message_id: email.message_id
       })
