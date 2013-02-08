@@ -32,13 +32,15 @@ class TicketMailer < ActionMailer::Base
 
     if replies_without_current.size == 0
       reply_to = reply.ticket
+      subject = reply_to.subject
     else
       reply_to = replies_without_current.last
+      subject = replies_without_current.first.ticket.subject
     end
 
     headers['In-Reply-To'] = '<' + reply_to.message_id + '>'
 
-    mail = mail(to: reply_to.user.email, subject: '')
+    mail = mail(to: reply_to.user.email, subject: 'Re: ' + subject)
   end
 
   def receive(email)
