@@ -17,7 +17,26 @@
 require 'test_helper'
 
 class TicketMailerTest < ActionMailer::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  def setup
+    @simple_email = read_fixture('simple').join
+  end
+
+  test "fixtures are loading correctly" do
+    assert_match /from/i, @simple_email
+  end
+
+  test "new email from unkown user is stored" do
+    
+    assert_difference "Ticket.count" do 
+
+      TicketMailer.receive(@simple_email)
+      
+    end
+
+    # TODO check whether from user is added to system
+    # TODO check whether agents receive mail
+
+  end
+
 end

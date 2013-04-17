@@ -57,11 +57,9 @@ class TicketsController < ApplicationController
   end
 
   def create
-    require 'mail'
 
-    message = Mail.new(params[:message])
 
-    @ticket = TicketMailer.receive(message)
+    @ticket = TicketMailer.receive(params[:message])
 
     respond_to do |format|
       format.json { render json: @ticket, status: :created }

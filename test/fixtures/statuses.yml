@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
+open:
+  name: Open
 
-two:
-  name: MyString
+closed:
+  name: Closed
+
+deleted:
+  name: Deleted

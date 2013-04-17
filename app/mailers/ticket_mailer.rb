@@ -42,7 +42,7 @@ class TicketMailer < ActionMailer::Base
     mail(to: reply_to.user.email, subject: 'Re: ' + subject)
   end
 
-  def notify_agents(ticket, reply)
+  def notify_agents(ticket)
 
     agents = []
 
@@ -52,10 +52,18 @@ class TicketMailer < ActionMailer::Base
       end
     end
 
-    mail(to: agents.uniq, subject: 'New reply to: ' + ticket.subject)
+    if agents.size > 0
+      mail(to: agents.uniq, subject: 'New reply to: ' + ticket.subject) 
+    else
+      # TODO notify all agents?
+    end
   end
 
-  def receive(email)
+  def receive(message)
+    require 'mail'
+
+    email = Mail.new(message)
+
     content = ''
 
     if email.multipart?
@@ -115,6 +123,8 @@ class TicketMailer < ActionMailer::Base
         status_id: Status.where(name: 'Open').first.id,
         message_id: email.message_id
       })
+
+      ticket = incoming
 
     end
 
