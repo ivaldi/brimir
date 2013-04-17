@@ -1,11 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  from: MyString
   subject: MyString
   content: MyText
 
 two:
-  from: MyString
   subject: MyString
   content: MyText

@@ -1,11 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  subject: MyString
   content: MyText
-  reply: 
 
 two:
-  subject: MyString
   content: MyText
-  reply: 
