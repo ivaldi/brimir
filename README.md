@@ -6,15 +6,19 @@ production.
 
 Incoming email
 --------------
-Incoming emails can be posted to the tickets url. A script like this should
-work:
+Incoming emails can be posted to the tickets url. First make a script like this:
 
-    $ cat /etc/aliases
+    #!/bin/bash
+    exec curl --data-urlencode message@- https://yourbrimirurl.com/tickets
+    
+Save it in `/etc/postfix/brimir.sh` for example.
+
+Next, create an alias in your `/etc/aliases` file like this:
+
     brimir: "|/bin/bash /etc/postfix/brimir.sh"
 
-    $ cat /etc/postfix/brimir.sh 
-    #!/bin/bash
-    exec curl --data-urlencode message@- https://yourserver.com/tickets
+Now sending an email to brimir@yourmailserver.com should start curl and post 
+the email to your brimir installation.
 
 License
 -------
