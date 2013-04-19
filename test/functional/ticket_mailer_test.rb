@@ -22,21 +22,21 @@ class TicketMailerTest < ActionMailer::TestCase
     @simple_email = read_fixture('simple').join
   end
 
-  test "fixtures are loading correctly" do
+  test 'fixtures are loading correctly' do
     assert_match(/From:/, @simple_email)
   end
 
-  test "new email from unkown user is stored correctly and \
-      agents are notified" do
+  test 'new email from unkown user is stored correctly and \
+      agents are notified' do
     
     # agents receive notifications
     assert_difference 'ActionMailer::Base.deliveries.size' do
 
       # ticket is created
-      assert_difference "Ticket.count" do 
+      assert_difference 'Ticket.count' do 
 
         # account for user created
-        assert_difference "User.count" do 
+        assert_difference 'User.count' do 
 
           TicketMailer.receive(@simple_email)
 
@@ -48,30 +48,31 @@ class TicketMailerTest < ActionMailer::TestCase
 
   end
 
-  test "email threads are recognized correctly" do
+  test 'email threads are recognized correctly and assignee \
+      is notified' do
 
     thread_start = read_fixture('thread_start').join
     thread_reply = read_fixture('thread_reply').join
 
-    assert_difference "Ticket.count" do 
-      assert_difference "User.count" do 
+    assert_difference 'Ticket.count' do 
+      assert_difference 'User.count' do 
         TicketMailer.receive(thread_start)
       end
     end
 
-    assert_difference "Reply.count" do 
-      assert_difference "User.count", 0 do 
+    assert_difference 'Reply.count' do 
+      assert_difference 'User.count', 0 do 
         TicketMailer.receive(thread_reply)
       end
     end
 
   end
 
-  test "email with attachments work" do
+  test 'email with attachments work' do
 
     attachments = read_fixture('attachments').join
-    assert_difference "Ticket.count" do 
-      assert_difference "Attachment.count", 2 do 
+    assert_difference 'Ticket.count' do 
+      assert_difference 'Attachment.count', 2 do 
         TicketMailer.receive(attachments)
       end
     end
