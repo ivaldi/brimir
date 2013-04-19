@@ -1,0 +1,19 @@
+Return-Path: <frank@xxxx.com>
+Delivered-To: frank@xxxx.com
+Received: from [192.168.178.43] (ivaldi.xs4all.nl [83.163.14.133])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	(Authenticated sender: frank@xxxx.com)
+	by mail.xxxx.com (Postfix) with ESMTPSA id CCDC11165C7
+	for <frank@xxxx.com>; Fri, 19 Apr 2013 13:35:36 +0200 (CEST)
+Message-ID: <51712C08.4000908@xxxx.com>
+Date: Fri, 19 Apr 2013 13:35:36 +0200
+From: Frank Groeneveld <frank@xxxx.com>
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:17.0) Gecko/20130329 Thunderbird/17.0.5
+MIME-Version: 1.0
+To: Frank Groeneveld <frank@xxxx.com>
+Subject: Test
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+First message in thread.

@@ -23,20 +23,52 @@ class TicketMailerTest < ActionMailer::TestCase
   end
 
   test "fixtures are loading correctly" do
-    assert_match /from/i, @simple_email
+    assert_match(/From:/, @simple_email)
   end
 
   test "new email from unkown user is stored" do
     
     assert_difference "Ticket.count" do 
 
-      TicketMailer.receive(@simple_email)
+      assert_difference "User.count" do 
+
+        TicketMailer.receive(@simple_email)
+
+      end
       
     end
 
-    # TODO check whether from user is added to system
     # TODO check whether agents receive mail
 
   end
 
+  test "email threads are recognized correctly" do
+
+    thread_start = read_fixture('thread_start').join
+    thread_reply = read_fixture('thread_reply').join
+
+    assert_difference "Ticket.count" do 
+      assert_difference "User.count" do 
+        TicketMailer.receive(thread_start)
+      end
+    end
+
+    assert_difference "Reply.count" do 
+      assert_difference "User.count", 0 do 
+        TicketMailer.receive(thread_reply)
+      end
+    end
+
+  end
+
+  test "email with attachments work" do
+
+    attachments = read_fixture('attachments').join
+    assert_difference "Ticket.count" do 
+      assert_difference "Attachment.count", 2 do 
+        TicketMailer.receive(attachments)
+      end
+    end
+  
+  end
 end
