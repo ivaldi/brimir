@@ -34,4 +34,6 @@ Brimir::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  ActionMailer::Base.default :from => 'brimir@xxxx.com'
 end

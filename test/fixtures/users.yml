@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  email: one@test.com
+alice:
+  email: alice@xxxx.com
+  agent: true
 
-two:
-  email: two@test.com
+bob:
+  email: bob@xxxx.com
+  agent: false

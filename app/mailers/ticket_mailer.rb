@@ -52,11 +52,19 @@ class TicketMailer < ActionMailer::Base
       end
     end
 
-    if agents.size > 0
-      mail(to: agents.uniq, subject: 'New reply to: ' + ticket.subject) 
+    if agents.size == 0
+      # notify all agents
+      agents = User.agents.pluck(:email)
     else
-      # TODO notify all agents?
+      # only the ones conceirned, without dupcliates
+      agents = agents.uniq
     end
+
+    @ticket = ticket
+
+    mail(to: agents, subject: 'New reply to: ' + ticket.subject,
+        template_name: 'notify_agents') # without template_name
+                                        # the functional tests fail
   end
 
   def receive(message)
@@ -148,7 +156,7 @@ class TicketMailer < ActionMailer::Base
 
     end
 
-    TicketMailer.notify_agents(ticket).deliver
+    notify_agents(ticket).deliver
 
     return incoming
 

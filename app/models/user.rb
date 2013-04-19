@@ -25,4 +25,6 @@ class User < ActiveRecord::Base
 
   has_many :tickets
   has_many :replies
+
+  scope :agents, where(agent: true)
 end

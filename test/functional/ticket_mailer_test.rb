@@ -26,19 +26,25 @@ class TicketMailerTest < ActionMailer::TestCase
     assert_match(/From:/, @simple_email)
   end
 
-  test "new email from unkown user is stored" do
+  test "new email from unkown user is stored correctly and \
+      agents are notified" do
     
-    assert_difference "Ticket.count" do 
+    # agents receive notifications
+    assert_difference 'ActionMailer::Base.deliveries.size' do
 
-      assert_difference "User.count" do 
+      # ticket is created
+      assert_difference "Ticket.count" do 
 
-        TicketMailer.receive(@simple_email)
+        # account for user created
+        assert_difference "User.count" do 
 
+          TicketMailer.receive(@simple_email)
+
+        end
+        
       end
-      
-    end
 
-    # TODO check whether agents receive mail
+    end
 
   end
 
