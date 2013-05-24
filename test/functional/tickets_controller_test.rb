@@ -31,4 +31,15 @@ class TicketsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:tickets)
   end
 
+  test 'should email assignee if ticket is assigned' do
+    
+    # new assignee should receive notification
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+
+      put :update, id: @ticket.id, ticket: { assignee_id: users(:charlie).id }
+      assert_redirected_to ticket_path(@ticket)
+
+    end
+  end
+
 end

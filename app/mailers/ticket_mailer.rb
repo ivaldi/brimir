@@ -42,6 +42,13 @@ class TicketMailer < ActionMailer::Base
     mail(to: reply_to.user.email, subject: 'Re: ' + subject)
   end
 
+  def notify_assignee(ticket)
+    @ticket = ticket
+
+    mail(to: ticket.assignee.email, subject:
+        'Ticket assigned to you: ' + ticket.subject)
+  end
+
   def notify_agents(ticket)
 
     agents = []

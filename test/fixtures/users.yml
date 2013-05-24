@@ -7,3 +7,7 @@ alice:
 bob:
   email: bob@xxxx.com
   agent: false
+
+charlie:
+  email: charlie@xxxx.com
+  agent: true

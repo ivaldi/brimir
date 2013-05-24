@@ -44,8 +44,19 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
 
+    if @ticket.assignee_id != params[:ticket][:assignee_id]
+      should_notify_assignee = true
+    else
+      should_notify_assignee = false
+    end
+
     respond_to do |format|
       if @ticket.update_attributes(params[:ticket])
+        
+        if should_notify_assignee
+          TicketMailer.notify_assignee(@ticket).deliver
+        end
+
         format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
         format.js { render notice: 'Ticket was succesfully updated.' }
         format.json { head :no_content }
@@ -57,7 +68,6 @@ class TicketsController < ApplicationController
   end
 
   def create
-
 
     @ticket = TicketMailer.receive(params[:message])
 

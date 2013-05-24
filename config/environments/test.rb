@@ -36,4 +36,6 @@ Brimir::Application.configure do
   config.active_support.deprecation = :stderr
 
   ActionMailer::Base.default :from => 'brimir@xxxx.com'
+
+  config.action_mailer.default_url_options = { :host => 'localhost' }
 end
