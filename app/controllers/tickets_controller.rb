@@ -19,13 +19,13 @@ class TicketsController < ApplicationController
 
   def show
     @ticket = Ticket.find(params[:id])
-    @users = User.all
+    @agents = User.agents
     @statuses = Status.all
     @reply = Reply.new
   end
 
   def index
-    @users = User.all
+    @agents = User.agents
     @statuses = Status.all
 
     @tickets = Ticket.order(:created_at)
@@ -35,7 +35,14 @@ class TicketsController < ApplicationController
     end
 
     if !params[:assignee_id].nil?
-      @tickets = @tickets.where(assignee_id: params[:assignee_id])
+      
+      # unassigned
+      if params[:assignee_id].to_i == 0
+        @tickets = @tickets.where(assignee_id: nil)
+      else
+        @tickets = @tickets.where(assignee_id: params[:assignee_id])
+      end
+
     end
 
     @tickets = @tickets.page(params[:page])
@@ -53,7 +60,7 @@ class TicketsController < ApplicationController
     respond_to do |format|
       if @ticket.update_attributes(params[:ticket])
         
-        if should_notify_assignee
+        if should_notify_assignee && !@ticket.assignee.nil?
           TicketMailer.notify_assignee(@ticket).deliver
         end
 
