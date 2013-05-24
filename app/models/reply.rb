@@ -15,12 +15,16 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Reply < ActiveRecord::Base
-  attr_accessible :content, :ticket_id, :message_id, :user_id
+  attr_accessible :content, :ticket_id, :message_id, :user_id,
+      :attachments_attributes
+
+  has_many :attachments, as: :attachable, dependent: :destroy
+
+  accepts_nested_attributes_for :attachments
 
   validates_presence_of :content
 
   belongs_to :ticket
   belongs_to :user
 
-  has_many :attachments, as: :attachable, dependent: :destroy
 end

@@ -19,12 +19,12 @@ class TicketMailer < ActionMailer::Base
   def reply(reply)
     @reply = reply
 
-    replies_without_current = reply.ticket.replies.select do |r|
+    replies_without_current = reply.ticket.replies.order(:id).select do |r|
       r != reply
     end
 
     references = replies_without_current.collect do |r|
-      '<' + r.message_id + '>'
+      '<' + r.message_id.to_s + '>'
     end
 
     headers['References'] = references.join(' ')
@@ -33,11 +33,15 @@ class TicketMailer < ActionMailer::Base
       reply_to = reply.ticket
       subject = reply_to.subject
     else
-      reply_to = replies_without_current.order(:id).last
+      reply_to = replies_without_current.last
       subject = replies_without_current.first.ticket.subject
     end
 
-    headers['In-Reply-To'] = '<' + reply_to.message_id + '>'
+    headers['In-Reply-To'] = '<' + reply_to.message_id.to_s + '>'
+
+    @reply.attachments.each do |at|
+      attachments[at.file_file_name] = File.read(at.file.path)
+    end
 
     mail(to: reply_to.user.email, subject: 'Re: ' + subject)
   end
