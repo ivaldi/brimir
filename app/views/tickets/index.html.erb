@@ -57,7 +57,11 @@
               <% elsif ticket.assignee == current_user %>
                 <span class="label success round">Yours</span>
               <% end %>
-              <%= link_to ticket.subject, ticket %>
+              <% if !ticket.subject.nil? %>
+                <%= link_to ticket.subject, ticket %>
+              <% else %>
+                <%= link_to '(No subject)', ticket %>
+              <% end %>
             </td>
             <td>
               <%= ticket.user.email %>
