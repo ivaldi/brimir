@@ -7,7 +7,12 @@
       </h1>
       <h5 class="subheader">By <a href="#"><%= @ticket.user.email %></a> on <%= l @ticket.created_at, format: :long %></h5>
 
-      <%= !@ticket.content.nil? ? @ticket.content.html_safe : '(No content)' %>
+      <% if @ticket.content.nil? %>
+        (No content)
+      <% else %>
+        <%# only allow these tags and attributes %>
+        <%= sanitize @ticket.content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
+      <% end %>
 
       <% if @ticket.attachments.size > 0 %>
         <hr />
@@ -28,7 +33,7 @@
               <h5><span class="label"><%= reply.user.email %></span> <small><%= l reply.created_at, format: :short %></small></h5>
             </div>
             <div class="content">
-              <%= reply.content.html_safe %>
+              <%= sanitize reply.content, tags: %w(a b code div em i img li ol p table td tfoot thead tr span strong ul), attributes: %w(src href) %>
               <% if reply.attachments.size > 0 %>
                 <hr />
                 <ul class="block-grid three-up attachments">
