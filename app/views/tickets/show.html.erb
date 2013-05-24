@@ -3,11 +3,11 @@
 
     <div class="panel">
       <h1>
-        <%= @ticket.subject %>
+        <%= !@ticket.subject.nil? ? @ticket.subject : '(No subject)' %>
       </h1>
       <h5 class="subheader">By <a href="#"><%= @ticket.user.email %></a> on <%= l @ticket.created_at, format: :long %></h5>
 
-      <%= @ticket.content.html_safe %>
+      <%= !@ticket.content.nil? ? @ticket.content.html_safe : '(No content)' %>
 
       <% if @ticket.attachments.size > 0 %>
         <hr />
