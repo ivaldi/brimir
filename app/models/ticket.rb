@@ -1,4 +1,4 @@
-# Brimir is a helpdesk system that can be used to handle email support requests.
+# Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Ticket < ActiveRecord::Base
-  attr_accessible :content, :user_id, :subject, :status_id, :assignee_id, :message_id
+  attr_accessible :content, :user_id, :subject, :status_id, :assignee_id,
+      :message_id
 
   validates_presence_of :status_id, :user_id
 

@@ -1,4 +1,4 @@
-# Brimir is a helpdesk system that can be used to handle email support requests.
+# Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
