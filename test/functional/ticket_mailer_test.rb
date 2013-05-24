@@ -78,7 +78,6 @@ class TicketMailerTest < ActionMailer::TestCase
       end
     end
 
-    print ActionMailer::Base.deliveries.inspect
   end
 
   test 'email with attachments work' do
