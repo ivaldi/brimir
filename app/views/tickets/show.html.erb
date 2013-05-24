@@ -20,9 +20,10 @@
     <% if @ticket.replies.size > 0 %>
       <ul class="accordion">
 
+        <% count = 0 %>
         <% @ticket.replies.each do |reply| %>
 
-          <li>
+          <li<%= ' class="active"'.html_safe if count == @ticket.replies.size - 1 %>>
             <div class="title">
               <h5><span class="label"><%= reply.user.email %></span> <small><%= l reply.created_at, format: :short %></small></h5>
             </div>
@@ -36,6 +37,8 @@
               <% end %>
             </div>
           </li>
+
+          <% count += 1 %>
 
         <% end %>
 
