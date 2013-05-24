@@ -77,7 +77,8 @@
   <h3>Write your reply</h3>
   <%= form_for @reply, remote: true do |r| %>
     <%= r.hidden_field :ticket_id, value: @ticket.id %>
-    <%= r.text_area :content, placeholder: 'Type your reply. The client will receive this reply via email.' %>
+    <p>Type your reply. The client will receive this reply via email.</p>
+    <%= r.text_area :content, value: "\n\n--\n" + current_user.signature.to_s %>
     <%= r.submit value: 'Send reply', class: 'button' %>
   <% end %>
   <a class="close-reveal-modal">&#215;</a>
