@@ -54,18 +54,31 @@ class TicketMailerTest < ActionMailer::TestCase
     thread_start = read_fixture('thread_start').join
     thread_reply = read_fixture('thread_reply').join
 
+    # ticket created?
     assert_difference 'Ticket.count' do 
+      # user created?
       assert_difference 'User.count' do 
-        TicketMailer.receive(thread_start)
+        ticket = TicketMailer.receive(thread_start)
+
+        # assign to first user
+        ticket.assignee = User.first
+        ticket.save!
       end
     end
 
-    assert_difference 'Reply.count' do 
-      assert_difference 'User.count', 0 do 
-        TicketMailer.receive(thread_reply)
+    # agents receive notifications
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+
+      # reply created?
+      assert_difference 'Reply.count' do 
+        # user re-used?
+        assert_difference 'User.count', 0 do 
+          TicketMailer.receive(thread_reply)
+        end
       end
     end
 
+    print ActionMailer::Base.deliveries.inspect
   end
 
   test 'email with attachments work' do

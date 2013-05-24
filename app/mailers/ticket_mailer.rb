@@ -46,6 +46,8 @@ class TicketMailer < ActionMailer::Base
 
     agents = []
 
+    agents << ticket.assignee.email unless ticket.assignee.nil?
+
     ticket.replies.each do |reply|
       if reply.user.agent
         agents.append(reply.user.email)
@@ -56,7 +58,7 @@ class TicketMailer < ActionMailer::Base
       # notify all agents
       agents = User.agents.pluck(:email)
     else
-      # only the ones conceirned, without dupcliates
+      # only the ones concerned, without duplicates
       agents = agents.uniq
     end
 
