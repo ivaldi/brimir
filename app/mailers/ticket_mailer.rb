@@ -80,6 +80,10 @@ class TicketMailer < ActionMailer::Base
                                         # the functional tests fail
   end
 
+  def normalize_body(part, charset) 
+    part.body.decoded.force_encoding(charset).encode('UTF-8')
+  end
+
   def receive(message)
     require 'mail'
 
@@ -89,13 +93,13 @@ class TicketMailer < ActionMailer::Base
 
     if email.multipart?
       if email.html_part
-        content = email.html_part.body.decoded.force_encoding(email.html_part.charset).encode('UTF-8')
+        content = normalize_body(email.html_part, email.html_part.charset)
       else 
-        content = '<pre>' + email.text_part.body.decoded.force_encoding(email.text_part.charset).encode('UTF-8') + '</pre>'
+        content = '<pre>' + normalize_body(email.text_part, email.text_part.charset) + '</pre>'
       end
     else
       if email.charset
-        content = '<pre>' + email.body.decoded.force_encoding(email.charset).encode('UTF-8') + '</pre>'
+        content = '<pre>' + normalize_body(email, email.charset) + '</pre>'
       else
         content = '<pre>' + email.body.decoded.encode('UTF-8') + '</pre>'
       end
