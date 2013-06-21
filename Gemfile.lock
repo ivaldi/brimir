@@ -180,6 +180,7 @@ DEPENDENCIES
   paperclip
   pg
   rails (~> 3.2.8)
+  rake
   rvm-capistrano
   sass-rails (~> 3.2.3)
   sqlite3
