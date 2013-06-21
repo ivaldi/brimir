@@ -27,4 +27,6 @@ class Reply < ActiveRecord::Base
   belongs_to :ticket
   belongs_to :user
 
+  scope :chronologically, order(:id)
+
 end

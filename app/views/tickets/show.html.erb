@@ -26,7 +26,7 @@
       <ul class="accordion">
 
         <% count = 0 %>
-        <% @ticket.replies.each do |reply| %>
+        <% @ticket.replies.chronologically.each do |reply| %>
 
           <li<%= ' class="active"'.html_safe if count == @ticket.replies.size - 1 %>>
             <div class="title">
