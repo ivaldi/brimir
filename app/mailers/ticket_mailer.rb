@@ -43,7 +43,7 @@ class TicketMailer < ActionMailer::Base
       attachments[at.file_file_name] = File.read(at.file.path)
     end
 
-    mail(to: reply_to.user.email, subject: 'Re: ' + subject)
+    mail(to: reply.ticket.user.email, subject: 'Re: ' + subject)
   end
 
   def notify_assignee(ticket)
