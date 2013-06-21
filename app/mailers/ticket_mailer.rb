@@ -129,9 +129,11 @@ class TicketMailer < ActionMailer::Base
     end
 
     if response_to
-      ticket.status = Status.where(name: 'Open').first
+      # reopen ticket
+      ticket.status = Status.default.first
       ticket.save
 
+      # add reply
       incoming = Reply.create!({
         content: content,
         ticket_id: ticket.id,
@@ -141,11 +143,12 @@ class TicketMailer < ActionMailer::Base
 
     else
 
+      # add reply
       incoming = Ticket.create!({
         user_id: from_user.id,
         subject: email.subject,
         content: content,
-        status_id: Status.where(name: 'Open').first.id,
+        status_id: Status.default.first.id,
         message_id: email.message_id
       })
 
