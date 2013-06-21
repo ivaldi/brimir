@@ -1,0 +1,7 @@
+<%= form_for @user do |f| %>
+
+  <%= f.label :signature, 'Email signature' %>
+  <%= f.text_area :signature, rows: 5, cols: 20 %>
+
+  <%= f.submit 'Save', class: 'button' %>
+<% end %>

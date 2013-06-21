@@ -14,14 +14,19 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+class UsersController < ApplicationController
+  
+  def edit
+    @user = User.find(params[:id])
+  end
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :signature
+  def update
+    @user = User.find(params[:id])
 
-  has_many :tickets
-  has_many :replies
-
-  scope :agents, where(agent: true)
+    if @user.update_attributes(params[:user])
+      redirect_to tickets_url, notice: 'Settings saved'
+    else
+      render action: 'edit'
+    end
+  end
 end

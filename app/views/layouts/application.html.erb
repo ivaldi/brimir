@@ -31,25 +31,21 @@
         <li class="toggle-topbar"><a href="#"></a></li>
       </ul>
       <section>
-        <!--<ul class="left">
-          <li class="divider"></li>
-          <li>
-            <a href="#">Tickets</a>
-          </li>
-          <li class="divider"></li>
-        </ul>-->
         <% if user_signed_in? %>
-        <ul class="right">
-          <li class="divider"></li>
-          <li class="has-dropdown">
-            <a href="#"><%= current_user.email %></a>
-            <ul class="dropdown">
-              <li>
-   	            <%= link_to 'Sign out', :destroy_user_session, method: :delete %>
-              </li>
-            </ul>
-          </li>
-        </ul>
+          <ul class="right">
+            <li class="divider"></li>
+            <li class="has-dropdown">
+              <a href="#"><%= current_user.email %></a>
+              <ul class="dropdown">
+                <li>
+                  <%= link_to 'Settings', edit_user_path(current_user) %>
+                </li>
+                <li>
+                  <%= link_to 'Sign out', :destroy_user_session, method: :delete %>
+                </li>
+              </ul>
+            </li>
+          </ul>
    	    <% end %>
       </section>
     </nav>

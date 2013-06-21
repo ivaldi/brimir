@@ -14,14 +14,23 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+require 'test_helper'
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :signature
+class UsersControllerTest < ActionController::TestCase
 
-  has_many :tickets
-  has_many :replies
+  setup do
+    sign_in users(:alice)
+    @user = users(:alice)
+  end
 
-  scope :agents, where(agent: true)
+  test 'should get edit' do
+    get :edit, id: @user.id
+    assert_response :success
+  end
+
+  test 'should modify signature' do
+    put :update, id: @user.id, user: { signature: 'Alice' }
+    assert_equal 'Alice', assigns(:user).signature
+    assert_redirected_to tickets_url
+  end
 end
