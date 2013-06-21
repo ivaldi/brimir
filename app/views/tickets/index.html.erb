@@ -22,15 +22,22 @@
     <dl class="sub-nav filter">
       <dt>Status:</dt>
 
-      <%= active_elem_if 'dd', params[:status_id].nil? do
-          link_to 'All', tickets_path(params.merge(status_id: nil))
+      <%= active_elem_if 'dd', @status_filter == '0' do
+          link_to 'All', tickets_path(params.merge(status_id: 0))
         end %>
 
       <% @statuses.each do |status| %>
 
-        <%= active_elem_if 'dd', params[:status_id] == status.id.to_s do
+        <%= active_elem_if 'dd', params[:status_id].to_i == status.id \
+            || (params[:status_id].nil? && status.default?) do
+
+          if status.default?
+            link_to status.name, tickets_path(params.merge(status_id: nil))
+          else 
             link_to status.name, tickets_path(params.merge(status_id: status.id))
-          end %>
+          end
+
+        end %>
 
       <% end %>
     </dl>

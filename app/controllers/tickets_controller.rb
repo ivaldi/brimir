@@ -28,11 +28,8 @@ class TicketsController < ApplicationController
     @agents = User.agents
     @statuses = Status.all
 
-    @tickets = Ticket.order(:created_at)
-
-    if !params[:status_id].nil?
-      @tickets = @tickets.where(status_id: params[:status_id])
-    end
+    @status_filter = params[:status_id]
+    @tickets = Ticket.order(:created_at).by_status(@status_filter)
 
     if !params[:assignee_id].nil?
       

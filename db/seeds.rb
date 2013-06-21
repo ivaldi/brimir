@@ -11,7 +11,7 @@ sem = User.create({ email: 'sem@xxxx.com', password: 'testtest', password_confir
 
 Status.create({ name: 'Deleted' })
 status_closed = Status.create({ name: 'Closed' })
-status_open = Status.create({ name: 'Open' })
+status_open = Status.create({ name: 'Open', default: true })
 
 password_length = 12
 password = Devise.friendly_token.first(password_length)

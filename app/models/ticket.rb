@@ -27,4 +27,13 @@ class Ticket < ActiveRecord::Base
   has_many :attachments, as: :attachable, dependent: :destroy
 
   has_many :replies, dependent: :destroy
+
+  scope :by_status, lambda { |status|
+    
+    if status.nil?
+      where(status_id: Status.default.first.id)
+    elsif status.to_i > 0
+      where(status_id: status)
+    end
+  }
 end

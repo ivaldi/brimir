@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130208144341) do
+ActiveRecord::Schema.define(:version => 20130621143205) do
 
   create_table "attachments", :force => true do |t|
     t.integer  "attachable_id"
@@ -41,8 +41,9 @@ ActiveRecord::Schema.define(:version => 20130208144341) do
 
   create_table "statuses", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "default",    :default => false
   end
 
   create_table "tickets", :force => true do |t|
