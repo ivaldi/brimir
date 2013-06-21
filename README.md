@@ -1,4 +1,4 @@
-Brimir ![Build Status](https://api.travis-ci.org/ivaldi/brimir.png)
+Brimir [![Build Status](https://travis-ci.org/ivaldi/brimir.png)](https://travis-ci.org/ivaldi/brimir)
 ======
 Brimir is a simple helpdesk system that can be used to handle support requests
 via incoming email. It is still under heavy development, but can be used in
