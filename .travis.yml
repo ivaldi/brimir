@@ -7,4 +7,4 @@ rvm:
 before_script:
   - psql -c 'CREATE DATABASE brimir_test;' -U postgres
   - cp config/database.travis.yml config/database.yml
-  - bundle exec rake db:test:prepare
+  - bundle exec rake db:migrate
