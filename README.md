@@ -1,12 +1,31 @@
 Brimir [![Build Status](https://travis-ci.org/ivaldi/brimir.png)](https://travis-ci.org/ivaldi/brimir)
 ======
 Brimir is a simple helpdesk system that can be used to handle support requests
-via incoming email. It is still under heavy development, but can be used in
-production.
+via incoming email. Brimir is currently used in production at [Ivaldi](http://ivaldi.nl/).
+
+Installation
+------------
+Brimir is a rather simple Ruby on Rails application. The only difficulty in setting things up is how to get incoming email to work. See the next section for details.
+
+To install brimir you first have to create a database and modify the config file in config/database.yml to reflect the details.
+
+Now install the required gems by running:
+
+    bundle install --without development:test
+    
+Next, load the database schema and some defaults:
+
+    rake db:migrate
+    
+Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
+
+    rails console
+    Status.create([ { name: 'Open', default: true }, { name: 'Closed' }, { name: 'Deleted' } ])
+    u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
 
 Incoming email
 --------------
-Incoming emails can be posted to the tickets url. First make a script like this:
+Incoming emails can be posted to the tickets url. First make a script like this on your mailserver:
 
     #!/bin/bash
     exec curl --data-urlencode message@- https://yourbrimirurl.com/tickets
