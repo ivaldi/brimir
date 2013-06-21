@@ -2,6 +2,7 @@
 
 open:
   name: Open
+  default: true
 
 closed:
   name: Closed
