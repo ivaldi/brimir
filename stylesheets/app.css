@@ -1,0 +1,16 @@
+.download{
+	margin-top: 50px;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.text-justify{
+	text-align: justify;
+}
+
+.button{
+	border: none;
+	border-bottom: 2px solid #196e87;
+}
