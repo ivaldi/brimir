@@ -23,6 +23,12 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
+    # if no password was posted, remove from params
+    if params[:user][:password] == ''
+      params[:user].delete(:password)
+      params[:user].delete(:password_confirmation)
+    end
+
     if @user.update_attributes(params[:user])
       redirect_to tickets_url, notice: 'Settings saved'
     else

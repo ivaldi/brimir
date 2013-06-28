@@ -3,5 +3,18 @@
   <%= f.label :signature, 'Email signature' %>
   <%= f.text_area :signature, rows: 5, cols: 20 %>
 
+  <hr />
+
+  <h5>Modify password</h5>
+  <p>Only fill in these two fields if you want to modify your password.</p>
+
+  <%= f.label :password, 'Password' %>
+  <%= f.password_field :password %>
+
+  <%= f.label :password_confirmation, 'Password confirmation' %>
+  <%= f.password_field :password_confirmation %>
+
+  <hr />
+
   <%= f.submit 'Save', class: 'button' %>
 <% end %>
