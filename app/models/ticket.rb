@@ -15,8 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Ticket < ActiveRecord::Base
-  attr_accessible :content, :user_id, :subject, :status_id, :assignee_id,
-      :message_id
 
   validates_presence_of :status_id, :user_id
 
@@ -28,7 +26,7 @@ class Ticket < ActiveRecord::Base
 
   has_many :replies, dependent: :destroy
 
-  scope :by_status, lambda { |status|
+  scope :by_status, -> (status) {
     
     if status.nil?
       where(status_id: Status.default.first.id)

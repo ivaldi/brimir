@@ -3,13 +3,13 @@
 problem:
   subject: I have a problem
   content: My computer doesn't start anymore
-  user_id: <%= ActiveRecord::Fixtures.identify(:bob) %>
-  assignee_id: <%= ActiveRecord::Fixtures.identify(:alice) %>
-  status_id: <%= ActiveRecord::Fixtures.identify(:open) %>
+  user: bob
+  assignee: alice
+  status: open
 
 two:
   subject: Some problems
   content: Word doesn't open, internet doesn't work
-  user_id: <%= ActiveRecord::Fixtures.identify(:bob) %>
-  assignee_id: <%= ActiveRecord::Fixtures.identify(:alice) %>
-  status_id: <%= ActiveRecord::Fixtures.identify(:closed) %>
+  user: bob
+  assignee: alice
+  status: closed

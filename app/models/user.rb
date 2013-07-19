@@ -17,11 +17,8 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :signature
-
   has_many :tickets
   has_many :replies
 
-  scope :agents, where(agent: true)
+  scope :agents, -> { where(agent: true) }
 end
