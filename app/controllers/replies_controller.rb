@@ -43,6 +43,10 @@ class RepliesController < ApplicationController
     end
   end
 
+  def new
+    @reply = Reply.new(reply_params)
+  end
+
   private
     def reply_params
       params.require(:reply).permit(:content, :ticket_id, :message_id, :user_id,

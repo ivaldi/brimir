@@ -52,7 +52,7 @@
     
     <ul class="button-group radius">
       <li>
-        <a class="button regular radius" data-reveal-id="reply-ticket">Add reply</a>
+        <%= link_to 'Add reply', new_reply_path(reply: { ticket_id: @ticket.id }), class: 'button regular radius', data: { 'modal-form' => '' } %>
       </li>
     </ul>
 
@@ -77,12 +77,6 @@
       </li>
     </ul>
   </div>
-</div>
-
-<div id="reply-ticket" class="reveal-modal large">
-  <h3>Write your reply</h3>
-  <%= render 'replies/form' %>
-  <a class="close-reveal-modal">&#215;</a>
 </div>
 
 <%= render 'assign_form', { ticket: @ticket } %>

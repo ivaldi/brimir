@@ -1,6 +1,6 @@
 Brimir::Application.routes.draw do
 
-  resources :replies, only: [ :create ]
+  resources :replies, only: [ :create, :new ]
 
   devise_for :users
 
