@@ -19,10 +19,12 @@ class RepliesController < ApplicationController
   def create
     @reply = Reply.new(reply_params)
 
-    @reply.user = current_user
+    @reply.user = current_user    
 
     respond_to do |format|
       if @reply.save
+
+        @reply.content += "\n\n--\n" + @reply.user.signature
 
         mail = TicketMailer.reply(@reply)
 
@@ -41,6 +43,10 @@ class RepliesController < ApplicationController
         format.js { render }
       end
     end
+  end
+
+  def new
+    @reply = Reply.new(reply_params)
   end
 
   private

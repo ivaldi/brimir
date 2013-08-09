@@ -12,6 +12,9 @@ gem 'zurb-foundation', '~> 3.2.0'
 
 gem 'jquery-rails'
 
+# Zurb form errors
+gem 'foundation_rails_helper', git: 'https://github.com/ivaldi/foundation_rails_helper.git'
+
 group :development do
   # To use debugger
   gem 'debugger'

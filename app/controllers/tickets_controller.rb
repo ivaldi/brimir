@@ -20,8 +20,7 @@ class TicketsController < ApplicationController
   def show
     @ticket = Ticket.find(params[:id])
     @agents = User.agents
-    @statuses = Status.all
-    @reply = Reply.new
+    @statuses = Status.all    
   end
 
   def index

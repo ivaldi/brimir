@@ -3,6 +3,7 @@
 alice:
   email: alice@xxxx.com
   agent: true
+  signature: 'Greets, Alice'
 
 bob:
   email: bob@xxxx.com
