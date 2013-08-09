@@ -23,7 +23,6 @@ group :development do
 
   # Deploy with Capistrano
   gem 'capistrano'
-  gem 'rvm-capistrano'
   
   # Debian Wheezy has no nodejs in the repo's :(
   gem 'therubyracer'
