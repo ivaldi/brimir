@@ -1,7 +1,2 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  content: MyText
-
-two:
-  content: MyText
+solution:
+  content: My first text reply
