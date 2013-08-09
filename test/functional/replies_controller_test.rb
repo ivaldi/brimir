@@ -33,7 +33,7 @@ class RepliesControllerTest < ActionController::TestCase
     post :create, reply: { content: @reply.content, ticket_id: @ticket.id }
 
     assert_equal 1, ActionMailer::Base.deliveries.size
-    assert_match @reply.content, ActionMailer::Base.deliveries.first.body.decoded
+    assert_match @reply.content, ActionMailer::Base.deliveries.last.body.decoded
 
   end
 
