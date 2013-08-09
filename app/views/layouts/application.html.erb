@@ -32,6 +32,13 @@
       </ul>
       <section>
         <% if user_signed_in? %>
+          <ul class="left">
+            <li class="divider"></li>
+            <li>
+              <%= link_to 'All tickets', root_path %>
+            </li>
+            <li class="divider"></li>
+          </ul>        
           <ul class="right">
             <li class="divider"></li>
             <li class="has-dropdown">
