@@ -14,24 +14,27 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Ticket < ActiveRecord::Base
+require 'test_helper'
 
-  validates_presence_of :status_id, :user_id
+class RepliesControllerTest < ActionController::TestCase
 
-  belongs_to :user
-  belongs_to :status
-  belongs_to :assignee, class_name: 'User'
+  setup do
 
-  has_many :attachments, as: :attachable, dependent: :destroy
+    @ticket = tickets(:problem)
+    @reply = replies(:solution)
 
-  has_many :replies, dependent: :destroy
+    sign_in users(:alice)
+  end
 
-  scope :by_status, ->(status) {
-    
-    if status.nil?
-      where(status_id: Status.default.first.id)
-    elsif status.to_i > 0
-      where(status_id: status)
-    end
-  }
+  test 'should send reply when reply is added' do
+
+    assert_equal 0, ActionMailer::Base.deliveries.size
+
+    post :create, reply: { content: @reply.content, ticket_id: @ticket.id }
+
+    assert_equal 1, ActionMailer::Base.deliveries.size
+    assert_match @reply.content, ActionMailer::Base.deliveries.last.body.decoded
+
+  end
+
 end

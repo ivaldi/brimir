@@ -48,25 +48,45 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
 
-    if @ticket.assignee_id != params[:ticket][:assignee_id]
-      should_notify_assignee = true
+    if !params[:ticket][:assignee_id].nil? \
+        && @ticket.assignee_id != params[:ticket][:assignee_id]
+      assignee_changed = true
     else
-      should_notify_assignee = false
+      assignee_changed = false
+    end
+
+    if !params[:ticket][:status_id].nil? \
+        && @ticket.status_id != params[:ticket][:status_id]
+      status_changed = true
+    else
+      status_changed = false
     end
 
     respond_to do |format|
-      if @ticket.update_attributes(params[:ticket])
+      if @ticket.update_attributes(ticket_params)
         
-        if should_notify_assignee && !@ticket.assignee.nil?
-          TicketMailer.notify_assignee(@ticket).deliver
+        if assignee_changed && !@ticket.assignee.nil?
+          TicketMailer.notify_assigned(@ticket).deliver
+        elsif status_changed && !@ticket.assignee.nil?
+          TicketMailer.notify_status_changed(@ticket).deliver
         end
 
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully updated.' }
-        format.js { render notice: 'Ticket was succesfully updated.' }
-        format.json { head :no_content }
+        format.html {
+          redirect_to @ticket, notice: 'Ticket was successfully updated.'
+        }
+        format.js {
+          render notice: 'Ticket was succesfully updated.'
+        }
+        format.json {
+          head :no_content
+        }
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+        format.html {
+          render action: 'edit'
+        }
+        format.json {
+          render json: @ticket.errors, status: :unprocessable_entity
+        }
       end
     end
   end
@@ -79,4 +99,10 @@ class TicketsController < ApplicationController
       format.json { render json: @ticket, status: :created }
     end
   end
+
+  private
+    def ticket_params
+      params.require(:ticket).permit(:content, :user_id, :subject, :status_id,
+          :assignee_id, :message_id)
+    end
 end

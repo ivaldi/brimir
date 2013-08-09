@@ -15,8 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Reply < ActiveRecord::Base
-  attr_accessible :content, :ticket_id, :message_id, :user_id,
-      :attachments_attributes
 
   has_many :attachments, as: :attachable, dependent: :destroy
 
@@ -27,6 +25,6 @@ class Reply < ActiveRecord::Base
   belongs_to :ticket
   belongs_to :user
 
-  scope :chronologically, order(:id)
+  scope :chronologically, -> { order(:id) }
 
 end

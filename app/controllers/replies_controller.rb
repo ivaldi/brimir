@@ -17,7 +17,7 @@
 class RepliesController < ApplicationController
 
   def create
-    @reply = Reply.new(params[:reply])
+    @reply = Reply.new(reply_params)
 
     @reply.user = current_user
 
@@ -42,5 +42,11 @@ class RepliesController < ApplicationController
       end
     end
   end
+
+  private
+    def reply_params
+      params.require(:reply).permit(:content, :ticket_id, :message_id, :user_id,
+          :attachments_attributes)
+    end
 
 end

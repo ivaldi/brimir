@@ -46,7 +46,14 @@ class TicketMailer < ActionMailer::Base
     mail(to: reply.ticket.user.email, subject: 'Re: ' + subject)
   end
 
-  def notify_assignee(ticket)
+  def notify_status_changed(ticket)
+    @ticket = ticket
+
+    mail(to: ticket.assignee.email, subject:
+        'Ticket status modified in ' + ticket.status.name + ' for: ' + ticket.subject)
+  end
+
+  def notify_assigned(ticket)
     @ticket = ticket
 
     mail(to: ticket.assignee.email, subject:

@@ -15,12 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Status < ActiveRecord::Base
-  attr_accessible :name, :default
-
   validates_presence_of :name
 
   has_many :tickets
 
-  scope :default, where(default: true)
+  scope :default, -> { where(default: true) }
 
 end
