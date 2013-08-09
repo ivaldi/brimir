@@ -3,7 +3,7 @@
   <%= r.hidden_field :ticket_id %>
   <p>Type your reply. The client will receive this reply via email.</p>
   <%= r.text_area :content %>
-  <p><%= current_user.signature.to_s %></p>
+  <p>--<br /><%= current_user.signature.to_s %><br /></p>
 
   <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
     <%= a.label :file, 'Attach a file' %>

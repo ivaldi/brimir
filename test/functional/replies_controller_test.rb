@@ -28,13 +28,34 @@ class RepliesControllerTest < ActionController::TestCase
 
   test 'should send reply when reply is added' do
 
-    assert_equal 0, ActionMailer::Base.deliveries.size
+    # do we send a mail
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      post :create, reply: { content: @reply.content, ticket_id: @ticket.id }
+    end
 
-    post :create, reply: { content: @reply.content, ticket_id: @ticket.id }
-
-    assert_equal 1, ActionMailer::Base.deliveries.size
     assert_match @reply.content, ActionMailer::Base.deliveries.last.body.decoded
 
   end
+
+  test 'reply should always contain text' do
+
+    # no emails should be send when invalid reply
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do      
+      post :create, reply: { content: '', ticket_id: @ticket.id }
+    end
+
+    refute_equal 0, assigns(:reply).errors.size
+
+  end
+
+  test 'reply should contain signature' do
+
+    post :create, reply: { content: @reply.content, ticket_id: @ticket.id }
+
+    assert_match assigns(:reply).user.signature, 
+        ActionMailer::Base.deliveries.last.body.decoded
+
+  end
+
 
 end
