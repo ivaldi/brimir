@@ -24,7 +24,7 @@ class RepliesController < ApplicationController
     respond_to do |format|
       if @reply.save
 
-        @reply.content += "--\n" + @reply.user.signature
+        @reply.content += "\n\n--\n" + @reply.user.signature
 
         mail = TicketMailer.reply(@reply)
 
