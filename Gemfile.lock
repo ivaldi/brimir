@@ -6,6 +6,14 @@ GIT
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
 
+GIT
+  remote: https://github.com/ivaldi/foundation_rails_helper.git
+  revision: 1d9d231e085d32cbdf799177a375bb6da896249e
+  specs:
+    foundation_rails_helper (0.3.alpha)
+      actionpack
+      railties
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -177,6 +185,7 @@ DEPENDENCIES
   compass-rails!
   debugger
   devise
+  foundation_rails_helper!
   jquery-rails
   paperclip
   pg

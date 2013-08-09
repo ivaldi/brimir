@@ -15,3 +15,66 @@
 //= require foundation
 //= require_tree .
 
+(function() {
+  
+  var dialog;
+
+  function onsubmit(e) {
+    e.preventDefault();
+
+    var form = jQuery(this);
+
+    jQuery.ajax({
+      url: form.attr('action'),
+      type: 'post',
+      data: form.serialize(),
+      success: function(data) {
+
+        /* alert found, probably something wrong */
+        if(jQuery(data).find('.error').length > 0) {
+          insertFormInDialog(data);
+        } else {
+          document.location.reload();
+        }
+      }
+    });
+
+  }
+
+  function oncancel(e) {
+    e.preventDefault();
+
+    jQuery(this).parents('.reveal-modal').foundation('reveal', 'close');
+  }
+
+  function insertFormInDialog(data) {
+    /* insert the result into the dialog */
+    dialog.find('article').html(jQuery(data).find('[data-content]'));
+
+    dialog.find('form').on('submit', onsubmit);
+
+    dialog.find('[data-close-modal]').on('click', oncancel);
+
+    /* show the dialog */
+    dialog.reveal('open');    
+  }
+
+  jQuery(function() {
+
+    dialog = jQuery('[data-dialog]');
+
+    jQuery('[data-modal-form]').click(function(e) {
+
+      e.preventDefault();
+
+      // load the form through ajax
+      jQuery.ajax({
+        url: jQuery(this).attr('href'),
+        success: insertFormInDialog
+      });
+
+    });
+
+  });
+
+})();
