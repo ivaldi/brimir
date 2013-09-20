@@ -90,4 +90,12 @@ class TicketMailerTest < ActionMailer::TestCase
     end
   
   end
+
+  test 'email with unkown reply_to' do
+
+    unknown_reply_to = read_fixture('unknown_reply_to').join
+    assert_difference 'Ticket.count' do 
+      TicketMailer.receive(unknown_reply_to)
+    end
+  end
 end

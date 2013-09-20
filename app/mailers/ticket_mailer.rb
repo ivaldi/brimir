@@ -120,8 +120,12 @@ class TicketMailer < ActionMailer::Base
       if !response_to
 
         response_to = Reply.find_by_message_id(email.in_reply_to)
-        ticket = response_to.ticket
 
+        if response_to
+          ticket = response_to.ticket
+        else
+          # we create a new ticket further below in this case
+        end
       else
         ticket = response_to
       end
