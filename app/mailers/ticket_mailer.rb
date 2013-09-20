@@ -99,10 +99,10 @@ class TicketMailer < ActionMailer::Base
     content = ''
 
     if email.multipart?
-      if email.html_part
+      if email.text_part
+        content = normalize_body(email.text_part, email.text_part.charset).gsub("\n", '<br />')
+      else
         content = normalize_body(email.html_part, email.html_part.charset)
-      else 
-        content = '<pre>' + normalize_body(email.text_part, email.text_part.charset) + '</pre>'
       end
     else
       if email.charset
