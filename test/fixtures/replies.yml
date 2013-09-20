@@ -1,2 +1,5 @@
 solution:
   content: My first text reply
+  to: alice@alice.nl
+  cc: bob@bob.nl
+  bcc: charlie@charlie.nl

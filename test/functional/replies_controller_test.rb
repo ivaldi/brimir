@@ -30,7 +30,11 @@ class RepliesControllerTest < ActionController::TestCase
 
     # do we send a mail
     assert_difference 'ActionMailer::Base.deliveries.size' do
-      post :create, reply: { content: @reply.content, ticket_id: @ticket.id }
+      post :create, reply: {
+          content: @reply.content,
+          ticket_id: @ticket.id,
+          to: @reply.to
+      }
     end
 
     assert_match @reply.content, ActionMailer::Base.deliveries.last.body.decoded
@@ -41,7 +45,11 @@ class RepliesControllerTest < ActionController::TestCase
 
     # no emails should be send when invalid reply
     assert_no_difference 'ActionMailer::Base.deliveries.size' do      
-      post :create, reply: { content: '', ticket_id: @ticket.id }
+      post :create, reply: {
+          content: '',
+          ticket_id: @ticket.id,
+          to: @reply.to
+      }
     end
 
     refute_equal 0, assigns(:reply).errors.size
@@ -50,12 +58,37 @@ class RepliesControllerTest < ActionController::TestCase
 
   test 'reply should contain signature' do
 
-    post :create, reply: { content: @reply.content, ticket_id: @ticket.id }
+    post :create, reply: {
+        content: @reply.content,
+        ticket_id: @ticket.id,
+        to: @reply.to
+    }
 
     assert_match assigns(:reply).user.signature, 
         ActionMailer::Base.deliveries.last.body.decoded
 
   end
 
+  test 'should send reply to correct to, cc and bcc addresses' do
+
+    # do we send a mail
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      post :create, reply: {
+          content: @reply.content,
+          ticket_id: @ticket.id,
+          to: @reply.to,
+          cc: @reply.cc,
+          bcc: @reply.bcc
+      }
+    end
+
+    assert_match @reply.content, ActionMailer::Base.deliveries.last.body.decoded
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal [ @reply.to ], mail.to
+    assert_equal [ @reply.cc ], mail.cc
+    assert_equal [ @reply.bcc ], mail.bcc
+
+  end
 
 end

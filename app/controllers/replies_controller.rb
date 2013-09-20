@@ -47,12 +47,14 @@ class RepliesController < ApplicationController
 
   def new
     @reply = Reply.new(reply_params)
+
+    @reply.to = @reply.ticket.user.email
   end
 
   private
     def reply_params
       params.require(:reply).permit(:content, :ticket_id, :message_id, :user_id,
-          :attachments_attributes)
+          :attachments_attributes, :to, :cc, :bcc)
     end
 
 end

@@ -39,11 +39,11 @@ class TicketMailer < ActionMailer::Base
 
     headers['In-Reply-To'] = '<' + reply_to.message_id.to_s + '>'
 
-    @reply.attachments.each do |at|
+    reply.attachments.each do |at|
       attachments[at.file_file_name] = File.read(at.file.path)
     end
 
-    mail(to: reply.ticket.user.email, subject: 'Re: ' + subject)
+    mail(to: reply.to, cc: reply.cc, bcc: reply.bcc, subject: 'Re: ' + subject)
   end
 
   def notify_status_changed(ticket)

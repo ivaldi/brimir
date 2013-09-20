@@ -1,7 +1,15 @@
 <%= form_for @reply do |r| %>
 	
   <%= r.hidden_field :ticket_id %>
-  <p>Type your reply. The client will receive this reply via email.</p>
+  <%= r.label :to, 'To' %>
+  <%= r.text_field :to %>
+
+  <%= r.label :cc, 'Cc' %>
+  <%= r.text_field :cc %>
+
+  <%= r.label :bcc, 'Bcc' %>
+  <%= r.text_field :bcc %>
+
   <%= r.text_area :content %>
   <p>--<br /><%= current_user.signature.to_s %><br /></p>
 
