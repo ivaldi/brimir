@@ -10,6 +10,8 @@
   <%= r.label :bcc, 'Bcc' %>
   <%= r.text_field :bcc %>
 
+  <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
+
   <%= r.text_area :content %>
   <p>--<br /><%= current_user.signature.to_s %><br /></p>
 

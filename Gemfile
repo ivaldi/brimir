@@ -46,3 +46,6 @@ gem 'will_paginate'
 
 # Attachments, thumbnails etc
 gem 'paperclip'
+
+# Markdown
+gem 'redcarpet'

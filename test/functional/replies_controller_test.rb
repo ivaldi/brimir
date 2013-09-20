@@ -28,7 +28,7 @@ class RepliesControllerTest < ActionController::TestCase
 
   test 'should send reply when reply is added' do
 
-    # do we send a mail
+    # do we send a mail?
     assert_difference 'ActionMailer::Base.deliveries.size' do
       post :create, reply: {
           content: @reply.content,
@@ -37,7 +37,9 @@ class RepliesControllerTest < ActionController::TestCase
       }
     end
 
-    assert_match @reply.content, ActionMailer::Base.deliveries.last.body.decoded
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_match @reply.content, mail.text_part.body.decoded
 
   end
 
@@ -64,14 +66,14 @@ class RepliesControllerTest < ActionController::TestCase
         to: @reply.to
     }
 
-    assert_match assigns(:reply).user.signature, 
-        ActionMailer::Base.deliveries.last.body.decoded
+    mail = ActionMailer::Base.deliveries.last
 
+    assert_match assigns(:reply).user.signature, mail.text_part.body.decoded
   end
 
   test 'should send reply to correct to, cc and bcc addresses' do
 
-    # do we send a mail
+    # do we send a mail?
     assert_difference 'ActionMailer::Base.deliveries.size' do
       post :create, reply: {
           content: @reply.content,
@@ -82,13 +84,29 @@ class RepliesControllerTest < ActionController::TestCase
       }
     end
 
-    assert_match @reply.content, ActionMailer::Base.deliveries.last.body.decoded
-
     mail = ActionMailer::Base.deliveries.last
+
+    assert_match @reply.content, mail.text_part.body.decoded
+
     assert_equal [ @reply.to ], mail.to
     assert_equal [ @reply.cc ], mail.cc
     assert_equal [ @reply.bcc ], mail.bcc
 
+  end
+
+  test 'reply should have text and html using markdown' do
+    # do we send a mail?
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      post :create, reply: {
+          content: '**this is in bold**',
+          ticket_id: @ticket.id,
+          to: @reply.to,
+      }
+    end
+
+    mail = ActionMailer::Base.deliveries.last
+    assert_match '<strong>this is in bold</strong>', mail.html_part.body.decoded
+    assert_match '**this is in bold**', mail.text_part.body.decoded
   end
 
 end
