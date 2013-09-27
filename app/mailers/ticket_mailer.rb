@@ -100,16 +100,19 @@ class TicketMailer < ActionMailer::Base
 
     if email.multipart?
       if email.text_part
-        content = normalize_body(email.text_part, email.text_part.charset).gsub("\n", '<br />')
+        content = normalize_body(email.text_part, email.text_part.charset)
+        content_type = 'text'
       else
         content = normalize_body(email.html_part, email.html_part.charset)
+        content_type = 'html'
       end
     else
       if email.charset
-        content = '<pre>' + normalize_body(email, email.charset) + '</pre>'
+        content = normalize_body(email, email.charset)
       else
-        content = '<pre>' + email.body.decoded.encode('UTF-8') + '</pre>'
+        content = email.body.decoded.encode('UTF-8')
       end
+      content_type = 'text'
     end
 
 
@@ -142,6 +145,7 @@ class TicketMailer < ActionMailer::Base
     if response_to
       # reopen ticket
       ticket.status = Status.default.first
+      ticket.content_type = content_type
       ticket.save
 
       # add reply
@@ -162,6 +166,8 @@ class TicketMailer < ActionMailer::Base
         status_id: Status.default.first.id,
         message_id: email.message_id
       })
+
+      incoming.content_type = content_type
 
       ticket = incoming
 

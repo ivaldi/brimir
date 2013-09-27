@@ -10,8 +10,18 @@
       <% if @ticket.content.nil? %>
         (No content)
       <% else %>
+
+        <% if @ticket.content_type == 'markdown' %>
+          <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
+          <% content = markdown.render(@ticket.content) %>
+        <% elsif @ticket.content_type == 'text' %>
+          <% content = @ticket.content.gsub("\n", '<br />') %>
+        <% else %>
+          <% content = @ticket.content %>
+        <% end %>
+
         <%# only allow these tags and attributes %>
-        <%= sanitize @ticket.content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
+        <%= sanitize content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
       <% end %>
 
       <% if @ticket.attachments.size > 0 %>
@@ -33,7 +43,17 @@
               <h5><span class="label"><%= reply.user.email %></span> <small><%= l reply.created_at, format: :short %></small></h5>
             </div>
             <div class="content">
-              <%= sanitize reply.content, tags: %w(a b code div em i img li ol p table td tfoot thead tr span strong ul), attributes: %w(src href) %>
+
+              <% if reply.content_type == 'markdown' %>
+                <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
+                <% content = markdown.render(reply.content) %>
+              <% elsif reply.content_type == 'text' %>
+                <% content = reply.content.gsub("\n", '<br />') %>
+              <% else %>
+                <% content = reply.content %>
+              <% end %>
+
+              <%= sanitize content, tags: %w(a b code div em i img li ol p table td tfoot thead tr span strong ul), attributes: %w(src href) %>
               <% if reply.attachments.size > 0 %>
                 <hr />
                 <ul class="block-grid three-up attachments">

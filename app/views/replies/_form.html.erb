@@ -13,7 +13,8 @@
   <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
 
   <%= r.text_area :content %>
-  <p>--<br /><%= current_user.signature.to_s %><br /></p>
+  <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
+  <%= markdown.render(current_user.signature.to_s).html_safe %>
 
   <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
     <%= a.label :file, 'Attach a file' %>

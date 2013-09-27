@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130920140439) do
+ActiveRecord::Schema.define(version: 20130927133039) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -28,14 +28,15 @@ ActiveRecord::Schema.define(version: 20130920140439) do
 
   create_table "replies", force: true do |t|
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "ticket_id"
     t.integer  "user_id"
     t.string   "message_id"
     t.string   "to"
     t.string   "cc"
     t.string   "bcc"
+    t.text     "content_type", default: "html"
   end
 
   add_index "replies", ["message_id"], name: "index_replies_on_message_id"
@@ -52,12 +53,13 @@ ActiveRecord::Schema.define(version: 20130920140439) do
   create_table "tickets", force: true do |t|
     t.string   "subject"
     t.text     "content"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "status_id"
     t.integer  "assignee_id"
     t.string   "message_id"
     t.integer  "user_id"
+    t.text     "content_type", default: "html"
   end
 
   add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"

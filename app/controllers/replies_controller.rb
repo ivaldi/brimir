@@ -24,7 +24,7 @@ class RepliesController < ApplicationController
     respond_to do |format|
       if @reply.save
 
-        @reply.content += "\n\n--\n" + @reply.user.signature
+        @reply.content += "\n\n" + @reply.user.signature.to_s
 
         mail = TicketMailer.reply(@reply)
 
@@ -32,6 +32,7 @@ class RepliesController < ApplicationController
 
         # save message id for later reference
         @reply.message_id = mail.message_id
+        @reply.content_type = 'markdown'
         @reply.save
 
         format.html { redirect_to @reply.ticket, notice: 'Reply was successfully created.' }
