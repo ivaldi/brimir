@@ -60,7 +60,7 @@ class TicketMailer < ActionMailer::Base
         'Ticket assigned to you: ' + ticket.subject)
   end
 
-  def notify_agents(ticket)
+  def notify_agents(ticket, incoming)
 
     agents = []
 
@@ -81,8 +81,14 @@ class TicketMailer < ActionMailer::Base
     end
 
     @ticket = ticket
+    @incoming = incoming
 
-    mail(to: agents, subject: 'New reply to: ' + ticket.subject,
+    title = 'New reply to: ' + ticket.subject
+    if incoming == ticket
+      title = 'New ticket: ' + ticket.subject
+    end
+
+    mail(to: agents, subject: title,
         template_name: 'notify_agents') # without template_name
                                         # the functional tests fail
   end
@@ -164,10 +170,10 @@ class TicketMailer < ActionMailer::Base
         subject: email.subject,
         content: content,
         status_id: Status.default.first.id,
-        message_id: email.message_id
+        message_id: email.message_id,
+        content_type: content_type
       })
 
-      incoming.content_type = content_type
 
       ticket = incoming
 
@@ -193,7 +199,7 @@ class TicketMailer < ActionMailer::Base
 
     end
 
-    notify_agents(ticket).deliver
+    notify_agents(ticket, incoming).deliver
 
     return incoming
 
