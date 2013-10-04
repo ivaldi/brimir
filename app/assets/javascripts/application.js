@@ -48,6 +48,7 @@
   }
 
   function insertFormInDialog(data) {
+
     /* insert the result into the dialog */
     dialog.find('article').html(jQuery(data).find('[data-content]'));
 

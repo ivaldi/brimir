@@ -1,26 +1,48 @@
 <%= form_for @reply do |r| %>
-	
+
   <%= r.hidden_field :ticket_id %>
-  <%= r.label :to, 'To' %>
-  <%= r.text_field :to %>
 
-  <%= r.label :cc, 'Cc' %>
-  <%= r.text_field :cc %>
+  <ul class="block-grid three-up">
+    <li>	
+      <%= r.label :to, 'To' %>
+      <%= r.text_field :to %>
+    </li>
 
-  <%= r.label :bcc, 'Bcc' %>
-  <%= r.text_field :bcc %>
+    <li>
+      <%= r.label :cc, 'Cc' %>
+      <%= r.text_field :cc %>
+    </li>
 
-  <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
+    <li>
+      <%= r.label :bcc, 'Bcc' %>
+      <%= r.text_field :bcc %>
+    </li>
+  </div>
 
-  <%= r.text_area :content %>
-  <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-  <%= markdown.render(current_user.signature.to_s).html_safe %>
+  
+  <dl class="tabs">
+    <dt>Message</dt>
+    <dd class="active"><a href="#edit">Edit</a></dd>
+    <dd><a href="#preview">Preview</a></dd>
+  </dl>
+  <ul class="tabs-content">
+    <li class="active" id="editTab">
+      <%= r.text_area :content %>
+      <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
+      <%= markdown.render(current_user.signature.to_s).html_safe %>
+      <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
+    </li>
+    <li id="previewTab">
+      preview
+    </li>
+  </ul>
 
-  <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
-    <%= a.label :file, 'Attach a file' %>
-    <%= a.file_field :file %><br />
-    <br />
-  <% end %>
+  <div class="panel">
+    <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
+      <%= a.label :file, 'Attach file(s)' %>
+      <%= a.file_field :file %>
+    <% end %>
+  </div>
 
   <%= r.submit value: 'Send reply', class: 'button' %>
 <% end %>

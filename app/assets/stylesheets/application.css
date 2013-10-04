@@ -68,3 +68,11 @@
 	float: left;
 }
  
+textarea{
+	width: 100%;
+	height: 300px !important;
+}
+
+.preview{
+	height: 300px;
+}
