@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/milgner/compass-rails.git
-  revision: c86e7fd9c2605c80816a2f64a3fb8b7c3a09e494
-  branch: rails4
-  specs:
-    compass-rails (1.0.3)
-      compass (>= 0.12.2, < 0.14)
-
-GIT
   remote: https://github.com/ivaldi/foundation_rails_helper.git
   revision: 1d9d231e085d32cbdf799177a375bb6da896249e
   specs:
@@ -68,6 +60,8 @@ GEM
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    compass-rails (2.0.alpha.0)
+      compass (>= 0.12.2, < 0.14)
     debugger (1.6.1)
       columnize (>= 0.3.1)
       debugger-linecache (~> 1.2.0)
@@ -180,7 +174,7 @@ PLATFORMS
 DEPENDENCIES
   capistrano
   coffee-rails (~> 4.0.0)
-  compass-rails!
+  compass-rails (~> 2.0.alpha.0)
   debugger
   devise
   foundation_rails_helper!
