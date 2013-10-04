@@ -21,6 +21,9 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     @agents = User.agents
     @statuses = Status.all    
+
+    @reply = @ticket.replies.new
+    @reply.to = @ticket.user.email
   end
 
   def index

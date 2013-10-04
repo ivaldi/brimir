@@ -69,38 +69,9 @@
       </ul>
     <% end %>
 
-    <dl class="tabs contained">
-      <dt>Reply</dt>
-      <dd class="active"><a href="#edit">Edit</a></dd>
-      <dd><a href="#preview">Preview</a></dd>
-    </dl>
-    <ul class="tabs-content contained">
-      <li class="active" id="editTab">
-        <ul class="block-grid three-up">
-          <li>  
-            <label>To</label>
-            <input type="text" />
-          </li>
+    <%= render 'replies/form' %>
 
-          <li>
-            <label>Cc</label>
-            <input type="text" />
-          </li>
-
-          <li>
-            <label>Bcc</label>
-            <input type="text" />
-          </li>
-        </ul>
-        <textarea></textarea>
-        <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
-      </li>
-      <li id="previewTab">
-        preview
-      </li>
-    </ul>
-    <p><%= link_to 'Add reply', new_reply_path(reply: { ticket_id: @ticket.id }), class: 'button regular radius', data: { 'inline-form' => '' } %></p>
-  </div><!-- .nine.columns -->
+  </div>
 
   <div class="three columns">    
     <ul class="side-nav">
