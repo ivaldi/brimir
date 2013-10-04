@@ -37,7 +37,12 @@
         <% count = 0 %>
         <% @ticket.replies.chronologically.each do |reply| %>
 
-          <li<%= ' class="active"'.html_safe if count == @ticket.replies.size - 1 %>>
+          <% if @ticket.replies.size - 2 == count %>
+            <%# minus 2, because @reply is a new ticket that is counted as well... %>
+            <li class="active">
+          <% else %>
+            <li>
+          <% end %>
             <div class="title">
               <h5><span class="label"><%= reply.user.email %></span> <small><%= l reply.created_at, format: :short %></small></h5>
             </div>
