@@ -12,6 +12,8 @@
       
       <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
     
+      <%= favicon_link_tag 'favicon.png' %>
+
       <%= stylesheet_link_tag    "application" %>
       
       <%= javascript_include_tag "application" %>

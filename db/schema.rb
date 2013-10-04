@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 20130927133039) do
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
     t.string   "attachable_type"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "file_file_name"
     t.string   "file_content_type"
     t.integer  "file_file_size"
@@ -28,15 +28,15 @@ ActiveRecord::Schema.define(version: 20130927133039) do
 
   create_table "replies", force: true do |t|
     t.text     "content"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "ticket_id"
     t.integer  "user_id"
     t.string   "message_id"
     t.string   "to"
     t.string   "cc"
     t.string   "bcc"
-    t.text     "content_type", default: "html"
+    t.text     "content_type", default: "markdown"
   end
 
   add_index "replies", ["message_id"], name: "index_replies_on_message_id"
@@ -45,16 +45,16 @@ ActiveRecord::Schema.define(version: 20130927133039) do
 
   create_table "statuses", force: true do |t|
     t.string   "name"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.boolean  "default",    default: false
   end
 
   create_table "tickets", force: true do |t|
     t.string   "subject"
     t.text     "content"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "status_id"
     t.integer  "assignee_id"
     t.string   "message_id"
@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 20130927133039) do
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
   create_table "users", force: true do |t|
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
