@@ -164,10 +164,10 @@ class TicketMailer < ActionMailer::Base
         subject: email.subject,
         content: content,
         status_id: Status.default.first.id,
-        message_id: email.message_id
+        message_id: email.message_id,
+        content_type: content_type
       })
 
-      incoming.content_type = content_type
 
       ticket = incoming
 
