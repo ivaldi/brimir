@@ -20,7 +20,7 @@ class Reply < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments
 
-  validates_presence_of :content
+  validates_presence_of :ticket_id, :content
 
   belongs_to :ticket
   belongs_to :user
