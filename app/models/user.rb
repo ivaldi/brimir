@@ -21,4 +21,8 @@ class User < ActiveRecord::Base
   has_many :replies
 
   scope :agents, -> { where(agent: true) }
+
+  def active_for_authentication?
+    super && agent
+  end
 end
