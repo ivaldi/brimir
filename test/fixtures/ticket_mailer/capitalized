@@ -1,0 +1,11 @@
+MIME-Version: 1.0
+Received: by 10.229.184.212 with HTTP; Sat, 27 Nov 2010 02:11:36 -0800 (PST)
+Date: Sat, 27 Nov 2010 11:11:36 +0100
+Message-ID: <AANLkTi=255AJgFEjx75oq3Y5UM=Q6L1jVCVz8oQq85ka@mail.gmail.com>
+Subject: Testing this with a simple message
+From: Frank <Frank@xxxx.com>
+To: Brimir <Brimir@xxxx.com>
+Content-Type: text/plain; charset=ISO-8859-1
+
+This is a message with capitalized mail addresses to prevent errors when
+user exists according to Devise, but not according to ActiveRecord.

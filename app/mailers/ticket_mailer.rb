@@ -43,14 +43,16 @@ class TicketMailer < ActionMailer::Base
       attachments[at.file_file_name] = File.read(at.file.path)
     end
 
-    mail(to: reply.to, cc: reply.cc, bcc: reply.bcc, subject: 'Re: ' + subject)
+    mail(to: reply.to, cc: reply.cc, bcc: reply.bcc, subject: 'Re: ' \
+        + subject)
   end
 
   def notify_status_changed(ticket)
     @ticket = ticket
 
     mail(to: ticket.assignee.email, subject:
-        'Ticket status modified in ' + ticket.status.name + ' for: ' + ticket.subject)
+        'Ticket status modified in ' + ticket.status.name + ' for: ' \
+        + ticket.subject)
   end
 
   def notify_assigned(ticket)
@@ -140,12 +142,14 @@ class TicketMailer < ActionMailer::Base
       end
     end
 
-    from_user = User.find_by_email(email.from.first)
+    # search using the same method as Devise validation
+    from_user = User.find_first_by_auth_conditions(email: email.from.first)
 
     if !from_user
       password_length = 12
       password = Devise.friendly_token.first(password_length)
-      from_user = User.create!(email: email.from.first, password: password, password_confirmation: password)
+      from_user = User.create!(email: email.from.first, password: password,
+          password_confirmation: password)
     end
 
     if response_to

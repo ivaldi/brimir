@@ -98,4 +98,12 @@ class TicketMailerTest < ActionMailer::TestCase
       TicketMailer.receive(unknown_reply_to)
     end
   end
+
+  test 'email with capitalized from address' do
+    capitalized = read_fixture('capitalized').join
+    assert_difference 'Ticket.count', 2 do 
+      TicketMailer.receive(capitalized)
+      TicketMailer.receive(capitalized)
+    end
+  end
 end
