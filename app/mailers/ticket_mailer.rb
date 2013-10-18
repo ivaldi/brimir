@@ -55,6 +55,14 @@ class TicketMailer < ActionMailer::Base
         + ticket.subject)
   end
 
+  def notify_priority_changed(ticket)
+    @ticket = ticket
+
+    mail(to: ticket.assignee.email, subject:
+        'Ticket priority modified in ' + ticket.priority.name + ' for: ' \
+        + ticket.subject)
+  end
+
   def notify_assigned(ticket)
     @ticket = ticket
 

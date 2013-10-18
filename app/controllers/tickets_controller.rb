@@ -52,27 +52,21 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
 
-    if !params[:ticket][:assignee_id].nil? \
-        && @ticket.assignee_id != params[:ticket][:assignee_id]
-      assignee_changed = true
-    else
-      assignee_changed = false
-    end
-
-    if !params[:ticket][:status_id].nil? \
-        && @ticket.status_id != params[:ticket][:status_id]
-      status_changed = true
-    else
-      status_changed = false
-    end
-
     respond_to do |format|
       if @ticket.update_attributes(ticket_params)
         
-        if assignee_changed && !@ticket.assignee.nil?
-          TicketMailer.notify_assigned(@ticket).deliver
-        elsif status_changed && !@ticket.assignee.nil?
-          TicketMailer.notify_status_changed(@ticket).deliver
+        if !@ticket.assignee.nil?
+
+          if @ticket.previous_changes.include? :assignee_id
+            TicketMailer.notify_assigned(@ticket).deliver
+
+          elsif @ticket.previous_changes.include? :status_id
+            TicketMailer.notify_status_changed(@ticket).deliver
+
+          elsif @ticket.previous_changes.include? :priority_id
+            TicketMailer.notify_priority_changed(@ticket).deliver
+          end
+
         end
 
         format.html {
