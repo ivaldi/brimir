@@ -79,7 +79,17 @@
   </div>
 
   <div class="three columns">    
-    <ul class="side-nav">
+    <ul class="side-nav">      
+      <li>Status:
+        <a href="#" data-reveal-id="change-status">
+          <%= @ticket.status.name %>
+        </a>
+      </li>
+      <li>Priority:
+        <a href="#" data-reveal-id="change-priority">
+          <%= @ticket.priority.name %>
+        </a>
+      </li>
       <li>
         Assignee:
         <a href="#" data-reveal-id="assign-ticket">
@@ -90,14 +100,10 @@
         <% end %>
         </a>
       </li>
-      <li>Status:
-        <a href="#" data-reveal-id="change-status">
-          <%= @ticket.status.name %>
-        </a>
-      </li>
     </ul>
   </div>
 </div>
 
-<%= render 'assign_form', { ticket: @ticket } %>
+<%= render 'change_priority_form', { ticket: @ticket } %>
+<%= render 'change_assignee_form', { ticket: @ticket } %>
 <%= render 'change_status_form', { ticket: @ticket } %>

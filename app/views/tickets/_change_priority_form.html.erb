@@ -1,0 +1,12 @@
+<div id="change-priority" class="reveal-modal small">
+  <h3>Change priority to...</h3>
+
+  <%= form_for ticket, remote: true, method: :put do |f| %>
+    <p>
+      <%= f.select :priority_id, options_from_collection_for_select(@priorities, 'id', 'name', ticket.priority_id) %>
+    </p>
+    <%= f.submit 'Change', class: 'button' %>
+  <% end %>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>

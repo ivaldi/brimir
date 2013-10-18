@@ -16,44 +16,33 @@
 
 jQuery(function() {
 
-  jQuery('table tr td.assignee a').click(function(e) {
-    e.preventDefault();
+  var forms = ['assignee', 'status', 'priority'];
 
-    var dialog = jQuery('#assign-ticket');
-    var options = dialog.find('form select');
+  for(var i = 0; i < forms.length; i++) {
+  
+    jQuery('[data-type="' + forms[i] + '"]').click(function(e) {
+      e.preventDefault();
 
-    /* set ticket id */
-    dialog.find('form').attr('action',
-        jQuery(this).parents('tr').data('ticket-url'));
-    
+      var elem = jQuery(this);
+      var type = elem.data('type');      
+      var dialog = jQuery('#change-' + type);
+      var options = dialog.find('form select');
 
-    /* select assigned user */
-    options.removeAttr('selected');
-    options.find('[value="' + jQuery(this).data('assignee-id') + '"]').attr('selected', 'selected');
+      /* set ticket id */
+      dialog.find('form').attr('action',
+          elem.parents('tr').data('ticket-url'));
+      
 
-    /* show the dialog */
-    dialog.reveal();
+      /* select assigned user */
+      options.removeAttr('selected');
+      options.find('[value="' + elem.data('id') + '"]').attr('selected', 'selected');
 
-  });
+      /* show the dialog */
+      dialog.reveal();
 
-  jQuery('table tr td.status a').click(function(e) {
-    e.preventDefault();
+    });
 
-    var dialog = jQuery('#change-status');
-    var options = dialog.find('form select');
+  }
 
-    /* set ticket id */
-    dialog.find('form').attr('action',
-        jQuery(this).parents('tr').data('ticket-url'));
-    
-
-    /* select current status */
-    options.removeAttr('selected');
-    options.find('[value="' + jQuery(this).data('status-id') + '"]').attr('selected', 'selected');
-
-    /* show the dialog */
-    dialog.reveal();
-
-  });
 });
 

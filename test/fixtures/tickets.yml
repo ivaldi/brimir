@@ -6,10 +6,12 @@ problem:
   user: bob
   assignee: alice
   status: open
+  priority: low
 
 two:
   subject: Some problems
-  content: Word doesn't open, internet doesn't work
+  content: "Word doesn't open, internet doesn't work"
   user: bob
   assignee: alice
   status: closed
+  priority: high

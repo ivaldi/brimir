@@ -55,7 +55,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should email assignee if status of ticket is changed' do
     
-    # new assignee should receive notification
+    # assignee should receive notification
     assert_difference 'ActionMailer::Base.deliveries.size' do
 
       put :update, id: @ticket.id, ticket: { status_id: statuses(:closed).id }
@@ -66,6 +66,22 @@ class TicketsControllerTest < ActionController::TestCase
     # currently we can check whether the hardcoded word status is in the body
     # in the future we might use templates or translations...
     assert_match 'status', ActionMailer::Base.deliveries.last.body.decoded
+  end
+
+  test 'should email assignee if priority of ticket is changed' do
+
+    # assignee should receive notification
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+
+      put :update, id: @ticket.id, ticket: { priority_id: priorities(:high) }
+      assert_redirected_to ticket_path(@ticket)
+
+    end
+
+    # currently we can check whether the hardcoded word priority is in the body
+    # in the future we might use templates or translations...
+    assert_match 'priority', ActionMailer::Base.deliveries.last.body.decoded
+
   end
 
 end
