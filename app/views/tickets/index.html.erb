@@ -46,6 +46,7 @@
       <thead>
         <tr>
           <th>Status</th>
+          <th>Priority</th>
           <th width="50%">Title</th>
           <th>Sender</th>
           <th>Assigned to</th>          
@@ -55,8 +56,11 @@
       <tbody>
         <% @tickets.each do |ticket| %>
           <tr data-ticket-url="<%= ticket_url(ticket) %>">
-            <td class="status">
-              <a data-status-id="<%= ticket.status.id %>" href="#"><%= ticket.status.name %></a>
+            <td>
+              <a data-type="status" data-id="<%= ticket.status.id %>" href="#"><%= ticket.status.name %></a>
+            </td>
+            <td>
+              <a data-type="priority" data-id="<%= ticket.priority.id %>" href="#"><%= ticket.priority.name %></a>
             </td>
             <td>
               <% if !ticket.assignee %>
@@ -73,11 +77,11 @@
             <td>
               <%= ticket.user.email %>
             </td>
-            <td class="assignee">
+            <td>
               <% if ticket.assignee %>
-                <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
+                <a data-type="assignee" data-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
               <% else %>
-                <a data-assignee-id="" href="#"><em>Nobody</em></a>
+                <a data-type="assignee" data-id="" href="#"><em>Nobody</em></a>
               <% end %>
             </td>
             <td>
@@ -92,5 +96,6 @@
   </div>
 </div>
 
-<%= render 'assign_form', { ticket: Ticket.new } %>
+<%= render 'change_assignee_form', { ticket: Ticket.new } %>
 <%= render 'change_status_form', { ticket: Ticket.new } %>
+<%= render 'change_priority_form', { ticket: Ticket.new } %>

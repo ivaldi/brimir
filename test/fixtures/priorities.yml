@@ -1,0 +1,12 @@
+none:
+  name: None
+  default: true
+
+low:
+  name: Low
+
+medium:
+  name: Medium
+
+high:
+  name: High

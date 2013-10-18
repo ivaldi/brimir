@@ -14,25 +14,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Ticket < ActiveRecord::Base
+class Priority < ActiveRecord::Base
 
-  validates_presence_of :status_id, :user_id
+	validates_presence_of :name
 
-  belongs_to :user
-  belongs_to :status
-  belongs_to :priority
-  belongs_to :assignee, class_name: 'User'
+  has_many :tickets
 
-  has_many :attachments, as: :attachable, dependent: :destroy
+  scope :default, -> { where(default: true) }
 
-  has_many :replies, dependent: :destroy
-
-  scope :by_status, ->(status) {
-    
-    if status.nil?
-      where(status_id: Status.default.first.id)
-    elsif status.to_i > 0
-      where(status_id: status)
-    end
-  }
 end

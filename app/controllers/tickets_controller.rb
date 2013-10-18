@@ -29,6 +29,7 @@ class TicketsController < ApplicationController
   def index
     @agents = User.agents
     @statuses = Status.all
+    @priorities = Priority.all
 
     @status_filter = params[:status_id]
     @tickets = Ticket.order(:created_at).by_status(@status_filter)
@@ -104,7 +105,13 @@ class TicketsController < ApplicationController
 
   private
     def ticket_params
-      params.require(:ticket).permit(:content, :user_id, :subject, :status_id,
-          :assignee_id, :message_id)
+      params.require(:ticket).permit(
+          :content, 
+          :user_id,
+          :subject,
+          :status_id,
+          :assignee_id,
+          :priority_id,
+          :message_id)
     end
 end
