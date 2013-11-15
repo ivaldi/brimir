@@ -31,6 +31,19 @@ class TicketsController < ApplicationController
     @agents = User.agents
     @statuses = Status.all
     @priorities = Priority.all
+    
+    if !params[:status_id].nil?
+
+      # unassigned
+      if params[:status_id].to_i == 0
+        @status_name = ''
+      else
+        @status_name = @statuses.find(params[:status_id].to_i).name
+      end
+
+    else
+      @status_name = @statuses.default.first.name
+    end
 
     @status_filter = params[:status_id]
     @tickets = Ticket.order(:created_at).by_status(@status_filter)

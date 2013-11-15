@@ -88,6 +88,10 @@
               <%= l ticket.created_at, format: :short %>
             </td>
           </tr>
+        <% end.empty? and begin %>
+          <tr>
+            <td colspan="100%">There are no <%= @status_name.downcase %> tickets for the requested assignee.</td>
+          </tr>
         <% end %>
       </tbody>
     </table>
