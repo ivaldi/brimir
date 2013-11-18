@@ -27,12 +27,5 @@ class Ticket < ActiveRecord::Base
 
   has_many :replies, dependent: :destroy
 
-  scope :by_status, ->(status) {
-    
-    if status.nil?
-      where(status_id: Status.default.first.id)
-    elsif status.to_i > 0
-      where(status_id: status)
     end
-  }
 end

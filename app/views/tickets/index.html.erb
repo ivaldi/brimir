@@ -22,21 +22,10 @@
     <dl class="sub-nav filter">
       <dt>Status:</dt>
 
-      <%= active_elem_if 'dd', @status_filter == '0' do
-          link_to 'All', tickets_path(params.merge(status_id: 0))
-        end %>
-
       <% @statuses.each do |status| %>
 
-        <%= active_elem_if 'dd', params[:status_id].to_i == status.id \
-            || (params[:status_id].nil? && status.default?) do
-
-          if status.default?
-            link_to status.name, tickets_path(params.merge(status_id: nil))
-          else 
-            link_to status.name, tickets_path(params.merge(status_id: status.id))
-          end
-
+        <%= active_elem_if 'dd', @active_status == status do
+          link_to status.name, tickets_path(params.merge(status_id: status.id))
         end %>
 
       <% end %>
@@ -90,7 +79,7 @@
           </tr>
         <% end.empty? and begin %>
           <tr>
-            <td colspan="100%">There are no <%= @status_name.downcase %> tickets for the requested assignee.</td>
+            <td colspan="100%">There are no <%= @active_status.as_adjective %> tickets for the requested assignee.</td>
           </tr>
         <% end %>
       </tbody>

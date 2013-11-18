@@ -17,7 +17,24 @@
 require 'test_helper'
 
 class StatusTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @default_status = statuses(:open)
+  end
+
+  test "should include the All status" do
+    assert_includes Status.filters, Status.all_status
+  end
+
+  test "should return all tickets within the All status" do
+    assert_equal Ticket.count, Status.all_status.tickets.count
+  end
+
+  test "finding an id of nil should return the default status" do
+    assert_equal @default_status, Status.find_by_id_from_filters(nil)
+  end
+
+  test "finding an id of 0 should return the All status" do
+    assert_equal Status.all_status, Status.find_by_id_from_filters(0)
+  end
 end
+
