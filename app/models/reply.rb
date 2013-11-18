@@ -27,4 +27,17 @@ class Reply < ActiveRecord::Base
 
   scope :chronologically, -> { order(:id) }
 
+  def notify
+    self.content += "\n\n" + self.user.signature.to_s
+
+    mail = TicketMailer.reply(self)
+
+    mail.deliver
+
+    # save message id for later reference
+    self.message_id = mail.message_id
+    self.content_type = 'markdown'
+    
+    save
+  end
 end
