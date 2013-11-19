@@ -32,20 +32,12 @@ class TicketsController < ApplicationController
     @statuses = Status.filters
     @priorities = Priority.all
 
-
-    if !params[:assignee_id].nil?
-      
-      # unassigned
-      if params[:assignee_id].to_i == 0
-        @tickets = @tickets.where(assignee_id: nil)
-      else
-        @tickets = @tickets.where(assignee_id: params[:assignee_id])
-      end
-
-    end
-
-    @tickets = @tickets.page(params[:page])
     @active_status = Status.find_by_id_from_filters(params[:status_id])
+    @tickets = @active_status
+      .tickets
+      .filter_by_assignee_id(params[:assignee_id])
+      .page(params[:page])
+      .order(:created_at)
   end
 
   def update
