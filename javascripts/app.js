@@ -18,6 +18,15 @@
     $.fn.foundationClearing         ? $doc.foundationClearing() : null;
 
     $.fn.placeholder                ? $('input, textarea').placeholder() : null;
+
+    $('#rssupdates').FeedEk({
+      FeedUrl : 'https://github.com/ivaldi/brimir/commits/master.atom',
+      MaxCount : 1,
+      ShowDesc : true,
+      ShowPubDate:true,
+      DescCharacterLimit:100,
+      TitleLinkTarget:'_blank'
+    });
   });
 
   // UNCOMMENT THE LINE YOU WANT BELOW IF YOU WANT IE8 SUPPORT AND ARE USING .block-grids
@@ -36,3 +45,6 @@
   }
 
 })(jQuery, this);
+
+
+
