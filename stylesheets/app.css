@@ -32,6 +32,48 @@ ul{
 	padding: 22px 15px 21px;
 }
 
+.feedEkList{
+	list-style: none;
+}
+
+.itemContent{
+	display: none;
+}
+
+.bg-black{
+	background-color: #000;
+	font-weight: bold;
+	height: 40px;
+	overflow: hidden;
+}
+.bg-black .logo-show{
+	display: block;
+	width: 27px;
+	height: 27px;
+	background: url(../images/icon.png) no-repeat top center;
+	text-indent: -999em;
+	margin-top: 2px;
+}
+.bg-black ul{
+	list-style: none;
+	margin: 0;
+}
+.bg-black li {
+	float: left;
+	line-height: 30px;
+	color: #C0C0C0;
+}
+.bg-black li.right{
+	float: right;
+	line-height: 40px;
+}
+.bg-black li a{
+color: #C0C0C0;
+}
+.bg-black li a:hover{
+	color: #fff;
+}
+
 /* margin [xxl] */
 .maxxl{ margin: 40px !important; }   
 .mtxxl{ margin-top: 40px !important; }
