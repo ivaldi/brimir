@@ -30,7 +30,7 @@ class Reply < ActiveRecord::Base
   def notify
     self.content += "\n\n" + self.user.signature.to_s
 
-    mail = TicketMailer.reply(self)
+    mail = yield(self)
 
     mail.deliver
 

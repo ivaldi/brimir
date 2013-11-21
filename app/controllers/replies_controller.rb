@@ -22,7 +22,7 @@ class RepliesController < ApplicationController
     @reply.user = current_user    
 
     respond_to do |format|
-      if @reply.save && @reply.notify
+      if @reply.save && @reply.notify {|reply| TicketMailer.reply(reply) }
         format.html { redirect_to @reply.ticket, notice: 'Reply was successfully created.' }
         format.json { render json: @reply, status: :created, location: @reply }
         format.js { render }

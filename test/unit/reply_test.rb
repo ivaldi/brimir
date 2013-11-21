@@ -17,7 +17,30 @@
 require 'test_helper'
 
 class ReplyTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  setup do
+    @reply = replies(:solution)
+  end
+  test "should save the message id when notifying" do
+    test_mailer = OpenStruct.new(message_id: 123)
+    @reply.notify {|reply| test_mailer }
+
+    assert_equal 123, @reply.message_id
+  end
+
+  test "should deliver the mail when notifying" do
+    test_mailer = OpenStruct.new.tap do |x|
+      def x.deliver
+        @deliveries ||= 0
+        @deliveries += 1
+      end
+
+      def x.deliveries
+        @deliveries
+      end
+    end
+
+    @reply.notify { |reply| test_mailer }
+
+    assert_equal 1, test_mailer.deliveries
+  end
 end
