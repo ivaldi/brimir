@@ -3,7 +3,7 @@
   <%= r.hidden_field :ticket_id %>
 
   <dl class="tabs contained">
-    <dt>Reply</dt>
+    <dt id="reply">Reply</dt>
     <dd class="active"><a href="#edit">Edit</a></dd>
     <dd><a href="#preview">Preview</a></dd>
   </dl>
@@ -36,7 +36,7 @@
       <div class="panel">
         <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
           <%= a.label :file, 'Attach file(s)' %>
-          <%= a.file_field :file %>
+          <%= a.file_field :file, multiple: true %>
         <% end %>
       </div>
     </li>
