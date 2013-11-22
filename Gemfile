@@ -33,6 +33,9 @@ end
 group :test do
   # for travis-ci
   gem 'rake'
+
+  # for coveralls
+  gem 'coveralls', require: false
 end
 
 group :production do
