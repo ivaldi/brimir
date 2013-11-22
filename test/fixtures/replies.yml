@@ -3,3 +3,4 @@ solution:
   to: alice@alice.nl
   cc: bob@bob.nl
   bcc: charlie@charlie.nl
+  user: bob

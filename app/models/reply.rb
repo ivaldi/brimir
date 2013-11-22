@@ -27,4 +27,11 @@ class Reply < ActiveRecord::Base
 
   scope :chronologically, -> { order(:id) }
 
+  def notify
+    self.content += "\n\n" + self.user.signature.to_s
+
+    mail = yield(self)
+
+    mail.deliver
+  end
 end

@@ -21,4 +21,40 @@ class Status < ActiveRecord::Base
 
   scope :default, -> { where(default: true) }
 
+  def self.all_status
+    Status.new(name: "All", id: 0)
+  end
+
+  def self.default_status
+    default.first
+  end
+
+  def self.find_by_id_from_filters(id)
+    return default_status if id.nil?
+    return all_status if id.to_i.zero?
+
+    find id
+  end
+
+  def self.filters
+    [Status.new(name: "All", id: 0)] + all
+  end
+
+  def all_status?
+    !id.nil? && id.zero?
+  end
+
+  def tickets(*args)
+    if all_status?
+      Ticket.where(args)
+    else
+      super(*args)
+    end
+  end
+
+  def as_adjective
+    return '' if all_status?
+
+    name.downcase
+  end
 end
