@@ -5,60 +5,83 @@
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
-      <meta charset="utf-8" />
+    <meta charset="utf-8" />
       
-      <!-- Set the viewport width to device width for mobile -->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
-      <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
-    
-      <%= favicon_link_tag 'favicon.png' %>
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <%= stylesheet_link_tag    "application" %>
-      
-      <%= javascript_include_tag "application" %>
-    
+    <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
+
+    <%= favicon_link_tag 'favicon.png' %>
+
+    <%= stylesheet_link_tag    "application" %>    
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
-    <nav class="top-bar">
-      <ul>
-        <li class="name">
-          <h1>
-            <a href="<%= root_path %>">
-              Brimir
-            </a>
-          </h1>
-        </li>
-        <li class="toggle-topbar"><a href="#"></a></li>
-      </ul>
-      <section>
-        <% if user_signed_in? %>
-          <ul class="left">
-            <li class="divider"></li>
-            <li>
-              <%= link_to 'All tickets', root_path %>
-            </li>
-            <li class="divider"></li>
-          </ul>        
-          <ul class="right">
-            <li class="divider"></li>
-            <li class="has-dropdown">
-              <a href="#"><%= current_user.email %></a>
-              <ul class="dropdown">
-                <li>
-                  <%= link_to 'Settings', edit_user_path(current_user) %>
-                </li>
-                <li>
-                  <%= link_to 'Sign out', :destroy_user_session, method: :delete %>
-                </li>
-              </ul>
-            </li>
-          </ul>
-   	    <% end %>
-      </section>
-    </nav>
 
+  <body>
+
+    <div class="contain-to-grid">
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1>
+              <a href="<%= root_path %>">
+                Brimir
+              </a>
+            </h1>
+          </li>
+          <li class="toggle-topbar menu-icon">
+            <a href="">
+              <span>Menu</span>
+            </a>
+          </li>
+        </ul>
+
+        <section class="top-bar-section">
+          
+          <% if user_signed_in? %>
+
+            <ul class="left">
+              <li>
+                <%= link_to 'All tickets', root_path %>
+              </li>
+            </ul> 
+
+            <ul class="right">
+              <li class="has-form">
+                <%= form_tag tickets_path, :method => 'get' do %>
+                  <div class="row collapse">                  
+                    <div class="large-8 small-9 columns">
+                      <%= text_field_tag :search, params[:search], placeholder: 'Find stuff' %>
+                    </div>
+                    <div class="large-4 small-3 columns">
+                      <%= submit_tag 'Find', class: 'button' %>
+                    </div>                  
+                  </div>
+                <% end %>
+              </li>
+              <li class="has-dropdown">
+                <a href="#"><%= current_user.email %></a>
+                <ul class="dropdown">
+                  <li>
+                    <%= link_to 'Settings', edit_user_path(current_user) %>
+                  </li>
+                  <li>
+                    <%= link_to 'Sign out', :destroy_user_session, method: :delete %>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+          <% end %>
+
+        </section>
+
+      </nav>
+    </div>
+ 
     <% if notice %>
         <div class="row">
           <div class="twelve columns">
@@ -76,11 +99,14 @@
     
     <%= yield %>
 
-    <div data-dialog class="reveal-modal">
+    <div class="reveal-modal" data-reveal>
       <article>
       </article>
       <a class="close-reveal-modal">&#215;</a>
     </div>
+
+    <%= javascript_include_tag "foundation" %>
+    <script>$(document).foundation();</script>
 
   </body>
 </html>

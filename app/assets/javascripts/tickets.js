@@ -38,7 +38,7 @@ jQuery(function() {
       options.find('[value="' + elem.data('id') + '"]').attr('selected', 'selected');
 
       /* show the dialog */
-      dialog.reveal();
+      dialog.foundation('reveal','open');
 
     });
 

@@ -2,14 +2,14 @@
 
   <%= r.hidden_field :ticket_id %>
 
-  <dl class="tabs contained">
+  <dl class="tabs" data-tab>
     <dt id="reply">Reply</dt>
     <dd class="active"><a href="#edit">Edit</a></dd>
     <dd><a href="#preview">Preview</a></dd>
   </dl>
-  <ul class="tabs-content contained">
-    <li class="active" id="editTab">
-      <ul class="block-grid three-up">
+  <div class="tabs-content panel">
+    <div class="content active full" id="edit">
+      <ul class="block-grid-large-3">
         <li>  
           <%= r.label :to, 'To' %>
           <%= r.text_field :to %>
@@ -39,12 +39,12 @@
           <%= a.file_field :file, multiple: true %>
         <% end %>
       </div>
-    </li>
-    <li id="previewTab">
+    </div>
+    <div class="content full" id="preview">
       <%= markdown.render(@reply.content.to_s).html_safe %>
       <%= markdown.render(current_user.signature.to_s).html_safe %>
-    </li>
-  </ul>
+    </div>
+  </div>
   <p>
     <%= r.submit value: 'Send reply', class: 'button regular radius' %>
   </p>

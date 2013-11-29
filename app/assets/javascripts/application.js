@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
 //= require_tree .
 
 (function() {
@@ -57,7 +56,7 @@
     dialog.find('[data-close-modal]').on('click', oncancel);
 
     /* show the dialog */
-    dialog.reveal('open');    
+    dialog.foundation('reveal','open');    
   }
 
   jQuery(function() {
