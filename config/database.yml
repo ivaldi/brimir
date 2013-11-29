@@ -20,6 +20,7 @@ test:
 
 production:
   adapter: postgresql
+  host:
   database:
   user:
   password:
