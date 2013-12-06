@@ -36,6 +36,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+
+    @users = User.by_email(params[:q])
+    render json: { users: @users.map { |user| { id: user.email, text: user.email} } }
+
+  end
+
   private
     def user_params
       # Setup accessible (or protected) attributes for your model

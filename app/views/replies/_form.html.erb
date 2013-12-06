@@ -46,7 +46,7 @@
 
 <script>
   jQuery(document).ready(function() { 
-    jQuery('#reply_to, #reply_cc, #reply_bcc').select2({
+    jQuery('#reply_to, #reply_cc, #reply_bcc').select2({        
         width: 'resolve',
         createSearchChoice:function(term, data) {
             if (jQuery(data).filter(function() {
@@ -55,11 +55,19 @@
                 }
             },
         multiple: true,
-        data: [
-          <% @addresses.each_with_index do |user, index| %>
-            <%= ("{id: '"+user.email+"', text: '"+user.email+"'}").html_safe %>
-            <%= (index < (@addresses.count - 1)) ? ',' : '' %>
-          <% end %>]
+        ajax: {
+          url: "/users",
+          dataType: 'json',
+          data: function (term, page) {
+            return {
+              q: term
+            };
+          },
+          results: function (data) {
+            console.log(data);
+            return { results: data.users };
+          }
+        }        
     });
   });
 </script>
