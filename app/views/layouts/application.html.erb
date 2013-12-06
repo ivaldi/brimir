@@ -54,7 +54,7 @@
                 <%= form_tag tickets_path, :method => 'get' do %>
                   <div class="row collapse">                  
                     <div class="large-8 small-9 columns">
-                      <%= text_field_tag :search, params[:search], placeholder: 'Find stuff' %>
+                      <%= text_field_tag :search, params[:search], placeholder: 'Search tickets' %>
                     </div>
                     <div class="large-4 small-3 columns">
                       <%= submit_tag 'Find', class: 'button' %>
@@ -62,7 +62,7 @@
                   </div>
                 <% end %>
               </li>
-              <li class="has-dropdown">
+              <li class="has-dropdown active">
                 <a href="#"><%= current_user.email %></a>
                 <ul class="dropdown">
                   <li>
@@ -84,14 +84,14 @@
  
     <% if notice %>
         <div class="row">
-          <div class="twelve columns">
+          <div class="large-12 columns">
               <div class="alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
           </div>
         </div>
     <% end %>
     <% if alert %>
         <div class="row">
-          <div class="twelve columns">
+          <div class="large-12 columns">
               <div class="alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
           </div>
         </div>
