@@ -5,7 +5,7 @@ RUN echo 'deb http://nl3.archive.ubuntu.com/ubuntu precise main universe' > /etc
 RUN apt-get update
 
 # install required dependencies for everything below
-RUN apt-get install -y git curl build-essential autoconf libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libpq-dev nodejs postgresql pwgen libcurl4-openssl-dev imagemagick
+RUN apt-get install -y git curl build-essential autoconf libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libpq-dev nodejs postgresql pwgen libcurl4-openssl-dev imagemagick postfix postfix-pcre
 
 # install ruby-build
 RUN git clone https://github.com/sstephenson/ruby-build.git /tmp/ruby-build
@@ -17,6 +17,9 @@ RUN ruby-build 2.0.0-p353 /usr/local
 
 # install bundler
 RUN gem install bundle
+
+# add brimir user
+RUN useradd -s /bin/bash brimir
 
 # clone the repo
 RUN git clone https://github.com/ivaldi/brimir /home/brimir/
@@ -43,5 +46,17 @@ RUN cd /home/brimir && rake assets:precompile
 # load database schema and fill with default seed data
 RUN service postgresql start && cd /home/brimir && rake db:migrate && rake db:seed
 
+# make everything owned by brimir, so passenger will run as brimir
+RUN chown -R brimir:brimir /home/brimir
+
+# setup incoming mail
+RUN echo 'brimir: "|/bin/bash /home/brimir/script/post-mail http://localhost/tickets"' >> /etc/aliases
+RUN newaliases
+# accept any domain
+RUN sed -i 's|mydestination.*|mydestination = pcre:/etc/postfix/mydestinations|g' /etc/postfix/main.cf
+RUN echo '/.*/ ACCEPT' >> /etc/postfix/mydestinations
+RUN postmap /etc/postfix/mydestinations
+
 CMD service postgresql start && /usr/local/sbin/nginx
 EXPOSE 80
+EXPOSE 25
