@@ -18,8 +18,6 @@ class RepliesController < ApplicationController
 
   def create
 
-    debugger
-
     @reply = Reply.new(reply_params)
     @addresses = User.all
     @reply.user = current_user    
