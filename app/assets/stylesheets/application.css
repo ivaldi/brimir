@@ -67,6 +67,10 @@
 .filter-title{
 	float: left;
 }
+
+.contain-to-grid{
+	margin-bottom: 1rem;
+}
  
 textarea{
 	width: 100%;
@@ -75,4 +79,8 @@ textarea{
 
 .preview{
 	height: 300px;
+}
+
+.mt{
+	margin-top: 30px;
 }
