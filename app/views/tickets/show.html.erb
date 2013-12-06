@@ -31,7 +31,8 @@
       <% end %>
     </div>
 
-    <% if @ticket.replies.size > 0 %>
+    <% if @ticket.replies.size > 1 %>
+      <h5><%= @ticket.replies.size-1 %> replies</h5>
       <dl class="accordion" data-accordion>
 
         <% count = 0 %>
@@ -46,7 +47,7 @@
 
           <dd>
             <a class="title" href="#reply-<%=reply.id%>">
-              <h5><span class="label"><%= reply.user.email %></span> <small><%= l reply.created_at, format: :short %></small></h5>
+              <h5><%= reply.user.email %> <small class="pull-right"><%= l reply.created_at, format: :short %></small></h5>
             </a>
             <div id="reply-<%=reply.id%>" class="<%= div_class %>">
 

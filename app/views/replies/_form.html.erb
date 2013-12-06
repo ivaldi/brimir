@@ -1,30 +1,27 @@
 <%= form_for @reply do |r| %>
 
   <%= r.hidden_field :ticket_id %>
-
+  <h5 class="mt">Reply</h5>
   <dl class="tabs" data-tab>
-    <dt id="reply">Reply</dt>
     <dd class="active"><a href="#edit">Edit</a></dd>
     <dd><a href="#preview">Preview</a></dd>
   </dl>
   <div class="tabs-content panel">
     <div class="content active full" id="edit">
-      <ul class="block-grid-large-3">
-        <li>  
+      <div class="row">
+        <div class="large-4 columns">
           <%= r.label :to, 'To' %>
           <%= r.text_field :to %>
-        </li>
-
-        <li>
+        </div>
+        <div class="large-4 columns">
           <%= r.label :cc, 'Cc' %>
           <%= r.text_field :cc %>
-        </li>
-
-        <li>
+        </div>
+        <div class="large-4 columns">
           <%= r.label :bcc, 'Bcc' %>
           <%= r.text_field :bcc %>
-        </li>
-      </ul>
+        </div>
+      </div>
 
       <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
 
@@ -33,12 +30,10 @@
       <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
       <%= markdown.render(current_user.signature.to_s).html_safe %>
 
-      <div class="panel">
-        <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
-          <%= a.label :file, 'Attach file(s)' %>
-          <%= a.file_field :file, multiple: true %>
-        <% end %>
-      </div>
+      <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
+        <%= a.label :file, 'Attach file(s)' %>
+        <%= a.file_field :file, multiple: true %>
+      <% end %>
     </div>
     <div class="content full" id="preview">
       <%= markdown.render(@reply.content.to_s).html_safe %>
