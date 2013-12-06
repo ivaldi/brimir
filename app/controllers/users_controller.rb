@@ -38,8 +38,13 @@ class UsersController < ApplicationController
 
   def index
 
-    @users = User.by_email(params[:q])
-    render json: { users: @users.map { |user| { id: user.email, text: user.email} } }
+    if params[:init].present?
+      @users = params[:q].split(',')      
+      render json: { users: @users.map { |user| { id: user, text: user} } }
+    else
+      @users = User.by_email(params[:q])
+      render json: { users: @users.map { |user| { id: user.email, text: user.email} } }
+    end
 
   end
 

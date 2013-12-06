@@ -21,8 +21,7 @@ class User < ActiveRecord::Base
   has_many :replies
 
   scope :agents, -> { where(agent: true) }
-  scope :by_email, -> (email) { where('LOWER(email) LIKE ?', 
-    '%' + email.downcase + '%') }
+  scope :by_email, -> (email) { where('LOWER(email) LIKE ?', '%' + email.downcase + '%') }
 
   def active_for_authentication?
     super && agent
