@@ -12,6 +12,9 @@ gem 'foundation-rails'
 
 gem 'jquery-rails'
 
+#select2 replacement for selectboxes
+gem 'select2-rails'
+
 # Zurb form errors
 #gem 'foundation_rails_helper', git: 'https://github.com/ivaldi/foundation_rails_helper.git'
 

@@ -18,7 +18,7 @@ class RepliesController < ApplicationController
 
   def create
     @reply = Reply.new(reply_params)
-
+    @addresses = User.all
     @reply.user = current_user    
 
     respond_to do |format|
@@ -36,6 +36,7 @@ class RepliesController < ApplicationController
 
   def new
     @reply = Reply.new(reply_params)
+    @addresses = User.all
 
     @reply.to = @reply.ticket.user.email
   end

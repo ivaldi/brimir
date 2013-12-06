@@ -25,6 +25,7 @@ class TicketsController < ApplicationController
 
     @reply = @ticket.replies.new
     @reply.to = @ticket.user.email
+    @addresses = User.all
   end
 
   def index

@@ -50,3 +50,21 @@
   </p>
 <% end %>
 
+<script>
+  jQuery(document).ready(function() { 
+    jQuery('#reply_to, #reply_cc, #reply_bcc').select2({
+        createSearchChoice:function(term, data) {
+            if (jQuery(data).filter(function() {
+                return this.text.localeCompare(term)===0; }).length===0) {
+                    return {id:term, text:term};
+                }
+            },
+        multiple: false,
+        data: [
+          <% @addresses.each_with_index do |user, index| %>
+            <%= ("{id: "+index.to_s+", text: '"+user.email+"'}").html_safe %>
+            <%= (index < (@addresses.count - 1)) ? ',' : '' %>
+          <% end %>]
+    });
+  });
+</script>
