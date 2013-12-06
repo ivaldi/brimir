@@ -8,36 +8,26 @@
   </dl>
   <div class="tabs-content panel">
     <div class="content active full" id="edit">
-      <div class="row">
-        <div class="large-4 columns">
-          <%= r.label :to, 'To' %>
-          <%= r.text_field :to %>
-        </div>
-        <div class="large-4 columns">
-          <%= r.label :cc, 'Cc' %>
-          <%= r.text_field :cc %>
-        </div>
-        <div class="large-4 columns">
-          <%= r.label :bcc, 'Bcc' %>
-          <%= r.text_field :bcc %>
-        </div>
+      <div class="row collapse">
+        <%= r.text_field :to, data: {placeholder: 'To'} %>
+        <%= r.text_field :cc, data: {placeholder: 'Cc'} %>
+        <%= r.text_field :bcc, data: {placeholder: 'Bcc'} %>
+
+        <%= r.text_area :content %>
+        <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
+
+        <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
+        <%= markdown.render(current_user.signature.to_s).html_safe %>
+
+        <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
+          <%= a.label :file, 'Attach file(s)' %>
+          <%= a.file_field :file, multiple: true %>
+        <% end %>
       </div>
-
-      <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
-
-      <%= r.text_area :content %>
-
-      <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-      <%= markdown.render(current_user.signature.to_s).html_safe %>
-
-      <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
-        <%= a.label :file, 'Attach file(s)' %>
-        <%= a.file_field :file, multiple: true %>
-      <% end %>
-    </div>
-    <div class="content full" id="preview">
-      <%= markdown.render(@reply.content.to_s).html_safe %>
-      <%= markdown.render(current_user.signature.to_s).html_safe %>
+      <div class="content full" id="preview">
+        <%= markdown.render(@reply.content.to_s).html_safe %>
+        <%= markdown.render(current_user.signature.to_s).html_safe %>
+      </div>
     </div>
   </div>
   <p>
