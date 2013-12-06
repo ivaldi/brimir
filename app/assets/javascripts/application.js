@@ -62,6 +62,9 @@
 
   jQuery(function() {
 
+    jQuery('#ticket_assignee_id').select2();
+    jQuery('#ticket_priority_id').select2();
+
     dialog = jQuery('[data-dialog]');
 
     jQuery('[data-modal-form]').click(function(e) {
