@@ -16,6 +16,7 @@
  *
  *= require_self
  *= require foundation_and_overrides
+ *= require select2
  *= require_tree .
  */
 
@@ -67,6 +68,10 @@
 .filter-title{
 	float: left;
 }
+
+.contain-to-grid{
+	margin-bottom: 1rem;
+}
  
 textarea{
 	width: 100%;
@@ -75,4 +80,16 @@ textarea{
 
 .preview{
 	height: 300px;
+}
+
+.mt{
+	margin-top: 30px;
+}
+
+.tabs-content .select2-container {
+	margin-bottom: 30px !important;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+	margin-top: 9px !important;
 }

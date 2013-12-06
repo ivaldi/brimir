@@ -1,52 +1,36 @@
 <%= form_for @reply do |r| %>
 
   <%= r.hidden_field :ticket_id %>
-
-  <dl class="tabs contained">
-    <dt id="reply">Reply</dt>
+  <h5 class="mt">Reply</h5>
+  <dl class="tabs" data-tab>
     <dd class="active"><a href="#edit">Edit</a></dd>
     <dd><a href="#preview">Preview</a></dd>
   </dl>
-  <ul class="tabs-content contained">
-    <li class="active" id="editTab">
-      <ul class="block-grid three-up">
-        <li>  
-          <%= r.label :to, 'To' %>
-          <%= r.text_field :to %>
-        </li>
+  <div class="tabs-content panel">
+    <div class="content active full" id="edit">
+      <div class="row collapse">
+        <%= r.text_field :to, data: {placeholder: 'To'} %>
+        <%= r.text_field :cc, data: {placeholder: 'Cc'} %>
+        <%= r.text_field :bcc, data: {placeholder: 'Bcc'} %>
 
-        <li>
-          <%= r.label :cc, 'Cc' %>
-          <%= r.text_field :cc %>
-        </li>
+        <%= r.text_area :content %>
+        <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
 
-        <li>
-          <%= r.label :bcc, 'Bcc' %>
-          <%= r.text_field :bcc %>
-        </li>
-      </ul>
+        <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
+        <%= markdown.render(current_user.signature.to_s).html_safe %>
 
-      <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
-
-      <%= r.text_area :content %>
-
-      <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-      <%= markdown.render(current_user.signature.to_s).html_safe %>
-
-      <div class="panel">
         <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
           <%= a.label :file, 'Attach file(s)' %>
           <%= a.file_field :file, multiple: true %>
         <% end %>
       </div>
-    </li>
-    <li id="previewTab">
+    </div>
+    <div class="content full" id="preview">
       <%= markdown.render(@reply.content.to_s).html_safe %>
       <%= markdown.render(current_user.signature.to_s).html_safe %>
-    </li>
-  </ul>
+    </div>
+  </div>
   <p>
     <%= r.submit value: 'Send reply', class: 'button regular radius' %>
   </p>
 <% end %>
-

@@ -11,9 +11,9 @@ jQuery(function() {
         }
       },
       success: function(data) {
-        var html = jQuery(data).find('#previewTab').html();
+        var html = jQuery(data).find('#preview').html();
 
-        jQuery('#previewTab').html(html);
+        jQuery('#preview').html(html);
       }
     });
   });
