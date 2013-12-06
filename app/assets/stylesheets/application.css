@@ -85,3 +85,7 @@ textarea{
 .mt{
 	margin-top: 30px;
 }
+
+.tabs-content .select2-container {
+	margin-bottom: 30px !important;
+}

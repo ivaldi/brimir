@@ -23,9 +23,8 @@
         </div>
       </div>
 
-      <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
-
       <%= r.text_area :content %>
+      <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
 
       <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
       <%= markdown.render(current_user.signature.to_s).html_safe %>
@@ -48,13 +47,14 @@
 <script>
   jQuery(document).ready(function() { 
     jQuery('#reply_to, #reply_cc, #reply_bcc').select2({
+        width: 'resolve',
         createSearchChoice:function(term, data) {
             if (jQuery(data).filter(function() {
                 return this.text.localeCompare(term)===0; }).length===0) {
                     return {id:term, text:term};
                 }
             },
-        multiple: false,
+        multiple: true,
         data: [
           <% @addresses.each_with_index do |user, index| %>
             <%= ("{id: '"+user.email+"', text: '"+user.email+"'}").html_safe %>
