@@ -12,17 +12,17 @@
       <ul class="block-grid-large-3">
         <li>  
           <%= r.label :to, 'To' %>
-          <%= r.text_field :to %>
+          <%= r.hidden_field :to %>
         </li>
 
         <li>
           <%= r.label :cc, 'Cc' %>
-          <%= r.text_field :cc %>
+          <%= r.hidden_field :cc %>
         </li>
 
         <li>
           <%= r.label :bcc, 'Bcc' %>
-          <%= r.text_field :bcc %>
+          <%= r.hidden_field :bcc %>
         </li>
       </ul>
 
@@ -62,7 +62,7 @@
         multiple: false,
         data: [
           <% @addresses.each_with_index do |user, index| %>
-            <%= ("{id: "+index.to_s+", text: '"+user.email+"'}").html_safe %>
+            <%= ("{id: '"+user.email+"', text: '"+user.email+"'}").html_safe %>
             <%= (index < (@addresses.count - 1)) ? ',' : '' %>
           <% end %>]
     });
