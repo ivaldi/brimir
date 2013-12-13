@@ -24,10 +24,10 @@
           <%= a.file_field :file, multiple: true %>
         <% end %>
       </div>
-      <div class="content full" id="preview">
-        <%= markdown.render(@reply.content.to_s).html_safe %>
-        <%= markdown.render(current_user.signature.to_s).html_safe %>
-      </div>
+    </div>
+    <div class="content full" id="preview">
+      <%= markdown.render(@reply.content.to_s).html_safe %>
+      <%= markdown.render(current_user.signature.to_s).html_safe %>
     </div>
   </div>
   <p>
