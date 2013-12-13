@@ -9,9 +9,30 @@
   <div class="tabs-content panel">
     <div class="content active full" id="edit">
       <div class="row collapse">
-        <%= r.text_field :to, data: {placeholder: 'To'} %>
-        <%= r.text_field :cc, data: {placeholder: 'Cc'} %>
-        <%= r.text_field :bcc, data: {placeholder: 'Bcc'} %>
+        <div class="row">
+          <div class="large-1 columns">
+            <%= r.label :to, class: 'inline' %>
+          </div>
+          <div class="large-6 columns end">
+            <%= r.text_field :to %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-1 columns">
+            <%= r.label :cc, class: 'inline' %>
+          </div>
+          <div class="large-6 columns end">
+            <%= r.text_field :cc %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-1 columns">
+            <%= r.label :bcc, class: 'inline' %>
+          </div>
+          <div class="large-6 columns end">
+            <%= r.text_field :bcc %>
+          </div>
+        </div>
 
         <%= r.text_area :content %>
         <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
