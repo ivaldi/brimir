@@ -30,11 +30,13 @@ class TicketsController < ApplicationController
   def index
     @agents = User.agents
     @statuses = Status.filters
+
     @priorities = Priority.all
 
     @active_status = Status.find_by_id_from_filters(params[:status_id])
     @tickets = @active_status
       .tickets
+      .search(params[:q])
       .filter_by_assignee_id(params[:assignee_id])
       .page(params[:page])
       .order(:created_at)

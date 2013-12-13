@@ -1,6 +1,10 @@
 <div class="row">
   <div class="large-12 columns">
-    <h2 class="filter-title">Tickets</h2>
+    <% if params[:q].present? %>
+      <h2 class="filter-title">Tickets containing '<em><%= params[:q].to_s %></em>'</h2>
+    <% else %>
+      <h2 class="filter-title">Tickets</h2>
+    <% end %>
 
 
     <dl class="sub-nav filter">
@@ -17,9 +21,7 @@
       <%= active_elem_if 'dd', params[:assignee_id] == '0' do
           link_to 'Unassigned', tickets_path(params.merge(assignee_id: 0))
         end %>
-    </dl>
 
-    <dl class="sub-nav filter">
       <dt>Status:</dt>
 
       <% @statuses.each do |status| %>

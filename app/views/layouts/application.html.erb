@@ -49,6 +49,11 @@
             </ul> 
 
             <ul class="right">
+              <li class="has-form">
+                <%= form_tag tickets_path, method: :get do %>
+                  <%= text_field_tag :q, params[:q], placeholder: 'Search tickets' %>
+                <% end %>
+              </li>
               <li class="has-dropdown active">
                 <a href="#"><%= current_user.email %></a>
                 <ul class="dropdown">

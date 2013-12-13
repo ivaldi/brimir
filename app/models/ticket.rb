@@ -38,4 +38,12 @@ class Ticket < ActiveRecord::Base
       all
     end
   }
+
+  scope :search, ->(term) {
+    if !term.nil?
+      term = '%' + term.downcase + '%'
+      where('LOWER(subject) LIKE ? OR LOWER(content) LIKE ?',
+          term, term)
+    end
+  }
 end
