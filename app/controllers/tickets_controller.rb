@@ -44,7 +44,7 @@ class TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
 
     respond_to do |format|
-      if @ticket.update_attributes(ticket_params)
+      if @ticket.update_attributes(permitted_params.permit)
         
         if !@ticket.assignee.nil?
 
@@ -89,15 +89,4 @@ class TicketsController < ApplicationController
     end
   end
 
-  private
-    def ticket_params
-      params.require(:ticket).permit(
-          :content, 
-          :user_id,
-          :subject,
-          :status_id,
-          :assignee_id,
-          :priority_id,
-          :message_id)
-    end
 end
