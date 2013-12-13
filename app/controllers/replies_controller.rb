@@ -35,7 +35,7 @@ class RepliesController < ApplicationController
   end
 
   def new
-    @reply = Reply.new(reply_params)
+    @reply = Reply.new(permitted_params.permit)
 
     @reply.to = @reply.ticket.user.email
   end
