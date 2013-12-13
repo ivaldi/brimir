@@ -54,3 +54,6 @@ gem 'paperclip'
 
 # Markdown
 gem 'redcarpet'
+
+# Move parameters logic to it's own class
+gem 'action_parameter'

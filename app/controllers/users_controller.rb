@@ -24,23 +24,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     # if no password was posted, remove from params
-    if params[:user][:password] == ''
+    if params[:user][:password].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
     end
 
-    if @user.update_attributes(user_params)
+    if @user.update_attributes(permitted_params.permit)
       redirect_to tickets_url, notice: 'Settings saved'
     else
       render action: 'edit'
     end
   end
-
-  private
-    def user_params
-      # Setup accessible (or protected) attributes for your model
-      params.require(:user).permit(:email, :password, :password_confirmation,
-          :remember_me, :signature)
-    end
 
 end
