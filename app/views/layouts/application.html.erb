@@ -16,7 +16,6 @@
 
     <%= stylesheet_link_tag    "application" %>    
     <%= javascript_include_tag "vendor/modernizr" %>
-    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -93,8 +92,7 @@
       <a class="close-reveal-modal">&#215;</a>
     </div>
 
-    <%= javascript_include_tag "foundation" %>
-    <script>$(document).foundation();</script>
+    <%= javascript_include_tag "application" %>
 
   </body>
 </html>
