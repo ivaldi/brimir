@@ -25,5 +25,6 @@ app/assets/stylesheets/scaffolds.css.scss
 public/system
 
 # Capistrano deploy details
+config/deploy
 config/deploy.rb
 Capfile
