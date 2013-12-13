@@ -27,9 +27,6 @@ class Ticket < ActiveRecord::Base
 
   has_many :replies, dependent: :destroy
 
-  scope :filter_by_search, -> (searched_for) { where('LOWER(subject) LIKE ? OR LOWER(content) LIKE ?', 
-      '%' + searched_for.downcase + '%', '%' + searched_for.downcase + '%') }
-
   def self.filter_by_assignee_id(assignee_id)
     if !assignee_id.nil?
       if assignee_id.to_i == 0

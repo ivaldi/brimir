@@ -39,12 +39,6 @@ class TicketsController < ApplicationController
       .page(params[:page])
       .order(:created_at)
 
-    if params[:search].present?
-
-      @tickets = @tickets.filter_by_search(params[:search])
-
-    end
-
   end
 
   def update
