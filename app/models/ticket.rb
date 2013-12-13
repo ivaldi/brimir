@@ -27,7 +27,7 @@ class Ticket < ActiveRecord::Base
 
   has_many :replies, dependent: :destroy
 
-  def self.filter_by_assignee_id(assignee_id)
+  scope :filter_by_assignee_id, ->(assignee_id) {
     if !assignee_id.nil?
       if assignee_id.to_i == 0
         where(assignee_id: nil)
@@ -37,5 +37,5 @@ class Ticket < ActiveRecord::Base
     else
       all
     end
-  end
+  }
 end
