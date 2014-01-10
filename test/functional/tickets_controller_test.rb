@@ -38,7 +38,7 @@ class TicketsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:tickets)
   end
 
-  test 'should email assignee if ticket is assigned' do
+  test 'should email assignee if ticket is assigned by somebody else' do
     
     # new assignee should receive notification
     assert_difference 'ActionMailer::Base.deliveries.size' do
@@ -53,7 +53,9 @@ class TicketsControllerTest < ActionController::TestCase
     assert_match 'assigned', ActionMailer::Base.deliveries.last.body.decoded
   end
 
-  test 'should email assignee if status of ticket is changed' do
+  test 'should email assignee if status of ticket is changed by somebody else' do
+    sign_out users(:alice)
+    sign_in users(:charlie)
     
     # assignee should receive notification
     assert_difference 'ActionMailer::Base.deliveries.size' do
@@ -68,12 +70,14 @@ class TicketsControllerTest < ActionController::TestCase
     assert_match 'status', ActionMailer::Base.deliveries.last.body.decoded
   end
 
-  test 'should email assignee if priority of ticket is changed' do
+  test 'should email assignee if priority of ticket is changed by somebody else' do
+    sign_out users(:alice)
+    sign_in users(:charlie)
 
     # assignee should receive notification
     assert_difference 'ActionMailer::Base.deliveries.size' do
 
-      put :update, id: @ticket.id, ticket: { priority_id: priorities(:high) }
+      put :update, id: @ticket.id, ticket: { priority_id: priorities(:high).id }
       assert_redirected_to ticket_path(@ticket)
 
     end
@@ -81,6 +85,44 @@ class TicketsControllerTest < ActionController::TestCase
     # currently we can check whether the hardcoded word priority is in the body
     # in the future we might use templates or translations...
     assert_match 'priority', ActionMailer::Base.deliveries.last.body.decoded
+
+  end
+
+  test 'should not email assignee if ticket is assigned by himself' do
+    sign_out users(:alice)
+    sign_in users(:charlie)
+
+    # new assignee should not receive notification
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+
+      put :update, id: @ticket.id, ticket: { assignee_id: users(:charlie).id }
+      assert_redirected_to ticket_path(@ticket)
+
+    end
+
+  end
+
+  test 'should not email assignee if status of ticket is changed by himself' do
+
+    # assignee should not receive notification
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+
+      put :update, id: @ticket.id, ticket: { status_id: statuses(:closed).id }
+      assert_redirected_to ticket_path(@ticket)
+
+    end
+
+  end
+
+  test 'should not email assignee if priority of ticket is changed by himself' do
+
+    # assignee should not receive notification
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+
+      put :update, id: @ticket.id, ticket: { priority_id: priorities(:high).id }
+      assert_redirected_to ticket_path(@ticket)
+
+    end
 
   end
 

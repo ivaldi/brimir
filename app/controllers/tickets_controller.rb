@@ -49,7 +49,8 @@ class TicketsController < ApplicationController
     respond_to do |format|
       if @ticket.update_attributes(ticket_params)
         
-        if !@ticket.assignee.nil?
+        # assignee set and not same as user who modifies
+        if !@ticket.assignee.nil? && @ticket.assignee.id != current_user.id
 
           if @ticket.previous_changes.include? :assignee_id
             TicketMailer.notify_assigned(@ticket).deliver
