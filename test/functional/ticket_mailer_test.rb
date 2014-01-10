@@ -30,7 +30,7 @@ class TicketMailerTest < ActionMailer::TestCase
       agents are notified' do
     
     # agents receive notifications
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    assert_difference 'ActionMailer::Base.deliveries.size', 1 do
 
       # ticket is created
       assert_difference 'Ticket.count' do 
@@ -67,7 +67,7 @@ class TicketMailerTest < ActionMailer::TestCase
     end
 
     # agents receive notifications
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    assert_difference 'ActionMailer::Base.deliveries.size', 1 do
 
       # reply created?
       assert_difference 'Reply.count' do 

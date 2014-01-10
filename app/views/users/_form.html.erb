@@ -1,20 +1,33 @@
 <%= form_for @user do |f| %>
+  <div class="row">
+    <div class="large-6 columns">
+      <h3>Email settings</h3>
 
-  <%= f.label :signature, 'Email signature' %>
-  <%= f.text_area :signature, rows: 5, cols: 20 %>
+      <p>
+        <label><%= f.check_box :notify %> Receive notifications for new tickets</label>
+      </p>
 
+      <%= f.label :signature, 'Email signature' %>
+      <%= f.text_area :signature, rows: 5, cols: 20 %>
+    </div>
+
+    <div class="large-6 columns end">
+
+      <h3>Account settings</h3>
+      <p>Only fill in these two fields if you want to modify your password.</p>
+
+      <%= f.label :password, 'Password' %>
+      <%= f.password_field :password %>
+
+      <%= f.label :password_confirmation, 'Password confirmation' %>
+      <%= f.password_field :password_confirmation %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-12 columns">
   <hr />
+      <%= f.submit 'Save', class: 'button radius' %>
+    </div>
+  </div>
 
-  <h5>Modify password</h5>
-  <p>Only fill in these two fields if you want to modify your password.</p>
-
-  <%= f.label :password, 'Password' %>
-  <%= f.password_field :password %>
-
-  <%= f.label :password_confirmation, 'Password confirmation' %>
-  <%= f.password_field :password_confirmation %>
-
-  <hr />
-
-  <%= f.submit 'Save', class: 'button' %>
 <% end %>

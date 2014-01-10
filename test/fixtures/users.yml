@@ -4,6 +4,7 @@ alice:
   email: alice@xxxx.com
   agent: true
   signature: 'Greets, Alice'
+  notify: true
 
 bob:
   email: bob@xxxx.com
@@ -12,3 +13,4 @@ bob:
 charlie:
   email: charlie@xxxx.com
   agent: true
+  notify: false

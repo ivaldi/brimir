@@ -86,7 +86,7 @@ class TicketMailer < ActionMailer::Base
 
     if agents.size == 0
       # notify all agents
-      agents = User.agents.pluck(:email)
+      agents = User.agents.where(notify: true).pluck(:email)
     else
       # only the ones concerned, without duplicates
       agents = agents.uniq
