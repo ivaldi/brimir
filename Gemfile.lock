@@ -125,7 +125,7 @@ GEM
       activesupport (= 4.0.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.1.0)
+    rake (10.1.1)
     redcarpet (3.0.0)
     ref (1.0.5)
     rest-client (1.6.7)
