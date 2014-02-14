@@ -46,6 +46,9 @@ end
 # Authentication
 gem 'devise'
 
+# Authorization
+gem 'cancan'
+
 # Pagination
 gem 'will_paginate'
 
