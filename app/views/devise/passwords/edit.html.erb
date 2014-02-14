@@ -8,10 +8,10 @@
       <%= f.hidden_field :reset_password_token %>
 
       <div><%= f.label :password, "New password" %><br />
-      <%= f.password_field :password %></div>
+      <%= f.password_field :password, label: false %></div>
 
       <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-      <%= f.password_field :password_confirmation %></div>
+      <%= f.password_field :password_confirmation, label: false %></div>
 
       <div><%= f.submit "Change my password" %></div>
     <% end %>

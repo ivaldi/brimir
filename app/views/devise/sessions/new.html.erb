@@ -6,14 +6,12 @@
 
     <hr />
 
-    <%= f.label :email %>
     <%= f.email_field :email %>
   
-    <%= f.label :password %>
     <%= f.password_field :password %>
   
     <% if devise_mapping.rememberable? -%>
-      <label><%= f.check_box :remember_me %> Remember me</label>
+      <%= f.check_box :remember_me %>
     <% end -%>
   
     <hr />
