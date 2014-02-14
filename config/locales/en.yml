@@ -3,3 +3,10 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    attributes:
+      user:
+        password: Password
+        password_confirmation: Password confirmation
+        signature: Email signature

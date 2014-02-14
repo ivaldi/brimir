@@ -13,7 +13,7 @@ gem 'foundation-rails'
 gem 'jquery-rails'
 
 # Zurb form errors
-#gem 'foundation_rails_helper', git: 'https://github.com/ivaldi/foundation_rails_helper.git'
+gem 'foundation_rails_helper'
 
 group :development do
   # To use debugger
