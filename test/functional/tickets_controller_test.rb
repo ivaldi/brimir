@@ -25,11 +25,11 @@ class TicketsControllerTest < ActionController::TestCase
     sign_in users(:alice)
   end
 
-  test 'should only allow agents to view tickets' do
+  test 'should only allow agents to view others tickets' do
     sign_out users(:alice)
     sign_in users(:bob)
-    get :index
-    assert_response :redirect  # redirect to sign in page
+    get :show, id: tickets(:multiple)
+    assert_response :unauthorized # redirect to sign in page
   end
 
   test 'should get index' do
