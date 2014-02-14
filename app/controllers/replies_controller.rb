@@ -16,6 +16,8 @@
 
 class RepliesController < ApplicationController
 
+  load_and_authorize_resource :reply
+
   def create
     @reply = Reply.new(reply_params)
 

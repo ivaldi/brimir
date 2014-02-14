@@ -17,8 +17,9 @@
 class TicketsController < ApplicationController
   before_filter :authenticate_user!, except: [ :create ] 
 
+  load_and_authorize_resource :ticket, except: [ :index ]
+
   def show
-    @ticket = Ticket.find(params[:id])
     @agents = User.agents
     @statuses = Status.all
     @priorities = Priority.all    
@@ -39,13 +40,19 @@ class TicketsController < ApplicationController
       .search(params[:q])
       .filter_by_assignee_id(params[:assignee_id])
       .page(params[:page])
-      .order(:created_at)
+      .ordered
+      .viewable_by(current_user)
 
+    if @tickets.count > 0
+      @tickets.each do |ticket|
+        authorize! :index, ticket
+      end
+    else
+      authorize! :index, Ticket
+    end
   end
 
   def update
-    @ticket = Ticket.find(params[:id])
-
     respond_to do |format|
       if @ticket.update_attributes(ticket_params)
         

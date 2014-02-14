@@ -18,4 +18,23 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :authenticate_user!
+
+  check_authorization unless: :devise_controller?
+
+  rescue_from CanCan::AccessDenied do |exception|
+    if Rails.env == :production
+      redirect_to root_url, alert: exception.message
+    else
+      # for tests and development, we want unauthorized status codes
+      render text: exception, status: :unauthorized
+    end
+  end
+
+  # Always automatically call strong parameters filter based on controller name
+  # this fixes cancan problems for create etc.
+  before_filter do
+    resource = controller_path.singularize.gsub('/', '_').to_sym
+    method = "#{resource}_params"
+    params[resource] &&= send(method) if respond_to?(method, true)
+  end
 end
