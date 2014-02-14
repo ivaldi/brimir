@@ -28,3 +28,6 @@ public/system
 config/deploy
 config/deploy.rb
 Capfile
+
+# rcov files
+coverage

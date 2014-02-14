@@ -43,6 +43,8 @@ class RepliesControllerTest < ActionController::TestCase
 
     assert_match 'multipart/alternative', mail.content_type
 
+    assert_not_nil assigns(:reply).message_id
+
   end
 
   test 'reply should always contain text' do
