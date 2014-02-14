@@ -38,6 +38,11 @@ class TicketsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:tickets)
   end
 
+  test 'should show ticket' do
+    get :show, id: @ticket.id
+    assert_response :success
+  end
+
   test 'should email assignee if ticket is assigned by somebody else' do
     
     # new assignee should receive notification
