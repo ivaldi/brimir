@@ -33,5 +33,9 @@ class Reply < ActiveRecord::Base
     mail = yield(self)
 
     mail.deliver
+
+    self.message_id = mail.message_id
+    self.content_type = 'markdown'
+    self.save
   end
 end

@@ -16,8 +16,6 @@
 
 class TicketMailer < ActionMailer::Base
 
-  after_action :update_reply_attributes
-
   def reply(reply)
     @reply = reply
 
@@ -219,18 +217,4 @@ class TicketMailer < ActionMailer::Base
     return incoming
 
   end
-
-  private
-    def update_reply_attributes
-      # only use message in this action, never use mail
-      # it will change content-type from multipart/alternative to text/plain
-
-      if @reply
-        @reply.message_id = message.message_id
-        @reply.content_type = 'markdown'
-
-        @reply.save
-      end
-    end
-
 end
