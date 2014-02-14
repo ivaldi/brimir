@@ -40,6 +40,23 @@ Next, create an alias in your `/etc/aliases` file like this:
 Now sending an email to brimir@yourmailserver.com should start curl and post 
 the email to your brimir installation.
 
+Contributing
+------------
+We appreciate all contributions! If you would like to contribute, please follow these steps:
+- Fork the repo.
+- Create a branch with a name that describes the change.
+- Make your changes in the branch.
+- Submit a pull-request to merge your feature-branch in our master branch.
+
+Requested features
+------------------
+Some users have made requests for the following features. If you would like to contribute, you could add any of these.
+- Switchable property to support threads by using special tags in the subject line instead of relying on mail headers.
+- Grouping issues by project.
+- Managing users from within Brimir.
+- Ability to create issues from within Brimir, instead of only via email.
+- Support for hosted incoming mail services (Sendgrid, Mandrill), possibly using griddler gem.
+
 License
 -------
 Brimir is licensed under the GNU Affero General Public License Version 3.
