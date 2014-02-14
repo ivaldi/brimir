@@ -19,6 +19,7 @@ class Attachment < ActiveRecord::Base
   belongs_to :attachable, polymorphic: true
 
   has_attached_file :file, styles: { thumb: [ '50x50#', :jpg ] }
+  do_not_validate_attachment_file_type :file
   before_post_process :image?
 
   def image?
