@@ -221,12 +221,16 @@ class TicketMailer < ActionMailer::Base
   end
 
   private
-  def update_reply_attributes
-    if @reply
-      @reply.message_id = mail.message_id
-      @reply.content_type = 'markdown'
+    def update_reply_attributes
+      # only use message in this action, never use mail
+      # it will change content-type from multipart/alternative to text/plain
 
-      @reply.save
+      if @reply
+        @reply.message_id = message.message_id
+        @reply.content_type = 'markdown'
+
+        @reply.save
+      end
     end
-  end
+
 end
