@@ -113,4 +113,19 @@ class RepliesControllerTest < ActionController::TestCase
     assert_match '**this is in bold**', mail.text_part.body.decoded
   end
 
+  test 'reply should have attachments' do
+
+    assert_difference 'Attachment.count', 2 do
+      post :create, reply: {
+            content: '**this is in bold**',
+            ticket_id: @ticket.id,
+            to: @reply.to,
+        },
+        attachment: [
+            fixture_file_upload('attachments/default-testpage.pdf'),
+            fixture_file_upload('attachments/default-testpage.pdf')
+        ]
+    end
+  end
+
 end

@@ -19,7 +19,20 @@ class RepliesController < ApplicationController
   load_and_authorize_resource :reply
 
   def create
-    @reply = Reply.new(reply_params)
+    @reply = Reply.new
+
+    if !params[:attachment].nil?
+ 
+      params[:attachment].each do |file|
+        
+        @reply.attachments.new(file: file)
+
+      end
+    
+      params[:reply].delete(:attachments_attributes)
+    end
+    
+    @reply.assign_attributes(reply_params)
 
     @reply.user = current_user    
 
@@ -36,16 +49,17 @@ class RepliesController < ApplicationController
     end
   end
 
-  def new
-    @reply = Reply.new(reply_params)
-
-    @reply.to = @reply.ticket.user.email
-  end
-
   private
     def reply_params
-      params.require(:reply).permit(:content, :ticket_id, :message_id, :user_id,
-          :attachments_attributes, :to, :cc, :bcc)
+      params.require(:reply).permit(
+          :content,
+          :ticket_id,
+          :message_id,
+          :user_id,
+          :to,
+          :cc,
+          :bcc
+      )
     end
 
 end

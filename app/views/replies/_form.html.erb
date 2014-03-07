@@ -1,4 +1,4 @@
-<%= form_for @reply, html: { class: 'new_reply' } do |r| %>
+<%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
 
   <%= r.hidden_field :ticket_id %>
   <h5 class="mt">Reply</h5>
@@ -40,10 +40,8 @@
         <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
         <%= markdown.render(current_user.signature.to_s).html_safe %>
 
-        <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
-          <%= a.label :file, 'Attach file(s)' %>
-          <%= a.file_field :file, multiple: true, label: false %>
-        <% end %>
+        <%= label_tag 'attachment[]', 'Attach file(s)' %>
+        <%= file_field_tag 'attachment[]', multiple: true, label: false %>
       </div>
     </div>
     <div class="content full" id="preview">
