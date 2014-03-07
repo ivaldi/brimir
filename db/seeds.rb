@@ -6,13 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-frank = User.where(email: 'frank@xxxx.com').first_or_create({ email: 'frank@xxxx.com', password: 'testtest', password_confirmation: 'testtest' })
-frank.agent = true
-frank.save!
+agent = User.where(email: 'agent@getbrimir.com').first_or_create({ email: 'agent@getbrimir.com', password: 'testtest', password_confirmation: 'testtest' })
+agent.agent = true
+agent.save!
 
-sem = User.where(email: 'sem@xxxx.com').first_or_create({ email: 'sem@xxxx.com', password: 'testtest', password_confirmation: 'testtest' })
-sem.agent = true
-sem.save!
+customer = User.where(email: 'customer@getbrimir.com').first_or_create({ email: 'customer@getbrimir.com', password: 'testtest', password_confirmation: 'testtest' })
+customer.save!
 
 Status.where(name: 'Deleted').first_or_create!({ name: 'Deleted' })
 status_closed = Status.where(name: 'Closed').first_or_create!({ name: 'Closed' })
@@ -30,10 +29,10 @@ owner = User.where(email: 'test@xxxx.com').first_or_create!({ email: 'test@xxxx.
 Ticket.create!([
   { 
     status_id: status_open.id, 
-    user_id: owner.id, 
+    user_id: customer.id, 
     subject: 'I have some problems', 
     content: '<pre>I have problems with my computer. Please help</pre>', 
-    assignee_id: frank.id, 
+    assignee_id: agent.id, 
     message_id: '1@xxxx.com',
     priority_id: priority_none.id,
   },
@@ -50,7 +49,7 @@ Ticket.create!([
     user_id: owner.id, 
     subject: 'I had some problems', 
     content: '<pre>I have problems with my computer. Please help</pre>', 
-    assignee_id: sem.id, 
+    assignee_id: agent.id, 
     message_id: '3@xxxx.com',
     priority_id: priority_low.id, 
   }
