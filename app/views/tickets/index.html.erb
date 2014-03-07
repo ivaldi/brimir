@@ -8,19 +8,21 @@
 
 
     <dl class="sub-nav filter">
-      <dt>Assignee:</dt>
+      <% if current_user.agent? %>
+        <dt>Assignee:</dt>
 
-      <%= active_elem_if 'dd', params[:assignee_id].nil? do
-          link_to 'All', tickets_path(params.merge(assignee_id: nil))
-        end %>
+        <%= active_elem_if 'dd', params[:assignee_id].nil? do
+            link_to 'All', tickets_path(params.merge(assignee_id: nil))
+          end %>
 
-      <%= active_elem_if 'dd', params[:assignee_id] == current_user.id.to_s do
-          link_to 'Yours', tickets_path(params.merge(assignee_id: current_user.id))
-        end %>
+        <%= active_elem_if 'dd', params[:assignee_id] == current_user.id.to_s do
+            link_to 'Yours', tickets_path(params.merge(assignee_id: current_user.id))
+          end %>
 
-      <%= active_elem_if 'dd', params[:assignee_id] == '0' do
-          link_to 'Unassigned', tickets_path(params.merge(assignee_id: 0))
-        end %>
+        <%= active_elem_if 'dd', params[:assignee_id] == '0' do
+            link_to 'Unassigned', tickets_path(params.merge(assignee_id: 0))
+          end %>
+      <% end %>
 
       <dt>Status:</dt>
 
