@@ -14,25 +14,25 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Attachment < ActiveRecord::Base
-  # polymorphic relation with tickets & replies
-  belongs_to :attachable, polymorphic: true
+class AttachmentsControllerTest < ActionController::TestCase
 
-  has_attached_file :file,
-      path: ':rails_root/data/:class/:attachment/:id_partition/:style/:id.:extension',
-      url: '/attachments/:id/:style',
-      styles: {
-          thumb: {
-              geometry: '50x50#',
-              format: :jpg,
-              # this will convert transparent parts to white instead of black
-              convert_options: '-flatten'
-          }
-      }
-  do_not_validate_attachment_file_type :file
-  before_post_process :image?
-
-  def image?
-    !file_content_type.match(/^image/).nil?
+  setup do
+    sign_in users(:alice)
+    @attachment = attachments(:default_page)
+    @attachment.update_attributes!({
+      file: fixture_file_upload('attachments/default-testpage.pdf')
+    })
   end
+
+  test 'should show thumb' do
+    get :show, format: :thumb, id: @attachment
+    assert_response :success
+  end
+
+
+  test 'should download original ' do
+    get :show, format: :original, id: @attachment
+    assert_response :success
+  end
+
 end

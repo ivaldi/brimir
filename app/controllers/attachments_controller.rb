@@ -14,25 +14,25 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Attachment < ActiveRecord::Base
-  # polymorphic relation with tickets & replies
-  belongs_to :attachable, polymorphic: true
+class AttachmentsController < ApplicationController
 
-  has_attached_file :file,
-      path: ':rails_root/data/:class/:attachment/:id_partition/:style/:id.:extension',
-      url: '/attachments/:id/:style',
-      styles: {
-          thumb: {
-              geometry: '50x50#',
-              format: :jpg,
-              # this will convert transparent parts to white instead of black
-              convert_options: '-flatten'
-          }
-      }
-  do_not_validate_attachment_file_type :file
-  before_post_process :image?
-
-  def image?
-    !file_content_type.match(/^image/).nil?
+  load_and_authorize_resource :attachment
+  
+  def show
+    begin
+      if params[:format] == 'thumb'
+        send_file @attachment.file.path(:thumb),
+            type: 'image/jpeg',
+            disposition: :inline
+      else
+        send_file @attachment.file.path,
+            filename: @attachment.file_file_name,
+            type: @attachment.file_content_type,
+            disposition: :attachment
+      end
+    rescue ActionController::MissingFile
+      render text: 'File not found.', status: :not_found
+    end
   end
+
 end
