@@ -1,16 +1,18 @@
 <%= form_for @user, html: { class: 'edit_user' } do |f| %>
   <div class="row">
+    <% if @user.agent? %>
+      <div class="large-6 columns">
+        <h3>Email settings</h3>
+
+        <p>
+          <label><%= f.check_box :notify, label: false %> Receive notifications for new tickets</label>
+        </p>
+
+        <%= f.text_area :signature, rows: 5, cols: 20, label: false %>
+      </div>
+    <% end %>
+
     <div class="large-6 columns">
-      <h3>Email settings</h3>
-
-      <p>
-        <label><%= f.check_box :notify %> Receive notifications for new tickets</label>
-      </p>
-
-      <%= f.text_area :signature, rows: 5, cols: 20, label: false %>
-    </div>
-
-    <div class="large-6 columns end">
 
       <h3>Account settings</h3>
       <p>Only fill in these two fields if you want to modify your password.</p>
