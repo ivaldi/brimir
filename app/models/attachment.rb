@@ -33,6 +33,6 @@ class Attachment < ActiveRecord::Base
   before_post_process :image?
 
   def image?
-    !file_content_type.match(/^image/).nil?
+    !file_content_type.match(/^image/).nil? || !file_content_type.match(/pdf$/).nil?
   end
 end
