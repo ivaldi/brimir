@@ -1,5 +1,12 @@
+
+
 <div class="row">
   <div class="large-12 columns">
+
+    <div class="alert-box notice">
+      You can view your tickets below. New tickets or replies can currently only be created via email.
+    </div>
+
     <% if params[:q].present? %>
       <h2 class="filter-title">Tickets containing '<em><%= params[:q].to_s %></em>'</h2>
     <% else %>
@@ -49,34 +56,64 @@
       <tbody>
         <% @tickets.each do |ticket| %>
           <tr data-ticket-url="<%= ticket_url(ticket) %>">
-            <td>
-              <a data-type="status" data-id="<%= ticket.status.id %>" href="#"><%= ticket.status.name %></a>
-            </td>
-            <td>
-              <a data-type="priority" data-id="<%= ticket.priority.id %>" href="#"><%= ticket.priority.name %></a>
-            </td>
-            <td>
-              <% if !ticket.assignee %>
-                <span class="label alert round">Unassigned</span>
-              <% elsif ticket.assignee == current_user %>
-                <span class="label success round">Yours</span>
-              <% end %>
-              <% if !ticket.subject.nil? %>
-                <%= link_to ticket.subject, ticket %>
-              <% else %>
-                <%= link_to '(No subject)', ticket %>
-              <% end %>
-            </td>
-            <td>
-              <%= ticket.user.email %>
-            </td>
-            <td>
-              <% if ticket.assignee %>
-                <a data-type="assignee" data-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
-              <% else %>
-                <a data-type="assignee" data-id="" href="#"><em>Nobody</em></a>
-              <% end %>
-            </td>
+
+            <% if can? :update, ticket %>
+
+              <td>
+                <a data-type="status" data-id="<%= ticket.status.id %>" href="#">
+                  <%= ticket.status.name %></a>
+              </td>
+              <td>
+                <a data-type="priority" data-id="<%= ticket.priority.id %>" href="#"><%= ticket.priority.name %></a>
+              </td>
+              <td>
+                <% if !ticket.assignee %>
+                  <span class="label alert round">Unassigned</span>
+                <% elsif ticket.assignee == current_user %>
+                  <span class="label success round">Yours</span>
+                <% end %>
+                <% if !ticket.subject.nil? %>
+                  <%= link_to ticket.subject, ticket %>
+                <% else %>
+                  <%= link_to ticket do %>
+                    <em>(No subject)</em>
+                  <% end %>
+                <% end %>
+              </td>
+              <td><%= ticket.user.email %></td>
+              <td>
+                <% if ticket.assignee %>
+                  <a data-type="assignee" data-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
+                <% else %>
+                  <a data-type="assignee" data-id="" href="#"><em>Nobody</em></a>
+                <% end %>
+              </td>
+
+            <% else %>
+
+              <td><%= ticket.status.name %></td>
+              <td><%= ticket.priority.name %></td>
+              <td>
+                <% if !ticket.subject.nil? %>
+                  <%= link_to ticket.subject, ticket %>
+                <% else %>
+                  <%= link_to ticket do %>
+                    <em>(No subject)</em>
+                  <% end %>
+                <% end %>
+              </td>
+              <td><%= ticket.user.email %></td>
+
+              <td>
+                <% if ticket.assignee %>
+                  <%= ticket.assignee.email %>
+                <% else %>
+                  <em>Nobody</em>
+                <% end %>
+              </td>
+
+            <% end %>
+
             <td>
               <%= l ticket.created_at, format: :short %>
             </td>
