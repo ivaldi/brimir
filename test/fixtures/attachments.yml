@@ -1,7 +1,1 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  attachable_id: 
-
-two:
-  attachable_id: 
+default_page: {}

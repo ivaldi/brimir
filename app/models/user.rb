@@ -22,7 +22,4 @@ class User < ActiveRecord::Base
 
   scope :agents, -> { where(agent: true) }
 
-  def active_for_authentication?
-    super && agent
-  end
 end

@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class UsersController < ApplicationController
+
+  load_and_authorize_resource :user
   
   def edit
     @user = User.find(params[:id])

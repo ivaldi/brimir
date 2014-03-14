@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -14,23 +14,25 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Ability
-  include CanCan::Ability
+class AttachmentsControllerTest < ActionController::TestCase
 
-  def initialize(user)
-    user ||= User.new # guest user (not logged in)
-    if user.agent?
-      can :manage, :all
-    else
-
-      # customers can view their own tickets, its replies and attachments
-      can :read, Ticket, user_id: user.id
-      can :read, Reply, ticket: { user_id: user.id }
-      can :read, Attachment, attachable_type: 'Ticket', attachable: { user_id: user.id }
-      can :read, Attachment, attachable_type: 'Reply', attachable: { ticket: { user_id: user.id } }
-
-      # customers can edit their own account
-      can [ :edit, :update ], User, id: user.id
-    end
+  setup do
+    sign_in users(:alice)
+    @attachment = attachments(:default_page)
+    @attachment.update_attributes!({
+      file: fixture_file_upload('attachments/default-testpage.pdf')
+    })
   end
+
+  test 'should show thumb' do
+    get :show, format: :thumb, id: @attachment
+    assert_response :success
+  end
+
+
+  test 'should download original ' do
+    get :show, format: :original, id: @attachment
+    assert_response :success
+  end
+
 end

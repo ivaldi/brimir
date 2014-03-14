@@ -18,7 +18,17 @@ class Attachment < ActiveRecord::Base
   # polymorphic relation with tickets & replies
   belongs_to :attachable, polymorphic: true
 
-  has_attached_file :file, styles: { thumb: [ '50x50#', :jpg ] }
+  has_attached_file :file,
+      path: ':rails_root/data/:class/:attachment/:id_partition/:style/:id.:extension',
+      url: '/attachments/:id/:style',
+      styles: {
+          thumb: {
+              geometry: '50x50#',
+              format: :jpg,
+              # this will convert transparent parts to white instead of black
+              convert_options: '-flatten'
+          }
+      }
   do_not_validate_attachment_file_type :file
   before_post_process :image?
 

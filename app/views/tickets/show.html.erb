@@ -2,9 +2,9 @@
   <div class="large-9 columns">
     <div class="panel">
       <h1>
-        <%= !@ticket.subject.nil? ? @ticket.subject : '(No subject)' %>
+        <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(No subject)</em>'.html_safe %>
       </h1>
-      <h5 class="subheader">By <a href="#"><%= @ticket.user.email %></a> on <%= l @ticket.created_at, format: :long %></h5>
+      <h5 class="subheader">By <%= @ticket.user.email %> on <%= l @ticket.created_at, format: :long %></h5>
 
       <% if @ticket.content.nil? %>
         (No content)
@@ -77,32 +77,51 @@
       </dl>
     <% end %>
 
-    <%= render 'replies/form' %>
+    <% if current_user.agent? %>
+      <%= render 'replies/form' %>
+    <% end %>
     
   </div>
 
   <div class="large-3 columns">    
     <ul class="side-nav">      
-      <li>Status:
-        <a href="#" data-reveal-id="change-status">
-          <%= @ticket.status.name %>
-        </a>
-      </li>
-      <li>Priority:
-        <a href="#" data-reveal-id="change-priority">
-          <%= @ticket.priority.name %>
-        </a>
-      </li>
-      <li>
-        Assignee:
-        <a href="#" data-reveal-id="change-assignee">
-        <% if !@ticket.assignee %>
-          Nobody
-        <% else %>
-          <%= @ticket.assignee.email %>
-        <% end %>
-        </a>
-      </li>
+
+      <% if can? :update, @ticket %>
+
+        <li>Status:
+          <a href="#" data-reveal-id="change-status">
+            <%= @ticket.status.name %>
+          </a>
+        </li>
+        <li>Priority:
+          <a href="#" data-reveal-id="change-priority">
+            <%= @ticket.priority.name %>
+          </a>
+        </li>
+        <li>
+          Assignee:
+          <a href="#" data-reveal-id="change-assignee">
+          <% if !@ticket.assignee %>
+            Nobody
+          <% else %>
+            <%= @ticket.assignee.email %>
+          <% end %>
+          </a>
+        </li>
+
+      <% else %>
+
+        <li>Status:<br /><%= @ticket.status.name %> </li>
+        <li>Priority:<br /><%= @ticket.priority.name %></li>
+        <li> Assignee:<br />
+          <% if !@ticket.assignee %>
+            <em>Nobody</em>
+          <% else %>
+            <%= @ticket.assignee.email %>
+          <% end %>
+        </li>
+      <% end %>
+
     </ul>
   </div>
 

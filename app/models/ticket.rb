@@ -46,4 +46,14 @@ class Ticket < ActiveRecord::Base
           term, term)
     end
   }
+
+  scope :ordered, -> {
+    order(:created_at)
+  }
+
+  scope :viewable_by, ->(user) {
+    if !user.agent?
+      where(user_id: user.id)
+    end
+  }
 end
