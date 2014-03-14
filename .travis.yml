@@ -6,6 +6,8 @@ rvm:
   - 2.1.0
 
 before_script:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq imagemagick ghostscript
   - psql -c 'CREATE DATABASE brimir_test;' -U postgres
   - cp config/database.travis.yml config/database.yml
   - bundle exec rake db:migrate
