@@ -20,7 +20,7 @@ class AttachmentsControllerTest < ActionController::TestCase
     sign_in users(:alice)
     @attachment = attachments(:default_page)
     @attachment.update_attributes!({
-      file: fixture_file_upload('attachments/default-testpage.pdf')
+      file: fixture_file_upload('attachments/default-testpage.pdf', 'application/pdf')
     })
   end
 
