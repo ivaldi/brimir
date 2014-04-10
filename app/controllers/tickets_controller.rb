@@ -17,7 +17,8 @@
 class TicketsController < ApplicationController
   before_filter :authenticate_user!, except: [ :create ] 
 
-  load_and_authorize_resource :ticket, except: [ :index ]
+  load_and_authorize_resource :ticket, except: [ :index, :create ]
+  skip_authorization_check only: [ :create ]
 
   def show
     @agents = User.agents
