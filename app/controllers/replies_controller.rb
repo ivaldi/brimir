@@ -16,7 +16,7 @@
 
 class RepliesController < ApplicationController
 
-  load_and_authorize_resource :reply
+  load_and_authorize_resource :reply, except: [ :create ]
 
   def create
     @reply = Reply.new
@@ -34,10 +34,18 @@ class RepliesController < ApplicationController
     
     @reply.assign_attributes(reply_params)
 
-    @reply.user = current_user    
+    @reply.user = current_user
+
+    authorize! :create, @reply
 
     respond_to do |format|
-      if @reply.save && @reply.notify {|reply| TicketMailer.reply(reply) }
+      if @reply.save && @reply.notify { |reply|
+          if current_user.agent?
+            TicketMailer.reply(reply)
+          else
+            TicketMailer.notify_agents(reply.ticket, reply)
+          end
+        }
         format.html { redirect_to @reply.ticket, notice: 'Reply was successfully created.' }
         format.json { render json: @reply, status: :created, location: @reply }
         format.js { render }
@@ -51,15 +59,24 @@ class RepliesController < ApplicationController
 
   private
     def reply_params
-      params.require(:reply).permit(
-          :content,
-          :ticket_id,
-          :message_id,
-          :user_id,
-          :to,
-          :cc,
-          :bcc
-      )
+      if current_user.agent?
+        params.require(:reply).permit(
+            :content,
+            :ticket_id,
+            :message_id,
+            :user_id,
+            :to,
+            :cc,
+            :bcc
+        )
+      else
+        params.require(:reply).permit(
+            :content,
+            :ticket_id,
+            :message_id,
+            :user_id,
+        )
+      end
     end
 
 end
