@@ -23,6 +23,21 @@ class TicketsControllerTest < ActionController::TestCase
     @ticket = tickets(:problem)
 
     sign_in users(:alice)
+
+    # read_fixture doesn't work in ActionController::TestCase, so use File.new
+    @simple_email = File.new('test/fixtures/ticket_mailer/simple').read
+  end
+
+  test 'should create ticket when posted from MTA' do
+
+    sign_out users(:alice) # make sure we sign out
+
+    assert_difference 'Ticket.count', 1 do
+      post :create, message: @simple_email, format: :json
+
+      assert_response :success
+    end
+
   end
 
   test 'should only allow agents to view others tickets' do
