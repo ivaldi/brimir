@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
@@ -28,6 +28,9 @@ group :development do
   
   # Debian Wheezy has no nodejs in the repo's :(
   gem 'therubyracer'
+
+  # Spring application pre-loader
+  gem 'spring'
 end
 
 group :test do
