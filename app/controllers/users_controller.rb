@@ -42,19 +42,13 @@ class UsersController < ApplicationController
 
     if params[:init].present?
       @users = params[:q].split(',')
-      render json: do
-        users: @users.map do |user|
-          { id: user, text: user }
-        end
-      end
+      @users = @users.map { |user| { id: user, text: user } }
     else
       @users = User.by_email(params[:q])
-      render json: {
-        users: @users.map do |user|
-          { id: user.email, text: user.email }
-        end
-      end
+      @users = @users.map { |user| { id: user.email, text: user.email } }
     end
+
+    render json: { users: @users }
 
   end
 
