@@ -2,13 +2,15 @@
 <div class="row">
   <div class="large-12 columns">
 
-    <h2 class="filter-title">Users</h2>
+    <h2 class="filter-title">Users <%= link_to 'add user',
+      new_user_path %></h2>
 
     <table class="full">
       <thead>
         <tr>
           <th>Email</th>
           <th>Role</th>
+          <th colspan="2"></th>
         </tr>
       </thead>
       <tbody>
@@ -16,6 +18,7 @@
           <tr>
             <td><%= user.email %></td>
             <td><%= (user.agent?) ? 'Agent' : 'Customer' %></td>
+            <td><%= link_to 'edit', edit_user_path(user) %></td>
           </tr>
         <% end %>
       </tbody>

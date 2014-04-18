@@ -2,7 +2,7 @@ Brimir::Application.routes.draw do
 
   devise_for :users
 
-  resources :users, only: [:edit, :update, :index]
+  resources :users
 
   resources :tickets, only: [:index, :show, :update, :create]
   resources :replies, only: [:create, :new]
