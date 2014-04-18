@@ -96,8 +96,7 @@
               q: term
             };
           },
-          results: function (data) {
-            console.log(data);
+          results: function (data) {            
             return { results: data.users };
           }
         },
