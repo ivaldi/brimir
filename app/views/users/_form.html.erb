@@ -1,6 +1,13 @@
 <%= form_for @user, html: { class: 'edit_user' } do |f| %>
+  <% if @user.new_record? %>
   <div class="row">
-    <% if @user.agent? %>
+    <div class="large-6 columns">
+      <h3>User settings</h3>
+    </div>
+  </div>
+  <% end %>
+  <div class="row">
+    <% if @user.agent? || @user.new_record? %>
       <div class="large-6 columns">
         <h3>Email settings</h3>
 

@@ -64,18 +64,6 @@ class UsersController < ApplicationController
 
   end
 
-  def destroy
-
-    @user = User.find(params[:id])
-
-    if @user.present? && @user.destroy!
-      redirect_to users_url, notice: 'User successfully deleted.'
-    else
-      redirect_to users_url, notice: 'User has not been deleted.'
-    end
-
-  end
-
   private
     def user_params
       # Setup accessible (or protected) attributes for your model
