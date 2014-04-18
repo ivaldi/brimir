@@ -78,18 +78,18 @@
     </div>
  
     <% if notice %>
-        <div class="row">
-          <div class="large-12 columns">
-              <div class="alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
-          </div>
+      <div class="row">
+        <div class="large-12 columns">
+            <div class="alert-box success"><%= notice %><a href="#" data-alert class="close">&times;</a></div>
         </div>
+      </div>
     <% end %>
     <% if alert %>
-        <div class="row">
-          <div class="large-12 columns">
-              <div class="alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
-          </div>
+      <div class="row">
+        <div class="large-12 columns">
+            <div class="alert-box alert"><%= alert %><a href="#" data-alert class="close">&times;</a></div>
         </div>
+      </div>
     <% end %>
     
     <%= yield %>

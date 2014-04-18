@@ -22,7 +22,7 @@ class Status < ActiveRecord::Base
   scope :default, -> { where(default: true) }
 
   def self.all_status
-    Status.new(name: "All", id: 0)
+    Status.new(name: 'All', id: 0)
   end
 
   def self.default_status
@@ -37,7 +37,7 @@ class Status < ActiveRecord::Base
   end
 
   def self.filters
-    [Status.new(name: "All", id: 0)] + all
+    [Status.new(name: 'All', id: 0)] + all
   end
 
   def all_status?
