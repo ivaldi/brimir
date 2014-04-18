@@ -79,7 +79,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to users_url, notice: 'User succesfully added.'
     else
-      render "new"
+      render 'new'
     end
 
   end
