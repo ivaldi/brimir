@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
     order(:email)
   }
 
-  scope :by_email, -> (email) {
+  scope :by_email, ->(email) {
     where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
   }
 
