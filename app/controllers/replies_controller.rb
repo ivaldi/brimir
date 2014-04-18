@@ -16,7 +16,7 @@
 
 class RepliesController < ApplicationController
 
-  load_and_authorize_resource :reply, except: [ :create ]
+  load_and_authorize_resource :reply, except: [:create]
 
   def create
     @reply = Reply.new
