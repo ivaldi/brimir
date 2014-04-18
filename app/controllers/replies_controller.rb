@@ -22,16 +22,16 @@ class RepliesController < ApplicationController
     @reply = Reply.new
 
     if !params[:attachment].nil?
- 
+
       params[:attachment].each do |file|
-        
+
         @reply.attachments.new(file: file)
 
       end
-    
+
       params[:reply].delete(:attachments_attributes)
     end
-    
+
     @reply.assign_attributes(reply_params)
 
     @reply.user = current_user
