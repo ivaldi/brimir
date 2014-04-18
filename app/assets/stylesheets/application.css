@@ -88,9 +88,11 @@
 .mt{
 	margin-top: 30px;
 }
+
 .select2-container-multi .select2-choices .select2-search-choice {
 	margin-top: 9px !important;
 }
+
 .nowrap{
 	white-space: nowrap;
 }

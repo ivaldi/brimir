@@ -1,7 +1,7 @@
 <%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
 
   <%= r.hidden_field :ticket_id %>
-  <dl class="tabs" data-tab>
+  <dl class="tabs mt" data-tab>
     <dd><h3>Reply</h3></dd>
     <dd class="right"><a href="#preview">Preview</a></dd>
     <dd class="active right"><a href="#edit">Edit</a></dd>    
