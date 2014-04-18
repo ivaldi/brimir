@@ -20,6 +20,12 @@ class User < ActiveRecord::Base
   has_many :tickets
   has_many :replies
 
-  scope :agents, -> { where(agent: true) }
+  scope :agents, -> {
+    where(agent: true)
+  }
+
+  scope :by_email, ->(email) {
+    where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
+  }
 
 end
