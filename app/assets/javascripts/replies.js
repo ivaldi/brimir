@@ -1,19 +1,15 @@
 jQuery(function() {
-  
+
   jQuery('a[href=#preview]').click(function(e) {
-    var form = jQuery('#new_reply');
+    var form = jQuery(this).parents('form');
     jQuery.ajax({
-      url: form.attr('action'),
-      type: 'post',
+      url: '/previews/new',
+      type: 'get',
       data: {
-        reply: {
-          content: form.find('#reply_content').val()
-        }
+        content: form.find('textarea').val(),
       },
       success: function(data) {
-        var html = jQuery(data).find('#preview').html();
-
-        jQuery('#preview').html(html);
+        jQuery('#preview').html(data);
       }
     });
   });
