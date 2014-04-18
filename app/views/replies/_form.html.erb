@@ -7,44 +7,42 @@
     <dd><a href="#preview">Preview</a></dd>
   </dl>
   <div class="tabs-content panel">
-    <div class="content active full" id="edit">
-      <div class="row collapse">
+    <div class="content active full" id="edit">      
+      <div class="row">
         <% if current_user.agent? %>
-          <div class="row">
-            <div class="large-1 columns">
-              <%= r.label :to, class: 'inline' %>
-            </div>
-            <div class="large-6 columns end">
-              <%= r.text_field :to, label: false %>
-            </div>
+          <div class="large-1 columns">
+            <%= r.label :to, class: 'inline' %>
           </div>
-          <div class="row">
-            <div class="large-1 columns">
-              <%= r.label :cc, class: 'inline' %>
-            </div>
-            <div class="large-6 columns end">
-              <%= r.text_field :cc, label: false %>
-            </div>
+          <div class="large-11 columns">
+            <%= r.text_field :to, label: false %>
           </div>
-          <div class="row">
-            <div class="large-1 columns">
-              <%= r.label :bcc, class: 'inline' %>
-            </div>
-            <div class="large-6 columns end">
-              <%= r.text_field :bcc, label: false %>
-            </div>
+        </div>
+        <div class="row">
+          <div class="large-1 columns">
+            <%= r.label :cc, class: 'inline' %>
           </div>
-        <% end %>
+          <div class="large-11 columns">
+            <%= r.text_field :cc, label: false %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-1 columns">
+            <%= r.label :bcc, class: 'inline' %>
+          </div>
+          <div class="large-11 columns">
+            <%= r.text_field :bcc, label: false %>
+          </div>
+        </div>
+      <% end %>
 
-        <%= r.text_area :content, label: false %>
-        <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
+      <%= r.text_area :content, label: false %>
+      <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
 
-        <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-        <%= markdown.render(current_user.signature.to_s).html_safe %>
+      <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
+      <%= markdown.render(current_user.signature.to_s).html_safe %>
 
-        <%= label_tag 'attachment[]', 'Attach file(s)' %>
-        <%= file_field_tag 'attachment[]', multiple: true, label: false %>
-      </div>
+      <%= label_tag 'attachment[]', 'Attach file(s)' %>
+      <%= file_field_tag 'attachment[]', multiple: true, label: false %>
     </div>
     <div class="content full" id="preview">
       <%= markdown.render(@reply.content.to_s).html_safe %>

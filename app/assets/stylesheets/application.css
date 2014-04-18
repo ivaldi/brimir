@@ -87,3 +87,7 @@
 .mt{
 	margin-top: 30px;
 }
+
+.nowrap{
+	white-space: nowrap;
+}

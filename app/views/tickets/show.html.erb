@@ -84,22 +84,24 @@
   </div>
 
   <div class="large-3 columns">    
-    <ul class="side-nav">      
-
+    <dl>      
+      
       <% if can? :update, @ticket %>
-
-        <li>Status:
+      
+        <dt>Status:</dt>
+        <dd>
           <a href="#" data-reveal-id="change-status">
             <%= @ticket.status.name %>
           </a>
-        </li>
-        <li>Priority:
+        </dd>
+        <dt>Priority:</dt>
+        <dd>
           <a href="#" data-reveal-id="change-priority">
             <%= @ticket.priority.name %>
           </a>
-        </li>
-        <li>
-          Assignee:
+        </dd>
+        <dt>Assignee:</dt>
+        <dd>
           <a href="#" data-reveal-id="change-assignee">
           <% if !@ticket.assignee %>
             Nobody
@@ -107,22 +109,26 @@
             <%= @ticket.assignee.email %>
           <% end %>
           </a>
-        </li>
+        </dd>
 
       <% else %>
 
-        <li>Status:<br /><%= @ticket.status.name %> </li>
-        <li>Priority:<br /><%= @ticket.priority.name %></li>
-        <li> Assignee:<br />
+        <dt>Status:<dt>
+        <dd><%= @ticket.status.name %></dd>
+        <dt>Priority:</dt>
+        <dd><%= @ticket.priority.name %></dd>
+        <dt>Assignee:</dt>
+        <dd>
           <% if !@ticket.assignee %>
             <em>Nobody</em>
           <% else %>
             <%= @ticket.assignee.email %>
           <% end %>
-        </li>
+        </dd>
+      
       <% end %>
-
-    </ul>
+    
+    </dl>
   </div>
 
 </div>
