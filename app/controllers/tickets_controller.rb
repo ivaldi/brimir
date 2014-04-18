@@ -15,10 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketsController < ApplicationController
-  before_filter :authenticate_user!, except: [ :create ] 
+  before_filter :authenticate_user!, except: [:create] 
 
-  load_and_authorize_resource :ticket, except: [ :index, :create ]
-  skip_authorization_check only: [ :create ]
+  load_and_authorize_resource :ticket, except: [:index, :create]
+  skip_authorization_check only: [:create]
 
   def show
     @agents = User.agents

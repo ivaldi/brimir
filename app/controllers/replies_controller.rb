@@ -39,13 +39,13 @@ class RepliesController < ApplicationController
     authorize! :create, @reply
 
     respond_to do |format|
-      if @reply.save && @reply.notify { |reply|
+      if @reply.save && @reply.notify do |reply|
           if current_user.agent?
             TicketMailer.reply(reply)
           else
             TicketMailer.notify_agents(reply.ticket, reply)
           end
-        }
+        end
         format.html { redirect_to @reply.ticket, notice: 'Reply was successfully created.' }
         format.json { render json: @reply, status: :created, location: @reply }
         format.js { render }
