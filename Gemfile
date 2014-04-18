@@ -8,7 +8,7 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.0.3'
 
 gem 'compass-rails', '~> 1.1.2'
-gem 'foundation-rails', '~> 5.0.0'
+gem 'foundation-rails', '~> 5.2.2'
 
 gem 'jquery-rails'
 
