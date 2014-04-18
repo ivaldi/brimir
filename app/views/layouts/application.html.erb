@@ -38,14 +38,19 @@
         </ul>
 
         <section class="top-bar-section">
-          
+
           <% if user_signed_in? %>
 
             <ul class="left">
               <li>
-                <%= link_to 'All tickets', root_path %>
+                <%= link_to 'Tickets', root_path %>
               </li>
-            </ul> 
+              <% if can? :manage, User %>
+                <li>
+                  <%= link_to 'Users', users_path %>
+                </li>
+              <% end %>
+            </ul>
 
             <ul class="right">
               <li class="has-form">
@@ -72,7 +77,7 @@
 
       </nav>
     </div>
- 
+
     <% if notice %>
         <div class="row">
           <div class="large-12 columns">
@@ -87,7 +92,7 @@
           </div>
         </div>
     <% end %>
-    
+
     <%= yield %>
 
     <div class="reveal-modal" data-reveal>
