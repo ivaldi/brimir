@@ -70,7 +70,8 @@
 .contain-to-grid{
 	margin-bottom: 1rem;
 }
-.new_reply textarea{
+ 
+#new_ticket textarea, .new_reply textarea{
 	width: 100%;
 	height: 300px !important;
 }
