@@ -97,7 +97,7 @@ class TicketsController < ApplicationController
 
   def create
     respond_to do |format|
-      format.html {
+      format.html do
         @ticket = Ticket.new(ticket_params)
 
         @ticket.status = Status.default.first
@@ -111,11 +111,11 @@ class TicketsController < ApplicationController
         else
           render 'new'
         end
-      }
-      format.json {
+      end
+      format.json do
         @ticket = TicketMailer.receive(params[:message])
         render json: @ticket, status: :created
-      }
+      end
       format.js { render }
     end
   end
