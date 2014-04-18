@@ -3,18 +3,11 @@
 <div class="row">
   <div class="large-12 columns">
 
-    <% if !current_user.agent? %>
-      <div class="alert-box notice">
-        You can view your tickets below. New tickets can currently only be created via email.
-      </div>
-    <% end %>
-
     <% if params[:q].present? %>
       <h2 class="filter-title">Tickets containing '<em><%= params[:q].to_s %></em>'</h2>
     <% else %>
       <h2 class="filter-title">Tickets</h2>
     <% end %>
-
 
     <dl class="sub-nav filter">
       <% if current_user.agent? %>
