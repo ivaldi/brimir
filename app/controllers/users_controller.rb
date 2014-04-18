@@ -17,7 +17,7 @@
 class UsersController < ApplicationController
 
   load_and_authorize_resource :user
-  
+
   def edit
     @user = User.find(params[:id])
   end
@@ -42,12 +42,18 @@ class UsersController < ApplicationController
 
     if params[:init].present?
       @users = params[:q].split(',')
-      render json: { users: @users.map { |user| { id: user, 
-          text: user } } }
+      render json: do
+        users: @users.map do |user|
+          { id: user, text: user }
+        end
+      end
     else
       @users = User.by_email(params[:q])
-      render json: { users: @users.map { |user| { id: user.email, 
-          text: user.email } } }
+      render json: {
+        users: @users.map do |user|
+          { id: user.email, text: user.email }
+        end
+      end
     end
 
   end
