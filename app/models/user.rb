@@ -22,4 +22,6 @@ class User < ActiveRecord::Base
 
   scope :agents, -> { where(agent: true) }
 
+  scope :by_email, -> (email) { where('LOWER(email) LIKE ?', '%' + email.downcase + '%') }
+
 end

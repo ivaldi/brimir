@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require select2
 //= require_tree .
 
 (function() {
@@ -62,6 +63,8 @@
 
   jQuery(function() {
 
+    jQuery('#ticket_assignee_id, #ticket_priority_id, #ticket_status_id').select2({ width: 'resolve' });
+
     dialog = jQuery('[data-dialog]');
 
     jQuery('[data-modal-form]').click(function(e) {
@@ -74,6 +77,44 @@
         success: insertFormInDialog
       });
 
+    });
+
+    jQuery('#reply_to, #reply_cc, #reply_bcc').select2({        
+        width: 'resolve',
+        createSearchChoice:function(term, data) {
+            if (jQuery(data).filter(function() {
+                return this.text.localeCompare(term)===0; }).length===0) {
+                    return {id:term, text:term};
+                }
+            },
+        multiple: true,
+        ajax: {
+          url: "/users",
+          dataType: 'json',
+          data: function (term, page) {
+            return {
+              q: term
+            };
+          },
+          results: function (data) {
+            console.log(data);
+            return { results: data.users };
+          }
+        },
+        initSelection: function(element, callback) {
+          var id = jQuery(element).val();
+          if (id !== "") {
+            jQuery.ajax('/users', {
+              data: {
+                init: true,
+                q: id
+              },
+              dataType: "json"
+            }).done(function(data) { 
+              callback(data.users); 
+            });
+          }
+        },        
     });
 
     jQuery(document).foundation();
