@@ -1,11 +1,4 @@
 <%= form_for @user, html: { class: 'edit_user' } do |f| %>
-  <% if @user.new_record? %>
-  <div class="row">
-    <div class="large-6 columns">
-      <h3>User settings</h3>
-    </div>
-  </div>
-  <% end %>
   <div class="row">
     <% if @user.agent? || @user.new_record? %>
       <div class="large-6 columns">
@@ -24,9 +17,17 @@
       <h3>Account settings</h3>
       <p>Only fill in these two fields if you want to modify your password.</p>
 
+      <% if can? :manage, User %>
+        <%= f.text_field :email %>
+      <% end %>
+
       <%= f.password_field :password %>
 
       <%= f.password_field :password_confirmation %>
+
+      <% if can? :manage, User %>
+        <%= f.check_box :agent, label: 'User is an agent' %>
+      <% end %>
     </div>
   </div>
   <div class="row">
