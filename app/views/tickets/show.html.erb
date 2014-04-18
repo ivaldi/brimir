@@ -77,7 +77,7 @@
       </dl>
     <% end %>
 
-    <% if current_user.agent? %>
+    <% if can? :create, @reply %>
       <%= render 'replies/form' %>
     <% end %>
     

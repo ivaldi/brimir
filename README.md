@@ -54,7 +54,6 @@ Some users have made requests for the following features. If you would like to c
 - Switchable property to support threads by using special tags in the subject line instead of relying on mail headers.
 - Grouping issues by project.
 - Managing users from within Brimir.
-- Ability to create issues from within Brimir, instead of only via email.
 - Support for hosted incoming mail services (Sendgrid, Mandrill), possibly using griddler gem.
 
 License

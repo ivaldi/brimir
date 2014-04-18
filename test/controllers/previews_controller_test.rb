@@ -14,18 +14,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+require 'test_helper'
 
-  has_many :tickets
-  has_many :replies
+class PreviewsControllerTest < ActionController::TestCase
 
-  scope :agents, -> {
-    where(agent: true)
-  }
+  test 'should preview as customer' do
 
-  scope :by_email, ->(email) {
-    where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
-  }
+    sign_in users(:bob) # customer sign in
+
+    get :new, content: '**test**'
+    assert_response :success
+  end
 
 end

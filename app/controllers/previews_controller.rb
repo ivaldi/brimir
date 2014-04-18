@@ -14,18 +14,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+class PreviewsController < ApplicationController
 
-  has_many :tickets
-  has_many :replies
+  layout false
+  skip_authorization_check
 
-  scope :agents, -> {
-    where(agent: true)
-  }
-
-  scope :by_email, ->(email) {
-    where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
-  }
+  def new
+    @content = params[:content]
+  end
 
 end

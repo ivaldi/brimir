@@ -15,15 +15,15 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketsController < ApplicationController
-  before_filter :authenticate_user!, except: [ :create ] 
+  before_filter :authenticate_user!, except: [:create]
 
-  load_and_authorize_resource :ticket, except: [ :index, :create ]
-  skip_authorization_check only: [ :create ]
+  load_and_authorize_resource :ticket, except: [:index, :create]
+  skip_authorization_check only: [:create]
 
   def show
     @agents = User.agents
     @statuses = Status.all
-    @priorities = Priority.all    
+    @priorities = Priority.all
 
     @reply = @ticket.replies.new
     @reply.to = @ticket.user.email
@@ -92,24 +92,50 @@ class TicketsController < ApplicationController
     end
   end
 
+  def new
+  end
+
   def create
-
-    @ticket = TicketMailer.receive(params[:message])
-
     respond_to do |format|
-      format.json { render json: @ticket, status: :created }
+      format.html do
+        @ticket = Ticket.new(ticket_params)
+
+        @ticket.status = Status.default.first
+        @ticket.priority = Priority.default.first
+        @ticket.user = current_user
+
+        if @ticket.save!
+          TicketMailer.notify_agents(@ticket, @ticket).deliver
+
+          redirect_to ticket_url(@ticket), notice: 'Ticket created succesfully'
+        else
+          render 'new'
+        end
+      end
+      format.json do
+        @ticket = TicketMailer.receive(params[:message])
+        render json: @ticket, status: :created
+      end
+      format.js { render }
     end
   end
 
   private
     def ticket_params
-      params.require(:ticket).permit(
-          :content, 
-          :user_id,
-          :subject,
-          :status_id,
-          :assignee_id,
-          :priority_id,
-          :message_id)
+      if current_user.agent?
+        params.require(:ticket).permit(
+            :content,
+            :user_id,
+            :subject,
+            :status_id,
+            :assignee_id,
+            :priority_id,
+            :message_id)
+      else
+        params.require(:ticket).permit(
+            :content,
+            :subject,
+            :priority_id)
+      end
     end
 end

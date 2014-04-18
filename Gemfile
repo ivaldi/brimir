@@ -17,7 +17,7 @@ gem 'foundation_rails_helper'
 
 group :development do
   # To use debugger
-  gem 'debugger'
+  gem 'byebug'
 
   gem 'sqlite3'
 
@@ -60,3 +60,6 @@ gem 'paperclip'
 
 # Markdown
 gem 'redcarpet'
+
+#select2 replacement for selectboxes
+gem 'select2-rails'

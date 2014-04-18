@@ -16,7 +16,7 @@
 
 class Ticket < ActiveRecord::Base
 
-  validates_presence_of :status_id, :user_id
+  validates_presence_of :status_id, :user_id, :priority_id
 
   belongs_to :user
   belongs_to :status
