@@ -27,4 +27,3 @@ class PreviewsControllerTest < ActionController::TestCase
   end
 
 end
-
