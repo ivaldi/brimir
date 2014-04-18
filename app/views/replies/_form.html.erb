@@ -1,10 +1,10 @@
 <%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
 
   <%= r.hidden_field :ticket_id %>
-  <h5 class="mt">Reply</h5>
   <dl class="tabs" data-tab>
-    <dd class="active"><a href="#edit">Edit</a></dd>
-    <dd><a href="#preview">Preview</a></dd>
+    <dd><h3>Reply</h3></dd>
+    <dd class="right"><a href="#preview">Preview</a></dd>
+    <dd class="active right"><a href="#edit">Edit</a></dd>    
   </dl>
   <div class="tabs-content panel">
     <div class="content active full" id="edit">      
