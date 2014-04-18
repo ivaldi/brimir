@@ -60,3 +60,6 @@ gem 'paperclip'
 
 # Markdown
 gem 'redcarpet'
+
+#select2 replacement for selectboxes
+gem 'select2-rails'

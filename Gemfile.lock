@@ -146,6 +146,8 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0.0)
+    select2-rails (3.5.4)
+      thor (~> 0.14)
     simplecov (0.8.2)
       docile (~> 1.1.0)
       multi_json
@@ -209,6 +211,7 @@ DEPENDENCIES
   rake
   redcarpet
   sass-rails (~> 4.0.0)
+  select2-rails
   spring
   sqlite3
   therubyracer
