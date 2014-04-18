@@ -74,7 +74,7 @@
                 <% end %>
               </td>
               <td><%= ticket.user.email %></td>
-              <td class="nowrap">
+              <td>
                 <% if ticket.assignee %>
                   <a data-type="assignee" data-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
                 <% else %>
@@ -97,7 +97,7 @@
               </td>
               <td><%= ticket.user.email %></td>
 
-              <td class="nowrap">
+              <td>
                 <% if ticket.assignee %>
                   <%= ticket.assignee.email %>
                 <% else %>
@@ -107,7 +107,7 @@
 
             <% end %>
 
-            <td>
+            <td class="nowrap">
               <%= l ticket.created_at, format: :short %>
             </td>
           </tr>
