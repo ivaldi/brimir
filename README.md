@@ -29,7 +29,7 @@ Incoming email
 Incoming emails can be posted to the tickets url. First make a script like this on your mailserver:
 
     #!/bin/bash
-    exec curl --data-urlencode message@- https://yourbrimirurl.com/tickets
+    exec curl --data-urlencode message@- https://yourbrimirurl.com/tickets.json
     
 Save it in `/etc/postfix/brimir.sh` for example.
 
