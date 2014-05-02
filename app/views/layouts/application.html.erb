@@ -28,11 +28,30 @@
             <%= link_to 'New ticket', new_ticket_path, class: 'button expand radius' %>
           </div>
           <ul class="off-canvas-list">
-            <li><%= link_to '<span class="fa fa-inbox"></span>Inbox'.html_safe, root_path, class: 'active' %></li>
-            <li><%= link_to '<span class="fa fa-user"></span>Mine'.html_safe, tickets_path(params.merge(assignee_id: current_user.id)) %></li>
-            <li><a href="#"><span class="fa fa-check"></span>Closed</a></li>
-            <li><a href="#"><span class="fa fa-trash-o"></span>Trashed</a></li>
-            <li><%= link_to '<span class="fa fa-archive"></span>All'.html_safe, root_path %></li>
+            <li>
+              <%= active_elem_if :a, current_page?(root_path), href: root_path do %>
+                <span class="fa fa-inbox"></span>Inbox
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, current_page?(tickets_path(assignee_id: current_user.id,
+                  status: 'open')), href: tickets_path(assignee_id: current_user.id,
+                  status: 'open') do %>
+                <span class="fa fa-user"></span>Mine
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, current_page?(tickets_path(status: 'closed')),
+                   href: tickets_path(status: 'closed') do %>
+                <span class="fa fa-check"></span>Closed
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, current_page?(tickets_path(status: 'deleted')),
+                  href: tickets_path(status: 'deleted') do %>
+                <span class="fa fa-trash-o"></span>Trashed
+              <% end %>
+            </li>
           </ul>
 
           <p class="text-secondary text-center mt">

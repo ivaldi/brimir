@@ -32,8 +32,11 @@ class TicketsController < ApplicationController
     @agents = User.agents
     @priorities = Priority.all
 
+    params[:status] ||= 'open'
+
     #TODO: filter status
     @tickets = Ticket
+      .by_status(params[:status])
       .search(params[:q])
       .filter_by_assignee_id(params[:assignee_id])
       .page(params[:page])

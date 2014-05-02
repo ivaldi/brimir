@@ -28,6 +28,10 @@ class Ticket < ActiveRecord::Base
 
   enum status: [:open, :closed, :deleted]
 
+  scope :by_status, ->(status) {
+    where(status: Ticket.statuses[status.to_sym])
+  }
+
   scope :filter_by_assignee_id, ->(assignee_id) {
     if !assignee_id.nil?
       if assignee_id.to_i == 0
