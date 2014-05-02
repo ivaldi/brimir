@@ -16,24 +16,11 @@
       <% end %>
     </div>
   </div>
-    <!--
-    <dl class="sub-nav filter">
-      <dt>Status:</dt>
-
-      <% @statuses.each do |status| %>
-
-        <%= active_elem_if 'dd', @active_status == status do
-          link_to status.name, tickets_path(params.merge(status_id: status.id))
-        end %>
-
-      <% end %>
-    </dl>
-    -->
 
     <div class="icon-button-bar">
-      <a href="#" class="fa fa-check-square-o icon-button"></a> 
-      <a href="#" class="fa fa-user icon-button"></a> 
-      <a href="#" class="fa fa-flag icon-button"></a> 
+      <a href="#" class="fa fa-check-square-o icon-button"></a>
+      <a href="#" class="fa fa-user icon-button"></a>
+      <a href="#" class="fa fa-flag icon-button"></a>
       <a href="#" class="fa fa-refresh icon-button"></a>
       <a href="#" class="fa fa-check icon-button"></a>
       <a href="#" class="fa fa-trash-o icon-button"></a>
@@ -53,7 +40,7 @@
 
               <td><input type="checkbox" /></td>
               <td><a data-type="priority" data-id="<%= ticket.priority.id %>" href="#" class="priority-<%= ticket.priority.name %> fa fa-circle" title="Priority: <%= ticket.priority.name %>"></a></td>
-              <td style="white-space:nowrap">                
+              <td style="white-space:nowrap">
                 <%= ticket.user.email %>
               </td>
               <td class="text-secondary table-nowrap">
@@ -67,7 +54,7 @@
               </td>
               <td>
                 <a data-type="status" data-id="<%= ticket.status.id %>" href="#" class="status-<%= ticket.status.name %>"></a>
-              </td>              
+              </td>
               <td>
                 <% if ticket.assignee %>
                   <a data-type="assignee" data-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
