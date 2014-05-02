@@ -1,5 +1,4 @@
 class ReplaceTicketStatusByEnum < ActiveRecord::Migration
-
   class OldStatus < ActiveRecord::Base
     self.table_name = 'statuses'
     has_many :tickets, foreign_key: 'status_id'

@@ -1,7 +1,7 @@
 <div id="change-assignee" class="reveal-modal small" data-reveal>
   <h3>Assign this ticket to...</h3>
 
-  <%= form_for ticket, remote: true, method: :put do |f| %>
+  <%= form_for ticket, remote: true, method: :patch do |f| %>
     <p>
       <%= f.select :assignee_id, options_from_collection_for_select(@agents, 'id', 'email', ticket.assignee_id), include_blank: 'Nobody' %>
     </p>
