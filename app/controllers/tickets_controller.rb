@@ -32,9 +32,8 @@ class TicketsController < ApplicationController
 
     params[:status] ||= 'open'
 
-    #TODO: filter status
-    @tickets = Ticket
-      .by_status(params[:status])
+    # TODO: filter status
+    @tickets = Ticket.by_status(params[:status])
       .search(params[:q])
       .filter_by_assignee_id(params[:assignee_id])
       .page(params[:page])

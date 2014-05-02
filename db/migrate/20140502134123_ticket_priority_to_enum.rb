@@ -1,12 +1,10 @@
 class TicketPriorityToEnum < ActiveRecord::Migration
-
   class OldPriority < ActiveRecord::Base
     self.table_name = 'priorities'
     has_many :tickets, foreign_key: 'priority_id'
   end
 
   def change
-
     add_column :tickets, :priority, :integer, null: false, default: 0
 
     OldPriority.all.each do |priority|
