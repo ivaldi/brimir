@@ -20,6 +20,20 @@
  *= require_tree .
  */
 
+body{
+	height: 600px;
+}
+
+aside{
+	background: #333;
+	height: 600px;
+}
+
+aside .fa{
+	width: 20px;
+	text-align: center;
+	margin-right: 10px
+}
 
 .full{
   width: 100%;
@@ -63,10 +77,6 @@
 	margin-top: 25px;
 }
 
-.filter-title{
-	float: left;
-}
-
 .contain-to-grid{
 	margin-bottom: 1rem;
 }
@@ -86,13 +96,70 @@
 }
 
 .mt{
-	margin-top: 30px;
+	margin-top: 30px !important;
 }
 
 .select2-container-multi .select2-choices .select2-search-choice {
 	margin-top: 9px !important;
 }
 
-.nowrap{
+
+table td, .nowrap{
 	white-space: nowrap;
+}
+
+table tr:hover td{
+	background: #eee;
+}
+
+.table-nowrap{
+	max-width: 500px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+table{
+	border-collapse: collapse;
+}
+
+table input{
+	margin: 0 !important;
+}
+
+.text-secondary{
+	color: #999 !important;
+}
+
+.filter-title{
+	margin-top: 20px;
+}
+
+.priority-Low{ color: #8eca34; }
+.priority-Medium{ color: #fe722d; }
+.priority-High{ color: #da360f; }
+
+.icon-button{
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	border: 2px solid #028cba;
+	text-align: center;
+	border-radius: 1000px;
+	font-size: 14px;
+}
+
+.icon-button-bar{
+	margin-left: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.icon-button-bar *{
+	line-height: 27px;
+	margin-right: 10px;
+}
+
+.off-canvas-list a.active{
+	color: #FFF;
 }

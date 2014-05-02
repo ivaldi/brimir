@@ -1,10 +1,10 @@
-<div class="row">
+<div class="row mt">
   <div class="large-9 columns">
     <div class="panel">
-      <h1>
+      <h2>
         <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(No subject)</em>'.html_safe %>
-      </h1>
-      <h5 class="subheader">By <%= @ticket.user.email %> on <%= l @ticket.created_at, format: :long %></h5>
+      </h2>
+      <h5 class="subheader text-secondary">By <%= @ticket.user.email %> on <%= l @ticket.created_at, format: :long %></h5>
 
       <% if @ticket.content.nil? %>
         (No content)
