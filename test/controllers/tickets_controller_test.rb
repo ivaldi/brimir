@@ -111,7 +111,7 @@ class TicketsControllerTest < ActionController::TestCase
     # assignee should receive notification
     assert_difference 'ActionMailer::Base.deliveries.size' do
 
-      put :update, id: @ticket.id, ticket: { priority_id: priorities(:high).id }
+      put :update, id: @ticket.id, ticket: { priority: 'high' }
       assert_redirected_to ticket_path(@ticket)
 
     end
@@ -153,7 +153,7 @@ class TicketsControllerTest < ActionController::TestCase
     # assignee should not receive notification
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
 
-      put :update, id: @ticket.id, ticket: { priority_id: priorities(:high).id }
+      put :update, id: @ticket.id, ticket: { priority: 'high' }
       assert_redirected_to ticket_path(@ticket)
 
     end

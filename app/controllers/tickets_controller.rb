@@ -22,7 +22,6 @@ class TicketsController < ApplicationController
 
   def show
     @agents = User.agents
-    @priorities = Priority.all
 
     @reply = @ticket.replies.new
     @reply.to = @ticket.user.email
@@ -30,7 +29,6 @@ class TicketsController < ApplicationController
 
   def index
     @agents = User.agents
-    @priorities = Priority.all
 
     params[:status] ||= 'open'
 
@@ -65,7 +63,7 @@ class TicketsController < ApplicationController
           elsif @ticket.previous_changes.include? :status
             TicketMailer.notify_status_changed(@ticket).deliver
 
-          elsif @ticket.previous_changes.include? :priority_id
+          elsif @ticket.previous_changes.include? :priority
             TicketMailer.notify_priority_changed(@ticket).deliver
           end
 
@@ -99,7 +97,6 @@ class TicketsController < ApplicationController
       format.html do
         @ticket = Ticket.new(ticket_params)
 
-        @ticket.priority = Priority.default.first
         @ticket.user = current_user
 
         if @ticket.save!
@@ -127,13 +124,13 @@ class TicketsController < ApplicationController
             :subject,
             :status,
             :assignee_id,
-            :priority_id,
+            :priority,
             :message_id)
       else
         params.require(:ticket).permit(
             :content,
             :subject,
-            :priority_id)
+            :priority)
       end
     end
 end

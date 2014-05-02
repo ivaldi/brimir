@@ -39,7 +39,7 @@
             <% if can? :update, ticket %>
 
               <td><input type="checkbox" /></td>
-              <td><a data-type="priority" data-id="<%= ticket.priority.id %>" href="#" class="priority-<%= ticket.priority.name %> fa fa-circle" title="Priority: <%= ticket.priority.name %>"></a></td>
+              <td><a data-type="priority" data-id="<%= ticket.priority %>" href="#" class="priority-<%= ticket.priority %> fa fa-circle" title="Priority: <%= ticket.priority %>"></a></td>
               <td style="white-space:nowrap">
                 <%= ticket.user.email %>
               </td>
@@ -66,7 +66,7 @@
             <% else %>
 
               <td><%= ticket.status %></td>
-              <td><%= ticket.priority.name %></td>
+              <td><%= ticket.priority %></td>
               <td>
                 <% if !ticket.subject.nil? %>
                   <%= link_to ticket.subject, ticket %>

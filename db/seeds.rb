@@ -13,11 +13,6 @@ agent.save!
 customer = User.where(email: 'customer@getbrimir.com').first_or_create({ email: 'customer@getbrimir.com', password: 'testtest', password_confirmation: 'testtest' })
 customer.save!
 
-priority_none = Priority.where(name: 'None').first_or_create!({ name: 'None', default: true })
-priority_low = Priority.where(name: 'Low').first_or_create!({ name: 'Low' })
-priority_medium = Priority.where(name: 'Medium').first_or_create!({ name: 'Medium' })
-priority_high = Priority.where(name: 'High').first_or_create!({ name: 'High' })
-
 password_length = 12
 password = Devise.friendly_token.first(password_length)
 owner = User.where(email: 'test@xxxx.com').first_or_create!({ email: 'test@xxxx.com', password: password, password_confirmation: password })
@@ -30,7 +25,7 @@ Ticket.create!([
     content: '<pre>I have problems with my computer. Please help</pre>',
     assignee_id: agent.id,
     message_id: '1@xxxx.com',
-    priority_id: priority_none.id,
+    priority: :unknown,
   },
   {
     status: :closed,
@@ -38,7 +33,7 @@ Ticket.create!([
     subject: 'I had some problems',
     content: '<pre>I have problems with my computer. Please help</pre>',
     message_id: '2@xxxx.com',
-    priority_id: priority_high.id,
+    priority: :high,
   },
   {
     status: :open,
@@ -47,6 +42,6 @@ Ticket.create!([
     content: '<pre>I have problems with my computer. Please help</pre>',
     assignee_id: agent.id,
     message_id: '3@xxxx.com',
-    priority_id: priority_low.id,
+    priority: :low,
   }
 ])

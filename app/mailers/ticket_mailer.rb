@@ -59,7 +59,7 @@ class TicketMailer < ActionMailer::Base
     @ticket = ticket
 
     mail(to: ticket.assignee.email, subject:
-        'Ticket priority modified in ' + ticket.priority.name + ' for: ' \
+        'Ticket priority modified in ' + ticket.priority + ' for: ' \
         + ticket.subject)
   end
 
@@ -181,7 +181,6 @@ class TicketMailer < ActionMailer::Base
         user_id: from_user.id,
         subject: email.subject,
         content: content,
-        priority_id: Priority.default.first.id,
         message_id: email.message_id,
         content_type: content_type
       })

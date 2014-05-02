@@ -135,9 +135,9 @@ table input{
 	margin-top: 20px;
 }
 
-.priority-Low{ color: #8eca34; }
-.priority-Medium{ color: #fe722d; }
-.priority-High{ color: #da360f; }
+.priority-low{ color: #8eca34; }
+.priority-medium{ color: #fe722d; }
+.priority-high{ color: #da360f; }
 
 .icon-button{
 	width: 30px;
