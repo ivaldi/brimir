@@ -31,8 +31,20 @@ class UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
 
+    #prevent normal user from changing email and role
+    if !current_user.agent?
+      params[:user].delete(:email)
+      params[:user].delete(:agent)
+    end
+
     if @user.update_attributes(user_params)
-      redirect_to tickets_url, notice: 'Settings saved'
+
+      if current_user.agent?
+        redirect_to users_url, notice: 'Settings saved'
+      else
+        redirect_to tickets_url, notice: 'Settings saved'
+      end
+
     else
       render action: 'edit'
     end
@@ -40,15 +52,34 @@ class UsersController < ApplicationController
 
   def index
 
-    if params[:init].present?
-      @users = params[:q].split(',')
-      @users = @users.map { |user| { id: user, text: user } }
-    else
-      @users = User.by_email(params[:q])
-      @users = @users.map { |user| { id: user.email, text: user.email } }
+    if params[:format].nil?
+      @users = User.ordered.page(params[:page])
+    elsif params[:format] == 'json'
+      if params[:init].present?
+        @users = params[:q].split(',')
+        @users = @users.map { |user| { id: user, text: user } }
+      else
+        @users = User.by_email(params[:q])
+        @users = @users.map { |user| { id: user.email, text: user.email } }
+      end
+
+      render json: { users: @users }
     end
 
-    render json: { users: @users }
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      redirect_to users_url, notice: 'User succesfully added.'
+    else
+      render 'new'
+    end
 
   end
 
@@ -56,7 +87,7 @@ class UsersController < ApplicationController
     def user_params
       # Setup accessible (or protected) attributes for your model
       params.require(:user).permit(:email, :password, :password_confirmation,
-          :remember_me, :signature)
+          :remember_me, :signature, :agent)
     end
 
 end

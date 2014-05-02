@@ -89,7 +89,7 @@
             },
         multiple: true,
         ajax: {
-          url: "/users",
+          url: "/users.json",
           dataType: 'json',
           data: function (term, page) {
             return {
@@ -103,7 +103,7 @@
         initSelection: function(element, callback) {
           var id = jQuery(element).val();
           if (id !== "") {
-            jQuery.ajax('/users', {
+            jQuery.ajax('/users.json', {
               data: {
                 init: true,
                 q: id

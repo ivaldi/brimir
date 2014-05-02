@@ -1,0 +1,29 @@
+
+<div class="row">
+  <div class="large-12 columns">
+
+    <h2 class="filter-title">Users</h2>
+    <%= link_to 'add user', new_user_path, class: 'button right' %>
+
+    <table class="full">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Role</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= (user.agent?) ? 'Agent' : 'Customer' %></td>
+            <td><%= link_to 'edit', edit_user_path(user), class: 'tiny right button' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <%= will_paginate @users %>
+  </div>
+</div>

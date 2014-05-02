@@ -31,6 +31,6 @@ class UsersControllerTest < ActionController::TestCase
   test 'should modify signature' do
     put :update, id: @user.id, user: { signature: 'Alice' }
     assert_equal 'Alice', assigns(:user).signature
-    assert_redirected_to tickets_url
+    assert_redirected_to users_url
   end
 end

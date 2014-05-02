@@ -6,7 +6,7 @@
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
-      
+
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -39,17 +39,22 @@
         </ul>
 
         <section class="top-bar-section">
-          
+
           <% if user_signed_in? %>
 
             <ul class="left">
               <li>
-                <%= link_to 'All tickets', root_path %>
+                <%= link_to 'Tickets', root_path %>
               </li>
+              <% if can? :manage, User %>
+                <li>
+                  <%= link_to 'Users', users_path %>
+                </li>
+              <% end %>
               <li>
                 <%= link_to 'New ticket', new_ticket_path, class: 'radius button' %>
               </li>
-            </ul> 
+            </ul>
 
             <ul class="right">
               <li class="has-form">
@@ -76,7 +81,7 @@
 
       </nav>
     </div>
- 
+
     <% if notice %>
       <div class="row">
         <div class="large-12 columns">
@@ -91,7 +96,7 @@
         </div>
       </div>
     <% end %>
-    
+
     <%= yield %>
 
     <div class="reveal-modal" data-reveal>
