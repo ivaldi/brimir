@@ -16,24 +16,11 @@
       <% end %>
     </div>
   </div>
-    <!--
-    <dl class="sub-nav filter">
-      <dt>Status:</dt>
-
-      <% @statuses.each do |status| %>
-
-        <%= active_elem_if 'dd', @active_status == status do
-          link_to status.name, tickets_path(params.merge(status_id: status.id))
-        end %>
-
-      <% end %>
-    </dl>
-    -->
 
     <div class="icon-button-bar">
-      <a href="#" class="fa fa-check-square-o icon-button"></a> 
-      <a href="#" class="fa fa-user icon-button"></a> 
-      <a href="#" class="fa fa-flag icon-button"></a> 
+      <a href="#" class="fa fa-check-square-o icon-button"></a>
+      <a href="#" class="fa fa-user icon-button"></a>
+      <a href="#" class="fa fa-flag icon-button"></a>
       <a href="#" class="fa fa-refresh icon-button"></a>
       <a href="#" class="fa fa-check icon-button"></a>
       <a href="#" class="fa fa-trash-o icon-button"></a>
@@ -52,8 +39,8 @@
             <% if can? :update, ticket %>
 
               <td><input type="checkbox" /></td>
-              <td><a data-type="priority" data-id="<%= ticket.priority.id %>" href="#" class="priority-<%= ticket.priority.name %> fa fa-circle" title="Priority: <%= ticket.priority.name %>"></a></td>
-              <td style="white-space:nowrap">                
+              <td><a data-type="priority" data-id="<%= ticket.priority %>" href="#" class="priority-<%= ticket.priority %> fa fa-circle" title="Priority: <%= ticket.priority %>"></a></td>
+              <td style="white-space:nowrap">
                 <%= ticket.user.email %>
               </td>
               <td class="text-secondary table-nowrap">
@@ -66,8 +53,8 @@
                 <% end %>
               </td>
               <td>
-                <a data-type="status" data-id="<%= ticket.status.id %>" href="#" class="status-<%= ticket.status.name %>"></a>
-              </td>              
+                <a data-type="status" data-id="<%= ticket.status %>" href="#" class="status-<%= ticket.status %>"></a>
+              </td>
               <td>
                 <% if ticket.assignee %>
                   <a data-type="assignee" data-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
@@ -78,8 +65,8 @@
 
             <% else %>
 
-              <td><%= ticket.status.name %></td>
-              <td><%= ticket.priority.name %></td>
+              <td><%= ticket.status %></td>
+              <td><%= ticket.priority %></td>
               <td>
                 <% if !ticket.subject.nil? %>
                   <%= link_to ticket.subject, ticket %>
@@ -107,7 +94,7 @@
           </tr>
         <% end.empty? and begin %>
           <tr>
-            <td colspan="100%">There are no <%= @active_status.as_adjective %> tickets found.</td>
+            <td colspan="100%">There are no tickets found.</td>
           </tr>
         <% end %>
       </tbody>

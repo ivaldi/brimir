@@ -1,9 +1,9 @@
 <div id="change-status" class="reveal-modal small" data-reveal>
   <h3>Change status to...</h3>
 
-  <%= form_for ticket, remote: true, method: :put do |f| %>
+  <%= form_for ticket, remote: true, method: :patch do |f| %>
     <p>
-      <%= f.select :status_id, options_from_collection_for_select(@statuses, 'id', 'name', ticket.status_id) %>
+      <%= f.select :status, Ticket.statuses.keys %>
     </p>
     <%= f.submit 'Change', class: 'button' %>
   <% end %>

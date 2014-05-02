@@ -16,16 +16,21 @@
 
 class Ticket < ActiveRecord::Base
 
-  validates_presence_of :status_id, :user_id, :priority_id
+  validates_presence_of :user_id
 
   belongs_to :user
-  belongs_to :status
-  belongs_to :priority
   belongs_to :assignee, class_name: 'User'
 
   has_many :attachments, as: :attachable, dependent: :destroy
 
   has_many :replies, dependent: :destroy
+
+  enum status: [:open, :closed, :deleted]
+  enum priority: [:unknown, :low, :medium, :high]
+
+  scope :by_status, ->(status) {
+    where(status: Ticket.statuses[status.to_sym])
+  }
 
   scope :filter_by_assignee_id, ->(assignee_id) {
     if !assignee_id.nil?

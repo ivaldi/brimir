@@ -6,12 +6,12 @@
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
-      
+
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
-    
+
     <%= favicon_link_tag 'favicon.png' %>
     <%= stylesheet_link_tag 'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css' %>
     <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' %>
@@ -28,17 +28,39 @@
             <%= link_to 'New ticket', new_ticket_path, class: 'button expand radius' %>
           </div>
           <ul class="off-canvas-list">
-            <li><%= link_to '<span class="fa fa-inbox"></span>Inbox'.html_safe, root_path, class: 'active' %></li>
-            <li><%= link_to '<span class="fa fa-user"></span>Mine'.html_safe, tickets_path(params.merge(assignee_id: current_user.id)) %></li>
-            <li><a href="#"><span class="fa fa-check"></span>Closed</a></li>
-            <li><a href="#"><span class="fa fa-trash-o"></span>Trashed</a></li>
-            <li><%= link_to '<span class="fa fa-archive"></span>All'.html_safe, root_path %></li>
+            <li>
+              <%= active_elem_if :a, current_page?(root_path), href: root_path do %>
+                <span class="fa fa-inbox"></span>Inbox
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, current_page?(tickets_path(assignee_id: current_user.id,
+                  status: 'open')), href: tickets_path(assignee_id: current_user.id,
+                  status: 'open') do %>
+                <span class="fa fa-user"></span>Mine
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, current_page?(tickets_path(status: 'closed')),
+                   href: tickets_path(status: 'closed') do %>
+                <span class="fa fa-check"></span>Closed
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, current_page?(tickets_path(status: 'deleted')),
+                  href: tickets_path(status: 'deleted') do %>
+                <span class="fa fa-trash-o"></span>Trashed
+              <% end %>
+            </li>
           </ul>
 
           <p class="text-secondary text-center mt">
             <%= current_user.email %><br />
+            <% if can? :manage, User %>
+              <a href="<%= users_path %>" class="text-secondary"><i class="fa-users fa"></i></a>
+            <% end %>
             <%= link_to '<i class="fa-cogs fa"></i>'.html_safe, edit_user_path(current_user), class: 'text-secondary' %>
-            <%= link_to '<i class="fa-sign-out fa"></i>'.html_safe, :destroy_user_session, method: :delete, class: 'text-secondary' %> 
+            <%= link_to '<i class="fa-sign-out fa"></i>'.html_safe, :destroy_user_session, method: :delete, class: 'text-secondary' %>
           </p>
         </aside>
       <% end %>
