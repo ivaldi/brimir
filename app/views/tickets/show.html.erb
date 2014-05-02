@@ -91,7 +91,7 @@
         <dt>Status:</dt>
         <dd>
           <a href="#" data-reveal-id="change-status">
-            <%= @ticket.status.name %>
+            <%= @ticket.status %>
           </a>
         </dd>
         <dt>Priority:</dt>
@@ -114,7 +114,7 @@
       <% else %>
 
         <dt>Status:<dt>
-        <dd><%= @ticket.status.name %></dd>
+        <dd><%= @ticket.status %></dd>
         <dt>Priority:</dt>
         <dd><%= @ticket.priority.name %></dd>
         <dt>Assignee:</dt>

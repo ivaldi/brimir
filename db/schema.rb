@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422060848) do
+ActiveRecord::Schema.define(version: 20140502124406) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -50,30 +50,23 @@ ActiveRecord::Schema.define(version: 20140422060848) do
   add_index "replies", ["ticket_id"], name: "index_replies_on_ticket_id"
   add_index "replies", ["user_id"], name: "index_replies_on_user_id"
 
-  create_table "statuses", force: true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "default",    default: false
-  end
-
   create_table "tickets", force: true do |t|
     t.string   "subject"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "status_id"
     t.integer  "assignee_id"
     t.string   "message_id"
     t.integer  "user_id"
     t.string   "content_type", default: "html"
     t.integer  "priority_id"
+    t.integer  "status",       default: 0,      null: false
   end
 
   add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"
   add_index "tickets", ["message_id"], name: "index_tickets_on_message_id"
   add_index "tickets", ["priority_id"], name: "index_tickets_on_priority_id"
-  add_index "tickets", ["status_id"], name: "index_tickets_on_status_id"
+  add_index "tickets", ["status"], name: "index_tickets_on_status"
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
   create_table "users", force: true do |t|

@@ -53,7 +53,7 @@
                 <% end %>
               </td>
               <td>
-                <a data-type="status" data-id="<%= ticket.status.id %>" href="#" class="status-<%= ticket.status.name %>"></a>
+                <a data-type="status" data-id="<%= ticket.status %>" href="#" class="status-<%= ticket.status %>"></a>
               </td>
               <td>
                 <% if ticket.assignee %>
@@ -65,7 +65,7 @@
 
             <% else %>
 
-              <td><%= ticket.status.name %></td>
+              <td><%= ticket.status %></td>
               <td><%= ticket.priority.name %></td>
               <td>
                 <% if !ticket.subject.nil? %>
@@ -94,7 +94,7 @@
           </tr>
         <% end.empty? and begin %>
           <tr>
-            <td colspan="100%">There are no <%= @active_status.as_adjective %> tickets found.</td>
+            <td colspan="100%">There are no tickets found.</td>
           </tr>
         <% end %>
       </tbody>

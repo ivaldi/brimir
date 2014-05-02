@@ -20,7 +20,6 @@ Next, load the database schema and some defaults:
 Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
     rails console
-    Status.create([ { name: 'Open', default: true }, { name: 'Closed' }, { name: 'Deleted' } ])
     Priority.create([ { name: 'None', default: true }, { name: 'Low' }, { name: 'Medium' }, { name: 'High' } ])
     u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
 
