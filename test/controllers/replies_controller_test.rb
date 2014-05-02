@@ -26,7 +26,28 @@ class RepliesControllerTest < ActionController::TestCase
     sign_in users(:alice)
   end
 
-  test 'should send reply when reply is added' do
+  test 'should notify agents when reply is added by customer' do
+    sign_out users(:alice)
+    sign_in users(:bob)
+
+    # do we send a mail?
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      post :create, reply: {
+          content: @reply.content,
+          ticket_id: @ticket.id,
+          to: @reply.to
+      }
+    end
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_match(/New reply received for/, mail.body.decoded)
+
+    assert_not_nil assigns(:reply).message_id
+
+  end
+
+  test 'should send reply when reply is added by agent' do
 
     # do we send a mail?
     assert_difference 'ActionMailer::Base.deliveries.size' do

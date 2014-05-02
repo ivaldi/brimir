@@ -28,6 +28,20 @@ class TicketsControllerTest < ActionController::TestCase
     @simple_email = File.new('test/fixtures/ticket_mailer/simple').read
   end
 
+  test 'should get new as customer' do
+
+    sign_out users(:alice) # agent sign out
+    sign_in users(:bob) # customer sign in
+
+    get :new
+    assert_response :success
+  end
+
+  test 'should get new as agent' do
+    get :new
+    assert_response :success
+  end
+
   test 'should create ticket when posted from MTA' do
 
     sign_out users(:alice) # make sure we sign out

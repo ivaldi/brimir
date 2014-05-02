@@ -1,18 +1,11 @@
 <div class="row">
   <div class="large-12 columns">
 
-    <% if !current_user.agent? %>
-      <div class="alert-box notice">
-        You can view your tickets below. New tickets or replies can currently only be created via email.
-      </div>
-    <% end %>
-
     <% if params[:q].present? %>
       <h2 class="filter-title">Tickets containing '<em><%= params[:q].to_s %></em>'</h2>
     <% else %>
       <h2 class="filter-title">Tickets</h2>
     <% end %>
-
 
     <dl class="sub-nav filter">
       <% if current_user.agent? %>
@@ -81,7 +74,7 @@
                 <% end %>
               </td>
               <td><%= ticket.user.email %></td>
-              <td class="nowrap">
+              <td>
                 <% if ticket.assignee %>
                   <a data-type="assignee" data-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
                 <% else %>
@@ -104,7 +97,7 @@
               </td>
               <td><%= ticket.user.email %></td>
 
-              <td class="nowrap">
+              <td>
                 <% if ticket.assignee %>
                   <%= ticket.assignee.email %>
                 <% else %>
@@ -114,7 +107,7 @@
 
             <% end %>
 
-            <td>
+            <td class="nowrap">
               <%= l ticket.created_at, format: :short %>
             </td>
           </tr>

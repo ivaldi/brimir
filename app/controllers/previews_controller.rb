@@ -14,47 +14,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Status < ActiveRecord::Base
-  validates_presence_of :name
+class PreviewsController < ApplicationController
 
-  has_many :tickets
+  layout false
+  skip_authorization_check
 
-  scope :default, -> { where(default: true) }
-
-  def self.all_status
-    Status.new(name: 'All', id: 0)
+  def new
+    @content = params[:content]
   end
 
-  def self.default_status
-    default.first
-  end
-
-  def self.find_by_id_from_filters(id)
-    return default_status if id.nil?
-    return all_status if id.to_i.zero?
-
-    find id
-  end
-
-  def self.filters
-    [Status.new(name: 'All', id: 0)] + all
-  end
-
-  def all_status?
-    !id.nil? && id.zero?
-  end
-
-  def tickets(*args)
-    if all_status?
-      Ticket.where(args)
-    else
-      super(*args)
-    end
-  end
-
-  def as_adjective
-    return '' if all_status?
-
-    name.downcase
-  end
 end

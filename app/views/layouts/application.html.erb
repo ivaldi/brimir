@@ -11,9 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
-
+    
     <%= favicon_link_tag 'favicon.png' %>
 
+    <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' %>
     <%= stylesheet_link_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
@@ -50,6 +51,9 @@
                   <%= link_to 'Users', users_path %>
                 </li>
               <% end %>
+              <li>
+                <%= link_to 'New ticket', new_ticket_path, class: 'radius button' %>
+              </li>
             </ul>
 
             <ul class="right">
@@ -79,18 +83,18 @@
     </div>
 
     <% if notice %>
-        <div class="row">
-          <div class="large-12 columns">
-              <div class="alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
-          </div>
+      <div class="row">
+        <div class="large-12 columns">
+            <div class="alert-box success"><%= notice %><a href="#" data-alert class="close">&times;</a></div>
         </div>
+      </div>
     <% end %>
     <% if alert %>
-        <div class="row">
-          <div class="large-12 columns">
-              <div class="alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
-          </div>
+      <div class="row">
+        <div class="large-12 columns">
+            <div class="alert-box alert"><%= alert %><a href="#" data-alert class="close">&times;</a></div>
         </div>
+      </div>
     <% end %>
 
     <%= yield %>

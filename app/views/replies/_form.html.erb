@@ -1,37 +1,39 @@
 <%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
 
   <%= r.hidden_field :ticket_id %>
-  <h5 class="mt">Reply</h5>
-  <dl class="tabs" data-tab>
-    <dd class="active"><a href="#edit">Edit</a></dd>
-    <dd><a href="#preview">Preview</a></dd>
+  <dl class="tabs mt" data-tab>
+    <dd><h3>Reply</h3></dd>
+    <dd class="right"><a href="#preview">Preview</a></dd>
+    <dd class="active right"><a href="#edit">Edit</a></dd>    
   </dl>
   <div class="tabs-content panel">
     <div class="content active full" id="edit">      
       <div class="row">
-        <div class="large-1 columns">
-          <%= r.label :to, class: 'inline' %>
+        <% if current_user.agent? %>
+          <div class="large-1 columns">
+            <%= r.label :to, class: 'inline' %>
+          </div>
+          <div class="large-11 columns">
+            <%= r.text_field :to, label: false %>
+          </div>
         </div>
-        <div class="large-11 columns">
-          <%= r.text_field :to, label: false %>
+        <div class="row">
+          <div class="large-1 columns">
+            <%= r.label :cc, class: 'inline' %>
+          </div>
+          <div class="large-11 columns">
+            <%= r.text_field :cc, label: false %>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="large-1 columns">
-          <%= r.label :cc, class: 'inline' %>
+        <div class="row">
+          <div class="large-1 columns">
+            <%= r.label :bcc, class: 'inline' %>
+          </div>
+          <div class="large-11 columns">
+            <%= r.text_field :bcc, label: false %>
+          </div>
         </div>
-        <div class="large-11 columns">
-          <%= r.text_field :cc, label: false %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="large-1 columns">
-          <%= r.label :bcc, class: 'inline' %>
-        </div>
-        <div class="large-11 columns">
-          <%= r.text_field :bcc, label: false %>
-        </div>
-      </div>
+      <% end %>
 
       <%= r.text_area :content, label: false %>
       <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>

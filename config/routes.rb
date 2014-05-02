@@ -4,9 +4,11 @@ Brimir::Application.routes.draw do
 
   resources :users
 
-  resources :tickets, only: [:index, :show, :update, :create]
+  resources :tickets, only: [:index, :show, :update, :new, :create]
+
   resources :replies, only: [:create, :new]
   get '/attachments/:id/:format' => 'attachments#show'
+  resources :previews, only: [:new]
 
   root :to => 'tickets#index'
 
