@@ -15,7 +15,7 @@ Now install the required gems by running:
     
 Next, load the database schema and some defaults:
 
-    rake db:migrate
+    rake db:schema:load
     
 Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
