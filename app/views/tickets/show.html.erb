@@ -1,15 +1,20 @@
 <div class="row mt">
-  <div class="large-9 columns">
-    <div class="panel">
-      <h2>
-        <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(No subject)</em>'.html_safe %>
-      </h2>
+  <div class="large-12 columns">
+    <h2>
+      <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(No subject)</em>'.html_safe %>
       <h5 class="subheader text-secondary">By <%= @ticket.user.email %> on <%= l @ticket.created_at, format: :long %></h5>
+    </h2>
+  </div>
+</div>
 
-      <% if @ticket.content.nil? %>
-        (No content)
-      <% else %>
+<div class="row mt">
+  <div class="large-9 columns">
 
+    <% if @ticket.content.nil? %>
+      (No content)
+    <% else %>
+
+      <div class="output">
         <% if @ticket.content_type == 'markdown' %>
           <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
           <% content = markdown.render(@ticket.content) %>
@@ -21,18 +26,71 @@
 
         <%# only allow these tags and attributes %>
         <%= sanitize content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
+      </div>
+    <% end %>
+
+    <% if @ticket.attachments.size > 0 %>
+      <hr />
+      <ul class="block-grid three-up attachments">
+        <%= render @ticket.attachments %>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="large-3 columns">
+    <dl>
+
+      <% if can? :update, @ticket %>
+
+        <dt>Status:</dt>
+        <dd>
+          <a href="#" data-reveal-id="change-status">
+            <%= @ticket.status %>
+          </a>
+        </dd>
+        <dt>Priority:</dt>
+        <dd>
+          <a href="#" data-reveal-id="change-priority">
+            <span data-type="priority" data-id="<%= @ticket.priority %>" href="#" class="priority-<%= @ticket.priority %> fa fa-circle" title="Priority: <%= @ticket.priority %>"></span> <%= @ticket.priority %>
+          </a>
+        </dd>
+        <dt>Assignee:</dt>
+        <dd>
+          <a href="#" data-reveal-id="change-assignee">
+          <% if !@ticket.assignee %>
+            Nobody
+          <% else %>
+            <%= @ticket.assignee.email %>
+          <% end %>
+          </a>
+        </dd>
+
+      <% else %>
+
+        <dt>Status:<dt>
+        <dd><%= @ticket.status %></dd>
+        <dt>Priority:</dt>
+        <dd><%= @ticket.priority %></dd>
+        <dt>Assignee:</dt>
+        <dd>
+          <% if !@ticket.assignee %>
+            <em>Nobody</em>
+          <% else %>
+            <%= @ticket.assignee.email %>
+          <% end %>
+        </dd>
+
       <% end %>
 
-      <% if @ticket.attachments.size > 0 %>
-        <hr />
-        <ul class="block-grid three-up attachments">
-          <%= render @ticket.attachments %>
-        </ul>
-      <% end %>
-    </div>
+    </dl>
+  </div>
 
+</div>
+
+<div class="row">
+  <div class="large-9 columns">
     <% if @ticket.replies.size > 1 %>
-      <h5><%= @ticket.replies.size-1 %> replies</h5>
+      <h3 class="mt"><%= @ticket.replies.size-1 %> replies</h3>
       <dl class="accordion" data-accordion>
 
         <% count = 0 %>
@@ -75,62 +133,11 @@
         <% end %>
 
       </dl>
-    <% end %>
-
+    <% end %>  
     <% if can? :create, @reply %>
       <%= render 'replies/form' %>
     <% end %>
-
   </div>
-
-  <div class="large-3 columns">
-    <dl>
-
-      <% if can? :update, @ticket %>
-
-        <dt>Status:</dt>
-        <dd>
-          <a href="#" data-reveal-id="change-status">
-            <%= @ticket.status %>
-          </a>
-        </dd>
-        <dt>Priority:</dt>
-        <dd>
-          <a href="#" data-reveal-id="change-priority">
-            <%= @ticket.priority %>
-          </a>
-        </dd>
-        <dt>Assignee:</dt>
-        <dd>
-          <a href="#" data-reveal-id="change-assignee">
-          <% if !@ticket.assignee %>
-            Nobody
-          <% else %>
-            <%= @ticket.assignee.email %>
-          <% end %>
-          </a>
-        </dd>
-
-      <% else %>
-
-        <dt>Status:<dt>
-        <dd><%= @ticket.status %></dd>
-        <dt>Priority:</dt>
-        <dd><%= @ticket.priority %></dd>
-        <dt>Assignee:</dt>
-        <dd>
-          <% if !@ticket.assignee %>
-            <em>Nobody</em>
-          <% else %>
-            <%= @ticket.assignee.email %>
-          <% end %>
-        </dd>
-
-      <% end %>
-
-    </dl>
-  </div>
-
 </div>
 
 <%= render 'change_priority_form', { ticket: @ticket } %>

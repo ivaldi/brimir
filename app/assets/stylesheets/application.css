@@ -131,13 +131,10 @@ table input{
 	color: #999 !important;
 }
 
-.filter-title{
-	margin-top: 20px;
-}
-
-.priority-low{ color: #8eca34; }
-.priority-medium{ color: #fe722d; }
-.priority-high{ color: #da360f; }
+.priority-unknown{ color: #ccc; }
+.priority-low{ color: #ffd700; }
+.priority-medium{ color: #ff8000; }
+.priority-high{ color: #da1500; }
 
 .icon-button{
 	width: 30px;
@@ -147,19 +144,17 @@ table input{
 	text-align: center;
 	border-radius: 1000px;
 	font-size: 14px;
-}
-
-.icon-button-bar{
-	margin-left: 10px;
-	margin-top: 20px;
-	margin-bottom: 20px;
-}
-
-.icon-button-bar *{
 	line-height: 27px;
-	margin-right: 10px;
+}
+
+.sort-by{
+	margin-right: 30px;
 }
 
 .off-canvas-list a.active{
 	color: #FFF;
+}
+
+.output{
+	line-height: 1.45;
 }
