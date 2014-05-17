@@ -45,6 +45,7 @@ group :production do
   # if either of these please you ...
   # gem 'pg'
   # gem 'mysql2'
+  gem 'sqlite3'
 end
 
 # Authentication
