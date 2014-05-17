@@ -7,16 +7,15 @@ Installation
 ------------
 Brimir is a rather simple Ruby on Rails application. The only difficulty in setting things up is how to get incoming email to work. See the next section for details.
 
-To install brimir you first have to create a database and modify the config file in config/database.yml to reflect the details.
-
-Now install the required gems by running:
+Install the required gems by running:
 
     bundle install --without development:test
     
-Next, load the database schema and some defaults:
+Next, load the database schema and some defaults, then precompile the assets:
 
-    rake db:schema:load
-    
+    rake db:migrate RAILS_ENV=production
+    rake assets:precompile RAILS_ENV=production
+
 Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
     rails console
