@@ -42,8 +42,9 @@ group :test do
 end
 
 group :production do
-  # PostgreSQL for production
-  gem 'pg'
+  # if either of these please you ...
+  # gem 'pg'
+  # gem 'mysql2'
 end
 
 # Authentication
