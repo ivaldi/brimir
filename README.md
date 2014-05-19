@@ -13,9 +13,10 @@ Now install the required gems by running:
 
     bundle install --without development:test
     
-Next, load the database schema and some defaults:
+Next, load the database schema and precompile assets:
 
-    rake db:schema:load
+    rake db:schema:load RAILS_ENV=production
+    rake assets:precompile RAILS_ENV=production
     
 Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
