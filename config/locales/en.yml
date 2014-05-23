@@ -21,6 +21,16 @@ en:
   edit: Edit
   parsed_markdown: Tickets are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
 
+# tickets/show
+  ticket_by_at: By %{email} on %{at}
+  no_content: No content
+  status: Status
+  assignee: Assignee
+  nobody: Nobody
+  num_replies:
+    one: '%{count} reply'
+    other: '%{count} replies'
+
   activerecord:
     attributes:
       user:

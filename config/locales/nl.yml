@@ -27,6 +27,15 @@ nl:
   edit: Bewerken
   parsed_markdown: Tickets worden omgezet met <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
 
+# tickets/show
+  ticket_by_at: Door %{email} op %{at}
+  no_content: Geen inhoud
+  status: Status
+  assignee: Toegewezen aan
+  nobody: Niemand
+  num_replies:
+    one: '%{count} reactie'
+    other: '%{count} reacties'
 
   helpers:
     submit:

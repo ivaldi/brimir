@@ -1,9 +1,11 @@
 <div class="row mt">
   <div class="large-12 columns">
     <h2>
-      <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(No subject)</em>'.html_safe %>
+      <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(' + t(:no_subject) + ')</em>'.html_safe %>
     </h2>
-    <h5 class="subheader text-secondary">By <%= @ticket.user.email %> on <%= l @ticket.created_at, format: :long %></h5>
+    <h5 class="subheader text-secondary">
+      <%= t(:ticket_by_at, email: @ticket.user.email, at: l(@ticket.created_at, format: :long)) %>
+    </h5>
   </div>
 </div>
 
@@ -11,7 +13,7 @@
   <div class="large-9 columns">
 
     <% if @ticket.content.nil? %>
-      (No content)
+      (<%= t(:no_content) %>)
     <% else %>
 
       <div class="output">
@@ -42,23 +44,23 @@
 
       <% if can? :update, @ticket %>
 
-        <dt>Status:</dt>
+        <dt><%= t(:status) %>:</dt>
         <dd>
           <a href="#" data-reveal-id="change-status">
             <%= @ticket.status %>
           </a>
         </dd>
-        <dt>Priority:</dt>
+        <dt><%= t(:priority) %>:</dt>
         <dd>
           <a href="#" data-reveal-id="change-priority">
-            <span data-type="priority" data-id="<%= @ticket.priority %>" href="#" class="priority-<%= @ticket.priority %> fa fa-circle" title="Priority: <%= @ticket.priority %>"></span> <%= @ticket.priority %>
+            <span data-type="priority" data-id="<%= @ticket.priority %>" href="#" class="priority-<%= @ticket.priority %> fa fa-circle" title="<%= t(:priority) %>: <%= @ticket.priority %>"></span> <%= @ticket.priority %>
           </a>
         </dd>
-        <dt>Assignee:</dt>
+        <dt><%= t(:assignee) %>:</dt>
         <dd>
           <a href="#" data-reveal-id="change-assignee">
           <% if !@ticket.assignee %>
-            Nobody
+            <%= t(:nobody) %>
           <% else %>
             <%= @ticket.assignee.email %>
           <% end %>
@@ -67,14 +69,14 @@
 
       <% else %>
 
-        <dt>Status:<dt>
+        <dt><%= t(:status) %>:<dt>
         <dd><%= @ticket.status %></dd>
-        <dt>Priority:</dt>
+        <dt><%= t(:priority) %>:</dt>
         <dd><%= @ticket.priority %></dd>
-        <dt>Assignee:</dt>
+        <dt><%= t(:priority) %>:</dt>
         <dd>
           <% if !@ticket.assignee %>
-            <em>Nobody</em>
+            <em><%= t(:nobody) %></em>
           <% else %>
             <%= @ticket.assignee.email %>
           <% end %>
@@ -90,7 +92,7 @@
 <div class="row">
   <div class="large-9 columns">
     <% if @ticket.replies.size > 1 %>
-      <h3 class="mt"><%= @ticket.replies.size-1 %> replies</h3>
+      <h3 class="mt"><%= t(:num_replies, count: (@ticket.replies.size - 1)) %></h3>
       <dl class="accordion" data-accordion>
 
         <% count = 0 %>
