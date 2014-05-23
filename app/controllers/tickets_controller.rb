@@ -103,6 +103,7 @@ class TicketsController < ApplicationController
         @ticket.status = Status.default.first
         @ticket.priority = Priority.default.first
         @ticket.user = current_user
+        @ticket.to = current_user.incoming_address
 
         if @ticket.save!
           TicketMailer.notify_agents(@ticket, @ticket).deliver
