@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140422060848) do
+ActiveRecord::Schema.define(version: 20140523071432) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -68,12 +68,14 @@ ActiveRecord::Schema.define(version: 20140422060848) do
     t.integer  "user_id"
     t.string   "content_type", default: "html"
     t.integer  "priority_id"
+    t.string   "to"
   end
 
   add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"
   add_index "tickets", ["message_id"], name: "index_tickets_on_message_id"
   add_index "tickets", ["priority_id"], name: "index_tickets_on_priority_id"
   add_index "tickets", ["status_id"], name: "index_tickets_on_status_id"
+  add_index "tickets", ["to"], name: "index_tickets_on_to"
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
   create_table "users", force: true do |t|
@@ -92,6 +94,7 @@ ActiveRecord::Schema.define(version: 20140422060848) do
     t.boolean  "agent"
     t.text     "signature"
     t.boolean  "notify",                 default: true
+    t.string   "incoming_address"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -106,4 +106,17 @@ class TicketMailerTest < ActionMailer::TestCase
       TicketMailer.receive(capitalized)
     end
   end
+
+  test 'store to address of tickets' do
+
+    # ticket is created
+    assert_difference 'Ticket.count' do
+
+      ticket = TicketMailer.receive(read_fixture('sub_agent').join)
+
+      assert_equal 'brimir2@xxxx.com', ticket.to
+
+    end
+  end
+
 end

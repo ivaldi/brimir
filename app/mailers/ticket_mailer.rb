@@ -184,7 +184,8 @@ class TicketMailer < ActionMailer::Base
         status_id: Status.default.first.id,
         priority_id: Priority.default.first.id,
         message_id: email.message_id,
-        content_type: content_type
+        content_type: content_type,
+        to: email.to.join(', ')
       })
 
 
