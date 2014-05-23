@@ -10,26 +10,26 @@
     <div class="content active full" id="edit">      
       <% if current_user.agent? && current_user.incoming_address.nil? %>
         <div class="row">
-          <div class="large-1 columns">
+          <div class="medium-2 large-1 columns">
             <%= r.label :to, class: 'inline' %>
           </div>
-          <div class="large-11 columns">
+          <div class="medium-10 large-11 columns">
             <%= r.text_field :to, label: false %>
           </div>
         </div>
         <div class="row">
-          <div class="large-1 columns">
+          <div class="medium-2 large-1 columns">
             <%= r.label :cc, class: 'inline' %>
           </div>
-          <div class="large-11 columns">
+          <div class="medium-10 large-11 columns">
             <%= r.text_field :cc, label: false %>
           </div>
         </div>
         <div class="row">
-          <div class="large-1 columns">
+          <div class="medium-2 large-1 columns">
             <%= r.label :bcc, class: 'inline' %>
           </div>
-          <div class="large-11 columns">
+          <div class="medium-10 large-11 columns">
             <%= r.text_field :bcc, label: false %>
           </div>
         </div>
