@@ -19,8 +19,28 @@ class Ability
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
+
     if user.agent?
-      can :manage, :all
+
+      # subagent for only 1 incoming address
+      unless user.incoming_address.nil?
+
+        can :manage, Ticket, to: user.incoming_address
+        can :manage, Reply, ticket: { to: user.incoming_address }
+        can [:create], Reply, ticket: nil # preview reply
+
+        can :read, Attachment, attachable_type: 'Ticket', attachable: {
+            to: user.incoming_address
+        }
+
+        can :read, Attachment, attachable_type: 'Reply', attachable: {
+            ticket: { to: user.incoming_address }
+        }
+
+      else
+        can :manage, :all
+      end
+
     else
 
       # customers can view their own tickets, its replies and attachments

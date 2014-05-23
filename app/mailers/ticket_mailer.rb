@@ -83,8 +83,19 @@ class TicketMailer < ActionMailer::Base
     end
 
     if agents.size == 0
-      # notify all agents
-      agents = User.agents.where(notify: true).pluck(:email)
+      if ticket.to.nil?
+        # notify all agents and no subagents
+        agents = User.agents
+            .where(notify: true)
+            .where(incoming_address: nil)
+            .pluck(:email)
+      else
+        # notify all agents and subagents with incoming_address
+        agents = User.agents
+            .where(notify: true)
+            .agents_and_subagents(ticket.to)
+            .pluck(:email)
+      end
     else
       # only the ones concerned, without duplicates
       agents = agents.uniq
