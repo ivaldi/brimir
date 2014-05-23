@@ -39,6 +39,8 @@ group :test do
 
   # for coveralls
   gem 'coveralls', require: false
+
+  gem 'mysql2'
 end
 
 group :production do

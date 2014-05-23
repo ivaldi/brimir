@@ -1,4 +1,11 @@
+<% if ENV['DB'] == 'postgresql' %>
 test:
   adapter: postgresql
   database: brimir_test
   username: postgres
+<% elsif ENV['DB'] == 'mysql' %>
+test:
+  adapter: mysql
+  database: brimir_test
+  username: root
+<% end %>

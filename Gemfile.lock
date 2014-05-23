@@ -104,6 +104,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.4)
     multi_json (1.10.1)
+    mysql2 (0.3.15)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
@@ -203,6 +204,7 @@ DEPENDENCIES
   foundation-rails (~> 5.2.2)
   foundation_rails_helper
   jquery-rails
+  mysql2
   paperclip
   pg
   rails (~> 4.1.0)

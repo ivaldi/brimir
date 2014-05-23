@@ -1,13 +1,19 @@
 language: ruby
 bundler_args: --without development
+
+env:
+  - DB=postgresql
+  - DB=mysql
+
 rvm:
   - 1.9.3
   - 2.0.0
-  - 2.1.1
+  - 2.1.2
 
 before_script:
   - sudo apt-get update -qq
   - sudo apt-get install -qq imagemagick ghostscript
   - psql -c 'CREATE DATABASE brimir_test;' -U postgres
+  - mysql -e 'create database brimir_test;'
   - cp config/database.travis.yml config/database.yml
   - bundle exec rake db:migrate
