@@ -1,47 +1,19 @@
 <div class="row">
   <div class="large-12 columns">
 
-
-  <div class="row collapse mt">
-    <div class="large-9 columns">
-      <% if params[:q].present? %>
-        <h2 class="filter-title">Tickets containing '<em><%= params[:q].to_s %></em>'</h2>
-      <% else %>
-        <h2 class="filter-title">Tickets</h2>
-      <% end %>
-    </div>
-    <div class="large-3 columns">
-      <%= form_tag tickets_path, method: :get do %>
-        <%= text_field_tag :q, params[:q], placeholder: 'Search tickets' %>
-      <% end %>
-    </div>
-  </div>
-
-    <div class="icon-button-bar row collapse">
-      <div class="large-1 columns">
-        <a href="#" title="Select all tickets" class="fa fa-check-square-o icon-button mls"></a>
-        <a href="#" title="Refresh" class="fa fa-refresh icon-button"></a>
+    <div class="row collapse mt">
+      <div class="large-9 columns">
+        <% if params[:q].present? %>
+          <h2 class="filter-title">Tickets containing '<em><%= params[:q].to_s %></em>'</h2>
+        <% else %>
+          <h2 class="filter-title">Tickets</h2>
+        <% end %>
       </div>
-      <div class="large-6 columns">
-        <a href="#" class="fa fa-user icon-button"></a>
-        <a href="#" class="fa fa-flag icon-button"></a>
-        <a href="#" class="fa fa-check icon-button"></a>
-        <a href="#" class="fa fa-trash-o icon-button"></a>
+      <div class="large-3 columns">
+        <%= form_tag tickets_path, method: :get do %>
+          <%= text_field_tag :q, params[:q], placeholder: 'Search tickets' %>
+        <% end %>
       </div>
-      <div class="pull-right">
-        <em class="text-secondary">Tickets 1-3 of 3</em>
-        <a href="#" class="fa fa-arrow-left icon-button"></a>
-        <a href="#" class="fa fa-arrow-right icon-button"></a>
-      </div>
-      <div class="pull-right sort-by">
-        <a href="#" data-dropdown="sort" class="tiny round dropdown button">Sort by</a><br>
-        <ul id="sort" data-dropdown-content class="f-dropdown">
-          <li><a href="#">Priority</a></li>
-          <li><a href="#">Date received</a></li>
-          <li><a href="#">Title</a></li>
-        </ul>
-      </div>
-
     </div>
 
     <table class="full zebra">
@@ -51,7 +23,6 @@
 
             <% if can? :update, ticket %>
 
-              <td><input type="checkbox" /></td>
               <td><a data-type="priority" data-id="<%= ticket.priority %>" href="#" class="priority-<%= ticket.priority %> fa fa-circle" title="Priority: <%= ticket.priority %>"></a></td>
               <td style="white-space:nowrap">
                 <%= ticket.user.email %>
