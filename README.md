@@ -21,8 +21,6 @@ Next, load the database schema and precompile assets:
 Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
     rails console
-    Status.create([ { name: 'Open', default: true }, { name: 'Closed' }, { name: 'Deleted' } ])
-    Priority.create([ { name: 'None', default: true }, { name: 'Low' }, { name: 'Medium' }, { name: 'High' } ])
     u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
 
 Incoming email
@@ -31,14 +29,14 @@ Incoming emails can be posted to the tickets url. First make a script like this 
 
     #!/bin/bash
     exec curl --data-urlencode message@- https://yourbrimirurl.com/tickets.json
-    
+
 Save it in `/etc/postfix/brimir.sh` for example.
 
 Next, create an alias in your `/etc/aliases` file like this:
 
     brimir: "|/bin/bash /etc/postfix/brimir.sh"
 
-Now sending an email to brimir@yourmailserver.com should start curl and post 
+Now sending an email to brimir@yourmailserver.com should start curl and post
 the email to your brimir installation.
 
 Contributing

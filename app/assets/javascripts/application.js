@@ -63,6 +63,9 @@
 
   jQuery(function() {
 
+    var screenY = jQuery(document).outerHeight();
+    jQuery('aside').css('min-height', screenY+'px');  
+
     jQuery('#ticket_assignee_id, #ticket_priority_id, #ticket_status_id').select2({ width: 'resolve' });
 
     dialog = jQuery('[data-dialog]');

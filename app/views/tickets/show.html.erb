@@ -1,10 +1,10 @@
-<div class="row">
+<div class="row mt">
   <div class="large-9 columns">
     <div class="panel">
-      <h1>
+      <h2>
         <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(No subject)</em>'.html_safe %>
-      </h1>
-      <h5 class="subheader">By <%= @ticket.user.email %> on <%= l @ticket.created_at, format: :long %></h5>
+      </h2>
+      <h5 class="subheader text-secondary">By <%= @ticket.user.email %> on <%= l @ticket.created_at, format: :long %></h5>
 
       <% if @ticket.content.nil? %>
         (No content)
@@ -37,7 +37,7 @@
 
         <% count = 0 %>
         <% @ticket.replies.chronologically.each do |reply| %>
-          
+
             <%# minus 2, because @reply is a new ticket that is counted as well... %>
             <% if @ticket.replies.size - 2 == count %>
               <% div_class = 'content active' %>
@@ -80,24 +80,24 @@
     <% if can? :create, @reply %>
       <%= render 'replies/form' %>
     <% end %>
-    
+
   </div>
 
-  <div class="large-3 columns">    
-    <dl>      
-      
+  <div class="large-3 columns">
+    <dl>
+
       <% if can? :update, @ticket %>
-      
+
         <dt>Status:</dt>
         <dd>
           <a href="#" data-reveal-id="change-status">
-            <%= @ticket.status.name %>
+            <%= @ticket.status %>
           </a>
         </dd>
         <dt>Priority:</dt>
         <dd>
           <a href="#" data-reveal-id="change-priority">
-            <%= @ticket.priority.name %>
+            <%= @ticket.priority %>
           </a>
         </dd>
         <dt>Assignee:</dt>
@@ -114,9 +114,9 @@
       <% else %>
 
         <dt>Status:<dt>
-        <dd><%= @ticket.status.name %></dd>
+        <dd><%= @ticket.status %></dd>
         <dt>Priority:</dt>
-        <dd><%= @ticket.priority.name %></dd>
+        <dd><%= @ticket.priority %></dd>
         <dt>Assignee:</dt>
         <dd>
           <% if !@ticket.assignee %>
@@ -125,9 +125,9 @@
             <%= @ticket.assignee.email %>
           <% end %>
         </dd>
-      
+
       <% end %>
-    
+
     </dl>
   </div>
 

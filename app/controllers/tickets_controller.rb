@@ -22,8 +22,6 @@ class TicketsController < ApplicationController
 
   def show
     @agents = User.agents
-    @statuses = Status.all
-    @priorities = Priority.all
 
     @reply = @ticket.replies.new
     @reply.to = @ticket.user.email
@@ -31,13 +29,11 @@ class TicketsController < ApplicationController
 
   def index
     @agents = User.agents
-    @statuses = Status.filters
 
-    @priorities = Priority.all
+    params[:status] ||= 'open'
 
-    @active_status = Status.find_by_id_from_filters(params[:status_id])
-    @tickets = @active_status
-      .tickets
+    # TODO: filter status
+    @tickets = Ticket.by_status(params[:status])
       .search(params[:q])
       .filter_by_assignee_id(params[:assignee_id])
       .page(params[:page])
@@ -56,17 +52,17 @@ class TicketsController < ApplicationController
   def update
     respond_to do |format|
       if @ticket.update_attributes(ticket_params)
-        
+
         # assignee set and not same as user who modifies
         if !@ticket.assignee.nil? && @ticket.assignee.id != current_user.id
 
           if @ticket.previous_changes.include? :assignee_id
             TicketMailer.notify_assigned(@ticket).deliver
 
-          elsif @ticket.previous_changes.include? :status_id
+          elsif @ticket.previous_changes.include? :status
             TicketMailer.notify_status_changed(@ticket).deliver
 
-          elsif @ticket.previous_changes.include? :priority_id
+          elsif @ticket.previous_changes.include? :priority
             TicketMailer.notify_priority_changed(@ticket).deliver
           end
 
@@ -100,8 +96,6 @@ class TicketsController < ApplicationController
       format.html do
         @ticket = Ticket.new(ticket_params)
 
-        @ticket.status = Status.default.first
-        @ticket.priority = Priority.default.first
         @ticket.user = current_user
         @ticket.to = current_user.incoming_address
 
@@ -128,15 +122,15 @@ class TicketsController < ApplicationController
             :content,
             :user_id,
             :subject,
-            :status_id,
+            :status,
             :assignee_id,
-            :priority_id,
+            :priority,
             :message_id)
       else
         params.require(:ticket).permit(
             :content,
             :subject,
-            :priority_id)
+            :priority)
       end
     end
 end

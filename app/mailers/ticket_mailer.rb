@@ -51,7 +51,7 @@ class TicketMailer < ActionMailer::Base
     @ticket = ticket
 
     mail(to: ticket.assignee.email, subject:
-        'Ticket status modified in ' + ticket.status.name + ' for: ' \
+        'Ticket status modified in ' + ticket.status + ' for: ' \
         + ticket.subject)
   end
 
@@ -59,7 +59,7 @@ class TicketMailer < ActionMailer::Base
     @ticket = ticket
 
     mail(to: ticket.assignee.email, subject:
-        'Ticket priority modified in ' + ticket.priority.name + ' for: ' \
+        'Ticket priority modified in ' + ticket.priority + ' for: ' \
         + ticket.subject)
   end
 
@@ -173,7 +173,7 @@ class TicketMailer < ActionMailer::Base
 
     if response_to
       # reopen ticket
-      ticket.status = Status.default.first
+      ticket.status = :open
       ticket.content_type = content_type
       ticket.save
 
@@ -192,8 +192,6 @@ class TicketMailer < ActionMailer::Base
         user_id: from_user.id,
         subject: email.subject,
         content: content,
-        status_id: Status.default.first.id,
-        priority_id: Priority.default.first.id,
         message_id: email.message_id,
         content_type: content_type,
         to: email.to.join(', ')

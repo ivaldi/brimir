@@ -11,9 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
-    
-    <%= favicon_link_tag 'favicon.png' %>
 
+    <%= favicon_link_tag 'favicon.png' %>
+    <%= stylesheet_link_tag 'http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css' %>
     <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' %>
     <%= stylesheet_link_tag 'application' %>
     <%= csrf_meta_tags %>
@@ -21,83 +21,70 @@
 
   <body>
 
-    <div class="contain-to-grid">
-      <nav class="top-bar" data-topbar>
-        <ul class="title-area">
-          <li class="name">
-            <h1>
-              <a href="<%= root_path %>">
-                Brimir
-              </a>
-            </h1>
-          </li>
-          <li class="toggle-topbar menu-icon">
-            <a href="">
-              <span>Menu</span>
-            </a>
-          </li>
-        </ul>
-
-        <section class="top-bar-section">
-
-          <% if user_signed_in? %>
-
-            <ul class="left">
-              <li>
-                <%= link_to 'Tickets', root_path %>
-              </li>
-              <% if can? :manage, User %>
-                <li>
-                  <%= link_to 'Users', users_path %>
-                </li>
+    <div class="row collapse">
+      <% if user_signed_in? %>
+        <aside class="medium-3 large-2 columns">
+          <div style="padding: 30px 0.66667rem 10px 0.66667rem">
+            <%= link_to 'New ticket', new_ticket_path, class: 'button expand radius' %>
+          </div>
+          <ul class="off-canvas-list">
+            <li>
+              <%= active_elem_if :a, current_page?(root_path), href: root_path do %>
+                <span class="fa fa-inbox"></span>Inbox
               <% end %>
-              <li>
-                <%= link_to 'New ticket', new_ticket_path, class: 'radius button' %>
-              </li>
-            </ul>
+            </li>
+            <li>
+              <%= active_elem_if :a, current_page?(tickets_path(assignee_id: current_user.id,
+                  status: 'open')), href: tickets_path(assignee_id: current_user.id,
+                  status: 'open') do %>
+                <span class="fa fa-user"></span>Mine
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, current_page?(tickets_path(status: 'closed')),
+                   href: tickets_path(status: 'closed') do %>
+                <span class="fa fa-check"></span>Closed
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, current_page?(tickets_path(status: 'deleted')),
+                  href: tickets_path(status: 'deleted') do %>
+                <span class="fa fa-trash-o"></span>Trashed
+              <% end %>
+            </li>
+          </ul>
 
-            <ul class="right">
-              <li class="has-form">
-                <%= form_tag tickets_path, method: :get do %>
-                  <%= text_field_tag :q, params[:q], placeholder: 'Search tickets' %>
-                <% end %>
-              </li>
-              <li class="has-dropdown active">
-                <a href="#"><%= current_user.email %></a>
-                <ul class="dropdown">
-                  <li>
-                    <%= link_to 'Settings', edit_user_path(current_user) %>
-                  </li>
-                  <li>
-                    <%= link_to 'Sign out', :destroy_user_session, method: :delete %>
-                  </li>
-                </ul>
-              </li>
-            </ul>
+          <p class="text-secondary text-center mt">
+            <%= current_user.email %><br />
+            <% if can? :manage, User %>
+              <a href="<%= users_path %>" class="text-secondary"><i class="fa-users fa"></i></a>
+            <% end %>
+            <%= link_to '<i class="fa-cogs fa"></i>'.html_safe, edit_user_path(current_user), class: 'text-secondary' %>
+            <%= link_to '<i class="fa-sign-out fa"></i>'.html_safe, :destroy_user_session, method: :delete, class: 'text-secondary' %>
+          </p>
+        </aside>
+      <% end %>
+      <div class="medium-9 large-10 columns">
 
-          <% end %>
+        <% if notice %>
+          <div class="row">
+            <div class="large-12 columns">
+                <div class="alert-box success"><%= notice %><a href="#" data-alert class="close">&times;</a></div>
+            </div>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div class="row">
+            <div class="large-12 columns">
+                <div class="alert-box alert"><%= alert %><a href="#" data-alert class="close">&times;</a></div>
+            </div>
+          </div>
+        <% end %>
 
-        </section>
+        <%= yield %>
 
-      </nav>
+      </div>
     </div>
-
-    <% if notice %>
-      <div class="row">
-        <div class="large-12 columns">
-            <div class="alert-box success"><%= notice %><a href="#" data-alert class="close">&times;</a></div>
-        </div>
-      </div>
-    <% end %>
-    <% if alert %>
-      <div class="row">
-        <div class="large-12 columns">
-            <div class="alert-box alert"><%= alert %><a href="#" data-alert class="close">&times;</a></div>
-        </div>
-      </div>
-    <% end %>
-
-    <%= yield %>
 
     <div class="reveal-modal" data-reveal>
       <article>
@@ -106,6 +93,8 @@
     </div>
 
     <%= javascript_include_tag "application" %>
+
+
 
   </body>
 </html>
