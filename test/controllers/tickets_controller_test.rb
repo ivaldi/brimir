@@ -22,7 +22,6 @@ class TicketsControllerTest < ActionController::TestCase
 
     @ticket = tickets(:problem)
 
-    sign_in users(:alice)
 
     # read_fixture doesn't work in ActionController::TestCase, so use File.new
     @simple_email = File.new('test/fixtures/ticket_mailer/simple').read
@@ -30,7 +29,6 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should get new as customer' do
 
-    sign_out users(:alice) # agent sign out
     sign_in users(:bob) # customer sign in
 
     get :new
@@ -38,13 +36,13 @@ class TicketsControllerTest < ActionController::TestCase
   end
 
   test 'should get new as agent' do
+    sign_in users(:alice)
+
     get :new
     assert_response :success
   end
 
   test 'should create ticket when posted from MTA' do
-
-    sign_out users(:alice) # make sure we sign out
 
     assert_difference 'Ticket.count', 1 do
       post :create, message: @simple_email, format: :json
@@ -55,24 +53,29 @@ class TicketsControllerTest < ActionController::TestCase
   end
 
   test 'should only allow agents to view others tickets' do
-    sign_out users(:alice)
     sign_in users(:bob)
+
     get :show, id: tickets(:multiple)
     assert_response :unauthorized # redirect to sign in page
   end
 
   test 'should get index' do
+    sign_in users(:alice)
+
     get :index
     assert_response :success
     assert_not_nil assigns(:tickets)
   end
 
   test 'should show ticket' do
+    sign_in users(:alice)
+
     get :show, id: @ticket.id
     assert_response :success
   end
 
   test 'should email assignee if ticket is assigned by somebody else' do
+    sign_in users(:alice)
     
     # new assignee should receive notification
     assert_difference 'ActionMailer::Base.deliveries.size' do
@@ -88,7 +91,6 @@ class TicketsControllerTest < ActionController::TestCase
   end
 
   test 'should email assignee if status of ticket is changed by somebody else' do
-    sign_out users(:alice)
     sign_in users(:charlie)
     
     # assignee should receive notification
@@ -105,7 +107,6 @@ class TicketsControllerTest < ActionController::TestCase
   end
 
   test 'should email assignee if priority of ticket is changed by somebody else' do
-    sign_out users(:alice)
     sign_in users(:charlie)
 
     # assignee should receive notification
@@ -123,7 +124,6 @@ class TicketsControllerTest < ActionController::TestCase
   end
 
   test 'should not email assignee if ticket is assigned by himself' do
-    sign_out users(:alice)
     sign_in users(:charlie)
 
     # new assignee should not receive notification
@@ -137,6 +137,7 @@ class TicketsControllerTest < ActionController::TestCase
   end
 
   test 'should not email assignee if status of ticket is changed by himself' do
+    sign_in users(:alice)
 
     # assignee should not receive notification
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
@@ -149,6 +150,7 @@ class TicketsControllerTest < ActionController::TestCase
   end
 
   test 'should not email assignee if priority of ticket is changed by himself' do
+    sign_in users(:alice)
 
     # assignee should not receive notification
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
