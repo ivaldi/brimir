@@ -4,9 +4,8 @@
       <div class="large-6 columns">
         <h3>Email settings</h3>
 
-        <p>
-          <label><%= f.check_box :notify, label: false %> Receive notifications for new tickets</label>
-        </p>
+        <%= f.check_box :notify, label: 'Receive notifications for new tickets' %>
+      </p>
 
         <%= f.text_area :signature, rows: 5, cols: 20, label: false %>
       </div>
