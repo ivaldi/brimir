@@ -1,19 +1,17 @@
 <%= form_for @ticket, html: { multipart: true } do |f| %>
 
   <dl class="tabs mt" data-tab>
-    <dd><h3>New ticket</h3></dd>
-    <dd class="right"><a href="#preview">Preview</a></dd>
-    <dd class="active right"><a href="#edit">Edit</a></dd>
+    <dd><h3><%= t(:new_ticket) %></h3></dd>
+    <dd class="right"><a href="#preview"><%= t(:preview) %></a></dd>
+    <dd class="active right"><a href="#edit"><%= t(:edit) %></a></dd>
   </dl>
   <div class="tabs-content panel">
     <div class="content active full" id="edit">
 
-        <%= f.label :subject %>
-        <%= f.text_field :subject, label: false %>
+        <%= f.text_field :subject %>
 
-        <%= f.label :content, 'Description' %>
-        <%= f.text_area :content, label: false %>
-        <p>Tickets are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
+        <%= f.text_area :content %>
+        <p><%= t(:parsed_markdown).html_safe %></p>
 
         <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
         <%= markdown.render(current_user.signature.to_s).html_safe %>
@@ -25,7 +23,7 @@
     </div>
   </div>
   <p>
-    <%= f.submit value: 'Create ticket', class: 'button regular radius' %>
+    <%= f.submit class: 'button regular radius' %>
   </p>
 
 <% end %>

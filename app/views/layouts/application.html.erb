@@ -24,31 +24,31 @@
       <% if user_signed_in? %>
         <aside class="medium-3 large-2 columns">
           <div style="padding: 30px 0.66667rem 10px 0.66667rem">
-            <%= link_to 'New ticket', new_ticket_path, class: 'button expand radius' %>
+            <%= link_to t(:new_ticket), new_ticket_path, class: 'button expand radius' %>
           </div>
           <ul class="off-canvas-list">
             <li>
               <%= active_elem_if :a, current_page?(root_path), href: root_path do %>
-                <span class="fa fa-inbox"></span>Inbox
+                <span class="fa fa-inbox"></span><%= t(:inbox) %>
               <% end %>
             </li>
             <li>
               <%= active_elem_if :a, current_page?(tickets_path(assignee_id: current_user.id,
                   status: 'open')), href: tickets_path(assignee_id: current_user.id,
                   status: 'open') do %>
-                <span class="fa fa-user"></span>Mine
+                <span class="fa fa-user"></span><%= t(:mine) %>
               <% end %>
             </li>
             <li>
               <%= active_elem_if :a, current_page?(tickets_path(status: 'closed')),
                    href: tickets_path(status: 'closed') do %>
-                <span class="fa fa-check"></span>Closed
+                <span class="fa fa-check"></span><%= t(:closed) %>
               <% end %>
             </li>
             <li>
               <%= active_elem_if :a, current_page?(tickets_path(status: 'deleted')),
                   href: tickets_path(status: 'deleted') do %>
-                <span class="fa fa-trash-o"></span>Trashed
+                <span class="fa fa-trash-o"></span><%= t(:trashed) %>
               <% end %>
             </li>
           </ul>
@@ -91,9 +91,7 @@
       <a class="close-reveal-modal">&#215;</a>
     </div>
 
-    <%= javascript_include_tag "application" %>
-
-
+    <%= javascript_include_tag 'application' %>
 
   </body>
 </html>

@@ -1,0 +1,40 @@
+nl:
+
+  time:
+    formats:
+      short: '%d-%m %H:%M'
+      long: '%d-%m-%Y %H:%M'
+
+# layouts/application
+  new_ticket: Nieuw ticket
+  inbox: Inbox
+  mine: Van mij
+  closed: Gesloten
+  trashed: Prullenbak
+
+# tickets/index
+  tickets: Tickets
+  tickets_containing: Tickets overeenkomend met 
+  search_tickets: Tickets doorzoeken
+  priority: Prioriteit
+  replies: reacties
+  no_subject: Geen onderwerp
+  unassigned: Niet toegewezen
+  no_tickets_found: Geen tickets gevonden.
+
+# tickets/_form
+  preview: Voorbeeld
+  edit: Bewerken
+  parsed_markdown: Tickets worden omgezet met <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
+
+
+  helpers:
+    submit:
+      ticket: 
+        create: Ticket aanmaken
+
+  activerecord:
+    attributes:
+      ticket:
+        subject: Onderwerp
+        content: Inhoud

@@ -1,8 +1,25 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+# layouts/application
+  new_ticket: New Ticket
+  inbox: Inbox
+  mine: Mine
+  closed: Closed
+  trashed: Trashed
+
+# tickets/index
+  tickets: Tickets
+  tickets_containing: Tickets containing
+  search_tickets: Search tickets
+  priority: Priority
+  replies: replies
+  no_subject: No subject
+  unassigned: Unassigned
+  no_tickets_found: No tickets found.
+
+# tickets/_form
+  preview: Preview
+  edit: Edit
+  parsed_markdown: Tickets are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
 
   activerecord:
     attributes:
