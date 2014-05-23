@@ -1,0 +1,13 @@
+MIME-Version: 1.0
+Received: by 10.229.184.212 with HTTP; Sat, 27 Nov 2010 02:11:36 -0800 (PST)
+Date: Sat, 27 Nov 2010 11:11:36 +0100
+Message-ID: <ANALkTi=255AJgFEjx75oq3Y5UM=Q6L1jVCVz8oQq85ka@mail.gmail.com>
+Subject: Testing this with a simple message to a different mail address
+From: Frank <frank@xxxx.com>
+To: Brimir <brimir2@xxxx.com>
+Content-Type: text/plain; charset=ISO-8859-1
+
+This is a simple message to test the system.
+
+Some newlines here as well.
+
