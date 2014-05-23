@@ -37,6 +37,7 @@ class Ability
             ticket: { to: user.incoming_address }
         }
 
+        can [:edit, :update], User, id: user.id
       else
         can :manage, :all
       end
