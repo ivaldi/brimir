@@ -63,5 +63,7 @@ gem 'paperclip'
 # Markdown
 gem 'redcarpet'
 
-#select2 replacement for selectboxes
+# select2 replacement for selectboxes
 gem 'select2-rails'
+
+gem 'font-awesome-rails', '~> 4.0.3'
