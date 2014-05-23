@@ -2,8 +2,8 @@
   <div class="large-12 columns">
     <h2>
       <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(No subject)</em>'.html_safe %>
-      <h5 class="subheader text-secondary">By <%= @ticket.user.email %> on <%= l @ticket.created_at, format: :long %></h5>
     </h2>
+    <h5 class="subheader text-secondary">By <%= @ticket.user.email %> on <%= l @ticket.created_at, format: :long %></h5>
   </div>
 </div>
 
