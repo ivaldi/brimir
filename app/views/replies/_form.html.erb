@@ -2,12 +2,12 @@
 
   <%= r.hidden_field :ticket_id %>
   <dl class="tabs mt" data-tab>
-    <dd><h3>Reply</h3></dd>
-    <dd class="right"><a href="#preview">Preview</a></dd>
-    <dd class="active right"><a href="#edit">Edit</a></dd>    
+    <dd><h3><%= t(:reply) %></h3></dd>
+    <dd class="right"><a href="#preview"><%= t(:preview) %></a></dd>
+    <dd class="active right"><a href="#edit"><%= t(:edit) %></a></dd>
   </dl>
   <div class="tabs-content panel">
-    <div class="content active full" id="edit">      
+    <div class="content active full" id="edit">
       <% if current_user.agent? && current_user.incoming_address.nil? %>
         <div class="row">
           <div class="medium-2 large-1 columns">
@@ -36,12 +36,12 @@
       <% end %>
 
       <%= r.text_area :content, label: false %>
-      <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
+      <p><%= t(:parsed_markdown).html_safe %></p>
 
       <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
       <%= markdown.render(current_user.signature.to_s).html_safe %>
 
-      <%= label_tag 'attachment[]', 'Attach file(s)' %>
+      <%= label_tag 'attachment[]', t(:attach_files) %>
       <%= file_field_tag 'attachment[]', multiple: true, label: false %>
     </div>
     <div class="content full" id="preview">
@@ -50,7 +50,7 @@
     </div>
   </div>
   <p>
-    <%= r.submit value: 'Send reply', class: 'button regular radius' %>
+    <%= r.submit value: t(:send_reply), class: 'button regular radius' %>
   </p>
 <% end %>
 

@@ -1,11 +1,11 @@
 <div id="change-priority" class="reveal-modal small" data-reveal>
-  <h3>Change priority to...</h3>
+  <h3><%= t(:change_priority) %></h3>
 
   <%= form_for ticket, remote: true, method: :patch do |f| %>
     <p>
       <%= f.select :priority, Ticket.priorities.keys %>
     </p>
-    <%= f.submit 'Change', class: 'button' %>
+    <%= f.submit t(:change), class: 'button' %>
   <% end %>
 
   <a class="close-reveal-modal">&#215;</a>

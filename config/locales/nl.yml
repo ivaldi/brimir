@@ -26,6 +26,8 @@ nl:
   preview: Voorbeeld
   edit: Bewerken
   parsed_markdown: Tickets worden omgezet met <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
+  attach_files: Bestand(en) toevoegen
+  send_reply: Vestuur reactie
 
 # tickets/show
   ticket_by_at: Door %{email} op %{at}
@@ -37,6 +39,28 @@ nl:
     one: '%{count} reactie'
     other: '%{count} reacties'
 
+# tickets/_change_priority_form
+  change: Wijzig
+  change_priority: Wijzig prioriteit
+
+# tickets/_change_status_form
+  change_status: Wijzig status
+
+# tickets/_change_assignee_form
+  change_assignee: Ticket toewijzen
+  assign: Toewijzen
+
+# replies/new
+  add_reply: Reactie toevoegen
+
+# replies/_form
+  reply: Reactie
+  preview: Voorbeeld
+  edit: Bewerken
+
+# attachments/_attachment
+  download: download
+
   helpers:
     submit:
       ticket: 
@@ -44,6 +68,19 @@ nl:
 
   activerecord:
     attributes:
+      user:
+        password: Wachtwoord
+        password_confirmation: Wachtwoord bevestiging
+        signature: E-mailhandtekening
+
       ticket:
         subject: Onderwerp
         content: Inhoud
+        status: Status
+        priority: Prioriteit
+        assignee_id: Toegewezen aan
+
+      reply:
+        to: Aan
+        cc: Cc
+        Bcc: Bcc

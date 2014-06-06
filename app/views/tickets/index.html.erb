@@ -61,7 +61,7 @@
                   <%= link_to ticket.subject, ticket %>
                 <% else %>
                   <%= link_to ticket do %>
-                    <em>(No subject)</em>
+                    <em>(<%= t(:no_subject) %>)</em>
                   <% end %>
                 <% end %>
               </td>
@@ -71,7 +71,7 @@
                 <% if ticket.assignee %>
                   <%= ticket.assignee.email %>
                 <% else %>
-                  <em>Nobody</em>
+                  <em><%= t(:nobody) %></em>
                 <% end %>
               </td>
 

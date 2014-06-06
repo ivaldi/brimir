@@ -1,11 +1,11 @@
 <div id="change-assignee" class="reveal-modal small" data-reveal>
-  <h3>Assign this ticket to...</h3>
+  <h3><%= t(:change_assignee) %></h3>
 
   <%= form_for ticket, remote: true, method: :patch do |f| %>
     <p>
-      <%= f.select :assignee_id, options_from_collection_for_select(@agents, 'id', 'email', ticket.assignee_id), include_blank: 'Nobody' %>
+      <%= f.select :assignee_id, options_from_collection_for_select(@agents, 'id', 'email', ticket.assignee_id), include_blank: t(:nobody) %>
     </p>
-    <%= f.submit 'Assign', class: 'button' %>
+    <%= f.submit t(:assign), class: 'button' %>
   <% end %>
 
   <a class="close-reveal-modal">&#215;</a>

@@ -31,9 +31,40 @@ en:
     one: '%{count} reply'
     other: '%{count} replies'
 
+# tickets/_change_priority_form
+  change: Change
+  change_priority: Change priority
+
+# tickets/_change_status_form
+  change_status: Change status
+
+# tickets/_change_assignee_form
+  change_assignee: Assign ticket
+  assign: Toewijzen
+
+# replies/new
+  add_reply: Add reply
+
+# replies/_form
+  reply: Reply
+  preview: Preview
+  edit: Edit
+  attach_files: Attach file(s)
+  send_reply: Send reply
+
+# attachments/_attachment
+  download: download
+
   activerecord:
     attributes:
       user:
         password: Password
         password_confirmation: Password confirmation
         signature: Email signature
+
+      ticket:
+        subject: Subject
+        content: Content
+        status: Status
+        priority: Priority
+        assignee_id: Assignee
