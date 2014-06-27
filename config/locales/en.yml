@@ -19,7 +19,6 @@ en:
 # tickets/_form
   preview: Preview
   edit: Edit
-  parsed_markdown: Tickets are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
 
 # tickets/show
   ticket_by_at: By %{email} on %{at}

@@ -11,15 +11,12 @@
         <%= f.text_field :subject %>
 
         <%= f.text_area :content %>
-        <p><%= t(:parsed_markdown).html_safe %></p>
-
-        <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-        <%= markdown.render(current_user.signature.to_s).html_safe %>
+        <%= current_user.signature.to_s.html_safe %>
 
     </div>
     <div class="content full" id="preview">
-      <%= markdown.render(@ticket.content.to_s).html_safe %>
-      <%= markdown.render(current_user.signature.to_s).html_safe %>
+      <%= @ticket.content.to_s.html_safe %>
+      <%= current_user.signature.to_s.html_safe %>
     </div>
   </div>
   <p>

@@ -1,4 +1,2 @@
-<% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-
-<%= markdown.render(@content).html_safe %>
-<%= markdown.render(current_user.signature.to_s).html_safe %>
+<%= @content.html_safe %>
+<%= current_user.signature.to_s.html_safe %>

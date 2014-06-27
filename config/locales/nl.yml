@@ -25,7 +25,6 @@ nl:
 # tickets/_form
   preview: Voorbeeld
   edit: Bewerken
-  parsed_markdown: Tickets worden omgezet met <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.
   attach_files: Bestand(en) toevoegen
   send_reply: Vestuur reactie
 

@@ -17,9 +17,8 @@
     <% else %>
 
       <div class="output">
-        <% if @ticket.content_type == 'markdown' %>
-          <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-          <% content = markdown.render(@ticket.content) %>
+        <% if @ticket.content_type == 'html' %>
+          <% content = @ticket.content.html_safe %>
         <% elsif @ticket.content_type == 'text' %>
           <% content = @ticket.content.gsub("\n", '<br />') %>
         <% else %>
@@ -111,9 +110,8 @@
             </a>
             <div id="reply-<%=reply.id%>" class="<%= div_class %>">
 
-              <% if reply.content_type == 'markdown' %>
-                <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-                <% content = markdown.render(reply.content) %>
+              <% if reply.content_type == 'html' %>
+                <% content = reply.content.html_safe %>
               <% elsif reply.content_type == 'text' %>
                 <% content = reply.content.gsub("\n", '<br />') %>
               <% else %>

@@ -1,2 +1,1 @@
-<% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-<%= markdown.render(@reply.content).html_safe %>
+<%= @reply.content.html_safe %>

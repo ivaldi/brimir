@@ -36,17 +36,14 @@
       <% end %>
 
       <%= r.text_area :content, label: false %>
-      <p><%= t(:parsed_markdown).html_safe %></p>
-
-      <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-      <%= markdown.render(current_user.signature.to_s).html_safe %>
+      <%= current_user.signature.to_s.html_safe %>
 
       <%= label_tag 'attachment[]', t(:attach_files) %>
       <%= file_field_tag 'attachment[]', multiple: true, label: false %>
     </div>
     <div class="content full" id="preview">
-      <%= markdown.render(@reply.content.to_s).html_safe %>
-      <%= markdown.render(current_user.signature.to_s).html_safe %>
+      <%= @reply.content.to_s.html_safe %>
+      <%= current_user.signature.to_s.html_safe %>
     </div>
   </div>
   <p>
