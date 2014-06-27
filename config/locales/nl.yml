@@ -57,6 +57,20 @@ nl:
   reply: Reactie
   preview: Voorbeeld
   edit: Bewerken
+  attach_files: Bestand(en) toevoegen
+  send_reply: Verstuur reactie
+
+# ticket_mailer/notify_agents.text.erb
+  new_reply_received: Nieuwe reactie ontvangen voor ticket
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Ticket aan jou toegewezen
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Prioriteit van ticket is gewijzigd
+
+# ticket_mailer/notify_status_changed.text.erb
+  tickets_status_modified: Status van ticket is gewijzigd
 
 # attachments/_attachment
   download: download
