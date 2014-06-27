@@ -18,19 +18,46 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
-  setup do
-    sign_in users(:alice)
-    @user = users(:alice)
-  end
-
   test 'should get edit' do
-    get :edit, id: @user.id
+    alice = users(:alice)
+    sign_in alice
+
+    get :edit, id: alice.id
     assert_response :success
   end
 
   test 'should modify signature' do
-    put :update, id: @user.id, user: { signature: 'Alice' }
+    alice = users(:alice)
+    sign_in alice
+
+    put :update, id: alice.id, user: { signature: 'Alice' }
     assert_equal 'Alice', assigns(:user).signature
     assert_redirected_to users_url
+  end
+
+  test 'customer may not become agent' do
+    bob = users(:bob)
+    sign_in bob
+
+    assert_no_difference 'User.agents.count' do
+      put :update, id: bob.id, user: { agent: true, signature: 'Bob' }
+    end
+  end
+
+  test 'customer may not create agent' do
+    bob = users(:bob)
+    sign_in bob
+
+    assert_no_difference 'User.agents.count' do
+      post :create, user: {
+          email: 'harry@getbrimir.com',
+          password: 'testtest',
+          password_confirmation: 'testtest',
+          agent: true,
+          signature: 'Harry'
+      }
+    end
+
+    assert_response :unauthorized
   end
 end

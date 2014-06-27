@@ -31,12 +31,6 @@ class UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
 
-    # prevent normal user from changing email and role
-    unless current_user.agent?
-      params[:user].delete(:email)
-      params[:user].delete(:agent)
-    end
-
     if @user.update_attributes(user_params)
 
       if current_user.agent?
@@ -85,14 +79,23 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      # Setup accessible (or protected) attributes for your model
-      params.require(:user).permit(
+      attributes = params.require(:user).permit(
           :email,
           :password,
           :password_confirmation,
           :remember_me,
           :signature,
-          :agent)
+          :agent,
+          :notify,
+      )
+
+      # prevent normal user from changing email and role
+      unless current_user.agent?
+        attributes.delete(:email)
+        attributes.delete(:agent)
+      end
+
+      return attributes
     end
 
 end
