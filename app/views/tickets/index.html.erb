@@ -30,7 +30,7 @@
               <td class="text-secondary table-nowrap">
                 <% if !ticket.subject.nil? %>
                   <a href="<%= ticket_url(ticket) %>">
-                    <% if ticket.replies.size > 0 %>                    
+                    <% if ticket.replies.size > 0 %>
                       <span class="radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
                     <% end %>
                     <%= ticket.subject %> - <span class="text-secondary"><%= ticket.content %></span>
@@ -54,24 +54,32 @@
 
             <% else %>
 
-              <td><%= ticket.status %></td>
-              <td><%= ticket.priority %></td>
-              <td>
+              <td><span class="priority-<%= ticket.priority %> fa fa-circle" title="<%= t(:priority) %> <%= ticket.priority %>"></span></td>
+              <td style="white-space:nowrap">
+                <%= ticket.user.email %>
+              </td>
+              <td class="text-secondary table-nowrap">
                 <% if !ticket.subject.nil? %>
-                  <%= link_to ticket.subject, ticket %>
+                  <a href="<%= ticket_url(ticket) %>">
+                    <% if ticket.replies.size > 0 %>
+                      <span class="radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
+                    <% end %>
+                    <%= ticket.subject %> - <span class="text-secondary"><%= ticket.content %></span>
+                  </a>
                 <% else %>
                   <%= link_to ticket do %>
                     <em>(<%= t(:no_subject) %>)</em>
                   <% end %>
                 <% end %>
               </td>
-              <td><%= ticket.user.email %></td>
-
+              <td>
+                <span class="status-<%= ticket.status %>"></span>
+              </td>
               <td>
                 <% if ticket.assignee %>
-                  <%= ticket.assignee.email %>
+                  <i class="fa fa-user"></i> <%= ticket.assignee.email %>
                 <% else %>
-                  <em><%= t(:nobody) %></em>
+                  <em><%= t(:unassigned) %></em>
                 <% end %>
               </td>
 
