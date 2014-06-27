@@ -58,13 +58,13 @@
     dialog.find('[data-close-modal]').on('click', oncancel);
 
     /* show the dialog */
-    dialog.foundation('reveal','open');    
+    dialog.foundation('reveal','open');
   }
 
   jQuery(function() {
 
     var screenY = jQuery(document).outerHeight();
-    jQuery('aside').css('min-height', screenY+'px');  
+    jQuery('aside').css('min-height', screenY+'px');
 
     jQuery('#ticket_assignee_id, #ticket_priority_id, #ticket_status_id').select2({ width: 'resolve' });
 
@@ -82,7 +82,7 @@
 
     });
 
-    jQuery('#reply_to, #reply_cc, #reply_bcc').select2({        
+    jQuery('#reply_to, #reply_cc, #reply_bcc').select2({
         width: 'resolve',
         createSearchChoice:function(term, data) {
             if (jQuery(data).filter(function() {
@@ -91,6 +91,7 @@
                 }
             },
         multiple: true,
+        minimumInputLength: 3,
         ajax: {
           url: "/users.json",
           dataType: 'json',
@@ -99,7 +100,7 @@
               q: term
             };
           },
-          results: function (data) {            
+          results: function (data) {
             return { results: data.users };
           }
         },
@@ -116,7 +117,7 @@
               callback(data.users); 
             });
           }
-        },        
+        },
     });
 
     jQuery(document).foundation();
