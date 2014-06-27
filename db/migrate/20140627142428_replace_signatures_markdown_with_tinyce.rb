@@ -8,5 +8,12 @@ class ReplaceSignaturesMarkdownWithTinyce < ActiveRecord::Migration
         user.save!
       end
     end
+
+    Ticket.all.each do |ticket|
+      if ticket.content.present?
+        ticket.content = markdown.render(ticket.content).html_safe
+        ticket.save!
+      end
+    end
   end
 end
