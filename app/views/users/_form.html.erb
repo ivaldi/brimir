@@ -1,18 +1,9 @@
 <%= form_for @user, html: { class: 'edit_user' } do |f| %>
   <div class="row">
-    <% if @user.agent? || @user.new_record? %>
-      <div class="large-6 columns">
-        <h3>Email settings</h3>
-
-        <%= f.check_box :notify, label: 'Receive notifications for new tickets' %>
-
-        <%= f.text_area :signature, rows: 5, cols: 20 %>
-      </div>
-    <% end %>
 
     <div class="large-6 columns">
 
-      <h3>Account settings</h3>
+      <h5>Account settings</h5>
       <p>Only fill in these two fields if you want to modify your password.</p>
 
       <% if can? :manage, User %>
@@ -27,6 +18,17 @@
         <%= f.check_box :agent, label: 'User is an agent' %>
       <% end %>
     </div>
+
+    <% if @user.agent? || @user.new_record? %>
+      <div class="large-6 columns">
+        <h5>Email settings</h5>
+
+        <%= f.check_box :notify, label: 'Receive notifications for new tickets' %>
+
+        <%= f.text_area :signature, rows: 5, cols: 20 %>
+      </div>
+    <% end %>
+
   </div>
   <div class="row">
     <div class="large-12 columns">
