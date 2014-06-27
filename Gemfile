@@ -67,3 +67,6 @@ gem 'redcarpet'
 gem 'select2-rails'
 
 gem 'font-awesome-rails', '~> 4.0.3'
+
+# TinyMCE 4 for WYSIWYG in textareas
+gem 'tinymce-rails'

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require select2
+//= require tinymce-jquery
 //= require_tree .
 
 (function() {
@@ -118,6 +119,15 @@
             });
           }
         },
+    });
+
+    tinyMCE.init({
+      autoresize_bottom_margin: 0,
+      selector: "textarea.tinymce",
+      statusbar: false,
+      menubar: false,
+      toolbar: "undo redo | bold italic | bullist numlist | outdent indent removeformat",
+        height: 150
     });
 
     jQuery(document).foundation();
