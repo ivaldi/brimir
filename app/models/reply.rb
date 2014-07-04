@@ -38,4 +38,15 @@ class Reply < ActiveRecord::Base
     self.content_type = 'html'
     self.save
   end
+
+  def to
+    to = read_attribute(:to)
+
+    # send to ticket starter when not current user and no to address set
+    if to.blank? && self.ticket.user != self.user
+      self.ticket.user.email
+    else
+      to
+    end
+  end
 end

@@ -149,4 +149,21 @@ class RepliesControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should send reply to correct to when not posted' do
+
+    # do we send a mail?
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      post :create, reply: {
+          content: @reply.content,
+          ticket_id: @ticket.id,
+      }
+    end
+
+    mail = ActionMailer::Base.deliveries.last
+
+    assert_equal [ @ticket.user.email ], mail.to
+
+  end
+
+
 end
