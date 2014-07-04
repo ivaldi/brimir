@@ -16,7 +16,7 @@ Next up: configuring your outgoing email address and url. This can be set in con
 
 Now install the required gems by running:
 
-    bundle install --without development:test
+    bundle install --without development:test --deployment
 
 Next, load the database schema and precompile assets:
 
