@@ -10,7 +10,7 @@
 
         <%= f.text_field :subject %>
 
-        <%= f.text_area :content %>
+        <%= f.text_area :content, class: 'tinymce' %>
         <%= current_user.signature.to_s.html_safe %>
 
     </div>
