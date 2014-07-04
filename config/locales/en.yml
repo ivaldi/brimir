@@ -65,6 +65,40 @@ en:
 # ticket_mailer/notify_agents.text.erb
   new_reply_received: New reply received for ticket
 
+# users/new
+  new_user: New User
+
+# users/edit
+  new_user: Edit User
+
+# users/index
+  email: Email
+  role: Rol
+  agent: Agent
+  customer: Customer
+
+# users/_form
+  account_settings: Account Settings
+  only_fill_in_passwords_when_modifying: Only fill in these two fields if you want to modify your password.
+  user_is_an_agent: User is an agent
+  receive_new_ticket_notifications: Receive notifications for new tickets
+  email_settings: Email Settings
+  save: Save
+
+# controllers/attachments
+  file_not_found: File not found
+
+# controllers/users
+  settings_saved: Settings saved
+  user_added: User added
+
+# controllers/tickets
+  ticket_added: Ticket added
+  ticket_updated: Ticket updated
+
+# controllers/replies
+  reply_added: Reply added
+
   activerecord:
     attributes:
       user:

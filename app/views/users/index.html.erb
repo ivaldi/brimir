@@ -2,20 +2,20 @@
   <div class="large-12 columns">
 
     <h2 class="filter-title">Users</h2>
-    <%= link_to 'New User', new_user_path, class: 'button right radius' %>
+    <%= link_to t(:new_user), new_user_path, class: 'button right radius' %>
 
     <table class="full">
       <thead>
         <tr>
-          <th>Email</th>
-          <th>Role</th>
+          <th><%= t(:email) %></th>
+          <th><%= t(:role) %></th>
         </tr>
       </thead>
       <tbody>
         <% @users.each do |user| %>
           <tr>
             <td><%= link_to user.email, edit_user_path(user) %></td>
-            <td><%= (user.agent?) ? 'Agent' : 'Customer' %></td>
+            <td><%= (user.agent?) ? t(:agent) : t(:customer) %></td>
           </tr>
         <% end %>
       </tbody>

@@ -70,6 +70,40 @@ nl:
 # attachments/_attachment
   download: download
 
+# users/new
+  new_user: Gebruiker toevoegen
+
+# users/edit
+  new_user: Gebruiker wijzigen
+
+# users/index
+  email: E-mailadres
+  role: Rol
+  agent: Medewerker
+  customer: Klant
+
+# users/_form
+  account_settings: Accountinstellingen
+  only_fill_in_passwords_when_modifying: Vul deze twee velden alleen in als het wachtwoord veranderd moet worden.
+  user_is_an_agent: Gebruiker is een medewerker
+  receive_new_ticket_notifications: Ontvang notificaties voor nieuwe tickets
+  email_settings: E-mailinstellingen
+  save: Save
+
+# controllers/attachments
+  file_not_found: Bestand niet gevonden
+
+# controllers/users
+  settings_saved: Instellingen opgeslagen
+  user_added: Gebruiker toegevoegd
+
+# controllers/tickets
+  ticket_added: Ticket toegevoegd
+  ticket_updated: Ticket gewijzigd
+
+# controllers/replies
+  reply_added: Reactie toegevoegd
+
   helpers:
     submit:
       ticket: 

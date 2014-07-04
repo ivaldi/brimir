@@ -31,7 +31,7 @@ class AttachmentsController < ApplicationController
             disposition: :attachment
       end
     rescue ActionController::MissingFile
-      render text: 'File not found.', status: :not_found
+      render text: I18n::translate(:file_not_found), status: :not_found
     end
   end
 

@@ -45,7 +45,7 @@ class RepliesController < ApplicationController
           TicketMailer.notify_agents(reply.ticket, reply)
         end
       end
-      redirect_to @reply.ticket, notice: 'Reply was successfully created.'
+      redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
     else
       render action: 'new'
     end

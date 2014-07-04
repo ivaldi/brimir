@@ -69,10 +69,10 @@ class TicketsController < ApplicationController
         end
 
         format.html {
-          redirect_to @ticket, notice: 'Ticket was successfully updated.'
+          redirect_to @ticket, notice: I18n::translate(:ticket_updated)
         }
         format.js {
-          render notice: 'Ticket was succesfully updated.'
+          render notice: I18n::translate(:ticket_updated)
         }
         format.json {
           head :no_content
@@ -102,7 +102,7 @@ class TicketsController < ApplicationController
         if @ticket.save!
           TicketMailer.notify_agents(@ticket, @ticket).deliver
 
-          redirect_to ticket_url(@ticket), notice: 'Ticket created succesfully'
+          redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
         else
           render 'new'
         end

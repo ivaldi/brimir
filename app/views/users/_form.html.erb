@@ -3,8 +3,8 @@
 
     <div class="large-6 columns">
 
-      <h5>Account settings</h5>
-      <p>Only fill in these two fields if you want to modify your password.</p>
+      <h5><%= t(:account_settings) %></h5>
+      <p><%= t(:only_fill_in_passwords_when_modifying) %></p>
 
       <% if can? :manage, User %>
         <%= f.text_field :email %>
@@ -15,15 +15,15 @@
       <%= f.password_field :password_confirmation %>
 
       <% if can? :manage, User %>
-        <%= f.check_box :agent, label: 'User is an agent' %>
+        <%= f.check_box :agent, label: t(:user_is_an_agent) %>
       <% end %>
     </div>
 
     <% if @user.agent? || @user.new_record? %>
       <div class="large-6 columns">
-        <h5>Email settings</h5>
+        <h5><%= t(:email_settings) %></h5>
 
-        <%= f.check_box :notify, label: 'Receive notifications for new tickets' %>
+        <%= f.check_box :notify, label: t(:receive_new_ticket_notifications) %>
 
         <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce' %>
       </div>
@@ -33,7 +33,7 @@
   <div class="row">
     <div class="large-12 columns">
   <hr />
-      <%= f.submit 'Save', class: 'button radius' %>
+      <%= f.submit t(:save), class: 'button radius' %>
     </div>
   </div>
 
