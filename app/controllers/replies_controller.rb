@@ -53,7 +53,12 @@ class RepliesController < ApplicationController
 
   private
     def reply_params
-      if current_user.agent?
+
+      if current_user.agent? &&
+          current_user.incoming_address.blank?
+
+        # only real agents are allowed to sent to any address they like
+        # (to, cc, bcc)
         params.require(:reply).permit(
             :content,
             :ticket_id,
