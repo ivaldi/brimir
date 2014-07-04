@@ -17,8 +17,6 @@ en:
   no_tickets_found: No tickets found.
 
 # tickets/_form
-  preview: Preview
-  edit: Edit
 
 # tickets/show
   ticket_by_at: By %{email} on %{at}
@@ -46,8 +44,6 @@ en:
 
 # replies/_form
   reply: Reply
-  preview: Preview
-  edit: Edit
   attach_files: Attach file(s)
   send_reply: Send reply
 

@@ -8,7 +8,6 @@ Brimir::Application.routes.draw do
 
   resources :replies, only: [:create, :new]
   get '/attachments/:id/:format' => 'attachments#show'
-  resources :previews, only: [:new]
 
   root :to => 'tickets#index'
 

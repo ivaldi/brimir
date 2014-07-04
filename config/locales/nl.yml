@@ -23,8 +23,6 @@ nl:
   no_tickets_found: Geen tickets gevonden.
 
 # tickets/_form
-  preview: Voorbeeld
-  edit: Bewerken
   attach_files: Bestand(en) toevoegen
   send_reply: Vestuur reactie
 
@@ -54,8 +52,6 @@ nl:
 
 # replies/_form
   reply: Reactie
-  preview: Voorbeeld
-  edit: Bewerken
   attach_files: Bestand(en) toevoegen
   send_reply: Verstuur reactie
 
