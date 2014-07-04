@@ -62,8 +62,10 @@
             <%= link_to '<i class="fa-sign-out fa"></i>'.html_safe, :destroy_user_session, method: :delete, class: 'text-secondary' %>
           </p>
         </aside>
+        <div class="medium-9 large-10 columns">
+      <% else %>
+        <div class="medium-9 large-10 columns medium-centered large-centered">
       <% end %>
-      <div class="medium-9 large-10 columns">
 
         <% if notice %>
           <div class="row">
