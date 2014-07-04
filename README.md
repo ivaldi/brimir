@@ -7,12 +7,12 @@ Installation
 ------------
 Brimir is a rather simple Ruby on Rails application. The only difficulty in setting things up is how to get incoming email to work. See the next section for details.
 
-To install brimir you first have to create a database and modify the config file in config/database.yml to reflect the details. Set your details under the production section. We advice to use `adapter: postgresql` or `adapter: mysql2` for production usage, because those are the only two adapters and database servers we test.
+To install brimir you first have to create a database and modify the config file in `config/database.yml` to reflect the details. Set your details under the production section. We advice to use `adapter: postgresql` or `adapter: mysql2` for production usage, because those are the only two adapters and database servers we test.
 
-Next up: configuring your outgoing email address and url. This can be set in config/environments/production.rb by adding the following lines *before* the keyword `end`:
+Next up: configuring your outgoing email address and url. This can be set in `config/environments/production.rb` by adding the following lines *before* the keyword `end`:
 
-    ActionMailer::Base.default :from => 'demo@getbrimir.com'
-	config.action_mailer.default_url_options = { :host => 'demo.getbrimir.com' }
+    ActionMailer::Base.default :from => 'brimir@yoururl.com'
+	config.action_mailer.default_url_options = { :host => 'brimir.yoururl.com' }
 
 Now install the required gems by running:
 
@@ -30,19 +30,11 @@ Last thing left to do before logging in is making a user and adding some statuse
 
 Incoming email
 --------------
-Incoming emails can be posted to the tickets url. First make a script like this on your mailserver:
+Incoming emails can be posted to the tickets url by using the script found in scripts/post-mail. Create an alias in your `/etc/aliases` file like this:
 
-    #!/bin/bash
-    exec curl --data-urlencode message@- https://yourbrimirurl.com/tickets.json
+    brimir: "|/bin/bash /path/to/your/brimir/repo/scripts/post-mail yoururl.com"
 
-Save it in `/etc/postfix/brimir.sh` for example.
-
-Next, create an alias in your `/etc/aliases` file like this:
-
-    brimir: "|/bin/bash /etc/postfix/brimir.sh"
-
-Now sending an email to brimir@yourmailserver.com should start curl and post
-the email to your brimir installation.
+Now sending an email to brimir@yoururl.com should start curl and post the email to your brimir installation.
 
 Contributing
 ------------
@@ -57,7 +49,6 @@ Requested features
 Some users have made requests for the following features. If you would like to contribute, you could add any of these.
 - Switchable property to support threads by using special tags in the subject line instead of relying on mail headers.
 - Grouping issues by project.
-- Managing users from within Brimir.
 - Support for hosted incoming mail services (Sendgrid, Mandrill), possibly using griddler gem.
 
 License
