@@ -18,6 +18,22 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
+  test 'should get index' do
+    alice = users(:alice)
+    sign_in alice
+
+    get :index
+    assert_response :success
+  end
+
+  test 'should not get index' do
+    bob = users(:bob)
+    sign_in bob
+
+    get :index
+    assert_response :unauthorized
+  end
+
   test 'should get edit' do
     alice = users(:alice)
     sign_in alice
