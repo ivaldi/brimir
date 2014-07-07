@@ -73,7 +73,7 @@ en:
 
 # users/index
   email: Email
-  role: Rol
+  role: Role
   agent: Agent
   customer: Customer
 
