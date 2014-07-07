@@ -1,1 +1,2 @@
-<%= @reply.content %>
+<% # replace <br /> and </p> with newlines, then strip the rest -%>
+<%= sanitize(@reply.content.gsub(/(<br( )?\/>|<\/p>)/, "\n"), tags: []) %>

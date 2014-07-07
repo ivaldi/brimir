@@ -123,15 +123,19 @@ class RepliesControllerTest < ActionController::TestCase
     # do we send a mail?
     assert_difference 'ActionMailer::Base.deliveries.size' do
       post :create, reply: {
-          content: '<strong>this is in bold</strong>',
+          content: '<br/><br /><p><strong>this is in bold</strong></p>',
           ticket_id: @ticket.id,
           to: @reply.to,
       }
     end
 
     mail = ActionMailer::Base.deliveries.last
-    assert_match '<strong>this is in bold</strong>', mail.html_part.body.decoded
-    assert_match '<strong>this is in bold</strong>', mail.text_part.body.decoded
+    # html in the html part
+    assert_match '<br/><br /><p><strong>this is in bold</strong></p>',
+        mail.html_part.body.decoded
+
+    # no html in the text part
+    assert_match "\n\nthis is in bold\n", mail.text_part.body.decoded
   end
 
   test 'reply should have attachments' do
