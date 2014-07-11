@@ -44,6 +44,10 @@ aside .fa{
   margin: 0;
 }
 
+.attachments{
+  list-style-type: none;
+}
+
 .attachments li{
   line-height: 1.2;
 }
