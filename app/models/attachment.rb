@@ -30,20 +30,24 @@ class Attachment < ActiveRecord::Base
           }
       }
   do_not_validate_attachment_file_type :file
-  before_post_process :should_create_thumbnail?
+  before_post_process :thumbnail?
 
-  def should_create_thumbnail?
+  def thumbnail?
 
-    if !file_content_type.match(/^image/).nil? &&
-        system('which convert', out: '/dev/null')
+    unless file_content_type.nil?
 
-      return true
-    end
+      if !file_content_type.match(/^image/).nil? &&
+          system('which convert', out: '/dev/null')
 
-    if !file_content_type.match(/pdf$/).nil? &&
-        system('which gs', out: '/dev/null')
+        return true
+      end
 
-      return true
+      if !file_content_type.match(/pdf$/).nil? &&
+          system('which gs', out: '/dev/null')
+
+        return true
+      end
+
     end
 
     return false

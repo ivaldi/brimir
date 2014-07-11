@@ -1,5 +1,5 @@
 <li class="group">
-  <% if attachment.image? %>
+  <% if attachment.thumbnail? %>
     <a href="<%= attachment.file.url %>"><img src="<%= attachment.file.url(:thumb) %>" /></a>
   <% end %>
   <strong><%= attachment.file_file_name %></strong>
