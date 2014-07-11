@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140627150246) do
+ActiveRecord::Schema.define(version: 20140711132522) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140627150246) do
     t.string   "to"
     t.string   "cc"
     t.string   "bcc"
-    t.string   "content_type", default: "markdown"
+    t.string   "content_type", default: "html"
   end
 
   add_index "replies", ["message_id"], name: "index_replies_on_message_id"
@@ -52,9 +52,9 @@ ActiveRecord::Schema.define(version: 20140627150246) do
     t.string   "message_id"
     t.integer  "user_id"
     t.string   "content_type", default: "html"
+    t.string   "to"
     t.integer  "status",       default: 0,      null: false
     t.integer  "priority",     default: 0,      null: false
-    t.string   "to"
   end
 
   add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"
