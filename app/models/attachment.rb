@@ -35,13 +35,13 @@ class Attachment < ActiveRecord::Base
   def should_create_thumbnail?
 
     if !file_content_type.match(/^image/).nil? &&
-        system('which convert')
+        system('which convert', out: '/dev/null')
 
       return true
     end
 
     if !file_content_type.match(/pdf$/).nil? &&
-        system('which gs')
+        system('which gs', out: '/dev/null')
 
       return true
     end
