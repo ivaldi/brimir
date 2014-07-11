@@ -37,7 +37,7 @@ en:
 
 # tickets/_change_assignee_form
   change_assignee: Assign ticket
-  assign: Toewijzen
+  assign: Assign
 
 # replies/new
   add_reply: Add reply
