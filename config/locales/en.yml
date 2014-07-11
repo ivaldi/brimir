@@ -16,8 +16,6 @@ en:
   unassigned: Unassigned
   no_tickets_found: No tickets found.
 
-# tickets/_form
-
 # tickets/show
   ticket_by_at: By %{email} on %{at}
   no_content: No content
@@ -107,8 +105,14 @@ en:
         signature: Email signature
 
       ticket:
+        from: From
         subject: Subject
         content: Content
         status: Status
         priority: Priority
         assignee_id: Assignee
+
+      reply:
+        to: To
+        cc: Cc
+        Bcc: Bcc

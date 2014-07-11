@@ -22,10 +22,6 @@ nl:
   unassigned: Niet toegewezen
   no_tickets_found: Geen tickets gevonden.
 
-# tickets/_form
-  attach_files: Bestand(en) toevoegen
-  send_reply: Vestuur reactie
-
 # tickets/show
   ticket_by_at: Door %{email} op %{at}
   no_content: Geen inhoud
@@ -117,6 +113,7 @@ nl:
         signature: E-mailhandtekening
 
       ticket:
+        from: Van
         subject: Onderwerp
         content: Inhoud
         status: Status

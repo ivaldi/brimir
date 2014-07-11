@@ -3,6 +3,8 @@
   <div class="panel mt">
     <h3><%= t(:new_ticket) %></h3>
 
+    <%= f.text_field :from %>
+
     <%= f.text_field :subject %>
 
     <%= f.text_area :content, class: 'tinymce' %>
