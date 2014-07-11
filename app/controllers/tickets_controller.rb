@@ -94,8 +94,7 @@ class TicketsController < ApplicationController
       format.html do
         @ticket = Ticket.new(ticket_params)
 
-        @ticket.user = current_user
-        @ticket.to = current_user.incoming_address
+        @ticket.to = current_user.incoming_address unless current_user.nil?
 
         if @ticket.save!
           TicketMailer.notify_agents(@ticket, @ticket).deliver
@@ -114,10 +113,10 @@ class TicketsController < ApplicationController
 
   private
     def ticket_params
-      if current_user.agent?
+      if !current_user.nil? && current_user.agent?
         params.require(:ticket).permit(
+            :from,
             :content,
-            :user_id,
             :subject,
             :status,
             :assignee_id,
@@ -125,6 +124,7 @@ class TicketsController < ApplicationController
             :message_id)
       else
         params.require(:ticket).permit(
+            :from,
             :content,
             :subject,
             :priority)

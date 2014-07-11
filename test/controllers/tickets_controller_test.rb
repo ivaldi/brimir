@@ -52,6 +52,18 @@ class TicketsControllerTest < ActionController::TestCase
 
   end
 
+  test 'should create ticket from html form' do
+    assert_difference 'Ticket.count', 1 do
+      post :create, ticket: {
+          from: 'test@test.nl',
+          content: @ticket.content,
+          subject: @ticket.subject
+      }
+
+      assert_redirected_to ticket_url(assigns(:ticket))
+    end
+  end
+
   test 'should only allow agents to view others tickets' do
     sign_in users(:bob)
 
