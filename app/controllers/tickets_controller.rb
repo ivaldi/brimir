@@ -71,9 +71,6 @@ class TicketsController < ApplicationController
         format.html {
           redirect_to @ticket, notice: I18n::translate(:ticket_updated)
         }
-        format.js {
-          render notice: I18n::translate(:ticket_updated)
-        }
         format.json {
           head :no_content
         }
@@ -112,7 +109,6 @@ class TicketsController < ApplicationController
         @ticket = TicketMailer.receive(params[:message])
         render json: @ticket, status: :created
       end
-      format.js { render }
     end
   end
 
