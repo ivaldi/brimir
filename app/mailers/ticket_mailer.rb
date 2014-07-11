@@ -161,35 +161,25 @@ class TicketMailer < ActionMailer::Base
       end
     end
 
-    # search using the same method as Devise validation
-    from_user = User.find_first_by_auth_conditions(email: email.from.first)
-
-    if !from_user
-      password_length = 12
-      password = Devise.friendly_token.first(password_length)
-      from_user = User.create!(email: email.from.first, password: password,
-          password_confirmation: password)
-    end
-
     if response_to
       # reopen ticket
       ticket.status = :open
-      ticket.content_type = content_type
       ticket.save
 
       # add reply
       incoming = Reply.create!({
         content: content,
         ticket_id: ticket.id,
-        user_id: from_user.id,
-        message_id: email.message_id
+        from: email.from.first,
+        message_id: email.message_id,
+        content_type: content_type
       })
 
     else
 
       # add reply
-      incoming = Ticket.create!({
-        user_id: from_user.id,
+      ticket = Ticket.create!({
+        from: email.from.first,
         subject: email.subject,
         content: content,
         message_id: email.message_id,
@@ -197,8 +187,7 @@ class TicketMailer < ActionMailer::Base
         to: email.to.join(', ')
       })
 
-
-      ticket = incoming
+      incoming = ticket
 
     end
 

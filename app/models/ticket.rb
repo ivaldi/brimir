@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Ticket < ActiveRecord::Base
+  include CreateFromUser
 
   validates_presence_of :user_id
 
