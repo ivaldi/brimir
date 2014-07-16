@@ -1,0 +1,89 @@
+.brimir-plugin-popup {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  width: 600px;
+  height: 400px;
+  margin-left: -300px;
+  margin-top: -200px;
+  background: #fff;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+  z-index: 2;
+}
+.brimir-plugin-popup.show {
+  top: 50%;
+}
+.brimir-plugin-popup [data-brimir-plugin="close"] {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 30px;
+  background: #fff;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+}
+.brimir-plugin-popup [data-brimir-plugin="close"]:hover i {
+  color: #f00;
+}
+.brimir-plugin-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  -webkit-transition: all 0.5s ease-out;
+  -moz-transition: all 0.5s ease-out;
+  -ms-transition: all 0.5s ease-out;
+  -o-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+  pointer-events: none;
+  z-index: 1;
+}
+.brimir-plugin-overlay.show {
+  opacity: 1;
+}
+.brimir-plugin-tabs {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-top: -32px;
+  border: 1px solid #f00;
+  -webkit-border-top-left-radius: 3px;
+  -moz-border-top-left-radius: 3px;
+  -ms-border-top-left-radius: 3px;
+  -o-border-top-left-radius: 3px;
+  border-top-left-radius: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -moz-border-bottom-left-radius: 3px;
+  -ms-border-bottom-left-radius: 3px;
+  -o-border-bottom-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.brimir-plugin-tabs a {
+  display: block;
+  color: #fff;
+  font-size: 20px;
+  padding: 0 8px;
+  background: #f00;
+  border-bottom: 1px solid #f00;
+  font-weight: bold;
+}
+.brimir-plugin-tabs a:last-child {
+  border-bottom: 0;
+}
+.brimir-plugin-tabs a:hover {
+  color: #fff;
+}

@@ -1,5 +1,5 @@
 (function() {
-	var script_tag = jQuery('script[src*="assets/brimir-plugin.js"]');
+	var script_tag = jQuery('script[src*="brimir-plugin.js"]');
 
 	function brimir_plugin_init(){
 
@@ -11,7 +11,7 @@
 			jQuery('head').append('<link href="' + css_url + '" media="screen" rel="stylesheet" />');
 		}
 
-		if(script_tag.data('skip-tab') == undefined) {
+		if(script_tag.data('skip-tabs') == undefined) {
 			jQuery('body').append(
 				'<div class="brimir-plugin-tabs">' +
 					'<a href="#" data-brimir-plugin="open">@</a>' +
@@ -25,7 +25,7 @@
 			brimir_plugin_init_popup();
 
 			var form_url = script_tag.attr('src');
-			form_url = form_url.replace('assets/brimir-plugin.js', 'tickets/new?a=');
+			form_url = form_url.replace('brimir-plugin.js', 'tickets/new?a=');
 
 			if(script_tag.data('prefill-email') != undefined) {
 				form_url += '&ticket[from]=' + encodeURIComponent(script_tag.data('prefill-email'));
