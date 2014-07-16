@@ -42,6 +42,11 @@ class TicketsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should get new as anonymous' do
+    get :new
+    assert_response :success
+  end
+
   test 'should create ticket when posted from MTA' do
 
     assert_difference 'Ticket.count', 1 do
