@@ -60,6 +60,20 @@ class TicketsControllerTest < ActionController::TestCase
           subject: @ticket.subject
       }
 
+      assert_response :success
+    end
+  end
+
+  test 'should create ticket' do
+    sign_in users(:alice)
+
+    assert_difference 'Ticket.count', 1 do
+      post :create, ticket: {
+          from: 'test@test.nl',
+          content: @ticket.content,
+          subject: @ticket.subject
+      }
+
       assert_redirected_to ticket_url(assigns(:ticket))
     end
   end
