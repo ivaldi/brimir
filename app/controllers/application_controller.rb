@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_filter :authenticate_user!
+  before_filter :set_locale
 
   check_authorization unless: :devise_controller?
 
@@ -37,4 +38,11 @@ class ApplicationController < ActionController::Base
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
   end
+
+  protected
+    def set_locale
+      I18n.locale = http_accept_language.compatible_language_from(
+          I18n.available_locales)
+    end
+
 end

@@ -70,3 +70,6 @@ gem 'font-awesome-rails', '~> 4.0.3'
 
 # TinyMCE 4 for WYSIWYG in textareas
 gem 'tinymce-rails'
+
+# for language detection
+gem 'http_accept_language'

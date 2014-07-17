@@ -94,6 +94,7 @@ GEM
       railties (>= 3.0)
     fssm (0.2.10)
     hike (1.2.3)
+    http_accept_language (2.0.1)
     i18n (0.6.9)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
@@ -208,6 +209,7 @@ DEPENDENCIES
   font-awesome-rails (~> 4.0.3)
   foundation-rails (~> 5.2.2)
   foundation_rails_helper
+  http_accept_language
   jquery-rails
   mysql2
   paperclip
