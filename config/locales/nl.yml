@@ -146,7 +146,7 @@ nl:
         label_ids: Labels
 
       ticket:
-        from: Van
+        from: E-mailadres
         subject: Onderwerp
         content: Inhoud
         status: Status

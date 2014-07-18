@@ -112,6 +112,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
     netrc (0.7.7)
+    non-stupid-digest-assets (1.0.4)
     orm_adapter (0.5.0)
     paperclip (4.2.0)
       activemodel (>= 3.0.0)
@@ -214,6 +215,7 @@ DEPENDENCIES
   http_accept_language
   jquery-rails
   mysql2
+  non-stupid-digest-assets
   paperclip
   pg
   rails (~> 4.1.0)

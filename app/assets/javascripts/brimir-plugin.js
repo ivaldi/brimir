@@ -25,7 +25,7 @@
 			brimir_plugin_init_popup();
 
 			var form_url = script_tag.attr('src');
-			form_url = form_url.replace('brimir-plugin.js', 'tickets/new?a=');
+			form_url = form_url.replace('assets/brimir-plugin.js', 'tickets/new?a=');
 
 			if(script_tag.data('prefill-email') != undefined) {
 				form_url += '&ticket[from]=' + encodeURIComponent(script_tag.data('prefill-email'));
@@ -74,7 +74,7 @@
 
 	function brimir_plugin_init_popup() {
 		if(jQuery('.brimir-plugin-popup').size() == 0) {
-			jQuery('body').append('<div class="brimir-plugin-popup"><form></form><a href="#" data-brimir-plugin="close"><i class="icon-remove"></i></a></div>');
+			jQuery('body').append('<div class="brimir-plugin-popup"><form></form><a href="#" data-brimir-plugin="close">&times;</a></div>');
 
 			jQuery('body').prepend('<div class="brimir-plugin-overlay"></div>');
 		}

@@ -138,7 +138,7 @@ en:
         label_ids: Labels
 
       ticket:
-        from: From
+        from: Email address
         subject: Subject
         content: Content
         status: Status

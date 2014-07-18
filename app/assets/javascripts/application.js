@@ -15,10 +15,10 @@
 //= require foundation
 //= require select2
 //= require tinymce-jquery
-//= require_tree .
+//= require tickets
 
 (function() {
-  
+
   var dialog;
 
   function onsubmit(e) {
