@@ -12,22 +12,20 @@ gem 'foundation-rails', '~> 5.2.2'
 
 gem 'jquery-rails'
 
-# Zurb form errors
+# foundation form errors
 gem 'foundation_rails_helper'
 
 group :development do
-  # To use debugger
+  # to use debugger
   gem 'byebug'
 
+  # sqlite database during development
   gem 'sqlite3'
 
-  # Deploy with Capistrano
-  gem 'capistrano', '~> 3.0'
-  gem 'capistrano-rvm', '~> 0.1.0'
+  # deploy with Capistrano
+  gem 'capistrano'
+  gem 'capistrano-rvm'
   gem 'capistrano-rails'
-
-  # Debian Wheezy has no nodejs in the repo's :(
-  gem 'therubyracer'
 
   # Spring application pre-loader
   gem 'spring'
@@ -48,16 +46,16 @@ group :production do
   gem 'pg'
 end
 
-# Authentication
+# authentication
 gem 'devise'
 
-# Authorization
+# authorization
 gem 'cancan'
 
-# Pagination
+# pagination
 gem 'will_paginate'
 
-# Attachments, thumbnails etc
+# attachments, thumbnails etc
 gem 'paperclip'
 
 # Markdown
