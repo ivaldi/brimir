@@ -6,6 +6,26 @@ en:
   closed: Closed
   trashed: Trashed
 
+# devise/sessions/new
+  sign_in: Sign in
+
+# devise/shared/links
+  forgot_password: Forgot your password?
+
+# devise/passwords/new
+  send_instructions: Send me instructions
+
+# devise/passwords/edit
+  change_password: Change password
+  new_password: New password
+  new_password_confirmation: Confirm new password
+
+# devise/mailer/reset_password_instructions
+  hello: Hello
+  someone_requested_link: Someone has requested a link to change your password, and you can do this through the link below.
+  ignore_if_not_requested: If you didn't request this, please ignore this email.
+  password_wont_change_without_opening_link: Your password won't change until you access the link above and create a new one.
+
 # tickets/index
   tickets: Tickets
   tickets_containing: Tickets containing
@@ -100,9 +120,11 @@ en:
   activerecord:
     attributes:
       user:
+        email: Email
         password: Password
         password_confirmation: Password confirmation
         signature: Email signature
+        remember_me: Remember me
 
       ticket:
         from: From

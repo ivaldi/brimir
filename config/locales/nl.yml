@@ -12,9 +12,29 @@ nl:
   closed: Gesloten
   trashed: Prullenbak
 
+# devise/sessions/new
+  sign_in: Inloggen
+
+# devise/shared/links
+  forgot_password: Wachtwoord vergeten?
+
+# devise/passwords/new
+  send_instructions: Stuur instructies
+
+# devise/passwords/edit
+  change_password: Wachtwoord wijzigen
+  new_password: Nieuw wachtwoord
+  new_password_confirmation: Bevestig nieuw wachtwoord
+
+# devise/mailer/reset_password_instructions
+  hello: Hallo
+  someone_requested_link: Iemand heeft een link opgevraagd om je wachtwoord te wijzigen, dat kun je doen met de link hieronder.
+  ignore_if_not_requested: Als je dit niet hebt opgevraagd, negeer dan deze e-mail.
+  password_wont_change_without_opening_link: Je wachtwoord veranderd niet totdat je via de link een nieuw wachtwoord aanmaakt.
+
 # tickets/index
   tickets: Tickets
-  tickets_containing: Tickets overeenkomend met 
+  tickets_containing: Tickets overeenkomend met
   search_tickets: Tickets doorzoeken
   priority: Prioriteit
   replies: reacties
@@ -108,9 +128,11 @@ nl:
   activerecord:
     attributes:
       user:
+        email: E-mailadres
         password: Wachtwoord
         password_confirmation: Wachtwoord bevestiging
         signature: E-mailhandtekening
+        remember_me: Onthouden
 
       ticket:
         from: Van

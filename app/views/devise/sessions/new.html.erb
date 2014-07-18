@@ -1,22 +1,25 @@
 <div class="row">
   <div class="large-5 columns large-centered">
-  <h2>Sign in</h2>
-  
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+    <h2><%= t(:sign_in) %></h2>
+    
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
-    <hr />
+      <hr />
 
-    <%= f.email_field :email %>
-  
-    <%= f.password_field :password %>
-  
-    <% if devise_mapping.rememberable? -%>
-      <%= f.check_box :remember_me %>
-    <% end -%>
-  
-    <hr />
-  
-    <%= f.submit "Sign in", class: 'button radius' %>  <%= render "devise/shared/links" %>
-  <% end %>
+      <%= f.email_field :email %>
+    
+      <%= f.password_field :password %>
+    
+      <% if devise_mapping.rememberable? -%>
+        <%= f.check_box :remember_me %>
+      <% end -%>
+    
+      <hr />
+    
+      <%= f.submit(t(:sign_in), class: 'button radius') %>
+
+      <%= render 'devise/shared/links' %>
+    <% end %>
+
   </div>
 </div>
