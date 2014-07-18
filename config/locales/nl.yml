@@ -51,6 +51,13 @@ nl:
   num_replies:
     one: '%{count} reactie'
     other: '%{count} reacties'
+  high: Hoog
+  medium: Gemiddeld
+  low: Laag
+  unknown: Onbekend
+  open: Open
+  closed: Gesloten
+  deleted: Verwijderd
 
 # tickets/_change_priority_form
   change: Wijzig
@@ -90,7 +97,7 @@ nl:
   new_user: Gebruiker toevoegen
 
 # users/edit
-  new_user: Gebruiker wijzigen
+  edit_user: Gebruiker wijzigen
 
 # users/index
   email: E-mailadres
@@ -104,7 +111,7 @@ nl:
   user_is_an_agent: Gebruiker is een medewerker
   receive_new_ticket_notifications: Ontvang notificaties voor nieuwe tickets
   email_settings: E-mailinstellingen
-  save: Save
+  save: Opslaan
 
 # controllers/attachments
   file_not_found: Bestand niet gevonden

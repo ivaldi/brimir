@@ -45,6 +45,13 @@ en:
   num_replies:
     one: '%{count} reply'
     other: '%{count} replies'
+  high: High
+  medium: Medium
+  low: Low
+  unknown: Unknown
+  open: Open
+  closed: Closed
+  deleted: Deleted
 
 # tickets/_change_priority_form
   change: Change
@@ -87,7 +94,7 @@ en:
   new_user: New User
 
 # users/edit
-  new_user: Edit User
+  edit_user: Edit User
 
 # users/index
   email: Email

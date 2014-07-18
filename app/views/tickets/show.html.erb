@@ -46,13 +46,13 @@
         <dt><%= t(:status) %>:</dt>
         <dd>
           <a href="#" data-reveal-id="change-status">
-            <%= @ticket.status %>
+            <%= t(@ticket.status) %>
           </a>
         </dd>
         <dt><%= t(:priority) %>:</dt>
         <dd>
           <a href="#" data-reveal-id="change-priority">
-            <span data-type="priority" data-id="<%= @ticket.priority %>" href="#" class="priority-<%= @ticket.priority %> fa fa-circle" title="<%= t(:priority) %>: <%= @ticket.priority %>"></span> <%= @ticket.priority %>
+            <span data-type="priority" data-id="<%= @ticket.priority %>" href="#" class="priority-<%= @ticket.priority %> fa fa-circle" title="<%= t(:priority) %>: <%= t(@ticket.priority) %>"></span> <%= t(@ticket.priority) %>
           </a>
         </dd>
         <dt><%= t(:assignee) %>:</dt>
@@ -69,9 +69,9 @@
       <% else %>
 
         <dt><%= t(:status) %>:<dt>
-        <dd><%= @ticket.status %></dd>
+        <dd><%= t(@ticket.status) %></dd>
         <dt><%= t(:priority) %>:</dt>
-        <dd><%= @ticket.priority %></dd>
+        <dd><%= t(@ticket.priority) %></dd>
         <dt><%= t(:priority) %>:</dt>
         <dd>
           <% if !@ticket.assignee %>

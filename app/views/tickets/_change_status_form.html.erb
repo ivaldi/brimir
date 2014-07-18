@@ -3,7 +3,13 @@
 
   <%= form_for ticket, remote: true, method: :patch do |f| %>
     <p>
-      <%= f.select :status, Ticket.statuses.keys %>
+      <%
+        translated = []
+        Ticket.statuses.keys.each do |value|
+          translated << [t(value), value]
+        end
+      %>
+      <%= f.select :status, translated %>
     </p>
     <%= f.submit t(:change_status), class: 'button' %>
   <% end %>
