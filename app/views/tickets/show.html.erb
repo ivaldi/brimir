@@ -118,7 +118,7 @@
                 <% content = reply.content %>
               <% end %>
 
-              <%= sanitize content, tags: %w(a b code div em i img li ol p table td tfoot thead tr span strong ul), attributes: %w(src href) %>
+              <%= sanitize content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
               <% if reply.attachments.size > 0 %>
                 <hr />
                 <ul class="block-grid three-up attachments">
