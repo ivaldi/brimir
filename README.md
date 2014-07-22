@@ -11,8 +11,9 @@ To install brimir you first have to create a database and modify the config file
 
 Next up: configuring your outgoing email address and url. This can be set in `config/environments/production.rb` by adding the following lines *before* the keyword `end`:
 
-    ActionMailer::Base.default :from => 'brimir@yoururl.com'
-	config.action_mailer.default_url_options = { :host => 'brimir.yoururl.com' }
+    config.action_mailer.default_options = { from: 'brimir@yoururl.com' }
+
+    config.action_mailer.default_url_options = { host: 'brimir.yoururl.com' }
 
 Now install the required gems by running:
 
@@ -25,7 +26,7 @@ Next, load the database schema and precompile assets:
 
 Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
-    rails console
+    rails console production
     u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
 
 Incoming email
