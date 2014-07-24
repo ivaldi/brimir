@@ -36,7 +36,7 @@ group :test do
   gem 'rake'
 
   # for coveralls
-  gem 'coveralls', require: false
+  gem 'coveralls'
 
   gem 'mysql2'
 end
