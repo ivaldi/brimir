@@ -6,7 +6,7 @@ Brimir::Application.routes.draw do
 
   resources :tickets, only: [:index, :show, :update, :new, :create]
 
-  resources :labelings, only: :destroy
+  resources :labelings, only: [:destroy, :create]
 
   resources :replies, only: [:create, :new]
   get '/attachments/:id/:format' => 'attachments#show'

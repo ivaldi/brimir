@@ -1,0 +1,5 @@
+<% if @labeling.valid? %>
+  jQuery('[data-labels]').append('<%= j(render(@labeling)) %>');
+<% end %>
+
+jQuery('input[name="labeling[label][name]"]').val('');

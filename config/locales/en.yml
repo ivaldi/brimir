@@ -51,6 +51,8 @@ en:
   open: Open
   closed: Closed
   deleted: Deleted
+  labels: Labels
+  label_name: Label name
 
 # tickets/_change_priority_form
   change: Change

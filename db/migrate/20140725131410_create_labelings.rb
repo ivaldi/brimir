@@ -6,5 +6,8 @@ class CreateLabelings < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :labelings, [:label_id, :labelable_id, :labelable_type],
+        unique: true,
+        name: :unique_labeling_label
   end
 end

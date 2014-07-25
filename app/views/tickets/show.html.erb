@@ -70,16 +70,27 @@
         </dd>
         <dt><%= t(:labels) %></dt>
         <dd>
-          <ul>
+          <ul data-labels style="margin-left: 0">
             <% @ticket.labelings.each do |labeling| %>
-              <li class="radius label" data-id="<%= labeling.id %>">
-                <%= labeling.label.name %>
-                <%= link_to labeling_path(labeling), method: :delete, remote: true do %>
-                  <span class="fa-times fa"></span>
-                <% end %>
-              </li>
+              <%= render labeling %>
             <% end %>
           </ul>
+          <%= form_for @labeling, remote: true do |f| %>
+            <%= f.hidden_field :labelable_id %>
+            <%= f.hidden_field :labelable_type %>
+
+            <div class="row collapse">
+              <div class="small-9 columns">
+                <%= f.fields_for :label, Label.new do |f| %>
+                  <%= f.text_field :name, label: false, placeholder: t(:label_name) %>
+                <% end %>
+              </div>
+              <div class="small-3 columns">
+                <%= f.button t(:add), type: 'submit', class: 'button postfix' %>
+              </div>
+            </div>
+
+          <% end %>
         </dd>
 
       <% else %>

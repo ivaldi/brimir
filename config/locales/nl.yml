@@ -57,6 +57,8 @@ nl:
   open: Open
   closed: Gesloten
   deleted: Verwijderd
+  labels: Labels
+  label_name: Label naam
 
 # tickets/_change_priority_form
   change: Wijzig

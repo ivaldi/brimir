@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20140725131410) do
     t.datetime "updated_at"
   end
 
+  add_index "labelings", ["label_id", "labelable_id", "labelable_type"], name: "unique_labeling_label", unique: true
   add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
   add_index "labelings", ["labelable_id", "labelable_type"], name: "index_labelings_on_labelable_id_and_labelable_type"
 

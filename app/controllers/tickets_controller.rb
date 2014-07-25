@@ -25,6 +25,8 @@ class TicketsController < ApplicationController
 
     @reply = @ticket.replies.new
     @reply.to = @ticket.user.email
+
+    @labeling = Labeling.new(labelable: @ticket)
   end
 
   def index
