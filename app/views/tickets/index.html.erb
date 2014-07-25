@@ -11,7 +11,14 @@
       </div>
       <div class="large-3 columns">
         <%= form_tag tickets_path, method: :get do %>
-          <%= text_field_tag :q, params[:q], placeholder: t(:search_tickets) %>
+        <div class="row collapse">
+          <div class="small-9 columns">
+            <%= text_field_tag :q, params[:q] %>
+          </div>
+          <div class="small-3 columns">
+            <%= button_tag t(:search), type: 'submit', class: 'button postfix' %>
+          </div>
+        </div>
         <% end %>
       </div>
     </div>

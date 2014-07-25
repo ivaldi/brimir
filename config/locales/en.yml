@@ -29,12 +29,12 @@ en:
 # tickets/index
   tickets: Tickets
   tickets_containing: Tickets containing
-  search_tickets: Search tickets
   priority: Priority
   replies: replies
   no_subject: No subject
   unassigned: Unassigned
   no_tickets_found: No tickets found.
+  search: Search
 
 # tickets/show
   ticket_by_at: By %{email} on %{at}
