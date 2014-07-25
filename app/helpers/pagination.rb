@@ -14,27 +14,31 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-module ApplicationHelper
-  def active_elem_if(elem, condition, attributes = {}, &block)
-    if condition
-      # define class as empty string when no class given
-      attributes[:class] ||= ''
-      # add 'active' class
-      attributes[:class] += ' active'
-    end
+module Pagination
+  class PaginationRenderer < WillPaginate::ActionView::LinkRenderer
 
-    # return the content tag with possible active class
-    content_tag(elem, attributes, &block)
-  end
+    protected
 
-  # change the default link renderer for will_paginate
-  def will_paginate(collection_or_options = nil, options = {})
-    if collection_or_options.is_a? Hash
-      options, collection_or_options = collection_or_options, nil
-    end
-    unless options[:renderer]
-      options = options.merge :renderer => Pagination::PaginationRenderer
-    end
-    super(*[collection_or_options, options].compact)
+      def gap
+        tag :li, link(super, '#'), class: 'unavailable'
+      end
+
+      def page_number(page)
+        tag :li, link(page, page, rel: rel_value(page)), class: ('current' if page == current_page)
+      end
+
+      def previous_or_next_page(page, text, classname)
+        tag :li, link('<i class="fa fa-arrow-circle-' +
+            (classname == 'previous_page' ? 'left' : 'right') +
+            '"></i>', page || '#')
+      end
+
+      def html_container(html)
+        tag(:ul, html, container_attributes)
+      end
+
+      def gap
+        tag :li, '<a>...</a>'
+      end
   end
 end
