@@ -45,9 +45,10 @@
 
         <dt><%= t(:status) %>:</dt>
         <dd>
-          <a href="#" data-reveal-id="change-status">
+          <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
             <%= t(@ticket.status) %>
           </a>
+          <%= render 'status_dropdown', ticket: @ticket %>
         </dd>
         <dt><%= t(:priority) %>:</dt>
         <dd>
@@ -142,4 +143,3 @@
 
 <%= render 'change_priority_form', { ticket: @ticket } %>
 <%= render 'change_assignee_form', { ticket: @ticket } %>
-<%= render 'change_status_form', { ticket: @ticket } %>

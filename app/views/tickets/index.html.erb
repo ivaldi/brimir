@@ -43,7 +43,10 @@
                 <% end %>
               </td>
               <td>
-                <a data-type="status" data-id="<%= ticket.status %>" href="#" class="status-<%= ticket.status %>"></a>
+                <a href="#" data-dropdown="statuses-<%= ticket.id %>">
+                  <%= t(ticket.status) %>
+                </a>
+                <%= render 'status_dropdown', ticket: ticket %>
               </td>
               <td>
                 <% if ticket.assignee %>
@@ -109,5 +112,4 @@
 </div>
 
 <%= render 'change_assignee_form', { ticket: Ticket.new } %>
-<%= render 'change_status_form', { ticket: Ticket.new } %>
 <%= render 'change_priority_form', { ticket: Ticket.new } %>

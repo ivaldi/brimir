@@ -16,7 +16,7 @@
 
 jQuery(function() {
 
-  var forms = ['assignee', 'status', 'priority'];
+  var forms = ['assignee', 'priority'];
 
   for(var i = 0; i < forms.length; i++) {
   

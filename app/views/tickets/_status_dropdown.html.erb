@@ -1,0 +1,8 @@
+<ul id="statuses-<%= ticket.id %>" class="f-dropdown" data-dropdown-content>
+  <% Ticket.statuses.keys.each do |value| %>
+    <li>
+      <%= link_to t(value), ticket_path(ticket, ticket: { status: value }),
+          method: :patch, remote: true %>
+    </li>
+  <% end %>
+</ul>
