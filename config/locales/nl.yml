@@ -47,7 +47,6 @@ nl:
   no_content: Geen inhoud
   status: Status
   assignee: Toegewezen aan
-  nobody: Niemand
   num_replies:
     one: '%{count} reactie'
     other: '%{count} reacties'

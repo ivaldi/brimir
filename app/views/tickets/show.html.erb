@@ -61,7 +61,7 @@
         <dd>
           <a href="#" data-reveal-id="change-assignee">
           <% if !@ticket.assignee %>
-            <%= t(:nobody) %>
+            <%= t(:unassigned) %>
           <% else %>
             <%= @ticket.assignee.email %>
           <% end %>

@@ -41,7 +41,6 @@ en:
   no_content: No content
   status: Status
   assignee: Assignee
-  nobody: Nobody
   num_replies:
     one: '%{count} reply'
     other: '%{count} replies'
