@@ -43,7 +43,7 @@
 
       <% if can? :update, @ticket %>
 
-        <dt><%= t(:status) %>:</dt>
+        <dt><%= t(:status) %></dt>
         <dd>
           <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
             <span class="fa fa-<%= status_icon(@ticket.status) %>"></span>
@@ -51,14 +51,14 @@
           </a>
           <%= render 'status_dropdown', ticket: @ticket %>
         </dd>
-        <dt><%= t(:priority) %>:</dt>
+        <dt><%= t(:priority) %></dt>
         <dd>
           <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
             <span class="priority-<%= @ticket.priority %> fa fa-circle"></span> <%= t(@ticket.priority) %>
           </a>
           <%= render 'priority_dropdown', ticket: @ticket, short: false %>
         </dd>
-        <dt><%= t(:assignee) %>:</dt>
+        <dt><%= t(:assignee) %></dt>
         <dd>
           <a href="#" data-reveal-id="change-assignee">
           <% if !@ticket.assignee %>
@@ -68,20 +68,41 @@
           <% end %>
           </a>
         </dd>
+        <dt><%= t(:labels) %></dt>
+        <dd>
+          <ul>
+            <% @ticket.labelings.each do |labeling| %>
+              <li class="radius label" data-id="<%= labeling.id %>">
+                <%= labeling.label.name %>
+                <%= link_to labeling_path(labeling), method: :delete, remote: true do %>
+                  <span class="fa-times fa"></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </dd>
 
       <% else %>
 
-        <dt><%= t(:status) %>:<dt>
+        <dt><%= t(:status) %><dt>
         <dd><%= t(@ticket.status) %></dd>
-        <dt><%= t(:priority) %>:</dt>
+        <dt><%= t(:priority) %></dt>
         <dd><%= t(@ticket.priority) %></dd>
-        <dt><%= t(:priority) %>:</dt>
+        <dt><%= t(:priority) %></dt>
         <dd>
           <% if !@ticket.assignee %>
             <em><%= t(:nobody) %></em>
           <% else %>
             <%= @ticket.assignee.email %>
           <% end %>
+        </dd>
+        <dt><%= t(:labels) %></dt>
+        <dd>
+          <ul class="inline-list">
+            <% @ticket.labels.each do |label| %>
+              <li class="radius label"><%= label.name %></li>
+            <% end %>
+          </ul>
         </dd>
 
       <% end %>
