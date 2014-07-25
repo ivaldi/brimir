@@ -16,33 +16,26 @@
 
 jQuery(function() {
 
-  var forms = ['assignee', 'priority'];
+  jQuery('[data-assignee-id]').click(function(e) {
+    e.preventDefault();
 
-  for(var i = 0; i < forms.length; i++) {
-  
-    jQuery('[data-type="' + forms[i] + '"]').click(function(e) {
-      e.preventDefault();
+    var elem = jQuery(this);
+    var dialog = jQuery('#change-assignee');
+    var options = dialog.find('form select');
 
-      var elem = jQuery(this);
-      var type = elem.data('type');      
-      var dialog = jQuery('#change-' + type);
-      var options = dialog.find('form select');
-
-      /* set ticket id */
-      dialog.find('form').attr('action',
-          elem.parents('tr').data('ticket-url'));
+    /* set ticket id */
+    dialog.find('form').attr('action',
+        elem.parents('tr').data('ticket-url'));
       
 
-      /* select assigned user */
-      options.removeAttr('selected');
-      options.find('[value="' + elem.data('id') + '"]').attr('selected', 'selected');
+    /* select assigned user */
+    options.removeAttr('selected');
+    options.find('[value="' + elem.data('assignee-id') + '"]').attr('selected', 'selected');
 
       /* show the dialog */
-      dialog.foundation('reveal','open');
+    dialog.foundation('reveal','open');
 
-    });
-
-  }
+  });
 
 });
 

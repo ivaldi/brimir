@@ -62,9 +62,9 @@
               </td>
               <td>
                 <% if ticket.assignee %>
-                  <a data-type="assignee" data-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
+                  <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
                 <% else %>
-                  <a data-type="assignee" data-id="" href="#"><em><%= t(:unassigned) %></em></a>
+                  <a data-assignee-id="" href="#"><em><%= t(:unassigned) %></em></a>
                 <% end %>
               </td>
 
