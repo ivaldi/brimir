@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711132522) do
+ActiveRecord::Schema.define(version: 20140725131410) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -25,6 +25,23 @@ ActiveRecord::Schema.define(version: 20140711132522) do
   end
 
   add_index "attachments", ["attachable_id"], name: "index_attachments_on_attachable_id"
+
+  create_table "labelings", force: true do |t|
+    t.integer  "label_id"
+    t.integer  "labelable_id"
+    t.string   "labelable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
+  add_index "labelings", ["labelable_id", "labelable_type"], name: "index_labelings_on_labelable_id_and_labelable_type"
+
+  create_table "labels", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "replies", force: true do |t|
     t.text     "content"

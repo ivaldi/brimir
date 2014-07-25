@@ -1,0 +1,7 @@
+bug_ticket:
+  label: bug
+  labelable: problem(Ticket)
+
+bug_user:
+  label: bug
+  labelable: dave(User)

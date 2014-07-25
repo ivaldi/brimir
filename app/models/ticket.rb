@@ -23,8 +23,9 @@ class Ticket < ActiveRecord::Base
   belongs_to :assignee, class_name: 'User'
 
   has_many :attachments, as: :attachable, dependent: :destroy
-
   has_many :replies, dependent: :destroy
+  has_many :labelings, as: :labelable
+  has_many :labels, through: :labelings
 
   enum status: [:open, :closed, :deleted]
   enum priority: [:unknown, :low, :medium, :high]

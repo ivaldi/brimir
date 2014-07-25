@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 
   has_many :tickets
   has_many :replies
+  has_many :labelings, as: :labelable
+  has_many :labels, through: :labelings
 
   scope :agents, -> {
     where(agent: true)
