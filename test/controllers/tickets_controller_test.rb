@@ -84,6 +84,13 @@ class TicketsControllerTest < ActionController::TestCase
 
     get :show, id: @ticket.id
     assert_response :success
+
+    # should contain this for label adding with javascript
+    assert_select '[data-labelings]'
+
+    # should contain this for label removing with javascript
+    assert_select '[data-labeling-id=?]',
+        @ticket.labelings.first.id
   end
 
   test 'should email assignee if ticket is assigned by somebody else' do

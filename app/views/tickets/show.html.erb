@@ -70,7 +70,7 @@
         </dd>
         <dt><%= t(:labels) %></dt>
         <dd>
-          <ul data-labels style="margin-left: 0">
+          <ul data-labelings="" style="margin-left: 0">
             <% @ticket.labelings.each do |labeling| %>
               <%= render labeling %>
             <% end %>
