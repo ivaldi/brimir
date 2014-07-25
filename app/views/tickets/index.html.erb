@@ -24,7 +24,12 @@
             <% if can? :update, ticket %>
               <%# DONT FORGET TO UPDATE THE ELSE IF YOU MODIFY THE FOLLOWING HTML %>
 
-              <td><a data-type="priority" data-id="<%= ticket.priority %>" href="#" class="priority-<%= ticket.priority %> fa fa-circle" title="<%= t(:priority) %> <%= ticket.priority %>"></a></td>
+              <td>
+                <a href="#" data-dropdown="priorities-<%= ticket.id %>">
+                  <span class="priority-<%= ticket.priority %> fa fa-circle"></span>
+                </a>
+                <%= render 'priority_dropdown', ticket: ticket, short: true %>
+              </td>
               <td style="white-space:nowrap">
                 <%= ticket.user.email %>
               </td>
@@ -112,4 +117,3 @@
 </div>
 
 <%= render 'change_assignee_form', { ticket: Ticket.new } %>
-<%= render 'change_priority_form', { ticket: Ticket.new } %>

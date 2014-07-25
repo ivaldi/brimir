@@ -52,9 +52,10 @@
         </dd>
         <dt><%= t(:priority) %>:</dt>
         <dd>
-          <a href="#" data-reveal-id="change-priority">
-            <span data-type="priority" data-id="<%= @ticket.priority %>" href="#" class="priority-<%= @ticket.priority %> fa fa-circle" title="<%= t(:priority) %>: <%= t(@ticket.priority) %>"></span> <%= t(@ticket.priority) %>
+          <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
+            <span class="priority-<%= @ticket.priority %> fa fa-circle"></span> <%= t(@ticket.priority) %>
           </a>
+          <%= render 'priority_dropdown', ticket: @ticket %>
         </dd>
         <dt><%= t(:assignee) %>:</dt>
         <dd>
@@ -141,5 +142,4 @@
   </div>
 </div>
 
-<%= render 'change_priority_form', { ticket: @ticket } %>
 <%= render 'change_assignee_form', { ticket: @ticket } %>
