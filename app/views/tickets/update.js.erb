@@ -5,7 +5,7 @@
   jQuery('[data-dropdown="priorities-<%= @ticket.id %>"]')
       .empty()
       .append('<span class="priority-<%= @ticket.priority %> fa fa-circle"></span> ' +
-          '<%= j(t(@ticket.priority)) if params[:short].present? %>');
+          '<%= j(t(@ticket.priority)) unless params[:short] == 'true' %>');
 
 <% else %>
   window.location.reload();

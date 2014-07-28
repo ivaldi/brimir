@@ -55,7 +55,7 @@
           <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
             <span class="priority-<%= @ticket.priority %> fa fa-circle"></span> <%= t(@ticket.priority) %>
           </a>
-          <%= render 'priority_dropdown', ticket: @ticket %>
+          <%= render 'priority_dropdown', ticket: @ticket, short: false %>
         </dd>
         <dt><%= t(:assignee) %>:</dt>
         <dd>
