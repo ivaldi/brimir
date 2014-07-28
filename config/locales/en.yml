@@ -110,6 +110,8 @@ en:
   receive_new_ticket_notifications: Receive notifications for new tickets
   email_settings: Email Settings
   save: Save
+  access_control: Toegangscontrole
+  have_access_to_label: User has access to all tickets with any of these labels.
 
 # controllers/attachments
   file_not_found: File not found
@@ -133,6 +135,7 @@ en:
         password_confirmation: Password confirmation
         signature: Email signature
         remember_me: Remember me
+        label_ids: Labels
 
       ticket:
         from: From

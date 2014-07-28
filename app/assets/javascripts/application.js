@@ -67,7 +67,7 @@
     var screenY = jQuery(document).outerHeight();
     jQuery('aside').css('min-height', screenY+'px');
 
-    jQuery('#ticket_assignee_id').select2({ width: 'resolve' });
+    jQuery('.select2').select2({ width: 'resolve' });
 
     dialog = jQuery('[data-dialog]');
 

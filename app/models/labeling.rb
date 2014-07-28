@@ -4,7 +4,7 @@ class Labeling < ActiveRecord::Base
 
   validates_uniqueness_of :label_id, scope: [:labelable_id, :labelable_type]
 
-  def initialize(attributes)
+  def initialize(attributes={})
     unless attributes[:label].blank? ||
         attributes[:label][:name].blank?
 
