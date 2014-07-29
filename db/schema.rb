@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140725131410) do
+ActiveRecord::Schema.define(version: 20140729183640) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -44,6 +44,14 @@ ActiveRecord::Schema.define(version: 20140725131410) do
     t.datetime "updated_at"
   end
 
+  create_table "labels_users", id: false, force: true do |t|
+    t.integer "label_id", null: false
+    t.integer "user_id",  null: false
+  end
+
+  add_index "labels_users", ["label_id", "user_id"], name: "index_labels_users_on_label_id_and_user_id"
+  add_index "labels_users", ["user_id", "label_id"], name: "index_labels_users_on_user_id_and_label_id"
+
   create_table "replies", force: true do |t|
     t.text     "content"
     t.datetime "created_at"
@@ -70,7 +78,6 @@ ActiveRecord::Schema.define(version: 20140725131410) do
     t.string   "message_id"
     t.integer  "user_id"
     t.string   "content_type", default: "html"
-    t.string   "to"
     t.integer  "status",       default: 0,      null: false
     t.integer  "priority",     default: 0,      null: false
   end
@@ -79,7 +86,6 @@ ActiveRecord::Schema.define(version: 20140725131410) do
   add_index "tickets", ["message_id"], name: "index_tickets_on_message_id"
   add_index "tickets", ["priority"], name: "index_tickets_on_priority"
   add_index "tickets", ["status"], name: "index_tickets_on_status"
-  add_index "tickets", ["to"], name: "index_tickets_on_to"
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
   create_table "users", force: true do |t|
@@ -98,7 +104,6 @@ ActiveRecord::Schema.define(version: 20140725131410) do
     t.boolean  "agent"
     t.text     "signature"
     t.boolean  "notify",                 default: true
-    t.string   "incoming_address"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

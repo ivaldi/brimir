@@ -181,18 +181,4 @@ class TicketsControllerTest < ActionController::TestCase
 
   end
   
-  test 'should not show other ticket to subagent' do
-    sign_in users(:dave)
-
-    get :show, id: tickets(:problem)
-    assert_response :unauthorized
-  end
-
-  test 'should show ticket to subagent' do
-    sign_in users(:dave)
-
-    get :show, id: tickets(:multiple)
-    assert_response :success
-  end
-
 end

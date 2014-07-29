@@ -99,9 +99,7 @@ class TicketsController < ApplicationController
       format.html do
         @ticket = Ticket.new(ticket_params)
 
-        @ticket.to = current_user.incoming_address unless current_user.nil?
-
-        if @ticket.save!
+        if @ticket.save
           TicketMailer.notify_agents(@ticket, @ticket).deliver
 
           redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)

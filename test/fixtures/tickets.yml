@@ -5,7 +5,6 @@ problem:
   assignee: alice
   status: open
   priority: low
-  to: brimir@xxxx.com
 
 multiple:
   subject: Some problems
@@ -14,4 +13,3 @@ multiple:
   assignee: alice
   status: closed
   priority: high
-  to: brimir2@xxxx.com

@@ -107,28 +107,4 @@ class TicketMailerTest < ActionMailer::TestCase
     end
   end
 
-  test 'store to address of tickets' do
-
-    # ticket is created
-    assert_difference 'Ticket.count' do
-
-      ticket = TicketMailer.receive(read_fixture('sub_agent').join)
-
-      assert_equal 'brimir2@xxxx.com', ticket.to
-
-    end
-  end
-
-  test 'notification is sent to subagent as well' do
-
-    # notification is sent
-    assert_difference 'ActionMailer::Base.deliveries.size', 1 do
-      TicketMailer.receive(read_fixture('sub_agent').join)
-    end
-
-    mail = ActionMailer::Base.deliveries.last
-    assert_match(/dave@xxxx.com/, mail.to.join(', '))
-    assert_match(/alice@xxxx.com/, mail.to.join(', '))
-  end
-
 end

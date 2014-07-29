@@ -34,8 +34,4 @@ class User < ActiveRecord::Base
     where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
   }
 
-  scope :agents_and_subagents, ->(to) {
-    where('incoming_address IS NULL OR incoming_address = ?', to)
-  }
-
 end

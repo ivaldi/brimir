@@ -22,25 +22,7 @@ class Ability
 
     if user.agent?
 
-      # subagent for only 1 incoming address
-      unless user.incoming_address.nil?
-
-        can :manage, Ticket, to: user.incoming_address
-        can :manage, Reply, ticket: { to: user.incoming_address }
-        can [:create], Reply, ticket: nil # preview reply
-
-        can :read, Attachment, attachable_type: 'Ticket', attachable: {
-            to: user.incoming_address
-        }
-
-        can :read, Attachment, attachable_type: 'Reply', attachable: {
-            ticket: { to: user.incoming_address }
-        }
-
-        can [:edit, :update], User, id: user.id
-      else
-        can :manage, :all
-      end
+      can :manage, :all
 
     else
 

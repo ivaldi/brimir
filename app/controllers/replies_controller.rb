@@ -54,10 +54,9 @@ class RepliesController < ApplicationController
   private
     def reply_params
 
-      if current_user.agent? &&
-          current_user.incoming_address.blank?
+      if current_user.agent?
 
-        # only real agents are allowed to sent to any address they like
+        # only agents are allowed to sent to any address they like
         # (to, cc, bcc)
         params.require(:reply).permit(
             :content,

@@ -61,8 +61,6 @@ class Ticket < ActiveRecord::Base
   scope :viewable_by, ->(user) {
     if !user.agent?
       where(user_id: user.id)
-    elsif !user.incoming_address.nil?
-      where(to: user.incoming_address)
     end
   }
 end
