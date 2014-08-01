@@ -37,4 +37,14 @@ module ApplicationHelper
     end
     super(*[collection_or_options, options].compact)
   end
+
+  def status_icon(status)
+    if status == 'closed'
+      'check'
+    elsif status == 'deleted'
+      'trash-o'
+    else
+      'inbox'
+    end
+  end
 end

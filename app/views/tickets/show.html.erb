@@ -46,6 +46,7 @@
         <dt><%= t(:status) %>:</dt>
         <dd>
           <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
+            <span class="fa fa-<%= status_icon(@ticket.status) %>"></span>
             <%= t(@ticket.status) %>
           </a>
           <%= render 'status_dropdown', ticket: @ticket %>

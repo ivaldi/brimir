@@ -37,6 +37,7 @@
                 </a>
                 <%= render 'priority_dropdown', ticket: ticket, short: true %>
               </td>
+
               <td style="white-space:nowrap">
                 <%= ticket.user.email %>
               </td>
@@ -53,12 +54,6 @@
                     <em>(<%= t(:no_subject) %>)</em>
                   <% end %>
                 <% end %>
-              </td>
-              <td>
-                <a href="#" data-dropdown="statuses-<%= ticket.id %>">
-                  <%= t(ticket.status) %>
-                </a>
-                <%= render 'status_dropdown', ticket: ticket %>
               </td>
               <td>
                 <% if ticket.assignee %>
@@ -71,7 +66,10 @@
             <% else %>
               <%# DONT FORGET TO UPDATE THE IF ABOVE IF YOU MODIFY THE FOLLOWING HTML %>
 
-              <td><span class="priority-<%= ticket.priority %> fa fa-circle" title="<%= t(:priority) %> <%= ticket.priority %>"></span></td>
+              <td>
+                <span class="priority-<%= ticket.priority %> fa fa-circle" title="<%= t(:priority) %> <%= ticket.priority %>"></span>
+              </td>
+
               <td style="white-space:nowrap">
                 <%= ticket.user.email %>
               </td>
@@ -88,9 +86,6 @@
                     <em>(<%= t(:no_subject) %>)</em>
                   <% end %>
                 <% end %>
-              </td>
-              <td>
-                <span class="status-<%= ticket.status %>"></span>
               </td>
               <td>
                 <% if ticket.assignee %>
