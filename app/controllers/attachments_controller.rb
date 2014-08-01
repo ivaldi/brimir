@@ -19,7 +19,11 @@ class AttachmentsController < ApplicationController
   def show
     @attachment = Attachment.find(params[:id])
 
-    authorize! :read, @attachment.attachable
+    if @attachment.attachable_type == 'Ticket'
+      authorize! :read, @attachment.attachable
+    else
+      authorize! :read, @attachment.attachable.ticket
+    end
 
     begin
       if params[:format] == 'thumb'
