@@ -95,9 +95,9 @@ class TicketMailer < ActionMailer::Base
     @ticket = ticket
     @incoming = incoming
 
-    title = 'New reply to: ' + ticket.subject
+    title = I18n::translate(:new_reply_received) + ': ' + ticket.subject
     if incoming == ticket
-      title = 'New ticket: ' + ticket.subject
+      title = I18n::translate(:new_ticket) + ': ' + ticket.subject
     end
 
     mail(to: agents, subject: title,
@@ -105,7 +105,7 @@ class TicketMailer < ActionMailer::Base
                                         # the functional tests fail
   end
 
-  def normalize_body(part, charset) 
+  def normalize_body(part, charset)
     part.body.decoded.force_encoding(charset).encode('UTF-8')
   end
 
