@@ -35,6 +35,12 @@ class Ability
 
       # customers can edit their own account
       can [:edit, :update], User, id: user.id
+
+      # customer can see al tickets labeled with his/her labels
+      can :read, Ticket, Ticket.viewable_by(user) do |ticket|
+        # at least one label_id overlap
+        (ticket.label_ids & user.label_ids).size > 0
+      end
     end
   end
 end

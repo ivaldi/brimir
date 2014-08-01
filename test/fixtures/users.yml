@@ -14,3 +14,8 @@ charlie:
   email: charlie@xxxx.com
   agent: true
   notify: false
+
+dave:
+  email: dave@xxxx.com
+  agent: false
+  notify: false
