@@ -29,7 +29,6 @@ class Ability
       # customers can view their own tickets, its replies and attachments
       can [:read, :create, :new], Ticket, user_id: user.id
       can [:new, :create, :read], Reply, ticket: { user_id: user.id }
-      can [:create], Reply, ticket: nil # preview reply
       can :read, Attachment, attachable_type: 'Ticket', attachable: { user_id: user.id }
       can :read, Attachment, attachable_type: 'Reply', attachable: { ticket: { user_id: user.id } }
 
