@@ -68,7 +68,7 @@ class Ticket < ActiveRecord::Base
   scope :viewable_by, ->(user) {
     if !user.agent?
       joins('LEFT JOIN labelings ON tickets.id = labelings.labelable_id')
-        .where('(labelings.label_id = ? AND labelings.labelable_type = ?) ' +
+        .where('(labelings.label_id IN (?) AND labelings.labelable_type = ?) ' +
             ' OR user_id = ?', user.label_ids, 'Ticket', user.id)
     end
   }

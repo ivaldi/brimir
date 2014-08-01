@@ -20,13 +20,13 @@
     </div>
 
     <div class="large-6 columns">
-      <% if @user.agent? || @user.new_record? %>
+      <% if @user.agent? %>
         <h5><%= t(:email_settings) %></h5>
 
         <%= f.check_box :notify, label: t(:receive_new_ticket_notifications) %>
 
         <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce' %>
-      <% else %>
+      <% elsif can? :create, Labeling %>
         <h5><%= t(:access_control) %></h5>
         <p><%= t(:have_access_to_label) %></p>
 
