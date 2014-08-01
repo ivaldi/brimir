@@ -32,6 +32,8 @@ class TicketsController < ApplicationController
   def index
     @agents = User.agents
 
+    @labels = Label.ordered
+
     params[:status] ||= 'open'
 
     @tickets = Ticket.by_status(params[:status])

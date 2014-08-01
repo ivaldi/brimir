@@ -32,8 +32,7 @@ class Ticket < ActiveRecord::Base
 
   scope :by_label_id, ->(label_id) {
     if label_id.to_i > 0
-      joins(:labelings)
-          .where(labelings: { label_id: label_id })
+      where(labelings: { label_id: label_id })
     end
   }
 
@@ -67,9 +66,12 @@ class Ticket < ActiveRecord::Base
 
   scope :viewable_by, ->(user) {
     if !user.agent?
-      joins('LEFT JOIN labelings ON tickets.id = labelings.labelable_id')
-        .where('(labelings.label_id IN (?) AND labelings.labelable_type = ?) ' +
-            ' OR user_id = ?', user.label_ids, 'Ticket', user.id)
+      joins('LEFT JOIN labelings ON tickets.id = labelings.labelable_id AND ' +
+          'labelings.labelable_type = \'Ticket\'')
+          .where('labelings.label_id IN (?) OR user_id = ?', user.label_ids, user.id)
+    else
+      joins('LEFT JOIN labelings ON tickets.id = labelings.labelable_id AND ' +
+          'labelings.labelable_type = \'Ticket\'')
     end
   }
 end

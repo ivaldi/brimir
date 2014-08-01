@@ -22,6 +22,16 @@
         <% end %>
       </div>
     </div>
+   
+    <p>
+      <% @labels.each do |label| %>
+        <a href="<%= tickets_url(params.merge(label_id: label.id)) %>">
+          <span class="radius label<%= ' success' if params[:label_id] == label.id.to_s %>">
+            <%= label.name %>
+          </span>
+        </a>
+      <% end %>
+    </p>
 
     <table class="full zebra">
       <tbody>
