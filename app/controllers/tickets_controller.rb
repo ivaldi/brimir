@@ -34,9 +34,9 @@ class TicketsController < ApplicationController
 
     params[:status] ||= 'open'
 
-    # TODO: filter status
     @tickets = Ticket.by_status(params[:status])
       .search(params[:q])
+      .by_label_id(params[:label_id])
       .filter_by_assignee_id(params[:assignee_id])
       .page(params[:page])
       .ordered

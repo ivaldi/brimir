@@ -30,6 +30,13 @@ class Ticket < ActiveRecord::Base
   enum status: [:open, :closed, :deleted]
   enum priority: [:unknown, :low, :medium, :high]
 
+  scope :by_label_id, ->(label_id) {
+    if label_id.to_i > 0
+      joins(:labelings)
+          .where(labelings: { label_id: label_id })
+    end
+  }
+
   scope :by_status, ->(status) {
     where(status: Ticket.statuses[status.to_sym])
   }
