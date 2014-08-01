@@ -6,8 +6,12 @@ class RemoveSubAgents < ActiveRecord::Migration
       Ticket.where(to: user.incoming_address).each do |ticket|
         label = Label.where(name: user.incoming_address).first_or_create!
 
-        ticket.labels << label
-        user.labels << label
+        unless ticket.label_ids.include?
+          ticket.labels << label
+        end
+        unless user.label_ids.include?
+          user.labels << label
+        end
       end
 
       user.agent = false
