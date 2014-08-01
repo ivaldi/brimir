@@ -48,7 +48,7 @@
                 <% if !ticket.subject.nil? %>
                   <a href="<%= ticket_url(ticket) %>">
                     <% if ticket.replies.size > 0 %>
-                      <span class="radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
+                      <span class="success radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
                     <% end %>
                     <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80] %></span>
                   </a>
@@ -79,8 +79,12 @@
               <td class="text-secondary table-nowrap">
                 <% if !ticket.subject.nil? %>
                   <a href="<%= ticket_url(ticket) %>">
+                    <% ticket.labels.each do |label| %>
+                      <span class="radius label"><%= label.name %></span>
+                    <% end %>
+
                     <% if ticket.replies.size > 0 %>
-                      <span class="radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
+                      <span class="success radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
                     <% end %>
                     <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80] %></span>
                   </a>
