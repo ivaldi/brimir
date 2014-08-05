@@ -11,18 +11,20 @@
       </div>
       <div class="large-3 columns">
         <%= form_tag tickets_path, method: :get do %>
-        <div class="row collapse">
-          <div class="small-9 columns">
-            <%= text_field_tag :q, params[:q] %>
+          <%= hidden_field_tag :assignee_id, params[:assignee_id] %>
+          <%= hidden_field_tag :status, params[:status] %>
+          <div class="row collapse">
+            <div class="small-9 columns">
+              <%= text_field_tag :q, params[:q] %>
+            </div>
+            <div class="small-3 columns">
+              <%= button_tag t(:search), type: 'submit', class: 'button postfix' %>
+            </div>
           </div>
-          <div class="small-3 columns">
-            <%= button_tag t(:search), type: 'submit', class: 'button postfix' %>
-          </div>
-        </div>
         <% end %>
       </div>
     </div>
-   
+
     <p>
       <% @labels.each do |label| %>
         <a href="<%= tickets_url(params.merge(label_id: label.id)) %>">

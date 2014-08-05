@@ -28,25 +28,28 @@
           </div>
           <ul class="off-canvas-list">
             <li>
-              <%= active_elem_if :a, current_page?(root_path), href: root_path do %>
+              <%= active_elem_if :a, params[:status] == 'open' &&
+                  params[:assignee_id].to_i == 0,
+                  href: root_path do %>
+
                 <span class="fa fa-inbox"></span><%= t(:inbox) %>
               <% end %>
             </li>
             <li>
-              <%= active_elem_if :a, current_page?(tickets_path(assignee_id: current_user.id,
-                  status: 'open')), href: tickets_path(assignee_id: current_user.id,
-                  status: 'open') do %>
+              <%= active_elem_if :a, params[:status] == 'open' &&
+                  params[:assignee_id].to_i == current_user.id,
+                  href: tickets_path(assignee_id: current_user.id) do %>
                 <span class="fa fa-user"></span><%= t(:mine) %>
               <% end %>
             </li>
             <li>
-              <%= active_elem_if :a, current_page?(tickets_path(status: 'closed')),
+              <%= active_elem_if :a, params[:status] == 'closed',
                    href: tickets_path(status: 'closed') do %>
                 <span class="fa fa-check"></span><%= t(:closed) %>
               <% end %>
             </li>
             <li>
-              <%= active_elem_if :a, current_page?(tickets_path(status: 'deleted')),
+              <%= active_elem_if :a, params[:status] == 'deleted',
                   href: tickets_path(status: 'deleted') do %>
                 <span class="fa fa-trash-o"></span><%= t(:trashed) %>
               <% end %>
