@@ -50,8 +50,8 @@ We appreciate all contributions! If you would like to contribute, please follow 
 Requested features
 ------------------
 Some users have made requests for the following features. If you would like to contribute, you could add any of these.
+- Allowing customers to update ticket status, with correct email notifications.
 - Switchable property to support threads by using special tags in the subject line instead of relying on mail headers.
-- Grouping issues by project.
 - Support for hosted incoming mail services (Sendgrid, Mandrill), possibly using griddler gem.
 
 License
