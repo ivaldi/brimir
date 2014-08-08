@@ -138,5 +138,21 @@ class RepliesControllerTest < ActionController::TestCase
 
   end
 
+  test 'should respond to others ticket as customer' do
+
+    sign_out(users(:alice))
+    sign_in(users(:dave))
+
+    # do we send a mail?
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      post :create, reply: {
+          content: @reply.content,
+          ticket_id: @ticket.id,
+      }
+    end
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal [ users(:bob).email, users(:alice).email ], mail.to
+  end
+
 
 end
