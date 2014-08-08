@@ -31,16 +31,6 @@ class Reply < ActiveRecord::Base
     where.not(message_id: nil)
   }
 
-  def notify
-    mail = yield(self)
-
-    mail.deliver
-
-    self.message_id = mail.message_id
-    self.content_type = 'html'
-    self.save
-  end
-
   def to
     to = read_attribute(:to)
 

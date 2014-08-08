@@ -17,24 +17,5 @@
 require 'test_helper'
 
 class ReplyTest < ActiveSupport::TestCase
-  setup do
-    @reply = replies(:solution)
-  end
 
-  test "should deliver the mail when notifying" do
-    test_mailer = OpenStruct.new.tap do |x|
-      def x.deliver
-        @deliveries ||= 0
-        @deliveries += 1
-      end
-
-      def x.deliveries
-        @deliveries
-      end
-    end
-
-    @reply.notify { |reply| test_mailer }
-
-    assert_equal 1, test_mailer.deliveries
-  end
 end

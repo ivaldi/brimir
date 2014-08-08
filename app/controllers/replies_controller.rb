@@ -38,39 +38,33 @@ class RepliesController < ApplicationController
 
     authorize! :create, @reply
 
-    if @reply.save && @reply.notify do |reply|
-      NotificationMailer.new_reply(current_user, reply)
-    end
-      redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
-    else
+    begin
+      Reply.transaction do
+        @reply.save!
+        mail = NotificationMailer.new_reply(current_user, @reply)
+
+        mail.deliver
+
+        @reply.to = mail.to.join(', ')
+        @reply.message_id = mail.message_id
+        @reply.content_type = 'html'
+
+        @reply.save!
+        redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
+      end
+    rescue
       render action: 'new'
     end
   end
 
   private
     def reply_params
-
-      if current_user.agent?
-
-        # only agents are allowed to sent to any address they like
-        # (to, cc, bcc)
-        params.require(:reply).permit(
-            :content,
-            :ticket_id,
-            :message_id,
-            :user_id,
-            :to,
-            :cc,
-            :bcc
-        )
-      else
-        params.require(:reply).permit(
-            :content,
-            :ticket_id,
-            :message_id,
-            :user_id,
-        )
-      end
+      params.require(:reply).permit(
+          :content,
+          :ticket_id,
+          :message_id,
+          :user_id,
+      )
     end
 
 end

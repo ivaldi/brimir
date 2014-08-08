@@ -73,10 +73,12 @@ class NotificationMailer < ActionMailer::Base
 
       assignee = reply.ticket.assignee
       if assignee.present?
-        to += [assignee.email]
+        to << assignee.email
+      else
+        to += agents_to_notify
       end
 
-      to.uniq
+      to.uniq - [reply.user.email]
     end
 
     def add_reference_message_ids(reply)
