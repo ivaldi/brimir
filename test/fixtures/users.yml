@@ -1,5 +1,3 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 alice:
   email: alice@xxxx.com
   agent: true
@@ -8,14 +6,10 @@ alice:
 
 bob:
   email: bob@xxxx.com
-  agent: false
 
 charlie:
   email: charlie@xxxx.com
   agent: true
-  notify: false
 
 dave:
   email: dave@xxxx.com
-  agent: false
-  notify: false
