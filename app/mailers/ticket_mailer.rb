@@ -16,37 +16,6 @@
 
 class TicketMailer < ActionMailer::Base
 
-  def reply(reply)
-    @reply = reply
-
-    replies_without_current = reply.ticket.replies.order(:id).select do |r|
-      r != reply
-    end
-
-    references = replies_without_current.collect do |r|
-      '<' + r.message_id.to_s + '>'
-    end
-
-    headers['References'] = references.join(' ')
-
-    if replies_without_current.size == 0
-      reply_to = reply.ticket
-      subject = reply_to.subject
-    else
-      reply_to = replies_without_current.last
-      subject = replies_without_current.first.ticket.subject
-    end
-
-    headers['In-Reply-To'] = '<' + reply_to.message_id.to_s + '>'
-
-    reply.attachments.each do |at|
-      attachments[at.file_file_name] = File.read(at.file.path)
-    end
-
-    mail(to: reply.to, cc: reply.cc, bcc: reply.bcc, subject: 'Re: ' \
-        + subject)
-  end
-
   def notify_status_changed(ticket)
     @ticket = ticket
 
@@ -70,40 +39,6 @@ class TicketMailer < ActionMailer::Base
         'Ticket assigned to you: ' + ticket.subject)
   end
 
-  def notify_agents(ticket, incoming)
-
-    agents = []
-
-    agents << ticket.assignee.email unless ticket.assignee.nil?
-
-    ticket.replies.each do |reply|
-      if reply.user.agent
-        agents.append(reply.user.email)
-      end
-    end
-
-    if agents.size == 0
-      # notify all agents and no subagents
-      agents = User.agents
-          .where(notify: true)
-          .pluck(:email)
-    else
-      # only the ones concerned, without duplicates
-      agents = agents.uniq
-    end
-
-    @ticket = ticket
-    @incoming = incoming
-
-    title = I18n::translate(:new_reply_received) + ': ' + ticket.subject
-    if incoming == ticket
-      title = I18n::translate(:new_ticket) + ': ' + ticket.subject
-    end
-
-    mail(to: agents, subject: title,
-        template_name: 'notify_agents') # without template_name
-                                        # the functional tests fail
-  end
 
   def normalize_body(part, charset)
     part.body.decoded.force_encoding(charset).encode('UTF-8')
@@ -201,7 +136,11 @@ class TicketMailer < ActionMailer::Base
 
     end
 
-    notify_agents(ticket, incoming).deliver
+    if ticket == incoming
+      NotificationMailer.new_ticket(ticket.user, ticket).deliver
+    else
+      NotificationMailer.new_reply(incoming.user, incoming).deliver
+    end
 
     return incoming
 

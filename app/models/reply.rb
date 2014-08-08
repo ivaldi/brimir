@@ -27,6 +27,9 @@ class Reply < ActiveRecord::Base
   belongs_to :user
 
   scope :chronologically, -> { order(:id) }
+  scope :with_message_id, -> {
+    where.not(message_id: nil)
+  }
 
   def notify
     self.content += '<br /><br />' + self.user.signature.to_s
@@ -50,4 +53,9 @@ class Reply < ActiveRecord::Base
       to
     end
   end
+
+  def other_replies
+    self.ticket.replies.where.not(id: self.id)
+  end
+
 end

@@ -79,9 +79,6 @@ nl:
   attach_files: Bestand(en) toevoegen
   send_reply: Verstuur reactie
 
-# ticket_mailer/notify_agents.text.erb
-  new_reply_received: Nieuwe reactie ontvangen voor ticket
-
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket aan jou toegewezen
 
@@ -90,6 +87,9 @@ nl:
 
 # ticket_mailer/notify_status_changed.text.erb
   tickets_status_modified: Status van ticket is gewijzigd
+
+# notification_mailer/new_reply.text.erb
+  new_reply: Nieuwe reactie
 
 # attachments/_attachment
   download: download
