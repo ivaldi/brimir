@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140711132522) do
+ActiveRecord::Schema.define(version: 20140729183640) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -25,6 +25,24 @@ ActiveRecord::Schema.define(version: 20140711132522) do
   end
 
   add_index "attachments", ["attachable_id"], name: "index_attachments_on_attachable_id"
+
+  create_table "labelings", force: true do |t|
+    t.integer  "label_id"
+    t.integer  "labelable_id"
+    t.string   "labelable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "labelings", ["label_id", "labelable_id", "labelable_type"], name: "unique_labeling_label", unique: true
+  add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
+  add_index "labelings", ["labelable_id", "labelable_type"], name: "index_labelings_on_labelable_id_and_labelable_type"
+
+  create_table "labels", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "replies", force: true do |t|
     t.text     "content"
@@ -52,7 +70,6 @@ ActiveRecord::Schema.define(version: 20140711132522) do
     t.string   "message_id"
     t.integer  "user_id"
     t.string   "content_type", default: "html"
-    t.string   "to"
     t.integer  "status",       default: 0,      null: false
     t.integer  "priority",     default: 0,      null: false
   end
@@ -61,7 +78,6 @@ ActiveRecord::Schema.define(version: 20140711132522) do
   add_index "tickets", ["message_id"], name: "index_tickets_on_message_id"
   add_index "tickets", ["priority"], name: "index_tickets_on_priority"
   add_index "tickets", ["status"], name: "index_tickets_on_status"
-  add_index "tickets", ["to"], name: "index_tickets_on_to"
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
   create_table "users", force: true do |t|
@@ -80,7 +96,6 @@ ActiveRecord::Schema.define(version: 20140711132522) do
     t.boolean  "agent"
     t.text     "signature"
     t.boolean  "notify",                 default: true
-    t.string   "incoming_address"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

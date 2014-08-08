@@ -14,24 +14,38 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+require 'test_helper'
 
-  has_many :tickets
-  has_many :replies
-  has_many :labelings, as: :labelable
-  has_many :labels, through: :labelings
+class LabelingsControllerTest < ActionController::TestCase
 
-  scope :agents, -> {
-    where(agent: true)
-  }
+  setup do
+    @labeling = labelings(:bug_ticket)
 
-  scope :ordered, -> {
-    order(:email)
-  }
+    sign_in users(:alice)
+  end
 
-  scope :by_email, ->(email) {
-    where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
-  }
+  test 'should create labeling' do
+
+    assert_difference 'Labeling.count' do
+
+      post :create, format: :js, labeling: {
+        labelable_id: tickets(:problem).id,
+        labelable_type: 'Ticket',
+        label: {
+          name: 'Hello'
+        }
+      }
+
+      assert_response :success
+    end
+  end
+
+  test 'should remove labeling' do
+    assert_difference 'Labeling.count', -1 do
+      delete :destroy, id: @labeling, format: :js
+
+      assert_response :success
+    end
+  end
 
 end

@@ -1,19 +1,19 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 problem:
   subject: I have a problem
   content: My computer doesn't start anymore
   user: bob
   assignee: alice
-  status: open
   priority: low
-  to: brimir@xxxx.com
 
 multiple:
   subject: Some problems
-  content: "Word doesn't open, internet doesn't work"
+  content: Word doesn't open, internet doesn't work
   user: charlie
   assignee: alice
   status: closed
   priority: high
-  to: brimir2@xxxx.com
+
+daves_problem:
+  subject: Dave has a problem
+  content: Dave has a problem with his computer
+  user: dave

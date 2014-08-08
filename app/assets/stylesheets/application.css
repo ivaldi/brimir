@@ -17,7 +17,6 @@
  *= require foundation_and_overrides
  *= require select2
  *= require font-awesome
- *= require_tree .
  *= require_self
  */
 
@@ -157,7 +156,7 @@ table input{
 }
 
 .off-canvas-list a.active{
-	color: #FFF;
+	color: #fff;
 }
 
 .output{

@@ -3,7 +3,7 @@
   <%= r.hidden_field :ticket_id %>
   <div class="panel mt">
     <h3><%= t(:reply) %></h3>
-    <% if current_user.agent? && current_user.incoming_address.nil? %>
+    <% if current_user.agent? %>
       <div class="row">
         <div class="medium-2 large-1 columns">
           <%= r.label :to, class: 'inline' %>

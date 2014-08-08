@@ -11,17 +11,37 @@
       </div>
       <div class="large-3 columns">
         <%= form_tag tickets_path, method: :get do %>
-        <div class="row collapse">
-          <div class="small-9 columns">
-            <%= text_field_tag :q, params[:q] %>
+          <%= hidden_field_tag :assignee_id, params[:assignee_id] %>
+          <%= hidden_field_tag :status, params[:status] %>
+          <div class="row collapse">
+            <div class="small-9 columns">
+              <%= text_field_tag :q, params[:q] %>
+            </div>
+            <div class="small-3 columns">
+              <%= button_tag t(:search), type: 'submit', class: 'button postfix' %>
+            </div>
           </div>
-          <div class="small-3 columns">
-            <%= button_tag t(:search), type: 'submit', class: 'button postfix' %>
-          </div>
-        </div>
         <% end %>
       </div>
     </div>
+
+    <p>
+      <% @labels.each do |label| %>
+        <%
+          # toggle label on/off
+          if params[:label_id].to_i == label.id
+            p = params.merge(label_id: nil)
+          else
+            p = params.merge(label_id: label.id)
+          end
+        %>
+        <a href="<%= tickets_url(p) %>">
+          <span class="radius label<%= ' success' if params[:label_id].to_i == label.id %>">
+            <%= label.name %>
+          </span>
+        </a>
+      <% end %>
+    </p>
 
     <table class="full zebra">
       <tbody>
@@ -42,10 +62,13 @@
                 <%= ticket.user.email %>
               </td>
               <td class="text-secondary table-nowrap">
+                <% ticket.labels.each do |label| %>
+                  <span class="radius label"><%= label.name %></span>
+                <% end %>
                 <% if !ticket.subject.nil? %>
                   <a href="<%= ticket_url(ticket) %>">
                     <% if ticket.replies.size > 0 %>
-                      <span class="radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
+                      <span class="success radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
                     <% end %>
                     <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80] %></span>
                   </a>
@@ -76,8 +99,12 @@
               <td class="text-secondary table-nowrap">
                 <% if !ticket.subject.nil? %>
                   <a href="<%= ticket_url(ticket) %>">
+                    <% ticket.labels.each do |label| %>
+                      <span class="radius label"><%= label.name %></span>
+                    <% end %>
+
                     <% if ticket.replies.size > 0 %>
-                      <span class="radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
+                      <span class="success radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
                     <% end %>
                     <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80] %></span>
                   </a>

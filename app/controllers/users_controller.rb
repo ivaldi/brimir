@@ -20,10 +20,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @labels = Label.ordered
   end
 
   def update
     @user = User.find(params[:id])
+    @labels = Label.ordered
 
     # if no password was posted, remove from params
     if params[:user][:password] == ''
@@ -64,10 +66,12 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @labels = Label.ordered
   end
 
   def create
     @user = User.new(user_params)
+    @labels = Label.ordered
 
     if @user.save
       redirect_to users_url, notice: I18n::translate(:user_added)
@@ -93,6 +97,7 @@ class UsersController < ApplicationController
       unless current_user.agent?
         attributes.delete(:email)
         attributes.delete(:agent)
+        attributes.delete(:label_ids)
       end
 
       return attributes

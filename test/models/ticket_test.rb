@@ -17,7 +17,16 @@
 require 'test_helper'
 
 class TicketTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  test 'should return accessible tickets for customer' do
+    dave = users(:dave)
+
+    tickets = Ticket.viewable_by(dave)
+
+    assert_equal 2, tickets.count
+
+    tickets.each do |ticket|
+      assert dave == ticket.user || (ticket.label_ids & dave.label_ids).size > 0
+    end
+  end
 end

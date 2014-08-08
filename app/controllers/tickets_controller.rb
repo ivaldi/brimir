@@ -15,7 +15,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketsController < ApplicationController
-  before_filter :authenticate_user!, except: [:create]
+  before_filter :authenticate_user!, except: [:create, :new]
+  before_filter :allow_cors, only: [:create, :new]
+
+  def allow_cors
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = %w{GET POST PUT DELETE}.join(',')
+    headers['Access-Control-Allow-Headers'] =
+        %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(',')
+
+    head :ok  if request.request_method == 'OPTIONS'
+  end
+
 
   load_and_authorize_resource :ticket, except: [:index, :create]
   skip_authorization_check only: [:create]
@@ -25,16 +36,24 @@ class TicketsController < ApplicationController
 
     @reply = @ticket.replies.new
     @reply.to = @ticket.user.email
+
+    @labeling = Labeling.new(labelable: @ticket)
   end
 
   def index
     @agents = User.agents
 
+    if current_user.agent?
+      @labels = Label.ordered
+    else
+      @labels = current_user.labels.ordered
+    end
+
     params[:status] ||= 'open'
 
-    # TODO: filter status
     @tickets = Ticket.by_status(params[:status])
       .search(params[:q])
+      .by_label_id(params[:label_id])
       .filter_by_assignee_id(params[:assignee_id])
       .page(params[:page])
       .ordered
@@ -89,7 +108,13 @@ class TicketsController < ApplicationController
   end
 
   def new
-    @ticket.user = current_user
+    unless params[:ticket].nil? # prefill params given?
+      @ticket = Ticket.new(ticket_params)
+    end
+
+    unless current_user.nil?
+      @ticket.user = current_user
+    end
   end
 
   def create
@@ -97,12 +122,14 @@ class TicketsController < ApplicationController
       format.html do
         @ticket = Ticket.new(ticket_params)
 
-        @ticket.to = current_user.incoming_address unless current_user.nil?
-
-        if @ticket.save!
+        if @ticket.save
           TicketMailer.notify_agents(@ticket, @ticket).deliver
 
-          redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
+          if current_user.nil?
+            return render text: I18n::translate(:ticket_added)
+          else
+            redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
+          end
         else
           render 'new'
         end

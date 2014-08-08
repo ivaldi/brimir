@@ -16,9 +16,15 @@
 
 class AttachmentsController < ApplicationController
 
-  load_and_authorize_resource :attachment
-  
   def show
+    @attachment = Attachment.find(params[:id])
+
+    if @attachment.attachable_type == 'Ticket'
+      authorize! :read, @attachment.attachable
+    else
+      authorize! :read, @attachment.attachable.ticket
+    end
+
     begin
       if params[:format] == 'thumb'
         send_file @attachment.file.path(:thumb),

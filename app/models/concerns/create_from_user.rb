@@ -22,17 +22,20 @@ module CreateFromUser
 
     def from=(email)
 
-      # search using the same method as Devise validation
-      from_user = User.find_first_by_auth_conditions(email: email)
+      unless email.blank?
 
-      if !from_user
-        password_length = 12
-        password = Devise.friendly_token.first(password_length)
-        from_user = User.create!(email: email, password: password,
-            password_confirmation: password)
+        # search using the same method as Devise validation
+        from_user = User.find_first_by_auth_conditions(email: email)
+
+        if !from_user
+          password_length = 12
+          password = Devise.friendly_token.first(password_length)
+          from_user = User.create!(email: email, password: password,
+              password_confirmation: password)
+        end
+
+        self.user = from_user
       end
-
-      self.user = from_user
 
     end
 

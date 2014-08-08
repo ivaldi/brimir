@@ -17,6 +17,5 @@ charlie:
 
 dave:
   email: dave@xxxx.com
-  agent: true
-  incoming_address: brimir2@xxxx.com
-  notify: true
+  agent: false
+  notify: false

@@ -23,11 +23,18 @@ class Ticket < ActiveRecord::Base
   belongs_to :assignee, class_name: 'User'
 
   has_many :attachments, as: :attachable, dependent: :destroy
-
   has_many :replies, dependent: :destroy
+  has_many :labelings, as: :labelable
+  has_many :labels, through: :labelings
 
   enum status: [:open, :closed, :deleted]
   enum priority: [:unknown, :low, :medium, :high]
+
+  scope :by_label_id, ->(label_id) {
+    if label_id.to_i > 0
+      where(labelings: { label_id: label_id })
+    end
+  }
 
   scope :by_status, ->(status) {
     where(status: Ticket.statuses[status.to_sym])
@@ -59,9 +66,12 @@ class Ticket < ActiveRecord::Base
 
   scope :viewable_by, ->(user) {
     if !user.agent?
-      where(user_id: user.id)
-    elsif !user.incoming_address.nil?
-      where(to: user.incoming_address)
+      joins('LEFT JOIN labelings ON tickets.id = labelings.labelable_id AND ' +
+          'labelings.labelable_type = \'Ticket\'')
+          .where('labelings.label_id IN (?) OR user_id = ?', user.label_ids, user.id)
+    else
+      joins('LEFT JOIN labelings ON tickets.id = labelings.labelable_id AND ' +
+          'labelings.labelable_type = \'Ticket\'')
     end
   }
 end

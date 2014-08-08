@@ -14,24 +14,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+class Labeling < ActiveRecord::Base
+  belongs_to :label
+  belongs_to :labelable, polymorphic: true
 
-  has_many :tickets
-  has_many :replies
-  has_many :labelings, as: :labelable
-  has_many :labels, through: :labelings
+  validates_uniqueness_of :label_id, scope: [:labelable_id, :labelable_type]
 
-  scope :agents, -> {
-    where(agent: true)
-  }
+  def initialize(attributes={})
+    unless attributes[:label].blank? ||
+        attributes[:label][:name].blank?
 
-  scope :ordered, -> {
-    order(:email)
-  }
+      label = Label.where(name: attributes[:label][:name]).first_or_create!
 
-  scope :by_email, ->(email) {
-    where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
-  }
+      attributes.delete(:label)
+      attributes[:label_id] = label.id
+    end
 
+    super(attributes)
+  end
 end

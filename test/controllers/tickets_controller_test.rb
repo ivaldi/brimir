@@ -42,6 +42,11 @@ class TicketsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should get new as anonymous' do
+    get :new
+    assert_response :success
+  end
+
   test 'should create ticket when posted from MTA' do
 
     assert_difference 'Ticket.count', 1 do
@@ -53,6 +58,20 @@ class TicketsControllerTest < ActionController::TestCase
   end
 
   test 'should create ticket from html form' do
+    assert_difference 'Ticket.count', 1 do
+      post :create, ticket: {
+          from: 'test@test.nl',
+          content: @ticket.content,
+          subject: @ticket.subject
+      }
+
+      assert_response :success
+    end
+  end
+
+  test 'should create ticket' do
+    sign_in users(:alice)
+
     assert_difference 'Ticket.count', 1 do
       post :create, ticket: {
           from: 'test@test.nl',
@@ -84,6 +103,13 @@ class TicketsControllerTest < ActionController::TestCase
 
     get :show, id: @ticket.id
     assert_response :success
+
+    # should contain this for label adding with javascript
+    assert_select '[data-labelings]'
+
+    # should contain this for label removing with javascript
+    assert_select '[data-labeling-id=?]',
+        @ticket.labelings.first.id
   end
 
   test 'should email assignee if ticket is assigned by somebody else' do
@@ -174,18 +200,4 @@ class TicketsControllerTest < ActionController::TestCase
 
   end
   
-  test 'should not show other ticket to subagent' do
-    sign_in users(:dave)
-
-    get :show, id: tickets(:problem)
-    assert_response :unauthorized
-  end
-
-  test 'should show ticket to subagent' do
-    sign_in users(:dave)
-
-    get :show, id: tickets(:multiple)
-    assert_response :success
-  end
-
 end

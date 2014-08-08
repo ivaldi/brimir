@@ -14,24 +14,33 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
+class LabelingsController < ApplicationController
 
-  has_many :tickets
-  has_many :replies
-  has_many :labelings, as: :labelable
-  has_many :labels, through: :labelings
+  load_and_authorize_resource :labeling
 
-  scope :agents, -> {
-    where(agent: true)
-  }
+  def create
+    @labeling = Labeling.create(labeling_params)
 
-  scope :ordered, -> {
-    order(:email)
-  }
+    respond_to :js
+  end
 
-  scope :by_email, ->(email) {
-    where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
-  }
+  def destroy
+    @labelings = Labeling.find(params[:id])
 
+    @labelings.destroy
+
+    respond_to :js
+  end
+
+  protected
+    def labeling_params
+      params.require(:labeling).permit(
+          :label_id,
+          :labelable_id,
+          :labelable_type,
+          label: [
+              :name
+          ]
+      )
+    end
 end

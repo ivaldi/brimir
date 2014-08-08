@@ -83,19 +83,10 @@ class TicketMailer < ActionMailer::Base
     end
 
     if agents.size == 0
-      if ticket.to.nil?
-        # notify all agents and no subagents
-        agents = User.agents
-            .where(notify: true)
-            .where(incoming_address: nil)
-            .pluck(:email)
-      else
-        # notify all agents and subagents with incoming_address
-        agents = User.agents
-            .where(notify: true)
-            .agents_and_subagents(ticket.to)
-            .pluck(:email)
-      end
+      # notify all agents and no subagents
+      agents = User.agents
+          .where(notify: true)
+          .pluck(:email)
     else
       # only the ones concerned, without duplicates
       agents = agents.uniq
@@ -104,9 +95,9 @@ class TicketMailer < ActionMailer::Base
     @ticket = ticket
     @incoming = incoming
 
-    title = 'New reply to: ' + ticket.subject
+    title = I18n::translate(:new_reply_received) + ': ' + ticket.subject
     if incoming == ticket
-      title = 'New ticket: ' + ticket.subject
+      title = I18n::translate(:new_ticket) + ': ' + ticket.subject
     end
 
     mail(to: agents, subject: title,
@@ -114,7 +105,7 @@ class TicketMailer < ActionMailer::Base
                                         # the functional tests fail
   end
 
-  def normalize_body(part, charset) 
+  def normalize_body(part, charset)
     part.body.decoded.force_encoding(charset).encode('UTF-8')
   end
 
@@ -177,14 +168,13 @@ class TicketMailer < ActionMailer::Base
 
     else
 
-      # add reply
+      # add new ticket
       ticket = Ticket.create!({
         from: email.from.first,
         subject: email.subject,
         content: content,
         message_id: email.message_id,
         content_type: content_type,
-        to: email.to.join(', ')
       })
 
       incoming = ticket

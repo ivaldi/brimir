@@ -75,3 +75,6 @@ gem 'http_accept_language'
 # internationalisation
 gem 'rails-i18n'
 gem 'devise-i18n'
+
+# non-digested assets for brimir-plugin js/css
+gem 'non-stupid-digest-assets'

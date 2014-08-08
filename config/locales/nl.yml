@@ -57,6 +57,8 @@ nl:
   open: Open
   closed: Gesloten
   deleted: Verwijderd
+  labels: Labels
+  label_name: Label naam
 
 # tickets/_change_priority_form
   change: Wijzig
@@ -111,6 +113,8 @@ nl:
   receive_new_ticket_notifications: Ontvang notificaties voor nieuwe tickets
   email_settings: E-mailinstellingen
   save: Opslaan
+  access_control: Toegangscontrole
+  have_access_to_label: Gebruiker heeft toegang tot alle tickets met één van deze labels.
 
 # controllers/attachments
   file_not_found: Bestand niet gevonden
@@ -139,9 +143,10 @@ nl:
         password_confirmation: Wachtwoord bevestiging
         signature: E-mailhandtekening
         remember_me: Onthouden
+        label_ids: Labels
 
       ticket:
-        from: Van
+        from: Van e-mailadres
         subject: Onderwerp
         content: Inhoud
         status: Status
