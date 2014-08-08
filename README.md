@@ -35,7 +35,7 @@ Incoming email
 --------------
 Incoming emails can be posted to the tickets url by using the script found in scripts/post-mail. Create an alias in your `/etc/aliases` file like this:
 
-    brimir: "|/bin/bash /path/to/your/brimir/repo/scripts/post-mail http://yoururl.com/tickets.json"
+    brimir: "|/bin/bash /path/to/your/brimir/repo/script/post-mail http://yoururl.com/tickets.json"
 
 Now sending an email to brimir@yoururl.com should start curl and post the email to your brimir installation.
 
