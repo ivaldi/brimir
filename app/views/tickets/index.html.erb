@@ -62,7 +62,7 @@
                 <%= ticket.user.email %>
               </td>
               <td class="text-secondary table-nowrap">
-                <% ticket.labels.each do |label| %>
+                <% ticket.labels.viewable_by(current_user).each do |label| %>
                   <span class="radius label"><%= label.name %></span>
                 <% end %>
                 <% if !ticket.subject.nil? %>
@@ -99,7 +99,7 @@
               <td class="text-secondary table-nowrap">
                 <% if !ticket.subject.nil? %>
                   <a href="<%= ticket_url(ticket) %>">
-                    <% ticket.labels.each do |label| %>
+                    <% ticket.labels.viewable_by(current_user).each do |label| %>
                       <span class="radius label"><%= label.name %></span>
                     <% end %>
 

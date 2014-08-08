@@ -78,7 +78,7 @@ class Ticket < ActiveRecord::Base
       ticket_ids = Labeling.where(label_id: user.label_ids)
           .where(labelable_type: 'Ticket')
           .pluck(:labelable_id)
-      where('id IN (?) OR tickets.user_id = ?', ticket_ids, user.id)
+      where('tickets.id IN (?) OR tickets.user_id = ?', ticket_ids, user.id)
     end
   }
 end

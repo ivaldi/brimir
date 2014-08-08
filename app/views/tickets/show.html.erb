@@ -110,7 +110,7 @@
         <dt><%= t(:labels) %></dt>
         <dd>
           <ul class="inline-list">
-            <% @ticket.labels.each do |label| %>
+            <% @ticket.labels.viewable_by(current_user).each do |label| %>
               <li class="radius label"><%= label.name %></li>
             <% end %>
           </ul>

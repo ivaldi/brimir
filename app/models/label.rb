@@ -4,4 +4,8 @@ class Label < ActiveRecord::Base
   scope :ordered, -> {
     order(:name)
   }
+
+  scope :viewable_by, ->(user){
+    where(id: user.label_ids) unless user.agent?
+  }
 end
