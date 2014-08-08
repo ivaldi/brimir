@@ -38,6 +38,11 @@ class Ability
         # at least one label_id overlap
         (ticket.label_ids & user.label_ids).size > 0
       end
+
+      can [:new, :create, :read], Reply do |reply|
+        # at least one label_id overlap
+        (reply.ticket.label_ids & user.label_ids).size > 0
+      end
     end
   end
 end
