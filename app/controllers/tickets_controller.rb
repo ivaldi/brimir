@@ -43,13 +43,12 @@ class TicketsController < ApplicationController
   def index
     @agents = User.agents
 
-    if current_user.agent?
-      @labels = Label.ordered
-    else
-      @labels = current_user.labels.ordered
-    end
-
     params[:status] ||= 'open'
+
+    @labels = Ticket.active_labels(params[:status])
+    unless current_user.agent?
+      @labels = current_user.labels & @labels
+    end
 
     @tickets = Ticket.by_status(params[:status])
       .search(params[:q])

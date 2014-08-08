@@ -91,6 +91,7 @@ class UsersController < ApplicationController
           :signature,
           :agent,
           :notify,
+          label_ids: []
       )
 
       # prevent normal user from changing email and role

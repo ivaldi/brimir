@@ -30,9 +30,18 @@ class Ticket < ActiveRecord::Base
   enum status: [:open, :closed, :deleted]
   enum priority: [:unknown, :low, :medium, :high]
 
+  def self.active_labels(status)
+    label_ids = where(status: Ticket.statuses[status])
+        .joins(:labelings)
+        .pluck(:label_id)
+        .uniq
+
+    return Label.where(id: label_ids)
+  end
+
   scope :by_label_id, ->(label_id) {
     if label_id.to_i > 0
-      where(labelings: { label_id: label_id })
+      joins(:labelings).where(labelings: { label_id: label_id })
     end
   }
 
@@ -66,12 +75,10 @@ class Ticket < ActiveRecord::Base
 
   scope :viewable_by, ->(user) {
     if !user.agent?
-      joins('LEFT JOIN labelings ON tickets.id = labelings.labelable_id AND ' +
-          'labelings.labelable_type = \'Ticket\'')
-          .where('labelings.label_id IN (?) OR user_id = ?', user.label_ids, user.id)
-    else
-      joins('LEFT JOIN labelings ON tickets.id = labelings.labelable_id AND ' +
-          'labelings.labelable_type = \'Ticket\'')
+      ticket_ids = Labeling.where(label_id: user.label_ids)
+          .where(labelable_type: 'Ticket')
+          .pluck(:labelable_id)
+      where('id IN (?) OR tickets.user_id = ?', ticket_ids, user.id)
     end
   }
 end

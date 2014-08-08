@@ -199,5 +199,37 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
   end
-  
+
+  test 'should not show duplicate tickets to agents' do
+    sign_in users(:alice)
+
+    @ticket.labels.create!(name: 'test1')
+    @ticket.labels.create!(name: 'test2')
+
+    get :index
+    assert_response :success
+
+    tickets = assigns(:tickets)
+    assert_equal tickets.pluck(:id).uniq, tickets.pluck(:id)
+
+  end
+
+  test 'should not show duplicate tickets to customers' do
+    charlie = users(:charlie)
+    sign_in charlie
+
+    label = @ticket.labels.create!(name: 'test1')
+    charlie.labels << label
+
+    label = @ticket.labels.create!(name: 'test2')
+    charlie.labels << label
+
+    get :index
+    assert_response :success
+
+    tickets = assigns(:tickets)
+    assert_equal tickets.pluck(:id).uniq, tickets.pluck(:id)
+
+  end
+
 end

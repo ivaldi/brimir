@@ -29,4 +29,5 @@ class TicketTest < ActiveSupport::TestCase
       assert dave == ticket.user || (ticket.label_ids & dave.label_ids).size > 0
     end
   end
+
 end
