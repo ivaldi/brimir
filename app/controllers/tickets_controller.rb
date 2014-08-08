@@ -130,7 +130,12 @@ class TicketsController < ApplicationController
         @ticket = Ticket.new(ticket_params)
 
         if @ticket.save
-          NotificationMailer.new_ticket(current_user, @ticket).deliver
+          if current_user.nil?
+            user = @ticket.user
+          else
+            user = current_user
+          end
+          NotificationMailer.new_ticket(user, @ticket).deliver
 
           if current_user.nil?
             return render text: I18n::translate(:ticket_added)
