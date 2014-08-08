@@ -34,7 +34,7 @@ class TicketsController < ApplicationController
   def show
     @agents = User.agents
 
-    @reply = @ticket.replies.new
+    @reply = @ticket.replies.new content: '<br /><br />' + current_user.signature.to_s
     @reply.to = @ticket.user.email
 
     @labeling = Labeling.new(labelable: @ticket)
@@ -107,8 +107,16 @@ class TicketsController < ApplicationController
   end
 
   def new
+    unless current_user.blank?
+      signature = { content: '<br /><br />' + current_user.signature.to_s }
+    else
+      signature = {}
+    end
+
     unless params[:ticket].nil? # prefill params given?
-      @ticket = Ticket.new(ticket_params)
+      @ticket = Ticket.new(signature.merge(ticket_params))
+    else
+      @ticket = Ticket.new(signature)
     end
 
     unless current_user.nil?
@@ -122,7 +130,7 @@ class TicketsController < ApplicationController
         @ticket = Ticket.new(ticket_params)
 
         if @ticket.save
-          TicketMailer.notify_agents(@ticket, @ticket).deliver
+          NotificationMailer.new_ticket(current_user, @ticket).deliver
 
           if current_user.nil?
             return render text: I18n::translate(:ticket_added)

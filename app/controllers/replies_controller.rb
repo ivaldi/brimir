@@ -39,12 +39,8 @@ class RepliesController < ApplicationController
     authorize! :create, @reply
 
     if @reply.save && @reply.notify do |reply|
-        if current_user.agent?
-          TicketMailer.reply(reply)
-        else
-          TicketMailer.notify_agents(reply.ticket, reply)
-        end
-      end
+      NotificationMailer.new_reply(current_user, reply)
+    end
       redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
     else
       render action: 'new'

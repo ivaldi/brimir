@@ -31,7 +31,6 @@
     <% end %>
 
     <%= r.text_area :content, label: false, class: 'tinymce' %>
-    <%= current_user.signature.to_s.html_safe %>
 
     <%= label_tag 'attachment[]', t(:attach_files) %>
     <%= file_field_tag 'attachment[]', multiple: true, label: false %>

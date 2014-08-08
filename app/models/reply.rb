@@ -32,8 +32,6 @@ class Reply < ActiveRecord::Base
   }
 
   def notify
-    self.content += '<br /><br />' + self.user.signature.to_s
-
     mail = yield(self)
 
     mail.deliver
