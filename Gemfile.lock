@@ -97,6 +97,9 @@ GEM
     hike (1.2.3)
     http_accept_language (2.0.1)
     i18n (0.6.11)
+    jbuilder (1.5.3)
+      activesupport (>= 3.0.0)
+      multi_json (>= 1.2.0)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -213,6 +216,7 @@ DEPENDENCIES
   foundation-rails (~> 5.2.2)
   foundation_rails_helper
   http_accept_language
+  jbuilder (~> 1.2)
   jquery-rails
   mysql2
   non-stupid-digest-assets

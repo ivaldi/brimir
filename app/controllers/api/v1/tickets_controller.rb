@@ -1,4 +1,4 @@
-# Brimir is a helpdesk system to handle email support requests.
+ # Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
@@ -14,8 +14,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class Api::V1::TicketsController < Api::V1::ApplicationController
+	before_filter :authenticate_user!
+
+	load_and_authorize_resource :ticket
 
 	def index
-		@tickets = Tickets.by_states(:open).viewable_by(current_user)
+		@tickets = Ticket.by_status(:open).viewable_by(current_user)
+	end
+
+	def show
+		@ticket = Ticket.find(params[:id])
 	end
 end

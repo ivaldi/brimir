@@ -78,3 +78,7 @@ gem 'devise-i18n'
 
 # non-digested assets for brimir-plugin js/css
 gem 'non-stupid-digest-assets'
+
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 1.2'
+ 

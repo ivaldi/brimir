@@ -1,3 +1,4 @@
 json.array! @tickets do |ticket|
-	json.subject ticket.subject
+	json.id			ticket.id
+	json.subject 	ticket.subject
 end
