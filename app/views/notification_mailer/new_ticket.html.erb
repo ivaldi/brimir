@@ -3,5 +3,5 @@
 <% if @ticket.content_type == 'html' %>
   <%= @ticket.content.html_safe %>
 <% else %>
-  <%= @ticket.content.gsub("\n", '<br />') %>
+  <%= @ticket.content.gsub("\n", '<br />').html_safe %>
 <% end %>

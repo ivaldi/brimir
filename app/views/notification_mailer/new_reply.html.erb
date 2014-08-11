@@ -3,5 +3,5 @@
 <% if @reply.content_type == 'html' %>
   <%= @reply.content.html_safe %>
 <% else %>
-  <%= @reply.content.gsub("\n", '<br />') %>
+  <%= @reply.content.gsub("\n", '<br />').html_safe %>
 <% end %>
