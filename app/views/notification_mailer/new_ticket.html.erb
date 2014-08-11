@@ -1,3 +1,7 @@
-<a href="<%= ticket_url(@ticket) %>" target="_blank"><%= t(:new_ticket) %></a>
+<p><a href="<%= ticket_url(@ticket) %>" target="_blank"><%= t(:new_ticket) %></a></p>
 
-<%= @ticket.content.html_safe %>
+<% if @ticket.content_type == 'html' %>
+  <%= @ticket.content.html_safe %>
+<% else %>
+  <%= @ticket.content.gsub("\n", '<br />') %>
+<% end %>

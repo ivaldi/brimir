@@ -1,3 +1,7 @@
 <p><a href="<%= ticket_url(@reply.ticket) %>" target="_blank"><%= t(:new_reply) %></a></p>
 
-<%= @reply.content.html_safe %>
+<% if @reply.content_type == 'html' %>
+  <%= @reply.content.html_safe %>
+<% else %>
+  <%= @reply.content.gsub("\n", '<br />') %>
+<% end %>
