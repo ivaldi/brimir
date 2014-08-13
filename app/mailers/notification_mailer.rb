@@ -36,6 +36,10 @@ class NotificationMailer < ActionMailer::Base
 
     add_attachments(ticket)
 
+    unless ticket.message_id.blank?
+      headers['In-Reply-To'] = '<' + ticket.message_id + '>'
+    end
+
     @ticket = ticket
 
     mail(to: to, subject: title)
