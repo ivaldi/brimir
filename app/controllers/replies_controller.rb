@@ -45,9 +45,7 @@ class RepliesController < ApplicationController
 
         mail.deliver
 
-        @reply.to = mail.to.join(', ')
         @reply.message_id = mail.message_id
-        @reply.content_type = 'html'
 
         @reply.save!
         redirect_to @reply.ticket, notice: I18n::translate(:reply_added)

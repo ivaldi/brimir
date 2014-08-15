@@ -63,9 +63,6 @@ ActiveRecord::Schema.define(version: 20140815125817) do
     t.integer  "ticket_id"
     t.integer  "user_id"
     t.string   "message_id"
-    t.string   "to"
-    t.string   "cc"
-    t.string   "bcc"
     t.string   "content_type", default: "html"
   end
 

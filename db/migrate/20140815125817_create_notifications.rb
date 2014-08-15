@@ -25,5 +25,9 @@ class CreateNotifications < ActiveRecord::Migration
       reply.save!
     end
 
+    remove_column :replies, :to
+    remove_column :replies, :cc
+    remove_column :replies, :bcc
+
   end
 end

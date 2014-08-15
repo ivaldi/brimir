@@ -40,17 +40,6 @@ class Reply < ActiveRecord::Base
     end
   end
 
-  def to
-    to = read_attribute(:to)
-
-    # send to ticket starter when not current user and no to address set
-    if to.blank? && self.ticket.user != self.user
-      self.ticket.user.email
-    else
-      to
-    end
-  end
-
   def other_replies
     self.ticket.replies.where.not(id: self.id)
   end
