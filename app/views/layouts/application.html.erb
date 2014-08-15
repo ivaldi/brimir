@@ -26,7 +26,9 @@
           <div style="padding: 30px 0.66667rem 10px 0.66667rem">
             <%= link_to t(:new_ticket), new_ticket_path, class: 'button expand radius' %>
           </div>
+          <h6></h6>
           <ul class="off-canvas-list">
+            <li><label>Main</label></li>
             <li>
               <%= active_elem_if :a, params[:status] == 'open' &&
                   params[:assignee_id].to_i == 0,
@@ -54,6 +56,26 @@
                 <span class="fa fa-trash-o"></span><%= t(:trashed) %>
               <% end %>
             </li>
+          </ul>
+
+          <ul class="off-canvas-list">
+            <li><label>Tags</label></li>
+              <% colors = ['de6262', '65a8dd', '6fc681', '9d61dd', '6370dd', 'dca761', 'a86f72', '759d91', '727274']  %>
+              <% @labels.each do |label| %>
+                <%
+                  # toggle label on/off
+                  if params[:label_id].to_i == label.id
+                    p = params.merge(label_id: nil)
+                  else
+                    p = params.merge(label_id: label.id)
+                  end
+                %>
+                <li>
+                  <a href="<%= tickets_url(p) %>"<%= ' class="active"'.html_safe if params[:label_id].to_i == label.id %>>
+                    <i class="fa fa-square" style="color: #<%= colors.sample %>"></i><%= label.name %>
+                  </a>
+                </li>
+              <% end %>
           </ul>
 
           <p class="text-secondary text-center mt">

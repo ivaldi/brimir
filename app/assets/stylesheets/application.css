@@ -25,7 +25,7 @@ body{
 }
 
 aside{
-	background: #333;
+	background: #30363e;
 	height: 600px;
 }
 
@@ -33,6 +33,10 @@ aside .fa{
 	width: 20px;
 	text-align: center;
 	margin-right: 10px
+}
+
+ul.off-canvas-list li label{
+	font-size: 11px;
 }
 
 .full{
@@ -155,12 +159,20 @@ table input{
 	margin-right: 30px;
 }
 
+.off-canvas-list li label{
+	margin-top: 30px;
+}
+
 .off-canvas-list a.active{
 	color: #fff;
 }
 
 .output{
 	line-height: 1.45;
+}
+
+.tabs dd.active a{
+	background: #f2f2f2;
 }
 
 input[type="checkbox"]{
