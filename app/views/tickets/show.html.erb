@@ -102,7 +102,7 @@
         <dt><%= t(:assignee) %></dt>
         <dd>
           <% if !@ticket.assignee %>
-            <em><%= t(:nobody) %></em>
+            <em><%= t(:unassigned) %></em>
           <% else %>
             <%= @ticket.assignee.email %>
           <% end %>

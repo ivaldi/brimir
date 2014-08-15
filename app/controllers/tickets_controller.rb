@@ -34,8 +34,11 @@ class TicketsController < ApplicationController
   def show
     @agents = User.agents
 
-    @reply = @ticket.replies.new content: '<br /><br />' + current_user.signature.to_s
-    @reply.to = @ticket.user.email
+    @reply = @ticket.replies.new(
+        content: '<br /><br />' + current_user.signature.to_s,
+        user: current_user,
+    )
+    @reply.set_default_notifications!
 
     @labeling = Labeling.new(labelable: @ticket)
   end

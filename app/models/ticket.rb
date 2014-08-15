@@ -27,6 +27,9 @@ class Ticket < ActiveRecord::Base
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
 
+  has_many :notifications, as: :notifiable, dependent: :destroy
+  has_many :notified_users, source: :user, through: :notifications
+
   enum status: [:open, :closed, :deleted]
   enum priority: [:unknown, :low, :medium, :high]
 
@@ -86,15 +89,15 @@ class Ticket < ActiveRecord::Base
 
     # customer created ticket for another user
     if !created_by.agent? && created_by != user
-      User.agent_addresses_to_notify + [user.email]
+      User.agents_to_notify + [user]
 
     # ticket created by customer
     elsif !created_by.agent?
-      User.agent_addresses_to_notify
+      User.agents_to_notify
 
     # ticket created by agent for another user
     elsif created_by.agent? && created_by != user
-      [user.email]
+      [user]
 
     # agent created ticket for himself
     else

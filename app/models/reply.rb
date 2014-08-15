@@ -19,6 +19,9 @@ class Reply < ActiveRecord::Base
 
   has_many :attachments, as: :attachable, dependent: :destroy
 
+  has_many :notifications, as: :notifiable, dependent: :destroy
+  has_many :notified_users, source: :user, through: :notifications
+
   accepts_nested_attributes_for :attachments
 
   validates_presence_of :ticket_id, :content
@@ -30,6 +33,12 @@ class Reply < ActiveRecord::Base
   scope :with_message_id, -> {
     where.not(message_id: nil)
   }
+
+  def set_default_notifications!
+    self.notified_user_ids = users_to_notify.map do |user|
+      user.id
+    end
+  end
 
   def to
     to = read_attribute(:to)
@@ -47,20 +56,21 @@ class Reply < ActiveRecord::Base
   end
 
   def users_to_notify
-    to = [ticket.user.email]
+    to = [ticket.user]
 
     other_replies.each do |r|
-      to << r.user.email
+      to << r.user
     end
 
     assignee = ticket.assignee
+
     if assignee.present?
-      to << assignee.email
+      to << assignee
     else
-      to += User.agent_addresses_to_notify
+      to += User.agents_to_notify
     end
 
-    to.uniq - [user.email]
+    to.uniq - [user]
   end
 
 end

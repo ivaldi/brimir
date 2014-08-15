@@ -14,29 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
-
-  has_many :tickets
-  has_many :replies
-  has_many :labelings, as: :labelable
-  has_many :labels, through: :labelings
-
-  scope :agents, -> {
-    where(agent: true)
-  }
-
-  scope :ordered, -> {
-    order(:email)
-  }
-
-  scope :by_email, ->(email) {
-    where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
-  }
-
-  def self.agents_to_notify
-    User.agents
-        .where(notify: true)
-  end
-
+class Notification < ActiveRecord::Base
+  belongs_to :notifiable, polymorphic: true
+  belongs_to :user
 end

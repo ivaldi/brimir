@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140729183640) do
+ActiveRecord::Schema.define(version: 20140815125817) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 20140729183640) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "notifications", force: true do |t|
+    t.integer  "notifiable_id"
+    t.string   "notifiable_type"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["notifiable_id", "notifiable_type", "user_id"], name: "unique_notification", unique: true
+  add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type"
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "replies", force: true do |t|
     t.text     "content"

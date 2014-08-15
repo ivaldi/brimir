@@ -64,6 +64,7 @@ class RepliesController < ApplicationController
           :ticket_id,
           :message_id,
           :user_id,
+          notified_user_ids: []
       )
     end
 

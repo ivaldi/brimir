@@ -35,7 +35,7 @@ class RepliesControllerTest < ActionController::TestCase
       post :create, reply: {
           content: @reply.content,
           ticket_id: @ticket.id,
-          to: @reply.to
+          notified_user_ids: @reply.users_to_notify.map { |u| u.id },
       }
     end
 
@@ -54,7 +54,7 @@ class RepliesControllerTest < ActionController::TestCase
       post :create, reply: {
           content: @reply.content,
           ticket_id: @ticket.id,
-          to: @reply.to
+          notified_user_ids: @reply.users_to_notify.map { |u| u.id },
       }
     end
 
@@ -80,7 +80,7 @@ class RepliesControllerTest < ActionController::TestCase
       post :create, reply: {
           content: '',
           ticket_id: @ticket.id,
-          to: @reply.to
+          notified_user_ids: @reply.users_to_notify.map { |u| u.id },
       }
     end
 
@@ -94,7 +94,7 @@ class RepliesControllerTest < ActionController::TestCase
       post :create, reply: {
           content: '<br/><br /><p><strong>this is in bold</strong></p>',
           ticket_id: @ticket.id,
-          to: @reply.to,
+          notified_user_ids: @reply.users_to_notify.map { |u| u.id },
       }
     end
 
@@ -113,7 +113,7 @@ class RepliesControllerTest < ActionController::TestCase
       post :create, reply: {
             content: '**this is in bold**',
             ticket_id: @ticket.id,
-            to: @reply.to,
+            notified_user_ids: @reply.users_to_notify.map { |u| u.id },
         },
         attachment: [
             fixture_file_upload('attachments/default-testpage.pdf'),
@@ -129,12 +129,13 @@ class RepliesControllerTest < ActionController::TestCase
       post :create, reply: {
           content: @reply.content,
           ticket_id: @ticket.id,
+          notified_user_ids: [@ticket.user.id],
       }
     end
 
     mail = ActionMailer::Base.deliveries.last
 
-    assert_equal [ @ticket.user.email ], mail.to
+    assert_equal [@ticket.user.email], mail.to
 
   end
 
@@ -146,12 +147,13 @@ class RepliesControllerTest < ActionController::TestCase
     # do we send a mail?
     assert_difference 'ActionMailer::Base.deliveries.size' do
       post :create, reply: {
-          content: @reply.content,
+          content: 'test',
           ticket_id: @ticket.id,
+          notified_user_ids: [users(:bob).id, users(:alice).id]
       }
     end
     mail = ActionMailer::Base.deliveries.last
-    assert_equal [ users(:bob).email, users(:alice).email ], mail.to
+    assert_equal [users(:bob).email, users(:alice).email], mail.to
   end
 
 

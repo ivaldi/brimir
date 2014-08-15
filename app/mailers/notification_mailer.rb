@@ -17,7 +17,7 @@
 class NotificationMailer < ActionMailer::Base
 
   def new_ticket(created_by, ticket)
-    to = ticket.users_to_notify(created_by)
+    to = users_to_addresses(ticket.users_to_notify(created_by))
 
     if to.size == 0
       # nothing to send
@@ -39,7 +39,7 @@ class NotificationMailer < ActionMailer::Base
 
   def new_reply(reply)
 
-    to = reply.users_to_notify
+    to = users_to_addresses(reply.notified_users)
 
     title = I18n::translate(:new_reply) + ': ' + reply.ticket.subject
 
@@ -77,6 +77,12 @@ class NotificationMailer < ActionMailer::Base
     def add_attachments(ticket_or_reply)
       ticket_or_reply.attachments.each do |at|
         attachments[at.file_file_name] = File.read(at.file.path)
+      end
+    end
+
+    def users_to_addresses(users)
+      users.map do |user|
+        user.email
       end
     end
 

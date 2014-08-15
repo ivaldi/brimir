@@ -4,6 +4,8 @@
   <div class="panel mt">
     <h3><%= t(:reply) %></h3>
 
+    <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
+
     <%= r.text_area :content, label: false, class: 'tinymce' %>
 
     <%= label_tag 'attachment[]', t(:attach_files) %>
