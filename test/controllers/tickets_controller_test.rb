@@ -59,12 +59,27 @@ class TicketsControllerTest < ActionController::TestCase
 
   end
 
+  test 'should not create ticket from html form when invalid' do
+
+    assert_no_difference 'Ticket.count' do
+      post :create, ticket: {
+          from: '',
+          content: '',
+          subject: '',
+      }
+
+      assert_response :success
+    end
+
+    assert_equal 0, assigns(:ticket).notified_users.count
+  end
+
   test 'should create ticket from html form' do
     assert_difference 'Ticket.count', 1 do
       post :create, ticket: {
           from: 'test@test.nl',
           content: @ticket.content,
-          subject: @ticket.subject
+          subject: @ticket.subject,
       }
 
       assert_response :success
@@ -80,7 +95,7 @@ class TicketsControllerTest < ActionController::TestCase
       post :create, ticket: {
           from: 'test@test.nl',
           content: @ticket.content,
-          subject: @ticket.subject
+          subject: @ticket.subject,
       }
 
       assert_redirected_to ticket_url(assigns(:ticket))

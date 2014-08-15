@@ -137,10 +137,9 @@ class TicketsController < ApplicationController
         else
           user = current_user
         end
-        @ticket.set_default_notifications!(user)
-
 
         if @ticket.save
+          @ticket.set_default_notifications!(user)
 
           NotificationMailer.new_ticket(@ticket).deliver
 
