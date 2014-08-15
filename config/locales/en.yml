@@ -82,8 +82,10 @@ en:
 # ticket_mailer/notify_status_changed.text.erb
   tickets_status_modified: Ticket status modified for ticket
 
-# notification_mailer/new_reply.text.erb
-  new_reply: New reply
+# notification_mailer/new_ticket
+  view_new_ticket: View new ticket
+# notification_mailer/new_reply
+  view_new_reply: View new reply
 
 # attachments/_attachment
   download: download

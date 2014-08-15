@@ -88,8 +88,10 @@ nl:
 # ticket_mailer/notify_status_changed.text.erb
   tickets_status_modified: Status van ticket is gewijzigd
 
-# notification_mailer/new_reply.text.erb
-  new_reply: Nieuwe reactie
+# notification_mailer/new_ticket
+  view_new_ticket: Nieuw ticket bekijken
+# notification_mailer/new_reply
+  view_new_reply: Nieuwe reactie bekijken
 
 # attachments/_attachment
   download: download

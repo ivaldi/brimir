@@ -41,7 +41,7 @@ class RepliesControllerTest < ActionController::TestCase
 
     mail = ActionMailer::Base.deliveries.last
 
-    assert_match(/New reply/, mail.text_part.body.decoded)
+    assert_match(I18n.translate(:view_new_reply), mail.text_part.body.decoded)
 
     assert_not_nil assigns(:reply).message_id
 
