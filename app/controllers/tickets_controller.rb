@@ -138,7 +138,9 @@ class TicketsController < ApplicationController
           else
             user = current_user
           end
-          NotificationMailer.new_ticket(user, @ticket).deliver
+          @ticket.set_default_notifications!(user)
+
+          NotificationMailer.new_ticket(@ticket).deliver
 
           if current_user.nil?
             return render text: I18n::translate(:ticket_added)

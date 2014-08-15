@@ -85,23 +85,24 @@ class Ticket < ActiveRecord::Base
     end
   }
 
-  def users_to_notify(created_by)
+  def set_default_notifications!(created_by)
 
     # customer created ticket for another user
     if !created_by.agent? && created_by != user
-      User.agents_to_notify + [user]
+      self.notified_user_ids = User.agents_to_notify.pluck(:id)
+      self.notified_user_ids << user.id
 
     # ticket created by customer
     elsif !created_by.agent?
-      User.agents_to_notify
+      self.notified_user_ids = User.agents_to_notify.pluck(:id)
 
     # ticket created by agent for another user
     elsif created_by.agent? && created_by != user
-      [user]
+      self.notified_user_ids = [user.id]
 
     # agent created ticket for himself
     else
-      []
+      self.notified_user_ids = []
     end
   end
 

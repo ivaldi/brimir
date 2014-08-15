@@ -16,8 +16,8 @@
 
 class NotificationMailer < ActionMailer::Base
 
-  def new_ticket(created_by, ticket)
-    to = users_to_addresses(ticket.users_to_notify(created_by))
+  def new_ticket(ticket)
+    to = users_to_addresses(ticket.notified_users)
 
     if to.size == 0
       # nothing to send
