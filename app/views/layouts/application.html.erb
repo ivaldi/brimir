@@ -20,13 +20,40 @@
 
   <body<%= ' style="background: #333;"'.html_safe if user_signed_in? %>>
 
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#">Brimir</a></h1>
+        </li>
+         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <!-- Right Nav Section -->
+        <ul class="right">
+          <% if can? :manage, User %>
+              <li><a href="<%= users_path %>">Gebruikers</a></li>
+          <% end %>
+          <li class="has-dropdown">
+            <a href="#"><%= current_user.email %></a>
+            <ul class="dropdown">
+              <li><%= link_to '<i class="fa-cogs fa fa-fw"></i> Persoonlijke instellingen'.html_safe, edit_user_path(current_user) %></li>
+              <li><%= link_to '<i class="fa-sign-out fa fa-fw"></i> Uitloggen'.html_safe, :destroy_user_session, method: :delete %></li>
+            </ul>
+          </li>
+        </ul>
+
+        <!-- Left Nav Section -->
+        <ul class="left">
+          <li><%= link_to t(:new_ticket), new_ticket_path %></li>
+        </ul>
+      </section>
+    </nav>
+
     <div class="row collapse">
       <% if user_signed_in? %>
         <aside class="medium-3 large-2 columns">
-          <div style="padding: 30px 0.66667rem 10px 0.66667rem">
-            <%= link_to t(:new_ticket), new_ticket_path, class: 'button expand radius' %>
-          </div>
-          <h6></h6>
           <ul class="off-canvas-list">
             <li><label>Main</label></li>
             <li>
@@ -60,35 +87,29 @@
 
           <ul class="off-canvas-list">
             <li><label>Tags</label></li>
-              <% colors = ['de6262', '65a8dd', '6fc681', '9d61dd', '6370dd', 'dca761', 'a86f72', '759d91', '727274']  %>
-              <% @labels.each do |label| %>
-                <%
-                  # toggle label on/off
-                  if params[:label_id].to_i == label.id
-                    p = params.merge(label_id: nil)
-                  else
-                    p = params.merge(label_id: label.id)
-                  end
-                %>
-                <li>
-                  <a href="<%= tickets_url(p) %>"<%= ' class="active"'.html_safe if params[:label_id].to_i == label.id %>>
-                    <i class="fa fa-square" style="color: #<%= colors.sample %>"></i><%= label.name %>
-                  </a>
-                </li>
-              <% end %>
+<%
+=begin
+%>
+            <% colors = ['de6262', '65a8dd', '6fc681', '9d61dd', '6370dd', 'dca761', 'a86f72', '759d91', '727274']  %>
+            <% @labels.each do |label| %>
+              <%
+                # toggle label on/off
+                if params[:label_id].to_i == label.id
+                  p = params.merge(label_id: nil)
+                else
+                  p = params.merge(label_id: label.id)
+                end
+              %>
+              <li>
+                <a href="<%= tickets_url(p) %>"<%= ' class="active"'.html_safe if params[:label_id].to_i == label.id %>>
+                  <i class="fa fa-square" style="color: #<%= colors.sample %>"></i><%= label.name %>
+                </a>
+              </li>
+            <% end %>
+<%
+=end
+%>            
           </ul>
-
-          <p class="text-secondary text-center mt">
-            <%= current_user.email %><br />
-            <% if can? :manage, Rule %>
-              <a href="<%= rules_path %>" class="text-secondary"><i class="fa-random fa"></i></a>
-            <% end %>
-            <% if can? :manage, User %>
-              <a href="<%= users_path %>" class="text-secondary"><i class="fa-users fa"></i></a>
-            <% end %>
-            <%= link_to '<i class="fa-cogs fa"></i>'.html_safe, edit_user_path(current_user), class: 'text-secondary' %>
-            <%= link_to '<i class="fa-sign-out fa"></i>'.html_safe, :destroy_user_session, method: :delete, class: 'text-secondary' %>
-          </p>
         </aside>
         <div class="medium-9 large-10 columns" style="background: #fff; min-height: 100vh;">
       <% else %>

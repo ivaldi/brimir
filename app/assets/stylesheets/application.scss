@@ -20,6 +20,8 @@
  *= require_self
  */
 
+ @import "foundation/functions";
+
 body{
 	height: 600px;
 }
@@ -33,6 +35,10 @@ aside .fa{
 	width: 20px;
 	text-align: center;
 	margin-right: 10px
+}
+
+.button .fa{
+	font-size: 14px;
 }
 
 ul.off-canvas-list li label{
@@ -107,6 +113,18 @@ ul.off-canvas-list li label{
 	margin-top: 30px !important;
 }
 
+.no-m{
+	margin: 0 !important;
+}
+
+.ma{
+	margin: rem-calc(15);
+}
+
+.pts{
+	padding-top: 5px;
+}
+
 .select2-container-multi .select2-choices .select2-search-choice {
 	margin-top: 9px !important;
 }
@@ -117,7 +135,7 @@ table td, .nowrap{
 }
 
 table tr:hover td{
-	background: #eee;
+	background: #dfe4ee;
 }
 
 .table-nowrap{

@@ -4,25 +4,45 @@
 
 @import "foundation/functions";
 
+$body-font-color: #747474;
+
+$primary-color: #2f87c1;
+$secondary-color: #e7e7e7;
+$alert-color: #f04124;
+$success-color: #43AC6A;
+$warning-color: #f08a24;
+$info-color: #a0d3e8;
+
 $row-width: 100%;
-$body-font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: "Lato", "Helvetica", Helvetica, Arial, sans-serif;
 $font-smoothing: antialiased;
 
-$panel-border-style: none;
 $tabs-navigation-bg-color: #fff;
 $accordion-content-active-bg-color: #f9f9f9;
 
-$table-bg: #f6f6f6;
-$table-even-row-bg: #fff;
+$table-bg: #fff;
+$table-even-row-bg: #f5f7fa;
 
 $table-border-style: solid;
-$table-border-size: 1px;
+$table-border-size: 0;
 $table-border-color: #fff;
+$table-row-padding: rem-calc(9 20);
 
 $off-canvas-bg: #30363e;
 $off-canvas-label-bg: rgba(0,0,0,0);
 $off-canvas-label-padding: rem-calc(30 10 0 10);
-$off-canvas-link-padding: rem-calc(8, 15);
+$off-canvas-link-padding: rem-calc(5, 15);
 $off-canvas-link-border-bottom: none;
+
+$topbar-height: 60px;
+$topbar-bg-color: $primary-color;
+$topbar-link-bg-active: scale-color($primary-color, $lightness: 5%);
+
+$panel-bg: #dfe4ee;
+$panel-border-style: solid;
+$panel-border-color: #000;
+$panel-margin-bottom: rem-calc(0);
+$panel-font-color: #56688a;
+$panel-padding: rem-calc(5 20);
 
 @import 'foundation';
