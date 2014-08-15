@@ -18,4 +18,13 @@ require 'test_helper'
 
 class ReplyTest < ActiveSupport::TestCase
 
+  test 'should notify label users' do
+    ticket = Ticket.new from: 'test@test.com', content: 'test'
+    ticket.labels << labels(:bug)
+
+    reply = ticket.replies.new
+
+    assert reply.users_to_notify.include?(users(:dave))
+  end
+
 end

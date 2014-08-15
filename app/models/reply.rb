@@ -59,6 +59,10 @@ class Reply < ActiveRecord::Base
       to += User.agents_to_notify
     end
 
+    ticket.labels.each do |label|
+      to += label.users
+    end
+
     to.uniq - [user]
   end
 
