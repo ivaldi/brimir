@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     params[resource] &&= send(method) if respond_to?(method, true)
   end
 
-  before_filter :load_labels
+  before_filter :load_labels, if: :user_signed_in?
 
   protected
     def load_labels
