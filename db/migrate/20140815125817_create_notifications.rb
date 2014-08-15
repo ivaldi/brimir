@@ -13,12 +13,12 @@ class CreateNotifications < ActiveRecord::Migration
     Reply.all.each do |reply|
       addresses = []
 
-      addresses += reply.to.to_s.split(', ')
-      addresses += reply.cc.to_s.split(', ')
-      addresses += reply.bcc.to_s.split(', ')
+      addresses += reply.to.to_s.split(',')
+      addresses += reply.cc.to_s.split(',')
+      addresses += reply.bcc.to_s.split(',')
 
       addresses.each do |address|
-        u = User.where(email: address).first_or_initialize
+        u = User.where(email: address.trim).first_or_initialize
 
         if u.new_record?
           password_length = 12
@@ -26,8 +26,6 @@ class CreateNotifications < ActiveRecord::Migration
 
           u.password = password
           u.password_confirmation = password
-
-          print "User created: #{u.email}\n"
         end
 
         if u.save
