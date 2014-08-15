@@ -27,11 +27,12 @@ class CreateNotifications < ActiveRecord::Migration
           u.password = password
           u.password_confirmation = password
 
-          u.save!
           print "User created: #{u.email}\n"
         end
 
-        reply.notified_users << u
+        if u.save
+          reply.notified_users << u
+        end
       end
 
       reply.save!
