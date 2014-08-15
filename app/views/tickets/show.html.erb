@@ -1,4 +1,16 @@
-<div class="row mt">
+<div class="panel">
+  <div class="row collapse">
+    <div class="large-9 columns">
+      <ul class="button-group radius">
+        <li><a href="#" class="tiny button no-m"><i class="fa fa-user"></i></a></a></li>
+        <li><a href="#" class="tiny button no-m"><i class="fa fa-check"></i></a></a></li>
+        <li><a href="#" class="tiny button no-m"><i class="fa fa-trash-o"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
   <div class="large-12 columns">
     <h2>
       <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(' + t(:no_subject) + ')</em>'.html_safe %>
@@ -15,146 +27,152 @@
   </div>
 </div>
 
-<div class="row mt">
-  <div class="large-9 columns">
+<div class="panel">
+  <div class="row">
+    <div class="large-9 columns">
 
-    <% if @ticket.content.nil? %>
-      (<%= t(:no_content) %>)
-    <% else %>
-
-      <div class="output">
-        <% if @ticket.content_type == 'text' %>
-          <% content = text_to_html(@ticket.content) %>
-        <% else %>
-          <% content = @ticket.content %>
-        <% end %>
-
-        <%# only allow these tags and attributes %>
-        <%= sanitize_html(content) %>
-      </div>
-    <% end %>
-
-    <% if @ticket.attachments.size > 0 %>
-      <hr />
-      <ul class="block-grid three-up attachments">
-        <%= render @ticket.attachments %>
-      </ul>
-    <% end %>
-  </div>
-
-  <div class="large-3 columns">
-    <dl>
-
-      <% if can? :update, @ticket %>
-
-        <dt><%= t(:status) %></dt>
-        <dd>
-          <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
-            <span class="fa fa-<%= status_icon(@ticket.status) %>"></span>
-            <%= t(@ticket.status) %>
-          </a>
-          <%= render 'status_dropdown', ticket: @ticket %>
-        </dd>
-        <dt><%= t(:priority) %></dt>
-        <dd>
-          <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
-            <span class="priority-<%= @ticket.priority %> fa fa-circle"></span> <%= t(@ticket.priority) %>
-          </a>
-          <%= render 'priority_dropdown', ticket: @ticket, short: false %>
-        </dd>
-        <dt><%= t(:assignee) %></dt>
-        <dd>
-          <a href="#" data-reveal-id="change-assignee">
-          <% if !@ticket.assignee %>
-            <%= t(:unassigned) %>
-          <% else %>
-            <%= @ticket.assignee.email %>
-          <% end %>
-          </a>
-        </dd>
-        <dt><%= t(:labels) %></dt>
-        <dd>
-          <ul data-labelings="" style="margin-left: 0">
-            <% @ticket.labelings.each do |labeling| %>
-              <%= render labeling %>
-            <% end %>
-          </ul>
-          <%= form_for @labeling, remote: true do |f| %>
-            <%= f.hidden_field :labelable_id %>
-            <%= f.hidden_field :labelable_type %>
-
-            <div class="row collapse">
-              <div class="small-9 columns">
-                <%= f.fields_for :label, Label.new do |f| %>
-                  <%= f.text_field :name, label: false, placeholder: t(:label_name) %>
-                <% end %>
-              </div>
-              <div class="small-3 columns">
-                <%= f.button t(:add), type: 'submit', class: 'button postfix' %>
-              </div>
-            </div>
-
-          <% end %>
-        </dd>
-
+      <% if @ticket.content.nil? %>
+        (<%= t(:no_content) %>)
       <% else %>
 
-        <dt><%= t(:status) %><dt>
-        <dd><%= t(@ticket.status) %></dd>
-        <dt><%= t(:priority) %></dt>
-        <dd><%= t(@ticket.priority) %></dd>
-        <dt><%= t(:assignee) %></dt>
-        <dd>
-          <% if !@ticket.assignee %>
-            <em><%= t(:unassigned) %></em>
+        <div class="output">
+          <% if @ticket.content_type == 'html' %>
+            <% content = @ticket.content %>
+          <% elsif @ticket.content_type == 'text' %>
+            <% content = text_to_html(@ticket.content) %>
           <% else %>
-            <%= @ticket.assignee.email %>
+            <% content = @ticket.content %>
           <% end %>
-        </dd>
-        <dt><%= t(:labels) %></dt>
-        <dd>
-          <ul class="inline-list">
-            <% @ticket.labels.viewable_by(current_user).each do |label| %>
-              <li class="radius label"><%= label.name %></li>
-            <% end %>
-          </ul>
-        </dd>
+
+          <%# only allow these tags and attributes %>
+          <%= sanitize_html(content) %>
+        </div>
 
       <% end %>
 
-    </dl>
-  </div>
+      <% if @ticket.attachments.size > 0 %>
+        <hr />
+        <ul class="block-grid three-up attachments">
+          <%= render @ticket.attachments %>
+        </ul>
+      <% end %>
+    </div>
 
-</div>
+    <div class="large-3 columns">
+      <dl>
 
-<div class="row">
-  <div class="large-9 columns">
-    <% if @ticket.replies.size > 1 %>
-      <h3 class="mt"><%= t(:num_replies, count: (@ticket.replies.size - 1)) %></h3>
-      <dl class="accordion" data-accordion>
+        <% if can? :update, @ticket %>
 
-        <% count = 0 %>
-        <% @ticket.replies.chronologically.each do |reply| %>
+          <dt><%= t(:status) %></dt>
+          <dd>
+            <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
+              <span class="fa fa-<%= status_icon(@ticket.status) %>"></span>
+              <%= t(@ticket.status) %>
+            </a>
+            <%= render 'status_dropdown', ticket: @ticket %>
+          </dd>
+          <dt><%= t(:priority) %></dt>
+          <dd>
+            <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
+              <span class="priority-<%= @ticket.priority %> fa fa-circle"></span> <%= t(@ticket.priority) %>
+            </a>
+            <%= render 'priority_dropdown', ticket: @ticket, short: false %>
+          </dd>
+          <dt><%= t(:assignee) %></dt>
+          <dd>
+            <a href="#" data-reveal-id="change-assignee">
+            <% if !@ticket.assignee %>
+              <%= t(:unassigned) %>
+            <% else %>
+              <%= @ticket.assignee.email %>
+            <% end %>
+            </a>
+          </dd>
+          <dt><%= t(:labels) %></dt>
+          <dd>
+            <ul data-labelings="" style="margin-left: 0">
+              <% @ticket.labelings.each do |labeling| %>
+                <%= render labeling %>
+              <% end %>
+            </ul>
+            <%= form_for @labeling, remote: true do |f| %>
+              <%= f.hidden_field :labelable_id %>
+              <%= f.hidden_field :labelable_type %>
 
-          <%# minus 2, because @reply is a new ticket that is counted as well... %>
-          <% if @ticket.replies.size - 2 == count %>
-            <% div_class = 'content active' %>
-          <% else %>
-            <% div_class = 'content' %>
-          <% end %>
+              <div class="row collapse">
+                <div class="small-9 columns">
+                  <%= f.fields_for :label, Label.new do |f| %>
+                    <%= f.text_field :name, label: false, placeholder: t(:label_name) %>
+                  <% end %>
+                </div>
+                <div class="small-3 columns">
+                  <%= f.button t(:add), type: 'submit', class: 'button postfix' %>
+                </div>
+              </div>
 
-          <%= render reply, div_class: div_class %>
+            <% end %>
+          </dd>
 
-          <% count += 1 %>
+        <% else %>
+
+          <dt><%= t(:status) %><dt>
+          <dd><%= t(@ticket.status) %></dd>
+          <dt><%= t(:priority) %></dt>
+          <dd><%= t(@ticket.priority) %></dd>
+          <dt><%= t(:assignee) %></dt>
+          <dd>
+            <% if !@ticket.assignee %>
+              <em><%= t(:nobody) %></em>
+            <% else %>
+              <%= @ticket.assignee.email %>
+            <% end %>
+          </dd>
+          <dt><%= t(:labels) %></dt>
+          <dd>
+            <ul class="inline-list">
+              <% @ticket.labels.viewable_by(current_user).each do |label| %>
+                <li class="radius label"><%= label.name %></li>
+              <% end %>
+            </ul>
+          </dd>
 
         <% end %>
 
       </dl>
-    <% end %>
-    <% if can? :create, @reply %>
-      <%= render 'replies/form' %>
-    <% end %>
-  </div>
-</div>
+    </div>
 
-<%= render 'change_assignee_form', { ticket: @ticket } %>
+  </div>
+
+  <div class="row">
+    <div class="large-9 columns">
+      <% if @ticket.replies.size > 1 %>
+        <h3 class="mt"><%= t(:num_replies, count: (@ticket.replies.size - 1)) %></h3>
+        <dl class="accordion" data-accordion>
+
+          <% count = 0 %>
+          <% @ticket.replies.chronologically.each do |reply| %>
+
+            <%# minus 2, because @reply is a new ticket that is counted as well... %>
+            <% if @ticket.replies.size - 2 == count %>
+              <% div_class = 'content active' %>
+            <% else %>
+              <% div_class = 'content' %>
+            <% end %>
+
+            <%= render reply, div_class: div_class %>
+
+            <% count += 1 %>
+
+          <% end %>
+
+        </dl>
+      <% end %>
+      <% if can? :create, @reply %>
+        <%= render 'replies/form' %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'change_assignee_form', { ticket: @ticket } %>
+</div>
+</dt>
