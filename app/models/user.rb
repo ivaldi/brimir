@@ -34,4 +34,10 @@ class User < ActiveRecord::Base
     where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
   }
 
+  def self.agent_addresses_to_notify
+    User.agents
+        .where(notify: true)
+        .pluck(:email)
+  end
+
 end

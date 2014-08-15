@@ -81,4 +81,5 @@ class Ticket < ActiveRecord::Base
       where('tickets.id IN (?) OR tickets.user_id = ?', ticket_ids, user.id)
     end
   }
+
 end

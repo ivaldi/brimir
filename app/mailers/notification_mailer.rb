@@ -20,10 +20,10 @@ class NotificationMailer < ActionMailer::Base
 
     #customer created ticket for another user
     if !created_by.agent? && created_by != ticket.user
-      to = agents_to_notify + [ticket.user.email]
+      to = User.agent_addresses_to_notify + [ticket.user.email]
     #ticket created by customer
     elsif !created_by.agent?
-      to = agents_to_notify
+      to = User.agent_addresses_to_notify
     #ticket created by agent for another user
     elsif created_by.agent? && created_by != ticket.user
       to = [ticket.user.email]
@@ -47,7 +47,7 @@ class NotificationMailer < ActionMailer::Base
 
   def new_reply(created_by, reply)
 
-    to = thread_users_to_notify(reply)
+    to = reply.thread_users_to_notify
 
     title = I18n::translate(:new_reply) + ': ' + reply.ticket.subject
 
@@ -62,29 +62,6 @@ class NotificationMailer < ActionMailer::Base
   end
 
   protected
-    def agents_to_notify
-      User.agents
-          .where(notify: true)
-          .pluck(:email)
-    end
-
-    def thread_users_to_notify(reply)
-      to = [reply.ticket.user.email]
-
-      reply.other_replies.each do |r|
-        to << r.user.email
-      end
-
-      assignee = reply.ticket.assignee
-      if assignee.present?
-        to << assignee.email
-      else
-        to += agents_to_notify
-      end
-
-      to.uniq - [reply.user.email]
-    end
-
     def add_reference_message_ids(reply)
       references = reply.other_replies.with_message_id.pluck(:message_id)
 

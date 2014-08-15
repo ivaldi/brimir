@@ -46,4 +46,21 @@ class Reply < ActiveRecord::Base
     self.ticket.replies.where.not(id: self.id)
   end
 
+  def thread_users_to_notify
+    to = [ticket.user.email]
+
+    other_replies.each do |r|
+      to << r.user.email
+    end
+
+    assignee = ticket.assignee
+    if assignee.present?
+      to << assignee.email
+    else
+      to += User.agent_addresses_to_notify
+    end
+
+    to.uniq - [user.email]
+  end
+
 end
