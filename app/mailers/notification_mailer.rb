@@ -17,18 +17,10 @@
 class NotificationMailer < ActionMailer::Base
 
   def new_ticket(created_by, ticket)
+    to = ticket.users_to_notify(created_by)
 
-    #customer created ticket for another user
-    if !created_by.agent? && created_by != ticket.user
-      to = User.agent_addresses_to_notify + [ticket.user.email]
-    #ticket created by customer
-    elsif !created_by.agent?
-      to = User.agent_addresses_to_notify
-    #ticket created by agent for another user
-    elsif created_by.agent? && created_by != ticket.user
-      to = [ticket.user.email]
-    #agent created ticket for himself (or herself ;))
-    else
+    if to.size == 0
+      # nothing to send
       return
     end
 
@@ -45,9 +37,9 @@ class NotificationMailer < ActionMailer::Base
     mail(to: to, subject: title)
   end
 
-  def new_reply(created_by, reply)
+  def new_reply(reply)
 
-    to = reply.thread_users_to_notify
+    to = reply.users_to_notify
 
     title = I18n::translate(:new_reply) + ': ' + reply.ticket.subject
 

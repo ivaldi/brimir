@@ -46,7 +46,7 @@ class Reply < ActiveRecord::Base
     self.ticket.replies.where.not(id: self.id)
   end
 
-  def thread_users_to_notify
+  def users_to_notify
     to = [ticket.user.email]
 
     other_replies.each do |r|

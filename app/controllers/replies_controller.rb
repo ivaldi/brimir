@@ -41,7 +41,7 @@ class RepliesController < ApplicationController
     begin
       Reply.transaction do
         @reply.save!
-        mail = NotificationMailer.new_reply(current_user, @reply)
+        mail = NotificationMailer.new_reply(@reply)
 
         mail.deliver
 

@@ -82,4 +82,24 @@ class Ticket < ActiveRecord::Base
     end
   }
 
+  def users_to_notify(created_by)
+
+    # customer created ticket for another user
+    if !created_by.agent? && created_by != user
+      User.agent_addresses_to_notify + [user.email]
+
+    # ticket created by customer
+    elsif !created_by.agent?
+      User.agent_addresses_to_notify
+
+    # ticket created by agent for another user
+    elsif created_by.agent? && created_by != user
+      [user.email]
+
+    # agent created ticket for himself
+    else
+      []
+    end
+  end
+
 end

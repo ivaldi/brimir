@@ -139,7 +139,7 @@ class TicketMailer < ActionMailer::Base
     if ticket == incoming
       NotificationMailer.new_ticket(ticket.user, ticket).deliver
     else
-      NotificationMailer.new_reply(incoming.user, incoming).deliver
+      NotificationMailer.new_reply(incoming).deliver
     end
 
     return incoming
