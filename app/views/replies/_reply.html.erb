@@ -1,0 +1,29 @@
+<dd>
+  <a class="title" href="#reply-<%=reply.id%>">
+    <h5><%= reply.user.email %> <small class="pull-right"><%= l reply.created_at, format: :short %></small></h5>
+  </a>
+  <div id="reply-<%=reply.id%>" class="<%= div_class %>">
+    <ul class="inline-list text-secondary">
+      <li><%= t(:notification_sent_to) %></li>
+      <% reply.notified_users.each do |user| %>
+        <li><%= user.email %></li>
+      <% end %>
+    </ul>
+
+    <% if reply.content_type == 'html' %>
+      <% content = reply.content.html_safe %>
+    <% elsif reply.content_type == 'text' %>
+      <% content = reply.content.gsub("\n", '<br />') %>
+    <% else %>
+      <% content = reply.content %>
+    <% end %>
+
+    <%= sanitize content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
+    <% if reply.attachments.size > 0 %>
+      <hr />
+      <ul class="block-grid three-up attachments">
+        <%= render reply.attachments %>
+      </ul>
+    <% end %>
+  </div>
+</dd>

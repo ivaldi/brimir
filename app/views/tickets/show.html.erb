@@ -6,6 +6,12 @@
     <h5 class="subheader text-secondary">
       <%= t(:ticket_by_at, email: @ticket.user.email, at: l(@ticket.created_at, format: :long)) %>
     </h5>
+    <ul class="inline-list text-secondary">
+      <li><%= t(:notification_sent_to) %></li>
+      <% @ticket.notified_users.each do |user| %>
+        <li><%= user.email %></li>
+      <% end %>
+    </ul>
   </div>
 </div>
 
@@ -132,36 +138,14 @@
         <% count = 0 %>
         <% @ticket.replies.chronologically.each do |reply| %>
 
-            <%# minus 2, because @reply is a new ticket that is counted as well... %>
-            <% if @ticket.replies.size - 2 == count %>
-              <% div_class = 'content active' %>
-            <% else %>
-              <% div_class = 'content' %>
-            <% end %>
+          <%# minus 2, because @reply is a new ticket that is counted as well... %>
+          <% if @ticket.replies.size - 2 == count %>
+            <% div_class = 'content active' %>
+          <% else %>
+            <% div_class = 'content' %>
+          <% end %>
 
-          <dd>
-            <a class="title" href="#reply-<%=reply.id%>">
-              <h5><%= reply.user.email %> <small class="pull-right"><%= l reply.created_at, format: :short %></small></h5>
-            </a>
-            <div id="reply-<%=reply.id%>" class="<%= div_class %>">
-
-              <% if reply.content_type == 'html' %>
-                <% content = reply.content.html_safe %>
-              <% elsif reply.content_type == 'text' %>
-                <% content = reply.content.gsub("\n", '<br />') %>
-              <% else %>
-                <% content = reply.content %>
-              <% end %>
-
-              <%= sanitize content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
-              <% if reply.attachments.size > 0 %>
-                <hr />
-                <ul class="block-grid three-up attachments">
-                  <%= render reply.attachments %>
-                </ul>
-              <% end %>
-            </div>
-          </dd>
+          <%= render reply, div_class: div_class %>
 
           <% count += 1 %>
 

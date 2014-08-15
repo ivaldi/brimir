@@ -59,6 +59,7 @@ nl:
   deleted: Verwijderd
   labels: Labels
   label_name: Label naam
+  notification_sent_to: 'Een notificatie is verstuurd aan de volgende adressen:'
 
 # tickets/_change_priority_form
   change: Wijzig

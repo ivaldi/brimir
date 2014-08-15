@@ -53,6 +53,7 @@ en:
   deleted: Deleted
   labels: Labels
   label_name: Label name
+  notification_sent_to: 'A notification was sent to the following addresses:'
 
 # tickets/_change_priority_form
   change: Change

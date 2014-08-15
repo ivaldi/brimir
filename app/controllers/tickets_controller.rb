@@ -132,13 +132,15 @@ class TicketsController < ApplicationController
       format.html do
         @ticket = Ticket.new(ticket_params)
 
+        if current_user.nil?
+          user = @ticket.user
+        else
+          user = current_user
+        end
+        @ticket.set_default_notifications!(user)
+
+
         if @ticket.save
-          if current_user.nil?
-            user = @ticket.user
-          else
-            user = current_user
-          end
-          @ticket.set_default_notifications!(user)
 
           NotificationMailer.new_ticket(@ticket).deliver
 

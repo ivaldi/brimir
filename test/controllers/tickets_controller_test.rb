@@ -55,6 +55,8 @@ class TicketsControllerTest < ActionController::TestCase
       assert_response :success
     end
 
+    refute_equal 0, assigns(:ticket).notified_users.count
+
   end
 
   test 'should create ticket from html form' do
@@ -67,6 +69,8 @@ class TicketsControllerTest < ActionController::TestCase
 
       assert_response :success
     end
+
+    refute_equal 0, assigns(:ticket).notified_users.count
   end
 
   test 'should create ticket' do
@@ -81,6 +85,8 @@ class TicketsControllerTest < ActionController::TestCase
 
       assert_redirected_to ticket_url(assigns(:ticket))
     end
+
+    refute_equal 0, assigns(:ticket).notified_users.count
   end
 
   test 'should only allow agents to view others tickets' do
