@@ -18,8 +18,20 @@ class CreateNotifications < ActiveRecord::Migration
       addresses += reply.bcc.to_s.split(', ')
 
       addresses.each do |address|
-        u = User.where(email: address).first_or_create!
-        reply.notified_user_ids << u.id
+        u = User.where(email: address).first_or_initialize
+
+        if u.new_record?
+          password_length = 12
+          password = Devise.friendly_token.first(password_length)
+
+          u.password = password
+          u.password_confirmation = password
+
+          u.save!
+          print "User created: #{u.email}\n"
+        end
+
+        reply.notified_users << u
       end
 
       reply.save!
