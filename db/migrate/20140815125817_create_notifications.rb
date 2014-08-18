@@ -18,7 +18,7 @@ class CreateNotifications < ActiveRecord::Migration
       addresses += reply.bcc.to_s.split(',')
 
       addresses.each do |address|
-        u = User.where(email: address.trim).first_or_initialize
+        u = User.where(email: address.strip).first_or_initialize
 
         if u.new_record?
           password_length = 12
