@@ -86,6 +86,7 @@ en:
 # notification_mailer/new_ticket
   view_new_ticket: View new ticket
 # notification_mailer/new_reply
+  new_reply: New reply
   view_new_reply: View new reply
 
 # attachments/_attachment

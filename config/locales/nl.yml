@@ -92,6 +92,7 @@ nl:
 # notification_mailer/new_ticket
   view_new_ticket: Nieuw ticket bekijken
 # notification_mailer/new_reply
+  new_reply: Nieuwe reactie
   view_new_reply: Nieuwe reactie bekijken
 
 # attachments/_attachment
