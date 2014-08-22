@@ -49,8 +49,7 @@ class NotificationMailer < ActionMailer::Base
 
     @reply = reply
 
-    mail(to: to, subject: title)
-
+    mail(to: to, subject: title) unless to.count == 0
   end
 
   protected
