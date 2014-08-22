@@ -16,6 +16,8 @@
 
 class NotificationMailer < ActionMailer::Base
 
+  add_template_helper HtmlTextHelper
+
   def new_ticket(ticket)
     to = users_to_addresses(ticket.notified_users)
 
@@ -49,8 +51,7 @@ class NotificationMailer < ActionMailer::Base
 
     @reply = reply
 
-    mail(to: to, subject: title)
-
+    mail(to: to, subject: title) unless to.count == 0
   end
 
   protected

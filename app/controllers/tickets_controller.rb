@@ -15,10 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketsController < ApplicationController
-  before_filter :authenticate_user!, except: [:create, :new]
 
-  load_and_authorize_resource :ticket, except: [:create]
-  skip_authorization_check only: [:create]
+  before_filter :authenticate_user!, except: [:create, :new]
+  load_and_authorize_resource :ticket, except: :create
+  skip_authorization_check only: :create
 
   def show
     @agents = User.agents
@@ -42,21 +42,12 @@ class TicketsController < ApplicationController
       @labels = current_user.labels & @labels
     end
 
-    @tickets = Ticket.by_status(params[:status])
+    @tickets = @tickets.by_status(params[:status])
       .search(params[:q])
       .by_label_id(params[:label_id])
       .filter_by_assignee_id(params[:assignee_id])
       .page(params[:page])
       .ordered
-      .viewable_by(current_user)
-
-    if @tickets.count > 0
-      @tickets.each do |ticket|
-        authorize! :index, ticket
-      end
-    else
-      authorize! :index, Ticket
-    end
   end
 
   def update

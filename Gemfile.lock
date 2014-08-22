@@ -33,7 +33,7 @@ GEM
     byebug (3.1.2)
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
-    cancan (1.6.10)
+    cancancan (1.9.2)
     capistrano (3.2.1)
       i18n
       rake (>= 10.0.0)
@@ -203,7 +203,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  cancan
+  cancancan
   capistrano
   capistrano-rails
   capistrano-rvm

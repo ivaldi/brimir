@@ -20,6 +20,8 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
+    can [:create, :new], Ticket
+
     if user.agent?
 
       can :manage, :all
@@ -27,7 +29,6 @@ class Ability
     else
 
       # customers can view their own tickets, its replies and attachments
-      can [:read, :create, :new], Ticket, user_id: user.id
       can [:new, :create, :read], Reply, ticket: { user_id: user.id }
 
       # customers can edit their own account
@@ -36,7 +37,7 @@ class Ability
       # customer can see al tickets labeled with his/her labels
       can :read, Ticket, Ticket.viewable_by(user) do |ticket|
         # at least one label_id overlap
-        (ticket.label_ids & user.label_ids).size > 0
+        ticket.user == user || (ticket.label_ids & user.label_ids).size > 0
       end
 
       can [:new, :create, :read], Reply do |reply|
