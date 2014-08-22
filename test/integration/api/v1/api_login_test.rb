@@ -19,7 +19,7 @@ class API::V1::ApiLoginTest < ActionDispatch::IntegrationTest
   test 'do not login with fault post' do
     post '/api/v1/sessions', wrong_param: 'wrong'
 
-    assert_response :success
+    assert_response :unauthorized
 
     result = JSON.parse @response.body
 
