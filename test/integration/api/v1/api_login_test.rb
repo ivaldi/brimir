@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'byebug'
 
 class API::V1::ApiLoginTest < ActionDispatch::IntegrationTest
 
