@@ -23,16 +23,14 @@
     <% else %>
 
       <div class="output">
-        <% if @ticket.content_type == 'html' %>
-          <% content = @ticket.content.html_safe %>
-        <% elsif @ticket.content_type == 'text' %>
-          <% content = @ticket.content.gsub("\n", '<br />') %>
+        <% if @ticket.content_type == 'text' %>
+          <% content = text_to_html(@ticket.content) %>
         <% else %>
           <% content = @ticket.content %>
         <% end %>
 
         <%# only allow these tags and attributes %>
-        <%= sanitize content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
+        <%= sanitize_html(content) %>
       </div>
     <% end %>
 

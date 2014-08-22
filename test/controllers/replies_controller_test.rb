@@ -92,7 +92,7 @@ class RepliesControllerTest < ActionController::TestCase
     # do we send a mail?
     assert_difference 'ActionMailer::Base.deliveries.size' do
       post :create, reply: {
-          content: '<br/><br /><p><strong>this is in bold</strong></p>',
+          content: '<br /><br /><p><strong>this is in bold</strong></p>',
           ticket_id: @ticket.id,
           notified_user_ids: @reply.users_to_notify.map { |u| u.id },
       }
@@ -100,7 +100,7 @@ class RepliesControllerTest < ActionController::TestCase
 
     mail = ActionMailer::Base.deliveries.last
     # html in the html part
-    assert_match '<br/><br /><p><strong>this is in bold</strong></p>',
+    assert_match '<br /><br /><p><strong>this is in bold</strong></p>',
         mail.html_part.body.decoded
 
     # no html in the text part

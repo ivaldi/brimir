@@ -10,15 +10,14 @@
       <% end %>
     </ul>
 
-    <% if reply.content_type == 'html' %>
-      <% content = reply.content.html_safe %>
-    <% elsif reply.content_type == 'text' %>
-      <% content = reply.content.gsub("\n", '<br />') %>
+    <% if reply.content_type == 'text' %>
+      <% content = text_to_html(reply.content) %>
     <% else %>
       <% content = reply.content %>
     <% end %>
 
-    <%= sanitize content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
+    <%= sanitize_html(content) %>
+
     <% if reply.attachments.size > 0 %>
       <hr />
       <ul class="block-grid three-up attachments">
