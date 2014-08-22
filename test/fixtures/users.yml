@@ -6,6 +6,7 @@ alice:
 
 bob:
   email: bob@xxxx.com
+  encrypted_password: $2a$10$R4kIaHGeNs1ssPGxh7pT/ulEx.P3umqE9CJKQKpDYgXuLVI6DKC9i #testtest
 
 charlie:
   email: charlie@xxxx.com

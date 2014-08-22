@@ -14,12 +14,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class Api::V1::TicketsController < Api::V1::ApplicationController
-	before_filter :authenticate_user!
 
-	load_and_authorize_resource :ticket
+	load_and_authorize_resource :ticket, except: [:index]
 
 	def index
 		@tickets = Ticket.by_status(:open).viewable_by(current_user)
+    @tickets.each do |ticket|
+      authorize! :index, ticket
+    end
 	end
 
 	def show

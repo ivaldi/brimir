@@ -17,7 +17,7 @@
 class Api::V1::ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user_from_token!
 
   check_authorization
 
@@ -27,6 +27,18 @@ class Api::V1::ApplicationController < ActionController::Base
     resource = controller_path.singularize.gsub('/', '_').to_sym
     method = "#{resource}_params"
     params[resource] &&= send(method) if respond_to?(method, true)
+  end
+
+  def authenticate_user_from_token!
+    user_token = params[:auth_token].presence
+    user = user_token && User.where(authentication_token: user_token.to_s).first
+
+    if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
+      sign_in user, store: false
+    else
+      redirect_to new_user_session_url
+    end
+
   end
 
 end

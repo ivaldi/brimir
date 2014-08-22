@@ -16,6 +16,7 @@ Brimir::Application.routes.draw do
 	namespace :api do
 		namespace :v1 do
 			resources :tickets, only: [ :index, :show ]
+      resources :sessions, only: [ :create ]
 		end
 	end
 

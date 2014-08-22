@@ -16,19 +16,8 @@
 
 class TicketsController < ApplicationController
   before_filter :authenticate_user!, except: [:create, :new]
-  before_filter :allow_cors, only: [:create, :new]
 
-  def allow_cors
-    headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Methods'] = %w{GET POST PUT DELETE}.join(',')
-    headers['Access-Control-Allow-Headers'] =
-        %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(',')
-
-    head :ok  if request.request_method == 'OPTIONS'
-  end
-
-
-  load_and_authorize_resource :ticket, except: [:index, :create]
+  load_and_authorize_resource :ticket, except: [:create]
   skip_authorization_check only: [:create]
 
   def show
