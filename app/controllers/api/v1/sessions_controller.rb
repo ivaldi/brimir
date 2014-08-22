@@ -16,7 +16,7 @@ class Api::V1::SessionsController < ActionController::Base
 
     end
 
-    return render json: { error: 'Wrong credentials' }.to_json
+    return render json: { error: 'Wrong credentials' }.to_json, status: :unauthorized
 
   end
 
