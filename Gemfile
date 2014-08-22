@@ -50,7 +50,7 @@ end
 gem 'devise'
 
 # authorization
-gem 'cancan'
+gem 'cancancan'
 
 # pagination
 gem 'will_paginate'
