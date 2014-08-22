@@ -48,14 +48,6 @@ class TicketsController < ApplicationController
       .filter_by_assignee_id(params[:assignee_id])
       .page(params[:page])
       .ordered
-
-    if @tickets.count > 0
-      @tickets.each do |ticket|
-        authorize! :index, ticket
-      end
-    else
-      authorize! :index, Ticket
-    end
   end
 
   def update

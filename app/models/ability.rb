@@ -20,6 +20,8 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
+    can [:create, :new], Ticket
+
     if user.agent?
 
       can :manage, :all
@@ -27,7 +29,6 @@ class Ability
     else
 
       # customers can view their own tickets, its replies and attachments
-      can [:create, :new], Ticket, user_id: user.id
       can [:new, :create, :read], Reply, ticket: { user_id: user.id }
 
       # customers can edit their own account
