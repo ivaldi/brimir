@@ -79,6 +79,7 @@ nl:
   reply: Reactie
   attach_files: Bestand(en) toevoegen
   send_reply: Verstuur reactie
+  on_date_author_wrote: 'Op %{date} schreef %{author}:'
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket aan jou toegewezen

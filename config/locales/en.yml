@@ -73,6 +73,7 @@ en:
   reply: Reply
   attach_files: Attach file(s)
   send_reply: Send reply
+  on_date_author_wrote: 'On %{date}, %{author} wrote:'
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket assigned to you

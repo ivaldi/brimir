@@ -6,7 +6,22 @@
 
     <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
 
-    <%= r.text_area :content, label: false, class: 'tinymce' %>
+    <%
+      content = '<br /><br />' + current_user.signature.to_s
+      reply_to = @reply.other_replies.order(:id).last
+
+      if reply_to.nil?
+        reply_to = @reply.ticket
+      end
+
+      content += '<br />'
+      content += t(:on_date_author_wrote, author: reply_to.user.email,
+          date: l(reply_to.created_at, format: :long))
+      content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
+    %>
+
+    <%= r.text_area :content, label: false, class: 'tinymce',
+        value: (@reply.content.nil? ? content : @reply.content) %>
 
     <%= label_tag 'attachment[]', t(:attach_files) %>
     <%= file_field_tag 'attachment[]', multiple: true, label: false %>
