@@ -30,6 +30,7 @@ class Api::V1::ApplicationController < ActionController::Base
   end
 
   def authenticate_user_from_token!
+
     user_token = params[:auth_token].presence
     user = user_token && User.where(authentication_token: user_token.to_s).first
 

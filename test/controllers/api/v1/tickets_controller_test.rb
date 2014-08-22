@@ -24,17 +24,17 @@ class Api::V1::TicketsControllerTest < ActionController::TestCase
   end
 
   test 'should get index' do
-    sign_in users(:alice)
+    sign_in users(:bob)
 
-    get :index, :format => :json
+    get :index, auth_token: users(:bob).authentication_token, :format => :json
     assert_response :success
     assert_not_nil assigns(:tickets)
   end
 
   test 'should show ticket' do
-    sign_in users(:alice)
+    sign_in users(:bob)
 
-    get :show, id: @ticket.id, :format => :json
+    get :show, auth_token: users(:bob).authentication_token, id: @ticket.id, :format => :json
     assert_response :success
   end
 

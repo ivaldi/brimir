@@ -15,13 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class Api::V1::TicketsController < Api::V1::ApplicationController
 
-	load_and_authorize_resource :ticket, except: [:index]
+	load_and_authorize_resource :ticket
 
 	def index
 		@tickets = Ticket.by_status(:open).viewable_by(current_user)
-    @tickets.each do |ticket|
-      authorize! :index, ticket
-    end
 	end
 
 	def show
