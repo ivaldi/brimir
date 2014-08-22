@@ -1,4 +1,4 @@
-<p><a href="<%= ticket_url(@reply.ticket) %>" target="_blank"><%= t(:view_new_reply) %> &raquo;</a></p>
+<p><a href="<%= ticket_url(@reply.ticket) %>#reply-<%= @reply.id %>" target="_blank"><%= t(:view_new_reply) %> &raquo;</a></p>
 
 <% if @reply.content_type == 'html' %>
   <%= sanitize_html(@reply.content) %>

@@ -131,6 +131,9 @@ class TicketsControllerTest < ActionController::TestCase
     # should contain this for label removing with javascript
     assert_select '[data-labeling-id=?]',
         @ticket.labelings.first.id
+
+    # should contain this anchor for linking from notification email
+    assert_select '[id=reply-' + @ticket.replies.first.id.to_s + ']'
   end
 
   test 'should email assignee if ticket is assigned by somebody else' do
