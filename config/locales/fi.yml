@@ -1,0 +1,153 @@
+fi:
+# layouts/application
+  new_ticket: Uusi tiketti
+  inbox: Saapuneet
+  mine: Omat
+  closed: Suljetut
+  trashed: Poistetut
+
+# devise/sessions/new
+  sign_in: Kirjaudu sisään
+
+# devise/shared/links
+  forgot_password: Unohditko salasanasi?
+
+# devise/passwords/new
+  send_instructions: Lähetä minulle ohjeet
+
+# devise/passwords/edit
+  change_password: Vaihda salasana
+  new_password: Uusi salasana
+  new_password_confirmation: Vahvista uusi salasana
+
+# devise/mailer/reset_password_instructions
+  hello: Hei
+  someone_requested_link: Joku lähetti pyynnön salasanan vaihdosta, voit vaihtaa salasanan alla olevasta linkistä.
+  ignore_if_not_requested: Jos et pyytänyt vaihtoa, voit jättää tämän sähköpostin huomiotta.
+  password_wont_change_without_opening_link: Salasanasi pysyy ennallaan, ellet avaa linkkiä ja vaihda itse salasanaasi.
+
+# tickets/index
+  tickets: Tiketit
+  tickets_containing: Tiketit jotka sisältävät
+  priority: Prioriteetti
+  replies: vastaukset
+  no_subject: Ei otsikkoa
+  unassigned: Ei tekijää
+  no_tickets_found: Tikettejä ei löytynyt.
+  search: Etsi
+
+# tickets/show
+  ticket_by_at: Lähettänyt %{email} kello %{at}
+  no_content: Ei sisältöä
+  status: Tila
+  assignee: Tekijä
+  num_replies:
+    one: '%{count} vastaus'
+    other: '%{count} vastausta'
+  high: Korkea
+  medium: Normaali
+  low: Alhainen
+  unknown: Tuntematon
+  open: Avoin
+  closed: Suljettu
+  deleted: Poistettu
+  labels: Aiheet
+  label_name: Aiheen nimi
+  notification_sent_to: 'Viesti lähetettiin seuraaville vastaanottajille:'
+
+# tickets/_change_priority_form
+  change: Muuta
+  change_priority: Muuta prioriteettia
+
+# tickets/_change_status_form
+  change_status: Muuta tilaa
+
+# tickets/_change_assignee_form
+  change_assignee: Vaihda tekijää
+  assign: Vaihda
+
+# replies/new
+  add_reply: Lisää vastaus
+
+# replies/_form
+  reply: Vastaa
+  attach_files: Lisää tiedosto(ja)
+  send_reply: Lähetä vastaus
+  on_date_author_wrote: '%{date} päivänä, %{author} kirjoitti:'
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Tiketti siirrettiin sinulle
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Prioriteetti muutettiin tiketille
+
+# ticket_mailer/notify_status_changed.text.erb
+  tickets_status_modified: Tila muutettiin tiketille
+
+# notification_mailer/new_ticket
+  view_new_ticket: Näytä uusi tiketti
+# notification_mailer/new_reply
+  new_reply: Uusi vastaus
+  view_new_reply: Näytä uusi vastaus
+
+# attachments/_attachment
+  download: lataa
+
+# users/new
+  new_user: Uusi käyttäjä
+
+# users/edit
+  edit_user: Muuta käyttäjää
+
+# users/index
+  email: Sähköposti
+  role: Rooli
+  agent: Työntekijä
+  customer: Asiakas
+
+# users/_form
+  account_settings: Tilin asetukset
+  only_fill_in_passwords_when_modifying: Täytä vain nämä kaksi kenttää, jos haluat vaihtaa salasanaasi.
+  user_is_an_agent: Käyttäjä on uusi työntekijä
+  receive_new_ticket_notifications: Lähetä ilmoitus uusista tiketeistä
+  email_settings: Sähköpostin asetukset
+  save: Tallenna
+  access_control: Pääsyoikeus
+  have_access_to_label: Käyttäjällä on pääsy kaikkiin tiketteihin, joissa on jokin näistä aiheista.
+
+# controllers/attachments
+  file_not_found: Tiedostoa ei löydy
+
+# controllers/users
+  settings_saved: Asetukset tallennettu
+  user_added: Käyttäjä lisätty
+
+# controllers/tickets
+  ticket_added: Tiketti lisätty
+  ticket_updated: Tikettiä muutettu
+
+# controllers/replies
+  reply_added: Vastaus lisätty
+
+  activerecord:
+    attributes:
+      user:
+        email: Sähköposti
+        password: Salasana
+        password_confirmation: Salasanan vahvistus
+        signature: Sähköpostin allekirjoitus
+        remember_me: Muista minut
+        label_ids: Aiheet
+
+      ticket:
+        from: Osoitteesta
+        subject: Otsikko
+        content: Sisältö
+        status: Tila
+        priority: Prioriteetti
+        assignee_id: Tekijä
+
+      reply:
+        to: Vastaanottaja
+        cc: Kopio
+        Bcc: Piilokopio
