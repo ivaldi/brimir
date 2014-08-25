@@ -1,4 +1,4 @@
-en:
+fi:
 # layouts/application
   new_ticket: Uusi tiketti
   inbox: Saapuneet
@@ -102,13 +102,13 @@ en:
 # users/index
   email: Sähköposti
   role: Rooli
-  agent: Toimija
+  agent: Työntekijä
   customer: Asiakas
 
 # users/_form
   account_settings: Tilin asetukset
-  only_fill_in_passwords_when_modifying: Täytä vain nämä kentät, jos haluat vaihtaa salasanaasi.
-  user_is_an_agent: Käyttäjä on uusi toimija
+  only_fill_in_passwords_when_modifying: Täytä vain nämä kaksi kenttää, jos haluat vaihtaa salasanaasi.
+  user_is_an_agent: Käyttäjä on uusi työntekijä
   receive_new_ticket_notifications: Lähetä ilmoitus uusista tiketeistä
   email_settings: Sähköpostin asetukset
   save: Tallenna
