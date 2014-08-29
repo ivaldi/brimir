@@ -58,6 +58,9 @@
 
           <p class="text-secondary text-center mt">
             <%= current_user.email %><br />
+            <% if can? :manage, Rule %>
+              <a href="<%= rules_path %>" class="text-secondary"><i class="fa-random fa"></i></a>
+            <% end %>
             <% if can? :manage, User %>
               <a href="<%= users_path %>" class="text-secondary"><i class="fa-users fa"></i></a>
             <% end %>

@@ -1,0 +1,36 @@
+<%= form_for @rule do |f| %>
+  <div class="row">
+
+    <div class="large-6 columns">
+
+      <%= f.text_field(:filter_field) %>
+
+      <%
+        operations = []
+        Rule.filter_operations.each do |key, value|
+          operations << [t(key, scope: 'activerecord.attributes.rule.filter_operations'), key]
+        end
+      %>
+      <%= f.select(:filter_operation, operations) %>
+
+      <%= f.text_field :filter_field %>
+
+      <%
+        operations = []
+        Rule.action_operations.each do |key, value|
+          operations << [t(key, scope: 'activerecord.attributes.rule.action_operations'), key]
+        end
+      %>
+      <%= f.select(:action_operation, operations) %>
+
+      <%= f.text_field :action_value %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="large-12 columns">
+      <hr />
+      <%= f.submit t(:save), class: 'button radius' %>
+    </div>
+  </div>
+<% end %>

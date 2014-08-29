@@ -129,6 +129,9 @@ en:
 # controllers/replies
   reply_added: Reply added
 
+# controller/rule
+  new_rule: New rule
+
   activerecord:
     attributes:
       user:
@@ -151,3 +154,14 @@ en:
         to: To
         cc: Cc
         Bcc: Bcc
+
+      rule:
+        filter_field: Field
+        filter_operation: Operator
+        filter_operations:
+          contains: contains
+        filter_value: Value
+        action_operation: Action to perform
+        action_operations:
+          assign_label: assign label
+        action_value: Possible parameter for action

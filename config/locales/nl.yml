@@ -135,6 +135,9 @@ nl:
 # controllers/replies
   reply_added: Reactie toegevoegd
 
+# controller/rule
+  new_rule: Nieuwe regel
+
   helpers:
     submit:
       ticket: 
@@ -162,3 +165,14 @@ nl:
         to: Aan
         cc: Cc
         Bcc: Bcc
+
+      rule:
+        filter_field: Veld
+        filter_operation: Operatie
+        filter_value: Waarde
+        filter_operations:
+          contains: bevat
+        action_operation: Uit te voeren actie
+        action_operations:
+          assign_label: voeg label toe
+        action_value: Eventuele parameter voor actie

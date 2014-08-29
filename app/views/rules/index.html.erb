@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="large-12 columns">
+
+    <h2 class="filter-title">Rules</h2>
+    <%= link_to t(:new_rule), new_rule_path, class: 'button right radius' %>
+
+    <table class="full">
+      <thead>
+        <tr>
+          <th><%= t('activerecord.attributes.rule.filter_field') %></th>
+          <th><%= t('activerecord.attributes.rule.filter_operation') %></th>
+          <th><%= t('activerecord.attributes.rule.filter_value') %></th>
+          <th><%= t('activerecord.attributes.rule.action_operation') %></th>
+          <th><%= t('activerecord.attributes.rule.action_value') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rules.each do |rule| %>
+          <tr>
+            <td><%= t(rule.filter_field, scope: 'activerecord.attributes.ticket') %></td>
+            <td><%= t(rule.filter_operation, scope: 'activerecord.attributes.rule.filter_operations') %></td>
+            <td><%= rule.filter_value %></td>
+            <td><%= t(rule.action_operation, scope: 'activerecord.attributes.rule.action_operations') %></td>
+            <td><%= rule.action_value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="pagination-centered">
+      <%= will_paginate @rules %>
+    </div>
+  </div>
+</div>
+
