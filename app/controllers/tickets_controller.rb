@@ -121,6 +121,8 @@ class TicketsController < ApplicationController
         if @ticket.save
           @ticket.set_default_notifications!(user)
 
+          Rule.apply_all(@ticket)
+
           NotificationMailer.new_ticket(@ticket).deliver
 
           if current_user.nil?
@@ -134,6 +136,9 @@ class TicketsController < ApplicationController
       end
       format.json do
         @ticket = TicketMailer.receive(params[:message])
+
+        Rule.apply_all(@ticket)
+
         render json: @ticket, status: :created
       end
       format.js { render }

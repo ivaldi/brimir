@@ -1,0 +1,6 @@
+assign_when_ivaldi:
+  filter_field: from
+  filter_operation: 0 # contains
+  filter_value: '@ivaldi.nl'
+  action_operation: 0 # assign label
+  action_value: ivaldi
