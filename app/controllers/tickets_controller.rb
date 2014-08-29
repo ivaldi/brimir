@@ -20,6 +20,9 @@ class TicketsController < ApplicationController
   load_and_authorize_resource :ticket, except: :create
   skip_authorization_check only: :create
 
+  # this is needed for brimir integration in other sites
+  before_filter :allow_cors, only: [:create, :new]
+
   def show
     @agents = User.agents
 
@@ -137,7 +140,7 @@ class TicketsController < ApplicationController
     end
   end
 
-  private
+  protected
     def ticket_params
       if !current_user.nil? && current_user.agent?
         params.require(:ticket).permit(
@@ -156,4 +159,14 @@ class TicketsController < ApplicationController
             :priority)
       end
     end
+
+    def allow_cors
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'GET,POST'
+      headers['Access-Control-Allow-Headers'] =
+          %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(',')
+
+      head :ok if request.request_method == 'OPTIONS'
+    end
+
 end
