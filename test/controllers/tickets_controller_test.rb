@@ -51,6 +51,7 @@ class TicketsControllerTest < ActionController::TestCase
 
     assert_difference 'ActionMailer::Base.deliveries.size' do
       assert_difference 'Ticket.count' do
+
         post :create, message: @simple_email, format: :json
 
         assert_response :success

@@ -108,39 +108,48 @@ class TicketsController < ApplicationController
   end
 
   def create
+    if params[:format] == 'json'
+      @ticket = TicketMailer.receive(params[:message])
+    else
+      @ticket = Ticket.new(ticket_params)
+    end
+
+    if @ticket.save
+
+      if current_user.nil?
+        user = @ticket.user
+      else
+        user = current_user
+      end
+
+      @ticket.set_default_notifications!(user)
+
+      Rule.apply_all(@ticket)
+
+      NotificationMailer.new_ticket(@ticket).deliver
+    end
+
     respond_to do |format|
       format.html do
-        @ticket = Ticket.new(ticket_params)
 
-        if current_user.nil?
-          user = @ticket.user
-        else
-          user = current_user
-        end
-
-        if @ticket.save
-          @ticket.set_default_notifications!(user)
-
-          Rule.apply_all(@ticket)
-
-          NotificationMailer.new_ticket(@ticket).deliver
+        if @ticket.valid?
 
           if current_user.nil?
             return render text: I18n::translate(:ticket_added)
           else
             redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
           end
+
         else
           render 'new'
         end
+
       end
+
       format.json do
-        @ticket = TicketMailer.receive(params[:message])
-
-        Rule.apply_all(@ticket)
-
         render json: @ticket, status: :created
       end
+
       format.js { render }
     end
   end
