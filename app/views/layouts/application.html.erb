@@ -18,7 +18,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body style="background: #333;">
+  <body<%= ' style="background: #333;"'.html_safe if user_signed_in? %>>
 
     <div class="row collapse">
       <% if user_signed_in? %>
