@@ -64,9 +64,6 @@
 
   jQuery(function() {
 
-    var screenY = jQuery(document).outerHeight();
-    jQuery('aside').css('min-height', screenY+'px');
-
     jQuery('.select2').select2({ width: 'resolve' });
 
     dialog = jQuery('[data-dialog]');
