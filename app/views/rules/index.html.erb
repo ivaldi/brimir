@@ -1,7 +1,7 @@
 <div class="row">
   <div class="large-12 columns">
 
-    <h2 class="filter-title">Rules</h2>
+    <h2 class="filter-title"><%= t(:rules) %></h2>
     <%= link_to t(:new_rule), new_rule_path, class: 'button right radius' %>
 
     <table class="full">
@@ -17,7 +17,7 @@
       <tbody>
         <% @rules.each do |rule| %>
           <tr>
-            <td><%= t(rule.filter_field, scope: 'activerecord.attributes.ticket') %></td>
+            <td><%= link_to t(rule.filter_field, scope: 'activerecord.attributes.ticket'), edit_rule_path(rule) %></td>
             <td><%= t(rule.filter_operation, scope: 'activerecord.attributes.rule.filter_operations') %></td>
             <td><%= rule.filter_value %></td>
             <td><%= t(rule.action_operation, scope: 'activerecord.attributes.rule.action_operations') %></td>

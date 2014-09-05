@@ -122,9 +122,12 @@ class TicketsController < ApplicationController
         user = current_user
       end
 
-      @ticket.set_default_notifications!(user)
-
       Rule.apply_all(@ticket)
+
+      # where user notifications added?
+      if @ticket.notified_users.count == 0
+        @ticket.set_default_notifications!(user)
+      end
 
       NotificationMailer.new_ticket(@ticket).deliver
     end

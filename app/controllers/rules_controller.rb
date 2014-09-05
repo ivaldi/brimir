@@ -19,6 +19,23 @@ class RulesController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @rule.update_attributes(rule_params)
+      redirect_to rules_url, notice: t(:rule_modified)
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @rule.destroy
+
+    redirect_to rules_url, notice: t(:rule_deleted)
+  end
+
   protected
     def rule_params
       params.require(:rule).permit(

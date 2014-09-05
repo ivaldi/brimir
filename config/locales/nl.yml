@@ -135,8 +135,19 @@ nl:
 # controllers/replies
   reply_added: Reactie toegevoegd
 
-# controller/rule
+# rules/index
   new_rule: Nieuwe regel
+  rules: Regels
+
+# rules/edit
+  edit_rule: Regel wijzigen
+  delete_rule: Regel verwijderen
+  are_you_sure: Weet u het zeker?
+
+# controllers/rules
+  rule_added: Regel toegevoegd
+  rule_modified: Regel gewijzigd
+  rule_deleted: Regel verwijderd
 
   helpers:
     submit:
@@ -175,4 +186,5 @@ nl:
         action_operation: Uit te voeren actie
         action_operations:
           assign_label: voeg label toe
-        action_value: Eventuele parameter voor actie
+          notify_user: stuur notificatie aan
+        action_value: Parameter voor actie

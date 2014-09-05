@@ -3,7 +3,13 @@
 
     <div class="large-6 columns">
 
-      <%= f.text_field(:filter_field) %>
+      <%
+        fields = []
+        [:from, :subject, :content].each do |key|
+          fields << [t(key, scope: 'activerecord.attributes.ticket'), key]
+        end
+      %>
+      <%= f.select(:filter_field, fields) %>
 
       <%
         operations = []
@@ -13,7 +19,7 @@
       %>
       <%= f.select(:filter_operation, operations) %>
 
-      <%= f.text_field :filter_field %>
+      <%= f.text_field :filter_value %>
 
       <%
         operations = []

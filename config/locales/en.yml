@@ -129,8 +129,20 @@ en:
 # controllers/replies
   reply_added: Reply added
 
-# controller/rule
+# rules/index
   new_rule: New rule
+  rules: Rules
+
+# rules/edit
+  edit_rule: Edit rule
+  delete_rule: Delete rule
+  are_you_sure: Are you sure?
+
+# controllers/rules
+  rule_added: Rule added
+  rule_modified: Rule modified
+  rule_deleted: Rule deleted
+
 
   activerecord:
     attributes:
@@ -164,4 +176,5 @@ en:
         action_operation: Action to perform
         action_operations:
           assign_label: assign label
-        action_value: Possible parameter for action
+          notify_user: send notification to
+        action_value: Parameter for action

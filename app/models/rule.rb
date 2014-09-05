@@ -16,8 +16,10 @@
 
 class Rule < ActiveRecord::Base
 
+  validates_presence_of :filter_field, :filter_value
+
   enum filter_operation: [:contains]
-  enum action_operation: [:assign_label]
+  enum action_operation: [:assign_label, :notify_user]
 
   def filter(ticket)
 
@@ -36,6 +38,14 @@ class Rule < ActiveRecord::Base
     if action_operation == 'assign_label'
       label = Label.where(name: action_value).first_or_create
       ticket.labels << label
+
+    elsif action_operation == 'notify_user'
+      user = User.where(email: action_value).first
+
+      unless user.nil?
+        ticket.notified_users << user
+      end
+
     end
   end
 
