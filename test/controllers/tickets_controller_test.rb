@@ -49,59 +49,68 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should create ticket when posted from MTA' do
 
-    assert_difference 'Ticket.count', 1 do
-      post :create, message: @simple_email, format: :json
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      assert_difference 'Ticket.count' do
+        post :create, message: @simple_email, format: :json
 
-      assert_response :success
+        assert_response :success
+      end
     end
 
     refute_equal 0, assigns(:ticket).notified_users.count
 
   end
 
-  test 'should not create ticket from html form when invalid' do
+  test 'should not create ticket when invalid' do
 
-    assert_no_difference 'Ticket.count' do
-      post :create, ticket: {
-          from: '',
-          content: '',
-          subject: '',
-      }
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      assert_no_difference 'Ticket.count' do
+        post :create, ticket: {
+            from: '',
+            content: '',
+            subject: '',
+        }
 
-      assert_response :success
+        assert_response :success
+      end
     end
 
     assert_equal 0, assigns(:ticket).notified_users.count
   end
 
-  test 'should create ticket from html form' do
-    assert_difference 'Ticket.count', 1 do
-      post :create, ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-      }
+  test 'should create ticket when not signed in' do
 
-      assert_response :success
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      assert_difference 'Ticket.count', 1 do
+        post :create, ticket: {
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+        }
+
+        assert_response :success
+      end
     end
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
 
-  test 'should create ticket' do
+  test 'should create ticket when signed in' do
     sign_in users(:alice)
 
-    assert_difference 'Ticket.count', 1 do
-      post :create, ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-      }
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      assert_difference 'Ticket.count', 1 do
+        post :create, ticket: {
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+        }
 
-      assert_redirected_to ticket_url(assigns(:ticket))
+        assert_redirected_to ticket_url(assigns(:ticket))
+      end
+
+      refute_equal 0, assigns(:ticket).notified_users.count
     end
-
-    refute_equal 0, assigns(:ticket).notified_users.count
   end
 
   test 'should only allow agents to view others tickets' do
@@ -138,7 +147,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should email assignee if ticket is assigned by somebody else' do
     sign_in users(:alice)
-    
+
     # new assignee should receive notification
     assert_difference 'ActionMailer::Base.deliveries.size' do
 
@@ -154,7 +163,7 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should email assignee if status of ticket is changed by somebody else' do
     sign_in users(:charlie)
-    
+
     # assignee should receive notification
     assert_difference 'ActionMailer::Base.deliveries.size' do
 
@@ -259,7 +268,7 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should allow CORS' do
     [:new, :create].each do |action|
       process(action, 'OPTIONS')
-    
+
       assert_response :ok
       assert_equal '*', response.headers['Access-Control-Allow-Origin']
       assert_equal 'GET,POST', response.headers['Access-Control-Allow-Methods']
