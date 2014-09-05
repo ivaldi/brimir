@@ -91,7 +91,7 @@ class TicketsController < ApplicationController
 
   def new
     unless current_user.blank?
-      signature = { content: '<br /><br />' + current_user.signature.to_s }
+      signature = { content: '<p></p>' + current_user.signature.to_s }
     else
       signature = {}
     end

@@ -7,7 +7,7 @@
     <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
 
     <%
-      content = '<br /><br />' + current_user.signature.to_s
+      content = '<p></p>' + current_user.signature.to_s
       reply_to = @reply.other_replies.order(:id).last
 
       if reply_to.nil?
