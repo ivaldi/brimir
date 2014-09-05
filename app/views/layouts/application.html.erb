@@ -18,7 +18,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body style="background: #333; min-height: 100vh;">
+  <body style="background: #333;">
 
     <div class="row collapse">
       <% if user_signed_in? %>
@@ -68,7 +68,7 @@
             <%= link_to '<i class="fa-sign-out fa"></i>'.html_safe, :destroy_user_session, method: :delete, class: 'text-secondary' %>
           </p>
         </aside>
-        <div class="medium-9 large-10 columns" style="background: #fff;">
+        <div class="medium-9 large-10 columns" style="background: #fff; min-height: 100vh;">
       <% else %>
         <div class="medium-9 large-10 columns medium-centered large-centered">
       <% end %>
