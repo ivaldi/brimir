@@ -135,6 +135,20 @@ nl:
 # controllers/replies
   reply_added: Reactie toegevoegd
 
+# rules/index
+  new_rule: Nieuwe regel
+  rules: Regels
+
+# rules/edit
+  edit_rule: Regel wijzigen
+  delete_rule: Regel verwijderen
+  are_you_sure: Weet u het zeker?
+
+# controllers/rules
+  rule_added: Regel toegevoegd
+  rule_modified: Regel gewijzigd
+  rule_deleted: Regel verwijderd
+
   helpers:
     submit:
       ticket: 
@@ -162,3 +176,15 @@ nl:
         to: Aan
         cc: Cc
         Bcc: Bcc
+
+      rule:
+        filter_field: Veld
+        filter_operation: Operatie
+        filter_value: Waarde
+        filter_operations:
+          contains: bevat
+        action_operation: Uit te voeren actie
+        action_operations:
+          assign_label: voeg label toe
+          notify_user: stuur notificatie aan
+        action_value: Parameter voor actie

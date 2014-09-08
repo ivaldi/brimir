@@ -26,7 +26,7 @@ class NotificationMailer < ActionMailer::Base
       return
     end
 
-    title = I18n::translate(:new_ticket) + ': ' + ticket.subject
+    title = I18n::translate(:new_ticket) + ': ' + ticket.subject.to_s
 
     add_attachments(ticket)
 

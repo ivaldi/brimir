@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140822114739) do
+ActiveRecord::Schema.define(version: 20140829124853) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -69,6 +69,16 @@ ActiveRecord::Schema.define(version: 20140822114739) do
   add_index "replies", ["message_id"], name: "index_replies_on_message_id"
   add_index "replies", ["ticket_id"], name: "index_replies_on_ticket_id"
   add_index "replies", ["user_id"], name: "index_replies_on_user_id"
+
+  create_table "rules", force: true do |t|
+    t.string   "filter_field"
+    t.integer  "filter_operation", default: 0, null: false
+    t.string   "filter_value"
+    t.integer  "action_operation", default: 0, null: false
+    t.string   "action_value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "tickets", force: true do |t|
     t.string   "subject"

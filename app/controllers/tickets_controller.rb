@@ -20,6 +20,9 @@ class TicketsController < ApplicationController
   load_and_authorize_resource :ticket, except: :create
   skip_authorization_check only: :create
 
+  # this is needed for brimir integration in other sites
+  before_filter :allow_cors, only: [:create, :new]
+
   def show
     @agents = User.agents
 
@@ -88,7 +91,7 @@ class TicketsController < ApplicationController
 
   def new
     unless current_user.blank?
-      signature = { content: '<br /><br />' + current_user.signature.to_s }
+      signature = { content: '<p></p>' + current_user.signature.to_s }
     else
       signature = {}
     end
@@ -105,39 +108,56 @@ class TicketsController < ApplicationController
   end
 
   def create
+    if params[:format] == 'json'
+      @ticket = TicketMailer.receive(params[:message])
+    else
+      @ticket = Ticket.new(ticket_params)
+    end
+
+    if @ticket.save
+
+      if current_user.nil?
+        user = @ticket.user
+      else
+        user = current_user
+      end
+
+      Rule.apply_all(@ticket)
+
+      # where user notifications added?
+      if @ticket.notified_users.count == 0
+        @ticket.set_default_notifications!(user)
+      end
+
+      NotificationMailer.new_ticket(@ticket).deliver
+    end
+
     respond_to do |format|
       format.html do
-        @ticket = Ticket.new(ticket_params)
 
-        if current_user.nil?
-          user = @ticket.user
-        else
-          user = current_user
-        end
-
-        if @ticket.save
-          @ticket.set_default_notifications!(user)
-
-          NotificationMailer.new_ticket(@ticket).deliver
+        if @ticket.valid?
 
           if current_user.nil?
             return render text: I18n::translate(:ticket_added)
           else
             redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
           end
+
         else
           render 'new'
         end
+
       end
+
       format.json do
-        @ticket = TicketMailer.receive(params[:message])
         render json: @ticket, status: :created
       end
+
       format.js { render }
     end
   end
 
-  private
+  protected
     def ticket_params
       if !current_user.nil? && current_user.agent?
         params.require(:ticket).permit(
@@ -156,4 +176,14 @@ class TicketsController < ApplicationController
             :priority)
       end
     end
+
+    def allow_cors
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'GET,POST'
+      headers['Access-Control-Allow-Headers'] =
+          %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(',')
+
+      head :ok if request.request_method == 'OPTIONS'
+    end
+
 end

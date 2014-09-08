@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="large-6 columns">
+    <h3><%= t(:edit_rule) %></h3>
+  </div>
+</div>
+<%= render 'form' %>
+<div class="row">
+  <div class="large-6 columns">
+    <em>
+      <%= link_to t(:delete_rule),
+          rule_path(@rule),
+          method: :delete,
+          data: { confirm: t(:are_you_sure) } %>
+    </em>
+  </div>
+</div>

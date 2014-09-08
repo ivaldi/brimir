@@ -4,6 +4,7 @@ problem:
   user: bob
   assignee: alice
   priority: low
+  message_id: 'test123@test123'
 
 multiple:
   subject: Some problems

@@ -64,9 +64,6 @@
 
   jQuery(function() {
 
-    var screenY = jQuery(document).outerHeight();
-    jQuery('aside').css('min-height', screenY+'px');
-
     jQuery('.select2').select2({ width: 'resolve' });
 
     dialog = jQuery('[data-dialog]');
@@ -94,7 +91,7 @@
         multiple: true,
         minimumInputLength: 3,
         ajax: {
-          url: "/users.json",
+          url: '/users.json',
           dataType: 'json',
           data: function (term, page) {
             return {
@@ -107,13 +104,13 @@
         },
         initSelection: function(element, callback) {
           var id = jQuery(element).val();
-          if (id !== "") {
+          if (id !== '') {
             jQuery.ajax('/users.json', {
               data: {
                 init: true,
                 q: id
               },
-              dataType: "json"
+              dataType: 'json'
             }).done(function(data) { 
               callback(data.users); 
             });
@@ -123,11 +120,12 @@
 
     tinyMCE.init({
       autoresize_bottom_margin: 0,
-      selector: "textarea.tinymce",
+      selector: 'textarea.tinymce',
       statusbar: false,
       menubar: false,
-      toolbar: "undo redo | bold italic | bullist numlist | outdent indent removeformat",
-        height: 150
+      toolbar: 'undo redo | bold italic | bullist numlist | outdent indent removeformat',
+      height: 150,
+      plugins: 'autoresize,paste',
     });
 
     jQuery(document).foundation();

@@ -129,6 +129,21 @@ en:
 # controllers/replies
   reply_added: Reply added
 
+# rules/index
+  new_rule: New rule
+  rules: Rules
+
+# rules/edit
+  edit_rule: Edit rule
+  delete_rule: Delete rule
+  are_you_sure: Are you sure?
+
+# controllers/rules
+  rule_added: Rule added
+  rule_modified: Rule modified
+  rule_deleted: Rule deleted
+
+
   activerecord:
     attributes:
       user:
@@ -151,3 +166,15 @@ en:
         to: To
         cc: Cc
         Bcc: Bcc
+
+      rule:
+        filter_field: Field
+        filter_operation: Operator
+        filter_operations:
+          contains: contains
+        filter_value: Value
+        action_operation: Action to perform
+        action_operations:
+          assign_label: assign label
+          notify_user: send notification to
+        action_value: Parameter for action

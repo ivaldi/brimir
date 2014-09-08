@@ -49,7 +49,7 @@ class UsersController < ApplicationController
   def index
 
     if params[:format].nil?
-      @users = User.ordered.page(params[:page])
+      @users = User.ordered.paginate(page: params[:page])
     elsif params[:format] == 'json'
       if params[:init].present?
         @users = params[:q].split(',')
