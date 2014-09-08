@@ -1,0 +1,154 @@
+# author: https://www.facebook.com/aunsinpagina?fref=ufi
+es:
+# layouts/application
+  new_ticket: Nuevo Ticket
+  inbox: Bandeja
+  mine: Mios
+  closed: Cerrado
+  trashed: Borrado
+
+# devise/sessions/new
+  sign_in: Entrar
+
+# devise/shared/links
+  forgot_password: Olvidaste tu contraseña?
+
+# devise/passwords/new
+  send_instructions: Enviame las instrucciones
+
+# devise/passwords/edit
+  change_password: Cambiar contraseña
+  new_password: Nueva contraseña
+  new_password_confirmation: Confirmar nueva contraseña
+  
+# devise/mailer/reset_password_instructions
+  hello: Hola
+  someone_requested_link: Alguien ha solicitado un link para cambiar tu contraseña, puedes proceder haciendo clic en el link siguiente.
+  ignore_if_not_requested: Si tu no lo solicitaste, ignora este correo.
+  password_wont_change_without_opening_link: Tu contraseña no cambiara hasta que acceses haciendo clic en la liga de arriba y generes una nueva.
+
+# tickets/index
+  tickets: Tickets
+  tickets_containing: Tickets que contienen
+  priority: Prioridad
+  replies: Respuestas
+  no_subject: Sin tema
+  unassigned: Sin asignar
+  no_tickets_found: No tickets encontrados.
+  search: Buscar
+
+# tickets/show
+  ticket_by_at: Por %{email} en %{at}
+  no_content: Sin contenido
+  status: Estado
+  assignee: Delegado a
+  num_replies:
+    one: '%{count} respuesta'
+    other: '%{count} respuestas'
+  high: Alta
+  medium: Medio
+  low: Bajo
+  unknown: Desconocido
+  open: Abierto
+  closed: Cerrado
+  deleted: Borrado
+  labels: Etiquetas
+  label_name: Nombre de etiqueta
+  notification_sent_to: 'Una notificacion fue enviada a las siguientes direcciones:'
+
+# tickets/_change_priority_form
+  change: Cambiar
+  change_priority: Cambiar prioridad
+
+# tickets/_change_status_form
+  change_status: Cambiar estado
+
+# tickets/_change_assignee_form
+  change_assignee: Asignar ticket
+  assign: Asignar
+
+# replies/new
+  add_reply: Agrergar respuesta
+
+# replies/_form
+  reply: Responder
+  attach_files: Adjuntar archivo(s)
+  send_reply: Enviar respuesta
+  on_date_author_wrote: 'En %{date}, %{author} escribio:'
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Se te asigno un Ticket
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Prioridad del ticket modificada para el ticket
+
+# ticket_mailer/notify_status_changed.text.erb
+  tickets_status_modified: Estado del ticket modificado para el ticket
+
+# notification_mailer/new_ticket
+  view_new_ticket: Ver nuevo ticket
+# notification_mailer/new_reply
+  new_reply: Nueva respuesta
+  view_new_reply: Ver nueva respuesta
+  
+# attachments/_attachment
+  download: Descarga
+
+# users/new
+  new_user: Nuevo Usuario
+
+# users/edit
+  edit_user: Editar Usuario
+
+# users/index
+  email: Correo
+  role: Rol
+  agent: Agente
+  customer: Cliente
+
+# users/_form
+  account_settings: Configuracion de Cuenta
+  only_fill_in_passwords_when_modifying: Solo llene los siguientes dos campos si desea modificar su contraseña.
+  user_is_an_agent: Usuario es un agente
+  receive_new_ticket_notifications: Recibir notificaciones para nuevos tickets
+  email_settings: Configuracion de Correo
+  save: Guardar
+  access_control: Control de Acceso
+  have_access_to_label: Usuario tiene acceso a todos los tickets con cualquiera de estas etiquetas.
+
+# controllers/attachments
+  file_not_found: Archivo no encontrado
+
+# controllers/users
+  settings_saved: Configuracion guardada
+  user_added: Usuario agregado
+
+# controllers/tickets
+  ticket_added: Ticket agregado
+  ticket_updated: Ticket actualizado
+
+# controllers/replies
+  reply_added: Respuesta agregada
+
+  activerecord:
+    attributes:
+      user:
+        email: Correo
+        password: Contraseña
+        password_confirmation: Confirmacion de contraseña
+        signature: Firma de correo
+        remember_me: Recordarme
+        label_ids: Etiquetas
+
+      ticket:
+        from: De direccion de correo
+        subject: Tema
+        content: Contenido
+        status: Estado
+        priority: Prioridad
+        assignee_id: Delegado
+
+      reply:
+        to: Para
+        cc: Cc
+        Bcc: Cco
