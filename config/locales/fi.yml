@@ -33,7 +33,7 @@ fi:
   priority: Prioriteetti
   replies: vastaukset
   no_subject: Ei otsikkoa
-  unassigned: Ei tekijää
+  unassigned: Ei suorittajaa
   no_tickets_found: Tikettejä ei löytynyt.
   search: Etsi
 
@@ -41,7 +41,7 @@ fi:
   ticket_by_at: Lähettänyt %{email} kello %{at}
   no_content: Ei sisältöä
   status: Tila
-  assignee: Tekijä
+  assignee: Suorittaja
   num_replies:
     one: '%{count} vastaus'
     other: '%{count} vastausta'
@@ -64,7 +64,7 @@ fi:
   change_status: Muuta tilaa
 
 # tickets/_change_assignee_form
-  change_assignee: Vaihda tekijää
+  change_assignee: Vaihda suorittajaa
   assign: Vaihda
 
 # replies/new
@@ -101,15 +101,16 @@ fi:
   edit_user: Muuta käyttäjää
 
 # users/index
+  users: Käyttäjät
   email: Sähköposti
   role: Rooli
-  agent: Työntekijä
+  agent: Asiakaspalvelija
   customer: Asiakas
 
 # users/_form
   account_settings: Tilin asetukset
   only_fill_in_passwords_when_modifying: Täytä vain nämä kaksi kenttää, jos haluat vaihtaa salasanaasi.
-  user_is_an_agent: Käyttäjä on uusi työntekijä
+  user_is_an_agent: Käyttäjä on asiakaspalvelija
   receive_new_ticket_notifications: Lähetä ilmoitus uusista tiketeistä
   email_settings: Sähköpostin asetukset
   save: Tallenna
@@ -146,7 +147,7 @@ fi:
         content: Sisältö
         status: Tila
         priority: Prioriteetti
-        assignee_id: Tekijä
+        assignee_id: Suorittaja
 
       reply:
         to: Vastaanottaja
