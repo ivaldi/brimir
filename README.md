@@ -28,7 +28,7 @@ Next, load the database schema and precompile assets:
 
 Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
-    rails console production
+    bin/rails console production
     u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
 
 Incoming email
