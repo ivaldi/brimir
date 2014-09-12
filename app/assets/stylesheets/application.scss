@@ -113,6 +113,10 @@ ul.off-canvas-list li label{
 	margin-top: 30px !important;
 }
 
+.mb{
+	margin-bottom: 30px !important;
+}
+
 .no-m{
 	margin: 0 !important;
 }
@@ -128,7 +132,6 @@ ul.off-canvas-list li label{
 .select2-container-multi .select2-choices .select2-search-choice {
 	margin-top: 9px !important;
 }
-
 
 table td, .nowrap{
 	white-space: nowrap;
@@ -171,6 +174,24 @@ table input{
 	border-radius: 1000px;
 	font-size: 14px;
 	line-height: 27px;
+}
+
+.replies{
+	border-top: 1px solid #bec8dc;
+	border-bottom: 1px solid #bec8dc;
+	background: #eceff3;
+	padding: 0;
+}
+
+.replies ul{
+	list-style: none;
+	margin-left: 0;
+}
+
+.reply{
+	background: #fff;
+	border: 1px solid #bec8dc;
+	padding: 30px;
 }
 
 .sort-by{

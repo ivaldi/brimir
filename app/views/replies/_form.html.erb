@@ -1,10 +1,8 @@
 <%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
 
   <%= r.hidden_field :ticket_id %>
-  <div class="panel mt">
+  <div class="ma">
     <h3><%= t(:reply) %></h3>
-
-    <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
 
     <%
       content = '<p></p>' + current_user.signature.to_s
@@ -20,14 +18,31 @@
       content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
     %>
 
-    <%= r.text_area :content, label: false, class: 'tinymce',
-        value: (@reply.content.nil? ? content : @reply.content) %>
 
-    <%= label_tag 'attachment[]', t(:attach_files) %>
-    <%= file_field_tag 'attachment[]', multiple: true, label: false %>
+    <p>
+      <%= r.text_area :content, label: false, class: 'tinymce',
+          value: (@reply.content.nil? ? content : @reply.content) %>
+    </p>
+
+    <p class="no-m">
+      <%= t(:attachment) %>
+    </p>
+    <p>
+      <%= label_tag 'attachment[]', t(:attach_files) %>
+      <%= file_field_tag 'attachment[]', multiple: true, label: false %>
+    </p>
+    
+    <p class="no-m">
+      <%= t(:notification_will_be_sent_to) %>
+    </p>
+    <p>
+      <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
+    </p>
+
+    <p>
+      <%= r.submit value: t(:send_reply), class: 'button regular radius' %>
+    </p>
+
   </div>
-  <p>
-    <%= r.submit value: t(:send_reply), class: 'button regular radius' %>
-  </p>
 <% end %>
 

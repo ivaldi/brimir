@@ -1,7 +1,8 @@
-<dd>
-  <a class="title" href="#reply-<%=reply.id%>">
-    <h5><%= reply.user.email %> <small class="pull-right"><%= l reply.created_at, format: :short %></small></h5>
-  </a>
+<li class="reply radius mb">
+  <p class="no-m">
+    <strong><%= reply.user.email %></strong>
+    <small class="pull-right"><%= time_ago_in_words(reply.created_at) %> <%= t(:ago) %></small>
+  </p>
   <div id="reply-<%=reply.id%>" class="<%= div_class %>">
 
     <% if reply.content_type == 'html' %>
@@ -19,5 +20,15 @@
         <%= render reply.attachments %>
       </ul>
     <% end %>
+
+
+    <hr />
+    <p class="no-m">
+      <%= t(:notification_sent_to) %>    
+      <% reply.notified_users.each do |user| %>
+        <%= user.email %>
+      <% end %>
+    </p>
+
   </div>
-</dd>
+</li>

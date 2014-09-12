@@ -50,6 +50,7 @@ nl:
   num_replies:
     one: '%{count} reactie'
     other: '%{count} reacties'
+  ago: geleden
   high: Hoog
   medium: Gemiddeld
   low: Laag
@@ -80,6 +81,7 @@ nl:
   attach_files: Bestand(en) toevoegen
   send_reply: Verstuur reactie
   on_date_author_wrote: 'Op %{date} schreef %{author}:'
+  notification_will_be_sent_to: Een notificatie van je reactie wordt verstuurd naar
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket aan jou toegewezen
