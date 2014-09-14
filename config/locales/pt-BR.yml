@@ -1,0 +1,183 @@
+# author: @neilorcaldeira - github.com/neilor
+
+pt-BR:
+# layouts/application
+  new_ticket: Novo Ticket
+  inbox: Caixa de Entrada
+  mine: Meu
+  closed: Fechado
+  trashed: Excluído
+
+# devise/sessions/new
+  sign_in: Entrar
+
+# devise/shared/links
+  forgot_password: Esqueceu a senha?
+
+# devise/passwords/new
+  send_instructions: Envie-me instruções
+
+# devise/passwords/edit
+  change_password: Mudar senha
+  new_password: Nova senha
+  new_password_confirmation: Confirme nova senha
+
+# devise/mailer/reset_password_instructions
+  hello: Olá
+  someone_requested_link: Alguém pediu um link para alterar sua senha, e você pode alterá-la através do link abaixo.
+  ignore_if_not_requested: Se você não fez esta requisição, por favor, ignore este email.
+  password_wont_change_without_opening_link: Sua senha não será alterada até que você acesse o link acima e crie uma nova.
+
+# tickets/index
+  tickets: Tickets
+  tickets_containing: Contém tickets
+  priority: Prioridade
+  replies: respostas
+  no_subject: Sem assunto
+  unassigned: Não atribuído
+  no_tickets_found: Nenhum ticket encontrado.
+  search: Procurar
+
+# tickets/show
+  ticket_by_at: Por %{email} em %{at}
+  no_content: Sem conteúdo
+  status: Status
+  assignee: Responsável
+  num_replies:
+    one: '%{count} resposta'
+    other: '%{count} respostas'
+  high: Alta
+  medium: Média
+  low: Baixa
+  unknown: Desconhecida
+  open: Aberto
+  closed: Fechado
+  deleted: Deletado
+  labels: Etiquetas
+  label_name: Nome da etiqueta
+  add: +
+  notification_sent_to: 'Uma notificação foi enviada para os seguintes endereços:'
+
+# tickets/_change_priority_form
+  change: Mudar
+  change_priority: Mudar prioridade
+
+# tickets/_change_status_form
+  change_status: Mudar status
+
+# tickets/_change_assignee_form
+  change_assignee: Atribuir ticket
+  assign: Atribuir
+
+# replies/new
+  add_reply: Adicionar resposta
+
+# replies/_form
+  reply: Resposta
+  attach_files: Anexar arquivo(s)
+  send_reply: Enviar resposta
+  on_date_author_wrote: 'Em %{date}, %{author} escreveu:'
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Ticket atribuído a você
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Prioridade modificada para ticket
+
+# ticket_mailer/notify_status_changed.text.erb
+  tickets_status_modified: Status modificado para ticket
+
+# notification_mailer/new_ticket
+  view_new_ticket: Ver novo ticket
+# notification_mailer/new_reply
+  new_reply: Nova resposta
+  view_new_reply: Ver nova resposta
+
+# attachments/_attachment
+  download: download
+
+# users/new
+  new_user: Novo usuário
+
+# users/edit
+  edit_user: Editar usuário
+
+# users/index
+  email: Email
+  role: Regra
+  agent: Agente
+  customer: Consumidor
+
+# users/_form
+  account_settings: Configurações da conta
+  only_fill_in_passwords_when_modifying: Somente preencha estes dois campos se você deseja modificar sua senha.
+  user_is_an_agent: Usuário é um agente
+  receive_new_ticket_notifications: Receba notificações de novos tickets
+  email_settings: Configurações de Email
+  save: Salvar
+  access_control: Controle de acesso
+  have_access_to_label: O usuário tem acesso a todos tickets com qualquer uma destas etiquetas.
+
+# controllers/attachments
+  file_not_found: Arquivo não encontrado
+
+# controllers/users
+  settings_saved: Configurações salvas
+  user_added: Usuário adicionado
+
+# controllers/tickets
+  ticket_added: Ticket adicionado
+  ticket_updated: Ticket atualizado
+
+# controllers/replies
+  reply_added: Resposta adicionada
+
+# rules/index
+  new_rule: Nova regra
+  rules: Regras
+
+# rules/edit
+  edit_rule: Editar regra
+  delete_rule: Deletar regra
+  are_you_sure: Você tem certeza?
+
+# controllers/rules
+  rule_added: Regra adicionada
+  rule_modified: Regra adicionada
+  rule_deleted: Regra deletada
+
+
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        password: Senha
+        password_confirmation: Confirmação da senha
+        signature: Assinatura de email
+        remember_me: Relembre-me
+        label_ids: Etiquetas
+
+      ticket:
+        from: Email remetente
+        subject: Assunto
+        content: Conteúdo
+        status: Status
+        priority: Prioridade
+        assignee_id: Responsável
+
+      reply:
+        to: Para
+        cc: Cc
+        Bcc: Cco
+
+      rule:
+        filter_field: Campo
+        filter_operation: Operador
+        filter_operations:
+          contains: contém
+        filter_value: Valor
+        action_operation: Ação a ser executada
+        action_operations:
+          assign_label: atribuir etiqueta
+          notify_user: enviar notificação para
+        action_value: Parâmetro para a ação
