@@ -19,7 +19,7 @@ class Rule < ActiveRecord::Base
   validates_presence_of :filter_field, :filter_value
 
   enum filter_operation: [:contains]
-  enum action_operation: [:assign_label, :notify_user]
+  enum action_operation: [:assign_label, :notify_user, :change_status]
 
   def filter(ticket)
 
@@ -45,6 +45,10 @@ class Rule < ActiveRecord::Base
       unless user.nil?
         ticket.notified_users << user
       end
+
+    elsif action_operation == 'change_status'
+      ticket.status = action_value
+      ticket.save
 
     end
   end

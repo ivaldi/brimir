@@ -187,4 +187,5 @@ nl:
         action_operations:
           assign_label: voeg label toe
           notify_user: stuur notificatie aan
+          change_status: wijzig status in
         action_value: Parameter voor actie
