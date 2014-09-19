@@ -6,6 +6,7 @@ fi:
   mine: Omat
   closed_tickets: Suljetut
   trashed: Poistetut
+  users: Käyttäjät
 
 # devise/sessions/new
   sign_in: Kirjaudu sisään
@@ -101,7 +102,6 @@ fi:
   edit_user: Muuta käyttäjää
 
 # users/index
-  users: Käyttäjät
   email: Sähköposti
   role: Rooli
   agent: Asiakaspalvelija

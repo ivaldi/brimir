@@ -1,4 +1,4 @@
-# author: @neilorcaldeira - github.com/neilor
+# author: https://github.com/neilor
 
 pt-BR:
 # layouts/application
@@ -7,6 +7,7 @@ pt-BR:
   mine: Meu
   closed_tickets: Fechado
   trashed: Excluído
+  rules: Regras
 
 # devise/sessions/new
   sign_in: Entrar
@@ -134,7 +135,6 @@ pt-BR:
 
 # rules/index
   new_rule: Nova regra
-  rules: Regras
 
 # rules/edit
   edit_rule: Editar regra
