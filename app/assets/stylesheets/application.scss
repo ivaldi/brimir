@@ -22,6 +22,8 @@
 
  @import "foundation/functions";
 
+b
+
 /* --- Helpers --- */
 
 .full{ width: 100%; }
@@ -51,8 +53,8 @@
 /* --- Side menu --- */
 
 aside{
+	min-height: calc(100vh - 60px);
 	background: #30363e;
-	height: 600px;
 }
 
 aside .fa{
