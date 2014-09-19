@@ -4,7 +4,7 @@ fi:
   new_ticket: Uusi tiketti
   inbox: Saapuneet
   mine: Omat
-  closed: Suljetut
+  closed_tickets: Suljetut
   trashed: Poistetut
 
 # devise/sessions/new
