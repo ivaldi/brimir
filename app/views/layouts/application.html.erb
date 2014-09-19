@@ -45,7 +45,7 @@
             <li>
               <%= active_elem_if :a, params[:status] == 'closed',
                    href: tickets_path(status: 'closed') do %>
-                <span class="fa fa-check"></span><%= t(:closed) %>
+                <span class="fa fa-check"></span><%= t(:closed_tickets) %>
               <% end %>
             </li>
             <li>
