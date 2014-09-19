@@ -135,7 +135,6 @@ en:
 
 # rules/index
   new_rule: New rule
-  rules: Rules
 
 # rules/edit
   edit_rule: Edit rule
