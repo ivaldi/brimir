@@ -1,8 +1,15 @@
-<div class="row">
-  <div class="large-12 columns">
-
-    <h2 class="filter-title"><%= t(:users) %></h2>
-    <%= link_to t(:new_user), new_user_path, class: 'button right radius' %>
+<div class="row collapse">
+  <div class="medium-12 columns">
+    <div class="panel">
+      <div class="row collapse">
+        <div class="medium-9 columns">
+            <h4 class="filter-title no-m pts"><%= t(:users) %></h4>
+        </div>
+        <div class="medium-3 columns">
+            <%= link_to t(:new_user), new_user_path, class: 'no-m tiny button right radius' %>
+        </div>
+      </div>
+    </div>
 
     <table class="full">
       <thead>

@@ -1,17 +1,12 @@
 <!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
-
-    <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
-
     <%= favicon_link_tag 'favicon.png' %>
     <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' %>
     <%= stylesheet_link_tag 'application' %>
@@ -20,18 +15,16 @@
 
   <body<%= ' style="background: #333;"'.html_safe if user_signed_in? %>>
 
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-        <li class="name">
-          <h1><a href="#">Brimir</a></h1>
-        </li>
-         <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-      </ul>
+    <% if user_signed_in? %>
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="#">Brimir</a></h1>
+          </li>
+          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
 
-      <section class="top-bar-section">
-        <% if user_signed_in? %>
-
+        <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
             <% if can? :manage, User %>
@@ -44,20 +37,18 @@
                 <li><%= link_to '<i class="fa-sign-out fa fa-fw"></i> Uitloggen'.html_safe, :destroy_user_session, method: :delete %></li>
               </ul>
             </li>
+          </ul>        
+          <!-- Left Nav Section -->
+          <ul class="left">
+            <li><%= link_to t(:new_ticket), new_ticket_path %></li>
           </ul>
-
-        <% end %>
-        
-        <!-- Left Nav Section -->
-        <ul class="left">
-          <li><%= link_to t(:new_ticket), new_ticket_path %></li>
-        </ul>
-      </section>
-    </nav>
+        </section>
+      </nav>
+    <% end %>
 
     <div class="row collapse">
       <% if user_signed_in? %>
-        <aside class="medium-3 large-2 columns">
+        <aside class="hide-for-small medium-3 large-2 columns">
           <ul class="off-canvas-list">
             <li><label>Main</label></li>
             <li>
@@ -115,18 +106,10 @@
       <% end %>
 
         <% if notice %>
-          <div class="row">
-            <div class="large-12 columns">
-                <div data-alert class="alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
-            </div>
-          </div>
+          <div data-alert class="notification alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
         <% end %>
         <% if alert %>
-          <div class="row">
-            <div class="large-12 columns">
-                <div data-alert class="alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
-            </div>
-          </div>
+          <div data-alert class="notification alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
         <% end %>
 
         <%= yield %>

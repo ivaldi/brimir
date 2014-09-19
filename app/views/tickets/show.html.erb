@@ -1,5 +1,5 @@
 <div class="row" style="border-bottom: 1px solid #bec8dc">
-  <div class="large-12 columns">
+  <div class="medium-12 columns">
     <h3 class="mt">
       <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(' + t(:no_subject) + ')</em>'.html_safe %>
     </h3>
@@ -11,7 +11,7 @@
 
 
 <div class="row collapse">
-  <div class="large-9 columns" style="border-right: 1px solid #bec8dc">
+  <div class="medium-9 columns" style="border-right: 1px solid #bec8dc">
     <div class="ma">
       <% if @ticket.content.nil? %>
         (<%= t(:no_content) %>)
@@ -81,7 +81,7 @@
 
   </div>
 
-  <div class="large-3 columns">
+  <div class="medium-3 columns">
     <div class="ma">
       <dl>
 
@@ -91,7 +91,7 @@
             <dt><%= t(:status) %></dt>
             <dd>
               <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
-                <span class="fa fa-<%= status_icon(@ticket.status) %>"></span>
+                <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"></span>
                 <%= t(@ticket.status) %>
               </a>
               <%= render 'status_dropdown', ticket: @ticket %>
@@ -99,7 +99,8 @@
             <dt><%= t(:priority) %></dt>
             <dd>
               <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
-                <span class="priority-<%= @ticket.priority %> fa fa-circle"></span> <%= t(@ticket.priority) %>
+                <span class="priority-<%= @ticket.priority %> fa fa-fw fa-circle"></span>
+                <%= t(@ticket.priority) %>
               </a>
               <%= render 'priority_dropdown', ticket: @ticket, short: false %>
             </dd>
@@ -107,8 +108,10 @@
             <dd>
               <a href="#" data-reveal-id="change-assignee">
               <% if !@ticket.assignee %>
+                <span class="fa fa-fw fa-user"></span>
                 <%= t(:unassigned) %>
               <% else %>
+                <span class="fa fa-fw fa-user"></span>
                 <%= @ticket.assignee.email %>
               <% end %>
               </a>

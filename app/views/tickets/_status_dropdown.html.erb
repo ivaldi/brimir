@@ -4,7 +4,7 @@
       <%= link_to ticket_path(ticket, ticket: { status: value }),
           method: :patch, remote: true do %>
 
-        <span class="fa fa-<%= status_icon(value) %>"></span>
+        <span class="fa fa-fw fa-<%= status_icon(value) %>"></span>
         <%= t(value) %>
       <% end %>
     </li>

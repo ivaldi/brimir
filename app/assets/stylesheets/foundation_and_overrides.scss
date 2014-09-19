@@ -40,9 +40,10 @@ $topbar-link-bg-active: scale-color($primary-color, $lightness: 5%);
 
 $panel-bg: #dfe4ee;
 $panel-border-style: solid;
-$panel-border-color: #000;
 $panel-margin-bottom: rem-calc(0);
 $panel-font-color: #56688a;
 $panel-padding: rem-calc(5 20);
+
+$input-font-size: rem-calc(11);
 
 @import 'foundation';

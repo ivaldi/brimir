@@ -1,22 +1,22 @@
 <div class="panel">
   <div class="row collapse">
-    <div class="large-9 columns">
+    <div class="medium-9 columns">
       <% if params[:q].present? %>
         <h4 class="filter-title no-m pts">321 <%= t(:tickets_containing) %> '<em><%= params[:q].to_s %></em>'</h4>
       <% else %>
-        <h4 class="filter-title no-m pts">23 <%= t(:tickets) %></h4>
+        <h4 class="filter-title no-m pts">23 <%= t(:tickets) %> in inbox</h4>
       <% end %>
     </div>
-    <div class="large-3 columns">
+    <div class="medium-3 columns">
       <%= form_tag tickets_path, method: :get do %>
         <%= hidden_field_tag :assignee_id, params[:assignee_id] %>
         <%= hidden_field_tag :status, params[:status] %>
         <div class="row collapse">
-          <div class="small-9 columns">
+          <div class="small-8 columns">
             <%= text_field_tag :q, params[:q], class: 'no-m' %>
           </div>
-          <div class="small-3 columns">
-            <%= button_tag t(:search), type: 'submit', class: 'no-m button postfix' %>
+          <div class="small-4 columns">
+            <%= button_tag t(:search), type: 'submit', class: 'radius no-m button postfix' %>
           </div>
         </div>
       <% end %>
