@@ -11,6 +11,8 @@ nl:
   mine: Van mij
   closed_tickets: Gesloten
   trashed: Prullenbak
+  users: Gebruikers
+  rules: Regels
 
 # devise/sessions/new
   sign_in: Inloggen
@@ -139,7 +141,6 @@ nl:
 
 # rules/index
   new_rule: Nieuwe regel
-  rules: Regels
 
 # rules/edit
   edit_rule: Regel wijzigen

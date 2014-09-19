@@ -5,6 +5,8 @@ en:
   mine: Mine
   closed_tickets: Closed
   trashed: Trashed
+  users: Users
+  rules: Rules
 
 # devise/sessions/new
   sign_in: Sign in

@@ -27,8 +27,11 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
+            <% if can? :manage, Rule %>
+                <li><a href="<%= rules_path %>"><%= t(:rules) %></a></li>
+            <% end %>
             <% if can? :manage, User %>
-                <li><a href="<%= users_path %>">Gebruikers</a></li>
+                <li><a href="<%= users_path %>"><%= t(:users) %></a></li>
             <% end %>
             <li class="has-dropdown">
               <a href="#"><%= current_user.email %></a>
