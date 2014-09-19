@@ -5,6 +5,15 @@ agent.save!
 customer = User.where(email: 'customer@getbrimir.com').first_or_create({ email: 'customer@getbrimir.com', password: 'testtest', password_confirmation: 'testtest' })
 customer.save!
 
+labels = [
+    'bug',
+    'feedback',
+    'feature-request',
+    'change-request',
+]
+
+customer.labels << Label.where(name: labels.sample).first_or_create!
+
 customers = [
     'alice@example.com',
     'bob@example.com',
@@ -44,7 +53,7 @@ content = [
     from = customer.email
   end
 
-  Ticket.create!(
+  ticket = Ticket.create!(
     from: from,
     subject: subjects.sample,
     content: '<html><head></head><body><p>' +
@@ -54,4 +63,8 @@ content = [
     priority: Ticket.priorities.keys.sample,
     status: Ticket.statuses.keys.sample,
   )
+
+  if Random.rand() > 0.5
+    ticket.labels << Label.where(name: labels.sample).first_or_create!
+  end
 end
