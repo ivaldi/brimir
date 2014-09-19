@@ -4,7 +4,7 @@ es:
   new_ticket: Nuevo Ticket
   inbox: Bandeja
   mine: Mios
-  closed: Cerrado
+  closed_tickets: Cerrado
   trashed: Borrado
 
 # devise/sessions/new

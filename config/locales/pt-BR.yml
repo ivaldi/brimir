@@ -5,7 +5,7 @@ pt-BR:
   new_ticket: Novo Ticket
   inbox: Caixa de Entrada
   mine: Meu
-  closed: Fechado
+  closed_tickets: Fechado
   trashed: Excluído
 
 # devise/sessions/new

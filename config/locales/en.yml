@@ -3,7 +3,7 @@ en:
   new_ticket: New Ticket
   inbox: Inbox
   mine: Mine
-  closed: Closed
+  closed_tickets: Closed
   trashed: Trashed
 
 # devise/sessions/new
