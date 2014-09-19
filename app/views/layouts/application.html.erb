@@ -36,11 +36,19 @@
             <li class="has-dropdown">
               <a href="#"><%= current_user.email %></a>
               <ul class="dropdown">
-                <li><%= link_to '<i class="fa-cogs fa fa-fw"></i> Persoonlijke instellingen'.html_safe, edit_user_path(current_user) %></li>
-                <li><%= link_to '<i class="fa-sign-out fa fa-fw"></i> Uitloggen'.html_safe, :destroy_user_session, method: :delete %></li>
+                <li>
+                  <%= link_to edit_user_path(current_user) do %>
+                    <i class="fa-cogs fa fa-fw"></i> <%= t(:personal_settings) %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                    <i class="fa-sign-out fa fa-fw"></i> <%= t(:sign_out) %>
+                  <% end %>
+                </li>
               </ul>
             </li>
-          </ul>        
+          </ul>
           <!-- Left Nav Section -->
           <ul class="left">
             <li><%= link_to t(:new_ticket), new_ticket_path %></li>

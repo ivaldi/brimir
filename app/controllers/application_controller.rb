@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
 
   protected
     def load_labels
-      @labels = Label.viewable_by(current_user)
+      @labels = Label.viewable_by(current_user).ordered
     end
 
     def set_locale
