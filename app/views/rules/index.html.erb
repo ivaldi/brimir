@@ -1,8 +1,16 @@
-<div class="row">
-  <div class="large-12 columns">
+<div class="panel">
+  <div class="row collapse">
+    <div class="medium-6 columns">
+      <h4 class="no-m pts pbs"><%= t(:rules) %></h4>
+    </div>
+    <div class="medium-6 columns">
+      <%= link_to t(:new_rule), new_rule_path, class: 'no-m tiny button right radius' %>
+    </div>
+  </div>
+</div>
 
-    <h2 class="filter-title"><%= t(:rules) %></h2>
-    <%= link_to t(:new_rule), new_rule_path, class: 'button right radius' %>
+<div class="row collapse">
+  <div class="large-12 columns">
 
     <table class="full">
       <thead>
