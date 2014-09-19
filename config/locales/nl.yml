@@ -35,8 +35,12 @@ nl:
   password_wont_change_without_opening_link: Je wachtwoord veranderd niet totdat je via de link een nieuw wachtwoord aanmaakt.
 
 # tickets/index
-  tickets: Tickets
-  tickets_containing: Tickets overeenkomend met
+  count_tickets_in_inbox:
+    one: '%{count} ticket in inbox'
+    other: '%{count} tickets in inbox'
+  count_tickets_containing:
+    one: '%{count} ticket overeenkomend met'
+    other: '%{count} tickets overeenkomend met'
   priority: Prioriteit
   replies: reacties
   no_subject: Geen onderwerp
