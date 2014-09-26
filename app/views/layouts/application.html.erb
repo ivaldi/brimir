@@ -111,7 +111,8 @@
             <% end %>
           </ul>
         </aside>
-        <div class="medium-9 large-10 columns" style="background: #fff;" data-main>
+        <%# 100vh - 60px because top-bar height is 60px %>
+        <div class="medium-9 large-10 columns" style="background: #fff; min-height: calc(100vh - 60px);" data-main>
       <% else %>
         <div class="medium-9 large-10 columns medium-centered large-centered">
       <% end %>
