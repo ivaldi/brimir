@@ -13,21 +13,20 @@
 <div class="row collapse">
   <div class="medium-9 columns" style="border-right: 1px solid #bec8dc">
     <div class="ma">
-      <% if @ticket.content.nil? %>
+      <% if @ticket.content.blank? %>
         (<%= t(:no_content) %>)
       <% else %>
 
         <div class="output">
           <% if @ticket.content_type == 'html' %>
-            <% content = @ticket.content.html_safe %>
+            <% content = @ticket.content %>
           <% elsif @ticket.content_type == 'text' %>
-            <% content = @ticket.content.gsub("\n", '<br />') %>
+            <% content = text_to_html(@ticket.content) %>
           <% else %>
             <% content = @ticket.content %>
           <% end %>
 
-          <%# only allow these tags and attributes %>
-          <%= sanitize content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href) %>
+          <%= sanitize_html(content) %>
         </div>
       <% end %>
 
