@@ -92,7 +92,6 @@
 
           <ul class="off-canvas-list">
             <li><label><%= t(:labels) %></label></li>
-            <% colors = ['de6262', '65a8dd', '6fc681', '9d61dd', '6370dd', 'dca761', 'a86f72', '759d91', '727274']  %>
             <% @labels.each do |label| %>
               <%
                 # toggle label on/off
@@ -104,7 +103,7 @@
               %>
               <li>
                 <a href="<%= tickets_url(p) %>"<%= ' class="active"'.html_safe if params[:label_id].to_i == label.id %>>
-                  <i class="fa fa-square" style="color: #<%= colors.sample %>"></i><%= label.name %>
+                  <i class="fa fa-square" style="color: <%= label.color %>"></i><%= label.name %>
                 </a>
               </li>
             <% end %>
