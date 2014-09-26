@@ -13,7 +13,7 @@ nl:
   trashed: Prullenbak
   users: Gebruikers
   rules: Regels
-  personal_settings: Personlijke instellingen
+  personal_settings: Persoonlijke instellingen
   sign_out: Uitloggen
 
 # devise/sessions/new
