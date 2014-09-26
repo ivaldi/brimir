@@ -20,10 +20,8 @@
         <div class="output">
           <% if @ticket.content_type == 'html' %>
             <% content = @ticket.content %>
-          <% elsif @ticket.content_type == 'text' %>
-            <% content = text_to_html(@ticket.content) %>
           <% else %>
-            <% content = @ticket.content %>
+            <% content = text_to_html(@ticket.content) %>
           <% end %>
 
           <%= sanitize_html(content) %>

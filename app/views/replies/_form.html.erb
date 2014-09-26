@@ -25,13 +25,12 @@
     </p>
 
     <p class="no-m">
-      <%= t(:attachment) %>
+      <%= label_tag 'attachment[]', t(:attach_files) %>
     </p>
     <p>
-      <%= label_tag 'attachment[]', t(:attach_files) %>
       <%= file_field_tag 'attachment[]', multiple: true, label: false %>
     </p>
-    
+
     <p class="no-m">
       <%= t(:notification_will_be_sent_to) %>
     </p>
