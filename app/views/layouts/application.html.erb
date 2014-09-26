@@ -13,7 +13,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body>
+  <body style="<%= 'background: #30363e' if user_signed_in? %>">
 
     <% if user_signed_in? %>
       <nav class="top-bar" data-topbar>
