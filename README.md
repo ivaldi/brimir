@@ -17,11 +17,11 @@ Next up: configuring your outgoing email address and url. This can be set in `co
 
     config.action_mailer.default_url_options = { host: 'brimir.yoururl.com' }
 
-Now install the required gems by running the following command if you want *PostgreSQL support*:
+Now install the required gems by running the following command if you want **PostgreSQL support**:
 
     bundle install --without mysql development test --deployment
 
-Run the following command to install gems if you want *MySQL support*:
+Run the following command to install gems if you want **MySQL support**:
 
     bundle install --without postgresql development test --deployment
 
