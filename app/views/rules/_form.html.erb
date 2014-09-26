@@ -1,8 +1,6 @@
 <%= form_for @rule do |f| %>
-  <div class="row">
-
+  <div class="row mt mb">
     <div class="large-6 columns">
-
       <%
         fields = []
         [:from, :subject, :content].each do |key|
@@ -34,9 +32,8 @@
   </div>
 
   <div class="row">
-    <div class="large-12 columns">
-      <hr />
-      <%= f.submit t(:save), class: 'button radius' %>
+    <div class="medium-12 columns bt">
+      <%= f.submit t(:save), class: 'success button radius mt' %>
     </div>
   </div>
 <% end %>

@@ -5,6 +5,10 @@ en:
   mine: Mine
   closed_tickets: Closed
   trashed: Trashed
+  users: Users
+  rules: Rules
+  personal_settings: Personal settings
+  sign_out: Sign out
 
 # devise/sessions/new
   sign_in: Sign in
@@ -27,8 +31,12 @@ en:
   password_wont_change_without_opening_link: Your password won't change until you access the link above and create a new one.
 
 # tickets/index
-  tickets: Tickets
-  tickets_containing: Tickets containing
+  count_tickets:
+    one: '%{count} ticket'
+    other: '%{count} tickets'
+  count_tickets_containing:
+    one: '%{count} ticket containing'
+    other: '%{count} tickets containing'
   priority: Priority
   replies: replies
   no_subject: No subject
@@ -44,6 +52,7 @@ en:
   num_replies:
     one: '%{count} reply'
     other: '%{count} replies'
+  ago: ago
   high: High
   medium: Medium
   low: Low
@@ -74,6 +83,7 @@ en:
   attach_files: Attach file(s)
   send_reply: Send reply
   on_date_author_wrote: 'On %{date}, %{author} wrote:'
+  notification_will_be_sent_to: Your notification will be sent to
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket assigned to you
@@ -131,7 +141,6 @@ en:
 
 # rules/index
   new_rule: New rule
-  rules: Rules
 
 # rules/edit
   edit_rule: Edit rule

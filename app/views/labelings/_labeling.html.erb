@@ -1,4 +1,4 @@
-<li class="radius label" data-labeling-id="<%= labeling.id %>">
+<li style="background: <%= labeling.label.color %>" class="radius label" data-labeling-id="<%= labeling.id %>">
   <%= labeling.label.name %>
   <%= link_to labeling_path(labeling), method: :delete, remote: true do %>
     <span class="fa-times fa" style="color: #eee"></span>

@@ -39,7 +39,13 @@ class ApplicationController < ActionController::Base
     params[resource] &&= send(method) if respond_to?(method, true)
   end
 
+  before_filter :load_labels, if: :user_signed_in?
+
   protected
+    def load_labels
+      @labels = Label.viewable_by(current_user).ordered
+    end
+
     def set_locale
       I18n.locale = http_accept_language.compatible_language_from(
           I18n.available_locales)

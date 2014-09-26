@@ -1,31 +1,65 @@
 <!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
-
-    <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
-
     <%= favicon_link_tag 'favicon.png' %>
     <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' %>
     <%= stylesheet_link_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
 
-  <body<%= ' style="background: #333;"'.html_safe if user_signed_in? %>>
+  <body>
+
+    <% if user_signed_in? %>
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="<%= root_path %>">Brimir</a></h1>
+          </li>
+          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+
+        <section class="top-bar-section">
+          <!-- Right Nav Section -->
+          <ul class="right">
+            <% if can? :manage, Rule %>
+                <li><a href="<%= rules_path %>"><%= t(:rules) %></a></li>
+            <% end %>
+            <% if can? :manage, User %>
+                <li><a href="<%= users_path %>"><%= t(:users) %></a></li>
+            <% end %>
+            <li class="has-dropdown">
+              <a href="#"><%= current_user.email %></a>
+              <ul class="dropdown">
+                <li>
+                  <%= link_to edit_user_path(current_user) do %>
+                    <i class="fa-cogs fa fa-fw"></i> <%= t(:personal_settings) %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                    <i class="fa-sign-out fa fa-fw"></i> <%= t(:sign_out) %>
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <!-- Left Nav Section -->
+          <ul class="left">
+            <li><%= link_to t(:new_ticket), new_ticket_path %></li>
+          </ul>
+        </section>
+      </nav>
+    <% end %>
 
     <div class="row collapse">
       <% if user_signed_in? %>
-        <aside class="medium-3 large-2 columns">
-          <div style="padding: 30px 0.66667rem 10px 0.66667rem">
-            <%= link_to t(:new_ticket), new_ticket_path, class: 'button expand radius' %>
-          </div>
+        <aside class="hide-for-small medium-3 large-2 columns">
           <ul class="off-canvas-list">
             <li>
               <%= active_elem_if :a, params[:status] == 'open' &&
@@ -56,36 +90,36 @@
             </li>
           </ul>
 
-          <p class="text-secondary text-center mt">
-            <%= current_user.email %><br />
-            <% if can? :manage, Rule %>
-              <a href="<%= rules_path %>" class="text-secondary"><i class="fa-random fa"></i></a>
+          <ul class="off-canvas-list">
+            <li><label><%= t(:labels) %></label></li>
+            <% @labels.each do |label| %>
+              <%
+                # toggle label on/off
+                if params[:label_id].to_i == label.id
+                  p = params.merge(label_id: nil)
+                else
+                  p = params.merge(label_id: label.id)
+                end
+              %>
+              <li>
+                <a href="<%= tickets_url(p) %>"<%= ' class="active"'.html_safe if params[:label_id].to_i == label.id %>>
+                  <i class="fa fa-square" style="color: <%= label.color %>"></i><%= label.name %>
+                </a>
+              </li>
             <% end %>
-            <% if can? :manage, User %>
-              <a href="<%= users_path %>" class="text-secondary"><i class="fa-users fa"></i></a>
-            <% end %>
-            <%= link_to '<i class="fa-cogs fa"></i>'.html_safe, edit_user_path(current_user), class: 'text-secondary' %>
-            <%= link_to '<i class="fa-sign-out fa"></i>'.html_safe, :destroy_user_session, method: :delete, class: 'text-secondary' %>
-          </p>
+          </ul>
         </aside>
-        <div class="medium-9 large-10 columns" style="background: #fff; min-height: 100vh;">
+        <%# 100vh - 60px because top-bar height is 60px %>
+        <div class="medium-9 large-10 columns" style="background: #fff; min-height: calc(100vh - 60px);" data-main>
       <% else %>
         <div class="medium-9 large-10 columns medium-centered large-centered">
       <% end %>
 
         <% if notice %>
-          <div class="row">
-            <div class="large-12 columns">
-                <div data-alert class="alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
-            </div>
-          </div>
+          <div data-alert class="notification alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
         <% end %>
         <% if alert %>
-          <div class="row">
-            <div class="large-12 columns">
-                <div data-alert class="alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
-            </div>
-          </div>
+          <div data-alert class="notification alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
         <% end %>
 
         <%= yield %>

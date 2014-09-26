@@ -11,6 +11,10 @@ nl:
   mine: Van mij
   closed_tickets: Gesloten
   trashed: Prullenbak
+  users: Gebruikers
+  rules: Regels
+  personal_settings: Personlijke instellingen
+  sign_out: Uitloggen
 
 # devise/sessions/new
   sign_in: Inloggen
@@ -33,8 +37,12 @@ nl:
   password_wont_change_without_opening_link: Je wachtwoord veranderd niet totdat je via de link een nieuw wachtwoord aanmaakt.
 
 # tickets/index
-  tickets: Tickets
-  tickets_containing: Tickets overeenkomend met
+  count_tickets:
+    one: '%{count} ticket'
+    other: '%{count} tickets'
+  count_tickets_containing:
+    one: '%{count} ticket overeenkomend met'
+    other: '%{count} tickets overeenkomend met'
   priority: Prioriteit
   replies: reacties
   no_subject: Geen onderwerp
@@ -50,6 +58,7 @@ nl:
   num_replies:
     one: '%{count} reactie'
     other: '%{count} reacties'
+  ago: geleden
   high: Hoog
   medium: Gemiddeld
   low: Laag
@@ -80,6 +89,7 @@ nl:
   attach_files: Bestand(en) toevoegen
   send_reply: Verstuur reactie
   on_date_author_wrote: 'Op %{date} schreef %{author}:'
+  notification_will_be_sent_to: Een notificatie van je reactie wordt verstuurd naar
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket aan jou toegewezen
@@ -137,7 +147,6 @@ nl:
 
 # rules/index
   new_rule: Nieuwe regel
-  rules: Regels
 
 # rules/edit
   edit_rule: Regel wijzigen

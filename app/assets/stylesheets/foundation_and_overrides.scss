@@ -2,43 +2,48 @@
 // FOUNDATION SETTINGS
 //
 
-$row-width: rem-calc(100%);
-$body-font-family: "Lato", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+@import "foundation/functions";
+
+$body-font-color: #747474;
+
+$primary-color: #2f87c1;
+$secondary-color: #e7e7e7;
+$alert-color: #f04124;
+$success-color: #43AC6A;
+$warning-color: #f08a24;
+$info-color: #a0d3e8;
+
+$row-width: 100%;
+$body-font-family: "Lato", "Helvetica", Helvetica, Arial, sans-serif;
 $font-smoothing: antialiased;
 
-$panel-border-style: none;
 $tabs-navigation-bg-color: #fff;
 $accordion-content-active-bg-color: #f9f9f9;
 
-// These control the background color for the table and even rows
-$table-bg: #f6f6f6;
-$table-even-row-bg: #fff;
+$table-bg: #fff;
+$table-even-row-bg: #f5f7fa;
 
-// These control the table cell border style
 $table-border-style: solid;
-$table-border-size: 1px;
+$table-border-size: 0;
 $table-border-color: #fff;
+$table-row-padding: rem-calc(9 20);
 
-// These control the table head styles
-// $table-head-bg: #f5f5f5  ;
-// $table-head-font-size: rem-calc(14);
-// $table-head-font-color: #222;
-// $table-head-font-weight: bold;
-// $table-head-padding: rem-calc(8 10 10);
+$off-canvas-bg: #30363e;
+$off-canvas-label-bg: rgba(0,0,0,0);
+$off-canvas-label-padding: rem-calc(30 10 0 10);
+$off-canvas-link-padding: rem-calc(5, 15);
+$off-canvas-link-border-bottom: none;
 
-// These control the row padding and font styles
-// $table-row-padding: rem-calc(9 10);
-// $table-row-font-size: rem-calc(14);
-// $table-row-font-color: #222;
-// $table-line-height: rem-calc(18);
+$topbar-height: 60px;
+$topbar-bg-color: $primary-color;
+$topbar-link-bg-active: scale-color($primary-color, $lightness: 5%);
 
-// These are for controlling the display and margin of tables
-// $table-display: table-cell;
-// $table-margin-bottom: rem-calc(20);
+$panel-bg: #dfe4ee;
+$panel-border-style: solid;
+$panel-margin-bottom: rem-calc(0);
+$panel-font-color: #56688a;
+$panel-padding: rem-calc(5 20);
 
+$input-font-size: rem-calc(11);
 
 @import 'foundation';
-
-.tabs dd.active a{
-	background: #f2f2f2;
-}

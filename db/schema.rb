@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140829124853) do
+ActiveRecord::Schema.define(version: 20140926120304) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140829124853) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "color"
   end
 
   create_table "notifications", force: true do |t|

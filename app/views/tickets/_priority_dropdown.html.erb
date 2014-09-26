@@ -3,7 +3,7 @@
     <li>
       <%= link_to ticket_path(ticket, ticket: { priority: value }, short: short),
           method: :patch, remote: true do %>
-        <span class="priority-<%= value %> fa fa-circle"></span>
+        <span class="priority-<%= value %> fa fa-fw fa-circle"></span>
         <%= t(value) %>
       <% end %>
     </li>

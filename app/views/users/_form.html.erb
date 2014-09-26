@@ -1,7 +1,7 @@
 <%= form_for @user, html: { class: 'edit_user' } do |f| %>
-  <div class="row">
+  <div class="row mt mb">
 
-    <div class="large-6 columns">
+    <div class="medium-6 columns">
 
       <h5><%= t(:account_settings) %></h5>
       <p><%= t(:only_fill_in_passwords_when_modifying) %></p>
@@ -19,7 +19,7 @@
       <% end %>
     </div>
 
-    <div class="large-6 columns">
+    <div class="medium-6 columns">
       <% if @user.agent? %>
         <h5><%= t(:email_settings) %></h5>
 
@@ -36,9 +36,8 @@
     </div>
   </div>
   <div class="row">
-    <div class="large-12 columns">
-      <hr />
-      <%= f.submit t(:save), class: 'button radius' %>
+    <div class="medium-12 columns bt">
+      <%= f.submit t(:save), class: 'success button radius mt' %>
     </div>
   </div>
 

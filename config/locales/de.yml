@@ -6,6 +6,8 @@ de:
   mine: Meine Tickets
   closed_tickets: Geschlossene Tickets
   trashed: Gelöschte Tickets
+  users: Benutzers
+  rules: Regeln
 
 # devise/sessions/new
   sign_in: Anmelden
@@ -133,7 +135,6 @@ de:
 
 # rules/index
   new_rule: Neue Regel hinzufügen
-  rules: Regeln
 
 # rules/edit
   edit_rule: Regel bearbeiten

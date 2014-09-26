@@ -1,0 +1,221 @@
+/* Brimir is a helpdesk system to handle email support requests.
+ * Copyright (C) 2012-2014 Ivaldi http:gcivaldi.nl
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http:gcwww.gnu.org/licenses/>.
+ *
+ *= require foundation_and_overrides
+ *= require select2
+ *= require font-awesome
+ *= require_self
+ */
+
+@import "foundation/functions";
+
+/* --- Helpers --- */
+
+.full{ width: 100%; }
+
+.ma{ margin: rem-calc(15); }
+.mt{ margin-top: 30px !important; }
+.mb{ margin-bottom: 30px !important; }
+
+.no-m{ margin: 0 !important; }
+
+.pts{ padding-top: 5px; }
+.pbs{ padding-bottom: 5px; }
+
+.priority-unknown{ color: #ccc; }
+.priority-low{ color: #ffd700; }
+.priority-medium{ color: #ff8000; }
+.priority-high{ color: #da1500; }
+
+.ba{ border: 1px solid #bec8dc; }
+.bt{ border-top: 1px solid #bec8dc; }
+.br{ border-right: 1px solid #bec8dc; }
+.bb{ border-bottom: 1px solid #bec8dc; }
+.bl{ border-left: 1px solid #bec8dc; }
+
+.text-secondary{ color: #999 !important; }
+
+/* --- Side menu --- */
+
+body {
+	background: #30363e;
+}
+
+aside{
+	min-height: calc(100vh - 60px);
+}
+
+aside .fa{
+	width: 20px;
+	text-align: center;
+	margin-right: 10px
+}
+
+ul.off-canvas-list li label{
+	font-size: 11px;
+}
+
+.off-canvas-list li label{
+	margin-top: 30px;
+}
+
+.off-canvas-list a.active{
+	color: #fff;
+}
+
+/* --- Attachments --- */
+
+.attachments{
+  list-style-type: none;
+}
+
+.attachments li{
+  line-height: 1.2;
+}
+
+.attachments img{
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  padding: 2px;
+  background: #fff;
+  float: left;
+}
+
+.attachments strong{
+  display: block;
+}
+
+.attachments .meta{
+  font-size: 13px;
+}
+
+/* --- Table --- */
+
+table td, .nowrap{
+	white-space: nowrap;
+}
+
+table tr:hover td{
+	background: #dfe4ee;
+}
+
+.table-nowrap{
+	max-width: 500px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+table{
+	border-collapse: collapse;
+}
+
+table input{
+	margin: 0 !important;
+}
+
+table thead tr th{
+	padding: 0.5625rem 1.25rem;
+}
+
+/* --- Forms --- */
+
+#new_ticket textarea, .new_reply textarea{
+	width: 100%;
+	height: 300px !important;
+}
+
+.edit_user textarea{
+	width: 100%;
+	height: 100px !important;
+}
+
+.preview{
+	height: 300px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+	margin-top: 9px !important;
+}
+
+.reveal-modal form{
+  margin: 0;
+}
+
+input[type="checkbox"]{
+  margin-right: 5px;
+}
+
+/* --- Uncategorized --- */
+
+.notification{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0;
+	-webkit-animation: animScale 0.4s;
+	animation: animScale 0.4s;
+}
+
+@-webkit-keyframes animScale {
+	0% { opacity: 0; -webkit-transform: translate3d(0,40px,0); }
+	100% { opacity: 1; -webkit-transform: translate3d(0,0,0); }
+}
+
+@keyframes animScale {
+	0% { opacity: 0; -webkit-transform: translate3d(0,40px,0); transform: translate3d(0,40px,0); }
+	100% { opacity: 1; -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); }
+}
+
+
+
+/* --- Uncategorized --- */
+
+.contain-to-grid{
+	margin-bottom: 1rem;
+}
+
+.sub-nav.filter{
+	float: right;
+	margin-top: 25px;
+}
+
+.button .fa{
+	font-size: 14px;
+}
+
+.replies{
+	border-top: 1px solid #bec8dc;
+	border-bottom: 1px solid #bec8dc;
+	background: #eceff3;
+	padding: 0;
+}
+
+.replies ul{
+	list-style: none;
+	margin-left: 0;
+}
+
+.reply{
+	background: #fff;
+	border: 1px solid #bec8dc;
+	padding: 30px;
+}
+
+.output{
+	line-height: 1.45;
+}
