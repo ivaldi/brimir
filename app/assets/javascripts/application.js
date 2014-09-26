@@ -65,10 +65,10 @@
   jQuery(function() {
 
     var page = jQuery(document).height();
-    var offset = jQuery('aside').offset().top;
+    var offset = jQuery('[data-main]').offset().top;
     var height = page - offset;
 
-    jQuery('aside').css('min-height', height+'px');
+    jQuery('[data-main]').css('min-height', height+'px');
 
     jQuery('.select2').select2({ width: 'resolve' });
 
