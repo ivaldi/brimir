@@ -37,14 +37,12 @@ group :test do
 
   # for coveralls
   gem 'coveralls'
-
-  gem 'mysql2'
 end
 
-group :production do
-  # PostgreSQL for production
-  gem 'pg'
-end
+# Optional PostgreSQL for production
+gem 'pg', group: :postgresql
+# Optional MySQL for production
+gem 'mysql2', group: :mysql
 
 # authentication
 gem 'devise'
@@ -81,4 +79,3 @@ gem 'non-stupid-digest-assets'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
- 
