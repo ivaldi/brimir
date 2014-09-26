@@ -80,30 +80,40 @@
 
   <div class="medium-3 columns">
     <div class="ma">
-      <dl>
+      <dl class="sticky">
+        <dt><%= t(:status) %></dt>
 
-        <% if can? :update, @ticket %>
+        <dd>
+          <% if can? :update, @ticket %>
+            <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
+              <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"></span>
+              <%= t(@ticket.status) %>
+            </a>
+            <%= render 'status_dropdown', ticket: @ticket %>
+          <% else %>
+            <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"></span>
+            <%= t(@ticket.status) %>
+          <% end %>
+        </dd>
 
-          <dl class="sticky">
-            <dt><%= t(:status) %></dt>
-            <dd>
-              <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
-                <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"></span>
-                <%= t(@ticket.status) %>
-              </a>
-              <%= render 'status_dropdown', ticket: @ticket %>
-            </dd>
-            <dt><%= t(:priority) %></dt>
-            <dd>
-              <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
-                <span class="priority-<%= @ticket.priority %> fa fa-fw fa-circle"></span>
-                <%= t(@ticket.priority) %>
-              </a>
-              <%= render 'priority_dropdown', ticket: @ticket, short: false %>
-            </dd>
-            <dt><%= t(:assignee) %></dt>
-            <dd>
-              <a href="#" data-reveal-id="change-assignee">
+        <dt><%= t(:priority) %></dt>
+        <dd>
+          <% if can? :update, @ticket %>
+            <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
+              <span class="priority-<%= @ticket.priority %> fa fa-fw fa-circle"></span>
+              <%= t(@ticket.priority) %>
+            </a>
+            <%= render 'priority_dropdown', ticket: @ticket, short: false %>
+          <% else %>
+            <span class="priority-<%= @ticket.priority %> fa fa-fw fa-circle"></span>
+            <%= t(@ticket.priority) %>
+          <% end %>
+        </dd>
+
+        <dt><%= t(:assignee) %></dt>
+        <dd>
+          <% if can? :update, @ticket %>
+            <a href="#" data-reveal-id="change-assignee">
               <% if !@ticket.assignee %>
                 <span class="fa fa-fw fa-user"></span>
                 <%= t(:unassigned) %>
@@ -111,61 +121,49 @@
                 <span class="fa fa-fw fa-user"></span>
                 <%= @ticket.assignee.email %>
               <% end %>
-              </a>
-            </dd>
-            <dt><%= t(:labels) %></dt>
-            <dd>
-              <ul data-labelings="" style="margin-left: 0">
-                <% @ticket.labelings.each do |labeling| %>
-                  <%= render labeling %>
-                <% end %>
-              </ul>
-              <%= form_for @labeling, remote: true do |f| %>
-                <%= f.hidden_field :labelable_id %>
-                <%= f.hidden_field :labelable_type %>
+            </a>
+          <% else %>
+            <% if !@ticket.assignee %>
+              <span class="fa fa-fw fa-user"></span>
+              <%= t(:unassigned) %>
+            <% else %>
+              <span class="fa fa-fw fa-user"></span>
+              <%= @ticket.assignee.email %>
+            <% end %>
+          <% end %>
+        </dd>
 
-                <div class="row collapse">
-                  <div class="small-9 columns">
-                    <%= f.fields_for :label, Label.new do |f| %>
-                      <%= f.text_field :name, label: false, placeholder: t(:label_name) %>
-                    <% end %>
-                  </div>
-                  <div class="small-3 columns">
-                    <%= f.button t(:add), type: 'submit', class: 'button postfix' %>
-                  </div>
+        <dt><%= t(:labels) %></dt>
+        <dd>
+          <% if can? :update, @ticket %>
+            <ul data-labelings="" style="margin-left: 0">
+              <% @ticket.labelings.each do |labeling| %>
+                <%= render labeling %>
+              <% end %>
+            </ul>
+            <%= form_for @labeling, remote: true do |f| %>
+              <%= f.hidden_field :labelable_id %>
+              <%= f.hidden_field :labelable_type %>
+
+              <div class="row collapse">
+                <div class="small-9 columns">
+                  <%= f.fields_for :label, Label.new do |f| %>
+                    <%= f.text_field :name, label: false, placeholder: t(:label_name) %>
+                  <% end %>
                 </div>
-
+                <div class="small-3 columns">
+                  <%= f.button t(:add), type: 'submit', class: 'button postfix' %>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <ul class="inline-list">
+              <% @ticket.labels.viewable_by(current_user).each do |label| %>
+                <li><%= render label %></li>
               <% end %>
-            </dd>
-          </dl>
-
-        <% else %>
-
-          <dl>
-            <dt><%= t(:status) %><dt>
-            <dd><%= t(@ticket.status) %></dd>
-            <dt><%= t(:priority) %></dt>
-            <dd><%= t(@ticket.priority) %></dd>
-            <dt><%= t(:assignee) %></dt>
-            <dd>
-              <% if !@ticket.assignee %>
-                <em><%= t(:nobody) %></em>
-              <% else %>
-                <%= @ticket.assignee.email %>
-              <% end %>
-            </dd>
-            <dt><%= t(:labels) %></dt>
-            <dd>
-              <ul class="inline-list">
-                <% @ticket.labels.viewable_by(current_user).each do |label| %>
-                  <li><%= render label %></li>
-                <% end %>
-              </ul>
-            </dd>
-          </dl>
-
-        <% end %>
-
+            </ul>
+          <% end %>
+        </dd>
       </dl>
     </div>
 
