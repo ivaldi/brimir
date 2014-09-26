@@ -32,81 +32,54 @@
     <% @tickets.each do |ticket| %>
       <tr data-ticket-url="<%= ticket_url(ticket) %>">
 
-        <% if can? :update, ticket %>
-          <%# DONT FORGET TO UPDATE THE ELSE IF YOU MODIFY THE FOLLOWING HTML %>
-
-          <td>
+        <td>
+          <% if can? :update, ticket %>
             <a href="#" data-dropdown="priorities-<%= ticket.id %>">
               <span class="priority-<%= ticket.priority %> fa fa-circle"></span>
             </a>
             <%= render 'priority_dropdown', ticket: ticket, short: true %>
-          </td>
+          <% else %>
+            <span class="priority-<%= ticket.priority %> fa fa-circle"></span>
+          <% end %>
+        </td>
 
-          <td style="white-space:nowrap">
-            <%= ticket.user.email %>
-          </td>
-          <td class="text-secondary table-nowrap">
-            <% ticket.labels.viewable_by(current_user).each do |label| %>
-              <%= render label %>
-            <% end %>
-            <% if !ticket.subject.nil? %>
-              <a href="<%= ticket_url(ticket) %>">
-                <% if ticket.replies.size > 0 %>
-                  <span class="success radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
-                <% end %>
-                <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80] %></span>
-              </a>
-            <% else %>
-              <%= link_to ticket do %>
-                <em>(<%= t(:no_subject) %>)</em>
+        <td style="white-space:nowrap">
+          <%= ticket.user.email %>
+        </td>
+
+        <td class="text-secondary table-nowrap">
+          <% ticket.labels.viewable_by(current_user).each do |label| %>
+            <%= render label %>
+          <% end %>
+          <% if !ticket.subject.nil? %>
+            <a href="<%= ticket_url(ticket) %>">
+              <% if ticket.replies.size > 0 %>
+                <span class="success radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
               <% end %>
+              <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80] %></span>
+            </a>
+          <% else %>
+            <%= link_to ticket do %>
+              <em>(<%= t(:no_subject) %>)</em>
             <% end %>
-          </td>
-          <td>
+          <% end %>
+        </td>
+
+        <td>
+          <% if can? :update, ticket %>
             <% if ticket.assignee %>
               <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
             <% else %>
               <a data-assignee-id="" href="#"><em><%= t(:unassigned) %></em></a>
             <% end %>
-          </td>
-
-        <% else %>
-          <%# DONT FORGET TO UPDATE THE IF ABOVE IF YOU MODIFY THE FOLLOWING HTML %>
-
-          <td>
-            <span class="priority-<%= ticket.priority %> fa fa-circle" title="<%= t(:priority) %> <%= ticket.priority %>"></span>
-          </td>
-
-          <td style="white-space:nowrap">
-            <%= ticket.user.email %>
-          </td>
-          <td class="text-secondary table-nowrap">
-            <% if !ticket.subject.nil? %>
-              <a href="<%= ticket_url(ticket) %>">
-                <% ticket.labels.viewable_by(current_user).each do |label| %>
-                  <%= render label %>
-                <% end %>
-
-                <% if ticket.replies.size > 0 %>
-                  <span class="success radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
-                <% end %>
-                <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80] %></span>
-              </a>
-            <% else %>
-              <%= link_to ticket do %>
-                <em>(<%= t(:no_subject) %>)</em>
-              <% end %>
-            <% end %>
-          </td>
-          <td>
+          <% else %>
             <% if ticket.assignee %>
               <i class="fa fa-user"></i> <%= ticket.assignee.email %>
             <% else %>
               <em><%= t(:unassigned) %></em>
             <% end %>
-          </td>
-
-        <% end %>
+          <% end %>
+        </td>
 
         <td class="nowrap text-right text-secondary">
           <%= l ticket.created_at, format: :short %>
