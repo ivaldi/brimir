@@ -161,7 +161,7 @@
             <dd>
               <ul class="inline-list">
                 <% @ticket.labels.viewable_by(current_user).each do |label| %>
-                  <li class="radius label"><%= label.name %></li>
+                  <li><%= render label %></li>
                 <% end %>
               </ul>
             </dd>
