@@ -64,7 +64,21 @@ content = [
     status: Ticket.statuses.keys.sample,
   )
 
+  ticket.set_default_notifications!(ticket.user)
+
   if Random.rand() > 0.5
     ticket.labels << Label.where(name: labels.sample).first_or_create!
+  end
+
+  (Random.rand() * 4).round.times do
+    if Random.rand() > 0.6
+      reply = ticket.replies.create!(
+        from: (customers + [agent.email]).sample,
+        content: '<html><head></head><body><p>' +
+            content[0, 1 + (Random.rand() * 3).round].join('</p><p>') +
+            '</p></body></html>',
+      )
+      reply.set_default_notifications!
+    end
   end
 end
