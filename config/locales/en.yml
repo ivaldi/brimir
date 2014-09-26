@@ -31,9 +31,9 @@ en:
   password_wont_change_without_opening_link: Your password won't change until you access the link above and create a new one.
 
 # tickets/index
-  count_tickets_in_inbox:
-    one: '%{count} ticket in inbox'
-    other: '%{count} tickets in inbox'
+  count_tickets:
+    one: '%{count} ticket'
+    other: '%{count} tickets'
   count_tickets_containing:
     one: '%{count} ticket containing'
     other: '%{count} tickets containing'

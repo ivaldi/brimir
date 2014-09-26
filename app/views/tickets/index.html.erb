@@ -2,9 +2,13 @@
   <div class="row collapse">
     <div class="medium-9 columns">
       <% if params[:q].present? %>
-        <h4 class="filter-title no-m pts"><%= t(:count_tickets_containing, count: @tickets.count) %> '<em><%= params[:q].to_s %></em>'</h4>
+        <h4 class="filter-title no-m pts">
+          <%= t(:count_tickets_containing, count: @tickets.count) %> '<em><%= params[:q].to_s %></em>'
+        </h4>
       <% else %>
-        <h4 class="filter-title no-m pts"><%= t(:count_tickets_in_inbox, count: @tickets.count) %></h4>
+        <h4 class="filter-title no-m pts">
+          <%= t(:count_tickets, count: @tickets.count) %>
+        </h4>
       <% end %>
     </div>
     <div class="medium-3 columns">

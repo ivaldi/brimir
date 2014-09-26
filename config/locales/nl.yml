@@ -37,9 +37,9 @@ nl:
   password_wont_change_without_opening_link: Je wachtwoord veranderd niet totdat je via de link een nieuw wachtwoord aanmaakt.
 
 # tickets/index
-  count_tickets_in_inbox:
-    one: '%{count} ticket in inbox'
-    other: '%{count} tickets in inbox'
+  count_tickets:
+    one: '%{count} ticket'
+    other: '%{count} tickets'
   count_tickets_containing:
     one: '%{count} ticket overeenkomend met'
     other: '%{count} tickets overeenkomend met'
