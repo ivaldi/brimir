@@ -61,7 +61,6 @@
       <% if user_signed_in? %>
         <aside class="hide-for-small medium-3 large-2 columns">
           <ul class="off-canvas-list">
-            <li><label><%= t(:main) %></label></li>
             <li>
               <%= active_elem_if :a, params[:status] == 'open' &&
                   params[:assignee_id].to_i == 0,
