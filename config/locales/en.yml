@@ -9,6 +9,7 @@ en:
   rules: Rules
   personal_settings: Personal settings
   sign_out: Sign out
+  main: Main
 
 # devise/sessions/new
   sign_in: Sign in
