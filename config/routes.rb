@@ -10,6 +10,8 @@ Brimir::Application.routes.draw do
 
   resources :rules
 
+  resources :labels, only: [ :destroy ]
+
   resources :replies, only: [:create, :new]
   get '/attachments/:id/:format' => 'attachments#show'
 

@@ -104,7 +104,14 @@
               <li>
                 <a href="<%= tickets_url(p) %>"<%= ' class="active"'.html_safe if params[:label_id].to_i == label.id %>>
                   <i class="fa fa-square" style="color: <%= label.color %>"></i><%= label.name %>
+                  <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down right"></i>
                 </a>
+                <!--<a href="#" class="right" data-dropdown="label-<%= label.id %>"></a>-->
+                <ul id="label-<%= label.id %>" class="f-dropdown" data-dropdown-content>
+                  <li>
+                    <%= link_to t(:remove), label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true %>
+                  </li>
+                </ul>
               </li>
             <% end %>
           </ul>

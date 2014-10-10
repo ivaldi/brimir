@@ -15,6 +15,7 @@ nl:
   rules: Regels
   personal_settings: Persoonlijke instellingen
   sign_out: Uitloggen
+  delete: Verwijderen
 
 # devise/sessions/new
   sign_in: Inloggen
