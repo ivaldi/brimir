@@ -4,6 +4,18 @@ class Label < ActiveRecord::Base
 
   after_initialize :assign_random_color
 
+  COLORS = [
+          '#de6262',
+          '#65a8dd',
+          '#6fc681',
+          '#9d61dd',
+          '#6370dd',
+          '#dca761',
+          '#a86f72',
+          '#759d91',
+          '#727274'
+  ]
+
   scope :ordered, -> {
     order(:name)
   }
@@ -14,17 +26,7 @@ class Label < ActiveRecord::Base
 
   def assign_random_color
     if self.color.blank?
-      self.color = [
-          '#de6262',
-          '#65a8dd',
-          '#6fc681',
-          '#9d61dd',
-          '#6370dd',
-          '#dca761',
-          '#a86f72',
-          '#759d91',
-          '#727274'
-      ].sample
+      self.color = Label::COLORS.sample
     end
   end
 end

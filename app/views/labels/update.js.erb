@@ -1,0 +1,6 @@
+jQuery('#label-id-<%= @label.id %>').css('background', '<%= @label.color %>');
+jQuery('[data-dropdown="label-<%= @label.id %>"]').closest('a').find('i.fa-square').css('color', '<%= @label.color %>');
+
+<%# close all dropdowns %>
+var dropdowns = jQuery('.f-dropdown');
+dropdowns.foundation('dropdown', 'close', dropdowns);

@@ -24,4 +24,11 @@ class LabelsController < ApplicationController
     respond_to :js
   end
 
+  def update
+    @label.color = Label::COLORS[ params[:color].to_i % Label::COLORS.count ]
+    @label.save
+
+    respond_to :js
+  end
+
 end

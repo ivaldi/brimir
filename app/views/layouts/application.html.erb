@@ -111,6 +111,13 @@
                   <li>
                     <%= link_to t(:remove), label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true %>
                   </li>
+                  <% Label::COLORS.each_with_index do |color, index| %>
+                    <li>
+                      <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
+                        <i class="fa fa-square" style="color: <%= color %>"></i>
+                      <% end %>
+                    </li>
+                  <% end %>
                 </ul>
               </li>
             <% end %>
