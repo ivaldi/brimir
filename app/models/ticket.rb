@@ -30,8 +30,12 @@ class Ticket < ActiveRecord::Base
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :notified_users, source: :user, through: :notifications
 
+  has_many :status_changes
+
   enum status: [:open, :closed, :deleted, :waiting]
   enum priority: [:unknown, :low, :medium, :high]
+
+  after_save :log_status_change
 
   def self.active_labels(status)
     label_ids = where(status: Ticket.statuses[status])
@@ -105,5 +109,20 @@ class Ticket < ActiveRecord::Base
       self.notified_user_ids = []
     end
   end
+
+  protected
+    def log_status_change
+
+      if self.changed.include? 'status'
+        previous = status_changes.ordered.last
+
+        unless previous.nil?
+          previous.updated_at = Time.now
+          previous.save
+        end
+
+        status_changes.create! status: self.status
+      end
+    end
 
 end

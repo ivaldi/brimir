@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140926120304) do
+ActiveRecord::Schema.define(version: 20141028155357) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -80,6 +80,15 @@ ActiveRecord::Schema.define(version: 20140926120304) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "status_changes", force: true do |t|
+    t.integer  "ticket_id"
+    t.integer  "status",     default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "status_changes", ["ticket_id"], name: "index_status_changes_on_ticket_id"
 
   create_table "tickets", force: true do |t|
     t.string   "subject"

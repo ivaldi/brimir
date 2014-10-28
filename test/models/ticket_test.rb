@@ -30,4 +30,24 @@ class TicketTest < ActiveSupport::TestCase
     end
   end
 
+  test 'should store status changes' do
+    ticket = tickets(:problem)
+
+    assert_difference 'StatusChange.count' do
+      ticket.status = 'waiting'
+      ticket.save
+    end
+
+    assert_difference 'StatusChange.count' do
+      ticket.status = 'open'
+      ticket.save
+    end
+
+    first = ticket.status_changes.first
+    assert_not_equal first.created_at, first.updated_at
+
+    last = ticket.status_changes.last
+    assert_equal last.created_at, last.updated_at
+  end
+
 end
