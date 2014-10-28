@@ -56,7 +56,7 @@
               <% if ticket.replies.size > 0 %>
                 <span class="success radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
               <% end %>
-              <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80] %></span>
+              <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80].html_safe %></span>
             </a>
           <% else %>
             <%= link_to ticket do %>
