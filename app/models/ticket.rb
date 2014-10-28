@@ -30,7 +30,7 @@ class Ticket < ActiveRecord::Base
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :notified_users, source: :user, through: :notifications
 
-  enum status: [:open, :closed, :deleted]
+  enum status: [:open, :closed, :deleted, :waiting]
   enum priority: [:unknown, :low, :medium, :high]
 
   def self.active_labels(status)

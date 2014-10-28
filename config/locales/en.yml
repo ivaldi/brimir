@@ -3,6 +3,7 @@ en:
   new_ticket: New Ticket
   inbox: Inbox
   mine: Mine
+  waiting: Waiting
   closed_tickets: Closed
   trashed: Trashed
   users: Users
