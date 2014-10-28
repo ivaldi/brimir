@@ -43,6 +43,8 @@ module ApplicationHelper
       'check'
     elsif status == 'deleted'
       'trash-o'
+    elsif status == 'waiting'
+      'clock-o'
     else
       'inbox'
     end

@@ -70,16 +70,16 @@
               <% end %>
             </li>
             <li>
-              <%= active_elem_if :a, params[:status] == 'waiting',
-                  href: tickets_path(status: 'waiting') do %>
-                <span class="fa fa-clock-o"></span><%= t(:waiting) %>
-              <% end %>
-            </li>
-            <li>
               <%= active_elem_if :a, params[:status] == 'open' &&
                   params[:assignee_id].to_i == current_user.id,
                   href: tickets_path(assignee_id: current_user.id) do %>
                 <span class="fa fa-user"></span><%= t(:mine) %>
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, params[:status] == 'waiting',
+                  href: tickets_path(status: 'waiting') do %>
+                <span class="fa fa-clock-o"></span><%= t(:waiting) %>
               <% end %>
             </li>
             <li>
