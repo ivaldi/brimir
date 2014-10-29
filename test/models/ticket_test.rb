@@ -18,6 +18,10 @@ require 'test_helper'
 
 class TicketTest < ActiveSupport::TestCase
 
+  teardown do
+    Timecop.return
+  end
+
   test 'should return accessible tickets for customer' do
     dave = users(:dave)
 
@@ -37,6 +41,9 @@ class TicketTest < ActiveSupport::TestCase
       ticket.status = 'waiting'
       ticket.save
     end
+
+    # a few hours later
+    Timecop.travel(Time.now.advance(hours: 3))
 
     assert_difference 'StatusChange.count' do
       ticket.status = 'open'
