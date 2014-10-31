@@ -124,7 +124,9 @@ class Ticket < ActiveRecord::Base
 
     # add the current status as well
     current = status_changes.ordered.last
-    total[current.status.to_sym] += Time.now - current.created_at
+    unless current.nil?
+      total[current.status.to_sym] += Time.now - current.created_at
+    end
 
     Ticket.statuses.keys.each do |key|
       total[key.to_sym] /= 1.minute
