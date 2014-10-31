@@ -73,28 +73,18 @@ ul.off-canvas-list li label{
 
 /* --- Attachments --- */
 
-.attachments{
-	list-style-type: none;
+.attachments li {
+  clear: both;
 }
-
-.attachments li{
-	line-height: 1.2;
+.attachments img {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 2px;
+  border: 1px solid #eee;
 }
-
-.attachments img{
-	margin-right: 10px;
-	border: 1px solid #ddd;
-	padding: 2px;
-	background: #fff;
-	float: left;
-}
-
 .attachments strong{
 	display: block;
-}
-
-.attachments .meta{
-	font-size: 13px;
 }
 
 /* --- Table --- */
