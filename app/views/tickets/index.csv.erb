@@ -17,7 +17,7 @@
     status_times = ticket.status_times
     rows << [
         ticket.id,
-        '"' + ticket.subject.gsub(/"/, '\"') + '"',
+        '"' + ticket.subject.gsub(/"/, '""') + '"',
         t(ticket.priority),
         t(ticket.status),
         (ticket.assignee.email unless ticket.assignee.nil?),
