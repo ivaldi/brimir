@@ -223,3 +223,23 @@ input[type="checkbox"]{
 .off-canvas-list .f-dropdown a:hover{
 	background-color: #eee;
 }
+aside .hover-icon-a {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+aside .hover-icon-a > .hover-icon-i {
+	margin-top: -21px;
+	margin-right: 0;
+	padding: 2px 3px;
+	position: relative;
+	background: #242424;
+	float: right;
+	display: none;
+}
+aside .hover-icon-a:hover > .hover-icon-i {
+	display: block
+}
+aside .f-dropdown {
+	width: 32px;
+}

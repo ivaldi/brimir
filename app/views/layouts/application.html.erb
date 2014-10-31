@@ -108,15 +108,12 @@
                 end
               %>
               <li>
-                <a href="<%= tickets_url(p) %>"<%= ' class="active"'.html_safe if params[:label_id].to_i == label.id %>>
-                  <i class="fa fa-square" style="color: <%= label.color %>"></i><%= label.name %>
-                  <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down right"></i>
+                <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">
+                  <i class="fa fa-square" style="color: <%= label.color %>"></i>
+                  <%= label.name %>
+                  <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down hover-icon-i"></i>
                 </a>
-                <!--<a href="#" class="right" data-dropdown="label-<%= label.id %>"></a>-->
                 <ul id="label-<%= label.id %>" class="f-dropdown" data-dropdown-content>
-                  <li>
-                    <%= link_to t(:remove), label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true %>
-                  </li>
                   <% Label::COLORS.each_with_index do |color, index| %>
                     <li>
                       <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
@@ -124,6 +121,11 @@
                       <% end %>
                     </li>
                   <% end %>
+                  <li>
+                    <%= link_to label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true do %>
+                      <%= fa_icon 'trash' %>
+                    <% end %>
+                  </li>
                 </ul>
               </li>
             <% end %>
