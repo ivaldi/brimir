@@ -62,7 +62,7 @@ gem 'redcarpet'
 # select2 replacement for selectboxes
 gem 'select2-rails'
 
-gem 'font-awesome-rails', '~> 4.0.3'
+gem 'font-awesome-rails', '~> 4.0'
 
 # TinyMCE 4 for WYSIWYG in textareas
 gem 'tinymce-rails'

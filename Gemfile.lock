@@ -86,7 +86,7 @@ GEM
     docile (1.1.5)
     erubis (2.7.0)
     execjs (2.2.1)
-    font-awesome-rails (4.0.3.2)
+    font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     foundation-rails (5.2.3.0)
       railties (>= 3.1.0)
@@ -108,7 +108,7 @@ GEM
     mail (2.6.1)
       mime-types (>= 1.16, < 3)
     mime-types (2.3)
-    minitest (5.4.1)
+    minitest (5.4.2)
     multi_json (1.10.1)
     mysql2 (0.3.16)
     net-scp (1.2.1)
@@ -210,7 +210,7 @@ DEPENDENCIES
   coveralls
   devise
   devise-i18n
-  font-awesome-rails (~> 4.0.3)
+  font-awesome-rails (~> 4.0)
   foundation-rails (~> 5.2.2)
   foundation_rails_helper
   http_accept_language
