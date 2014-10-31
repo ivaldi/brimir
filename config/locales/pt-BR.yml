@@ -38,6 +38,7 @@ pt-BR:
   unassigned: Não atribuído
   no_tickets_found: Nenhum ticket encontrado.
   search: Procurar
+  minutes: minutos
 
 # tickets/show
   ticket_by_at: Por %{email} em %{at}

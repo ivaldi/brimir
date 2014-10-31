@@ -36,6 +36,7 @@ es:
   unassigned: Sin asignar
   no_tickets_found: No tickets encontrados.
   search: Buscar
+  minutes: minutos
 
 # tickets/show
   ticket_by_at: Por %{email} en %{at}

@@ -41,8 +41,16 @@ class TicketsController < ApplicationController
       .search(params[:q])
       .by_label_id(params[:label_id])
       .filter_by_assignee_id(params[:assignee_id])
-      .page(params[:page])
       .ordered
+
+    respond_to do |format|
+      format.html do
+        @tickets = @tickets.page(params[:page])
+      end
+      format.csv do
+        @tickets = @tickets.includes(:status_changes)
+      end
+    end
   end
 
   def update

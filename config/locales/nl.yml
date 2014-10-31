@@ -51,6 +51,8 @@ nl:
   unassigned: Niet toegewezen
   no_tickets_found: Geen tickets gevonden.
   search: Zoek
+  minutes: minuten
+  export_tickets: Exporteer deze tickets
 
 # tickets/show
   ticket_by_at: Door %{email} op %{at}

@@ -1,15 +1,15 @@
 <div class="panel">
   <div class="row collapse">
     <div class="medium-9 columns">
-      <% if params[:q].present? %>
-        <h4 class="filter-title no-m pts">
+      <h4 class="filter-title no-m pts">
+
+        <% if params[:q].present? %>
           <%= t(:count_tickets_containing, count: @tickets.count) %> '<em><%= params[:q].to_s %></em>'
-        </h4>
-      <% else %>
-        <h4 class="filter-title no-m pts">
+        <% else %>
           <%= t(:count_tickets, count: @tickets.count) %>
-        </h4>
-      <% end %>
+        <% end %>
+
+      </h4>
     </div>
     <div class="medium-3 columns">
       <%= form_tag tickets_path, method: :get do %>
@@ -96,8 +96,19 @@
   </tbody>
 </table>
 
-<div class="pagination-centered">
-  <%= will_paginate @tickets %>
-</div>
+<% unless @tickets.empty? %>
 
-<%= render 'change_assignee_form', { ticket: Ticket.new } %>
+  <div class="row">
+    <div class="small-6 columns">
+      <%= will_paginate @tickets %>
+    </div>
+    <div class="small-6 columns">
+      <%= link_to tickets_path(params.merge(format: :csv)), class: 'tiny secondary radius button right' do %>
+        <%= t(:export_tickets) %>
+      <% end %>
+    </div>
+  </div>
+
+  <%= render 'change_assignee_form', { ticket: Ticket.new } %>
+
+<% end %>

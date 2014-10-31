@@ -1,0 +1,34 @@
+<%-
+  header = [
+    'Id',
+    t(:subject, scope: 'activerecord.attributes.ticket'),
+    t(:priority, scope: 'activerecord.attributes.ticket'),
+    t(:status, scope: 'activerecord.attributes.ticket'),
+    t(:assignee_id, scope: 'activerecord.attributes.ticket'),
+    "#{t(:open)} (#{t(:minutes)})",
+    "#{t(:waiting)} (#{t(:minutes)})",
+    "#{t(:closed)} (#{t(:minutes)})",
+    "#{t(:deleted)} (#{t(:minutes)})",
+  ]
+
+  rows = []
+
+  @tickets.each do |ticket|
+    status_times = ticket.status_times
+    rows << [
+        ticket.id,
+        '"' + ticket.subject + '"',
+        t(ticket.priority),
+        t(ticket.status),
+        (ticket.assignee.email unless ticket.assignee.nil?),
+        status_times[:open].round(1),
+        status_times[:waiting].round(1),
+        status_times[:closed].round(1),
+        status_times[:deleted].round(1)
+    ]
+  end
+-%>
+<%= header.join(',') %>
+<%- rows.each do |row| -%>
+<%= row.join(',').html_safe %>
+<%- end -%>

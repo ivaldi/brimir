@@ -38,6 +38,7 @@ de:
   unassigned: Nicht zugewiesen
   no_tickets_found: Keine Tickets gefunden.
   search: Suche
+  minutes: Minuten
 
 # tickets/show
   add: Neu

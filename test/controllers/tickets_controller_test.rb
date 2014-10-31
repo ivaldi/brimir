@@ -129,6 +129,14 @@ class TicketsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:tickets)
   end
 
+  test 'should get csv index' do
+    sign_in users(:alice)
+
+    get :index, format: :csv
+    assert_response :success
+    assert_not_nil assigns(:tickets)
+  end
+
   test 'should show ticket' do
     sign_in users(:alice)
 

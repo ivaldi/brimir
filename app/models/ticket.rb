@@ -35,7 +35,8 @@ class Ticket < ActiveRecord::Base
   enum status: [:open, :closed, :deleted, :waiting]
   enum priority: [:unknown, :low, :medium, :high]
 
-  after_save :log_status_change
+  after_update :log_status_change
+  after_create :create_status_change
 
   def self.active_labels(status)
     label_ids = where(status: Ticket.statuses[status])
@@ -110,7 +111,29 @@ class Ticket < ActiveRecord::Base
     end
   end
 
+  def status_times
+    total = {}
+
+    Ticket.statuses.keys.each do |key|
+      total[key.to_sym] = 0
+    end
+
+    status_changes.each do |status_change|
+      total[status_change.status.to_sym] += status_change.updated_at - status_change.created_at 
+    end
+
+    Ticket.statuses.keys.each do |key|
+      total[key.to_sym] /= 1.minute
+    end
+
+    total
+  end
+
   protected
+    def create_status_change
+      status_changes.create! status: self.status
+    end
+
     def log_status_change
 
       if self.changed.include? 'status'

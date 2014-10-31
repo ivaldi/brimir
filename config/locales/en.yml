@@ -45,6 +45,8 @@ en:
   unassigned: Unassigned
   no_tickets_found: No tickets found.
   search: Search
+  minutes: minutes
+  export_these_tickets: Export these tickets
 
 # tickets/show
   ticket_by_at: By %{email} on %{at}

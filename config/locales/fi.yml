@@ -37,6 +37,7 @@ fi:
   unassigned: Ei suorittajaa
   no_tickets_found: Tikettejä ei löytynyt.
   search: Etsi
+  minutes: minuuttia
 
 # tickets/show
   ticket_by_at: Lähettänyt %{email} kello %{at}
