@@ -6,7 +6,7 @@ de:
   mine: Meine Tickets
   closed_tickets: Geschlossene Tickets
   trashed: Gelöschte Tickets
-  users: Benutzers
+  users: Benutzer
   rules: Regeln
 
 # devise/sessions/new
@@ -26,8 +26,8 @@ de:
 # devise/mailer/reset_password_instructions
   hello: Hallo
   someone_requested_link: 'Jemand hat einen Link angefordert, damit Sie Ihr Passwort ändern können. Wenn Sie Ihr Passwort ändern möchten, klicken Sie bitte auf den folgenden Link:'
-  ignore_if_not_requested: Wenn nicht Sie diesen Link angefordert haben, ignorieren Sie bitte diese Email.
-  password_wont_change_without_opening_link: Ihr passwort wird nur geändert, wenn Sie den obigen Link benutzen, um ein neues Passwort zu erstellen.
+  ignore_if_not_requested: Wenn nicht Sie diesen Link angefordert haben, ignorieren Sie bitte diese E-Mail.
+  password_wont_change_without_opening_link: Ihr Passwort wird nur geändert, wenn Sie den obigen Link benutzen, um ein neues Passwort zu erstellen.
 
 # tickets/index
   tickets: Tickets
@@ -58,7 +58,7 @@ de:
   deleted: gelöscht
   labels: Label
   label_name: Label
-  notification_sent_to: 'Es wurde eine Benachrichtigung an folgende Email-Adressen geschickt:'
+  notification_sent_to: 'Es wurde eine Benachrichtigung an folgende E-Mail-Adressen geschickt:'
 
 # tickets/_change_priority_form
   change: Priorität setzen
@@ -84,10 +84,10 @@ de:
   ticket_assigned: Ein Ticket wurde Ihnen zugewiesen
 
 # ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Die Priority würde geändert für folgendes Ticket
+  ticket_priority_changed: Die Priorität des Tickets wurde geändert
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: 'Der Status würde für folgedes Ticket geändert:'
+  tickets_status_modified: Der Status des Tickets geändert
 
 # notification_mailer/new_ticket
   view_new_ticket: Ticket anzeigen
@@ -105,17 +105,17 @@ de:
   edit_user: Benutzer bearbeiten
 
 # users/index
-  email: Email-Adresse
+  email: E-Mail-Adresse
   role: Rolle
   agent: Kundenbetreuer
   customer: Kunde
 
 # users/_form
   account_settings: Einstellungen
-  only_fill_in_passwords_when_modifying: Die beiden Passwort Felder können leer bleiben, wenn das Passwort beibehalten werden soll.
+  only_fill_in_passwords_when_modifying: Die beiden Passwort-Felder können leer bleiben, wenn das Passwort beibehalten werden soll.
   user_is_an_agent: Dieser Benutzer ist Kundenbetreuer
   receive_new_ticket_notifications: Benachrichtigen, wenn ein neues Ticket erstellt wird
-  email_settings: Email Einstellungen
+  email_settings: E-Mail-Einstellungen
   save: Speichern
   access_control: Zugriff erlauben
   have_access_to_label: 'Der Benutzer darf nur Tickets mit diesen Labels öffnen:'
@@ -132,7 +132,7 @@ de:
   ticket_updated: Ticket aktualisiert
 
 # controllers/replies
-  reply_added: Geantwortet
+  reply_added: Antwort hinzugefügt
 
 # rules/index
   new_rule: Neue Regel hinzufügen
@@ -151,15 +151,15 @@ de:
   activerecord:
     attributes:
       user:
-        email: Email-Adresse
+        email: E-Mail-Adresse
         password: Passwort
         password_confirmation: Password wiederholen
-        signature: Email Signatur
+        signature: E-Mail-Signatur
         remember_me: Angemeldet bleiben
-        label_ids: Labels
+        label_ids: Label
 
       ticket:
-        from: Email-Adresse des Kunden
+        from: E-Mail-Adresse des Kunden
         subject: Betreff
         content: Inhalt
         status: Status
