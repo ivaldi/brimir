@@ -4,10 +4,14 @@ de:
   new_ticket: Ticket erstellen
   inbox: Offene Tickets
   mine: Meine Tickets
+  waiting: Ausstehend
   closed_tickets: Geschlossene Tickets
   trashed: Gelöschte Tickets
   users: Benutzer
   rules: Regeln
+  personal_settings: Benutzereinstellungen
+  sign_out: Ausloggen
+  delete: Entfernen
 
 # devise/sessions/new
   sign_in: Anmelden
@@ -30,6 +34,12 @@ de:
   password_wont_change_without_opening_link: Ihr Passwort wird nur geändert, wenn Sie den obigen Link benutzen, um ein neues Passwort zu erstellen.
 
 # tickets/index
+  count_tickets:
+    one: '%{count} Ticket'
+    other: '%{count} Tickets'
+  count_tickets_containing:
+    one: '%{count} Ticket enthalten'
+    other: '%{count} Tickets enthalten'
   tickets: Tickets
   tickets_containing: 'Tickets: Suche nach'
   priority: Priorität
