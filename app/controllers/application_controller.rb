@@ -47,8 +47,16 @@ class ApplicationController < ActionController::Base
     end
 
     def set_locale
-      I18n.locale = http_accept_language.compatible_language_from(
-          I18n.available_locales)
+      locales = []
+
+      Dir.open('config/locales').each do |file|
+        unless ['.', '..'].include?(file)
+          # strip of .yml
+          locales << file[0...-4]
+        end
+      end
+
+      I18n.locale = http_accept_language.compatible_language_from(locales)
     end
 
 end
