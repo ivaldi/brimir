@@ -13,7 +13,7 @@
     </div>
     <div class="medium-3 columns">
       <%= form_tag tickets_path, method: :get do %>
-        <%= hidden_field_tag :assignee_id, params[:assignee_id] %>
+        <%= hidden_field_tag(:assignee_id, params[:assignee_id]) unless params[:assignee_id].blank? %>
         <%= hidden_field_tag :status, params[:status] %>
         <div class="row collapse">
           <div class="small-8 columns">
