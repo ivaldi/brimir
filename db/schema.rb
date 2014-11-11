@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028155357) do
+ActiveRecord::Schema.define(version: 20141111202309) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -44,6 +44,14 @@ ActiveRecord::Schema.define(version: 20141028155357) do
     t.datetime "updated_at"
     t.string   "color"
   end
+
+  create_table "labels_users", id: false, force: true do |t|
+    t.integer "label_id", null: false
+    t.integer "user_id",  null: false
+  end
+
+  add_index "labels_users", ["label_id", "user_id"], name: "index_labels_users_on_label_id_and_user_id"
+  add_index "labels_users", ["user_id", "label_id"], name: "index_labels_users_on_user_id_and_label_id"
 
   create_table "notifications", force: true do |t|
     t.integer  "notifiable_id"
@@ -112,8 +120,8 @@ ActiveRecord::Schema.define(version: 20141028155357) do
   create_table "users", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  default: "",   null: false
-    t.string   "encrypted_password",     default: "",   null: false
+    t.string   "email",                  default: "",          null: false
+    t.string   "encrypted_password",     default: "",          null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -126,6 +134,7 @@ ActiveRecord::Schema.define(version: 20141028155357) do
     t.text     "signature"
     t.boolean  "notify",                 default: true
     t.string   "authentication_token"
+    t.string   "time_zone",              default: "Amsterdam"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

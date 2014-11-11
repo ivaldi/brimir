@@ -176,6 +176,7 @@ nl:
         signature: E-mailhandtekening
         remember_me: Onthouden
         label_ids: Labels
+        time_zone: Tijdzone
 
       ticket:
         from: Van e-mailadres

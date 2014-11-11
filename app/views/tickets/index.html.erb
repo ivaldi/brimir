@@ -82,7 +82,7 @@
         </td>
 
         <td class="nowrap text-right text-secondary">
-          <%= l ticket.created_at, format: :short %>
+          <%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %>
         </td>
       </tr>
     <% end %>

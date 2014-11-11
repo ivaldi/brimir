@@ -4,7 +4,7 @@
       <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(' + t(:no_subject) + ')</em>'.html_safe %>
     </h3>
     <h5 class="subheader text-secondary mb">
-      <%= t(:ticket_by_at, email: @ticket.user.email, at: l(@ticket.created_at, format: :long)) %>
+      <%= t(:ticket_by_at, email: @ticket.user.email, at: l(@ticket.created_at.in_time_zone(current_user.time_zone), format: :long)) %>
     </h5>
   </div>
 </div>

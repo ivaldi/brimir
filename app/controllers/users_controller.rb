@@ -20,10 +20,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
   end
 
   def update
     @user = User.find(params[:id])
+    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
 
     # if no password was posted, remove from params
     if params[:user][:password] == ''
@@ -64,10 +66,12 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
   end
 
   def create
     @user = User.new(user_params)
+    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
 
     if @user.save
       redirect_to users_url, notice: I18n::translate(:user_added)
@@ -87,6 +91,7 @@ class UsersController < ApplicationController
           :signature,
           :agent,
           :notify,
+          :time_zone,
           label_ids: []
       )
 
