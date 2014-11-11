@@ -191,4 +191,5 @@ en:
           assign_label: assign label
           notify_user: send notification to
           change_status: change status to
+          change_priority: change priority to
         action_value: Parameter for action
