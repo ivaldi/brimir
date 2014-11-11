@@ -73,6 +73,11 @@ ul.off-canvas-list li label{
 
 /* --- Attachments --- */
 
+.attachments {
+  list-style: none;
+  margin-left: 0;
+}
+
 .attachments li {
   clear: both;
 }
@@ -189,11 +194,6 @@ input[type="checkbox"]{
 	border-bottom: 1px solid #bec8dc;
 	background: #eceff3;
 	padding: 0;
-}
-
-.replies ul{
-	list-style: none;
-	margin-left: 0;
 }
 
 .reply{
