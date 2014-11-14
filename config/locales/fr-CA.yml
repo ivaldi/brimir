@@ -1,0 +1,197 @@
+# author: https://github.com/social-org
+fr-CA:
+# layouts/application
+  new_ticket: Nouveau Billet
+  inbox: Boîte de réception
+  mine: Mes Billets
+  waiting: En attente
+  closed_tickets: Fermé
+  trashed: Corbeille
+  users: Utilisateurs
+  rules: Règles
+  personal_settings: Règlages personnel
+  sign_out: Se déconnecter
+  delete: Supprimer
+
+# devise/sessions/new
+  sign_in: S'authentifier
+
+# devise/shared/links
+  forgot_password: Mot de passe oublié?
+
+# devise/passwords/new
+  send_instructions: Envoyez-moi les instructions
+
+# devise/passwords/edit
+  change_password: Changer de mot de passe
+  new_password: Nouveau mot de passe
+  new_password_confirmation: Confirmez nouveau mot de passe
+
+# devise/mailer/reset_password_instructions
+  hello: Bonjour
+  someone_requested_link: Quelqu'un a demandé un lien pour changer votre mot de passe, et vous pouvez le faire via le lien ci-dessous.
+  ignore_if_not_requested: Si vous n'avez pas demandé ceci, vous pouvez ignorer ce courriel.
+  password_wont_change_without_opening_link: Votre mot de passe ne changera pas jusqu'a ce que vous accédez au lien ci-dessus et en créer un nouveau.
+
+# tickets/index
+  count_tickets:
+    one: '%{count} billet'
+    other: '%{count} billets'
+  count_tickets_containing:
+    one: '%{count} billet contenant'
+    other: '%{count} billets contenant'
+  priority: Priorité
+  replies: réponses
+  no_subject: Aucun sujet
+  unassigned: Non affecté
+  no_tickets_found: Aucun billet trouvé.
+  search: Recherche
+  minutes: minutes
+  export_these_tickets: Exporter ces billets
+
+# tickets/show
+  ticket_by_at: Par %{email} a %{at}
+  no_content: Aucun contenu
+  status: Statut
+  assignee: Attribué
+  num_replies:
+    one: '%{count} réponse'
+    other: '%{count} réponses'
+  ago: il y a
+  high: Haute
+  medium: Moyenne
+  low: Basse
+  unknown: Inconnu
+  open: Ouvert
+  closed: Fermé
+  deleted: Supprimé
+  labels: Étiquettes
+  label_name: Nom étiquette
+  notification_sent_to: 'Une notification a été envoyé aux addresses suivantes:'
+
+# tickets/_change_priority_form
+  change: Changer
+  change_priority: Changer la priorité
+
+# tickets/_change_status_form
+  change_status: Changer le statut
+
+# tickets/_change_assignee_form
+  change_assignee: Attribuer un billet
+  assign: Attribuer
+
+# replies/new
+  add_reply: Ajouter une réponse
+
+# replies/_form
+  reply: Répondre
+  attach_files: Attacher fichier(s)
+  send_reply: Envoyer réponse
+  on_date_author_wrote: 'Le %{date}, %{author} a écrit:'
+  notification_will_be_sent_to: Votre notification sera envoyé a
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Un billet de support vous a été attribué
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Priorité modifié pour le billet
+
+# ticket_mailer/notify_status_changed.text.erb
+  tickets_status_modified: Statut modifié pour le billet
+
+# notification_mailer/new_ticket
+  view_new_ticket: Voir le nouveau billet
+# notification_mailer/new_reply
+  new_reply: Nouvelle réponse
+  view_new_reply: Voir nouvelle réponse
+
+# attachments/_attachment
+  download: télécharger
+
+# users/new
+  new_user: Nouveau utilisateur
+
+# users/edit
+  edit_user: Modifier l'utilisateur
+
+# users/index
+  email: Courriel
+  role: Rôle
+  agent: Agent
+  customer: Client
+
+# users/_form
+  account_settings: Paramètres du compte
+  only_fill_in_passwords_when_modifying: Remplir ces deux champs seulement si vous souhaitez modifier votre mot de passe.
+  user_is_an_agent: L'utilisateur est un agent
+  receive_new_ticket_notifications: Recevoir les notifications des nouveaux billets
+  email_settings: Paramètres du courriel
+  save: Enregister
+  access_control: Contrôle d'accés
+  have_access_to_label: L'utilisateur a accés à tous les billets avec l'une de ces étiquettes.
+
+# controllers/attachments
+  file_not_found: Fichier introuvable
+
+# controllers/users
+  settings_saved: Paramètres enregistés
+  user_added: Utilisateur ajouté
+
+# controllers/tickets
+  ticket_added: Billet ajouté
+  ticket_updated: Billet mise à jour
+
+# controllers/replies
+  reply_added: Réponse ajouté
+
+# rules/index
+  new_rule: Nouvelle règle
+
+# rules/edit
+  edit_rule: Modifier règle
+  delete_rule: Supprimer règle
+  are_you_sure: Êtes-vous sûr?
+
+# controllers/rules
+  rule_added: Règle ajoutée
+  rule_modified: Règle modifiée
+  rule_deleted: Règle supprimée
+
+
+  activerecord:
+    attributes:
+      user:
+        email: Courriel
+        password: Mot de passe
+        password_confirmation: Confirmation de mot de passe
+        signature: Signature de courriel
+        remember_me: Maintenir la connexion
+        label_ids: Étiquettes
+        time_zone: Time zone
+
+      ticket:
+        from: De l'addresse courriel
+        subject: Sujet
+        content: Objet
+        status: Statut
+        priority: Priorité
+        assignee_id: Attribué
+
+      reply:
+        to: A
+        cc: Cc
+        Bcc: Bcc
+
+      rule:
+        filter_field: Champ
+        filter_operation: Opérateur
+        filter_operations:
+          contains: contient
+        filter_value: Valeur
+        action_operation: Action à effectuer
+        action_operations:
+          assign_label: attribuer étiquette
+          notify_user: envoyer une notification a
+          change_status: changer le statut a
+          change_priority: changer la priorité a
+        action_value: Paramètres de l’action
