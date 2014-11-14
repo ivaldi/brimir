@@ -1,5 +1,6 @@
 <div class="row" style="border-bottom: 1px solid #bec8dc">
   <div class="medium-12 columns">
+    <a class="pull-right mtm" href="#print" onclick="window.print()"><%= fa_icon 'print' %></a>
     <h3 class="mt">
       <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(' + t(:no_subject) + ')</em>'.html_safe %>
     </h3>
