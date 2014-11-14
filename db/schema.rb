@@ -45,14 +45,6 @@ ActiveRecord::Schema.define(version: 20141111202309) do
     t.string   "color"
   end
 
-  create_table "labels_users", id: false, force: true do |t|
-    t.integer "label_id", null: false
-    t.integer "user_id",  null: false
-  end
-
-  add_index "labels_users", ["label_id", "user_id"], name: "index_labels_users_on_label_id_and_user_id"
-  add_index "labels_users", ["user_id", "label_id"], name: "index_labels_users_on_user_id_and_label_id"
-
   create_table "notifications", force: true do |t|
     t.integer  "notifiable_id"
     t.string   "notifiable_type"
