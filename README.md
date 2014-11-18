@@ -67,6 +67,7 @@ Some users have made requests for the following features. If you would like to c
 - Remove user functionality, without losing ticket and reply information.
 - Adding knowledge base functionality.
 - Improved manner to display images in tickets and replies, for example using fancybox.
+- Welcome mail for new users (after mailing a ticket for example) with their password.
 
 License
 -------
