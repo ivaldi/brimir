@@ -1,0 +1,203 @@
+﻿#ukranian
+uk:
+# layouts/application
+  new_ticket: Новий тікет
+  inbox: Вхідні
+  mine: Мої
+  waiting: Очікує
+  closed_tickets: Закриті
+  trashed: Видалені
+  users: Користувачі
+  rules: Правила
+  personal_settings: Налаштування
+  sign_out: Вийти
+  delete: Видалити
+
+# devise/sessions/new
+  sign_in: Увійти
+
+# devise/shared/links
+  forgot_password: Забувся пароль?
+
+# devise/passwords/new
+  send_instructions: Надішліть інструкції
+
+# devise/passwords/edit
+  change_password: Змінити пароль
+  new_password: Новий пароль
+  new_password_confirmation: Підтвердіть новий пароль
+
+# devise/mailer/reset_password_instructions
+  hello: Привіт
+  someone_requested_link: Хтось запитав посиляння для скидання вашого паролю. Ви можете це зробити після переходу за посиланням в цьому повідомленні.
+  ignore_if_not_requested: Якщо це не ви, ігноруйте цей мейл.
+  password_wont_change_without_opening_link: Ваш пароль не буде змінено доки ви не скористаєтесь посиланням.
+
+# tickets/index
+  count_tickets:
+    one: '%{count} тікет'
+    few: 'Тікетів: %{count}'
+    many: 'Тікетів: %{count}'
+    other: 'Тікетів: %{count}'
+  count_tickets_containing:
+    one: '%{count} тікет що містить'
+    few: '%{count} тікетів що містить'
+    many: '%{count} тікетів що містить'
+    other: '%{count} тікетів що містить'
+  priority: Пріорітет
+  replies: відповіді
+  no_subject: Немає теми
+  unassigned: Не прив'язан
+  no_tickets_found: Тікети не знайдено.
+  search: Пошук
+  minutes: хвилин
+  export_these_tickets: Експортувати ці тікети
+
+# tickets/show
+  ticket_by_at: За %{email} в %{at}
+  no_content: Немає контенту
+  status: Статус
+  assignee: Призначено
+  num_replies:
+    one: '%{count} відповідь'
+    few: '%{count} відповіді'
+    many: '%{count} відповіді'
+    other: '%{count} відповіді'
+  ago: назад
+  high: Високий
+  medium: Середній
+  low: Низький
+  unknown: Невідомо
+  open: Відкрито
+  closed: Закрито
+  deleted: Видалено
+  labels: Мітки
+  label_name: Назва мітки
+  notification_sent_to: 'A notification was sent to the following addresses:'
+
+# tickets/_change_priority_form
+  change: Змінити
+  change_priority: Змінити пріоритет
+
+# tickets/_change_status_form
+  change_status: Змінити статус
+
+# tickets/_change_assignee_form
+  change_assignee: Назначити тікет
+  assign: Назначити
+
+# replies/new
+  add_reply: Додати відповідь
+
+# replies/_form
+  reply: Відповідь
+  attach_files: Додати файл(и)
+  send_reply: Відповісти
+  on_date_author_wrote: 'Від %{date}, %{author} було написано:'
+  notification_will_be_sent_to: Your notification will be sent to
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Ваші назначені тікети
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Пріорітет тікету змінено 
+
+# ticket_mailer/notify_status_changed.text.erb
+  tickets_status_modified: Статус тікету змінено
+
+# notification_mailer/new_ticket
+  view_new_ticket: Переглянути новий тікет
+# notification_mailer/new_reply
+  new_reply: Нова відповідь
+  view_new_reply: Переглянути нову відповідь
+
+# attachments/_attachment
+  download: скачати
+
+# users/new
+  new_user: Новий Користувач
+
+# users/edit
+  edit_user: Редагувати користувача
+
+# users/index
+  email: Email
+  role: Роль
+  agent: Агент
+  customer: Клієнт
+
+# users/_form
+  account_settings: Налаштування облічки
+  only_fill_in_passwords_when_modifying: Заповніть ці два поля тільки якщо бажаєте змінити пароль.
+  user_is_an_agent: Користувач є агентом
+  receive_new_ticket_notifications: Receive notifications for new tickets
+  email_settings: Email Settings
+  save: Зберігти
+  access_control: Контроль доступу
+  have_access_to_label: Користувачі матимуть доступ до тікетів з наступними мітками
+
+# controllers/attachments
+  file_not_found: Файл не знайдено
+
+# controllers/users
+  settings_saved: Налаштування збережено
+  user_added: Користвача додано
+
+# controllers/tickets
+  ticket_added: Додано тікет
+  ticket_updated: Оновлено тікет
+
+# controllers/replies
+  reply_added: Додана відповдь
+
+# rules/index
+  new_rule: Нове правило
+
+# rules/edit
+  edit_rule: Редагувати правило
+  delete_rule: Видалити правило
+  are_you_sure: Ви певні?
+
+# controllers/rules
+  rule_added: Додано правило
+  rule_modified: Змінено правило
+  rule_deleted: Видалено правило
+
+
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        password: Пароль
+        password_confirmation: Підтвердіть пароль
+        signature: Підпис
+        remember_me: Запам'ятати
+        label_ids: Мітки
+        time_zone: Часова зона
+
+      ticket:
+        from: From email address
+        subject: Заголовок
+        content: Зміст
+        status: Статус
+        priority: Пріоритет
+        assignee_id: Назначено
+
+      reply:
+        to: To
+        cc: Cc
+        Bcc: Bcc
+
+      rule:
+        filter_field: Поле
+        filter_operation: Оператор
+        filter_operations:
+          contains: містить
+        filter_value: Значення
+        action_operation: Дія
+        action_operations:
+          assign_label: назначити мітку
+          notify_user: увідомити
+          change_status: змінити статус на
+          change_priority: змінити пріоритет на
+        action_value: Параметри дії
