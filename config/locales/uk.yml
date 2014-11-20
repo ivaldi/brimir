@@ -127,11 +127,11 @@ uk:
   customer: Клієнт
 
 # users/_form
-  account_settings: Налаштування облічки
+  account_settings: Налаштування облікового запису
   only_fill_in_passwords_when_modifying: Заповніть ці два поля тільки якщо бажаєте змінити пароль.
   user_is_an_agent: Користувач є агентом
-  receive_new_ticket_notifications: Receive notifications for new tickets
-  email_settings: Email Settings
+  receive_new_ticket_notifications: Отримувати інформацію про нові тікети
+  email_settings: Налаштування пошти
   save: Зберігти
   access_control: Контроль доступу
   have_access_to_label: Користувачі матимуть доступ до тікетів з наступними мітками
@@ -173,7 +173,7 @@ uk:
         signature: Підпис
         remember_me: Запам'ятати
         label_ids: Мітки
-        time_zone: Часова зона
+        time_zone: Часовий пояс
 
       ticket:
         from: From email address
@@ -184,9 +184,9 @@ uk:
         assignee_id: Назначено
 
       reply:
-        to: To
-        cc: Cc
-        Bcc: Bcc
+        to: Кому
+        cc: Копія
+        Bcc: Додатково
 
       rule:
         filter_field: Поле
