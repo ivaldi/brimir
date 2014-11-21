@@ -67,6 +67,7 @@ en:
   labels: Labels
   label_name: Label name
   notification_sent_to: 'A notification was sent to the following addresses:'
+  no_notifications_sent: 'No notifications have been sent'
 
 # tickets/_change_priority_form
   change: Change
