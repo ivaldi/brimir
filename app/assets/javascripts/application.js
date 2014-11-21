@@ -64,11 +64,13 @@
 
   jQuery(function() {
 
-    var page = jQuery(document).height();
-    var offset = jQuery('[data-main]').offset().top;
-    var height = page - offset;
+    if(jQuery('[data-main]').length > 0){
+      var page = jQuery(document).height();
+      var offset = jQuery('[data-main]').offset().top;
+      var height = page - offset;
 
-    jQuery('[data-main]').css('min-height', height+'px');
+      jQuery('[data-main]').css('min-height', height+'px');
+    }
 
     jQuery('.select2').select2({ width: 'resolve' });
 
