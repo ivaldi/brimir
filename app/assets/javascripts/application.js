@@ -16,6 +16,7 @@
 //= require select2
 //= require tinymce-jquery
 //= require tickets
+//= require fancybox
 
 (function() {
 
@@ -64,11 +65,22 @@
 
   jQuery(function() {
 
-    var page = jQuery(document).height();
-    var offset = jQuery('[data-main]').offset().top;
-    var height = page - offset;
+    jQuery("a.fancybox").fancybox({
+      type : 'image',
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
 
-    jQuery('[data-main]').css('min-height', height+'px');
+    if(jQuery('[data-main]').length > 0){
+      var page = jQuery(document).height();
+      var offset = jQuery('[data-main]').offset().top;
+      var height = page - offset;
+
+      jQuery('[data-main]').css('min-height', height+'px');
+    }
 
     jQuery('.select2').select2({ width: 'resolve' });
 

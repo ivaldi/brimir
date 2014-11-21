@@ -73,6 +73,7 @@ nl:
   labels: Labels
   label_name: Label naam
   notification_sent_to: 'Een notificatie is verstuurd aan de volgende adressen:'
+  no_notifications_sent: 'Er zijn geen notificaties verzonden'
 
 # tickets/_change_priority_form
   change: Wijzig

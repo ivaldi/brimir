@@ -22,9 +22,13 @@
 
     <hr />
     <p class="no-m">
-      <%= t(:notification_sent_to) %>    
-      <% reply.notified_users.each do |user| %>
-        <%= user.email %>
+      <% if reply.notified_users.count > 0 %>
+        <%= t(:notification_sent_to) %>    
+        <% reply.notified_users.each do |user| %>
+          <%= user.email %>
+        <% end %>
+      <% else %>
+        <%= t(:no_notifications_sent) %>
       <% end %>
     </p>
 
