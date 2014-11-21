@@ -1,0 +1,225 @@
+# author: https://github.com/lemial
+ru:
+# layouts/application
+  new_ticket: 'Новая заявка'
+  inbox: 'Входящие'
+  mine: 'Назначенные мне'
+  waiting: 'Отложенные'
+  closed_tickets: 'Закрытые'
+  trashed: 'Архивные'
+  users: 'Сотрудники'
+  rules: 'Правила'
+  personal_settings: 'Личные настройки'
+  sign_out: 'Выход'
+  delete: 'Удалить'
+  add: 'Ок'
+  in: 'в'
+  create_ticket: 'Создать заявку'
+  
+# devise/sessions/new
+  sign_in: 'Войти'
+
+# devise/shared/links
+  forgot_password: 'Забыли свой пароль?'
+
+# devise/passwords/new
+  send_instructions: 'Отправить мне инструкции'
+
+# devise/passwords/edit
+  change_password: 'Изменить пароль'
+  new_password: 'Новый пароль'
+  new_password_confirmation: 'Подтверждение нового пароля'
+
+# devise/mailer/reset_password_instructions
+  hello: 'Приветствую'
+  someone_requested_link: 'Кто-то, возможно вы сами, запросил ссылку на восстановление пароля, если это были вы - перейдите по ней:'
+  ignore_if_not_requested: 'Если вы не запрашивали ссылку на восстановление пароля - просто игнорируйте это сообщение.'
+  password_wont_change_without_opening_link: 'Ваш пароль не будет изменен пока вы не перейдете по этой ссылке или повторно не запросите восстановление пароля!'
+
+# tickets/index
+  count_tickets:
+    one: '%{count} заявка'
+    other: '%{count} заявок'
+  count_tickets_containing:
+    one: '%{count} заявка, содержит'
+    other: '%{count} заявок, содержат'
+  priority: 'Приоритет'
+  replies: 'ответов'
+  no_subject: 'Нет темы'
+  unassigned: 'Не назначена'
+  untime: 'Бессрочно'
+  no_tickets_found: 'Не найдено заявок'
+  search: 'Поиск'
+  minutes: 'минут'
+  export_tickets: 'Экспортировать заявки'
+  export_these_tickets: 'Экспортировать выбранные заявки'
+  number_ticket: 'Номер заявки'
+  ticket_number: 'Заявка номер'
+  prio_ticket: 'Приоритет'
+  initiator: 'Инициатор заявки'
+  context: 'Метки и тема'
+  assigned_to: 'Исполнитель заявки'
+  create_date: 'Дата и время создания'
+  no_existing_match: 'Совпадений не найдено'
+  
+# tickets/show
+  ticket_by_at: '%{email}, %{at}'
+  no_content: 'Нет отписания'
+  status: 'Статус'
+  assignee: 'Ответственный'
+  num_replies:
+    one: '%{count} ответ'
+    other: '%{count} ответов'
+  ago: 'назад'
+  high: 'Высокий'
+  medium: 'Средний'
+  low: 'Низкий'
+  unknown: 'Не известно'
+  open: 'Открыт'
+  closed: 'Закрыт'
+  deleted: 'Удален'
+  labels: 'Метки'
+  label_name: 'Добавить метку'
+  notification_sent_to: 'Уведомление было направлено по следующим адресам:'
+
+# tickets/_change_priority_form
+  change: 'Изменить'
+  change_priority: 'Изменить приоритет'
+
+# tickets/_change_status_form
+  change_status: 'Изменить статус'
+
+# tickets/_change_assignee_form
+  change_assignee: 'Назначить заявку'
+  assign: 'Назначить'
+
+# tickets/_change_assignee_time
+  time_assignee: 'Назначить время исполнения заявки'
+  time_assign: 'Назначить'
+
+# replies/new
+  add_reply: 'Добавить ответ'
+
+# replies/_form
+  reply: 'Ответ'
+  attach_files: 'Прикрепить файл(ы):'
+  send_reply: 'Отправить ответ'
+  on_date_author_wrote: '%{date}, %{author} написал:'
+  notification_will_be_sent_to: 'Ваше уведомление будет отправлено:'
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: 'Заявка назначена вам'
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: 'Приоритет заявки изменен'
+
+# ticket_mailer/notify_status_changed.text.erb
+  tickets_status_modified: 'Статус заявки изменен'
+
+# notification_mailer/new_ticket
+  view_new_ticket: 'Посмотреть новую заявку'
+# notification_mailer/new_reply
+  new_reply: 'Новый ответ'
+  view_new_reply: 'Посмотреть новый ответ'
+
+# attachments/_attachment
+  download: 'скачать'
+
+# users/new
+  new_user: 'Новый сотрудник'
+
+# users/edit
+  edit_user: 'Редактирование сотрудника'
+
+# users/index
+  email: 'Email'
+  role: 'Права'
+  agent: 'Инженер'
+  customer: 'Сотрудник'
+  fname: 'ФИО'
+  department: 'Подразделение'
+  phone: 'Телефон'
+  department_role: 'Должность'
+  undefine: 'Не заполнено'
+  employee_not_select: 'Сотрудник не выбран'
+  employee: 'Заявитель'
+  to_date: 'Исполнить до'
+
+# users/_form
+  account_settings: 'Настройки сотрудника'
+  only_fill_in_passwords_when_modifying: 'Если требуется сменить пароль - заполните поля ввода пароля и подтверждения'
+  user_is_an_tech: 'Пользователь является администратором'
+  user_is_an_agent: 'Пользователь является инженером'
+  receive_new_ticket_notifications: 'Получать уведомления о новых заявках'
+  email_settings: 'Настройки Email'
+  save: 'Сохранить'
+  access_control: 'Настройки доступа'
+  have_access_to_label: 'Ограничить доступ сотрудника только к следующим меткам'
+
+# controllers/attachments
+  file_not_found: 'Файл отсутствует'
+
+# controllers/users
+  settings_saved: 'Настройки сохранены'
+  user_added: 'Сотрудник добавлен'
+
+# controllers/tickets
+  ticket_added: 'Заявка добавлена'
+  ticket_updated: 'Заявка обновлена'
+
+# controllers/replies
+  reply_added: 'Ответ добавлен'
+
+# rules/index
+  new_rule: 'Новое правило'
+
+# rules/edit
+  edit_rule: 'Редактировать правило'
+  delete_rule: 'Удалить правило'
+  are_you_sure: 'Вы уверены?'
+
+# controllers/rules
+  rule_added: 'Правило добавлено'
+  rule_modified: 'Правило изменено'
+  rule_deleted: 'Правило удалено'
+
+
+  activerecord:
+    attributes:
+      user:
+        email: 'Email'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+        signature: 'Подпись для Email'
+        remember_me: 'Запомнить меня'
+        label_ids: 'Метки'
+
+      ticket:
+        fname: 'ФИО'
+        from: 'Email'
+        subject: 'Тема'
+        content: 'Описание'
+        status: 'Статус'
+        priority: 'Приоритет'
+        assignee_id: 'Назначить сотрудника ответственного за исполнение заявки'
+
+      reply:
+        to: 'To'
+        cc: 'Cc'
+        Bcc: 'Bcc'
+
+      rule:
+        filter_field: 'Поле'
+        filter_operation: 'Оператор'
+        filter_operations:
+          contains: 'Содержит'
+        filter_value: 'Значение'
+        action_operation: 'Действие'
+        action_operations:
+          assign_label: 'Добавить метку'
+          notify_user: 'Отправить уведомнение на Email'
+          change_status: 'Изменить статус'
+          change_priority: 'Изменить приоритет'
+        action_value: 'Параметры действий'
+
+
