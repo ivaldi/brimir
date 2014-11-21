@@ -221,19 +221,21 @@ aside .hover-icon-a {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	position: relative;
 }
 aside .hover-icon-a > .hover-icon-i {
-	margin-top: -21px;
-	margin-right: 0;
-	padding: 2px 3px;
-	position: relative;
-	background: #242424;
-	float: right;
+	position: absolute;
+	top: 10px;
+	right: 0;
 	display: none;
 }
-aside .hover-icon-a:hover > .hover-icon-i {
+aside li:hover a > .hover-icon-i {
 	display: block
 }
 aside .f-dropdown {
 	width: 32px;
+}
+
+ul.off-canvas-list li:hover > a{
+	background: #242424;
 }
