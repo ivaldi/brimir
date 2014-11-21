@@ -82,3 +82,7 @@ gem 'jbuilder', '~> 1.2'
 
 # time traveling
 gem 'timecop'
+
+# fancybox for showing image in lightbox
+gem 'fancybox2-rails', '~> 0.2.8'
+

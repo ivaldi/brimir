@@ -16,6 +16,7 @@
 //= require select2
 //= require tinymce-jquery
 //= require tickets
+//= require fancybox
 
 (function() {
 
@@ -63,6 +64,15 @@
   }
 
   jQuery(function() {
+
+    jQuery("a.fancybox").fancybox({
+      type : 'image',
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
 
     if(jQuery('[data-main]').length > 0){
       var page = jQuery(document).height();
