@@ -22,9 +22,12 @@ class TicketsControllerTest < ActionController::TestCase
 
     @ticket = tickets(:problem)
 
-
     # read_fixture doesn't work in ActionController::TestCase, so use File.new
     @simple_email = File.new('test/fixtures/ticket_mailer/simple').read
+  end
+
+  teardown do
+    I18n.locale = :en
   end
 
   test 'should get new as customer' do
@@ -49,6 +52,9 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should create ticket when posted from MTA' do
 
+    # should ignore this in emails, but use application default
+    I18n.locale = :nl
+
     assert_difference 'ActionMailer::Base.deliveries.size' do
       assert_difference 'Ticket.count' do
 
@@ -57,6 +63,9 @@ class TicketsControllerTest < ActionController::TestCase
         assert_response :success
       end
     end
+
+    # should have used English locale
+    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
 
     refute_equal 0, assigns(:ticket).notified_users.count
 

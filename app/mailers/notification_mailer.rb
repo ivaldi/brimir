@@ -26,7 +26,7 @@ class NotificationMailer < ActionMailer::Base
       return
     end
 
-    title = I18n::translate(:new_ticket) + ': ' + ticket.subject.to_s
+    title = I18n::translate(:new_ticket, locale: Rails.configuration.i18n.default_locale) + ': ' + ticket.subject.to_s
 
     add_attachments(ticket)
 
