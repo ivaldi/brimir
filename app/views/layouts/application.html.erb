@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
     <%= favicon_link_tag 'favicon.png' %>
-    <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' %>
+    <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,600italic' %>
     <%= stylesheet_link_tag 'application' %>
     <%= stylesheet_link_tag 'application-print', media: 'print' %>
     <%= csrf_meta_tags %>
@@ -18,9 +18,9 @@
 
     <% if user_signed_in? %>
       <nav class="top-bar" data-topbar>
-        <ul class="title-area">
+        <ul class="title-area medium-3 large-2">
           <li class="name">
-            <h1><a href="<%= root_path %>">Brimir</a></h1>
+            <h1><a href="<%= root_path %>">BRIMIR</a></h1>
           </li>
           <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
         </ul>
@@ -29,10 +29,10 @@
           <!-- Right Nav Section -->
           <ul class="right">
             <% if can? :manage, Rule %>
-                <li><a href="<%= rules_path %>"><%= t(:rules) %></a></li>
+                <li><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
             <% end %>
             <% if can? :manage, User %>
-                <li><a href="<%= users_path %>"><%= t(:users) %></a></li>
+                <li><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></li>
             <% end %>
             <li class="has-dropdown">
               <a href="#"><%= current_user.email %></a>
@@ -50,10 +50,6 @@
               </ul>
             </li>
           </ul>
-          <!-- Left Nav Section -->
-          <ul class="left">
-            <li><%= link_to t(:new_ticket), new_ticket_path %></li>
-          </ul>
         </section>
       </nav>
     <% end %>
@@ -61,7 +57,10 @@
     <div class="row collapse">
       <% if user_signed_in? %>
         <aside class="hide-for-small medium-3 large-2 columns">
-          <ul class="off-canvas-list mt">
+          <div class="new-ticket pam">
+            <%= link_to t(:new_ticket), new_ticket_path, class: 'radius tiny expand success button no-mb' %>
+          </div>
+          <ul class="off-canvas-list mtm">
             <li>
               <%= active_elem_if :a, params[:status] == 'open' &&
                   params[:assignee_id].to_i == 0,
@@ -110,7 +109,7 @@
               %>
               <li>
                 <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">
-                  <i class="fa fa-square" style="color: <%= label.color %>"></i>
+                  <i class="fa fa-circle-o" style="color: <%= label.color %>"></i>
                   <%= label.name %>
                   <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down hover-icon-i"></i>
                 </a>
@@ -118,7 +117,7 @@
                   <% Label::COLORS.each_with_index do |color, index| %>
                     <li>
                       <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
-                        <i class="fa fa-square" style="color: <%= color %>"></i>
+                        <i class="fa fa-circle-o" style="color: <%= color %>"></i>
                       <% end %>
                     </li>
                   <% end %>
