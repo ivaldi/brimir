@@ -194,4 +194,5 @@ en:
           notify_user: send notification to
           change_status: change status to
           change_priority: change priority to
+          assign_user: assign to
         action_value: Parameter for action

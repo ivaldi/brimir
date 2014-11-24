@@ -204,4 +204,5 @@ nl:
           notify_user: stuur notificatie aan
           change_status: wijzig status in
           change_priority: wijzig prioriteit in
+          assign_user: toewijzen aan
         action_value: Parameter voor actie

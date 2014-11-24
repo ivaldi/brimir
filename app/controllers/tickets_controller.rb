@@ -132,7 +132,11 @@ class TicketsController < ApplicationController
         @ticket.set_default_notifications!(user)
       end
 
-      NotificationMailer.new_ticket(@ticket).deliver
+      if @ticket.assignee.nil?
+        NotificationMailer.new_ticket(@ticket).deliver
+      else
+        TicketMailer.notify_assigned(@ticket).deliver
+      end
     end
 
     respond_to do |format|
