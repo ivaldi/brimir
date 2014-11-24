@@ -1,49 +1,58 @@
-// 
+//
 // FOUNDATION SETTINGS
 //
 
 @import "foundation/functions";
 
-$body-font-color: #747474;
+$body-font-color: #626262;
 
 $primary-color: #2f87c1;
-$secondary-color: #e7e7e7;
+$secondary-color: #fff;
 $alert-color: #f04124;
 $success-color: #43AC6A;
 $warning-color: #f08a24;
 $info-color: #a0d3e8;
 
+$button-function-factor: -3%;
+
 $row-width: 100%;
-$body-font-family: "Lato", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: "Source Sans Pro", "Helvetica", Helvetica, Arial, sans-serif;
 $font-smoothing: antialiased;
+
+$header-font-weight: 300;
 
 $tabs-navigation-bg-color: #fff;
 $accordion-content-active-bg-color: #f9f9f9;
 
 $table-bg: #fff;
-$table-even-row-bg: #f5f7fa;
+$table-even-row-bg: #fff;
 
 $table-border-style: solid;
-$table-border-size: 0;
-$table-border-color: #fff;
-$table-row-padding: rem-calc(9 20);
+$table-border-color: #eaeef0;
+$table-row-padding: rem-calc(10 20);
 
 $off-canvas-bg: #30363e;
 $off-canvas-label-bg: rgba(0,0,0,0);
-$off-canvas-label-padding: rem-calc(30 10 0 10);
-$off-canvas-link-padding: rem-calc(5, 15);
+$off-canvas-label-padding: rem-calc(30 10 0 20);
+$off-canvas-link-padding: rem-calc(8 20);
 $off-canvas-link-border-bottom: none;
 
+$topbar-title-weight: bold;
 $topbar-height: 60px;
 $topbar-bg-color: $primary-color;
-$topbar-link-bg-active: scale-color($primary-color, $lightness: 5%);
+$topbar-link-bg-hover: #4896d1;
 
-$panel-bg: #dfe4ee;
+$panel-bg: #f9f9f9;
 $panel-border-style: solid;
 $panel-margin-bottom: rem-calc(0);
-$panel-font-color: #56688a;
+$panel-font-color: #777;
 $panel-padding: rem-calc(5 20);
 
-$input-font-size: rem-calc(11);
+$input-font-size: rem-calc(14);
+$input-border-color: #ddd;
+$input-box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+
+$label-font-weight: bold;
+$label-padding: rem-calc(4 8);
 
 @import 'foundation';
