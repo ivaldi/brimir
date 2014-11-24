@@ -32,7 +32,7 @@
                 <li><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
             <% end %>
             <% if can? :manage, User %>
-                <li><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></li>
+                <li><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
             <% end %>
             <li class="has-dropdown">
               <a href="#"><%= current_user.email %></a>
