@@ -1,7 +1,7 @@
-<div class="panel">
+<div class="panel no-b pam">
   <div class="row collapse">
-    <div class="medium-9 columns">
-      <h4 class="filter-title no-m pts">
+    <div class="medium-8 columns">
+      <h3 class="filter-title no-m pts plm">
 
         <% if params[:q].present? %>
           <%= t(:count_tickets_containing, count: @tickets.count) %> '<em><%= params[:q].to_s %></em>'
@@ -9,25 +9,31 @@
           <%= t(:count_tickets, count: @tickets.count) %>
         <% end %>
 
-      </h4>
+      </h3>
     </div>
-    <div class="medium-3 columns">
-      <%= form_tag tickets_path, method: :get do %>
+    <div class="medium-4 columns">
+      <%= form_tag tickets_path, method: :get, class: 'prm' do %>
         <%= hidden_field_tag(:assignee_id, params[:assignee_id]) unless params[:assignee_id].blank? %>
         <%= hidden_field_tag :status, params[:status] %>
         <div class="row collapse">
-          <div class="small-8 columns">
-            <%= text_field_tag :q, params[:q], class: 'no-m' %>
+          <div class="small-7 columns">
+            <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
           </div>
-          <div class="small-4 columns">
-            <%= button_tag t(:search), type: 'submit', class: 'radius no-m button postfix' %>
+          <div class="small-2 columns">
+            <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', class: 'secondary radius no-bl no-m button postfix' %>
+          </div>
+          <div class="small-1 columns"></div>
+          <div class="small-2 column">
+            <%= link_to tickets_path(params.merge(format: :csv)), class: 'secondary radius button no-m postfix' do %>
+              <i class="fa fa-cloud-download" style="top:1px"></i>
+            <% end %>
           </div>
         </div>
       <% end %>
     </div>
   </div>
 </div>
-<table class="full zebra">
+<table class="full">
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr data-ticket-url="<%= ticket_url(ticket) %>">
@@ -54,7 +60,7 @@
           <% if !ticket.subject.nil? %>
             <a href="<%= ticket_url(ticket) %>">
               <% if ticket.replies.size > 0 %>
-                <span class="success radius label" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
+                <span class="secondary ba radius label right ml" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
               <% end %>
               <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80].html_safe %></span>
             </a>
@@ -99,13 +105,8 @@
 <% unless @tickets.empty? %>
 
   <div class="row">
-    <div class="small-6 columns">
+    <div class="small-12 columns">
       <%= will_paginate @tickets %>
-    </div>
-    <div class="small-6 columns">
-      <%= link_to tickets_path(params.merge(format: :csv)), class: 'tiny secondary radius button right' do %>
-        <%= t(:export_tickets) %>
-      <% end %>
     </div>
   </div>
 
