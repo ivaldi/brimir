@@ -106,6 +106,8 @@
                 else
                   p = params.merge(label_id: label.id)
                 end
+                # remove pagination from link, start at first page
+                p.delete(:page)
               %>
               <li>
                 <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">
