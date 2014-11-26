@@ -168,6 +168,7 @@ en:
         remember_me: Remember me
         label_ids: Labels
         time_zone: Time zone
+        per_page: Tickets per page
 
       ticket:
         from: From email address

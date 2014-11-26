@@ -45,7 +45,8 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        @tickets = @tickets.page(params[:page])
+        @tickets = @tickets.paginate(page: params[:page],
+            per_page: current_user.per_page)
       end
       format.csv do
         @tickets = @tickets.includes(:status_changes)

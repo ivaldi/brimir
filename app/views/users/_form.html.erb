@@ -35,6 +35,8 @@
       <% end %>
 
       <%= f.select :time_zone, @time_zones %>
+
+      <%= f.select :per_page, [10, 20, 30, 50, 75, 100] %>
     </div>
   </div>
   <div class="row">

@@ -178,6 +178,7 @@ nl:
         remember_me: Onthouden
         label_ids: Labels
         time_zone: Tijdzone
+        per_page: Tickets per pagina
 
       ticket:
         from: Van e-mailadres

@@ -92,6 +92,7 @@ class UsersController < ApplicationController
           :agent,
           :notify,
           :time_zone,
+          :per_page,
           label_ids: []
       )
 
