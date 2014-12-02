@@ -12,7 +12,7 @@ module HtmlTextHelper
   end
 
   def sanitize_html(content)
-    sanitize(content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul), attributes: %w(src href)).html_safe
+    sanitize(content, tags: %w(a b br code div em i img li ol p pre table td tfoot thead tr span strong ul font), attributes: %w(src href style color)).html_safe
   end
 
   def wrap_and_quote(content)
