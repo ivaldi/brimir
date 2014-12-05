@@ -30,8 +30,6 @@ pt-BR:
   password_wont_change_without_opening_link: Sua senha não será alterada até que você acesse o link acima e crie uma nova.
 
 # tickets/index
-  tickets: Tickets
-  tickets_containing: Contém tickets
   priority: Prioridade
   replies: respostas
   no_subject: Sem assunto
@@ -57,7 +55,6 @@ pt-BR:
   deleted: Deletado
   labels: Etiquetas
   label_name: Nome da etiqueta
-  add: +
   notification_sent_to: 'Uma notificação foi enviada para os seguintes endereços:'
 
 # tickets/_change_priority_form
@@ -165,11 +162,6 @@ pt-BR:
         status: Status
         priority: Prioridade
         assignee_id: Responsável
-
-      reply:
-        to: Para
-        cc: Cc
-        Bcc: Cco
 
       rule:
         filter_field: Campo

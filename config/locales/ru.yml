@@ -12,10 +12,7 @@ ru:
   personal_settings: 'Личные настройки'
   sign_out: 'Выход'
   delete: 'Удалить'
-  add: 'Ок'
-  in: 'в'
-  create_ticket: 'Создать заявку'
-  
+
 # devise/sessions/new
   sign_in: 'Войти'
 
@@ -47,22 +44,12 @@ ru:
   replies: 'ответов'
   no_subject: 'Нет темы'
   unassigned: 'Не назначена'
-  untime: 'Бессрочно'
   no_tickets_found: 'Не найдено заявок'
   search: 'Поиск'
   minutes: 'минут'
-  export_tickets: 'Экспортировать заявки'
-  export_these_tickets: 'Экспортировать выбранные заявки'
-  number_ticket: 'Номер заявки'
-  ticket_number: 'Заявка номер'
-  prio_ticket: 'Приоритет'
-  initiator: 'Инициатор заявки'
-  context: 'Метки и тема'
-  assigned_to: 'Исполнитель заявки'
-  create_date: 'Дата и время создания'
-  no_existing_match: 'Совпадений не найдено'
-  
+
 # tickets/show
+  add: 'Ок'
   ticket_by_at: '%{email}, %{at}'
   no_content: 'Нет отписания'
   status: 'Статус'
@@ -92,10 +79,6 @@ ru:
 # tickets/_change_assignee_form
   change_assignee: 'Назначить заявку'
   assign: 'Назначить'
-
-# tickets/_change_assignee_time
-  time_assignee: 'Назначить время исполнения заявки'
-  time_assign: 'Назначить'
 
 # replies/new
   add_reply: 'Добавить ответ'
@@ -136,19 +119,10 @@ ru:
   role: 'Права'
   agent: 'Инженер'
   customer: 'Сотрудник'
-  fname: 'ФИО'
-  department: 'Подразделение'
-  phone: 'Телефон'
-  department_role: 'Должность'
-  undefine: 'Не заполнено'
-  employee_not_select: 'Сотрудник не выбран'
-  employee: 'Заявитель'
-  to_date: 'Исполнить до'
 
 # users/_form
   account_settings: 'Настройки сотрудника'
   only_fill_in_passwords_when_modifying: 'Если требуется сменить пароль - заполните поля ввода пароля и подтверждения'
-  user_is_an_tech: 'Пользователь является администратором'
   user_is_an_agent: 'Пользователь является инженером'
   receive_new_ticket_notifications: 'Получать уведомления о новых заявках'
   email_settings: 'Настройки Email'
@@ -195,18 +169,12 @@ ru:
         label_ids: 'Метки'
 
       ticket:
-        fname: 'ФИО'
         from: 'Email'
         subject: 'Тема'
         content: 'Описание'
         status: 'Статус'
         priority: 'Приоритет'
         assignee_id: 'Назначить сотрудника ответственного за исполнение заявки'
-
-      reply:
-        to: 'To'
-        cc: 'Cc'
-        Bcc: 'Bcc'
 
       rule:
         filter_field: 'Поле'

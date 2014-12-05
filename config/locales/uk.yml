@@ -36,13 +36,9 @@ uk:
 # tickets/index
   count_tickets:
     one: '%{count} тікет'
-    few: 'Тікетів: %{count}'
-    many: 'Тікетів: %{count}'
     other: 'Тікетів: %{count}'
   count_tickets_containing:
     one: '%{count} тікет що містить'
-    few: '%{count} тікетів що містить'
-    many: '%{count} тікетів що містить'
     other: '%{count} тікетів що містить'
   priority: Пріорітет
   replies: відповіді
@@ -51,7 +47,6 @@ uk:
   no_tickets_found: Тікети не знайдено.
   search: Пошук
   minutes: хвилин
-  export_these_tickets: Експортувати ці тікети
 
 # tickets/show
   ticket_by_at: За %{email} в %{at}
@@ -182,11 +177,6 @@ uk:
         status: Статус
         priority: Пріоритет
         assignee_id: Назначено
-
-      reply:
-        to: Кому
-        cc: Копія
-        Bcc: Додатково
 
       rule:
         filter_field: Поле

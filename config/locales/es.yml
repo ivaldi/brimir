@@ -28,8 +28,6 @@ es:
   password_wont_change_without_opening_link: Tu contraseña no cambiara hasta que acceses haciendo clic en la liga de arriba y generes una nueva.
 
 # tickets/index
-  tickets: Tickets
-  tickets_containing: Tickets que contienen
   priority: Prioridad
   replies: Respuestas
   no_subject: Sin tema
@@ -148,8 +146,3 @@ es:
         status: Estado
         priority: Prioridad
         assignee_id: Delegado
-
-      reply:
-        to: Para
-        cc: Cc
-        Bcc: Cco
