@@ -1,10 +1,5 @@
+# author: https://github.com/frenkel
 nl:
-
-  time:
-    formats:
-      short: '%d-%m %H:%M'
-      long: '%d-%m-%Y %H:%M'
-
 # layouts/application
   new_ticket: Nieuw ticket
   inbox: Inbox
@@ -52,9 +47,9 @@ nl:
   no_tickets_found: Geen tickets gevonden.
   search: Zoek
   minutes: minuten
-  export_tickets: Exporteer deze tickets
 
 # tickets/show
+  add: Toevoegen
   ticket_by_at: Door %{email} op %{at}
   no_content: Geen inhoud
   status: Status
@@ -163,11 +158,6 @@ nl:
   rule_modified: Regel gewijzigd
   rule_deleted: Regel verwijderd
 
-  helpers:
-    submit:
-      ticket: 
-        create: Ticket aanmaken
-
   activerecord:
     attributes:
       user:
@@ -187,11 +177,6 @@ nl:
         status: Status
         priority: Prioriteit
         assignee_id: Toegewezen aan
-
-      reply:
-        to: Aan
-        cc: Cc
-        Bcc: Bcc
 
       rule:
         filter_field: Veld

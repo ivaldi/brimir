@@ -147,12 +147,12 @@
               <%= f.hidden_field :labelable_type %>
 
               <div class="row collapse">
-                <div class="small-9 columns">
+                <div class="small-6 columns">
                   <%= f.fields_for :label, Label.new do |f| %>
                     <%= f.text_field :name, label: false, placeholder: t(:label_name) %>
                   <% end %>
                 </div>
-                <div class="small-3 columns">
+                <div class="small-6 columns">
                   <%= f.button t(:add), type: 'submit', class: 'button postfix' %>
                 </div>
               </div>

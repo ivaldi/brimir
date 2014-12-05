@@ -40,8 +40,6 @@ de:
   count_tickets_containing:
     one: '%{count} Ticket enthalten'
     other: '%{count} Tickets enthalten'
-  tickets: Tickets
-  tickets_containing: 'Tickets: Suche nach'
   priority: Priorität
   replies: Antworten
   no_subject: Kein Betreff
@@ -175,11 +173,6 @@ de:
         status: Status
         priority: Priorität
         assignee_id: Bearbeiter
-
-      reply:
-        to: Empfänger
-        cc: Kopie
-        Bcc: Blindkopie
 
       rule:
         filter_field: Feld

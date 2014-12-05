@@ -46,9 +46,9 @@ en:
   no_tickets_found: No tickets found.
   search: Search
   minutes: minutes
-  export_these_tickets: Export these tickets
 
 # tickets/show
+  add: Add
   ticket_by_at: By %{email} on %{at}
   no_content: No content
   status: Status
@@ -177,11 +177,6 @@ en:
         status: Status
         priority: Priority
         assignee_id: Assignee
-
-      reply:
-        to: To
-        cc: Cc
-        Bcc: Bcc
 
       rule:
         filter_field: Field
