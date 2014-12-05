@@ -55,7 +55,7 @@ class TicketsControllerTest < ActionController::TestCase
     # should ignore this in emails, but use application default
     I18n.locale = :nl
 
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
 
         post :create, message: @simple_email, format: :json
@@ -90,8 +90,8 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should create ticket when not signed in' do
 
-    assert_difference 'ActionMailer::Base.deliveries.size' do
-      assert_difference 'Ticket.count', 1 do
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
+      assert_difference 'Ticket.count' do
         post :create, ticket: {
             from: 'test@test.nl',
             content: @ticket.content,

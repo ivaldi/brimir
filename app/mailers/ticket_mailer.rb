@@ -138,7 +138,14 @@ class TicketMailer < ActionMailer::Base
 
     if ticket != incoming
       incoming.set_default_notifications!
-      NotificationMailer.new_reply(incoming).deliver
+
+      incoming.notified_users.each do |user|
+        mail = NotificationMailer.new_reply(incoming, user)
+        mail.deliver
+        incoming.message_id = mail.message_id
+      end
+
+      incoming.save
     end
 
     return incoming

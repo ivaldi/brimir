@@ -134,7 +134,13 @@ class TicketsController < ApplicationController
       end
 
       if @ticket.assignee.nil?
-        NotificationMailer.new_ticket(@ticket).deliver
+        @ticket.notified_users.each do |user|
+          mail = NotificationMailer.new_ticket(@ticket, user)
+          mail.deliver
+          @ticket.message_id = mail.message_id
+        end
+
+        @ticket.save
       else
         TicketMailer.notify_assigned(@ticket).deliver
       end
