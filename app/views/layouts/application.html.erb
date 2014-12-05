@@ -163,28 +163,28 @@
       <% current_user.sign_in_count += 1 %>
       <% current_user.save %>
       <ol class="joyride-list" data-joyride data-options="expose: true;scroll_speed: 1000;">
-        <li data-id="joyride-tickets" data-text="Volgende stap" data-options="prev_button: false; tip_location: top;">
+        <li data-id="joyride-tickets" data-text="<%= t('joyride.next') %>" data-options="prev_button: false; tip_location: top;">
           <h4><%= t(:new_ticket) %></h4>
           <p><%= t('joyride.tickets') %></p>
         </li>
-        <li data-id="joyride-settings" data-class="custom-step" data-button="Next" data-prev-text="Prev" data-options="tip_location: right;">
+        <li data-id="joyride-settings" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
           <h4><%= t(:personal_settings) %></h4>
           <p><%= t('joyride.personal_settings') %></p>
         </li>
-        <li data-id="joyride-labels" data-button="Next" data-prev-text="Prev" data-options="tip_location: top;">
+        <li data-id="joyride-labels" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: top;">
           <h4><%= t(:labels) %></h4>
           <p><%= t('joyride.labels') %></p>
         </li>
-        <li data-id="joyride-rules" data-button="Next" data-prev-text="Prev" data-options="tip_location: right;">
+        <li data-id="joyride-rules" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
           <h4><%= t(:rules) %></h4>
           <p><%= t('joyride.rules') %></p>
         </li>
-        <li data-id="joyride-users" data-button="Next" data-prev-text="Prev" data-options="tip_location: right;">
+        <li data-id="joyride-users" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
           <h4><%= t(:users) %></h4>
           <p><%= t('joyride.users') %></p>
         </li>
-        <li data-button="End" data-prev-text="Prev">
-          <h4><%= t('joyride.end') %></h4>
+        <li data-button="<%= t('joyride.end') %>" data-prev-text="<%= t('joyride.previous') %>">
+          <h4><%= t('joyride.final') %></h4>
           <p>&nbsp;</p>
         </li>
       </ol>

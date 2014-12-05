@@ -18,7 +18,10 @@ en:
     labels: After adding labels to tickets or users, they will show up here. You can then use them as filters.
     rules: Automatically add labels, assignees, change status and more.
     users: Add more agents or normal users.
-    end: Thanks for using Brimir!
+    final: Thanks for using Brimir!
+    next: Next
+    previous: Previous
+    end: End
 
 # devise/sessions/new
   sign_in: Sign in
