@@ -1,7 +1,9 @@
+<%# WATCH OUT make sure you don't add whitespace accidentally %>
+<% unless @user.current_sign_in_at.blank? %>
 <p><a href="<%= ticket_url(@reply.ticket) %>#reply-<%= @reply.id %>" target="_blank"><%= t(:view_new_reply) %> &raquo;</a></p>
-
+<% end %>
 <% if @reply.content_type == 'html' %>
-  <%= sanitize_html(@reply.content) %>
+<%= sanitize_html(@reply.content) %>
 <% else %>
-  <%= sanitize_html(text_to_html(@reply.content)) %>
+<%= sanitize_html(text_to_html(@reply.content)) %>
 <% end %>

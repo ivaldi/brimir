@@ -1,3 +1,5 @@
+<%# WATCH OUT make sure you don't add whitespace accidentally %>
+<% unless @user.current_sign_in_at.blank? %>
 <%= t(:view_new_ticket) %>: <%= ticket_url(@ticket) %>
-
+<% end %>
 <%= html_to_text(@ticket.content) %>

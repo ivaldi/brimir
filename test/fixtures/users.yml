@@ -12,6 +12,8 @@ bob:
 charlie:
   email: charlie@xxxx.com
   agent: true
+  current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails
 
 dave:
   email: dave@xxxx.com
+  current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails

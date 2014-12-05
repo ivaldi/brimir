@@ -28,6 +28,7 @@ class NotificationMailer < ActionMailer::Base
     end
 
     @ticket = ticket
+    @user = user
 
     mail(to: user.email, subject: title)
   end
@@ -44,6 +45,7 @@ class NotificationMailer < ActionMailer::Base
     end
 
     @reply = reply
+    @user = user
 
     mail(to: user.email, subject: title)
   end
