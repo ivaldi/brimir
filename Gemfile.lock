@@ -90,7 +90,7 @@ GEM
       railties (>= 3.1.0, < 5.0)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
-    foundation-rails (5.2.3.0)
+    foundation-rails (5.4.5.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
     foundation_rails_helper (0.4)
@@ -214,7 +214,7 @@ DEPENDENCIES
   devise-i18n
   fancybox2-rails (~> 0.2.8)
   font-awesome-rails (~> 4.0)
-  foundation-rails (~> 5.2.2)
+  foundation-rails (~> 5.4.2)
   foundation_rails_helper
   http_accept_language
   jbuilder (~> 1.2)
