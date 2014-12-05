@@ -3,7 +3,15 @@
     <div class="panel paxl">
       <h3 class="mb"><%= t(:forgot_password) %></h3>
       <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-        <%= f.email_field :email %>
+        <%= f.label :email %>
+        <div class="row collapse">
+          <div class="small-1 columns">
+            <span class="prefix"><i class="fa fa-user"></i></span>
+          </div>
+          <div class="small-11 columns">
+            <%= f.email_field :email, label: false %>
+          </div>
+        </div>
         <%= f.submit t(:send_instructions), class: 'button radius mtm no-mb' %> <%= render "devise/shared/links" %>
       <% end %>
     </div>

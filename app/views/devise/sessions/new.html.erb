@@ -4,9 +4,25 @@
       <h3 class="mb"><%= t(:sign_in) %> in Brimir</h3>
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
-        <%= f.email_field :email %>
+        <%= f.label :email %>
+        <div class="row collapse">
+          <div class="small-1 columns">
+            <span class="prefix"><i class="fa fa-user"></i></span>
+          </div>
+          <div class="small-11 columns">
+            <%= f.email_field :email, label: false %>
+          </div>
+        </div>
 
-        <%= f.password_field :password %>
+        <%= f.label :password %>
+        <div class="row collapse">
+          <div class="small-1 columns">
+            <span class="prefix"><i class="fa fa-lock"></i></span>
+          </div>
+          <div class="small-11 columns">
+            <%= f.password_field :password, label: false %>
+          </div>
+        </div>
 
         <% if devise_mapping.rememberable? -%>
           <%= f.check_box :remember_me %>
