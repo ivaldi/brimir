@@ -38,40 +38,32 @@
     <% @tickets.each do |ticket| %>
       <tr data-ticket-url="<%= ticket_url(ticket) %>">
 
-        <td>
-          <% if can? :update, ticket %>
-            <a href="#" data-dropdown="priorities-<%= ticket.id %>">
-              <span class="priority-<%= ticket.priority %> fa fa-circle"></span>
+        <td class="priority-<%= ticket.priority %> table-nowrap">
+          <span class="block"><%= ticket.user.email %></span>
+          <% if !ticket.subject.nil? %>
+            <a href="<%= ticket_url(ticket) %>">
+              <strong><%= ticket.subject %></strong>
             </a>
-            <%= render 'priority_dropdown', ticket: ticket, short: true %>
           <% else %>
-            <span class="priority-<%= ticket.priority %> fa fa-circle"></span>
+            <%= link_to ticket do %>
+              <em><%= t(:no_subject) %></em>
+            <% end %>
           <% end %>
         </td>
 
-        <td style="white-space:nowrap">
-          <%= ticket.user.email %>
+        <td>
+          <% if ticket.replies.size > 0 %>
+            <span class="secondary ba radius label ml" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
+          <% end %>
         </td>
 
         <td class="text-secondary table-nowrap">
           <% ticket.labels.viewable_by(current_user).each do |label| %>
             <%= render label %>
           <% end %>
-          <% if !ticket.subject.nil? %>
-            <a href="<%= ticket_url(ticket) %>">
-              <% if ticket.replies.size > 0 %>
-                <span class="secondary ba radius label right ml" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
-              <% end %>
-              <%= ticket.subject %> - <span class="text-secondary"><%= sanitize(ticket.content, tags: [])[0..80].html_safe %></span>
-            </a>
-          <% else %>
-            <%= link_to ticket do %>
-              <em>(<%= t(:no_subject) %>)</em>
-            <% end %>
-          <% end %>
         </td>
-
-        <td>
+        <td class="nowrap text-right text-secondary">
+          <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
           <% if can? :update, ticket %>
             <% if ticket.assignee %>
               <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
@@ -85,10 +77,6 @@
               <em><%= t(:unassigned) %></em>
             <% end %>
           <% end %>
-        </td>
-
-        <td class="nowrap text-right text-secondary">
-          <%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %>
         </td>
       </tr>
     <% end %>
