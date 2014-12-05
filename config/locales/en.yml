@@ -12,6 +12,14 @@ en:
   sign_out: Sign out
   delete: Remove
 
+  joyride:
+    tickets: Anybody can create tickets using this button.
+    personal_settings: Set your signature, timezone and other preferences via this menu.
+    labels: After adding labels to tickets or users, they will show up here. You can then use them as filters.
+    rules: Automatically add labels, assignees, change status and more.
+    users: Add more agents or normal users.
+    end: Thanks for using Brimir!
+
 # devise/sessions/new
   sign_in: Sign in
 

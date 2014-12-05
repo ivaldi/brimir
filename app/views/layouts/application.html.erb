@@ -29,12 +29,12 @@
           <!-- Right Nav Section -->
           <ul class="right">
             <% if can? :manage, Rule %>
-                <li><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
+                <li id="joyride-rules"><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
             <% end %>
             <% if can? :manage, User %>
-                <li><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
+                <li id="joyride-users"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
             <% end %>
-            <li class="has-dropdown">
+            <li class="has-dropdown" id="joyride-settings">
               <a href="#"><%= current_user.email %></a>
               <ul class="dropdown">
                 <li>
@@ -58,7 +58,7 @@
       <% if user_signed_in? %>
         <aside class="hide-for-small medium-3 large-2 columns">
           <div class="new-ticket pam">
-            <%= link_to t(:new_ticket), new_ticket_path, class: 'radius tiny expand success button no-mb' %>
+            <%= link_to t(:new_ticket), new_ticket_path, class: 'radius tiny expand success button no-mb', id: 'joyride-tickets' %>
           </div>
           <ul class="off-canvas-list mtm">
             <li>
@@ -97,7 +97,7 @@
           </ul>
 
           <ul class="off-canvas-list">
-            <li><label><%= t(:labels) %></label></li>
+            <li id="joyride-labels"><label><%= t(:labels) %></label></li>
             <% @labels.each do |label| %>
               <%
                 # toggle label on/off
@@ -158,6 +158,40 @@
     </div>
 
     <%= javascript_include_tag 'application' %>
+
+    <% if user_signed_in? && current_user.agent? && current_user.sign_in_count == 1 %>
+      <% current_user.sign_in_count += 1 %>
+      <% current_user.save %>
+      <ol class="joyride-list" data-joyride data-options="expose: true;scroll_speed: 1000;">
+        <li data-id="joyride-tickets" data-text="Volgende stap" data-options="prev_button: false; tip_location: top;">
+          <h4><%= t(:new_ticket) %></h4>
+          <p><%= t('joyride.tickets') %></p>
+        </li>
+        <li data-id="joyride-settings" data-class="custom-step" data-button="Next" data-prev-text="Prev" data-options="tip_location: right;">
+          <h4><%= t(:personal_settings) %></h4>
+          <p><%= t('joyride.personal_settings') %></p>
+        </li>
+        <li data-id="joyride-labels" data-button="Next" data-prev-text="Prev" data-options="tip_location: top;">
+          <h4><%= t(:labels) %></h4>
+          <p><%= t('joyride.labels') %></p>
+        </li>
+        <li data-id="joyride-rules" data-button="Next" data-prev-text="Prev" data-options="tip_location: right;">
+          <h4><%= t(:rules) %></h4>
+          <p><%= t('joyride.rules') %></p>
+        </li>
+        <li data-id="joyride-users" data-button="Next" data-prev-text="Prev" data-options="tip_location: right;">
+          <h4><%= t(:users) %></h4>
+          <p><%= t('joyride.users') %></p>
+        </li>
+        <li data-button="End" data-prev-text="Prev">
+          <h4><%= t('joyride.end') %></h4>
+          <p>&nbsp;</p>
+        </li>
+      </ol>
+      <script>
+       jQuery(document).foundation('joyride','start');
+      </script>
+    <% end %>
 
   </body>
 </html>
