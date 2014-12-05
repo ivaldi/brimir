@@ -17,9 +17,9 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :tickets
-  has_many :replies
-  has_many :labelings, as: :labelable
+  has_many :tickets, dependent: :destroy
+  has_many :replies, dependent: :destroy
+  has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
 
   scope :agents, -> {

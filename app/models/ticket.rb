@@ -24,13 +24,13 @@ class Ticket < ActiveRecord::Base
 
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :replies, dependent: :destroy
-  has_many :labelings, as: :labelable
+  has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
 
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :notified_users, source: :user, through: :notifications
 
-  has_many :status_changes
+  has_many :status_changes, dependent: :destroy
 
   enum status: [:open, :closed, :deleted, :waiting]
   enum priority: [:unknown, :low, :medium, :high]
