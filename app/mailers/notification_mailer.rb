@@ -24,14 +24,10 @@ class NotificationMailer < ActionMailer::Base
     add_attachments(ticket)
 
     unless ticket.message_id.blank?
-      headers['In-Reply-To'] = '<' + ticket.message_id + '>'
+      headers['Message-ID'] = ticket.message_id
     end
 
     @ticket = ticket
-
-    unless ticket.message_id.blank?
-      headers['Message-ID'] = ticket.message_id
-    end
 
     mail(to: user.email, subject: title)
   end
@@ -43,11 +39,11 @@ class NotificationMailer < ActionMailer::Base
     add_reference_message_ids(reply)
     add_in_reply_to_message_id(reply)
 
-    @reply = reply
-
     unless reply.message_id.blank?
       headers['Message-ID'] = reply.message_id
     end
+
+    @reply = reply
 
     mail(to: user.email, subject: title)
   end
