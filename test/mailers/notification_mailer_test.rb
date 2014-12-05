@@ -26,9 +26,12 @@ class NotificationMailerTest < ActionMailer::TestCase
       NotificationMailer.new_ticket(ticket).deliver
     end
 
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal ticket.message_id, mail.message_id
+
   end
 
-  test 'should  notify user of new reply' do
+  test 'should notify user of new reply' do
     reply = replies(:solution)
     reply.notified_users << User.last
 
@@ -38,6 +41,7 @@ class NotificationMailerTest < ActionMailer::TestCase
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal "<#{reply.ticket.message_id}>", mail['In-Reply-To'].to_s
+    assert_equal reply.message_id, mail.message_id
   end
 
 end

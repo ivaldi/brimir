@@ -13,8 +13,10 @@ multiple:
   assignee: alice
   status: closed
   priority: high
+  message_id: 'test124@test124'
 
 daves_problem:
   subject: Dave has a problem
   content: Dave has a problem with his computer
   user: dave
+  message_id: 'test125@test125'

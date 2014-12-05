@@ -2,3 +2,4 @@ solution:
   ticket: problem
   content: My first text reply
   user: bob
+  message_id: 'reply123@reply123'
