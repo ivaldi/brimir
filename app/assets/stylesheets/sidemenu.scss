@@ -1,0 +1,72 @@
+/* --- Side menu --- */
+
+aside{
+	min-height: calc(100vh - 60px);
+}
+
+aside .fa{
+	width: 20px;
+	text-align: center;
+	margin-right: 10px
+}
+
+.new-ticket{
+	background: rgba(255,255,255,.1);
+	border-bottom: 1px solid rgba(255,255,255,.11);
+	padding: 11px;
+}
+
+ul.off-canvas-list li label{
+	font-size: 12px;
+}
+
+.off-canvas-list li label{
+	margin-top: 30px;
+}
+
+.off-canvas-list a{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.off-canvas-list a:hover{
+	color: #fff;
+}
+
+.off-canvas-list a.active{
+	color: #fff;
+}
+
+.off-canvas-list .f-dropdown a{
+	color: #555;
+}
+
+.off-canvas-list .f-dropdown a:hover{
+	background-color: #eee;
+}
+
+aside .hover-icon-a {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	position: relative;
+}
+
+aside .hover-icon-a > .hover-icon-i {
+	position: absolute;
+	top: 10px;
+	right: 0;
+	display: none;
+}
+
+aside li:hover a > .hover-icon-i {
+	display: block
+}
+
+aside .f-dropdown {
+	width: 65px;
+}
+
+ul.off-canvas-list li:hover > a{
+	background: #242424;
+}

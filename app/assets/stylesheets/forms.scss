@@ -1,0 +1,27 @@
+/* --- Forms --- */
+
+#new_ticket textarea, .new_reply textarea{
+	width: 100%;
+	height: 300px !important;
+}
+
+.edit_user textarea{
+	width: 100%;
+	height: 100px !important;
+}
+
+.preview{
+	height: 300px;
+}
+
+.select2-container-multi .select2-choices .select2-search-choice {
+	margin-top: 9px !important;
+}
+
+.reveal-modal form{
+	margin: 0;
+}
+
+input[type="checkbox"]{
+	margin-right: 5px;
+}

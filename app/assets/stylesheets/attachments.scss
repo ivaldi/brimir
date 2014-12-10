@@ -1,0 +1,20 @@
+/* --- Attachments --- */
+
+.attachments {
+  list-style: none;
+  margin-left: 0;
+}
+
+.attachments li {
+  clear: both;
+}
+.attachments img {
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 2px;
+  border: 1px solid #eee;
+}
+.attachments strong{
+	display: block;
+}
