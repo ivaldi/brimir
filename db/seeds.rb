@@ -1,3 +1,12 @@
+if ENV['CLEAN'].present?
+  User.delete_all
+  Label.delete_all
+  Rule.delete_all
+  Ticket.delete_all
+  Reply.delete_all
+  Attachment.destroy_all
+end
+
 agent = User.where(email: 'agent@getbrimir.com').first_or_create({ email: 'agent@getbrimir.com', password: 'testtest', password_confirmation: 'testtest' })
 agent.agent = true
 agent.save!
