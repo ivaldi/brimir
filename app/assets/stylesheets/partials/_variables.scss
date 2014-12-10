@@ -1,0 +1,29 @@
+//Core variables
+// -------------------------
+$fontSize: 						16px !default;
+$baseLineHeight:				1.5 !default;
+
+$fontSizeXXL:					rem-calc($fontSize*2.5) !default;				
+$fontSizeXL:					rem-calc($fontSize*2) !default;
+$fontSizeL:						rem-calc($fontSize*1.75) !default;
+$fontSizeM:						rem-calc($fontSize*1.25) !default;
+$fontSizeS:						rem-calc($fontSize*1) !default;		
+$fontSizeXS:					rem-calc($fontSize*0.75) !default;
+$fontSizeXXS:					rem-calc($fontSize*0.5) !default;
+
+
+//Selection colors
+// -------------------------
+$selectionBgColor: 				#fe57a1 !default;
+$selectionFontColor: 			#fff !default;
+
+
+// Grays
+// -------------------------
+$black:                 		#000 !default;
+$dark:            				#222 !default;
+$mediumdark:              		#333 !default;
+$medium:                  		#555 !default;
+$mediumlight:            		#999 !default;
+$light:           				#ddd !default;
+$white:                 		#fff !default;

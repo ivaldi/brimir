@@ -15,7 +15,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body style="<%= 'background: #30363e' if user_signed_in? %>">
+  <body>
 
     <% if user_signed_in? %>
       <nav class="top-bar" data-topbar>
@@ -58,8 +58,8 @@
     <div class="row collapse">
       <% if user_signed_in? %>
         <aside class="hide-for-small medium-3 large-2 columns">
-          <div class="new-ticket pam">
-            <%= link_to t(:new_ticket), new_ticket_path, class: 'radius tiny expand success button no-mb', id: 'joyride-tickets' %>
+          <div class="new-ticket plm prm pbm">
+            <%= link_to t(:new_ticket), new_ticket_path, class: 'tiny secondary expand button no-mb no-b', id: 'joyride-tickets' %>
           </div>
           <ul class="off-canvas-list mtm">
             <li>
@@ -76,24 +76,26 @@
                   href: tickets_path(assignee_id: current_user.id) do %>
                 <span class="fa fa-user"></span><%= t(:mine) %>
               <% end %>
-            </li>
-            <li>
-              <%= active_elem_if :a, params[:status] == 'waiting',
-                  href: tickets_path(status: 'waiting') do %>
-                <span class="fa fa-clock-o"></span><%= t(:waiting) %>
-              <% end %>
-            </li>
-            <li>
-              <%= active_elem_if :a, params[:status] == 'closed',
-                   href: tickets_path(status: 'closed') do %>
-                <span class="fa fa-check"></span><%= t(:closed_tickets) %>
-              <% end %>
-            </li>
-            <li>
-              <%= active_elem_if :a, params[:status] == 'deleted',
-                  href: tickets_path(status: 'deleted') do %>
-                <span class="fa fa-trash-o"></span><%= t(:trashed) %>
-              <% end %>
+              <ul class="no-m">
+                <li>
+                  <%= active_elem_if :a, params[:status] == 'waiting',
+                      href: tickets_path(status: 'waiting') do %>
+                    <span class="fa fa-clock-o"></span><%= t(:waiting) %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= active_elem_if :a, params[:status] == 'closed',
+                       href: tickets_path(status: 'closed') do %>
+                    <span class="fa fa-check"></span><%= t(:closed_tickets) %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= active_elem_if :a, params[:status] == 'deleted',
+                      href: tickets_path(status: 'deleted') do %>
+                    <span class="fa fa-trash-o"></span><%= t(:trashed) %>
+                  <% end %>
+                </li>
+              </ul>
             </li>
           </ul>
 

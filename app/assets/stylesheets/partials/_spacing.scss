@@ -1,0 +1,85 @@
+//defaults
+$paddingMargins: p, m;
+$positions: a, t, r, b, l;
+$spacing-increment: 5px;
+$sizes: n, s, m, l, xl, xxl;
+$pm: padding;
+$pos: top;
+$sz: 0;
+
+//create classes
+@each $paddingMargin in $paddingMargins {
+	$tempVar : $paddingMargin;
+	@if $paddingMargin == "p" {
+		$pm: padding;
+	} @else {
+		$pm: margin;
+	}
+	@each $position in $positions {
+		@if $position == "a" {
+			@each $size in $sizes {
+				@if $size == "n" {
+					$sz: $spacing-increment * 0;
+				} @else if $size == "s" {
+					$sz: $spacing-increment * 1; 
+				} @else if $size == "m" {
+					$sz: $spacing-increment * 2;
+				} @else if $size == "l" {
+					$sz: $spacing-increment * 3;
+				} @else if $size == "xl" {
+					$sz: $spacing-increment * 4;
+				} @else if $size == "xxl" {
+					$sz: $spacing-increment * 8;
+				}
+
+				@if $size == "n"{
+					.no-#{$tempVar}{
+						#{$pm}: $sz !important;
+					}
+				}@else{
+					.#{$tempVar}a#{$size}{
+						#{$pm}: $sz !important;
+					}
+				} 
+			}
+		} @else{
+			$tempVar2: #{$tempVar}#{$position};
+			@if $position == "t" {
+				$pos: top;
+			} @else if $position == "r" {
+				$pos: right;
+			} @else if $position == "b" {
+				$pos: bottom;
+			} @else if $position == "l" {
+				$pos: left;
+			}
+			@each $size in $sizes {
+				$tempVar3: #{$tempVar2}#{$size};
+
+				@if $size == "n" {
+					$sz: $spacing-increment * 0;
+				} @else if $size == "s" {
+					$sz: $spacing-increment * 1; 
+				} @else if $size == "m" {
+					$sz: $spacing-increment * 2;
+				} @else if $size == "l" {
+					$sz: $spacing-increment * 3;
+				} @else if $size == "xl" {
+					$sz: $spacing-increment * 4;
+				} @else if $size == "xxl" {
+					$sz: $spacing-increment * 8;
+				}
+
+				@if $size == "n"{
+					.no-#{$tempVar2}{
+						#{$pm}-#{$pos}: $sz !important;
+					} 
+				} @else {
+					.#{$tempVar3}{
+						#{$pm}-#{$pos}: $sz !important;
+					} 
+				} 
+			}
+		}
+	}
+}

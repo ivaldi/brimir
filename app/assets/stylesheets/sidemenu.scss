@@ -1,40 +1,44 @@
 /* --- Side menu --- */
-
 aside{
 	min-height: calc(100vh - 60px);
-}
+	.fa{
+		width: 20px;
+		text-align: center;
+		margin-right: 10px
+	}
 
-aside .fa{
-	width: 20px;
-	text-align: center;
-	margin-right: 10px
-}
+	ul.off-canvas-list {
+		li {
+			label{
+				font-size: 12px;
+				margin-top: 30px;
+			}
+			a{
+				font-size: 14px;
+				font-weight: bold;
 
-.new-ticket{
-	background: rgba(255,255,255,.1);
-	border-bottom: 1px solid rgba(255,255,255,.11);
-	padding: 11px;
-}
+				&:hover,
+				&.active{
+					color: #fff;
+					background-color: darken($body-font-color, 10);
+				}
+			}
 
-ul.off-canvas-list li label{
-	font-size: 12px;
-}
+			ul{
+				li{
+					a{
+						padding-left: 50px;
+						&:hover,
+						&.active{
+							color: #fff;
+							background-color: darken($body-font-color, 5);
+						}
+					}
+				}
+			}
+		}
+	}
 
-.off-canvas-list li label{
-	margin-top: 30px;
-}
-
-.off-canvas-list a{
-	font-size: 14px;
-	font-weight: bold;
-}
-
-.off-canvas-list a:hover{
-	color: #fff;
-}
-
-.off-canvas-list a.active{
-	color: #fff;
 }
 
 .off-canvas-list .f-dropdown a{

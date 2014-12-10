@@ -14,19 +14,21 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http:gcwww.gnu.org/licenses/>.
  *
- *= require foundation_and_overrides
  *= require select2
  *= require font-awesome
  *= require fancybox
  *= require helpers
- *= require sidemenu
  *= require forms
  *= require attachments
- *= require inbox
  *= require_self
  */
 
+@import "foundation_and_overrides";
 @import "foundation/functions";
+@import "partials/variables";
+@import "partials/spacing";
+@import "sidemenu";
+@import "inbox";
 
 /* --- Table --- */
 
@@ -89,11 +91,6 @@ table thead tr th{
 @keyframes animScale {
 	0% { opacity: 0; -webkit-transform: translate3d(0,40px,0); transform: translate3d(0,40px,0); }
 	100% { opacity: 1; -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); }
-}
-
-
-.title-area{
-	background: #4896d1;
 }
 
 .contain-to-grid{
