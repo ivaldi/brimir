@@ -1,5 +1,13 @@
 .full{ width: 100%; }
 .block{ display: block; }
+.ib{ display: inline-block; }
+
+.heading-one{ font-size: $fontSizeXXL; }
+.heading-two{ font-size: $fontSizeXL; }
+.heading-three{ font-size: $fontSizeL; }
+.heading-four{ font-size: $fontSizeM; }
+.heading-five{ font-size: $fontSizeS; }
+.heading-six{ font-size: $fontSizeXS; }
 
 .priority-unknown{ color: #ccc; }
 .priority-low{ color: #ffd700; }

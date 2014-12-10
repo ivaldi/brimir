@@ -67,14 +67,14 @@
                   params[:assignee_id].to_i == 0,
                   href: root_path do %>
 
-                <span class="fa fa-inbox"></span><%= t(:inbox) %>
+                <span class="fa fa-inbox"></span><%= t(:inbox) %> <span class="right heading-six bubble pls prs">17</span>
               <% end %>
             </li>
             <li>
               <%= active_elem_if :a, params[:status] == 'open' &&
                   params[:assignee_id].to_i == current_user.id,
                   href: tickets_path(assignee_id: current_user.id) do %>
-                <span class="fa fa-user"></span><%= t(:mine) %>
+                <span class="fa fa-user"></span><%= t(:mine) %> <span class="right heading-six bubble pls prs">8</span>
               <% end %>
               <ul class="no-m">
                 <li>
@@ -114,15 +114,15 @@
               %>
               <li>
                 <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">
-                  <i class="fa fa-circle-o" style="color: <%= label.color %>"></i>
+                  <span class="pas ib mrs" style="background-color: <%= label.color %>"></span>
                   <%= label.name %>
                   <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down hover-icon-i"></i>
                 </a>
-                <ul id="label-<%= label.id %>" class="f-dropdown" data-dropdown-content>
+                <ul id="label-<%= label.id %>" class="f-dropdown medium-block-grid-3" data-dropdown-content>
                   <% Label::COLORS.each_with_index do |color, index| %>
                     <li>
                       <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
-                        <i class="fa fa-circle-o" style="color: <%= color %>"></i>
+                        <span class="pas ib" style="background-color: <%= color %>"></span>
                       <% end %>
                     </li>
                   <% end %>

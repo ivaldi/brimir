@@ -12,6 +12,7 @@ aside{
 			label{
 				font-size: 12px;
 				margin-top: 30px;
+				color: darken($body-font-color, 10);
 			}
 			a{
 				font-size: 14px;
@@ -22,8 +23,34 @@ aside{
 					color: #fff;
 					background-color: darken($body-font-color, 10);
 				}
-			}
+				.bubble{
+					color: $body-font-color;
+					background-color: #fff;
+					font-weight: normal;
+					padding-top: 2px;
+					padding-bottom: 2px;
+				}
 
+				&.hover-icon-a {
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					position: relative;
+
+					.hover-icon-i {
+						position: absolute;
+						top: 10px;
+						right: 0;
+						display: none;
+					}
+				}
+
+				&:hover{
+					.hover-icon-i {
+						display: block
+					}
+				}
+			}
 			ul{
 				li{
 					a{
@@ -35,42 +62,27 @@ aside{
 						}
 					}
 				}
+
+				&.f-dropdown {
+					width: 100px;
+					li{
+						padding: 0.625rem;
+						text-align: center;
+
+						a{
+							padding: 0;
+							color: $body-font-color;
+
+							&:hover{
+								background-color: #eee;
+							}
+							i{
+								width: auto;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
-
-}
-
-.off-canvas-list .f-dropdown a{
-	color: #555;
-}
-
-.off-canvas-list .f-dropdown a:hover{
-	background-color: #eee;
-}
-
-aside .hover-icon-a {
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	position: relative;
-}
-
-aside .hover-icon-a > .hover-icon-i {
-	position: absolute;
-	top: 10px;
-	right: 0;
-	display: none;
-}
-
-aside li:hover a > .hover-icon-i {
-	display: block
-}
-
-aside .f-dropdown {
-	width: 65px;
-}
-
-ul.off-canvas-list li:hover > a{
-	background: #242424;
 }

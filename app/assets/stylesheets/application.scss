@@ -17,7 +17,6 @@
  *= require select2
  *= require font-awesome
  *= require fancybox
- *= require helpers
  *= require forms
  *= require attachments
  *= require_self
@@ -27,6 +26,7 @@
 @import "foundation/functions";
 @import "partials/variables";
 @import "partials/spacing";
+@import "helpers";
 @import "sidemenu";
 @import "inbox";
 
