@@ -34,15 +34,23 @@
   </div>
 </div>
 
-<table class="full">
-  <tbody>
-    <% @tickets.each do |ticket| %>
-      <tr data-ticket-url="<%= ticket_url(ticket) %>">
-
-        <td class="priority-<%= ticket.priority %> table-nowrap">
+<section class="tickets">
+  <ul class="inline-list bb no-m">
+    <li class="pal no-m"><input type="checkbox" value="" name="" class="no-mb mts" data-toggle-all/></li>
+    <li class="bl no-m"><a href="#" class="ptl plm prm pbl text-medium-light-grey">Assign</a></li>
+    <li class="bl no-m"><a href="#" class="ptl plm prm pbl text-medium-light-grey">Close</a></li>
+    <li class="bl no-m"><a href="#" class="ptl plm prm pbl text-medium-light-grey">Label</a></li>
+    <li class="bl no-m"><a href="#" class="ptl plm prm pbl text-medium-light-grey">Prioritize</a></li>
+    <li class="bl no-m"><a href="#" class="ptl plm prm pbl text-medium-light-grey">Remove</a></li>
+  </ul>
+  <% @tickets.each do |ticket| %>
+    <div class="priority-<%= ticket.priority %> row ticket bb" style="height: 5em;" data-ticket-url="<%= ticket_url(ticket) %>">
+      <div class="medium-4 plxxl v-middle columns">
+        <input type="checkbox" value="" name="" class="no-mb"/>
+        <p class="no-mb plm">
           <span class="block"><%= ticket.user.email %></span>
           <% if !ticket.subject.nil? %>
-            <a href="<%= ticket_url(ticket) %>">
+            <a href="<%= ticket_url(ticket) %>" class="text-default">
               <strong><%= ticket.subject %></strong>
             </a>
           <% else %>
@@ -50,55 +58,56 @@
               <em><%= t(:no_subject) %></em>
             <% end %>
           <% end %>
-        </td>
-
-        <td>
-          <% if ticket.replies.size > 0 %>
-            <span class="secondary ba radius label ml" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
-          <% end %>
-        </td>
-
-        <td class="text-secondary table-nowrap">
-          <% ticket.labels.viewable_by(current_user).each do |label| %>
-            <%= render label %>
-          <% end %>
-        </td>
-        <td class="nowrap text-right text-secondary">
-          <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
-          <% if can? :update, ticket %>
-            <% if ticket.assignee %>
-              <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
-            <% else %>
-              <a data-assignee-id="" href="#"><em><%= t(:unassigned) %></em></a>
-            <% end %>
+        </p>
+      </div>
+      <div class="medium-1 v-middle columns">
+         <% if ticket.replies.size > 0 %>
+          <span class="ba label right alt" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
           <% else %>
-            <% if ticket.assignee %>
-              <i class="fa fa-user"></i> <%= ticket.assignee.email %>
+          <span>&nbsp;</span>
+        <% end %>
+      </div>
+      <div class="medium-4 v-middle columns">
+        <% ticket.labels.viewable_by(current_user).each do |label| %>
+          <%= render label %>
+        <% end %>
+      </div>
+      <div class="medium-3 v-middle columns">
+        <p class="no-mb text-right">
+          <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
+            <% if can? :update, ticket %>
+              <% if ticket.assignee %>
+                <a data-assignee-id="<%= ticket.assignee.id %>" href="#" class="text-default"><%= ticket.assignee.email %></a>
+              <% else %>
+                <a data-assignee-id="" href="#" class="text-default"><em><%= t(:unassigned) %></em></a>
+              <% end %>
             <% else %>
-              <em><%= t(:unassigned) %></em>
+              <% if ticket.assignee %>
+                <%= ticket.assignee.email %>
+              <% else %>
+                <em><%= t(:unassigned) %></em>
+              <% end %>
             <% end %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-
-    <% if @tickets.empty? %>
-      <tr>
-        <td colspan="100%"><%= t(:no_tickets_found) %></td>
-      </tr>
-    <% end %>
-
-  </tbody>
-</table>
-
-<% unless @tickets.empty? %>
-
-  <div class="row">
-    <div class="small-12 columns">
-      <%= will_paginate @tickets %>
+        </p>
+      </div>
     </div>
-  </div>
+  <% end %>
 
-  <%= render 'change_assignee_form', { ticket: Ticket.new } %>
+  <% if @tickets.empty? %>
+    <div class="ticket text-center">
+      <p><%= t(:no_tickets_found) %></p>
+    </div>
+  <% end %>
 
-<% end %>
+  <% unless @tickets.empty? %>
+
+    <div class="row">
+      <div class="small-12 columns">
+        <%= will_paginate @tickets %>
+      </div>
+    </div>
+
+    <%= render 'change_assignee_form', { ticket: Ticket.new } %>
+
+  <% end %>
+</section>

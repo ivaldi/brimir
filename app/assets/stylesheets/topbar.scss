@@ -1,0 +1,32 @@
+.top-bar{
+	border-bottom: 1px solid $light;
+
+	.title-area{
+		background-color: $body-font-color;
+		text-align: center;
+
+		.name {
+			h1{
+				a{
+					font-size: 22px;
+				}
+			}
+		}
+	}
+
+	.top-bar-section{
+		float: right;
+
+		ul li{
+			background: transparent;
+
+			a:not(.button){
+				color: $body-font-color;
+				background: transparent;
+				&:after{
+					border-color: $body-font-color transparent transparent transparent;
+				}
+			}
+		}
+	}
+}

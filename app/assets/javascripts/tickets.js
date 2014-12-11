@@ -37,5 +37,16 @@ jQuery(function() {
 
   });
 
-});
+  jQuery('.ticket input[type="checkbox"]').on('change', function(){
+    jQuery(this).parents('.ticket').toggleClass('highlight');
+  });
 
+  jQuery('[data-toggle-all]').on('change', function(){
+    var checked = this.checked ? true : false;
+    jQuery('.ticket input[type="checkbox"]').each(function(){
+      if(checked && !this.checked || !checked && this.checked){
+        jQuery(this).click();
+      }
+    });
+  });
+});

@@ -21,6 +21,8 @@ $font-smoothing: antialiased;
 
 $header-font-weight: 300;
 
+$paragraph-font-size: rem-calc(14);
+
 $tabs-navigation-bg-color: #fff;
 $accordion-content-active-bg-color: #f9f9f9;
 
@@ -31,16 +33,15 @@ $table-border-style: solid;
 $table-border-color: #eaeef0;
 $table-row-padding: rem-calc(10 20);
 
-$off-canvas-bg: #30363e;
 $off-canvas-label-bg: rgba(0,0,0,0);
 $off-canvas-label-padding: rem-calc(30 10 0 20);
 $off-canvas-link-padding: rem-calc(8 20);
 $off-canvas-link-border-bottom: none;
 
 $topbar-title-weight: bold;
-$topbar-height: 60px;
+$topbar-height: 65px;
 $topbar-bg-color: $primary-color;
-$topbar-link-bg-hover: #4896d1;
+$topbar-link-bg-hover: darken($primary-color, 5);
 
 $panel-bg: #f9f9f9;
 $panel-border-style: solid;
@@ -52,7 +53,9 @@ $input-font-size: rem-calc(14);
 $input-border-color: #ddd;
 $input-box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
 
-$label-font-weight: bold;
+$label-font-weight: normal;
 $label-padding: rem-calc(4 8);
+$label-font-color: #fff;
+$label-font-color-alt: $body-font-color;
 
 @import 'foundation';

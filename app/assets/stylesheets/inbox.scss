@@ -2,39 +2,49 @@ body{
 	background-color: $body-font-color;
 }
 
-.top-bar{
-	border-bottom: 1px solid $light;
-	height: 65px;
-	line-height: 65px;
+.tickets{
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
 
-	.title-area{
-		background-color: $body-font-color;
-		text-align: center;
+	input[type="checkbox"]{
+	    -webkit-appearance: none;
+		border: 1px solid $body-font-color;
+		width: 15px;
+		height: 15px;
+		background-color: #fff;
 
-		.name {
-			height: 65px;
-			h1{
-				line-height: 65px;
-				a{
-					font-size: 22px;
-				}
-			}
+		&:checked{
+			background-color: $body-font-color;
 		}
 	}
+	.ticket{
+		overflow: hidden;
+		position: relative;
+		border-left-width: 3px;
+		border-left-style: solid;
+		-webkit-transition: background-color 0.25s;
+		-ms-transition: background-color 0.25s;
+		-o-transition: background-color 0.25s;
+		transition: background-color 0.25s;
 
-	.top-bar-section{
-		float: right;
+		&:hover{
+			background: darken($white, 3);
+		}
 
-		ul li{
-			background: transparent;
-			
-			a:not(.button){
-				color: $body-font-color;
-				background: transparent;
-				&:after{
-					border-color: $body-font-color transparent transparent transparent;
-				}
-			}
+		&.highlight{
+			background-color: rgba(255,255,128,0.25);
+		}
+
+		input[type="checkbox"]{
+			position: absolute;
+			left: 12px;
+			top: 50%;
+			margin-top: -8px;
+		}
+
+		.label.alt{
+			color: $body-font-color;
 		}
 	}
 }
