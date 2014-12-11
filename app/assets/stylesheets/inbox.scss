@@ -4,13 +4,21 @@ body{
 
 .top-bar{
 	border-bottom: 1px solid $light;
+	height: 65px;
+	line-height: 65px;
 
 	.title-area{
 		background-color: $body-font-color;
 		text-align: center;
 
-		.name h1 a{
-			font-size: 22px;
+		.name {
+			height: 65px;
+			h1{
+				line-height: 65px;
+				a{
+					font-size: 22px;
+				}
+			}
 		}
 	}
 
@@ -19,7 +27,7 @@ body{
 
 		ul li{
 			background: transparent;
-
+			
 			a:not(.button){
 				color: $body-font-color;
 				background: transparent;

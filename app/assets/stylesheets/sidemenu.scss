@@ -4,7 +4,7 @@ aside{
 	.fa{
 		width: 20px;
 		text-align: center;
-		margin-right: 10px
+		margin-right: 5px
 	}
 
 	ul.off-canvas-list {
@@ -16,7 +16,8 @@ aside{
 			}
 			a{
 				font-size: 14px;
-				font-weight: bold;
+				font-weight: normal;
+				color: #fff;
 
 				&:hover,
 				&.active{
@@ -29,6 +30,8 @@ aside{
 					font-weight: normal;
 					padding-top: 2px;
 					padding-bottom: 2px;
+					min-width: 23px;
+					text-align: center;
 				}
 
 				&.hover-icon-a {
@@ -54,11 +57,11 @@ aside{
 			ul{
 				li{
 					a{
-						padding-left: 50px;
+						padding-left: 42px;
 						&:hover,
 						&.active{
 							color: #fff;
-							background-color: darken($body-font-color, 5);
+							background-color: darken($body-font-color, 3);
 						}
 					}
 				}
@@ -81,6 +84,37 @@ aside{
 							}
 						}
 					}
+				}
+			}
+		
+			&.add-label a{
+				color: lighten($body-font-color, 15);
+			}
+		}
+	}
+
+	ul.pos-bottom{
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 70px;
+
+		li{
+			&:first-child a{
+				background-color: darken($body-font-color, 5);
+			}
+			&:last-child a{
+				background-color: darken($body-font-color, 10);
+			}
+			a{
+				height: 100%;
+				padding: 10px;
+				color: darken($body-font-color, 20);
+				font-size: 0.75em;
+				line-height: 1.25;
+				i{
+					margin: 0 auto;
 				}
 			}
 		}

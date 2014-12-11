@@ -58,7 +58,7 @@
     <div class="row collapse">
       <% if user_signed_in? %>
         <aside class="hide-for-small medium-3 large-2 columns">
-          <div class="new-ticket plm prm pbm">
+          <div class="new-ticket ptm plxl prxl pbm">
             <%= link_to t(:new_ticket), new_ticket_path, class: 'tiny secondary expand button no-mb no-b', id: 'joyride-tickets' %>
           </div>
           <ul class="off-canvas-list mtm">
@@ -114,7 +114,7 @@
               %>
               <li>
                 <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">
-                  <span class="pas ib mrs" style="background-color: <%= label.color %>"></span>
+                  <span class="pas ib mrl" style="background-color: <%= label.color %>"></span>
                   <%= label.name %>
                   <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down hover-icon-i"></i>
                 </a>
@@ -134,10 +134,24 @@
                 </ul>
               </li>
             <% end %>
+            <li class="add-label"><a href="#"><i class="fa fa-plus text-left"></i> Add label</a></li>
+          </ul>
+
+          <ul class="pos-bottom medium-block-grid-2 text-center no-m">
+            <li class="no-p">
+              <%= link_to edit_user_path(current_user), :class=>'block' do %>
+                <i class="fa-sliders fa fa-fw fa-2x block"></i> <%= t(:personal_settings) %>
+              <% end %>
+            </li>
+            <li class="no-p">
+              <%= link_to destroy_user_session_path, method: :delete, :class=>'block' do %>
+                <i class="fa-cog fa fa-fw fa-2x block"></i> <%= t(:sign_out) %>
+              <% end %>
+            </li>
           </ul>
         </aside>
-        <%# 100vh - 60px because top-bar height is 60px %>
-        <div class="medium-9 large-10 columns" style="background: #fff; min-height: calc(100vh - 60px);" data-main>
+        <%# 100vh - 65px because top-bar height is 65px %>
+        <div class="medium-9 large-10 columns" style="background: #fff; min-height: calc(100vh - 65px);" data-main>
       <% else %>
         <div class="medium-9 large-10 columns medium-centered large-centered">
       <% end %>
