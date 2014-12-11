@@ -50,7 +50,7 @@
         <p class="no-mb plm">
           <span class="block"><%= ticket.user.email %></span>
           <% if !ticket.subject.nil? %>
-            <a href="<%= ticket_url(ticket) %>" class="text-default">
+            <a href="<%= ticket_url(ticket) %>" class="text-default text-overflow block">
               <strong><%= ticket.subject %></strong>
             </a>
           <% else %>

@@ -13,6 +13,12 @@
 
 .text-medium-light-grey{ color: $mediumlight; }
 
+.text-overflow{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 .priority-unknown{ border-color: #ccc; }
 .priority-low{ border-color: #ffd700; }
 .priority-medium{ border-color: #ff8000; }

@@ -94,11 +94,12 @@ aside{
 	}
 
 	ul.pos-bottom{
-		position: absolute;
+		position: fixed;
 		left: 0;
 		right: 0;
 		bottom: 0;
 		height: 70px;
+		width: 16.66667%;
 
 		li{
 			&:first-child a{
