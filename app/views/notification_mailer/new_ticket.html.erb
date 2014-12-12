@@ -1,6 +1,6 @@
 <%# WATCH OUT make sure you don't add whitespace accidentally %>
 <% unless @user.current_sign_in_at.blank? %>
-<p><a href="<%= ticket_url(@ticket) %>" target="_blank"><%= t(:view_new_ticket, locale: Rails.configuration.i18n.default_locale) %> &raquo;</a></p>
+<p><a href="<%= ticket_url(@ticket) %>" target="_blank"><%= t(:view_new_ticket, locale: @locale) %> &raquo;</a></p>
 <% end %>
 <% if @ticket.content_type == 'html' %>
 <%= sanitize_html(@ticket.content) %>

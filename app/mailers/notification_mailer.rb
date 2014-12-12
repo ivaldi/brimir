@@ -19,7 +19,12 @@ class NotificationMailer < ActionMailer::Base
   add_template_helper HtmlTextHelper
 
   def new_ticket(ticket, user)
-    title = I18n::translate(:new_ticket, locale: Rails.configuration.i18n.default_locale) + ': ' + ticket.subject.to_s
+    unless user.locale.blank?
+      @locale = user.locale
+    else
+      @locale = Rails.configuration.i18n.default_locale
+    end
+    title = I18n::translate(:new_ticket, locale: @locale) + ': ' + ticket.subject.to_s
 
     add_attachments(ticket)
 
@@ -34,7 +39,12 @@ class NotificationMailer < ActionMailer::Base
   end
 
   def new_reply(reply, user)
-    title = I18n::translate(:new_reply) + ': ' + reply.ticket.subject
+    unless user.locale.blank?
+      @locale = user.locale
+    else
+      @locale = Rails.configuration.i18n.default_locale
+    end
+    title = I18n::translate(:new_reply, locale: @locale) + ': ' + reply.ticket.subject
 
     add_attachments(reply)
     add_reference_message_ids(reply)
