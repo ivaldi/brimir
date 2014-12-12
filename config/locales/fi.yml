@@ -1,5 +1,6 @@
 # author: https://github.com/JanneMantyharju
 fi:
+  language_name: suomi
 # layouts/application
   new_ticket: Uusi tiketti
   inbox: Saapuneet

@@ -18,14 +18,14 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource :user
 
+  before_filter :load_locales, except: :index
+
   def edit
     @user = User.find(params[:id])
-    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
   end
 
   def update
     @user = User.find(params[:id])
-    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
 
     # if no password was posted, remove from params
     if params[:user][:password] == ''
@@ -70,12 +70,10 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
   end
 
   def create
     @user = User.new(user_params)
-    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
 
     if @user.save
       redirect_to users_url, notice: I18n::translate(:user_added)
@@ -86,6 +84,18 @@ class UsersController < ApplicationController
   end
 
   private
+    def load_locales
+      @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
+      @locales = []
+
+      Dir.open('config/locales').each do |file|
+        unless ['.', '..'].include?(file)
+          code = file[0...-4] # strip of .yml
+          @locales << [I18n.translate(:language_name, locale: code), code]
+        end
+      end
+    end
+
     def user_params
       attributes = params.require(:user).permit(
           :email,
@@ -96,6 +106,7 @@ class UsersController < ApplicationController
           :agent,
           :notify,
           :time_zone,
+          :locale,
           :per_page,
           label_ids: []
       )

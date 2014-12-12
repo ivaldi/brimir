@@ -1,5 +1,6 @@
 # author: https://github.com/frenkel
 nl:
+  language_name: nederlands
 # layouts/application
   new_ticket: Nieuw ticket
   inbox: Inbox
@@ -167,6 +168,7 @@ nl:
         signature: E-mailhandtekening
         remember_me: Onthouden
         label_ids: Labels
+        locale: Taal
         time_zone: Tijdzone
         per_page: Tickets per pagina
 

@@ -1,6 +1,7 @@
 # author: https://github.com/neilor
 
 pt-BR:
+  language_name: português do Brasil
 # layouts/application
   new_ticket: Novo Ticket
   inbox: Caixa de Entrada

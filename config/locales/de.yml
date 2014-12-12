@@ -1,5 +1,6 @@
 # author: https://github.com/cschlack
 de:
+  language_name: Deutsch
 # layouts/application
   new_ticket: Ticket erstellen
   inbox: Offene Tickets

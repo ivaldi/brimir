@@ -1,5 +1,6 @@
 # author: https://github.com/lemial
 ru:
+  language_name: русский
 # layouts/application
   new_ticket: 'Новая заявка'
   inbox: 'Входящие'
