@@ -19,6 +19,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :authenticate_user!
   before_filter :set_locale
+  before_filter :load_labels, if: :user_signed_in?
 
   check_authorization unless: :devise_controller?
 
@@ -30,16 +31,6 @@ class ApplicationController < ActionController::Base
       render text: exception, status: :unauthorized
     end
   end
-
-  # Always automatically call strong parameters filter based on controller name
-  # this fixes cancan problems for create etc.
-  before_filter do
-    resource = controller_path.singularize.gsub('/', '_').to_sym
-    method = "#{resource}_params"
-    params[resource] &&= send(method) if respond_to?(method, true)
-  end
-
-  before_filter :load_labels, if: :user_signed_in?
 
   protected
     def load_labels
