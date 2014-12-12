@@ -11,7 +11,7 @@ es:
   sign_in: Entrar
 
 # devise/shared/links
-  forgot_password: Olvidaste tu contraseña?
+  forgot_password: ¿Olvidaste tu contraseña?
 
 # devise/passwords/new
   send_instructions: Enviame las instrucciones
@@ -106,11 +106,11 @@ es:
   customer: Cliente
 
 # users/_form
-  account_settings: Configuracion de Cuenta
+  account_settings: Configuración de Cuenta
   only_fill_in_passwords_when_modifying: Rellene solo los siguientes dos campos si desea modificar su contraseña.
   user_is_an_agent: El usuario es un agente
   receive_new_ticket_notifications: Recibir notificaciones para nuevos tickets
-  email_settings: Configuracion de Correo
+  email_settings: Configuración de Correo
   save: Guardar
   access_control: Control de Acceso
   have_access_to_label: El usuario tiene acceso a todos los tickets con cualquiera de estas etiquetas.
@@ -119,7 +119,7 @@ es:
   file_not_found: Archivo no encontrado
 
 # controllers/users
-  settings_saved: Configuracion guardada
+  settings_saved: Configuración guardada
   user_added: Usuario añadido
 
 # controllers/tickets
@@ -134,7 +134,7 @@ es:
       user:
         email: Correo
         password: Contraseña
-        password_confirmation: Confirmacion de contraseña
+        password_confirmation: Confirmación de contraseña
         signature: Firma de correo
         remember_me: Recordarme
         label_ids: Etiquetas
@@ -147,11 +147,11 @@ es:
         assignee_id: Delegado
       rule:
         filter_field: Campo
-        filter_operation: Operacion
+        filter_operation: Operación
         filter_operations:
           contains: contiene
         filter_value: Valor
-        action_operation: Action to perform
+        action_operation: Acción a ejecutar
         action_operations:
           assign_label: asignar etiqueta
           notify_user: enviar notificacion a
@@ -164,8 +164,8 @@ es:
         per_page: Tickets por pagina
 
   add: Añadir
-  ago: ago
-  are_you_sure: Estas seguro?
+  ago: hace
+  are_you_sure: ¿Estás seguro?
   count_tickets:
     one: '%{count} ticket'
     other: '%{count} tickets'
@@ -189,13 +189,13 @@ es:
     end: Fin
 
   new_rule: Nueva regla
-  no_notifications_sent: 'Ninguna notificacion ha sido enviada'
+  no_notifications_sent: 'Ninguna notificación ha sido enviada'
   notification_will_be_sent_to: Tus notificaciones serán enviadas a
-  personal_settings: Configuracion personal
+  personal_settings: Configuración personal
   rule_added: Regla añadida
   rule_modified: Regla modificada
   rule_deleted: Regla eliminada
   rules: Reglas
-  sign_out: Cerrar sesion
+  sign_out: Cerrar sesión
   users: Usuarios
   waiting: En espera
