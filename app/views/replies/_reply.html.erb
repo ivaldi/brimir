@@ -1,10 +1,6 @@
-<li class="reply radius mb">
-  <p class="no-m">
-    <strong><%= reply.user.email %></strong>
-    <small class="pull-right"><%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %> <%= t(:ago) %></small>
-  </p>
-  <div id="reply-<%=reply.id%>" class="<%= div_class %>">
-
+<details>
+  <summary class="pal bb">Reply by <strong><%= reply.user.email %></strong> <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %> <%= t(:ago) %></summary>
+  <div id="reply-<%=reply.id%>" class="<%= div_class %> plxxl prl pbl ptl bg-white">
     <% if reply.content_type == 'html' %>
       <% content = reply.content %>
     <% else %>
@@ -31,6 +27,5 @@
         <%= t(:no_notifications_sent) %>
       <% end %>
     </p>
-
   </div>
-</li>
+</details>

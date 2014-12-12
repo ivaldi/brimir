@@ -24,6 +24,11 @@
 .priority-medium{ border-color: #ff8000; }
 .priority-high{ border-color: #da1500; }
 
+.cc-priority-unknown{ color: #ccc; }
+.cc-priority-low{ color: #ffd700; }
+.cc-priority-medium{ color: #ff8000; }
+.cc-priority-high{ color: #da1500; }
+
 .no-b{ border: none; };
 
 .ba{ border: 1px solid #eaeef0; }
@@ -44,6 +49,11 @@
 .radius-bl{ border-bottom-left-radius: 3px; }
 
 .text-secondary{ color: #999 !important; }
+.text-default{ color: $body-font-color !important; }
+
+.bg-white{
+	background-color: $white;
+}
 
 .v-middle{
 	position: relative;

@@ -1,47 +1,49 @@
 <%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
 
   <%= r.hidden_field :ticket_id %>
-  <div class="ma">
-    <h3><%= t(:reply) %></h3>
+  <div class="row bb">
+    <div class="medium-12 columns ptm pbm">
+      <h3><%= t(:reply) %></h3>
 
-    <%
-      content = '<p></p>' + current_user.signature.to_s
-      reply_to = @reply.other_replies.order(:id).last
+      <%
+        content = '<p></p>' + current_user.signature.to_s
+        reply_to = @reply.other_replies.order(:id).last
 
-      if reply_to.nil?
-        reply_to = @reply.ticket
-      end
+        if reply_to.nil?
+          reply_to = @reply.ticket
+        end
 
-      content += '<br />'
-      content += t(:on_date_author_wrote, author: reply_to.user.email,
-          date: l(reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
-      content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
-    %>
+        content += '<br />'
+        content += t(:on_date_author_wrote, author: reply_to.user.email,
+            date: l(reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
+        content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
+      %>
 
 
-    <p>
-      <%= r.text_area :content, label: false, class: 'tinymce',
-          value: (@reply.content.nil? ? content : @reply.content) %>
-    </p>
+      <p>
+        <%= r.text_area :content, label: false, class: 'tinymce',
+            value: (@reply.content.nil? ? content : @reply.content) %>
+      </p>
 
-    <p class="no-m">
-      <%= label_tag 'attachment[]', t(:attach_files) %>
-    </p>
-    <p>
-      <%= file_field_tag 'attachment[]', multiple: true, label: false %>
-    </p>
+      <p class="no-m">
+        <%= label_tag 'attachment[]', t(:attach_files) %>
+      </p>
+      <p>
+        <%= file_field_tag 'attachment[]', multiple: true, label: false %>
+      </p>
 
-    <p class="no-m">
-      <%= t(:notification_will_be_sent_to) %>
-    </p>
-    <p>
-      <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
-    </p>
+      <p class="no-m">
+        <%= t(:notification_will_be_sent_to) %>
+      </p>
+      <p>
+        <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
+      </p>
 
-    <p>
-      <%= r.submit value: t(:send_reply), class: 'button regular radius' %>
-    </p>
+      <p>
+        <%= r.submit value: t(:send_reply), class: 'button regular radius' %>
+      </p>
 
+    </div>
   </div>
 <% end %>
 

@@ -20,12 +20,12 @@
             <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
           </div>
           <div class="small-2 columns">
-            <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', class: 'secondary radius no-bl no-m button postfix' %>
+            <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', class: 'text-primary radius no-bl no-m button postfix' %>
           </div>
           <div class="small-1 columns"></div>
           <div class="small-2 column">
-            <%= link_to tickets_path(params.merge(format: :csv)), class: 'secondary radius button no-m postfix' do %>
-              <i class="fa fa-cloud-download" style="top:1px"></i>
+            <%= link_to tickets_path(params.merge(format: :csv)), class: 'text-default pam no-m ib text-center right' do %>
+              <i class="fa fa-download" style="top:1px"></i>
             <% end %>
           </div>
         </div>
