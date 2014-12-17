@@ -108,7 +108,7 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should create ticket when signed in' do
     sign_in users(:alice)
 
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count', 1 do
         post :create, ticket: {
             from: 'test@test.nl',

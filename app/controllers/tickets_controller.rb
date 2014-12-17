@@ -120,17 +120,11 @@ class TicketsController < ApplicationController
 
     if @ticket.save
 
-      if current_user.nil?
-        user = @ticket.user
-      else
-        user = current_user
-      end
-
       Rule.apply_all(@ticket)
 
       # where user notifications added?
       if @ticket.notified_users.count == 0
-        @ticket.set_default_notifications!(user)
+        @ticket.set_default_notifications!
       end
 
       if @ticket.assignee.nil?
