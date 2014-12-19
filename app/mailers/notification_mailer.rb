@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class NotificationMailer < ActionMailer::Base
+  default from: EmailAddress.default_email
 
   add_template_helper HtmlTextHelper
 
