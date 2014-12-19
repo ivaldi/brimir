@@ -15,7 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class NotificationMailer < ActionMailer::Base
-  default from: EmailAddress.default_email
 
   add_template_helper HtmlTextHelper
 
@@ -36,7 +35,7 @@ class NotificationMailer < ActionMailer::Base
     @ticket = ticket
     @user = user
 
-    mail(to: user.email, subject: title)
+    mail(to: user.email, subject: title, from: EmailAddress.default_email)
   end
 
   def new_reply(reply, user)
@@ -58,7 +57,7 @@ class NotificationMailer < ActionMailer::Base
     @reply = reply
     @user = user
 
-    mail(to: user.email, subject: title)
+    mail(to: user.email, subject: title, from: EmailAddress.default_email)
   end
 
   protected
