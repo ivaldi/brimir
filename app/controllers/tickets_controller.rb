@@ -127,16 +127,19 @@ class TicketsController < ApplicationController
         @ticket.set_default_notifications!
       end
 
-      if @ticket.assignee.nil?
-        @ticket.notified_users.each do |user|
-          mail = NotificationMailer.new_ticket(@ticket, user)
-          mail.deliver
-          @ticket.message_id = mail.message_id
-        end
+      # @ticket might be a Reply when via json post
+      if @ticket.is_a?(Ticket)
+        if @ticket.assignee.nil?
+          @ticket.notified_users.each do |user|
+            mail = NotificationMailer.new_ticket(@ticket, user)
+            mail.deliver
+            @ticket.message_id = mail.message_id
+          end
 
-        @ticket.save
-      else
-        TicketMailer.notify_assigned(@ticket).deliver
+          @ticket.save
+        else
+          TicketMailer.notify_assigned(@ticket).deliver
+        end
       end
     end
 
