@@ -88,7 +88,7 @@ class UsersController < ApplicationController
       @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
       @locales = []
 
-      Dir.open('config/locales').each do |file|
+      Dir.open("#{Rails.root}/config/locales").each do |file|
         unless ['.', '..'].include?(file)
           code = file[0...-4] # strip of .yml
           @locales << [I18n.translate(:language_name, locale: code), code]
