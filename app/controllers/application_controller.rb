@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
       else
         locales = []
 
-        Dir.open('config/locales').each do |file|
+        Dir.open("#{Rails.root}/config/locales").each do |file|
           unless ['.', '..'].include?(file)
             # strip of .yml
             locales << file[0...-4]
