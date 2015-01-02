@@ -1,0 +1,37 @@
+<div class="panel">
+  <div class="row collapse">
+    <div class="medium-6 columns">
+      <h4 class="no-m pts pbs"><%= t(:email_addresses) %></h4>
+    </div>
+    <div class="medium-6 columns">
+      <%= link_to t(:new_email_address), new_email_address_path, class: 'no-m tiny button right radius' %>
+    </div>
+  </div>
+</div>
+
+<div class="row collapse">
+  <div class="large-12 columns">
+
+    <table class="full">
+      <thead>
+        <tr>
+          <th><%= t('activerecord.attributes.email_address.email') %></th>
+          <th><%= t('activerecord.attributes.email_address.default') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @email_addresses.each do |email_address| %>
+          <tr>
+            <td><%= email_address.email %></td>
+            <td><%= fa_icon 'check' if email_address.default? %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="pagination-centered">
+      <%= will_paginate @email_address %>
+    </div>
+  </div>
+</div>
+

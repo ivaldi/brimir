@@ -170,6 +170,12 @@ en:
   rule_modified: Rule modified
   rule_deleted: Rule deleted
 
+# email_addresses/index
+  new_email_address: New email address
+  email_addresses: Email addresses
+
+# controllers/email_addresses
+  email_address_added: Email address added
 
   activerecord:
     attributes:
@@ -206,3 +212,7 @@ en:
           change_priority: change priority to
           assign_user: assign to
         action_value: Parameter for action
+
+      email_address:
+        email: Email address
+        default: Default

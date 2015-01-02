@@ -13,15 +13,18 @@ Brimir::Application.routes.draw do
   resources :labels, only: [ :destroy, :update ]
 
   resources :replies, only: [:create, :new]
+
   get '/attachments/:id/:format' => 'attachments#show'
 
-  root :to => 'tickets#index'
+  resources :email_addresses, only: [:index, :create, :new, :destroy]
 
-	namespace :api do
-		namespace :v1 do
-			resources :tickets, only: [ :index, :show ]
+  root to: 'tickets#index'
+
+  namespace :api do
+    namespace :v1 do
+      resources :tickets, only: [ :index, :show ]
       resources :sessions, only: [ :create ]
-		end
-	end
+    end
+  end
 
 end

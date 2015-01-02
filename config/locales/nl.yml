@@ -160,6 +160,13 @@ nl:
   rule_modified: Regel gewijzigd
   rule_deleted: Regel verwijderd
 
+# email_addresses/index
+  new_email_address: Nieuw e-mailadres
+  email_addresses: E-mailadressen
+
+# controllers/email_addresses
+  email_address_added: E-mailadres toevoegd
+
   activerecord:
     attributes:
       user:
@@ -195,3 +202,7 @@ nl:
           change_priority: wijzig prioriteit in
           assign_user: toewijzen aan
         action_value: Parameter voor actie
+
+      email_address:
+        email: E-mailadres
+        default: Standaard

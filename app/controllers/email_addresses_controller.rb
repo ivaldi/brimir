@@ -1,4 +1,4 @@
-# Brimir is a helpdesk system that can be used to handle email support requests.
+# Brimir is a helpdesk system to handle email support requests.
 # Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
@@ -14,36 +14,32 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class EmailAddress < ActiveRecord::Base
+class EmailAddressesController < ApplicationController
 
-  validates_uniqueness_of :email
+  load_and_authorize_resource :email_address
 
-  before_save :ensure_one_default
+  def index
+    @email_address = EmailAddress.ordered.page(params[:page])
+  end
 
-  scope :ordered, -> {
-    order(:email)
-  }
+  def new
+  end
 
-  def self.default_email
-
-    if !EmailAddress.where(default: true).first.nil?
-      return EmailAddress.where(default: true).first.email
-
-    elsif ActionMailer::Base.default[:from].present?
-      ActionMailer::Base.default[:from]
-
-    elsif Rails.configuration.action_mailer.default_options.present?
-      Rails.configuration.action_mailer.default_options[:from]
-
+  def create
+    @email_address.assign_attributes(email_address_params)
+    if @email_address.save
+      redirect_to email_addresses_url, notice: I18n.t(:email_address_added)
+    else
+      render 'new'
     end
-
   end
 
   protected
-    def ensure_one_default
-      if self.default
-        EmailAddress.where.not(id: self.id).update_all(default: false) 
-      end
+    def email_address_params
+      params.require(:email_address).permit(
+          :email,
+          :default
+      )
     end
 
 end
