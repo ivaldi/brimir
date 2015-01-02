@@ -82,8 +82,12 @@
   <div class="medium-3 columns">
     <div class="ma">
       <dl class="sticky">
-        <dt><%= t(:status) %></dt>
+        <dt><%= t(:ticket_id) %></dt>
+        <dd>
+          <%= @ticket.id %>
+        </dd>
 
+        <dt><%= t(:status) %></dt>
         <dd>
           <% if can? :update, @ticket %>
             <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
