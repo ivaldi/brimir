@@ -1,7 +1,7 @@
 en:
   language_name: english
 # layouts/application
-  new_ticket: New Ticket
+  new_ticket: New ticket
   inbox: Inbox
   mine: Mine
   waiting: Waiting
@@ -171,8 +171,12 @@ en:
   rule_deleted: Rule deleted
 
 # email_addresses/index
-  new_email_address: New email address
-  email_addresses: Email addresses
+  new_email_address: New outgoing email address
+  email_addresses: Email addresses for outgoing email
+
+# email_addresses/new
+  verification_mail_will_be_sent: Make sure this email address is forwarded correctly to Brimir. An automated verification email will be sent when you click save. Only verified email addresses can be used for outgoing mail.
+  mark_spam_spf: Brimir mails might be marked as spam when you don't add this server to the SPF DNS record of the above mail address.
 
 # controllers/email_addresses
   email_address_added: Email address added
@@ -215,5 +219,5 @@ en:
 
       email_address:
         email: Email address
-        default: Default
+        default: Use as default outgoing mail address
         verification_token: Verified

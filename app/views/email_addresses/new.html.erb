@@ -6,16 +6,28 @@
   </div>
 </div>
 <%= form_for @email_address do |f| %>
-  <div class="row mt mb">
+  <div class="row mt">
     <div class="large-6 columns">
       <%= f.text_field :email %>
 
       <%= f.check_box :default %>
+
+      <p>
+        <%= t(:verification_mail_will_be_sent) %>
+      </p>
+
+      <p>
+        <strong>
+          <%= t(:mark_spam_spf) %>
+        </strong>
+      </p>
+
     </div>
   </div>
 
   <div class="row">
     <div class="medium-12 columns bt">
+
       <%= f.submit t(:save), class: 'success button radius mt' %>
     </div>
   </div>

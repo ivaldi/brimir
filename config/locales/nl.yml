@@ -161,8 +161,12 @@ nl:
   rule_deleted: Regel verwijderd
 
 # email_addresses/index
-  new_email_address: Nieuw e-mailadres
-  email_addresses: E-mailadressen
+  new_email_address: Nieuw uitgaand e-mailadres
+  email_addresses: E-mailadressen voor uitgaande e-mails
+
+# email_addresses/new
+  verification_mail_will_be_sent: Zorg dat dit e-mailadres correct doorstuurd naar Brimir. Een automatische verificatie e-mail wordt verstuurd nadat u op opslaan klikt. Alleen geverifieerde e-mailadressen kunnen gebruikt worden voor uitgaande e-mail.
+  mark_spam_spf: Brimir mails worden mogelijk als spam gemarkeerd als deze server niet wordt toegevoegd aan het SPF DNS record van het bovenstaande e-mailadres.
 
 # controllers/email_addresses
   email_address_added: E-mailadres toevoegd
@@ -205,5 +209,5 @@ nl:
 
       email_address:
         email: E-mailadres
-        default: Standaard
+        default: Gebruik als standaard uitgaand e-mailadres
         verification_token: Geverifieerd
