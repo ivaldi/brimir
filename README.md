@@ -70,6 +70,7 @@ Some users have made requests for the following features. If you would like to c
 - Set priority, assignee and labels on the create ticket form.
 - Autocomplete labels
 - Assign tickets to groups of users
+- When replying, select a response from pre-defined canned responses and modify to your needs
 
 License
 -------

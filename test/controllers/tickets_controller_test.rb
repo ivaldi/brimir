@@ -161,6 +161,10 @@ class TicketsControllerTest < ActionController::TestCase
 
     # should contain this anchor for linking from notification email
     assert_select '[id=reply-' + @ticket.replies.first.id.to_s + ']'
+
+    # should have this icon for label color update javascript (sidebar)
+    assert_select 'aside ul li i.fa-circle-o'
+
   end
 
   test 'should email assignee if ticket is assigned by somebody else' do

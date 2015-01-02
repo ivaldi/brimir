@@ -1,4 +1,6 @@
 # author: https://www.facebook.com/aunsinpagina & daniel.seijo_at_urbincasa.es
+# revisions: http://colina.net.ve e1th0r
+# 
 es:
   language_name: español
 # layouts/application
@@ -15,7 +17,7 @@ es:
   forgot_password: ¿Olvidaste tu contraseña?
 
 # devise/passwords/new
-  send_instructions: Enviame las instrucciones
+  send_instructions: Envíame las instrucciones
 
 # devise/passwords/edit
   change_password: Cambiar contraseña
@@ -24,9 +26,9 @@ es:
   
 # devise/mailer/reset_password_instructions
   hello: Hola
-  someone_requested_link: Alguien ha solicitado un link para cambiar tu contraseña, puedes proceder haciendo clic en el link siguiente.
-  ignore_if_not_requested: Si tu no lo solicitaste, ignora este correo.
-  password_wont_change_without_opening_link: Tu contraseña no cambiara hasta que accedas haciendo clic en el enlace de arriba y generes una nueva.
+  someone_requested_link: Alguien ha solicitado un enlace para cambiar tu contraseña, puedes proceder haciendo click en el siguiente enlace.
+  ignore_if_not_requested: Si tú no lo solicitaste, ignora este correo.
+  password_wont_change_without_opening_link: Tu contraseña no cambiará hasta que accedas haciendo clic en el enlace de arriba y generes una nueva.
 
 # tickets/index
   priority: Prioridad
@@ -54,7 +56,7 @@ es:
   deleted: Borrado
   labels: Etiquetas
   label_name: Nombre de etiqueta
-  notification_sent_to: 'Una notificacion fue enviada a las siguientes direcciones:'
+  notification_sent_to: 'Las notificaciones fueron enviadas a las siguientes direcciones:'
 
 # tickets/_change_priority_form
   change: Cambiar
@@ -74,7 +76,7 @@ es:
   reply: Responder
   attach_files: Adjuntar archivo(s)
   send_reply: Enviar respuesta
-  on_date_author_wrote: 'En %{date}, %{author} escribio:'
+  on_date_author_wrote: 'En %{date}, %{author} escribió:'
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Te asignaron un Ticket
@@ -108,7 +110,7 @@ es:
 
 # users/_form
   account_settings: Configuración de Cuenta
-  only_fill_in_passwords_when_modifying: Rellene solo los siguientes dos campos si desea modificar su contraseña.
+  only_fill_in_passwords_when_modifying: Rellena solo los siguientes dos campos si deseas modificar tu contraseña.
   user_is_an_agent: El usuario es un agente
   receive_new_ticket_notifications: Recibir notificaciones para nuevos tickets
   email_settings: Configuración de Correo
@@ -155,14 +157,15 @@ es:
         action_operation: Acción a ejecutar
         action_operations:
           assign_label: asignar etiqueta
-          notify_user: enviar notificacion a
+          notify_user: enviar notificación a
           change_status: cambiar estado a
           change_priority: cambiar prioridad a
           assign_user: asignar a
-        action_value: Parametros para accion
+        action_value: Parámetros para acción
       user:
         time_zone: Zona horaria
-        per_page: Tickets por pagina
+        per_page: Tickets por página
+
 
   add: Añadir
   ago: hace
@@ -179,11 +182,11 @@ es:
   edit_rule: Editar regla
 
   joyride:
-    tickets: Nadie puede crear tickets activando este boton.
-    personal_settings: Introduce tu firma, zona horaria y otras preferencias con este menu.
-    labels: Después de añadir etiquetas a tickets o usuarios, ellos podrán verlas aqui. Entonces podrán usarlas como filtros.
-    rules: Añade automaticamente etiquetas, asignaciones, cambia estados y mas.
-    users: Añade mas agentes o usuarios.
+    tickets: Nadie puede crear tickets activando este botón.
+    personal_settings: Introduce tu firma, zona horaria y otras preferencias con este menú.
+    labels: Después de añadir etiquetas a tickets o usuarios, ellos podrán verlas aquí y, entonces, podrán usarlas como filtros.
+    rules: Añade automáticamente etiquetas, asignaciones, cambia estados y más.
+    users: Añade más agentes o usuarios.
     final: Gracias por usar Brimir!
     next: Siguiente
     previous: Anterior

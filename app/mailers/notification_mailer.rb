@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -35,7 +35,7 @@ class NotificationMailer < ActionMailer::Base
     @ticket = ticket
     @user = user
 
-    mail(to: user.email, subject: title)
+    mail(to: user.email, subject: title, from: EmailAddress.default_email)
   end
 
   def new_reply(reply, user)
@@ -57,8 +57,35 @@ class NotificationMailer < ActionMailer::Base
     @reply = reply
     @user = user
 
-    mail(to: user.email, subject: title)
+    mail(to: user.email, subject: title, from: EmailAddress.default_email)
   end
+
+  def status_changed(ticket)
+    @ticket = ticket
+
+    headers['In-Reply-To'] = '<' + ticket.message_id.to_s + '>'
+    mail(to: ticket.assignee.email, subject:
+        'Ticket status modified in ' + ticket.status + ' for: ' \
+        + ticket.subject)
+  end
+
+  def priority_changed(ticket)
+    @ticket = ticket
+
+    headers['In-Reply-To'] = '<' + ticket.message_id.to_s + '>'
+    mail(to: ticket.assignee.email, subject:
+        'Ticket priority modified in ' + ticket.priority + ' for: ' \
+        + ticket.subject)
+  end
+
+  def assigned(ticket)
+    @ticket = ticket
+
+    headers['In-Reply-To'] = '<' + ticket.message_id.to_s + '>'
+    mail(to: ticket.assignee.email, subject:
+        'Ticket assigned to you: ' + ticket.subject)
+  end
+
 
   protected
     def add_reference_message_ids(reply)

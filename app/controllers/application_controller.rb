@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -43,7 +43,7 @@ class ApplicationController < ActionController::Base
       else
         locales = []
 
-        Dir.open('config/locales').each do |file|
+        Dir.open("#{Rails.root}/config/locales").each do |file|
           unless ['.', '..'].include?(file)
             # strip of .yml
             locales << file[0...-4]

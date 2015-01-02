@@ -73,7 +73,7 @@ content = [
     status: Ticket.statuses.keys.sample,
   )
 
-  ticket.set_default_notifications!(ticket.user)
+  ticket.set_default_notifications!
 
   if Random.rand() > 0.5
     ticket.labels << Label.where(name: labels.sample).first_or_create!

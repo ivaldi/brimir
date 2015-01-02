@@ -29,6 +29,7 @@ data
 config/deploy
 config/deploy.rb
 Capfile
+.capistrano
 
 # rcov files
 coverage
