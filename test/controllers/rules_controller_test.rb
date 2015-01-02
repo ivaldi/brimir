@@ -21,6 +21,7 @@ class RulesControllerTest < ActionController::TestCase
   setup do
     @alice = users(:alice)
     @bob = users(:bob)
+
     @rule = rules(:assign_when_ivaldi)
   end
 
@@ -41,15 +42,52 @@ class RulesControllerTest < ActionController::TestCase
   test 'should get edit' do
     sign_in @alice
 
-    get :edit, id: @rule.id
+    get :edit, id: @rule
     assert_response :success
   end
 
-  test 'should update rule' do
+  test 'should update' do
     sign_in @alice
 
-    patch :update, id: @rule.id, rule: { filter_field: 'to' }
-    assert_equal 'to', assigns(:rule).filter_field
+    put :update, id: @rule, rule: {
+        filter_field: 'subject',
+    }
+    assert_equal 'subject', assigns(:rule).filter_field
     assert_redirected_to rules_url
   end
+
+  test 'should get new' do
+    sign_in @alice
+
+    get :new
+    assert_response :success
+  end
+
+  test 'should create' do
+    sign_in @alice
+
+    assert_difference 'Rule.count' do
+      post :create, rule: {
+        filter_field: @rule.filter_field,
+        filter_operation: @rule.filter_operation,
+        filter_value: @rule.filter_value,
+        action_operation: @rule.action_operation,
+        action_value: @rule.action_value,
+      }
+
+      assert_redirected_to rules_url
+    end
+  end
+
+  test 'should remove rule' do
+    sign_in @alice
+
+    assert_difference 'Rule.count', -1 do
+      delete :destroy, id: @rule
+
+      assert_redirected_to rules_url
+    end
+
+  end
+
 end
