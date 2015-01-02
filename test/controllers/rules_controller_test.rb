@@ -16,11 +16,12 @@
 
 require 'test_helper'
 
-class UsersControllerTest < ActionController::TestCase
+class RulesControllerTest < ActionController::TestCase
 
   setup do
     @alice = users(:alice)
     @bob = users(:bob)
+    @rule = rules(:assign_when_ivaldi)
   end
 
   test 'should get index' do
@@ -40,78 +41,15 @@ class UsersControllerTest < ActionController::TestCase
   test 'should get edit' do
     sign_in @alice
 
-    get :edit, id: @alice.id
+    get :edit, id: @rule.id
     assert_response :success
   end
 
-  test 'should modify signature' do
+  test 'should update rule' do
     sign_in @alice
 
-    put :update, id: @alice.id, user: { signature: 'Alice' }
-    assert_equal 'Alice', assigns(:user).signature
-    assert_redirected_to users_url
-  end
-
-  test 'customer may not become agent' do
-    sign_in @bob
-
-    assert_no_difference 'User.agents.count' do
-      put :update, id: @bob.id, user: { agent: true, signature: 'Bob' }
-    end
-  end
-
-  test 'customer may not create agent' do
-    sign_in @bob
-
-    assert_no_difference 'User.agents.count' do
-      post :create, user: {
-          email: 'harry@getbrimir.com',
-          password: 'testtest',
-          password_confirmation: 'testtest',
-          agent: true,
-          signature: 'Harry'
-      }
-    end
-
-    assert_response :unauthorized
-  end
-
-  test 'should update user' do
-    sign_in @alice    
-
-    assert_difference 'Labeling.count' do
-      patch :update, id: @bob.id, user: {
-        email: 'test@test.test',
-        label_ids: [labels(:bug).id]
-      }
-    end
-    
-    @bob.reload
-
-    assert_equal 'test@test.test', @bob.email
-    assert_equal 1, @bob.labels.count
-    assert_equal labels(:bug), @bob.labels.first
-
-    assert_redirected_to users_url
-  end
-
-  test 'should not update user' do
-    sign_in @bob
-
-    assert_no_difference 'Labeling.count' do
-      patch :update, id: @bob.id, user: {
-        email: 'test@test.test',
-        label_ids: [labels(:bug).id],
-        password: 'testtest',
-        password_confirmation: 'testtest',
-      }
-    end
-    
-    @bob.reload
-
-    refute_equal 'test@test.test', @bob.email
-    assert_equal 0, @bob.labels.count
-
-    assert_redirected_to tickets_url
+    patch :update, id: @rule.id, rule: { filter_field: 'to' }
+    assert_equal 'to', assigns(:rule).filter_field
+    assert_redirected_to rules_url
   end
 end
