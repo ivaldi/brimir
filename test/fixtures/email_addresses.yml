@@ -4,4 +4,7 @@ support:
 
 sales:
   email: outgoing@sales.bla
-  default: false
+
+unverified:
+  email: unverified@support.bla
+  verification_token: qeECnGA3DO7djolZ

@@ -57,6 +57,7 @@ class EmailAddressesControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to email_addresses_url
-    assert_match assigns(:email_address).verification_token, ActionMailer::Base.deliveries.last.body.to_s
+    assert_equal assigns(:email_address).verification_token,
+        ActionMailer::Base.deliveries.last['X-Brimir-Verification'].to_s
   end
 end

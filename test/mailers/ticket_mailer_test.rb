@@ -99,4 +99,11 @@ class TicketMailerTest < ActionMailer::TestCase
     end
   end
 
+  test 'should verify email address' do
+    verification = read_fixture('verification').join
+    assert_difference 'EmailAddress.where(verification_token: nil).count' do
+      TicketMailer.receive(verification)
+    end
+  end
+
 end

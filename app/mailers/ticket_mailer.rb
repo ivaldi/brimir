@@ -25,6 +25,11 @@ class TicketMailer < ActionMailer::Base
 
     email = Mail.new(message)
 
+    # is this an address verification mail?
+    if VerificationMailer.receive(email)
+      return
+    end
+
     content = ''
 
     if email.multipart?
