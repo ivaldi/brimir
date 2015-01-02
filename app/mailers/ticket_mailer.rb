@@ -16,30 +16,6 @@
 
 class TicketMailer < ActionMailer::Base
 
-  def notify_status_changed(ticket)
-    @ticket = ticket
-
-    mail(to: ticket.assignee.email, subject:
-        'Ticket status modified in ' + ticket.status + ' for: ' \
-        + ticket.subject)
-  end
-
-  def notify_priority_changed(ticket)
-    @ticket = ticket
-
-    mail(to: ticket.assignee.email, subject:
-        'Ticket priority modified in ' + ticket.priority + ' for: ' \
-        + ticket.subject)
-  end
-
-  def notify_assigned(ticket)
-    @ticket = ticket
-
-    mail(to: ticket.assignee.email, subject:
-        'Ticket assigned to you: ' + ticket.subject)
-  end
-
-
   def normalize_body(part, charset)
     part.body.decoded.force_encoding(charset).encode('UTF-8')
   end

@@ -60,6 +60,33 @@ class NotificationMailer < ActionMailer::Base
     mail(to: user.email, subject: title, from: EmailAddress.default_email)
   end
 
+  def status_changed(ticket)
+    @ticket = ticket
+
+    headers['In-Reply-To'] = '<' + ticket.message_id.to_s + '>'
+    mail(to: ticket.assignee.email, subject:
+        'Ticket status modified in ' + ticket.status + ' for: ' \
+        + ticket.subject)
+  end
+
+  def priority_changed(ticket)
+    @ticket = ticket
+
+    headers['In-Reply-To'] = '<' + ticket.message_id.to_s + '>'
+    mail(to: ticket.assignee.email, subject:
+        'Ticket priority modified in ' + ticket.priority + ' for: ' \
+        + ticket.subject)
+  end
+
+  def assigned(ticket)
+    @ticket = ticket
+
+    headers['In-Reply-To'] = '<' + ticket.message_id.to_s + '>'
+    mail(to: ticket.assignee.email, subject:
+        'Ticket assigned to you: ' + ticket.subject)
+  end
+
+
   protected
     def add_reference_message_ids(reply)
       references = reply.other_replies.with_message_id.pluck(:message_id)
