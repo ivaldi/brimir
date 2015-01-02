@@ -18,7 +18,7 @@ class VerificationMailer < ActionMailer::Base
 
   def verify(email_address)
     headers['X-Brimir-Verification'] = email_address.verification_token
-    mail(to: email_address)
+    mail(to: email_address.email)
   end
 
   def receive(email)
