@@ -48,12 +48,15 @@ class EmailAddressesControllerTest < ActionController::TestCase
   test 'should create' do
     sign_in @alice
 
-    assert_no_difference 'EmailAddress.where(default: true).count' do 
-      assert_difference 'EmailAddress.count' do 
-        post :create, email_address: { email: 'support@support.bla', default: '1' }
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      assert_no_difference 'EmailAddress.where(default: true).count' do
+        assert_difference 'EmailAddress.count' do
+          post :create, email_address: { email: 'support@support.bla', default: '1' }
+        end
       end
     end
 
     assert_redirected_to email_addresses_url
+    assert_match assigns(:email_address).verification_token, ActionMailer::Base.deliveries.last.body.to_s
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219133150) do
+ActiveRecord::Schema.define(version: 20150102140400) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(version: 20141219133150) do
 
   create_table "email_addresses", force: true do |t|
     t.string   "email"
-    t.boolean  "default",    default: false
+    t.boolean  "default",            default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "verification_token"
   end
 
   create_table "labelings", force: true do |t|

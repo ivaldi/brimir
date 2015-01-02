@@ -216,3 +216,4 @@ en:
       email_address:
         email: Email address
         default: Default
+        verification_token: Verified

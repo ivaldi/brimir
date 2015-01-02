@@ -17,6 +17,7 @@
         <tr>
           <th><%= t('activerecord.attributes.email_address.email') %></th>
           <th><%= t('activerecord.attributes.email_address.default') %></th>
+          <th><%= t('activerecord.attributes.email_address.verification_token') %></th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +25,7 @@
           <tr>
             <td><%= email_address.email %></td>
             <td><%= fa_icon 'check' if email_address.default? %></td>
+            <td><%= fa_icon 'check' if email_address.verification_token.nil? %></td>
           </tr>
         <% end %>
       </tbody>
