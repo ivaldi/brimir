@@ -47,6 +47,9 @@ gem 'mysql2', group: :mysql
 # authentication
 gem 'devise'
 
+# omniauth
+gem 'omniauth-google-oauth2'
+
 # authorization
 gem 'cancancan'
 
