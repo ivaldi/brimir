@@ -17,11 +17,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!,unless: :auth_controller?
   before_filter :set_locale
   before_filter :load_labels, if: :user_signed_in?
 
-  check_authorization unless: :devise_controller?
+  # important note! not also Devise, but also omniauth needs to be excluded
+  # TODO: review
+  check_authorization unless: :auth_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
     if Rails.env == :production
@@ -33,30 +35,35 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-    def load_labels
-      @labels = Label.viewable_by(current_user).ordered
-    end
+  def load_labels
+    @labels = Label.viewable_by(current_user).ordered
+  end
 
-    def set_locale
-      if user_signed_in? && !current_user.locale.blank?
-        I18n.locale = current_user.locale
-      else
-        locales = []
+  def set_locale
+    if user_signed_in? && !current_user.locale.blank?
+      I18n.locale = current_user.locale
+    else
+      locales = []
 
-        Dir.open("#{Rails.root}/config/locales").each do |file|
-          unless ['.', '..'].include?(file)
-            # strip of .yml
-            locales << file[0...-4]
-          end
-        end
-
-        I18n.locale = http_accept_language.compatible_language_from(locales)
-
-        if user_signed_in?
-          current_user.locale = I18n.locale
-          current_user.save
+      Dir.open("#{Rails.root}/config/locales").each do |file|
+        unless ['.', '..'].include?(file)
+          # strip of .yml
+          locales << file[0...-4]
         end
       end
+
+      I18n.locale = http_accept_language.compatible_language_from(locales)
+
+      if user_signed_in?
+        current_user.locale = I18n.locale
+        current_user.save
+      end
     end
+  end
+
+  # TODO: review
+  def auth_controller?
+    is_a?(Devise::SessionsController) || is_a?(OmniauthController)
+  end
 
 end

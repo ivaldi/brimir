@@ -40,6 +40,15 @@
         <%= f.label :label_ids %>
         <%= f.collection_select :label_ids, @labels, :id, :name, {}, { multiple: true, class: 'select2' } %>
       <% end %>
+
+      <h4>Connect with other plattforms:</h4>
+      <div class="panel paxl">
+
+        <%= link_to '/auth/google_oauth2', class: 'button radius radius no-mb', :target => '_blank' do %>
+            <i class="fa fa-google-plus-square"></i>
+            <%= "Sign in per Google" %>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="row">
