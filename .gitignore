@@ -33,3 +33,6 @@ Capfile
 
 # rcov files
 coverage
+
+# ignore rubymine
+.idea

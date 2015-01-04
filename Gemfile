@@ -86,3 +86,5 @@ gem 'timecop'
 # fancybox for showing image in lightbox
 gem 'fancybox2-rails', '~> 0.2.8'
 
+# may be needed explicity if development system is windows
+gem 'tzinfo-data', platforms: [:mingw, :mswin]
