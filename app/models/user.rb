@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
 
+  # identities for omniauth
+  has_many :identities
+
   scope :agents, -> {
     where(agent: true)
   }
@@ -37,6 +40,10 @@ class User < ActiveRecord::Base
   def self.agents_to_notify
     User.agents
         .where(notify: true)
+  end
+
+  def self.create_with_omniauth(info)
+    User.create(name: info['name'])
   end
 
 end
