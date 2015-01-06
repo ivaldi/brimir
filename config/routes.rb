@@ -2,6 +2,10 @@ Brimir::Application.routes.draw do
 
   devise_for :users
 
+  # special omniauth routes
+  get 'auth/:provider/callback', to: 'omniauth#callback'
+  get 'auth/failure', to: 'omniauth#failure'
+
   resources :users
 
   resources :tickets, only: [:index, :show, :update, :new, :create]

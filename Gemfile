@@ -47,6 +47,9 @@ gem 'mysql2', group: :mysql
 # authentication
 gem 'devise'
 
+# omniauth
+gem 'omniauth-google-oauth2'
+
 # authorization
 gem 'cancancan'
 
@@ -86,3 +89,5 @@ gem 'timecop'
 # fancybox for showing image in lightbox
 gem 'fancybox2-rails', '~> 0.2.8'
 
+# may be needed explicity if development system is windows
+gem 'tzinfo-data', platforms: [:mingw, :mswin]

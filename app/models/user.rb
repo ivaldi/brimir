@@ -22,6 +22,9 @@ class User < ActiveRecord::Base
   has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
 
+  # identities for omniauth
+  has_many :identities
+
   scope :agents, -> {
     where(agent: true)
   }
@@ -38,5 +41,4 @@ class User < ActiveRecord::Base
     User.agents
         .where(notify: true)
   end
-
 end
