@@ -49,6 +49,12 @@ class TicketMailer < ActionMailer::Base
       content_type = 'text'
     end
 
+    if email.charset
+      subject = email.subject.force_encoding(email.charset).encode('UTF-8')
+    else
+      subject = email.subject.encode('UTF-8')
+    end
+
 
     if email.in_reply_to
       # is this a reply to a ticket or to another reply?
@@ -87,7 +93,7 @@ class TicketMailer < ActionMailer::Base
       # add new ticket
       ticket = Ticket.create!({
         from: email.from.first,
-        subject: email.subject,
+        subject: subject,
         content: content,
         message_id: email.message_id,
         content_type: content_type,
