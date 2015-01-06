@@ -2,7 +2,7 @@ class OmniauthController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, only: :callback
   skip_before_filter :authenticate_user, only: :callback
-  skip_authorization_check :only => :callback
+  skip_authorization_check only: :callback
 
   def callback
     auth = request.env['omniauth.auth']
@@ -27,7 +27,7 @@ class OmniauthController < ApplicationController
         # The identity is not associated with the current_user so lets
         # associate the identity
         @identity.user = current_user
-        @identity.save()
+        @identity.save
         # TODO: a redirect to :back would be nice
         redirect_to root_url, notice: "Successfully linked that account!"
       end

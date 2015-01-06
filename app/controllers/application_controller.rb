@@ -17,7 +17,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :authenticate_user!,unless: :auth_controller?
+  # require authenticate before everything (even devise?) except omniatuh
+  before_filter :authenticate_user!, unless: :omniauth_controller?
   before_filter :set_locale
   before_filter :load_labels, if: :user_signed_in?
 
@@ -66,4 +67,7 @@ class ApplicationController < ActionController::Base
     is_a?(Devise::SessionsController) || is_a?(OmniauthController)
   end
 
+  def omniauth_controller?
+    is_a?(OmniauthController)
+  end
 end
