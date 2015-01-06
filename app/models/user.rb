@@ -41,5 +41,4 @@ class User < ActiveRecord::Base
     User.agents
         .where(notify: true)
   end
-
 end
