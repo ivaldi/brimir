@@ -34,14 +34,12 @@
           <%= render 'devise/shared/links' %>
 
           <br/>
-          <h4>Sign with other providers:</h4>
-          <div class="panel paxl">
+          <h4><%= t(:omniauth_sign_in_title) %></h4>
 
           <%= link_to '/auth/google_oauth2', class: 'button radius radius no-mb' do %>
               <i class="fa fa-google-plus-square"></i>
-              <%= "Sign in per Google" %>
+              <%= t(:omniauth_sign_in_google) %>
           <% end %>
-          </div>
 
 
 

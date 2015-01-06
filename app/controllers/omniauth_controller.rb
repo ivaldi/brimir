@@ -16,39 +16,33 @@ class OmniauthController < ApplicationController
 
     if signed_in?
       if @identity.user == current_user
-        # User is signed in so they are trying to link an identity with their
-        # account. But we found the identity and the user associated with it
-        # is the current user. So the identity is already associated with
-        # this user. So let's display an error message.
-        # TODO: a redirect to :back would be nice
-
-        redirect_to root_url, notice: "Already linked that account!"
+        # TODO: a redirect to :back could be nice
+        redirect_to root_url, notice: I18n.translate(:already_linked_accounts)
       else
         # The identity is not associated with the current_user so lets
         # associate the identity
         @identity.user = current_user
         @identity.save
-        # TODO: a redirect to :back would be nice
-        redirect_to root_url, notice: "Successfully linked that account!"
+        # TODO: a redirect to :back could be nice
+        redirect_to root_url, notice: I18n.translate(:successfully_linked_account)
       end
     else
       if @identity.user.present?
         # The identity we found had a user associated with it so let's
         # just log them in here
         sign_in @identity.user
-        redirect_to root_url, notice: "Signed in!"
+        redirect_to root_url, notice: I18n.translate(:signed_in_with_omniauth)
       else
-        # No user associated with the identity so we need to create a new one
+        # No user associated with the identity so we reject this attemp
         # TODO: concept and texts
-        redirect_to new_user_session_path, alert: "There is no user attached to this provider yet! Please login first and connect in the control panel"
+        redirect_to new_user_session_path, alert: I18n.translate(:not_linked_account_cant_login)
 
       end
     end
   end
 
   def failure
-    # TODO
-    redirect('/')
+    redirect_to root_url,  alert: I18n.translate(:third_party_failure)
   end
 
   protected

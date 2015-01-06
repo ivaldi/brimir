@@ -1,60 +1,63 @@
-<%= form_for @user, html: { class: 'edit_user' } do |f| %>
-  <div class="row mt mb">
+<%= form_for @user, html: {class: 'edit_user'} do |f| %>
+    <div class="row mt mb">
 
-    <div class="medium-6 columns">
+      <div class="medium-6 columns">
 
-      <h5><%= t(:account_settings) %></h5>
-      <p><%= t(:only_fill_in_passwords_when_modifying) %></p>
+        <h5><%= t(:account_settings) %></h5>
 
-      <% if can? :manage, User %>
-        <%= f.text_field :email %>
-      <% end %>
+        <p><%= t(:only_fill_in_passwords_when_modifying) %></p>
 
-      <%= f.password_field :password %>
-
-      <%= f.password_field :password_confirmation %>
-
-      <% if can? :manage, User %>
-        <%= f.check_box :agent, label: t(:user_is_an_agent) %>
-      <% end %>
-
-      <%= f.select :time_zone, @time_zones %>
-
-      <% @user.locale = 'en' if @user.locale.blank? # fallback on english %>
-      <%= f.select :locale, @locales %>
-
-      <%= f.select :per_page, [10, 20, 30, 50, 75, 100] %>
-    </div>
-
-    <div class="medium-6 columns">
-      <% if @user.agent? %>
-        <h5><%= t(:email_settings) %></h5>
-
-        <%= f.check_box :notify, label: t(:receive_new_ticket_notifications) %>
-
-        <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce' %>
-      <% elsif can? :create, Labeling %>
-        <h5><%= t(:access_control) %></h5>
-        <p><%= t(:have_access_to_label) %></p>
-
-        <%= f.label :label_ids %>
-        <%= f.collection_select :label_ids, @labels, :id, :name, {}, { multiple: true, class: 'select2' } %>
-      <% end %>
-
-      <h4>Connect with other plattforms:</h4>
-      <div class="panel paxl">
-
-        <%= link_to '/auth/google_oauth2', class: 'button radius radius no-mb', :target => '_blank' do %>
-            <i class="fa fa-google-plus-square"></i>
-            <%= "Sign in per Google" %>
+        <% if can? :manage, User %>
+            <%= f.text_field :email %>
         <% end %>
+
+        <%= f.password_field :password %>
+
+        <%= f.password_field :password_confirmation %>
+
+        <% if can? :manage, User %>
+            <%= f.check_box :agent, label: t(:user_is_an_agent) %>
+        <% end %>
+
+        <%= f.select :time_zone, @time_zones %>
+
+        <% @user.locale = 'en' if @user.locale.blank? # fallback on english  %>
+        <%= f.select :locale, @locales %>
+
+        <%= f.select :per_page, [10, 20, 30, 50, 75, 100] %>
+      </div>
+
+      <div class="medium-6 columns">
+        <% if @user.agent? %>
+            <h5><%= t(:email_settings) %></h5>
+
+            <%= f.check_box :notify, label: t(:receive_new_ticket_notifications) %>
+
+            <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce' %>
+        <% elsif can? :create, Labeling %>
+            <h5><%= t(:access_control) %></h5>
+
+            <p><%= t(:have_access_to_label) %></p>
+
+            <%= f.label :label_ids %>
+            <%= f.collection_select :label_ids, @labels, :id, :name, {}, {multiple: true, class: 'select2'} %>
+        <% end %>
+
+        <h5><%= t(:omniauth_connect_title) %></h5>
+
+        <p><%= t(:omniauth_connect_text) %></p>
+
+          <%= link_to '/auth/google_oauth2', class: 'button radius radius no-mb', :target => '_blank' do %>
+              <i class="fa fa-google-plus-square"></i>
+              <%= t(:omniauth_connect_google_text) %>
+          <% end %>
+
       </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="medium-12 columns bt">
-      <%= f.submit t(:save), class: 'success button radius mt' %>
+    <div class="row">
+      <div class="medium-12 columns bt">
+        <%= f.submit t(:save), class: 'success button radius mt' %>
+      </div>
     </div>
-  </div>
 
 <% end %>
