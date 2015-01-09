@@ -28,13 +28,13 @@ class Ability
       can :manage, :all
 
     else
-      customer
+      customer user
     end
   end
 
   protected
 
-  def customer
+  def customer(user)
     # customers can view their own tickets, its replies and attachments
     can [:new, :create, :read], Reply, ticket: { user_id: user.id }
 
