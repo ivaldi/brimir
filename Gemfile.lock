@@ -221,8 +221,6 @@ GEM
       railties (>= 3.1.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    tzinfo-data (1.2014.10)
-      tzinfo (>= 1.0.0)
     uglifier (2.6.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -266,6 +264,5 @@ DEPENDENCIES
   sqlite3
   timecop
   tinymce-rails
-  tzinfo-data
   uglifier (>= 1.0.3)
   will_paginate
