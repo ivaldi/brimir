@@ -29,7 +29,6 @@ GEM
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.9)
-    bcrypt (3.1.9-x86-mingw32)
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -93,7 +92,6 @@ GEM
       railties (>= 3.1.0, < 5.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    ffi (1.9.6-x86-mingw32)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     foundation-rails (5.4.5.0)
@@ -155,7 +153,6 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     pg (0.17.1)
-    pg (0.17.1-x86-mingw32)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -184,10 +181,6 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rest-client (1.7.2-x86-mingw32)
-      ffi (~> 1.9)
-      mime-types (>= 1.16, < 3.0)
-      netrc (~> 0.7)
     sass (3.2.19)
     sass-rails (4.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -213,7 +206,6 @@ GEM
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.10)
-    sqlite3 (1.3.10-x86-mingw32)
     sshkit (1.6.1)
       colorize (>= 0.7.0)
       net-scp (>= 1.1.2)
@@ -240,7 +232,6 @@ GEM
 
 PLATFORMS
   ruby
-  x86-mingw32
 
 DEPENDENCIES
   byebug
