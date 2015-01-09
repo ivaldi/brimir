@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# replies to tickets, made by a user, possibly with attachments
 class Reply < ActiveRecord::Base
   include CreateFromUser
 
@@ -24,37 +25,29 @@ class Reply < ActiveRecord::Base
 
   accepts_nested_attributes_for :attachments
 
-  validates_presence_of :ticket_id, :content
+  validates :ticket_id, :content, presence: true
 
   belongs_to :ticket
   belongs_to :user
 
   scope :chronologically, -> { order(:id) }
-  scope :with_message_id, -> {
+  scope :with_message_id, lambda {
     where.not(message_id: nil)
   }
 
   def set_default_notifications!
-    self.notified_user_ids = users_to_notify.map do |user|
-      user.id
-    end
+    self.notified_user_ids = users_to_notify.map(&:id)
   end
 
   def other_replies
-    self.ticket.replies.where.not(id: self.id)
+    ticket.replies.where.not(id: id)
   end
 
   def users_to_notify
-    to = [ticket.user]
+    to = [ticket.user] + other_replies.map(&:user)
 
-    other_replies.each do |r|
-      to << r.user
-    end
-
-    assignee = ticket.assignee
-
-    if assignee.present?
-      to << assignee
+    if ticket.assignee.present?
+      to << ticket.assignee
     else
       to += User.agents_to_notify
     end
@@ -65,5 +58,4 @@ class Reply < ActiveRecord::Base
 
     to.uniq - [user]
   end
-
 end
