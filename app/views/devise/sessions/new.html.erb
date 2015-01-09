@@ -4,44 +4,42 @@
       <h3 class="mb"><%= t(:sign_in) %> in Brimir</h3>
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
-          <%= f.label :email %>
-          <div class="row collapse">
-            <div class="small-1 columns">
-              <span class="prefix"><i class="fa fa-user"></i></span>
-            </div>
-            <div class="small-11 columns">
-              <%= f.email_field :email, label: false %>
-            </div>
+        <%= f.label :email %>
+        <div class="row collapse">
+          <div class="small-1 columns">
+            <span class="prefix"><i class="fa fa-user"></i></span>
           </div>
-
-          <%= f.label :password %>
-          <div class="row collapse">
-            <div class="small-1 columns">
-              <span class="prefix"><i class="fa fa-lock"></i></span>
-            </div>
-            <div class="small-11 columns">
-              <%= f.password_field :password, label: false %>
-            </div>
+          <div class="small-11 columns">
+            <%= f.email_field :email, label: false %>
           </div>
+        </div>
 
-          <% if devise_mapping.rememberable? -%>
-              <%= f.check_box :remember_me %>
-          <% end -%>
+        <%= f.label :password %>
+        <div class="row collapse">
+          <div class="small-1 columns">
+            <span class="prefix"><i class="fa fa-lock"></i></span>
+          </div>
+          <div class="small-11 columns">
+            <%= f.password_field :password, label: false %>
+          </div>
+        </div>
 
-          <%= f.submit(t(:sign_in), class: 'button radius no-mb mtm') %>
+        <% if devise_mapping.rememberable? -%>
+            <%= f.check_box :remember_me %>
+        <% end -%>
+
+        <%= f.submit(t(:sign_in), class: 'button radius no-mb mtm') %>
 
 
-          <%= render 'devise/shared/links' %>
+        <%= render 'devise/shared/links' %>
 
-          <br/>
-          <h4><%= t(:omniauth_sign_in_title) %></h4>
+        <br/>
+        <h4><%= t(:omniauth_sign_in_title) %></h4>
 
-          <%= link_to '/auth/google_oauth2', class: 'button radius radius no-mb' do %>
-              <i class="fa fa-google-plus-square"></i>
-              <%= t(:omniauth_sign_in_google) %>
-          <% end %>
-
-
+        <%= link_to '/auth/google_oauth2', class: 'button radius radius no-mb' do %>
+            <i class="fa fa-google-plus-square"></i>
+            <%= t(:omniauth_sign_in_google) %>
+        <% end %>
 
       <% end %>
     </div>
