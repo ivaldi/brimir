@@ -114,7 +114,7 @@ de:
   edit_user: Benutzer bearbeiten
   omniauth_connect_title: Authentifizierung per Google
   omniauth_connect_text: Die Möglichkeit der Authentifizierung per Google muss hier einmalig vorgenommen werden. Danach ist die Anmeldung per Google zusätzlich zum Standardlogin möglich.
-  omniauth_connect_google_text: Mit Google verbinden
+  omniauth_connect_google_text: Mit Google-Konto verbinden
 
 # users/index
   email: E-Mail-Adresse
@@ -147,11 +147,11 @@ de:
   reply_added: Antwort hinzugefügt
 
 # controllers/omniauth
-  already_linked_accounts: "Ihr Benutzer ist bereits mit diesem Google-Konto verbunden!"
-  successfully_linked_account: "Das Google-Konto wurde Ihrem Account hinzugefügt! Sie können sich nun per Google anmelden."
-  signed_in_with_omniauth: "Sie wurden erfolgreich angemeldet."
-  not_linked_account_cant_login:  "Dieser Benutzer ist noch nicht mit einem Google-Konto verbunden. In den Benutzereinstellungen können Konten hinzugefügt werden."
-  third_party_failure: "Bei der Verbindung mit Google ist ein Fehler aufgetreten."
+  already_linked_accounts: Ihr Benutzer ist bereits mit diesem Google-Konto verbunden
+  successfully_linked_account: Das Google-Konto wurde Ihrem Account hinzugefügt. Sie können sich nun per Google anmelden.
+  signed_in_with_omniauth: Sie wurden erfolgreich angemeldet.
+  not_linked_account_cant_login:  Dieser Benutzer ist noch nicht mit einem Google-Konto verbunden. In den Benutzereinstellungen können Konten hinzugefügt werden.
+  third_party_failure: Bei der Verbindung mit Google ist ein Fehler aufgetreten. Haben sie "Contacts API" und "Google+ API" aktiviert?
 
 # user/sign_in (omniauth)
   omniauth_sign_in_title: Alternative Anmeldung
