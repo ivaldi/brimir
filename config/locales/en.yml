@@ -126,8 +126,8 @@ en:
 
 # users/edit
   edit_user: Edit User
-  omniauth_connect_title: Authenticate per Google
-  omniauth_connect_text: Activate authentication per Google by signing into Google and connecting it to this account. Afterwards you can use "Sign in with Google" as an alternative to the default login.
+  omniauth_connect_title: Alternative sign ins
+  omniauth_connect_text: Activate authentication using Google Accounts. Afterwards you can use "Sign in with Google" as an alternative to the default email address and password login.
   omniauth_connect_google_text: Connect with Google
 
 # users/index
@@ -161,11 +161,11 @@ en:
   reply_added: Reply added
 
 # controllers/omniauth
-  already_linked_accounts: "Already linked that account!"
-  successfully_linked_account: "Successfully linked that account!"
-  signed_in_with_omniauth: "Signed in!"
-  not_linked_account_cant_login:  "There is no user attached to this provider yet! Please login first and connect in the control panel"
-  third_party_failure: "Errors happened during authentication"
+  already_linked_accounts: Already linked with Google Account
+  successfully_linked_account: Successfully linked with Google Account
+  signed_in_with_omniauth: Signed in
+  not_linked_account_cant_login: There is no user attached to this provider yet. Please sign in first and connect in the control panel
+  third_party_failure: Errors happened during authentication. Did you enable "Contacts API" and "Google+ API" via the Google API console?
 
 # user/sign_in (omniauth)
   omniauth_sign_in_title: Alternative sign in

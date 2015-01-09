@@ -29,28 +29,28 @@
 
       <div class="medium-6 columns">
         <% if @user.agent? %>
-            <h5><%= t(:email_settings) %></h5>
+          <h5><%= t(:email_settings) %></h5>
 
-            <%= f.check_box :notify, label: t(:receive_new_ticket_notifications) %>
+          <%= f.check_box :notify, label: t(:receive_new_ticket_notifications) %>
 
-            <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce' %>
+          <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce' %>
         <% elsif can? :create, Labeling %>
-            <h5><%= t(:access_control) %></h5>
+          <h5><%= t(:access_control) %></h5>
 
-            <p><%= t(:have_access_to_label) %></p>
+          <p><%= t(:have_access_to_label) %></p>
 
-            <%= f.label :label_ids %>
-            <%= f.collection_select :label_ids, @labels, :id, :name, {}, {multiple: true, class: 'select2'} %>
+          <%= f.label :label_ids %>
+          <%= f.collection_select :label_ids, @labels, :id, :name, {}, {multiple: true, class: 'select2'} %>
         <% end %>
 
         <h5><%= t(:omniauth_connect_title) %></h5>
 
         <p><%= t(:omniauth_connect_text) %></p>
 
-          <%= link_to '/auth/google_oauth2', class: 'button radius radius no-mb', :target => '_blank' do %>
-              <i class="fa fa-google-plus-square"></i>
-              <%= t(:omniauth_connect_google_text) %>
-          <% end %>
+        <%= link_to user_omniauth_authorize_path(:google_oauth2) do %>
+          <i class="fa fa-google-plus-square"></i>
+          <%= t(:omniauth_connect_google_text) %>
+        <% end %>
 
       </div>
     </div>
