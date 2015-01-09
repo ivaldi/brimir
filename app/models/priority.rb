@@ -15,11 +15,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Priority < ActiveRecord::Base
-
-	validates_presence_of :name
+  validates :name, presence: true
 
   has_many :tickets
 
   scope :default, -> { where(default: true) }
-
 end

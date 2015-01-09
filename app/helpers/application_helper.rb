@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# helpers used system wide
 module ApplicationHelper
   def active_elem_if(elem, condition, attributes = {}, &block)
     if condition
@@ -33,7 +34,7 @@ module ApplicationHelper
       options, collection_or_options = collection_or_options, nil
     end
     unless options[:renderer]
-      options = options.merge :renderer => Pagination::PaginationRenderer
+      options = options.merge renderer: Pagination::PaginationRenderer
     end
     super(*[collection_or_options, options].compact)
   end
