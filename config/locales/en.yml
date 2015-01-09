@@ -163,7 +163,6 @@ en:
 # controllers/omniauth
   already_linked_accounts: Already linked with Google Account
   successfully_linked_account: Successfully linked with Google Account
-  signed_in_with_omniauth: Signed in
   not_linked_account_cant_login: There is no user attached to this provider yet. Please sign in first and connect through the personal settings screen.
   third_party_failure: An error occured during authentication. Did you enable "Contacts API" and "Google+ API" via the Google API console?
 

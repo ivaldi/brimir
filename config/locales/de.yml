@@ -149,7 +149,6 @@ de:
 # controllers/omniauth
   already_linked_accounts: Ihr Benutzer ist bereits mit diesem Google-Konto verbunden
   successfully_linked_account: Das Google-Konto wurde Ihrem Account hinzugefügt. Sie können sich nun per Google anmelden.
-  signed_in_with_omniauth: Sie wurden erfolgreich angemeldet.
   not_linked_account_cant_login:  Dieser Benutzer ist noch nicht mit einem Google-Konto verbunden. In den Benutzereinstellungen können Konten hinzugefügt werden.
   third_party_failure: Bei der Verbindung mit Google ist ein Fehler aufgetreten. Haben sie "Contacts API" und "Google+ API" aktiviert?
 

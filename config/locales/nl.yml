@@ -153,7 +153,6 @@ nl:
 # controllers/omniauth
   already_linked_accounts: Al met een Google Account verbonden
   successfully_linked_account: Succesvol verbonden met Google Account
-  signed_in_with_omniauth: Ingelogd
   not_linked_account_cant_login: Er is nog geen gebruiker verbonden met deze provider. Log eerst in en verbind via uw persoonlijke instellingen scherm.
   third_party_failure: Fout tijdens authenticatie. Heeft u "Contacts API" en "Google+ API" aangezet via de Google API console?
 
