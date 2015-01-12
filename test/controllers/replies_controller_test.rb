@@ -111,5 +111,17 @@ class RepliesControllerTest < ActionController::TestCase
     assert_equal [users(:alice).email], mail.to
   end
 
+  test 'should re-open ticket' do
+    @ticket.status = 'closed'
+    @ticket.save
+
+    post :create, reply: {
+        content: 're-open please',
+        ticket_id: @ticket.id,
+    }
+
+    @ticket.reload
+    assert_equal 'open', @ticket.status
+  end
 
 end

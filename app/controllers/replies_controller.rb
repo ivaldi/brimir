@@ -44,7 +44,7 @@ class RepliesController < ApplicationController
 
         # reopen ticket
         @reply.ticket.status = :open
-        @reply.ticket.save
+        @reply.ticket.save!
 
         @reply.notified_users.each do |user|
           mail = NotificationMailer.new_reply(@reply, user)
