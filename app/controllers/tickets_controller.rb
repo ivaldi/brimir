@@ -120,7 +120,7 @@ class TicketsController < ApplicationController
 
     if @ticket.save
 
-      Rule.apply_all(@ticket)
+      Rule.apply_all(@ticket) unless @ticket.is_a?(Reply)
 
       # where user notifications added?
       if @ticket.notified_users.count == 0
