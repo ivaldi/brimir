@@ -138,7 +138,7 @@ class TicketsController < ApplicationController
 
           @ticket.save
         else
-          TicketMailer.notify_assigned(@ticket).deliver
+          NotificationMailer.assigned(@ticket).deliver
         end
       end
     end
