@@ -50,9 +50,9 @@ class TicketMailer < ActionMailer::Base
     end
 
     if email.charset
-      subject = email.subject.force_encoding(email.charset).encode('UTF-8')
+      subject = email.subject.to_s.force_encoding(email.charset).encode('UTF-8')
     else
-      subject = email.subject.encode('UTF-8')
+      subject = email.subject.to_s.encode('UTF-8')
     end
 
 
