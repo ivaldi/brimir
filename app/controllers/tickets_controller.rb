@@ -19,6 +19,7 @@ class TicketsController < ApplicationController
   before_filter :authenticate_user!, except: [:create, :new]
   load_and_authorize_resource :ticket, except: :create
   skip_authorization_check only: :create
+  skip_before_action :verify_authenticity_token, only: :create, if: 'request.format.json?'
 
   # this is needed for brimir integration in other sites
   before_filter :allow_cors, only: [:create, :new]
