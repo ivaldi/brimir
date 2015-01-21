@@ -56,7 +56,10 @@ class RepliesController < ApplicationController
         @reply.save!
         redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
       end
-    rescue
+    rescue => e
+      Rails.logger.error 'Exception occured on Reply transaction!'
+      Rails.logger.error "Message: #{e.message}"
+      Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
       render action: 'new'
     end
   end
