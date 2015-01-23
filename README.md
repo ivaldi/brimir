@@ -25,6 +25,10 @@ Run the following command to install gems if you want **MySQL support**:
 
     bundle install --without postgresql development test --deployment
 
+Generate a secret\_key\_base in the secrets.yml file:
+
+    sed -i "s/<%= ENV\[\"SECRET_KEY_BASE\"\] %>/`bin/rake secret`/g" config/secrets.yml
+
 Next, load the database schema and precompile assets:
 
     rake db:schema:load RAILS_ENV=production
