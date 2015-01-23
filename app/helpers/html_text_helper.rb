@@ -17,8 +17,8 @@
 # helper functions to convert html mail to text mail and back
 module HtmlTextHelper
   def html_to_text(content)
-    content = sanitize(content.gsub(%r{(<br( )?/>|</p>)}, "\n"), tags: [])
-    content = content.gsub(/<br( )?\/>/, "\n")
+    content = sanitize(content.gsub(%r{(<br ?/?>|</p>)}, "\n"), tags: [])
+    content = content.gsub(%r{<br ?/?>}, "\n")
     content = content.gsub(/<\/p>/, "\n\n")
     sanitize(content, tags: [])
   end
