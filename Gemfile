@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.2.0'
 
-gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 
 gem 'uglifier', '>= 1.0.3'
 
-gem 'compass-rails', '~> 1.1.2'
-gem 'foundation-rails', '~> 5.4.2'
+gem 'compass-rails', '~> 2.0.0'
+gem 'foundation-rails', '~> 5.5.0'
 
 gem 'jquery-rails'
 
@@ -21,11 +21,6 @@ group :development do
 
   # sqlite database during development
   gem 'sqlite3'
-
-  # deploy with Capistrano
-  gem 'capistrano'
-  gem 'capistrano-rvm'
-  gem 'capistrano-rails'
 
   # Spring application pre-loader
   gem 'spring'
@@ -81,7 +76,7 @@ gem 'devise-i18n'
 gem 'non-stupid-digest-assets'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.2'
 
 # time traveling
 gem 'timecop'
