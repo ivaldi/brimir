@@ -1,6 +1,12 @@
 <%
+  if params[:reply].present?
+    entity = [Reply.new]
+  else
+    entity = [Ticket.new]
+  end
+
 	output = ''
-  form_for [Ticket.new] do |f|
+  form_for entity do |f|
     f.fields_for :attachments, Attachment.new, child_index: Time.now.to_i do |ap|
       output = render 'attachments/form_row', f: ap
     end

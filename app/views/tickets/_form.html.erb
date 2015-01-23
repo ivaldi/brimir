@@ -13,20 +13,7 @@
     <%= f.text_area :content, class: 'tinymce' %>
   </p>
 
-  <div class="panel mb ptm pbm">
-    <h5><%= t(:attach_files) %></h5>
-
-    <div data-attachments>
-
-      <%= f.fields_for :attachments, @ticket.attachments do |ff| %>
-        <%= render 'attachments/form_row', f: ff %>
-      <% end %>
-
-    </div>
-
-    <%= link_to t(:attach_files), new_attachment_path, remote: true, class: 'small button radius secondary' %>
-
-  </div>
+  <%= render 'attachments/form', f: f %>
 
   <p>
     <%= f.submit class: 'button regular radius' %>

@@ -21,17 +21,6 @@ class RepliesController < ApplicationController
   def create
     @reply = Reply.new
 
-    if !params[:attachment].nil?
-
-      params[:attachment].each do |file|
-
-        @reply.attachments.new(file: file)
-
-      end
-
-      params[:reply].delete(:attachments_attributes)
-    end
-
     @reply.assign_attributes(reply_params)
 
     @reply.user = current_user
@@ -71,7 +60,10 @@ class RepliesController < ApplicationController
           :ticket_id,
           :message_id,
           :user_id,
-          notified_user_ids: []
+          notified_user_ids: [],
+          attachments_attributes: [
+              :file
+          ]
       )
     end
 
