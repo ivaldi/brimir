@@ -89,6 +89,7 @@ nl:
 # replies/_form
   reply: Reactie
   attach_files: Bestand(en) toevoegen
+  attach_file: Bestand toevoegen
   send_reply: Verstuur reactie
   on_date_author_wrote: 'Op %{date} schreef %{author}:'
   notification_will_be_sent_to: Een notificatie van je reactie wordt verstuurd naar

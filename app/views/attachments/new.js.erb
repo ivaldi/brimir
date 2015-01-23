@@ -1,0 +1,9 @@
+<%
+	output = ''
+  form_for [Ticket.new] do |f|
+    f.fields_for :attachments, Attachment.new, child_index: Time.now.to_i do |ap|
+      output = render 'attachments/form_row', f: ap
+    end
+  end
+%>
+jQuery('[data-attachments]').append('<%= j output %>');

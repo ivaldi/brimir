@@ -99,6 +99,7 @@ en:
 # replies/_form
   reply: Reply
   attach_files: Attach file(s)
+  attach_file: Attach file
   send_reply: Send reply
   on_date_author_wrote: 'On %{date}, %{author} wrote:'
   notification_will_be_sent_to: Your notification will be sent to

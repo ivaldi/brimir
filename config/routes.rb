@@ -15,6 +15,7 @@ Brimir::Application.routes.draw do
   resources :replies, only: [:create, :new]
 
   get '/attachments/:id/:format' => 'attachments#show'
+  resources :attachments, only: [:index, :new]
 
   resources :email_addresses, only: [:index, :create, :new, :destroy]
 

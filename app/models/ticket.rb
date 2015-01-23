@@ -23,6 +23,8 @@ class Ticket < ActiveRecord::Base
   belongs_to :assignee, class_name: 'User'
 
   has_many :attachments, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :attachments, allow_destroy: true
+
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings

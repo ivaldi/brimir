@@ -179,13 +179,19 @@ class TicketsController < ApplicationController
             :status,
             :assignee_id,
             :priority,
-            :message_id)
+            :message_id,
+            attachments_attributes: [
+              :file
+            ])
       else
         params.require(:ticket).permit(
             :from,
             :content,
             :subject,
-            :priority)
+            :priority,
+            attachments_attributes: [
+              :file
+            ])
       end
     end
 
