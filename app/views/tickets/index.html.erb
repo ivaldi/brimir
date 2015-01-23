@@ -24,6 +24,8 @@
           </div>
           <div class="small-1 columns"></div>
           <div class="small-2 column">
+            <% params.delete(:controller) %>
+            <% params.delete(:action) %>
             <%= link_to tickets_path(params.merge(format: :csv)), class: 'secondary radius button no-m postfix' do %>
               <i class="fa fa-cloud-download" style="top:1px"></i>
             <% end %>

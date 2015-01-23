@@ -63,13 +63,13 @@ class TicketsController < ApplicationController
         if !@ticket.assignee.nil? && @ticket.assignee.id != current_user.id
 
           if @ticket.previous_changes.include? :assignee_id
-            NotificationMailer.assigned(@ticket).deliver
+            NotificationMailer.assigned(@ticket).deliver_now
 
           elsif @ticket.previous_changes.include? :status
-            NotificationMailer.status_changed(@ticket).deliver
+            NotificationMailer.status_changed(@ticket).deliver_now
 
           elsif @ticket.previous_changes.include? :priority
-            NotificationMailer.priority_changed(@ticket).deliver
+            NotificationMailer.priority_changed(@ticket).deliver_now
           end
 
         end
@@ -133,13 +133,13 @@ class TicketsController < ApplicationController
         if @ticket.assignee.nil?
           @ticket.notified_users.each do |user|
             mail = NotificationMailer.new_ticket(@ticket, user)
-            mail.deliver
+            mail.deliver_now
             @ticket.message_id = mail.message_id
           end
 
           @ticket.save
         else
-          NotificationMailer.assigned(@ticket).deliver
+          NotificationMailer.assigned(@ticket).deliver_now
         end
       end
     end

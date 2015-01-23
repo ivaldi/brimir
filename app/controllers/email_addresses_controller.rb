@@ -30,7 +30,7 @@ class EmailAddressesController < ApplicationController
 
     if @email_address.save
       VerificationMailer.verify(@email_address)
-          .deliver
+          .deliver_now
 
       redirect_to email_addresses_url, notice: I18n.t(:email_address_added)
     else

@@ -128,7 +128,7 @@ class TicketMailer < ActionMailer::Base
 
       incoming.notified_users.each do |user|
         mail = NotificationMailer.new_reply(incoming, user)
-        mail.deliver
+        mail.deliver_now
         incoming.message_id = mail.message_id
       end
 
