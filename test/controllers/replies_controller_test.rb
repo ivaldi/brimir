@@ -86,10 +86,10 @@ class RepliesControllerTest < ActionController::TestCase
             content: '**this is in bold**',
             ticket_id: @ticket.id,
             notified_user_ids: @reply.users_to_notify.map { |u| u.id },
-            attachments_attributes: [
+            attachments_attributes: {
               '0' => { file: fixture_file_upload('attachments/default-testpage.pdf') },
               '1' => { file: fixture_file_upload('attachments/default-testpage.pdf') }
-            ]
+            }
       }
     end
   end
