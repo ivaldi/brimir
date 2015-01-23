@@ -38,7 +38,9 @@ module HtmlTextHelper
 
   def wrap_and_quote(content)
     content = html_to_text(content)
-    content = word_wrap(content, line_width: 72)
-    content.gsub(/^/, '> ')
+    content = content.gsub(/^.*\n&gt;.*$/, '') # strip off last line before older quotes
+    content = content.gsub(/^&gt;.*$/, '') # strip off older quotes
+    content = word_wrap(content.strip, line_width: 72)
+    content.gsub(/^/, '&gt; ')
   end
 end
