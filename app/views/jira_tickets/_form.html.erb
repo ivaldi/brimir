@@ -1,0 +1,16 @@
+<%= form_for @jira_ticket, url: ticket_jira_tickets_path(@ticket) do |f| %>
+
+  <div class="ma">
+     <%= f.text_field :title %>
+
+      <%= f.text_area :description, class: 'tinymce', rows: 5 %>
+
+      <hr />
+
+      <%= f.collection_select :project, @projects, :id, :name, { } %>
+
+
+      <%= f.button 'Opslaan', type: 'submit', class: 'button tiny right' %>
+  </div>
+<% end %>
+

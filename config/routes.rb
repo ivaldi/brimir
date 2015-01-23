@@ -4,7 +4,9 @@ Brimir::Application.routes.draw do
 
   resources :users
 
-  resources :tickets, only: [:index, :show, :update, :new, :create]
+  resources :tickets, only: [:index, :show, :update, :new, :create] do
+    resources :jira_tickets, only: [:create, :new]
+  end
 
   resources :labelings, only: [:destroy, :create]
 
@@ -15,6 +17,8 @@ Brimir::Application.routes.draw do
   resources :replies, only: [:create, :new]
 
   get '/attachments/:id/:format' => 'attachments#show'
+
+
 
   resources :email_addresses, only: [:index, :create, :new, :destroy]
 

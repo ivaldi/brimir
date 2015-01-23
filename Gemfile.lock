@@ -116,6 +116,9 @@ GEM
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
+    jira-ruby (0.1.10)
+      activesupport
+      oauth
     jquery-rails (4.0.3)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -137,6 +140,7 @@ GEM
     nokogiri (1.6.6.1)
       mini_portile (~> 0.6.0)
     non-stupid-digest-assets (1.0.4)
+    oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -262,6 +266,7 @@ DEPENDENCIES
   foundation_rails_helper
   http_accept_language
   jbuilder (~> 2.2)
+  jira-ruby
   jquery-rails
   mysql2
   non-stupid-digest-assets

@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20150104173344) do
 
-  create_table "attachments", force: true do |t|
+  create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
     t.string   "attachable_type"
     t.datetime "created_at"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20150104173344) do
 
   add_index "attachments", ["attachable_id"], name: "index_attachments_on_attachable_id"
 
-  create_table "email_addresses", force: true do |t|
+  create_table "email_addresses", force: :cascade do |t|
     t.string   "email"
     t.boolean  "default",            default: false
     t.datetime "created_at"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150104173344) do
     t.string   "verification_token"
   end
 
-  create_table "identities", force: true do |t|
+  create_table "identities", force: :cascade do |t|
     t.integer "user_id"
     t.string  "uid"
     t.string  "provider"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20150104173344) do
 
   add_index "identities", ["user_id"], name: "index_identities_on_user_id"
 
-  create_table "labelings", force: true do |t|
+  create_table "labelings", force: :cascade do |t|
     t.integer  "label_id"
     t.integer  "labelable_id"
     t.string   "labelable_type"
@@ -52,16 +52,16 @@ ActiveRecord::Schema.define(version: 20150104173344) do
 
   add_index "labelings", ["label_id", "labelable_id", "labelable_type"], name: "unique_labeling_label", unique: true
   add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
-  add_index "labelings", ["labelable_id", "labelable_type"], name: "index_labelings_on_labelable_id_and_labelable_type"
+  add_index "labelings", ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
 
-  create_table "labels", force: true do |t|
+  create_table "labels", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "color"
   end
 
-  create_table "notifications", force: true do |t|
+  create_table "notifications", force: :cascade do |t|
     t.integer  "notifiable_id"
     t.string   "notifiable_type"
     t.integer  "user_id"
@@ -70,10 +70,10 @@ ActiveRecord::Schema.define(version: 20150104173344) do
   end
 
   add_index "notifications", ["notifiable_id", "notifiable_type", "user_id"], name: "unique_notification", unique: true
-  add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type"
+  add_index "notifications", ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
-  create_table "replies", force: true do |t|
+  create_table "replies", force: :cascade do |t|
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20150104173344) do
   add_index "replies", ["ticket_id"], name: "index_replies_on_ticket_id"
   add_index "replies", ["user_id"], name: "index_replies_on_user_id"
 
-  create_table "rules", force: true do |t|
+  create_table "rules", force: :cascade do |t|
     t.string   "filter_field"
     t.integer  "filter_operation", default: 0, null: false
     t.string   "filter_value"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(version: 20150104173344) do
     t.datetime "updated_at"
   end
 
-  create_table "status_changes", force: true do |t|
+  create_table "status_changes", force: :cascade do |t|
     t.integer  "ticket_id"
     t.integer  "status",     default: 0, null: false
     t.datetime "created_at"
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 20150104173344) do
 
   add_index "status_changes", ["ticket_id"], name: "index_status_changes_on_ticket_id"
 
-  create_table "tickets", force: true do |t|
+  create_table "tickets", force: :cascade do |t|
     t.string   "subject"
     t.text     "content"
     t.datetime "created_at"
@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20150104173344) do
   add_index "tickets", ["status"], name: "index_tickets_on_status"
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "email",                  default: "",          null: false
