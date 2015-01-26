@@ -76,6 +76,7 @@ Some users have made requests for the following features. If you would like to c
 - When replying, select a response from pre-defined canned responses and modify to your needs
 - TicketsController#create should limit access to IP and be user/pass protected
 - TicketsController#new should be configurable as open-to-the-world or not
+- Integration with OpsWeekly
 
 License
 -------
