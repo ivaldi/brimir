@@ -40,7 +40,7 @@ de:
 
 # devise/mailer/reset_password_instructions
   hello: Hallo
-  someone_requested_link: Jemand hat einen Link angefordert, damit Sie Ihr Passwort ändern können. Wenn Sie Ihr Passwort ändern möchten, klicken Sie bitte auf den folgenden Link:
+  someone_requested_link: 'Jemand hat einen Link angefordert, damit Sie Ihr Passwort ändern können. Wenn Sie Ihr Passwort ändern möchten, klicken Sie bitte auf den folgenden Link:'
   ignore_if_not_requested: Wenn nicht Sie diesen Link angefordert haben, ignorieren Sie bitte diese E-Mail.
   password_wont_change_without_opening_link: Ihr Passwort wird nur geändert, wenn Sie den obigen Link benutzen, um ein neues Passwort zu erstellen.
 
@@ -102,7 +102,7 @@ de:
   attach_file: Datei anhängen
   send_reply: Anwort senden
   on_date_author_wrote: 'Am %{date} hat %{author} folgendes geschrieben:'
-  notification_will_be_sent_to: Es wird eine Benachrichtung an folgende Adresse gesendet:
+  notification_will_be_sent_to: 'Es wird eine Benachrichtung an folgende Adresse gesendet:'
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ihnen wurde ein Ticket zugewiesen
@@ -145,7 +145,7 @@ de:
   email_settings: E-Mail-Einstellungen
   save: Speichern
   access_control: Zugriff gestatten
-  have_access_to_label: Der Benutzer darf nur Tickets mit diesen Labels öffnen:
+  have_access_to_label: 'Der Benutzer darf nur Tickets mit diesen Labels öffnen:'
 
 # controllers/attachments
   file_not_found: Datei nicht gefunden
