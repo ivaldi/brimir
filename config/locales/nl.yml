@@ -201,6 +201,7 @@ nl:
         status: Status
         priority: Prioriteit
         assignee_id: Toegewezen aan
+        created_at: Aangemaakt op
 
       rule:
         filter_field: Veld

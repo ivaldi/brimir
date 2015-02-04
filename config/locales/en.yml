@@ -215,6 +215,7 @@ en:
         status: Status
         priority: Priority
         assignee_id: Assignee
+        created_at: Created at
 
       rule:
         filter_field: Field
