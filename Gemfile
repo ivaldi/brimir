@@ -15,10 +15,10 @@ gem 'jquery-rails'
 # foundation form errors
 gem 'foundation_rails_helper'
 
-group :development do
-  # to use debugger
-  gem 'byebug'
+# to use debugger
+gem 'byebug', group: [:development, :test]
 
+group :development do
   # sqlite database during development
   gem 'sqlite3'
 

@@ -57,4 +57,9 @@ class TicketTest < ActiveSupport::TestCase
     assert_equal last.created_at, last.updated_at
   end
 
+  test 'should escape special char search' do
+    assert_equal 1, Ticket.search('%').count
+    assert_equal 1, Ticket.search('_').count
+  end
+
 end
