@@ -9,7 +9,7 @@ test:
   database: brimir_test
   username: root
 <% elsif ENV['DB'] == 'sqlite3' %>
-development:
+test:
   adapter: sqlite3
   database: db/test.sqlite3
 <% end %>
