@@ -4,6 +4,7 @@ bundler_args: --without development --jobs 4
 env:
   - DB=postgresql
   - DB=mysql
+  - DB=sqlite3
 
 rvm:
   - 2.0.0
