@@ -19,9 +19,6 @@ gem 'foundation_rails_helper'
 gem 'byebug', group: [:development, :test]
 
 group :development do
-  # sqlite database during development
-  gem 'sqlite3'
-
   # Spring application pre-loader
   gem 'spring'
 end
@@ -38,6 +35,8 @@ end
 gem 'pg', group: :postgresql
 # Optional MySQL for production
 gem 'mysql2', group: :mysql
+# Optional SQLite for development
+gem 'sqlite3', group: :sqlite
 
 # authentication
 gem 'devise'

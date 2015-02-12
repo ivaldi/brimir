@@ -19,11 +19,11 @@ Next up: configuring your outgoing email address and url. This can be set in `co
 
 Now install the required gems by running the following command if you want **PostgreSQL support**:
 
-    bundle install --without mysql development test --deployment
+    bundle install --without sqlite mysql development test --deployment
 
 Run the following command to install gems if you want **MySQL support**:
 
-    bundle install --without postgresql development test --deployment
+    bundle install --without sqlite postgresql development test --deployment
 
 Generate a secret\_key\_base in the secrets.yml file:
 
