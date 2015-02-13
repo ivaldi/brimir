@@ -48,6 +48,7 @@ nl:
   no_tickets_found: Geen tickets gevonden.
   search: Zoek
   minutes: minuten
+  are_you_sure_empty_trash: Alle tickets uit de prullenbak verwijderen?
 
 # tickets/show
   add: Toevoegen
@@ -147,6 +148,9 @@ nl:
 # controllers/tickets
   ticket_added: Ticket toegevoegd
   ticket_updated: Ticket gewijzigd
+
+# controllers/tickets/deleted
+  trash_emptied: Alle tickets zijn uit de prullenbak verwijderd
 
 # controllers/replies
   reply_added: Reactie toegevoegd

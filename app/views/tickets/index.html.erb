@@ -1,6 +1,6 @@
 <div class="panel no-b pam">
   <div class="row collapse">
-    <div class="medium-8 columns">
+    <div class="medium-6 columns">
       <h3 class="filter-title no-m pts plm">
 
         <% if params[:q].present? %>
@@ -11,24 +11,28 @@
 
       </h3>
     </div>
-    <div class="medium-4 columns">
+    <div class="medium-6 columns">
       <%= form_tag tickets_path, method: :get, class: 'prm' do %>
         <%= hidden_field_tag(:assignee_id, params[:assignee_id]) unless params[:assignee_id].blank? %>
         <%= hidden_field_tag :status, params[:status] %>
         <div class="row collapse">
-          <div class="small-7 columns">
-            <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
-          </div>
-          <div class="small-2 columns">
+          <% params.delete(:controller) %>
+          <% params.delete(:action) %>
+          <%= link_to tickets_path(:csv, params), class: 'secondary radius tiny button right mlm' do %>
+            <i class="fa fa-cloud-download" style="top:1px"></i>
+          <% end %>
+
+          <% if params[:status] == 'deleted' %>
+            <%= link_to tickets_deleted_path, method: :delete, 'data-confirm' => t(:are_you_sure_empty_trash), class: 'secondary radius tiny button right mlm' do %>
+              <i class="fa fa-bomb" style="top:1px"></i>
+            <% end %>
+          <% end %>
+
+          <div class="small-2 columns right">
             <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', class: 'secondary radius no-bl no-m button postfix' %>
           </div>
-          <div class="small-1 columns"></div>
-          <div class="small-2 column">
-            <% params.delete(:controller) %>
-            <% params.delete(:action) %>
-            <%= link_to tickets_path(:csv, params), class: 'secondary radius button no-m postfix' do %>
-              <i class="fa fa-cloud-download" style="top:1px"></i>
-            <% end %>
+          <div class="small-5 columns right">
+            <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
           </div>
         </div>
       <% end %>

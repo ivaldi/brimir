@@ -58,6 +58,7 @@ en:
   no_tickets_found: No tickets found.
   search: Search
   minutes: minutes
+  are_you_sure_empty_trash: Delete all tickets in the trash?
 
 # tickets/show
   add: Add
@@ -157,6 +158,9 @@ en:
 # controllers/tickets
   ticket_added: Ticket added
   ticket_updated: Ticket updated
+
+# controllers/tickets/deleted
+  trash_emptied: All tickets were deleted from the trash
 
 # controllers/replies
   reply_added: Reply added
