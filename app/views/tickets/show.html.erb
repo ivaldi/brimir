@@ -138,6 +138,19 @@
           <% end %>
         </dd>
 
+        <dt><%= t(:time_consumed)%></dt>
+        <dd>
+          <% if can? :update, @ticket %>
+            <a href="#" data-reveal-id="set-time-consumed">
+              <span class="time-consumed fa fa-fw fa-clock-o"></span>
+              <%= distance_of_time_in_words(@ticket.time_consumed*60) %>
+            </a>
+          <% else %>
+            <span class="time-consumed fa fa-fw fa-clock-o"></span>
+            <%= distance_of_time_in_words(@ticket.time_consumed*60) %>
+          <% end %>
+        </dd>
+
         <dt><%= t(:labels) %></dt>
         <dd>
           <% if can? :update, @ticket %>
@@ -177,3 +190,4 @@
 </div>
 
 <%= render 'change_assignee_form', { ticket: @ticket } %>
+<%= render 'set_time_consumed_form', { ticket: @ticket } %>

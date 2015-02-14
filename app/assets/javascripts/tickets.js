@@ -25,16 +25,40 @@ jQuery(function() {
 
     /* set ticket id */
     dialog.find('form').attr('action',
-        elem.parents('tr').data('ticket-url'));
+      elem.parents('tr').data('ticket-url'));
 
-    /* select assigned user */
-    options.removeAttr('selected');
-    options.find('[value="' + elem.data('assignee-id') + '"]').attr('selected', 'selected');
+      /* select assigned user */
+      options.removeAttr('selected');
+      options.find('[value="' + elem.data('assignee-id') + '"]').attr('selected', 'selected');
 
       /* show the dialog */
-    dialog.foundation('reveal','open');
+      dialog.foundation('reveal','open');
 
   });
 
-});
+  jQuery('[data-set-time-consumed]').click(function(e) {
+    e.preventDefault();
 
+    var elem = jQuery(this);
+    var dialog = jQuery('#set-time-consumed');
+
+    var days_select = dialog.find('form select#ticket_consumed_days');
+    var hours_select = dialog.find('form select#ticket_consumed_hours');
+    var minutes_select = dialog.find('form select#ticket_consumed_minutes');
+
+    var days = parseInt(elem.data('set-time-consumed').split('-')[0]);
+    var hours = parseInt(elem.data('set-time-consumed').split('-')[1]);
+    var minutes = parseInt(elem.data('set-time-consumed').split('-')[2]);
+
+    /* set ticket url */
+    dialog.find('form').attr('action', elem.parents('tr').data('ticket-url'));
+
+    days_select.select2('val', days);
+    hours_select.select2('val', hours);
+    minutes_select.select2('val', minutes);
+
+    /* show the dialog */
+    dialog.foundation('reveal','open');
+  });
+
+});

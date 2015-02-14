@@ -1,0 +1,19 @@
+<div id="set-time-consumed" class="reveal-modal small" data-reveal>
+  <h3><%= t(:time_consumed) %></h3>
+
+  <%= form_for ticket, remote: true, method: :patch do |f| %>
+    <p>
+    <%= f.select :consumed_days, options_for_select((0..31).to_a, ticket.time_consumed_as_duration.days), {}, {class: 'select2'} %>
+    </p>
+    <p>
+    <%= f.select :consumed_hours, options_for_select((0..24).to_a, ticket.time_consumed_as_duration.hours), {}, {class: 'select2'} %>
+    </p>
+    <p>
+    <%= f.select :consumed_minutes, options_for_select((0..60).to_a, ticket.time_consumed_as_duration.minutes), {}, {class: 'select2'} %>
+    </p>
+
+    <%= f.submit t(:save), class: 'button' %>
+  <% end %>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>
