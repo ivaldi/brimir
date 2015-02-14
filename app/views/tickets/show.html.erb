@@ -182,8 +182,10 @@
             </ul>
           <% end %>
         </dd>
-        <dt><%= t(:notes) %></dt>
-        <dd><%= render :partial => 'notes_form' %></dd>
+        <% if can? :update, @ticket %>
+          <dt><%= t(:notes) %></dt>
+          <dd><%= render :partial => 'notes_form' %></dd>
+        <% end %>
       </dl>
     </div>
 
