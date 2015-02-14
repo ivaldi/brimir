@@ -42,20 +42,20 @@ jQuery(function() {
     var elem = jQuery(this);
     var dialog = jQuery('#set-time-consumed');
 
-    var days_select = dialog.find('form select#ticket_consumed_days');
-    var hours_select = dialog.find('form select#ticket_consumed_hours');
-    var minutes_select = dialog.find('form select#ticket_consumed_minutes');
+    var daysSelect = dialog.find('form select#ticket_consumed_days');
+    var hoursSelect = dialog.find('form select#ticket_consumed_hours');
+    var minutesSelect = dialog.find('form select#ticket_consumed_minutes');
 
-    var days = parseInt(elem.data('set-time-consumed').split('-')[0]);
-    var hours = parseInt(elem.data('set-time-consumed').split('-')[1]);
-    var minutes = parseInt(elem.data('set-time-consumed').split('-')[2]);
+    var days = parseInt(elem.data('set-time-consumed').split('-')[0],10);
+    var hours = parseInt(elem.data('set-time-consumed').split('-')[1],10);
+    var minutes = parseInt(elem.data('set-time-consumed').split('-')[2],10);
 
     /* set ticket url */
     dialog.find('form').attr('action', elem.parents('tr').data('ticket-url'));
 
-    days_select.select2('val', days);
-    hours_select.select2('val', hours);
-    minutes_select.select2('val', minutes);
+    daysSelect.select2('val', days);
+    hoursSelect.select2('val', hours);
+    minutesSelect.select2('val', minutes);
 
     /* show the dialog */
     dialog.foundation('reveal','open');
