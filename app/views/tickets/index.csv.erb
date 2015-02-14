@@ -22,7 +22,7 @@
         t(ticket.priority),
         t(ticket.status),
         (ticket.assignee.email unless ticket.assignee.nil?),
-        l(ticket.created_at.in_time_zone(current_user.time_zone), format: :long),
+        '"' + l(ticket.created_at.in_time_zone(current_user.time_zone), format: :long).gsub(/"/, '""') + '"',
         status_times[:open].round(1),
         status_times[:waiting].round(1),
         status_times[:closed].round(1),
