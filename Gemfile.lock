@@ -37,6 +37,8 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
+    autosize-rails (1.18.17)
+      rails (>= 3.1)
     bcrypt (3.1.9)
     builder (3.2.2)
     byebug (3.5.1)
@@ -259,6 +261,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  autosize-rails
   byebug
   cancancan
   coffee-rails (~> 4.1.0)

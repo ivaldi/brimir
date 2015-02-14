@@ -86,6 +86,7 @@ en:
   days: 'Days'
   hours: 'Hours'
   time_consumed: 'Time consumed'
+  notes: 'Notes'
 
 # tickets/_change_priority_form
   change: Change

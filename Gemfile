@@ -87,3 +87,6 @@ gem 'therubyracer'
 
 # for easy time interval calculating
 gem 'ruby-duration'
+
+# Autosize for textareas
+gem 'autosize-rails'

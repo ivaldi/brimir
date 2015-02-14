@@ -1,0 +1,4 @@
+<%= form_for @ticket, remote: true, method: :patch do |f| %>
+  <%= f.text_area :notes, label: false, class: 'autosize' %>
+  <%= f.submit t(:save) %>
+<% end %>
