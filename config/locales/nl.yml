@@ -184,6 +184,7 @@ nl:
 
 # controllers/email_addresses
   email_address_added: E-mailadres toevoegd
+  email_address_removed: Email address verwijderd
 
   activerecord:
     attributes:

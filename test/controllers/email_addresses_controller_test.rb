@@ -60,4 +60,14 @@ class EmailAddressesControllerTest < ActionController::TestCase
     assert_equal assigns(:email_address).verification_token,
         ActionMailer::Base.deliveries.last['X-Brimir-Verification'].to_s
   end
+
+  test 'should destroy' do
+    sign_in @alice
+
+    assert_difference 'EmailAddress.count', -1 do
+      delete :destroy, id: @email_address.id
+    end
+
+    assert_redirected_to email_addresses_url
+  end
 end

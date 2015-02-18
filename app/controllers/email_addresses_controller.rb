@@ -38,6 +38,11 @@ class EmailAddressesController < ApplicationController
     end
   end
 
+  def destroy
+    @email_address.destroy
+    redirect_to email_addresses_url, notice: I18n.t(:email_address_removed)
+  end
+
   protected
     def email_address_params
       params.require(:email_address).permit(

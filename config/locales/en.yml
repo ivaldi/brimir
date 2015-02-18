@@ -198,6 +198,7 @@ en:
 
 # controllers/email_addresses
   email_address_added: Email address added
+  email_address_removed: Email address removed
 
   activerecord:
     attributes:
