@@ -36,5 +36,24 @@ jQuery(function() {
 
   });
 
-});
+  jQuery('.select2-create').select2({
+    width: 'resolve',
+    createSearchChoicePosition: 'bottom',
+    createSearchChoice: function(term, data) {
+      return { id:term, text:term };
+    },
+    ajax: {
+      url: '/labels.json',
+      dataType: 'json',
+      data: function (term, page) {
+        return {
+          q: term
+        };
+      },
+      results: function (data) {
+        return { results: data };
+      }
+    }
+  });
 
+});

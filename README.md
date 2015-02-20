@@ -71,7 +71,6 @@ Some users have made requests for the following features. If you would like to c
 - Adding knowledge base functionality.
 - Welcome mail for new users (after mailing a ticket for example) with their password.
 - Set priority, assignee and labels on the create ticket form.
-- Autocomplete labels
 - Assign tickets to groups of users
 - When replying, select a response from pre-defined canned responses and modify to your needs
 - TicketsController#create should limit access to IP and be user/pass protected
