@@ -40,6 +40,10 @@ class Ticket < ActiveRecord::Base
   after_update :log_status_change
   after_create :create_status_change
 
+  before_save :set_time_consumed
+
+  attr_accessor :consumed_days, :consumed_hours, :consumed_minutes
+
   def self.active_labels(status)
     label_ids = where(status: Ticket.statuses[status])
         .joins(:labelings)
@@ -121,7 +125,15 @@ class Ticket < ActiveRecord::Base
     total
   end
 
+  def time_consumed_as_duration
+    Duration.new(time_consumed*60)
+  end
+
   protected
+    def set_time_consumed
+      self.time_consumed = Duration.new(:days => self.consumed_days.to_i, :hours => self.consumed_hours.to_i, :minutes => self.consumed_minutes.to_i).total/60 if self.consumed_days || self.consumed_hours || self.consumed_minutes
+    end
+
     def create_status_change
       status_changes.create! status: self.status
     end
