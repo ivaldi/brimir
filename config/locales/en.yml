@@ -82,6 +82,11 @@ en:
   label_name: Label name
   notification_sent_to: 'A notification was sent to the following addresses:'
   no_notifications_sent: 'No notifications have been sent'
+  minutes: 'Minutes'
+  days: 'Days'
+  hours: 'Hours'
+  time_consumed: 'Time consumed'
+  notes: 'Notes'
 
 # tickets/_change_priority_form
   change: Change

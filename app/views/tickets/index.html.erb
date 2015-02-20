@@ -84,6 +84,15 @@
             <% end %>
           <% end %>
         </td>
+        <td class="nowrap text-right text-secondary">
+          <% if can? :update, ticket %>
+            <a href="#" data-set-time-consumed="<%= ticket.time_consumed_as_duration.format('%d-%h-%m')%>">
+              <span class=""><%= distance_of_time_in_words(ticket.time_consumed*60) %></span>
+            </a>
+          <% else %>
+            <span class=""><%= distance_of_time_in_words(ticket.time_consumed*60) %></span>
+          <% end %>
+        </td>
       </tr>
     <% end %>
 
@@ -105,5 +114,6 @@
   </div>
 
   <%= render 'change_assignee_form', { ticket: Ticket.new } %>
+  <%= render 'set_time_consumed_form', { ticket: Ticket.new } %>
 
 <% end %>

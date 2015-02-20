@@ -36,3 +36,6 @@ coverage
 
 # ignore rubymine
 .idea
+
+# assets
+public/assets

@@ -10,6 +10,7 @@
     "#{t(:waiting)} (#{t(:minutes)})",
     "#{t(:closed)} (#{t(:minutes)})",
     "#{t(:deleted)} (#{t(:minutes)})",
+    "#{t(:time_consumed)} (#{t(:minutes)})"
   ]
 
   rows = []
@@ -26,7 +27,8 @@
         status_times[:open].round(1),
         status_times[:waiting].round(1),
         status_times[:closed].round(1),
-        status_times[:deleted].round(1)
+        status_times[:deleted].round(1),
+        ticket.time_consumed/60
     ]
   end
 -%>

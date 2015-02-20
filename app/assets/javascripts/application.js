@@ -17,6 +17,7 @@
 //= require tinymce-jquery
 //= require tickets
 //= require fancybox
+//= require jquery.autosize
 
 (function() {
 
@@ -64,6 +65,8 @@
   }
 
   jQuery(function() {
+
+    jQuery('textarea.autosize').autosize();
 
     jQuery("a.fancybox").fancybox({
       type : 'image',
