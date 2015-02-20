@@ -51,21 +51,7 @@ class UsersController < ApplicationController
   end
 
   def index
-
-    if params[:format].nil?
-      @users = User.ordered.paginate(page: params[:page])
-    elsif params[:format] == 'json'
-      if params[:init].present?
-        @users = params[:q].split(',')
-        @users = @users.map { |user| { id: user, text: user } }
-      else
-        @users = User.by_email(params[:q])
-        @users = @users.map { |user| { id: user.email, text: user.email } }
-      end
-
-      render json: { users: @users }
-    end
-
+    @users = User.ordered.paginate(page: params[:page])
   end
 
   def new

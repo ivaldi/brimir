@@ -98,44 +98,6 @@
 
     });
 
-    jQuery('#reply_to, #reply_cc, #reply_bcc').select2({
-        width: 'resolve',
-        createSearchChoice:function(term, data) {
-            if (jQuery(data).filter(function() {
-                return this.text.localeCompare(term)===0; }).length===0) {
-                    return {id:term, text:term};
-                }
-            },
-        multiple: true,
-        minimumInputLength: 3,
-        ajax: {
-          url: '/users.json',
-          dataType: 'json',
-          data: function (term, page) {
-            return {
-              q: term
-            };
-          },
-          results: function (data) {
-            return { results: data.users };
-          }
-        },
-        initSelection: function(element, callback) {
-          var id = jQuery(element).val();
-          if (id !== '') {
-            jQuery.ajax('/users.json', {
-              data: {
-                init: true,
-                q: id
-              },
-              dataType: 'json'
-            }).done(function(data) { 
-              callback(data.users); 
-            });
-          }
-        },
-    });
-
     tinyMCE.init({
       autoresize_bottom_margin: 0,
       selector: 'textarea.tinymce',
