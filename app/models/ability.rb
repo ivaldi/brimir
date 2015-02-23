@@ -21,7 +21,8 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
-    can [:create, :new], Ticket
+    can :create, Ticket
+    can :create, Attachment
 
     if user.agent?
 
