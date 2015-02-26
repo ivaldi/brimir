@@ -33,7 +33,7 @@ class UsersController < ApplicationController
       params[:user].delete(:password_confirmation)
     end
 
-    if current_user.agent?
+    if current_user == @user
       params[:user].delete(:agent) # prevent removing own agent permissions
     end
 
