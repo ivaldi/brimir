@@ -46,7 +46,7 @@
 
         <td class="priority-<%= ticket.priority %> table-nowrap">
           <span class="block"><%= ticket.user.email %></span>
-          <% if !ticket.subject.nil? %>
+          <% unless ticket.subject.blank? %>
             <a href="<%= ticket_url(ticket) %>">
               <strong><%= ticket.subject %></strong>
             </a>
