@@ -36,7 +36,10 @@ ru:
 
 # tickets/index
   count_tickets:
+    zero: 'нет заявок'
     one: '%{count} заявка'
+    few: '%{count} заявки'
+    many: '%{count} заявок'
     other: '%{count} заявок'
   count_tickets_containing:
     one: '%{count} заявка, содержит'
@@ -114,6 +117,10 @@ ru:
 
 # users/edit
   edit_user: 'Редактирование сотрудника'
+  omniauth_connect_title: Авторизация через Google аккаунт
+  omniauth_connect_text: Активировать авторизацию через Google аккаунт. После этого вы сможете "Входить через Google" как альтернатива для входа по умолчанию через email и пароль.
+  omniauth_connect_google_text: Связать с Google аккаунтом
+
 
 # users/index
   email: 'Email'
@@ -152,11 +159,17 @@ ru:
   edit_rule: 'Редактировать правило'
   delete_rule: 'Удалить правило'
   are_you_sure: 'Вы уверены?'
+  are_you_sure_empty_trash: 'Вы уверены, что хотите очистить корзину'
+
 
 # controllers/rules
   rule_added: 'Правило добавлено'
   rule_modified: 'Правило изменено'
   rule_deleted: 'Правило удалено'
+
+# email_addresses/index
+  new_email_address: Новый исходящий email адрес
+  email_addresses: Email адрес для исходящего письма
 
 
   activerecord:
