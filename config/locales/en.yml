@@ -59,6 +59,14 @@ en:
   search: Search
   minutes: minutes
   are_you_sure_empty_trash: Delete all tickets in the trash?
+  ticket:
+    id: ID
+    subject: Subject
+    customer: Customer
+    date: Date
+    labels: Labels
+    assignee: Assignee
+    replies: Replies
 
 # tickets/show
   add: Add
@@ -116,6 +124,7 @@ en:
 
 # notification_mailer/new_ticket
   view_new_ticket: View new ticket
+  views_ticket_id: 'Ticket #'
 # notification_mailer/new_reply
   new_reply: New reply
   view_new_reply: View new reply

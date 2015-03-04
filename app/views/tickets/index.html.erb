@@ -39,13 +39,27 @@
     </div>
   </div>
 </div>
-<table class="full">
+
+<table class="full" id="tickets_table">
+  <thead>
+    <tr>
+      <th><%= t('ticket.id') %></th>
+      <th><%= t('ticket.subject') %></th>
+      <th><%= t('ticket.customer') %></th>
+      <th><%= t('ticket.replies') %></th>
+      <th><%= t('ticket.labels') %></th>
+      <th><%= t('ticket.date') %></th>
+      <th class="text-right"><%= t('ticket.assignee') %></th>
+    </tr>
+  </thead>
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr data-ticket-url="<%= ticket_url(ticket) %>">
-
         <td class="priority-<%= ticket.priority %> table-nowrap">
-          <span class="block"><%= ticket.user.email %></span>
+          <%= ticket.id %>
+        </td>
+
+        <td>
           <% unless ticket.subject.blank? %>
             <a href="<%= ticket_url(ticket) %>">
               <strong><%= ticket.subject %></strong>
@@ -54,7 +68,10 @@
             <%= link_to ticket do %>
               <em><%= t(:no_subject) %></em>
             <% end %>
-          <% end %>
+          <% end %>          
+        </td>
+        <td>
+          <span class="block"><%= ticket.user.email %></span>
         </td>
 
         <td>
@@ -68,8 +85,12 @@
             <%= render label %>
           <% end %>
         </td>
-        <td class="nowrap text-right text-secondary">
+
+        <td>
           <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
+        </td>
+
+        <td class="nowrap text-right text-secondary">          
           <% if can? :update, ticket %>
             <% if ticket.assignee %>
               <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
