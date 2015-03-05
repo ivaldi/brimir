@@ -68,7 +68,6 @@ Some users have made requests for the following features. If you would like to c
 - Switchable property to support threads by using special tags in the subject line instead of relying on mail headers.
 - Support for hosted incoming mail services (Sendgrid, Mandrill), possibly using griddler gem.
 - Ability to sign in using a Single Sign On functionality based on Shared Token or JWT.
-- Signing in using LDAP.
 - Queue sorting by column header.
 - Private note addition to tickets.
 - Automated replies based on the current rule system.
