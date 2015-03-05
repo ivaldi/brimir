@@ -15,8 +15,17 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class User < ActiveRecord::Base
+  # Returns the auth strategy to use with Devise. Possible return values are
+  # :database_authenticatable, :ldap_authenticatable. If you choose
+  # :ldap_authenticatable, make sure to update config/ldap.yml with correct values.
+  # You may also want to make this dynamic:
+  #
+  #   def self.authentication_strategy
+  #     Rails.env.production? ? :ldap_authenticatable : :database_authenticatable
+  #   end
+  #
   def self.authentication_strategy
-    :database_authenticatable #or :ldap_authenticatable
+    :database_authenticatable
   end
 
   devise authentication_strategy, :recoverable, :rememberable, :trackable, :validatable,
