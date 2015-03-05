@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable,
+  devise authentication_strategy, :recoverable, :rememberable, :trackable, :validatable,
     :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :tickets, dependent: :destroy
@@ -41,5 +41,9 @@ class User < ActiveRecord::Base
   def self.agents_to_notify
     User.agents
         .where(notify: true)
+  end
+
+  def self.authentication_strategy
+    :database_authenticatable #or :ldap_authenticatable
   end
 end
