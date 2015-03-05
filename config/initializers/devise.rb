@@ -1,16 +1,16 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  # ==> LDAP Configuration 
+  # ==> LDAP Configuration
   # config.ldap_logger = true
-  # config.ldap_create_user = false
+  config.ldap_create_user = true
   # config.ldap_update_password = true
   # config.ldap_config = "#{Rails.root}/config/ldap.yml"
   # config.ldap_check_group_membership = false
   # config.ldap_check_attributes = false
   # config.ldap_use_admin_to_bind = false
   # config.ldap_ad_group_check = false
-  
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
@@ -135,7 +135,7 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   # config.timeout_in = 30.minutes
-  
+
   # If true, expires auth token on session timeout.
   # config.expire_auth_token_on_timeout = false
 
