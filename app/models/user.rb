@@ -15,6 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class User < ActiveRecord::Base
+  def self.authentication_strategy
+    :database_authenticatable #or :ldap_authenticatable
+  end
+
   devise authentication_strategy, :recoverable, :rememberable, :trackable, :validatable,
     :omniauthable, omniauth_providers: [:google_oauth2]
 
@@ -43,7 +47,4 @@ class User < ActiveRecord::Base
         .where(notify: true)
   end
 
-  def self.authentication_strategy
-    :database_authenticatable #or :ldap_authenticatable
-  end
 end
