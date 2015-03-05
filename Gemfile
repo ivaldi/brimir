@@ -40,6 +40,7 @@ gem 'sqlite3', group: :sqlite
 
 # authentication
 gem 'devise'
+gem "devise_ldap_authenticatable"
 
 # omniauth
 gem 'omniauth-google-oauth2'
