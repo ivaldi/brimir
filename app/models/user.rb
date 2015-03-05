@@ -15,8 +15,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class User < ActiveRecord::Base
-  devise Rails.application.config.devise_authentication_strategy, :recoverable, :rememberable, :trackable, :validatable,
-    :omniauthable, omniauth_providers: [:google_oauth2]
+  devise Rails.application.config.devise_authentication_strategy, :recoverable,
+    :rememberable, :trackable, :validatable,:omniauthable,
+    omniauth_providers: [:google_oauth2]
 
   has_many :tickets, dependent: :destroy
   has_many :replies, dependent: :destroy
