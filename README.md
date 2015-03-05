@@ -34,7 +34,13 @@ Next, load the database schema and precompile assets:
     rake db:schema:load RAILS_ENV=production
     rake assets:precompile RAILS_ENV=production
 
-Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
+If you want to use LDAP, configure config/ldap.yml accordingly, then change the auth strategy in the user model:
+
+    def self.authentication_strategy
+        :ldap_authenticatable
+    end
+
+(Optional for LDAP) Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
     bin/rails console production
     u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
