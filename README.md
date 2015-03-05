@@ -34,11 +34,9 @@ Next, load the database schema and precompile assets:
     rake db:schema:load RAILS_ENV=production
     rake assets:precompile RAILS_ENV=production
 
-If you want to use LDAP, configure config/ldap.yml accordingly, then change the auth strategy in the user model:
+If you want to use LDAP, configure config/application accordingly, then change the auth strategy in the user model:
 
-    def self.authentication_strategy
-        :ldap_authenticatable
-    end
+    config.devise_authentication_strategy = :ldap_authenticatable
 
 (Optional for LDAP) Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
