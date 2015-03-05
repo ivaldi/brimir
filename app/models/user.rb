@@ -39,6 +39,12 @@ class User < ActiveRecord::Base
   # identities for omniauth
   has_many :identities
 
+  # All ldap users are agents by default, remove/comment this method if this
+  # is not the intended behavior.
+  def ldap_before_save
+    self.agent = true
+  end
+
   scope :agents, -> {
     where(agent: true)
   }
