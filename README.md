@@ -34,7 +34,7 @@ Next, load the database schema and precompile assets:
     rake db:schema:load RAILS_ENV=production
     rake assets:precompile RAILS_ENV=production
 
-If you want to use LDAP, configure config/application accordingly, then change the auth strategy in the user model:
+If you want to use LDAP, configure config/ldap.yml accordingly, then change the auth strategy in your application config in file config/application.rb:
 
     config.devise_authentication_strategy = :ldap_authenticatable
 
