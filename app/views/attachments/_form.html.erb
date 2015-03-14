@@ -1,0 +1,16 @@
+<div class="panel mb ptm pbm">
+  <h5><%= t(:attach_files) %></h5>
+
+  <div data-attachments>
+
+    <%= f.fields_for :attachments, f.object.attachments do |ff| %>
+      <%= render 'attachments/form_row', f: ff %>
+    <% end %>
+
+  </div>
+
+  <% params = { reply: true } if f.object.is_a?(Reply) %>
+
+  <%= link_to t(:attach_files), new_attachment_path(params), remote: true, class: 'small button radius secondary' %>
+
+</div>

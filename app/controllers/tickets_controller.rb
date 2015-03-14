@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -15,78 +15,70 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketsController < ApplicationController
-  before_filter :authenticate_user!, except: [ :create ] 
+
+  before_filter :authenticate_user!, except: [:create, :new]
+  load_and_authorize_resource :ticket, except: :create
+  skip_authorization_check only: :create
+  skip_before_action :verify_authenticity_token, only: :create, if: 'request.format.json?'
+
+  # this is needed for brimir integration in other sites
+  before_filter :allow_cors, only: [:create, :new]
 
   def show
-    @ticket = Ticket.find(params[:id])
     @agents = User.agents
-    @statuses = Status.all
-    @priorities = Priority.all    
 
-    @reply = @ticket.replies.new
-    @reply.to = @ticket.user.email
+    @reply = @ticket.replies.new(user: current_user)
+    @reply.set_default_notifications!
+
+    @labeling = Labeling.new(labelable: @ticket)
   end
 
   def index
     @agents = User.agents
-    @statuses = Status.all
-    @priorities = Priority.all
-    
-    if !params[:status_id].nil?
 
-      # unassigned
-      if params[:status_id].to_i == 0
-        @status_name = ''
-      else
-        @status_name = @statuses.find(params[:status_id].to_i).name
+    params[:status] ||= 'open'
+
+    @tickets = @tickets.by_status(params[:status])
+      .search(params[:q])
+      .by_label_id(params[:label_id])
+      .filter_by_assignee_id(params[:assignee_id])
+      .ordered
+
+    respond_to do |format|
+      format.html do
+        @tickets = @tickets.paginate(page: params[:page],
+            per_page: current_user.per_page)
       end
-
-    else
-      @status_name = @statuses.default.first.name
-    end
-
-    @status_filter = params[:status_id]
-    @tickets = Ticket.order(:created_at).by_status(@status_filter)
-
-    if !params[:assignee_id].nil?
-      
-      # unassigned
-      if params[:assignee_id].to_i == 0
-        @tickets = @tickets.where(assignee_id: nil)
-      else
-        @tickets = @tickets.where(assignee_id: params[:assignee_id])
+      format.csv do
+        @tickets = @tickets.includes(:status_changes)
       end
-
     end
-
-    @tickets = @tickets.page(params[:page])
   end
 
   def update
-    @ticket = Ticket.find(params[:id])
-
     respond_to do |format|
       if @ticket.update_attributes(ticket_params)
-        
-        if !@ticket.assignee.nil?
+
+        # assignee set and not same as user who modifies
+        if !@ticket.assignee.nil? && @ticket.assignee.id != current_user.id
 
           if @ticket.previous_changes.include? :assignee_id
-            TicketMailer.notify_assigned(@ticket).deliver
+            NotificationMailer.assigned(@ticket).deliver_now
 
-          elsif @ticket.previous_changes.include? :status_id
-            TicketMailer.notify_status_changed(@ticket).deliver
+          elsif @ticket.previous_changes.include? :status
+            NotificationMailer.status_changed(@ticket).deliver_now
 
-          elsif @ticket.previous_changes.include? :priority_id
-            TicketMailer.notify_priority_changed(@ticket).deliver
+          elsif @ticket.previous_changes.include? :priority
+            NotificationMailer.priority_changed(@ticket).deliver_now
           end
 
         end
 
         format.html {
-          redirect_to @ticket, notice: 'Ticket was successfully updated.'
+          redirect_to @ticket, notice: I18n::translate(:ticket_updated)
         }
         format.js {
-          render notice: 'Ticket was succesfully updated.'
+          render notice: I18n::translate(:ticket_updated)
         }
         format.json {
           head :no_content
@@ -102,24 +94,114 @@ class TicketsController < ApplicationController
     end
   end
 
-  def create
+  def new
+    unless current_user.blank?
+      signature = { content: '<p></p>' + current_user.signature.to_s }
+    else
+      signature = {}
+    end
 
-    @ticket = TicketMailer.receive(params[:message])
+    unless params[:ticket].nil? # prefill params given?
+      @ticket = Ticket.new(signature.merge(ticket_params))
+    else
+      @ticket = Ticket.new(signature)
+    end
 
-    respond_to do |format|
-      format.json { render json: @ticket, status: :created }
+    unless current_user.nil?
+      @ticket.user = current_user
     end
   end
 
-  private
-    def ticket_params
-      params.require(:ticket).permit(
-          :content, 
-          :user_id,
-          :subject,
-          :status_id,
-          :assignee_id,
-          :priority_id,
-          :message_id)
+  def create
+    if params[:format] == 'json'
+      @ticket = TicketMailer.receive(params[:message])
+    else
+      @ticket = Ticket.new(ticket_params)
     end
+
+    if @ticket.save
+
+      Rule.apply_all(@ticket) unless @ticket.is_a?(Reply)
+
+      # where user notifications added?
+      if @ticket.notified_users.count == 0
+        @ticket.set_default_notifications!
+      end
+
+      # @ticket might be a Reply when via json post
+      if @ticket.is_a?(Ticket)
+        if @ticket.assignee.nil?
+          @ticket.notified_users.each do |user|
+            mail = NotificationMailer.new_ticket(@ticket, user)
+            mail.deliver_now
+            @ticket.message_id = mail.message_id
+          end
+
+          @ticket.save
+        else
+          NotificationMailer.assigned(@ticket).deliver_now
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html do
+
+        if @ticket.valid?
+
+          if current_user.nil?
+            render 'create'
+          else
+            redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
+          end
+
+        else
+          render 'new'
+        end
+
+      end
+
+      format.json do
+        render json: @ticket, status: :created
+      end
+
+      format.js { render }
+    end
+  end
+
+  protected
+    def ticket_params
+      if !current_user.nil? && current_user.agent?
+        params.require(:ticket).permit(
+            :from,
+            :content,
+            :subject,
+            :status,
+            :assignee_id,
+            :priority,
+            :message_id,
+            attachments_attributes: [
+              :file
+            ])
+      else
+        params.require(:ticket).permit(
+            :from,
+            :content,
+            :subject,
+            :priority,
+            attachments_attributes: [
+              :file
+            ])
+      end
+    end
+
+    def allow_cors
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'GET,POST'
+      headers['Access-Control-Allow-Headers'] =
+          %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(',')
+
+      head :ok if request.request_method == 'OPTIONS'
+    end
+
 end

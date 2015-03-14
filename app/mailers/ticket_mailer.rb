@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -16,94 +16,7 @@
 
 class TicketMailer < ActionMailer::Base
 
-  def reply(reply)
-    @reply = reply
-
-    replies_without_current = reply.ticket.replies.order(:id).select do |r|
-      r != reply
-    end
-
-    references = replies_without_current.collect do |r|
-      '<' + r.message_id.to_s + '>'
-    end
-
-    headers['References'] = references.join(' ')
-
-    if replies_without_current.size == 0
-      reply_to = reply.ticket
-      subject = reply_to.subject
-    else
-      reply_to = replies_without_current.last
-      subject = replies_without_current.first.ticket.subject
-    end
-
-    headers['In-Reply-To'] = '<' + reply_to.message_id.to_s + '>'
-
-    reply.attachments.each do |at|
-      attachments[at.file_file_name] = File.read(at.file.path)
-    end
-
-    mail(to: reply.to, cc: reply.cc, bcc: reply.bcc, subject: 'Re: ' \
-        + subject)
-  end
-
-  def notify_status_changed(ticket)
-    @ticket = ticket
-
-    mail(to: ticket.assignee.email, subject:
-        'Ticket status modified in ' + ticket.status.name + ' for: ' \
-        + ticket.subject)
-  end
-
-  def notify_priority_changed(ticket)
-    @ticket = ticket
-
-    mail(to: ticket.assignee.email, subject:
-        'Ticket priority modified in ' + ticket.priority.name + ' for: ' \
-        + ticket.subject)
-  end
-
-  def notify_assigned(ticket)
-    @ticket = ticket
-
-    mail(to: ticket.assignee.email, subject:
-        'Ticket assigned to you: ' + ticket.subject)
-  end
-
-  def notify_agents(ticket, incoming)
-
-    agents = []
-
-    agents << ticket.assignee.email unless ticket.assignee.nil?
-
-    ticket.replies.each do |reply|
-      if reply.user.agent
-        agents.append(reply.user.email)
-      end
-    end
-
-    if agents.size == 0
-      # notify all agents
-      agents = User.agents.pluck(:email)
-    else
-      # only the ones concerned, without duplicates
-      agents = agents.uniq
-    end
-
-    @ticket = ticket
-    @incoming = incoming
-
-    title = 'New reply to: ' + ticket.subject
-    if incoming == ticket
-      title = 'New ticket: ' + ticket.subject
-    end
-
-    mail(to: agents, subject: title,
-        template_name: 'notify_agents') # without template_name
-                                        # the functional tests fail
-  end
-
-  def normalize_body(part, charset) 
+  def normalize_body(part, charset)
     part.body.decoded.force_encoding(charset).encode('UTF-8')
   end
 
@@ -111,6 +24,11 @@ class TicketMailer < ActionMailer::Base
     require 'mail'
 
     email = Mail.new(message)
+
+    # is this an address verification mail?
+    if VerificationMailer.receive(email)
+      return
+    end
 
     content = ''
 
@@ -129,6 +47,12 @@ class TicketMailer < ActionMailer::Base
         content = email.body.decoded.encode('UTF-8')
       end
       content_type = 'text'
+    end
+
+    if email.charset
+      subject = email.subject.to_s.force_encoding(email.charset).encode('UTF-8')
+    else
+      subject = email.subject.to_s.encode('UTF-8')
     end
 
 
@@ -150,45 +74,32 @@ class TicketMailer < ActionMailer::Base
       end
     end
 
-    # search using the same method as Devise validation
-    from_user = User.find_first_by_auth_conditions(email: email.from.first)
-
-    if !from_user
-      password_length = 12
-      password = Devise.friendly_token.first(password_length)
-      from_user = User.create!(email: email.from.first, password: password,
-          password_confirmation: password)
-    end
-
     if response_to
       # reopen ticket
-      ticket.status = Status.default.first
-      ticket.content_type = content_type
+      ticket.status = :open
       ticket.save
 
       # add reply
       incoming = Reply.create!({
         content: content,
         ticket_id: ticket.id,
-        user_id: from_user.id,
-        message_id: email.message_id
-      })
-
-    else
-
-      # add reply
-      incoming = Ticket.create!({
-        user_id: from_user.id,
-        subject: email.subject,
-        content: content,
-        status_id: Status.default.first.id,
-        priority_id: Priority.default.first.id,
+        from: email.from.first,
         message_id: email.message_id,
         content_type: content_type
       })
 
+    else
 
-      ticket = incoming
+      # add new ticket
+      ticket = Ticket.create!({
+        from: email.from.first,
+        subject: subject,
+        content: content,
+        message_id: email.message_id,
+        content_type: content_type,
+      })
+
+      incoming = ticket
 
     end
 
@@ -212,10 +123,19 @@ class TicketMailer < ActionMailer::Base
 
     end
 
-    notify_agents(ticket, incoming).deliver
+    if ticket != incoming
+      incoming.set_default_notifications!
+
+      incoming.notified_users.each do |user|
+        mail = NotificationMailer.new_reply(incoming, user)
+        mail.deliver_now
+        incoming.message_id = mail.message_id
+      end
+
+      incoming.save
+    end
 
     return incoming
 
   end
-
 end

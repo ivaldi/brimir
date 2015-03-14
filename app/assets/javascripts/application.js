@@ -13,10 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
-//= require_tree .
+//= require select2
+//= require tinymce-jquery
+//= require tickets
+//= require fancybox
 
 (function() {
-  
+
   var dialog;
 
   function onsubmit(e) {
@@ -57,10 +60,29 @@
     dialog.find('[data-close-modal]').on('click', oncancel);
 
     /* show the dialog */
-    dialog.reveal('open');    
+    dialog.foundation('reveal','open');
   }
 
   jQuery(function() {
+
+    jQuery("a.fancybox").fancybox({
+      type : 'image',
+      helpers: {
+        overlay: {
+          locked: false
+        }
+      }
+    });
+
+    if(jQuery('[data-main]').length > 0){
+      var page = jQuery(document).height();
+      var offset = jQuery('[data-main]').offset().top;
+      var height = page - offset;
+
+      jQuery('[data-main]').css('min-height', height+'px');
+    }
+
+    jQuery('.select2').select2({ width: 'resolve' });
 
     dialog = jQuery('[data-dialog]');
 
@@ -76,6 +98,19 @@
 
     });
 
+    tinyMCE.init({
+      autoresize_bottom_margin: 0,
+      selector: 'textarea.tinymce',
+      statusbar: false,
+      menubar: false,
+      toolbar: 'undo redo | bold italic | bullist numlist | outdent indent removeformat',
+      height: 150,
+      plugins: 'autoresize,paste',
+    });
+
+    jQuery(document).foundation();
+
   });
+
 
 })();

@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -16,46 +16,55 @@
 
 class RepliesController < ApplicationController
 
+  load_and_authorize_resource :reply, except: [:create]
+
   def create
-    @reply = Reply.new(reply_params)
+    @reply = Reply.new
 
-    @reply.user = current_user    
+    @reply.assign_attributes(reply_params)
 
-    respond_to do |format|
-      if @reply.save
+    @reply.user = current_user
 
-        @reply.content += "\n\n" + @reply.user.signature.to_s
+    authorize! :create, @reply
 
-        mail = TicketMailer.reply(@reply)
+    begin
+      Reply.transaction do
+        @reply.save!
 
-        mail.deliver
+        # reopen ticket
+        @reply.ticket.status = :open
+        @reply.ticket.save!
 
-        # save message id for later reference
-        @reply.message_id = mail.message_id
-        @reply.content_type = 'markdown'
-        @reply.save
+        @reply.notified_users.each do |user|
+          mail = NotificationMailer.new_reply(@reply, user)
 
-        format.html { redirect_to @reply.ticket, notice: 'Reply was successfully created.' }
-        format.json { render json: @reply, status: :created, location: @reply }
-        format.js { render }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @reply.errors, status: :unprocessable_entity }
-        format.js { render }
+          mail.deliver_now
+          @reply.message_id = mail.message_id
+        end
+
+        @reply.save!
+        redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
       end
+    rescue => e
+      Rails.logger.error 'Exception occured on Reply transaction!'
+      Rails.logger.error "Message: #{e.message}"
+      Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
+      render action: 'new'
     end
-  end
-
-  def new
-    @reply = Reply.new(reply_params)
-
-    @reply.to = @reply.ticket.user.email
   end
 
   private
     def reply_params
-      params.require(:reply).permit(:content, :ticket_id, :message_id, :user_id,
-          :attachments_attributes, :to, :cc, :bcc)
+      params.require(:reply).permit(
+          :content,
+          :ticket_id,
+          :message_id,
+          :user_id,
+          notified_user_ids: [],
+          attachments_attributes: [
+              :file
+          ]
+      )
     end
 
 end

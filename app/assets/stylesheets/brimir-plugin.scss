@@ -1,0 +1,162 @@
+@mixin vendor($property, $value...){
+    -webkit-#{$property}: $value;
+       -moz-#{$property}: $value;
+        -ms-#{$property}: $value;
+         -o-#{$property}: $value;
+            #{$property}: $value;
+}
+
+@mixin transition($transition-property: all, $transition-time: 1000ms, $method: ease-out) {
+    -webkit-transition: $transition-property $transition-time $method;
+    -moz-transition: $transition-property $transition-time $method;
+    -ms-transition: $transition-property $transition-time $method;
+    -o-transition: $transition-property $transition-time $method;
+    transition: $transition-property $transition-time $method;
+}
+
+@mixin radius(){
+    @include vendor("border-radius", $_radius-default);
+}
+
+.brimir-plugin-popup{
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    width: 600px;
+    height: 400px;
+    margin-left: -300px;
+    margin-top: -200px;
+	padding: 15px;
+    background: #fff;
+    box-shadow: 0 0 5px 0 rgba(0,0,0,.5);
+    @include transition(all,.5s,ease-out);
+    z-index: 2;
+	font-size: 14px;
+
+    &.show{
+        top: 50%;
+    }
+
+    [data-brimir-plugin="close"]{
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        font-size: 30px;
+		color: #008cba;
+        background: #fff;
+        @include vendor(border-radius,100%);
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+
+        &:hover i{
+            color: #f00;
+        }
+    }
+
+	input, textarea {
+		width: 100%;
+		border: 1px solid #cccccc;
+		background: #fff;
+	}
+	textarea {
+		height: 150px;
+	}
+
+	label {
+		background-color: #fff;
+		color: #4d4d4d;
+		font-weight: normal;
+		text-align: left;
+		display: block;
+		padding: 0;
+		margin: 0;
+	}
+
+	h3 {
+		color: #333;
+		text-align: left;
+	}
+
+	input.button {
+		padding: 0;
+		margin: 15px 0 0 0;
+		color: #fff;
+		width: auto;
+		float: right;
+		background-color: #008cba;
+		border-color: #007095;
+		border-style: solid;
+		border-width: 0;
+		color: white;
+		cursor: pointer;
+		display: inline-block;
+		font-family: "Lato","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif;
+		font-size: 1rem;
+		font-weight: normal;
+		line-height: normal;
+		margin: 15px 0 0 0;
+		padding: 16px 32px;
+		position: relative;
+		text-align: center;
+		text-decoration: none;
+		transition: background-color 300ms ease-out 0s;
+	}
+
+	.panel {
+		border: none;
+		margin: 0;
+		padding: 0;
+	}
+}
+
+.brimir-plugin-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+    opacity: 0;
+    @include transition(all,.5s,ease-out);
+    pointer-events: none;
+    z-index: 1;
+
+    &.show{
+        opacity: 1;
+    }
+}
+
+.brimir-plugin-tabs{
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -32px;
+    border: 1px solid #007095;
+    border-right: none;
+    @include vendor("border-top-left-radius", 3px);
+    @include vendor("border-bottom-left-radius", 3px);
+
+
+    a{
+        display: block;
+        color: #fff;
+        font-size: 20px;
+        padding: 0 8px;
+        border-bottom: 1px solid #f00;
+        background: #008cba;
+        font-weight: bold;
+        text-decoration: none;
+
+        &:last-child{
+            border-bottom: 0;
+        }
+
+        &:hover{
+            color: #fff;
+        }
+
+    }
+}

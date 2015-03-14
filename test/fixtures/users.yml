@@ -1,14 +1,19 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 alice:
   email: alice@xxxx.com
   agent: true
   signature: 'Greets, Alice'
+  notify: true
 
 bob:
   email: bob@xxxx.com
-  agent: false
+  encrypted_password: $2a$10$R4kIaHGeNs1ssPGxh7pT/ulEx.P3umqE9CJKQKpDYgXuLVI6DKC9i #testtest
+  authentication_token: blabla
 
 charlie:
   email: charlie@xxxx.com
   agent: true
+  current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails
+
+dave:
+  email: dave@xxxx.com
+  current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails

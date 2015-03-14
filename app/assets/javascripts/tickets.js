@@ -1,5 +1,5 @@
 // Brimir is a helpdesk system to handle email support requests.
-// Copyright (C) 2012 Ivaldi http:gcivaldi.nl
+// Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -16,33 +16,44 @@
 
 jQuery(function() {
 
-  var forms = ['assignee', 'status', 'priority'];
+  jQuery('[data-assignee-id]').click(function(e) {
+    e.preventDefault();
 
-  for(var i = 0; i < forms.length; i++) {
-  
-    jQuery('[data-type="' + forms[i] + '"]').click(function(e) {
-      e.preventDefault();
+    var elem = jQuery(this);
+    var dialog = jQuery('#change-assignee');
+    var options = dialog.find('form select');
 
-      var elem = jQuery(this);
-      var type = elem.data('type');      
-      var dialog = jQuery('#change-' + type);
-      var options = dialog.find('form select');
+    /* set ticket id */
+    dialog.find('form').attr('action',
+        elem.parents('tr').data('ticket-url'));
 
-      /* set ticket id */
-      dialog.find('form').attr('action',
-          elem.parents('tr').data('ticket-url'));
-      
-
-      /* select assigned user */
-      options.removeAttr('selected');
-      options.find('[value="' + elem.data('id') + '"]').attr('selected', 'selected');
+    /* select assigned user */
+    options.removeAttr('selected');
+    options.find('[value="' + elem.data('assignee-id') + '"]').attr('selected', 'selected');
 
       /* show the dialog */
-      dialog.reveal();
+    dialog.foundation('reveal','open');
 
-    });
+  });
 
-  }
+  jQuery('.select2-create').select2({
+    width: 'resolve',
+    createSearchChoicePosition: 'bottom',
+    createSearchChoice: function(term, data) {
+      return { id:term, text:term };
+    },
+    ajax: {
+      url: '/labels.json',
+      dataType: 'json',
+      data: function (term, page) {
+        return {
+          q: term
+        };
+      },
+      results: function (data) {
+        return { results: data };
+      }
+    }
+  });
 
 });
-

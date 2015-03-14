@@ -1,5 +1,5 @@
 solution:
+  ticket: problem
   content: My first text reply
-  to: alice@alice.nl
-  cc: bob@bob.nl
-  bcc: charlie@charlie.nl
+  user: bob
+  message_id: 'reply123@reply123'

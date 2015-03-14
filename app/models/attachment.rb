@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -18,10 +18,38 @@ class Attachment < ActiveRecord::Base
   # polymorphic relation with tickets & replies
   belongs_to :attachable, polymorphic: true
 
-  has_attached_file :file, styles: { thumb: [ '50x50#', :jpg ] }
-  before_post_process :image?
+  has_attached_file :file,
+      path: ':rails_root/data/:class/:attachment/:id_partition/:style.:extension',
+      url: '/attachments/:id/:style',
+      styles: {
+          thumb: {
+              geometry: '50x50#',
+              format: :jpg,
+              # this will convert transparent parts to white instead of black
+              convert_options: '-flatten'
+          }
+      }
+  do_not_validate_attachment_file_type :file
+  before_post_process :thumbnail?
 
-  def image?
-    !file_content_type.match(/^image/).nil?
+  def thumbnail?
+
+    unless file_content_type.nil?
+
+      if !file_content_type.match(/^image/).nil? &&
+          system('which convert', out: '/dev/null')
+
+        return true
+      end
+
+      if !file_content_type.match(/pdf$/).nil? &&
+          system('which gs', out: '/dev/null')
+
+        return true
+      end
+
+    end
+
+    return false
   end
 end

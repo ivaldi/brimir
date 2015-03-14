@@ -1,105 +1,109 @@
-<div class="row">
-  <div class="twelve columns">
-    <h2 class="filter-title">Tickets</h2>
+<div class="panel no-b pam">
+  <div class="row collapse">
+    <div class="medium-6 columns">
+      <h3 class="filter-title no-m pts plm">
 
-
-    <dl class="sub-nav filter">
-      <dt>Assignee:</dt>
-
-      <%= active_elem_if 'dd', params[:assignee_id].nil? do
-          link_to 'All', tickets_path(params.merge(assignee_id: nil))
-        end %>
-
-      <%= active_elem_if 'dd', params[:assignee_id] == current_user.id.to_s do
-          link_to 'Yours', tickets_path(params.merge(assignee_id: current_user.id))
-        end %>
-
-      <%= active_elem_if 'dd', params[:assignee_id] == '0' do
-          link_to 'Unassigned', tickets_path(params.merge(assignee_id: 0))
-        end %>
-    </dl>
-
-    <dl class="sub-nav filter">
-      <dt>Status:</dt>
-
-      <%= active_elem_if 'dd', @status_filter == '0' do
-          link_to 'All', tickets_path(params.merge(status_id: 0))
-        end %>
-
-      <% @statuses.each do |status| %>
-
-        <%= active_elem_if 'dd', params[:status_id].to_i == status.id \
-            || (params[:status_id].nil? && status.default?) do
-
-          if status.default?
-            link_to status.name, tickets_path(params.merge(status_id: nil))
-          else 
-            link_to status.name, tickets_path(params.merge(status_id: status.id))
-          end
-
-        end %>
-
-      <% end %>
-    </dl>
-
-    <table class="full">
-      <thead>
-        <tr>
-          <th>Status</th>
-          <th>Priority</th>
-          <th width="50%">Title</th>
-          <th>Sender</th>
-          <th>Assigned to</th>          
-          <th>Reported on</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @tickets.each do |ticket| %>
-          <tr data-ticket-url="<%= ticket_url(ticket) %>">
-            <td>
-              <a data-type="status" data-id="<%= ticket.status.id %>" href="#"><%= ticket.status.name %></a>
-            </td>
-            <td>
-              <a data-type="priority" data-id="<%= ticket.priority.id %>" href="#"><%= ticket.priority.name %></a>
-            </td>
-            <td>
-              <% if !ticket.assignee %>
-                <span class="label alert round">Unassigned</span>
-              <% elsif ticket.assignee == current_user %>
-                <span class="label success round">Yours</span>
-              <% end %>
-              <% if !ticket.subject.nil? %>
-                <%= link_to ticket.subject, ticket %>
-              <% else %>
-                <%= link_to '(No subject)', ticket %>
-              <% end %>
-            </td>
-            <td>
-              <%= ticket.user.email %>
-            </td>
-            <td>
-              <% if ticket.assignee %>
-                <a data-type="assignee" data-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
-              <% else %>
-                <a data-type="assignee" data-id="" href="#"><em>Nobody</em></a>
-              <% end %>
-            </td>
-            <td>
-              <%= l ticket.created_at, format: :short %>
-            </td>
-          </tr>
-        <% end.empty? and begin %>
-          <tr>
-            <td colspan="100%">There are no <%= @status_name.downcase %> tickets for the requested assignee.</td>
-          </tr>
+        <% if params[:q].present? %>
+          <%= t(:count_tickets_containing, count: @tickets.count) %> '<em><%= params[:q].to_s %></em>'
+        <% else %>
+          <%= t(:count_tickets, count: @tickets.count) %>
         <% end %>
-      </tbody>
-    </table>
 
-    <%= will_paginate @tickets %>
+      </h3>
+    </div>
+    <div class="medium-6 columns">
+      <%= form_tag tickets_path, method: :get, class: 'prm' do %>
+        <%= hidden_field_tag(:assignee_id, params[:assignee_id]) unless params[:assignee_id].blank? %>
+        <%= hidden_field_tag :status, params[:status] %>
+        <div class="row collapse">
+          <% params.delete(:controller) %>
+          <% params.delete(:action) %>
+          <%= link_to tickets_path(:csv, params), class: 'secondary radius tiny button right mlm' do %>
+            <i class="fa fa-cloud-download" style="top:1px"></i>
+          <% end %>
+
+          <% if params[:status] == 'deleted' %>
+            <%= link_to tickets_deleted_path, method: :delete, 'data-confirm' => t(:are_you_sure_empty_trash), class: 'secondary radius tiny button right mlm' do %>
+              <i class="fa fa-bomb" style="top:1px"></i>
+            <% end %>
+          <% end %>
+
+          <div class="small-2 columns right">
+            <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', class: 'secondary radius no-bl no-m button postfix' %>
+          </div>
+          <div class="small-5 columns right">
+            <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
+<table class="full">
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr data-ticket-url="<%= ticket_url(ticket) %>">
 
-<%= render 'change_assignee_form', { ticket: Ticket.new } %>
-<%= render 'change_status_form', { ticket: Ticket.new } %>
-<%= render 'change_priority_form', { ticket: Ticket.new } %>
+        <td class="priority-<%= ticket.priority %> table-nowrap">
+          <span class="block"><%= ticket.user.email %></span>
+          <% unless ticket.subject.blank? %>
+            <a href="<%= ticket_url(ticket) %>">
+              <strong><%= ticket.subject %></strong>
+            </a>
+          <% else %>
+            <%= link_to ticket do %>
+              <em><%= t(:no_subject) %></em>
+            <% end %>
+          <% end %>
+        </td>
+
+        <td>
+          <% if ticket.replies.size > 0 %>
+            <span class="secondary ba radius label ml" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
+          <% end %>
+        </td>
+
+        <td class="text-secondary table-nowrap">
+          <% ticket.labels.viewable_by(current_user).each do |label| %>
+            <%= render label %>
+          <% end %>
+        </td>
+        <td class="nowrap text-right text-secondary">
+          <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
+          <% if can? :update, ticket %>
+            <% if ticket.assignee %>
+              <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
+            <% else %>
+              <a data-assignee-id="" href="#"><em><%= t(:unassigned) %></em></a>
+            <% end %>
+          <% else %>
+            <% if ticket.assignee %>
+              <i class="fa fa-user"></i> <%= ticket.assignee.email %>
+            <% else %>
+              <em><%= t(:unassigned) %></em>
+            <% end %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+
+    <% if @tickets.empty? %>
+      <tr>
+        <td colspan="100%"><%= t(:no_tickets_found) %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
+
+<% unless @tickets.empty? %>
+
+  <div class="row">
+    <div class="small-12 columns">
+      <%= will_paginate @tickets %>
+    </div>
+  </div>
+
+  <%= render 'change_assignee_form', { ticket: Ticket.new } %>
+
+<% end %>

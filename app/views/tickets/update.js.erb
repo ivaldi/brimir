@@ -1,1 +1,19 @@
-window.location.reload();
+<% if !params[:ticket][:status].blank? %>
+  jQuery('[data-dropdown="statuses-<%= @ticket.id %>"]')
+      .empty()
+      .append('<span class="fa fa-<%= status_icon(@ticket.status) %>"></span> ' +
+          '<%= j(t(@ticket.status)) %>');
+
+<% elsif !params[:ticket][:priority].blank? %>
+  jQuery('[data-dropdown="priorities-<%= @ticket.id %>"]')
+      .empty()
+      .append('<span class="priority-<%= @ticket.priority %> fa fa-circle"></span> ' +
+          '<%= j(t(@ticket.priority)) unless params[:short] == 'true' %>');
+
+<% else %>
+  window.location.reload();
+<% end %>
+
+<%# close all dropdowns %>
+var dropdowns = jQuery('.f-dropdown');
+dropdowns.foundation('dropdown', 'close', dropdowns);

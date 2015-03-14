@@ -1,13 +1,35 @@
 Brimir::Application.routes.draw do
 
-  resources :replies, only: [ :create, :new ]
+  devise_for :users, controllers: { omniauth_callbacks: 'omniauth' }
 
-  devise_for :users
+  resources :users
 
-  resources :users, only: [ :edit, :update ]
+  resources :tickets, only: [:index, :show, :update, :new, :create]
 
-  resources :tickets, only: [ :index, :show, :update, :create ]
+  namespace :tickets do
+    resource :deleted, only: :destroy, controller: :deleted
+  end
 
-  root :to => 'tickets#index'
+  resources :labelings, only: [:destroy, :create]
+
+  resources :rules
+
+  resources :labels, only: [:destroy, :update, :index]
+
+  resources :replies, only: [:create, :new]
+
+  get '/attachments/:id/:format' => 'attachments#show'
+  resources :attachments, only: [:index, :new]
+
+  resources :email_addresses, only: [:index, :create, :new, :destroy]
+
+  root to: 'tickets#index'
+
+  namespace :api do
+    namespace :v1 do
+      resources :tickets, only: [ :index, :show ]
+      resources :sessions, only: [ :create ]
+    end
+  end
 
 end

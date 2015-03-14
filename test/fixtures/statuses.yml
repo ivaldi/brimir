@@ -1,9 +1,0 @@
-open:
-  name: Open
-  default: true
-
-closed:
-  name: Closed
-
-deleted:
-  name: Deleted

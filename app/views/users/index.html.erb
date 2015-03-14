@@ -1,0 +1,35 @@
+<div class="row collapse">
+  <div class="medium-12 columns">
+    <div class="panel">
+      <div class="row collapse">
+        <div class="medium-9 columns">
+            <h4 class="filter-title no-m pts"><%= t(:users) %></h4>
+        </div>
+        <div class="medium-3 columns">
+            <%= link_to t(:new_user), new_user_path, class: 'no-m tiny button right radius' %>
+        </div>
+      </div>
+    </div>
+
+    <table class="full">
+      <thead>
+        <tr>
+          <th><%= t(:email) %></th>
+          <th><%= t(:role) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= link_to user.email, edit_user_path(user) %></td>
+            <td><%= (user.agent?) ? t(:agent) : t(:customer) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="pagination-centered">
+      <%= will_paginate @users %>
+    </div>
+  </div>
+</div>

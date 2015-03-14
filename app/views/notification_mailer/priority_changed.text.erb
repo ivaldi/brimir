@@ -1,0 +1,3 @@
+<%= t(:ticket_priority_changed) %>: <%= ticket_url(@ticket) %>
+
+<%= sanitize(@ticket.content.gsub(/(<br( )?\/>|<\/p>)/, "\n"), tags: []) %>

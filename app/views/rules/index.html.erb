@@ -1,0 +1,43 @@
+<div class="panel">
+  <div class="row collapse">
+    <div class="medium-6 columns">
+      <h4 class="no-m pts pbs"><%= t(:rules) %></h4>
+    </div>
+    <div class="medium-6 columns">
+      <%= link_to t(:new_rule), new_rule_path, class: 'no-m tiny button right radius' %>
+    </div>
+  </div>
+</div>
+
+<div class="row collapse">
+  <div class="large-12 columns">
+
+    <table class="full">
+      <thead>
+        <tr>
+          <th><%= t('activerecord.attributes.rule.filter_field') %></th>
+          <th><%= t('activerecord.attributes.rule.filter_operation') %></th>
+          <th><%= t('activerecord.attributes.rule.filter_value') %></th>
+          <th><%= t('activerecord.attributes.rule.action_operation') %></th>
+          <th><%= t('activerecord.attributes.rule.action_value') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rules.each do |rule| %>
+          <tr>
+            <td><%= link_to t(rule.filter_field, scope: 'activerecord.attributes.ticket'), edit_rule_path(rule) %></td>
+            <td><%= t(rule.filter_operation, scope: 'activerecord.attributes.rule.filter_operations') %></td>
+            <td><%= rule.filter_value %></td>
+            <td><%= t(rule.action_operation, scope: 'activerecord.attributes.rule.action_operations') %></td>
+            <td><%= rule.action_value %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="pagination-centered">
+      <%= will_paginate @rules %>
+    </div>
+  </div>
+</div>
+

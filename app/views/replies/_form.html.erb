@@ -1,52 +1,42 @@
-<%= form_for @reply do |r| %>
+<%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
 
   <%= r.hidden_field :ticket_id %>
+  <div class="ma">
+    <h3><%= t(:reply) %></h3>
 
-  <dl class="tabs contained">
-    <dt>Reply</dt>
-    <dd class="active"><a href="#edit">Edit</a></dd>
-    <dd><a href="#preview">Preview</a></dd>
-  </dl>
-  <ul class="tabs-content contained">
-    <li class="active" id="editTab">
-      <ul class="block-grid three-up">
-        <li>  
-          <%= r.label :to, 'To' %>
-          <%= r.text_field :to %>
-        </li>
+    <%
+      content = '<p></p>' + current_user.signature.to_s
+      reply_to = @reply.other_replies.order(:id).last
 
-        <li>
-          <%= r.label :cc, 'Cc' %>
-          <%= r.text_field :cc %>
-        </li>
+      if reply_to.nil?
+        reply_to = @reply.ticket
+      end
 
-        <li>
-          <%= r.label :bcc, 'Bcc' %>
-          <%= r.text_field :bcc %>
-        </li>
-      </ul>
+      content += '<br />'
+      content += t(:on_date_author_wrote, author: reply_to.user.email,
+          date: l(reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
+      content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
+    %>
 
-      <p>Replies are parsed with <a target="_blank" href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>.</p>
 
-      <%= r.text_area :content %>
+    <p>
+      <%= r.text_area :content, label: false, class: 'tinymce',
+          value: (@reply.content.nil? ? content : @reply.content) %>
+    </p>
 
-      <% markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML %>
-      <%= markdown.render(current_user.signature.to_s).html_safe %>
+    <%= render 'attachments/form', f: r %>
 
-      <div class="panel">
-        <%= r.fields_for :attachments, Attachment.new, child_index: nil do |a| %>
-          <%= a.label :file, 'Attach file(s)' %>
-          <%= a.file_field :file %>
-        <% end %>
-      </div>
-    </li>
-    <li id="previewTab">
-      <%= markdown.render(@reply.content.to_s).html_safe %>
-      <%= markdown.render(current_user.signature.to_s).html_safe %>
-    </li>
-  </ul>
-  <p>
-    <%= r.submit value: 'Send reply', class: 'button regular radius' %>
-  </p>
+    <p class="no-m">
+      <%= t(:notification_will_be_sent_to) %>
+    </p>
+    <p>
+      <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
+    </p>
+
+    <p>
+      <%= r.submit value: t(:send_reply), class: 'button regular radius' %>
+    </p>
+
+  </div>
 <% end %>
 

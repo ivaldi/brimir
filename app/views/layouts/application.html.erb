@@ -1,86 +1,203 @@
 <!DOCTYPE html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
-      <meta charset="utf-8" />
-      
-      <!-- Set the viewport width to device width for mobile -->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
-      <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
-    
-      <%= favicon_link_tag 'favicon.png' %>
-
-      <%= stylesheet_link_tag    "application" %>
-      
-      <%= javascript_include_tag "application" %>
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
+    <%= favicon_link_tag 'favicon.png' %>
+    <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,600italic' %>
+    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag 'application-print', media: 'print' %>
+    <%= javascript_include_tag 'vendor/modernizr' %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
-    <nav class="top-bar">
-      <ul>
-        <li class="name">
-          <h1>
-            <a href="<%= root_path %>">
-              Brimir
-            </a>
-          </h1>
-        </li>
-        <li class="toggle-topbar"><a href="#"></a></li>
-      </ul>
-      <section>
-        <% if user_signed_in? %>
-          <ul class="left">
-            <li class="divider"></li>
-            <li>
-              <%= link_to 'All tickets', root_path %>
-            </li>
-            <li class="divider"></li>
-          </ul>        
+
+  <body style="<%= 'background: #30363e' if user_signed_in? %>">
+
+    <% if user_signed_in? %>
+      <nav class="top-bar" data-topbar>
+        <ul class="title-area medium-3 large-2">
+          <li class="name">
+            <h1><a href="<%= root_path %>">BRIMIR</a></h1>
+          </li>
+          <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+        </ul>
+
+        <section class="top-bar-section">
+          <!-- Right Nav Section -->
           <ul class="right">
-            <li class="divider"></li>
-            <li class="has-dropdown">
+            <% if can? :manage, EmailAddress %>
+                <li><a href="<%= email_addresses_path %>"><i class="fa fa-envelope fa-fw"></i></a></li>
+            <% end %>
+            <% if can? :manage, Rule %>
+                <li id="joyride-rules"><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
+            <% end %>
+            <% if can? :manage, User %>
+                <li id="joyride-users"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
+            <% end %>
+            <li class="has-dropdown" id="joyride-settings">
               <a href="#"><%= current_user.email %></a>
               <ul class="dropdown">
                 <li>
-                  <%= link_to 'Settings', edit_user_path(current_user) %>
+                  <%= link_to edit_user_path(current_user) do %>
+                    <i class="fa-cogs fa fa-fw"></i> <%= t(:personal_settings) %>
+                  <% end %>
                 </li>
                 <li>
-                  <%= link_to 'Sign out', :destroy_user_session, method: :delete %>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                    <i class="fa-sign-out fa fa-fw"></i> <%= t(:sign_out) %>
+                  <% end %>
                 </li>
               </ul>
             </li>
           </ul>
-   	    <% end %>
-      </section>
-    </nav>
-
-    <% if notice %>
-        <div class="row">
-          <div class="twelve columns">
-              <div class="alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
-          </div>
-        </div>
+        </section>
+      </nav>
     <% end %>
-    <% if alert %>
-        <div class="row">
-          <div class="twelve columns">
-              <div class="alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
-          </div>
-        </div>
-    <% end %>
-    
-    <%= yield %>
 
-    <div data-dialog class="reveal-modal">
+    <div class="row collapse">
+      <% if user_signed_in? %>
+        <aside class="hide-for-small medium-3 large-2 columns">
+          <div class="new-ticket pam">
+            <%= link_to t(:new_ticket), new_ticket_path, class: 'radius tiny expand success button no-mb', id: 'joyride-tickets' %>
+          </div>
+          <ul class="off-canvas-list mtm">
+            <li>
+              <%= active_elem_if :a, params[:status] == 'open' &&
+                  params[:assignee_id].to_i == 0,
+                  href: root_path do %>
+
+                <span class="fa fa-inbox"></span><%= t(:inbox) %>
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, params[:status] == 'open' &&
+                  params[:assignee_id].to_i == current_user.id,
+                  href: tickets_path(assignee_id: current_user.id) do %>
+                <span class="fa fa-user"></span><%= t(:mine) %>
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, params[:status] == 'waiting',
+                  href: tickets_path(status: 'waiting') do %>
+                <span class="fa fa-clock-o"></span><%= t(:waiting) %>
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, params[:status] == 'closed',
+                   href: tickets_path(status: 'closed') do %>
+                <span class="fa fa-check"></span><%= t(:closed_tickets) %>
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, params[:status] == 'deleted',
+                  href: tickets_path(status: 'deleted') do %>
+                <span class="fa fa-trash-o"></span><%= t(:trashed) %>
+              <% end %>
+            </li>
+          </ul>
+
+          <ul class="off-canvas-list">
+            <li id="joyride-labels"><label><%= t(:labels) %></label></li>
+            <% @labels.each do |label| %>
+              <%
+                # toggle label on/off
+                if params[:label_id].to_i == label.id
+                  p = params.merge(label_id: nil)
+                else
+                  p = params.merge(label_id: label.id)
+                end
+                # remove pagination from link, start at first page
+                p.delete(:page)
+                p.delete(:controller)
+                p.delete(:action)
+              %>
+              <li>
+                <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">
+                  <i class="fa fa-circle-o" style="color: <%= label.color %>"></i>
+                  <%= label.name %>
+                  <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down hover-icon-i"></i>
+                </a>
+                <ul id="label-<%= label.id %>" class="f-dropdown" data-dropdown-content>
+                  <% Label::COLORS.each_with_index do |color, index| %>
+                    <li>
+                      <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
+                        <i class="fa fa-circle-o" style="color: <%= color %>"></i>
+                      <% end %>
+                    </li>
+                  <% end %>
+                  <li>
+                    <%= link_to label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true do %>
+                      <%= fa_icon 'trash' %>
+                    <% end %>
+                  </li>
+                </ul>
+              </li>
+            <% end %>
+          </ul>
+        </aside>
+        <%# 100vh - 60px because top-bar height is 60px %>
+        <div class="medium-9 large-10 columns" style="background: #fff; min-height: calc(100vh - 60px);" data-main>
+      <% else %>
+        <div class="medium-9 large-10 columns medium-centered large-centered">
+      <% end %>
+
+        <% if notice %>
+          <div data-alert class="notification alert-box success"><%= notice %><a href="#" class="close">&times;</a></div>
+        <% end %>
+        <% if alert %>
+          <div data-alert class="notification alert-box alert"><%= alert %><a href="#" class="close">&times;</a></div>
+        <% end %>
+
+        <%= yield %>
+
+      </div>
+    </div>
+
+    <div class="reveal-modal" data-reveal>
       <article>
       </article>
       <a class="close-reveal-modal">&#215;</a>
     </div>
+
+    <%= javascript_include_tag 'application' %>
+
+    <% if user_signed_in? && current_user.agent? && current_user.sign_in_count == 1 %>
+      <% current_user.sign_in_count += 1 %>
+      <% current_user.save %>
+      <ol class="joyride-list" data-joyride data-options="expose: true;scroll_speed: 1000;">
+        <li data-id="joyride-tickets" data-text="<%= t('joyride.next') %>" data-options="prev_button: false; tip_location: top;">
+          <h4><%= t(:new_ticket) %></h4>
+          <p><%= t('joyride.tickets') %></p>
+        </li>
+        <li data-id="joyride-settings" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
+          <h4><%= t(:personal_settings) %></h4>
+          <p><%= t('joyride.personal_settings') %></p>
+        </li>
+        <li data-id="joyride-labels" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: top;">
+          <h4><%= t(:labels) %></h4>
+          <p><%= t('joyride.labels') %></p>
+        </li>
+        <li data-id="joyride-rules" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
+          <h4><%= t(:rules) %></h4>
+          <p><%= t('joyride.rules') %></p>
+        </li>
+        <li data-id="joyride-users" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
+          <h4><%= t(:users) %></h4>
+          <p><%= t('joyride.users') %></p>
+        </li>
+        <li data-button="<%= t('joyride.end') %>" data-prev-text="<%= t('joyride.previous') %>">
+          <h4><%= t('joyride.final') %></h4>
+          <p>&nbsp;</p>
+        </li>
+      </ol>
+      <script>
+       jQuery(document).foundation('joyride','start');
+      </script>
+    <% end %>
 
   </body>
 </html>

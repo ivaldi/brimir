@@ -23,7 +23,16 @@ app/assets/stylesheets/scaffolds.css.scss
 
 # uploads
 public/system
+data
 
 # Capistrano deploy details
+config/deploy
 config/deploy.rb
 Capfile
+.capistrano
+
+# rcov files
+coverage
+
+# ignore rubymine
+.idea

@@ -1,0 +1,27 @@
+<%= form_for @rule do |f| %>
+  <div class="row mt mb">
+    <div class="large-6 columns">
+      <%
+        fields = []
+        [:from, :subject, :content].each do |key|
+          fields << [t(key, scope: 'activerecord.attributes.ticket'), key]
+        end
+      %>
+      <%= f.select(:filter_field, fields) %>
+
+      <%= f.collection_select(:filter_operation, t('activerecord.attributes.rule.filter_operations'), :first, :last) %>
+
+      <%= f.text_field :filter_value %>
+
+      <%= f.collection_select(:action_operation, t('activerecord.attributes.rule.action_operations'), :first, :last) %>
+
+      <%= f.text_field :action_value %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="medium-12 columns bt">
+      <%= f.submit t(:save), class: 'success button radius mt' %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,24 @@
+<%= form_for @ticket, url: tickets_url, html: { multipart: true } do |f| %>
+
+  <h3><%= t(:new_ticket) %></h3>
+
+  <p>
+    <%= f.text_field :from %>
+  </p>
+
+  <p>
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.text_area :content, class: 'tinymce' %>
+  </p>
+
+  <%= render 'attachments/form', f: f %>
+
+  <p>
+    <%= f.submit class: 'button regular radius' %>
+  </p>
+
+<% end %>
+
+
