@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212130849) do
+ActiveRecord::Schema.define(version: 20141219133150) do
 
   create_table "attachments", force: true do |t|
     t.integer  "attachable_id"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20141212130849) do
   end
 
   add_index "attachments", ["attachable_id"], name: "index_attachments_on_attachable_id"
+
+  create_table "email_addresses", force: true do |t|
+    t.string   "email"
+    t.boolean  "default",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "labelings", force: true do |t|
     t.integer  "label_id"

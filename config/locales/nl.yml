@@ -53,6 +53,7 @@ nl:
   add: Toevoegen
   ticket_by_at: Door %{email} op %{at}
   no_content: Geen inhoud
+  ticket_id: Ticketnummer
   status: Status
   assignee: Toegewezen aan
   num_replies:

@@ -35,6 +35,7 @@
         <a class="pull-right mtm text-default" href="#print" onclick="window.print()"><%= fa_icon 'print' %></a>
         <h3 class="mt no-mb text-default">
           <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(' + t(:no_subject) + ')</em>'.html_safe %>
+
           <% if can? :update, @ticket %>
             <ul data-labelings="" class="ib no-m">
               <% @ticket.labelings.each do |labeling| %>
@@ -70,7 +71,7 @@
         </h5>
 
         <ul class="inline-list no-m">
-          <li class="no-m">
+          <li><%= t(:ticket_id) %>: <%= @ticket.id %></li>
             <% if can? :update, @ticket %>
               <a href="#" data-dropdown="statuses-<%= @ticket.id %>" class="text-default">
                 <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"></span>
@@ -94,7 +95,7 @@
               <%= t(@ticket.priority) %>
             <% end %>
           </li>
-           <li>
+          <li>
             <% if can? :update, @ticket %>
               <a href="#" data-reveal-id="change-assignee" class="text-default">
                 <% if !@ticket.assignee %>

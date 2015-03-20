@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -15,30 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketMailer < ActionMailer::Base
-
-  def notify_status_changed(ticket)
-    @ticket = ticket
-
-    mail(to: ticket.assignee.email, subject:
-        'Ticket status modified in ' + ticket.status + ' for: ' \
-        + ticket.subject)
-  end
-
-  def notify_priority_changed(ticket)
-    @ticket = ticket
-
-    mail(to: ticket.assignee.email, subject:
-        'Ticket priority modified in ' + ticket.priority + ' for: ' \
-        + ticket.subject)
-  end
-
-  def notify_assigned(ticket)
-    @ticket = ticket
-
-    mail(to: ticket.assignee.email, subject:
-        'Ticket assigned to you: ' + ticket.subject)
-  end
-
 
   def normalize_body(part, charset)
     part.body.decoded.force_encoding(charset).encode('UTF-8')

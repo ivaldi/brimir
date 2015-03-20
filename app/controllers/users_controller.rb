@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -88,7 +88,7 @@ class UsersController < ApplicationController
       @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
       @locales = []
 
-      Dir.open('config/locales').each do |file|
+      Dir.open("#{Rails.root}/config/locales").each do |file|
         unless ['.', '..'].include?(file)
           code = file[0...-4] # strip of .yml
           @locales << [I18n.translate(:language_name, locale: code), code]

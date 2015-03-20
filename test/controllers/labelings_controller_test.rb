@@ -48,4 +48,8 @@ class LabelingsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should show labels in sidebar' do
+    
+  end
+
 end

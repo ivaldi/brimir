@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -62,13 +62,13 @@ class TicketsController < ApplicationController
         if !@ticket.assignee.nil? && @ticket.assignee.id != current_user.id
 
           if @ticket.previous_changes.include? :assignee_id
-            TicketMailer.notify_assigned(@ticket).deliver
+            NotificationMailer.assigned(@ticket).deliver
 
           elsif @ticket.previous_changes.include? :status
-            TicketMailer.notify_status_changed(@ticket).deliver
+            NotificationMailer.status_changed(@ticket).deliver
 
           elsif @ticket.previous_changes.include? :priority
-            TicketMailer.notify_priority_changed(@ticket).deliver
+            NotificationMailer.priority_changed(@ticket).deliver
           end
 
         end
@@ -127,16 +127,19 @@ class TicketsController < ApplicationController
         @ticket.set_default_notifications!
       end
 
-      if @ticket.assignee.nil?
-        @ticket.notified_users.each do |user|
-          mail = NotificationMailer.new_ticket(@ticket, user)
-          mail.deliver
-          @ticket.message_id = mail.message_id
-        end
+      # @ticket might be a Reply when via json post
+      if @ticket.is_a?(Ticket)
+        if @ticket.assignee.nil?
+          @ticket.notified_users.each do |user|
+            mail = NotificationMailer.new_ticket(@ticket, user)
+            mail.deliver
+            @ticket.message_id = mail.message_id
+          end
 
-        @ticket.save
-      else
-        TicketMailer.notify_assigned(@ticket).deliver
+          @ticket.save
+        else
+          TicketMailer.notify_assigned(@ticket).deliver
+        end
       end
     end
 

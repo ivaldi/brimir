@@ -1,4 +1,4 @@
-# Brimir is a helpdesk system to handle email support requests.
+# Brimir is a helpdesk system that can be used to handle email support requests.
 # Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
@@ -14,12 +14,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Priority < ActiveRecord::Base
+class EmailAddress < ActiveRecord::Base
 
-	validates_presence_of :name
+  def self.default_email
 
-  has_many :tickets
+    if !EmailAddress.where(default: true).first.nil?
+      return EmailAddress.where(default: true).first.email
 
-  scope :default, -> { where(default: true) }
+    elsif ActionMailer::Base.default[:from].present?
+      ActionMailer::Base.default[:from]
+
+    elsif Rails.configuration.action_mailer.default_options.present?
+      Rails.configuration.action_mailer.default_options[:from]
+
+    end
+
+  end
 
 end

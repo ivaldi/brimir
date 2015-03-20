@@ -1,0 +1,7 @@
+support:
+  email: outgoing@support.bla
+  default: true
+
+sales:
+  email: outgoing@sales.bla
+  default: false
