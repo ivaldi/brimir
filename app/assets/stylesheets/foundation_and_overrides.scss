@@ -13,8 +13,6 @@ $success-color: #54cca8;
 $warning-color: #ff8000;
 $info-color: #67c2e5;
 
-$button-function-factor: -3%;
-
 $row-width: 100%;
 $body-font-family: "Source Sans Pro", "Helvetica", Helvetica, Arial, sans-serif;
 $font-smoothing: antialiased;
@@ -57,5 +55,9 @@ $label-font-weight: normal;
 $label-padding: rem-calc(4 8);
 $label-font-color: #fff;
 $label-font-color-alt: $body-font-color;
+
+$button-border-width: 1px;
+$button-border-style: solid;
+$button-radius: 0;
 
 @import 'foundation';

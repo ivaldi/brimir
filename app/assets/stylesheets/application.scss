@@ -29,6 +29,7 @@
 @import "helpers";
 @import "sidemenu";
 @import "topbar";
+@import "forms";
 @import "inbox";
 
 /* --- Table --- */
@@ -101,10 +102,6 @@ table thead tr th{
 .sub-nav.filter{
 	float: right;
 	margin-top: 25px;
-}
-
-.button.secondary{
-	border: 1px solid #ddd;
 }
 
 .button .fa{

@@ -1,6 +1,9 @@
 <details>
-  <summary class="pal bb">Reply by <strong><%= reply.user.email %></strong> <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %> <%= t(:ago) %></summary>
-  <div id="reply-<%=reply.id%>" class="<%= div_class %> plxxl prl pbl ptl bg-white">
+  <summary class="pal bb">
+    <span>Reply by <strong><%= reply.user.email %></strong></span>
+    <span class="right"><%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %> <%= t(:ago) %></span>
+  </summary>
+  <div id="reply-<%=reply.id%>" class="<%= div_class %> plxxl prl pbl ptl bg-white bb">
     <% if reply.content_type == 'html' %>
       <% content = reply.content %>
     <% else %>
