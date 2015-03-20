@@ -145,6 +145,8 @@ pt-BR:
   rule_modified: Regra adicionada
   rule_deleted: Regra deletada
 
+# private_messages/_message
+  private_message_at: postado em -
 
   activerecord:
     attributes:

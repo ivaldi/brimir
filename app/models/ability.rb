@@ -24,9 +24,11 @@ class Ability
     can :create, Ticket
     can :create, Attachment
 
+
     if user.agent?
 
       can :manage, :all
+      can :create, PrivateMessage
 
     else
       customer user

@@ -1,0 +1,16 @@
+<div class="ma">
+  <% @ticket.private_messages.each do |private_message| %>
+    <% unless private_message.message.blank?%>
+      <div class="panel">
+        <span class="label secondary">
+          <a href="mailto:<%= private_message.user.email %>"><%= private_message.user.email %></a>  - said:
+        </span>
+        <div class="panel callout radius">
+          <%= private_message.message %>
+        </div>
+        <span class="label secondary"> on <%= private_message.created_at.strftime("%B %d, %Y %H:%M %p") %></span>
+        <%= t(:private_message_sent_at, email: private_message.user.email, at: l(private_message.created_at.in_time_zone(current_user.time_zone), format: :long)) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

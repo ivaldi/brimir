@@ -76,6 +76,13 @@
     <% if can? :create, @reply %>
       <%= render 'replies/form' %>
     <% end %>
+    <% if can? :create, @private_message %>
+      <%= render 'private_messages/form' %>
+    <% end %>
+
+    <% if can? :show, @private_message %>
+      <%= render 'private_messages/message' %>
+    <% end %>
 
   </div>
 

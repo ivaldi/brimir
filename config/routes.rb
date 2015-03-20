@@ -18,6 +18,8 @@ Brimir::Application.routes.draw do
 
   resources :replies, only: [:create, :new]
 
+  resources :private_messages, only: [:create, :new]
+
   get '/attachments/:id/:format' => 'attachments#show'
   resources :attachments, only: [:index, :new]
 
