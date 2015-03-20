@@ -1,32 +1,24 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.1.0'
+gem 'rails', '~> 4.2.0'
 
-gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 5.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 
 gem 'uglifier', '>= 1.0.3'
 
-gem 'compass-rails', '~> 1.1.2'
-gem 'foundation-rails', '~> 5.4.2'
+gem 'compass-rails', '~> 2.0.0'
+gem 'foundation-rails', '~> 5.5.0'
 
 gem 'jquery-rails'
 
 # foundation form errors
 gem 'foundation_rails_helper'
 
+# to use debugger
+gem 'byebug', group: [:development, :test]
+
 group :development do
-  # to use debugger
-  gem 'byebug'
-
-  # sqlite database during development
-  gem 'sqlite3'
-
-  # deploy with Capistrano
-  gem 'capistrano'
-  gem 'capistrano-rvm'
-  gem 'capistrano-rails'
-
   # Spring application pre-loader
   gem 'spring'
 end
@@ -43,9 +35,15 @@ end
 gem 'pg', group: :postgresql
 # Optional MySQL for production
 gem 'mysql2', group: :mysql
+# Optional SQLite for development
+gem 'sqlite3', group: :sqlite
 
 # authentication
 gem 'devise'
+gem 'devise_ldap_authenticatable'
+
+# omniauth
+gem 'omniauth-google-oauth2'
 
 # authorization
 gem 'cancancan'
@@ -78,11 +76,10 @@ gem 'devise-i18n'
 gem 'non-stupid-digest-assets'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder', '~> 2.2'
 
 # time traveling
 gem 'timecop'
 
 # fancybox for showing image in lightbox
 gem 'fancybox2-rails', '~> 0.2.8'
-

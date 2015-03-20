@@ -16,11 +16,13 @@
 
 require 'test_helper'
 
-class UsersControllerTest < ActionController::TestCase
+class RulesControllerTest < ActionController::TestCase
 
   setup do
     @alice = users(:alice)
     @bob = users(:bob)
+
+    @rule = rules(:assign_when_ivaldi)
   end
 
   test 'should get index' do
@@ -40,78 +42,52 @@ class UsersControllerTest < ActionController::TestCase
   test 'should get edit' do
     sign_in @alice
 
-    get :edit, id: @alice.id
+    get :edit, id: @rule
     assert_response :success
   end
 
-  test 'should modify signature' do
+  test 'should update' do
     sign_in @alice
 
-    put :update, id: @alice.id, user: { signature: 'Alice' }
-    assert_equal 'Alice', assigns(:user).signature
-    assert_redirected_to users_url
+    put :update, id: @rule, rule: {
+        filter_field: 'subject',
+    }
+    assert_equal 'subject', assigns(:rule).filter_field
+    assert_redirected_to rules_url
   end
 
-  test 'customer may not become agent' do
-    sign_in @bob
+  test 'should get new' do
+    sign_in @alice
 
-    assert_no_difference 'User.agents.count' do
-      put :update, id: @bob.id, user: { agent: true, signature: 'Bob' }
-    end
+    get :new
+    assert_response :success
   end
 
-  test 'customer may not create agent' do
-    sign_in @bob
+  test 'should create' do
+    sign_in @alice
 
-    assert_no_difference 'User.agents.count' do
-      post :create, user: {
-          email: 'harry@getbrimir.com',
-          password: 'testtest',
-          password_confirmation: 'testtest',
-          agent: true,
-          signature: 'Harry'
+    assert_difference 'Rule.count' do
+      post :create, rule: {
+        filter_field: @rule.filter_field,
+        filter_operation: @rule.filter_operation,
+        filter_value: @rule.filter_value,
+        action_operation: @rule.action_operation,
+        action_value: @rule.action_value,
       }
-    end
 
-    assert_response :unauthorized
+      assert_redirected_to rules_url
+    end
   end
 
-  test 'should update user' do
-    sign_in @alice    
+  test 'should remove rule' do
+    sign_in @alice
 
-    assert_difference 'Labeling.count' do
-      patch :update, id: @bob.id, user: {
-        email: 'test@test.test',
-        label_ids: [labels(:bug).id]
-      }
+    assert_difference 'Rule.count', -1 do
+      delete :destroy, id: @rule
+
+      assert_redirected_to rules_url
     end
-    
-    @bob.reload
 
-    assert_equal 'test@test.test', @bob.email
-    assert_equal 1, @bob.labels.count
-    assert_equal labels(:bug), @bob.labels.first
-
-    assert_redirected_to users_url
   end
 
-  test 'should not update user' do
-    sign_in @bob
-
-    assert_no_difference 'Labeling.count' do
-      patch :update, id: @bob.id, user: {
-        email: 'test@test.test',
-        label_ids: [labels(:bug).id],
-        password: 'testtest',
-        password_confirmation: 'testtest',
-      }
-    end
-    
-    @bob.reload
-
-    refute_equal 'test@test.test', @bob.email
-    assert_equal 0, @bob.labels.count
-
-    assert_redirected_to tickets_url
-  end
 end

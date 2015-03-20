@@ -31,4 +31,9 @@ class LabelsController < ApplicationController
     respond_to :js
   end
 
+  def index
+    @labels = Label.viewable_by(current_user).where('name LIKE ?', "#{params[:q]}%")
+    respond_to :json
+  end
+
 end

@@ -48,6 +48,7 @@ nl:
   no_tickets_found: Geen tickets gevonden.
   search: Zoek
   minutes: minuten
+  are_you_sure_empty_trash: Alle tickets uit de prullenbak verwijderen?
 
 # tickets/show
   add: Toevoegen
@@ -89,6 +90,7 @@ nl:
 # replies/_form
   reply: Reactie
   attach_files: Bestand(en) toevoegen
+  attach_file: Bestand toevoegen
   send_reply: Verstuur reactie
   on_date_author_wrote: 'Op %{date} schreef %{author}:'
   notification_will_be_sent_to: Een notificatie van je reactie wordt verstuurd naar
@@ -116,6 +118,9 @@ nl:
 
 # users/edit
   edit_user: Gebruiker wijzigen
+  omniauth_connect_title: Authenticatie via Google
+  omniauth_connect_text: Activeer authenticatie via een Google Account. Daarna kunt u inloggen met uw google account als een alternatief voor e-mailadres en wachtwoord authenticatie.
+  omniauth_connect_google_text: Verbind met Google Account
 
 # users/index
   email: E-mailadres
@@ -144,8 +149,17 @@ nl:
   ticket_added: Ticket toegevoegd
   ticket_updated: Ticket gewijzigd
 
+# controllers/tickets/deleted
+  trash_emptied: Alle tickets zijn uit de prullenbak verwijderd
+
 # controllers/replies
   reply_added: Reactie toegevoegd
+
+# controllers/omniauth
+  already_linked_accounts: Al met een Google Account verbonden
+  successfully_linked_account: Succesvol verbonden met Google Account
+  not_linked_account_cant_login: Er is nog geen gebruiker verbonden met deze provider. Log eerst in en verbind via uw persoonlijke instellingen scherm.
+  third_party_failure: Fout tijdens authenticatie. Heeft u "Contacts API" en "Google+ API" aangezet via de Google API console?
 
 # rules/index
   new_rule: Nieuwe regel
@@ -159,6 +173,18 @@ nl:
   rule_added: Regel toegevoegd
   rule_modified: Regel gewijzigd
   rule_deleted: Regel verwijderd
+
+# email_addresses/index
+  new_email_address: Nieuw uitgaand e-mailadres
+  email_addresses: E-mailadressen voor uitgaande e-mails
+
+# email_addresses/new
+  verification_mail_will_be_sent: Zorg dat dit e-mailadres correct doorstuurd naar Brimir. Een automatische verificatie e-mail wordt verstuurd nadat u op opslaan klikt. Alleen geverifieerde e-mailadressen kunnen gebruikt worden voor uitgaande e-mail.
+  mark_spam_spf: Brimir mails worden mogelijk als spam gemarkeerd als deze server niet wordt toegevoegd aan het SPF DNS record van het bovenstaande e-mailadres.
+
+# controllers/email_addresses
+  email_address_added: E-mailadres toevoegd
+  email_address_removed: Email address verwijderd
 
   activerecord:
     attributes:
@@ -180,6 +206,7 @@ nl:
         status: Status
         priority: Prioriteit
         assignee_id: Toegewezen aan
+        created_at: Aangemaakt op
 
       rule:
         filter_field: Veld
@@ -195,3 +222,8 @@ nl:
           change_priority: wijzig prioriteit in
           assign_user: toewijzen aan
         action_value: Parameter voor actie
+
+      email_address:
+        email: E-mailadres
+        default: Gebruik als standaard uitgaand e-mailadres
+        verification_token: Geverifieerd

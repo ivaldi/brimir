@@ -14,13 +14,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# filter rules applied to a ticket when it is created
 class Rule < ActiveRecord::Base
-
-  validates_presence_of :filter_field, :filter_value
+  validates :filter_field, :filter_value, presence: true
 
   enum filter_operation: [:contains]
-  enum action_operation: [:assign_label, :notify_user,
-      :change_status, :change_priority, :assign_user]
+  enum action_operation: [:assign_label, :notify_user, :change_status,
+                          :change_priority, :assign_user]
 
   def filter(ticket)
 
@@ -30,9 +30,7 @@ class Rule < ActiveRecord::Base
       value = ticket.attributes[filter_field]
     end
 
-    if filter_operation == 'contains'
-      value.include?(filter_value)
-    end
+    value.include?(filter_value) if filter_operation == 'contains'
   end
 
   def execute(ticket)
@@ -43,9 +41,7 @@ class Rule < ActiveRecord::Base
     elsif action_operation == 'notify_user'
       user = User.where(email: action_value).first
 
-      unless user.nil?
-        ticket.notified_users << user
-      end
+      ticket.notified_users << user unless user.nil?
 
     elsif action_operation == 'change_status'
       ticket.status = action_value
@@ -67,12 +63,8 @@ class Rule < ActiveRecord::Base
   end
 
   def self.apply_all(ticket)
-
     Rule.all.each do |rule|
-      if rule.filter(ticket)
-        rule.execute(ticket)
-      end
+      rule.execute(ticket) if rule.filter(ticket)
     end
   end
-
 end

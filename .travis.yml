@@ -4,11 +4,12 @@ bundler_args: --without development --jobs 4
 env:
   - DB=postgresql
   - DB=mysql
+  - DB=sqlite3
 
 rvm:
-  - 1.9.3
   - 2.0.0
-  - 2.1.2
+  - 2.1.5
+  - 2.2.0
 
 before_script:
   - sudo apt-get update -qq

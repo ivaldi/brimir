@@ -51,7 +51,7 @@ class RepliesControllerTest < ActionController::TestCase
     # do we send a mail?
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       post :create, reply: {
-          content: '<br /><br /><p><strong>this is in bold</strong></p>',
+          content: '<br><br><p><strong>this is in bold</strong></p>',
           ticket_id: @ticket.id,
           notified_user_ids: @reply.users_to_notify.map { |u| u.id },
       }
@@ -60,7 +60,7 @@ class RepliesControllerTest < ActionController::TestCase
     mail = ActionMailer::Base.deliveries.last
 
     # html in the html part
-    assert_match '<br /><br /><p><strong>this is in bold</strong></p>',
+    assert_match '<br><br><p><strong>this is in bold</strong></p>',
         mail.html_part.body.decoded
 
     # no html in the text part
@@ -86,11 +86,11 @@ class RepliesControllerTest < ActionController::TestCase
             content: '**this is in bold**',
             ticket_id: @ticket.id,
             notified_user_ids: @reply.users_to_notify.map { |u| u.id },
-        },
-        attachment: [
-            fixture_file_upload('attachments/default-testpage.pdf'),
-            fixture_file_upload('attachments/default-testpage.pdf')
-        ]
+            attachments_attributes: {
+              '0' => { file: fixture_file_upload('attachments/default-testpage.pdf') },
+              '1' => { file: fixture_file_upload('attachments/default-testpage.pdf') }
+            }
+      }
     end
   end
 
@@ -111,5 +111,17 @@ class RepliesControllerTest < ActionController::TestCase
     assert_equal [users(:alice).email], mail.to
   end
 
+  test 'should re-open ticket' do
+    @ticket.status = 'closed'
+    @ticket.save
+
+    post :create, reply: {
+        content: 're-open please',
+        ticket_id: @ticket.id,
+    }
+
+    @ticket.reload
+    assert_equal 'open', @ticket.status
+  end
 
 end

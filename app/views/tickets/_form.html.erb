@@ -12,6 +12,9 @@
   <p>
     <%= f.text_area :content, class: 'tinymce' %>
   </p>
+
+  <%= render 'attachments/form', f: f %>
+
   <p>
     <%= f.submit class: 'button regular radius' %>
   </p>

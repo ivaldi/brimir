@@ -23,6 +23,8 @@ class Ticket < ActiveRecord::Base
   belongs_to :assignee, class_name: 'User'
 
   has_many :attachments, as: :attachable, dependent: :destroy
+  accepts_nested_attributes_for :attachments, allow_destroy: true
+
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
@@ -71,9 +73,10 @@ class Ticket < ActiveRecord::Base
 
   scope :search, ->(term) {
     if !term.nil?
-      term = '%' + term.downcase + '%'
-      where('LOWER(subject) LIKE ? OR LOWER(content) LIKE ?',
-          term, term)
+      term.gsub!(/[\\%_]/) { |m| "!#{m}" }
+      term = "%#{term.downcase}%"
+      where('LOWER(subject) LIKE ? ESCAPE ? OR LOWER(content) LIKE ? ESCAPE ?',
+          term, '!', term, '!')
     end
   }
 

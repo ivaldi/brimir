@@ -29,7 +29,7 @@ class NotificationMailer < ActionMailer::Base
     add_attachments(ticket)
 
     unless ticket.message_id.blank?
-      headers['Message-ID'] = ticket.message_id
+      headers['Message-ID'] = "<#{ticket.message_id}>"
     end
 
     @ticket = ticket
@@ -51,7 +51,7 @@ class NotificationMailer < ActionMailer::Base
     add_in_reply_to_message_id(reply)
 
     unless reply.message_id.blank?
-      headers['Message-ID'] = reply.message_id
+      headers['Message-ID'] = "<#{reply.message_id}>"
     end
 
     @reply = reply
@@ -63,7 +63,9 @@ class NotificationMailer < ActionMailer::Base
   def status_changed(ticket)
     @ticket = ticket
 
-    headers['In-Reply-To'] = '<' + ticket.message_id.to_s + '>'
+    unless ticket.message_id.blank?
+      headers['Message-ID'] = "<#{ticket.message_id}>"
+    end
     mail(to: ticket.assignee.email, subject:
         'Ticket status modified in ' + ticket.status + ' for: ' \
         + ticket.subject)
@@ -72,7 +74,9 @@ class NotificationMailer < ActionMailer::Base
   def priority_changed(ticket)
     @ticket = ticket
 
-    headers['In-Reply-To'] = '<' + ticket.message_id.to_s + '>'
+    unless ticket.message_id.blank?
+      headers['Message-ID'] = "<#{ticket.message_id}>"
+    end
     mail(to: ticket.assignee.email, subject:
         'Ticket priority modified in ' + ticket.priority + ' for: ' \
         + ticket.subject)
@@ -81,7 +85,9 @@ class NotificationMailer < ActionMailer::Base
   def assigned(ticket)
     @ticket = ticket
 
-    headers['In-Reply-To'] = '<' + ticket.message_id.to_s + '>'
+    unless ticket.message_id.blank?
+      headers['Message-ID'] = "<#{ticket.message_id}>"
+    end
     mail(to: ticket.assignee.email, subject:
         'Ticket assigned to you: ' + ticket.subject)
   end

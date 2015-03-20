@@ -156,11 +156,10 @@ class TicketsControllerTest < ActionController::TestCase
     assert_select '[data-labelings]'
 
     # should contain this for label removing with javascript
-    assert_select '[data-labeling-id=?]',
-        @ticket.labelings.first.id
+    assert_select "[data-labeling-id='#{@ticket.labelings.first.id}']"
 
     # should contain this anchor for linking from notification email
-    assert_select '[id=reply-' + @ticket.replies.first.id.to_s + ']'
+    assert_select "[id=reply-#{@ticket.replies.first.id}]"
 
     # should have this icon for label color update javascript (sidebar)
     assert_select 'aside ul li i.fa-circle-o'

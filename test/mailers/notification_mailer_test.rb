@@ -22,7 +22,7 @@ class NotificationMailerTest < ActionMailer::TestCase
     ticket = tickets(:problem)
 
     assert_difference 'ActionMailer::Base.deliveries.size' do
-      NotificationMailer.new_ticket(ticket, User.agents.first).deliver
+      NotificationMailer.new_ticket(ticket, User.agents.first).deliver_now
     end
 
     mail = ActionMailer::Base.deliveries.last
@@ -34,7 +34,7 @@ class NotificationMailerTest < ActionMailer::TestCase
     reply = replies(:solution)
 
     assert_difference 'ActionMailer::Base.deliveries.size' do
-      NotificationMailer.new_reply(reply, User.last).deliver
+      NotificationMailer.new_reply(reply, User.last).deliver_now
     end
 
     mail = ActionMailer::Base.deliveries.last

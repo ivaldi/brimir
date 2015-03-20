@@ -25,6 +25,11 @@ class TicketMailer < ActionMailer::Base
 
     email = Mail.new(message)
 
+    # is this an address verification mail?
+    if VerificationMailer.receive(email)
+      return
+    end
+
     content = ''
 
     if email.multipart?
@@ -42,6 +47,12 @@ class TicketMailer < ActionMailer::Base
         content = email.body.decoded.encode('UTF-8')
       end
       content_type = 'text'
+    end
+
+    if email.charset
+      subject = email.subject.to_s.force_encoding(email.charset).encode('UTF-8')
+    else
+      subject = email.subject.to_s.encode('UTF-8')
     end
 
 
@@ -82,7 +93,7 @@ class TicketMailer < ActionMailer::Base
       # add new ticket
       ticket = Ticket.create!({
         from: email.from.first,
-        subject: email.subject,
+        subject: subject,
         content: content,
         message_id: email.message_id,
         content_type: content_type,
@@ -117,7 +128,7 @@ class TicketMailer < ActionMailer::Base
 
       incoming.notified_users.each do |user|
         mail = NotificationMailer.new_reply(incoming, user)
-        mail.deliver
+        mail.deliver_now
         incoming.message_id = mail.message_id
       end
 

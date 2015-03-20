@@ -36,10 +36,16 @@ ru:
 
 # tickets/index
   count_tickets:
+    zero: 'нет заявок'
     one: '%{count} заявка'
+    few: '%{count} заявки'
+    many: '%{count} заявок'
     other: '%{count} заявок'
   count_tickets_containing:
+    zero: 'нет заявки'
     one: '%{count} заявка, содержит'
+    few: '%{count} заявки, содержит'
+    many: '%{count} заявок, содержат'
     other: '%{count} заявок, содержат'
   priority: 'Приоритет'
   replies: 'ответов'
@@ -56,7 +62,10 @@ ru:
   status: 'Статус'
   assignee: 'Ответственный'
   num_replies:
+    zero: 'нет ответов'
     one: '%{count} ответ'
+    few: '%{count} ответа'
+    many: '%{count} ответов'
     other: '%{count} ответов'
   ago: 'назад'
   high: 'Высокий'
@@ -102,6 +111,7 @@ ru:
 
 # notification_mailer/new_ticket
   view_new_ticket: 'Посмотреть новую заявку'
+
 # notification_mailer/new_reply
   new_reply: 'Новый ответ'
   view_new_reply: 'Посмотреть новый ответ'
@@ -114,6 +124,10 @@ ru:
 
 # users/edit
   edit_user: 'Редактирование сотрудника'
+  omniauth_connect_title: Авторизация через Google аккаунт
+  omniauth_connect_text: Активировать авторизацию через Google аккаунт. После этого вы сможете "Входить через Google" как альтернатива для входа по умолчанию через email и пароль.
+  omniauth_connect_google_text: Связать с Google аккаунтом
+
 
 # users/index
   email: 'Email'
@@ -152,11 +166,17 @@ ru:
   edit_rule: 'Редактировать правило'
   delete_rule: 'Удалить правило'
   are_you_sure: 'Вы уверены?'
+  are_you_sure_empty_trash: 'Вы уверены, что хотите очистить корзину'
+
 
 # controllers/rules
   rule_added: 'Правило добавлено'
   rule_modified: 'Правило изменено'
   rule_deleted: 'Правило удалено'
+
+# email_addresses/index
+  new_email_address: Новый исходящий email адрес
+  email_addresses: Email адрес для исходящего письма
 
 
   activerecord:

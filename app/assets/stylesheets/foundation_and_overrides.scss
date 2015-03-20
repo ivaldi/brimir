@@ -37,7 +37,7 @@ $off-canvas-link-padding: rem-calc(8 20);
 $off-canvas-link-border-bottom: none;
 
 $topbar-title-weight: bold;
-$topbar-height: 65px;
+$topbar-height: rem-calc(65);
 $topbar-bg-color: $primary-color;
 $topbar-link-bg-hover: darken($primary-color, 5);
 

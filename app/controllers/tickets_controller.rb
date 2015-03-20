@@ -19,6 +19,7 @@ class TicketsController < ApplicationController
   before_filter :authenticate_user!, except: [:create, :new]
   load_and_authorize_resource :ticket, except: :create
   skip_authorization_check only: :create
+  skip_before_action :verify_authenticity_token, only: :create, if: 'request.format.json?'
 
   # this is needed for brimir integration in other sites
   before_filter :allow_cors, only: [:create, :new]
@@ -62,13 +63,13 @@ class TicketsController < ApplicationController
         if !@ticket.assignee.nil? && @ticket.assignee.id != current_user.id
 
           if @ticket.previous_changes.include? :assignee_id
-            NotificationMailer.assigned(@ticket).deliver
+            NotificationMailer.assigned(@ticket).deliver_now
 
           elsif @ticket.previous_changes.include? :status
-            NotificationMailer.status_changed(@ticket).deliver
+            NotificationMailer.status_changed(@ticket).deliver_now
 
           elsif @ticket.previous_changes.include? :priority
-            NotificationMailer.priority_changed(@ticket).deliver
+            NotificationMailer.priority_changed(@ticket).deliver_now
           end
 
         end
@@ -120,7 +121,7 @@ class TicketsController < ApplicationController
 
     if @ticket.save
 
-      Rule.apply_all(@ticket)
+      Rule.apply_all(@ticket) unless @ticket.is_a?(Reply)
 
       # where user notifications added?
       if @ticket.notified_users.count == 0
@@ -132,13 +133,13 @@ class TicketsController < ApplicationController
         if @ticket.assignee.nil?
           @ticket.notified_users.each do |user|
             mail = NotificationMailer.new_ticket(@ticket, user)
-            mail.deliver
+            mail.deliver_now
             @ticket.message_id = mail.message_id
           end
 
           @ticket.save
         else
-          TicketMailer.notify_assigned(@ticket).deliver
+          NotificationMailer.assigned(@ticket).deliver_now
         end
       end
     end
@@ -149,7 +150,7 @@ class TicketsController < ApplicationController
         if @ticket.valid?
 
           if current_user.nil?
-            return render text: I18n::translate(:ticket_added)
+            render 'create'
           else
             redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
           end
@@ -178,13 +179,19 @@ class TicketsController < ApplicationController
             :status,
             :assignee_id,
             :priority,
-            :message_id)
+            :message_id,
+            attachments_attributes: [
+              :file
+            ])
       else
         params.require(:ticket).permit(
             :from,
             :content,
             :subject,
-            :priority)
+            :priority,
+            attachments_attributes: [
+              :file
+            ])
       end
     end
 

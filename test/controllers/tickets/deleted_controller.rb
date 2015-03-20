@@ -1,5 +1,7 @@
-# Brimir is a helpdesk system that can be used to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+require 'test_helper'
+
+# Brimir is a helpdesk system to handle email support requests.
+# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -14,15 +16,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-require 'test_helper'
-require 'rails/performance_test_help'
+module Tickets
+  # tests for interaction with deleted tickets
+  class DeletedControllerTest < ActionController::TestCase
 
-class BrowsingTest < ActionDispatch::PerformanceTest
-  # Refer to the documentation for all available options
-  # self.profile_options = { :runs => 5, :metrics => [:wall_time, :memory]
-  #                          :output => 'tmp/performance', :formats => [:flat] }
+    setup do
+      sign_in users(:alice)
+    end
 
-  def test_homepage
-    get '/'
+    test 'should empty trash' do
+
+      Ticket.update_all(status: Ticket.statuses[:deleted])
+
+      assert_difference 'Ticket.count', -3 do
+        delete :destroy
+        assert_redirected_to tickets_url(status: :deleted)
+      end
+    end
   end
 end

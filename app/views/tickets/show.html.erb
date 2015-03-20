@@ -1,3 +1,16 @@
+<div class="row bb">
+  <div class="medium-12 columns">
+    <a class="pull-right mtm" href="#print" onclick="window.print()"><%= fa_icon 'print' %></a>
+    <h3 class="mt">
+      <%= !@ticket.subject.blank? ? @ticket.subject : "<em>(#{t(:no_subject)})</em>".html_safe %>
+    </h3>
+    <h5 class="subheader text-secondary mb">
+      <%= t(:ticket_by_at, email: @ticket.user.email, at: l(@ticket.created_at.in_time_zone(current_user.time_zone), format: :long)) %>
+    </h5>
+  </div>
+</div>
+
+
 <div class="row collapse">
   <div class="large-4 hide-for-medium columns">
     <section class="tickets">
@@ -47,16 +60,10 @@
               <%= f.hidden_field :labelable_id %>
               <%= f.hidden_field :labelable_type %>
 
-              <div class="row collapse">
-                <div class="small-6 columns">
-                  <%= f.fields_for :label, Label.new do |f| %>
-                    <%= f.text_field :name, label: false, placeholder: t(:label_name) %>
-                  <% end %>
-                </div>
-                <div class="small-6 columns">
-                  <%= f.button t(:add), type: 'submit', class: 'button postfix' %>
-                </div>
-              </div>
+              <%= f.fields_for :label, Label.new do |f| %>
+                <%= f.text_field :name, label: false, placeholder: t(:label_name), class: 'select2-create' %>
+              <% end %>
+              <%= f.button t(:add), type: 'submit', class: 'tiny radius button mtm' %>
             <% end %>
           <% else %>
             <ul class="inline-list">

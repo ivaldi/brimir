@@ -29,6 +29,15 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
+            <% if can? :manage, EmailAddress %>
+                <li><a href="<%= email_addresses_path %>"><i class="fa fa-envelope fa-fw"></i></a></li>
+            <% end %>
+            <% if can? :manage, Rule %>
+                <li id="joyride-rules"><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
+            <% end %>
+            <% if can? :manage, User %>
+                <li id="joyride-users"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
+            <% end %>
             <li class="has-dropdown" id="joyride-settings">
               <a href="#"><%= current_user.email %></a>
               <ul class="dropdown">
@@ -105,6 +114,8 @@
                 end
                 # remove pagination from link, start at first page
                 p.delete(:page)
+                p.delete(:controller)
+                p.delete(:action)
               %>
               <li>
                 <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">

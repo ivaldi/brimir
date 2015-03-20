@@ -21,17 +21,6 @@ class RepliesController < ApplicationController
   def create
     @reply = Reply.new
 
-    if !params[:attachment].nil?
-
-      params[:attachment].each do |file|
-
-        @reply.attachments.new(file: file)
-
-      end
-
-      params[:reply].delete(:attachments_attributes)
-    end
-
     @reply.assign_attributes(reply_params)
 
     @reply.user = current_user
@@ -41,17 +30,25 @@ class RepliesController < ApplicationController
     begin
       Reply.transaction do
         @reply.save!
+
+        # reopen ticket
+        @reply.ticket.status = :open
+        @reply.ticket.save!
+
         @reply.notified_users.each do |user|
           mail = NotificationMailer.new_reply(@reply, user)
 
-          mail.deliver
+          mail.deliver_now
           @reply.message_id = mail.message_id
         end
 
         @reply.save!
         redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
       end
-    rescue
+    rescue => e
+      Rails.logger.error 'Exception occured on Reply transaction!'
+      Rails.logger.error "Message: #{e.message}"
+      Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
       render action: 'new'
     end
   end
@@ -63,7 +60,10 @@ class RepliesController < ApplicationController
           :ticket_id,
           :message_id,
           :user_id,
-          notified_user_ids: []
+          notified_user_ids: [],
+          attachments_attributes: [
+              :file
+          ]
       )
     end
 

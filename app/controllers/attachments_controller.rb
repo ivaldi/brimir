@@ -16,6 +16,9 @@
 
 class AttachmentsController < ApplicationController
 
+  before_filter :authenticate_user!, except: [:create, :new]
+  load_and_authorize_resource :attachment, except: :show
+
   def show
     @attachment = Attachment.find(params[:id])
 
@@ -40,5 +43,4 @@ class AttachmentsController < ApplicationController
       render text: I18n::translate(:file_not_found), status: :not_found
     end
   end
-
 end

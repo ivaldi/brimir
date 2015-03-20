@@ -1,4 +1,3 @@
-# author: https://github.com/cschlack
 de:
   language_name: Deutsch
 # layouts/application
@@ -10,9 +9,20 @@ de:
   trashed: Gelöschte Tickets
   users: Benutzer
   rules: Regeln
-  personal_settings: Benutzereinstellungen
+  personal_settings: Persönliche Einstellungen
   sign_out: Ausloggen
   delete: Entfernen
+
+  joyride:
+    tickets: Mit diesem Button kann jeder ein Ticket erstellen.
+    personal_settings: Erstelle eine Signatur, definiere eine Zeitzone oder ändere weitere Einstellungen.
+    labels: Nach der Erstellung eines Labels für einen Benutzer oder ein Ticket, erscheint es hier. Labels können als Filter verwendet werden.
+    rules: Weise einem Ticket mit Regeln automatisiert Attribute zu.
+    users: Füge weitere Agenten oder Benutzer hinzu.
+    final: Danke, dass du Brimir verwendest!
+    next: Weiter
+    previous: Zurück
+    end: Ende
 
 # devise/sessions/new
   sign_in: Anmelden
@@ -53,11 +63,13 @@ de:
   add: Neu
   ticket_by_at: Erstellt von %{email} am %{at}
   no_content: Kein Inhalt
+  ticket_id: Ticketnummer
   status: Status
   assignee: Bearbeiter
   num_replies:
     one: '%{count} Antwort'
     other: '%{count} Antworten'
+  ago: vor
   high: hoch
   medium: normal
   low: gering
@@ -67,7 +79,8 @@ de:
   deleted: gelöscht
   labels: Label
   label_name: Label
-  notification_sent_to: 'Es wurde eine Benachrichtigung an folgende E-Mail-Adressen geschickt:'
+  notification_sent_to: 'Es wurde eine Benachrichtigung an folgende E-Mail-Adressen gesendet:'
+  no_notifications_sent: 'Es wurde keine Benachrichtigung gesendet.'
 
 # tickets/_change_priority_form
   change: Priorität setzen
@@ -86,11 +99,13 @@ de:
 # replies/_form
   reply: Antwort schreiben
   attach_files: Datei(en) anhängen
+  attach_file: Datei anhängen
   send_reply: Anwort senden
   on_date_author_wrote: 'Am %{date} hat %{author} folgendes geschrieben:'
+  notification_will_be_sent_to: 'Es wird eine Benachrichtung an folgende Adresse gesendet:'
 
 # ticket_mailer/notify_assigned.text.erb
-  ticket_assigned: Ein Ticket wurde Ihnen zugewiesen
+  ticket_assigned: Ihnen wurde ein Ticket zugewiesen
 
 # ticket_mailer/notify_priority_changed.text.erb
   ticket_priority_changed: Die Priorität des Tickets wurde geändert
@@ -112,25 +127,28 @@ de:
 
 # users/edit
   edit_user: Benutzer bearbeiten
+  omniauth_connect_title: Authentifizierung per Google
+  omniauth_connect_text: Die Möglichkeit der Authentifizierung per Google muss hier einmalig vorgenommen werden. Danach ist die Anmeldung per Google zusätzlich zum Standardlogin möglich.
+  omniauth_connect_google_text: Mit Google-Konto verbinden
 
 # users/index
   email: E-Mail-Adresse
   role: Rolle
-  agent: Kundenbetreuer
+  agent: Agent
   customer: Kunde
 
 # users/_form
-  account_settings: Einstellungen
-  only_fill_in_passwords_when_modifying: Die beiden Passwort-Felder können leer bleiben, wenn das Passwort beibehalten werden soll.
-  user_is_an_agent: Dieser Benutzer ist Kundenbetreuer
+  account_settings: Account-Einstellungen
+  only_fill_in_passwords_when_modifying: Passwort-Felder leer lassen, um aktuelles Passwort beizubehalten.
+  user_is_an_agent: Dieser Benutzer ist ein Agent
   receive_new_ticket_notifications: Benachrichtigen, wenn ein neues Ticket erstellt wird
   email_settings: E-Mail-Einstellungen
   save: Speichern
-  access_control: Zugriff erlauben
+  access_control: Zugriff gestatten
   have_access_to_label: 'Der Benutzer darf nur Tickets mit diesen Labels öffnen:'
 
 # controllers/attachments
-  file_not_found: Datei wurde nicht gefunden
+  file_not_found: Datei nicht gefunden
 
 # controllers/users
   settings_saved: Einstellungen wurden gespeichert
@@ -143,19 +161,39 @@ de:
 # controllers/replies
   reply_added: Antwort hinzugefügt
 
+# controllers/omniauth
+  already_linked_accounts: Ihr Benutzer ist bereits mit diesem Google-Konto verbunden
+  successfully_linked_account: Das Google-Konto wurde Ihrem Account hinzugefügt. Sie können sich nun durch Google anmelden.
+  not_linked_account_cant_login:  Dieser Benutzer ist noch nicht mit einem Google-Konto verbunden. In den Benutzereinstellungen können Konten verknüpft werden.
+  third_party_failure: Bei der Verbindung mit Google ist ein Fehler aufgetreten. Haben sie "Contacts API" und "Google+ API" aktiviert?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Alternative Anmeldung
+  omniauth_sign_in_google: Google
+
 # rules/index
   new_rule: Neue Regel hinzufügen
 
 # rules/edit
   edit_rule: Regel bearbeiten
-  delete_rule: Regel löschen
+  delete_rule: Regel entfernen
   are_you_sure: Sind Sie sicher?
 
 # controllers/rules
   rule_added: Regel hinzugefügt
   rule_modified: Regel geändert
-  rule_deleted: Regel gelöscht
+  rule_deleted: Regel entfernt
 
+# email_addresses/index
+  new_email_address: Neue E-Mail-Adresse für ausgehende Nachrichten anlegen
+  email_addresses: E-Mail-Adressen für ausgehende Nachrichten
+
+# email_addresses/new
+  verification_mail_will_be_sent: Bitte stelle sicher, dass diese E-Mail-Adresse korrekt an Brimir weiterleitet. Es wurde eine Nachricht an die angegebene Adresse verschickt, die verifiziert werden muss. Nur verifizierte E-Mail-Adressen können für ausgehende Nachrichten verwendet werden.
+  mark_spam_spf: Nachrichten könnten beim Empfänger als Spam eingestuft werden, wenn ein vorhandener SPF-Record im DNS-Server nicht aktualisiert wird.
+
+# controllers/email_addresses
+  email_address_added: E-Mail-Adresse wurde hinzugefügt
 
   activerecord:
     attributes:
@@ -166,9 +204,12 @@ de:
         signature: E-Mail-Signatur
         remember_me: Angemeldet bleiben
         label_ids: Label
+        locale: Sprache
+        time_zone: Zeitzone
+        per_page: Tickets pro Seite
 
       ticket:
-        from: E-Mail-Adresse des Kunden
+        from: E-Mail-Adresse des Absenders
         subject: Betreff
         content: Inhalt
         status: Status
@@ -186,4 +227,11 @@ de:
           assign_label: Label zuweisen
           notify_user: Benachrichtigung senden an
           change_status: Status setzen auf
-        action_value: Parameter für die Aktion
+          change_priority: Priorität verändern auf
+          assign_user: Zuweisen an
+        action_value: Aktions-Parameter
+
+      email_address:
+        email: E-Mail-Adresse
+        default: Als Standard-E-Mail-Adresse für ausgehende Nachrichten verwenden
+        verification_token: Verifiziert

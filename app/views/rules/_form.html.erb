@@ -9,23 +9,11 @@
       %>
       <%= f.select(:filter_field, fields) %>
 
-      <%
-        operations = []
-        Rule.filter_operations.each do |key, value|
-          operations << [t(key, scope: 'activerecord.attributes.rule.filter_operations'), key]
-        end
-      %>
-      <%= f.select(:filter_operation, operations) %>
+      <%= f.collection_select(:filter_operation, t('activerecord.attributes.rule.filter_operations'), :first, :last) %>
 
       <%= f.text_field :filter_value %>
 
-      <%
-        operations = []
-        Rule.action_operations.each do |key, value|
-          operations << [t(key, scope: 'activerecord.attributes.rule.action_operations'), key]
-        end
-      %>
-      <%= f.select(:action_operation, operations) %>
+      <%= f.collection_select(:action_operation, t('activerecord.attributes.rule.action_operations'), :first, :last) %>
 
       <%= f.text_field :action_value %>
     </div>

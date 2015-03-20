@@ -25,12 +25,7 @@
             value: (@reply.content.nil? ? content : @reply.content) %>
       </p>
 
-      <p class="no-m">
-        <%= label_tag 'attachment[]', t(:attach_files) %>
-      </p>
-      <p>
-        <%= file_field_tag 'attachment[]', multiple: true, label: false %>
-      </p>
+      <%= render 'attachments/form', f: r %>
 
       <p class="no-m">
         <%= t(:notification_will_be_sent_to) %>

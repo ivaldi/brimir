@@ -1,15 +1,38 @@
 <div class="panel pam no-bt">
   <div class="row collapse">
-    <div class="medium-3 columns">
-      <%= form_tag tickets_path, method: :get, class: 'prm mts mbs' do %>
+    <div class="medium-6 columns">
+      <h3 class="filter-title no-m pts plm">
+
+        <% if params[:q].present? %>
+          <%= t(:count_tickets_containing, count: @tickets.count) %> '<em><%= params[:q].to_s %></em>'
+        <% else %>
+          <%= t(:count_tickets, count: @tickets.count) %>
+        <% end %>
+
+      </h3>
+    </div>
+    <div class="medium-6 columns">
+      <%= form_tag tickets_path, method: :get, class: 'prm' do %>
         <%= hidden_field_tag(:assignee_id, params[:assignee_id]) unless params[:assignee_id].blank? %>
         <%= hidden_field_tag :status, params[:status] %>
         <div class="row collapse">
-          <div class="small-9 columns">
-            <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
+          <% params.delete(:controller) %>
+          <% params.delete(:action) %>
+          <%= link_to tickets_path(:csv, params), class: 'secondary radius tiny button right mlm' do %>
+            <i class="fa fa-cloud-download" style="top:1px"></i>
+          <% end %>
+
+          <% if params[:status] == 'deleted' %>
+            <%= link_to tickets_deleted_path, method: :delete, 'data-confirm' => t(:are_you_sure_empty_trash), class: 'secondary radius tiny button right mlm' do %>
+              <i class="fa fa-bomb" style="top:1px"></i>
+            <% end %>
+          <% end %>
+
+          <div class="small-2 columns right">
+            <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', class: 'secondary radius no-bl no-m button postfix' %>
           </div>
-          <div class="small-3 columns">
-            <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', class: 'text-primary radius no-bl no-m button postfix' %>
+          <div class="small-5 columns right">
+            <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
           </div>
         </div>
       <% end %>
@@ -37,8 +60,8 @@
         <input type="checkbox" value="" name="" class="no-mb"/>
         <p class="no-mb plm">
           <span class="block"><%= ticket.user.email %></span>
-          <% if !ticket.subject.nil? %>
-            <a href="<%= ticket_url(ticket) %>" class="text-default text-overflow block">
+          <% unless ticket.subject.blank? %>
+            <a href="<%= ticket_url(ticket) %>">
               <strong><%= ticket.subject %></strong>
             </a>
           <% else %>

@@ -47,9 +47,9 @@ class TicketMailerTest < ActionMailer::TestCase
     thread_reply = read_fixture('thread_reply').join
 
     # ticket created?
-    assert_difference 'Ticket.count' do 
+    assert_difference 'Ticket.count' do
       # user created?
-      assert_difference 'User.count' do 
+      assert_difference 'User.count' do
         ticket = TicketMailer.receive(thread_start)
 
         # assign to first user
@@ -62,9 +62,9 @@ class TicketMailerTest < ActionMailer::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', 1 do
 
       # reply created?
-      assert_difference 'Reply.count' do 
+      assert_difference 'Reply.count' do
         # user re-used?
-        assert_difference 'User.count', 0 do 
+        assert_difference 'User.count', 0 do
           TicketMailer.receive(thread_reply)
         end
       end
@@ -75,27 +75,34 @@ class TicketMailerTest < ActionMailer::TestCase
   test 'email with attachments work' do
 
     attachments = read_fixture('attachments').join
-    assert_difference 'Ticket.count' do 
-      assert_difference 'Attachment.count', 2 do 
+    assert_difference 'Ticket.count' do
+      assert_difference 'Attachment.count', 2 do
         TicketMailer.receive(attachments)
       end
     end
-  
+
   end
 
   test 'email with unkown reply_to' do
 
     unknown_reply_to = read_fixture('unknown_reply_to').join
-    assert_difference 'Ticket.count' do 
+    assert_difference 'Ticket.count' do
       TicketMailer.receive(unknown_reply_to)
     end
   end
 
   test 'email with capitalized from address' do
     capitalized = read_fixture('capitalized').join
-    assert_difference 'Ticket.count', 2 do 
+    assert_difference 'Ticket.count', 2 do
       TicketMailer.receive(capitalized)
       TicketMailer.receive(capitalized)
+    end
+  end
+
+  test 'should verify email address' do
+    verification = read_fixture('verification').join
+    assert_difference 'EmailAddress.where(verification_token: nil).count' do
+      TicketMailer.receive(verification)
     end
   end
 

@@ -9,4 +9,21 @@ class HtmlTextHelperTest < ActionView::TestCase
       assert_operator line.length, :<=, 80 - "\n".length
     end
   end
+
+  test 'should remove older quotes correctly' do
+
+    content = '
+hi, thanks for you reply
+
+On date, person wrote:
+> older quote
+>> older quote
+> > older quote
+'
+
+    stripped = wrap_and_quote(content)
+
+    refute_match(/On date, person wrote/, stripped)
+    refute_match(/older quote/, stripped)
+  end
 end
