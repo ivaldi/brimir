@@ -10,9 +10,9 @@ class PrivateMessagesControllerTest < ActionController::TestCase
 
   test "create private message" do
     put :create, private_message: {
-                   ticket_id: @ticket.id,
-                   message: "test message"
-               }
+      ticket_id: @ticket.id,
+      message: "test message"
+    }
 
     assert "test message", @ticket.private_messages[0].message
   end

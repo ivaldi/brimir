@@ -31,8 +31,8 @@ class TicketsController < ApplicationController
     @reply.set_default_notifications!
 
     @private_message = @ticket.private_messages.new(
-        user: current_user,
-        ticket: @ticket
+      user: current_user,
+      ticket: @ticket
     )
 
     @labeling = Labeling.new(labelable: @ticket)
