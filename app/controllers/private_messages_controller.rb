@@ -23,13 +23,14 @@ class PrivateMessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html{redirect_to @message.ticket, :notice => 'Message Added'}
-        format.json{render json: @message.to_json, response: 201}
+        format.html { redirect_to @message.ticket, notice: "Message Added" }
+        format.json { render json: @message.to_json, response: 201 }
       end
     end
   end
 
   private
+
   def private_messages_params
     params.require(:private_message).permit(:message, :ticket_id)
   end
