@@ -51,7 +51,7 @@
   </ul>
   <% @tickets.each do |ticket| %>
     <div class="priority-<%= ticket.priority %> row ticket bb" style="height: 5em;" data-ticket-url="<%= ticket_url(ticket) %>">
-      <div class="medium-4 plxxl v-middle columns">
+      <div class="medium-6 plxxl v-middle columns">
         <input type="checkbox" value="" name="" class="no-mb"/>
         <p class="no-mb plm">
           <span class="block"><%= ticket.user.email %></span>
@@ -73,7 +73,7 @@
           <span>&nbsp;</span>
         <% end %>
       </div>
-      <div class="medium-4 v-middle columns">
+      <div class="medium-2 v-middle columns">
         <% ticket.labels.viewable_by(current_user).each do |label| %>
           <%= render label %>
         <% end %>

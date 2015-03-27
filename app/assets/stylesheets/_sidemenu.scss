@@ -12,7 +12,7 @@ aside{
 			label{
 				font-size: 12px;
 				margin-top: 30px;
-				color: darken($body-font-color, 10);
+				color: lighten($body-font-color, 30);
 			}
 			a{
 				font-size: 14px;
@@ -88,7 +88,7 @@ aside{
 			}
 		
 			&.add-label a{
-				color: lighten($body-font-color, 15);
+				color: lighten($body-font-color, 30);
 			}
 		}
 	}
@@ -98,7 +98,6 @@ aside{
 		left: 0;
 		right: 0;
 		bottom: 0;
-		height: 70px;
 		width: 16.66667%;
 
 		li{
@@ -111,11 +110,15 @@ aside{
 			a{
 				height: 100%;
 				padding: 10px;
-				color: darken($body-font-color, 20);
+				color: lighten($body-font-color, 30);
 				font-size: 0.75em;
 				line-height: 1.25;
 				i{
 					margin: 0 auto;
+				}
+
+				&:hover {
+					color: #fff;
 				}
 			}
 		}

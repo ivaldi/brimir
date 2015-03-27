@@ -145,12 +145,12 @@
           <ul class="pos-bottom medium-block-grid-2 text-center no-m">
             <li class="no-p">
               <%= link_to edit_user_path(current_user), :class=>'block' do %>
-                <i class="fa-sliders fa fa-fw fa-2x block"></i> <%= t(:personal_settings) %>
+                <i class="fa-sliders fa fa-fw fa-2x block"></i> <%= t(:settings) %>
               <% end %>
             </li>
             <li class="no-p">
               <%= link_to destroy_user_session_path, method: :delete, :class=>'block' do %>
-                <i class="fa-cog fa fa-fw fa-2x block"></i> <%= t(:sign_out) %>
+                <i class="fa-power-off fa fa-fw fa-2x block"></i> <%= t(:sign_out) %>
               <% end %>
             </li>
           </ul>
