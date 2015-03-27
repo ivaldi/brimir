@@ -1,0 +1,243 @@
+zh-CN:
+  language_name: 简体中文
+# layouts/application
+  new_ticket: 新建咨询
+  inbox: 咨询夹
+  mine: 我的
+  waiting: 等待中
+  closed_tickets: 关闭
+  trashed: 丢弃
+  users: 用户
+  rules: 规则
+  personal_settings: 个人设置
+  sign_out: 注销
+  delete: 删除
+
+  joyride:
+    tickets: 任何人都可以使用这个按钮新建一个咨询
+    personal_settings: 设置您的签名，时区和其他个人设置。
+    labels: 在给咨询或者用户设定标签后，会在这里显示。您也可以把他用作过滤器。
+    rules: 自动化设定标签，分配任务，更改状态等等。
+    users: 增加更多的公司或者普通用户。
+    final: 多谢使用brimir!
+    next: 下一个
+    previous: 上一个
+    end: 结束
+
+# devise/sessions/new
+  sign_in: 登录
+
+# devise/shared/links
+  forgot_password: 忘记密码
+
+# devise/passwords/new
+  send_instructions: 发给我步骤
+
+# devise/passwords/edit
+  change_password: 更换密码
+  new_password: 新密码
+  new_password_confirmation: 确认新密码
+
+# devise/mailer/reset_password_instructions
+  hello: 您好
+  someone_requested_link: 有人发起了更改密码的操作，您可以点击下面的链接操作。
+  ignore_if_not_requested: 如果不是您发起的这个操作，请忽略它。
+  password_wont_change_without_opening_link: 除非您使用了这个链接更改了密码，否则您的密码将保持不变。
+
+# tickets/index
+  count_tickets:
+    one: '%{count} 咨询'
+    other: '%{count} 咨询'
+  count_tickets_containing:
+    one: '%{count} 咨询包含'
+    other: '%{count} 咨询包含'
+  priority: 优先级
+  replies: 回复
+  no_subject: 没有主题
+  unassigned: 没有分配
+  no_tickets_found: 未找到咨询
+  search: 搜索
+  minutes: 分钟
+  are_you_sure_empty_trash: 删除所有在垃圾箱的咨询？
+
+# tickets/show
+  add: 增加
+  ticket_by_at: 由 %{email} 于 %{at}
+  no_content: 没有内容
+  ticket_id: 咨询编号
+  status: 状态
+  assignee: 分配给
+  num_replies:
+    one: '%{count} 回复'
+    other: '%{count} 回复'
+  ago: 之前
+  high: 高
+  medium: 中
+  low: 低
+  unknown: 未知
+  open: 打开状态
+  closed: 关闭状态
+  deleted: 删除状态
+  labels: 标签
+  label_name: 标签名称
+  notification_sent_to: '一条提醒将会发送到以下地址:'
+  no_notifications_sent: '没有提醒被发送'
+
+# tickets/_change_priority_form
+  change: 更改
+  change_priority: 更改优先级
+
+# tickets/_change_status_form
+  change_status: 更改状态
+
+# tickets/_change_assignee_form
+  change_assignee: 分配咨询
+  assign: 分配
+
+# replies/new
+  add_reply: 新增回复
+
+# replies/_form
+  reply: 回复
+  attach_files: 附件
+  attach_file: 附件
+  send_reply: 发送回复
+  on_date_author_wrote: '%{author} 写于 %{date}:'
+  notification_will_be_sent_to: 您的提醒将被发送到
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: 分配给您的咨询
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: 咨询优先级设置
+
+# ticket_mailer/notify_status_changed.text.erb
+  tickets_status_modified: 咨询状态设置
+
+# notification_mailer/new_ticket
+  view_new_ticket: 查看新咨询
+# notification_mailer/new_reply
+  new_reply: 新回复
+  view_new_reply: 查看新回复
+
+# attachments/_attachment
+  download: 下载
+
+# users/new
+  new_user: 新用户
+
+# users/edit
+  edit_user: 编辑用户
+  omniauth_connect_title: Authentication using Google
+  omniauth_connect_text: Activate authentication using a Google Account. Afterwards you can use "Sign in with Google" as an alternative to the default email address and password login.
+  omniauth_connect_google_text: Connect with Google
+
+# users/index
+  email: 电子邮件
+  role: 权限
+  agent: 公司管理员
+  customer: 客户
+
+# users/_form
+  account_settings: 帐户设置
+  only_fill_in_passwords_when_modifying: 请在下面框中输入您想更改的密码，否则请留空.
+  user_is_an_agent: 用户是公司管理员
+  receive_new_ticket_notifications: 新的咨询收取提醒
+  email_settings: 电子邮件设置
+  save: 保存
+  access_control: 权限控制
+  have_access_to_label: 用户有权限访问这些标签的咨询.
+
+# controllers/attachments
+  file_not_found: 文件未找到
+
+# controllers/users
+  settings_saved: 设置已经保存
+  user_added: 用户已经添加
+
+# controllers/tickets
+  ticket_added: 咨询已经添加
+  ticket_updated: 咨询已经更新
+
+# controllers/tickets/deleted
+  trash_emptied: 垃圾箱里所有的咨询已经被删除
+
+# controllers/replies
+  reply_added: 回复已经成功
+
+# controllers/omniauth
+  already_linked_accounts: Already linked with Google Account
+  successfully_linked_account: Successfully linked with Google Account
+  not_linked_account_cant_login: There is no user attached to this provider yet. Please sign in first and connect through the personal settings screen.
+  third_party_failure: An error occured during authentication. Did you enable "Contacts API" and "Google+ API" via the Google API console?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Alternative sign in
+  omniauth_sign_in_google: Google
+
+# rules/index
+  new_rule: 新规则
+
+# rules/edit
+  edit_rule: 编辑规则
+  delete_rule: 删除规则
+  are_you_sure: 您确定?
+
+# controllers/rules
+  rule_added: 规则已经添加
+  rule_modified: 规则已经更改
+  rule_deleted: 规则已经删除
+
+# email_addresses/index
+  new_email_address: 新的外发邮件地址
+  email_addresses: 外发邮件地址
+
+# email_addresses/new
+  verification_mail_will_be_sent: Make sure this email address is forwarded correctly to brimir. An automated verification email will be sent when you click save. Only verified email addresses can be used for outgoing mail.
+  mark_spam_spf: brimir mails might be marked as spam when you don't add this server to the SPF DNS record of the above mail address.
+
+# controllers/email_addresses
+  email_address_added: 电子邮件已经添加
+  email_address_removed: 电子邮件已经移除
+
+  activerecord:
+    attributes:
+      user:
+        email: 电子邮件
+        password: 密码
+        password_confirmation: 确认密码
+        signature: 电子邮件签名
+        remember_me: 记住我
+        label_ids: 标签
+        locale: 语言
+        time_zone: 时区
+        per_page: 每页显示的咨询数目
+
+      ticket:
+        from: 来自于电子邮件
+        subject: 主题
+        content: 内容
+        status: 状态
+        priority: 优秀级
+        assignee_id: 分配者
+        created_at: 创建于
+
+      rule:
+        filter_field: Field
+        filter_operation: 操作者
+        filter_operations:
+          contains: 包含
+        filter_value: 参数
+        action_operation: 执行操作
+        action_operations:
+          assign_label: 分配标签
+          notify_user: 发送提醒给
+          change_status: 更改状态
+          change_priority: 更改优先级
+          assign_user: 分配给
+        action_value: 操作参数
+
+      email_address:
+        email: 电子邮件
+        default: 设置为默认发件地址
+        verification_token: 已经确认

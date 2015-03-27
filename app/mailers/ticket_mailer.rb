@@ -36,8 +36,11 @@ class TicketMailer < ActionMailer::Base
       if email.text_part
         content = normalize_body(email.text_part, email.text_part.charset)
         content_type = 'text'
-      else
+      elsif email.html_part
         content = normalize_body(email.html_part, email.html_part.charset)
+        content_type = 'html'
+      else
+        content = normalize_body(email.parts[0], email.parts[0].charset)
         content_type = 'html'
       end
     else
