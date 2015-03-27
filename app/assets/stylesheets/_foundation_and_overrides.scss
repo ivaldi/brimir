@@ -19,6 +19,9 @@ $font-smoothing: antialiased;
 
 $header-font-weight: 300;
 
+$anchor-font-color: $secondary-color;
+$anchor-font-color-hover: scale-color($secondary-color, $lightness: -14%);
+
 $paragraph-font-size: rem-calc(14);
 
 $tabs-navigation-bg-color: #fff;

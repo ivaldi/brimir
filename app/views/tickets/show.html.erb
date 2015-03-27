@@ -1,16 +1,3 @@
-<div class="row bb">
-  <div class="medium-12 columns">
-    <a class="pull-right mtm" href="#print" onclick="window.print()"><%= fa_icon 'print' %></a>
-    <h3 class="mt">
-      <%= !@ticket.subject.blank? ? @ticket.subject : "<em>(#{t(:no_subject)})</em>".html_safe %>
-    </h3>
-    <h5 class="subheader text-secondary mb">
-      <%= t(:ticket_by_at, email: @ticket.user.email, at: l(@ticket.created_at.in_time_zone(current_user.time_zone), format: :long)) %>
-    </h5>
-  </div>
-</div>
-
-
 <div class="row collapse">
   <div class="large-4 hide-for-medium columns">
     <section class="tickets">
@@ -27,7 +14,7 @@
           <input type="checkbox" value="" name="" class="no-mb">
           <p class="no-mb plm">
             <span class="block text-overflow">delta@example.com</span>
-            <a href="http://localhost:3000/tickets/191" class="text-default text-overflow block">
+            <a href="http://localhost:3000/tickets/191" class="text-overflow block">
               <strong>Donec et mollis dolor. Praesent et diam eget libero egestas mattis sit amet vitae augue.</strong>
             </a>
             <span style="background: #9d61dd" class="radius label" id="label-id-3">change-request</span>
@@ -47,38 +34,18 @@
       <div class="medium-12 columns ptm pbm">
         <a class="pull-right mtm text-default" href="#print" onclick="window.print()"><%= fa_icon 'print' %></a>
         <h3 class="mt no-mb text-default">
-          <%= !@ticket.subject.nil? ? @ticket.subject : '<em>(' + t(:no_subject) + ')</em>'.html_safe %>
-
-          <% if can? :update, @ticket %>
-            <ul data-labelings="" class="ib no-m">
-              <% @ticket.labelings.each do |labeling| %>
-                <%= render labeling %>
-              <% end %>
-              <li class="radius label no-m" style="background-color: #bac1cc;" ><i class="fa fa-fw fa-plus"></i> Add label</li>
-            </ul>
-            <%= form_for @labeling, remote: true do |f| %>
-              <%= f.hidden_field :labelable_id %>
-              <%= f.hidden_field :labelable_type %>
-
-              <%= f.fields_for :label, Label.new do |f| %>
-                <%= f.text_field :name, label: false, placeholder: t(:label_name), class: 'select2-create' %>
-              <% end %>
-              <%= f.button t(:add), type: 'submit', class: 'tiny radius button mtm' %>
-            <% end %>
-          <% else %>
-            <ul class="inline-list">
-              <% @ticket.labels.viewable_by(current_user).each do |label| %>
-                <li><%= render label %></li>
-              <% end %>
-            </ul>
-          <% end %>
+          <%= !@ticket.subject.blank? ? @ticket.subject : '<em>(' + t(:no_subject) + ')</em>'.html_safe %>
         </h3>
         <h5 class="text-default mb no-mt">
           <%= t(:ticket_by_at, email: @ticket.user.email, at: l(@ticket.created_at.in_time_zone(current_user.time_zone), format: :long)) %>
         </h5>
 
-        <ul class="inline-list no-m">
-          <li><%= t(:ticket_id) %>: <%= @ticket.id %></li>
+        <ul class="no-m">
+          <li class="ib no-ml mrl">
+            <span class="fa fa-tag fa-fw ib"></span>
+            <%= t(:ticket_id) %>: <%= @ticket.id %>
+          </li>
+          <li class="ib mrl">
             <% if can? :update, @ticket %>
               <a href="#" data-dropdown="statuses-<%= @ticket.id %>" class="text-default">
                 <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"></span>
@@ -90,7 +57,7 @@
               <%= t(@ticket.status) %>
             <% end %>
           </li>
-          <li>
+          <li class="ib mrl">
             <% if can? :update, @ticket %>
               <a href="#" data-dropdown="priorities-<%= @ticket.id %>" class="text-default">
                 <span class="cc-priority-<%= @ticket.priority %> fa fa-fw fa-circle-o"></span>
@@ -102,7 +69,7 @@
               <%= t(@ticket.priority) %>
             <% end %>
           </li>
-          <li>
+          <li class="ib mrl">
             <% if can? :update, @ticket %>
               <a href="#" data-reveal-id="change-assignee" class="text-default">
                 <% if !@ticket.assignee %>
@@ -121,6 +88,20 @@
                 <span class="fa fa-fw fa-user"></span>
                 <%= @ticket.assignee.email %>
               <% end %>
+            <% end %>
+          </li>
+        </ul>
+        <ul class="no-m">
+          <li class="ib">
+            <% if can? :update, @ticket %>
+              <a href="#" data-reveal-id="add-labels" class="radius label secondary mrs text-light">
+                <i class="fa fa-fw fa-plus"></i> <%= t(:add) %>
+              </a>
+            <% end %>
+            <% @ticket.labelings.each do |labeling| %>
+              <span data-labelings="" class="ib no-m">
+                <%= render labeling %>
+              </span>
             <% end %>
           </li>
         </ul>
@@ -186,5 +167,22 @@
     <% end %>
   </div>
 </div>
+
+<% if can? :update, @ticket %>
+  <div id="add-labels" class="reveal-modal small" data-reveal>
+    <h3>Labels toewijzen</h3>
+    <%= form_for @labeling, remote: true do |f| %>
+      <%= f.hidden_field :labelable_id %>
+      <%= f.hidden_field :labelable_type %>
+
+      <%= f.fields_for :label, Label.new do |f| %>
+        <%= f.text_field :name, label: false, placeholder: t(:label_name), class: 'select2-create' %>
+      <% end %>
+      <%= f.button t(:add), type: 'submit', class: 'tiny radius button mtm' %>
+    <% end %>
+    <a class="close-reveal-modal">&#215;</a>
+  </div>
+<% end %>
+
 
 <%= render 'change_assignee_form', { ticket: @ticket } %>

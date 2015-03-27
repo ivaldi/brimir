@@ -1,6 +1,6 @@
 .full{ width: 100%; }
 .block{ display: block; }
-.ib{ display: inline-block; }
+.ib{ display: inline-block !important; }
 
 .heading-one{ font-size: $fontSizeXXL; }
 .heading-two{ font-size: $fontSizeXL; }
@@ -17,6 +17,10 @@
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+}
+
+.nowrap{
+	white-space: nowrap;
 }
 
 .priority-unknown{ border-color: #ccc; }

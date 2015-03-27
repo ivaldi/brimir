@@ -14,18 +14,17 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http:gcwww.gnu.org/licenses/>.
  *
- *= require select2
- *= require font-awesome
- *= require fancybox
- *= require forms
- *= require attachments
- *= require_self
  */
 
+@import "select2";
+@import "font-awesome";
+@import "fancybox";
 @import "foundation_and_overrides";
 @import "foundation/functions";
-@import "partials/variables";
-@import "partials/spacing";
+@import "variables";
+@import "spacing";
+@import "forms";
+@import "attachments";
 @import "helpers";
 @import "sidemenu";
 @import "topbar";

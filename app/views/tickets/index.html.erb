@@ -18,7 +18,7 @@
         <div class="row collapse">
           <% params.delete(:controller) %>
           <% params.delete(:action) %>
-          <%= link_to tickets_path(:csv, params), class: 'secondary radius tiny button right mlm' do %>
+          <%= link_to tickets_path(:csv, params), class: 'secondary radius tiny button right mlm no-m' do %>
             <i class="fa fa-cloud-download" style="top:1px"></i>
           <% end %>
 
@@ -35,11 +35,6 @@
             <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
           </div>
         </div>
-      <% end %>
-    </div>
-    <div class="medium-4 columns">
-      <%= link_to tickets_path(params.merge(format: :csv)), class: 'text-default pam no-m ib text-center right button radius icon-fw' do %>
-        <i class="fa fa-download"></i>
       <% end %>
     </div>
   </div>
