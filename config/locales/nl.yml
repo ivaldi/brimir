@@ -14,6 +14,17 @@ nl:
   sign_out: Uitloggen
   delete: Verwijderen
 
+  joyride:
+    tickets: Via deze knop kan iedereen nieuwe tickets aanmaken.
+    personal_settings: Stel je handtekening, tijdzone en andere instellingen in via dit menu.
+    labels: Na het toevoegen van labels aan tickets of agents verschijnen ze hier. Je kunt ze gebruiken om te filteren.
+    rules: Voeg automatisch labels toe, wijs tickets toe aan agents, wijzig de status van een ticket, etcetera.
+    users: Voeg meer agents of normale gebruikers toe.
+    final: Bedankt voor het gebruiken van Brimir!
+    next: Volgende
+    previous: Vorige
+    end: Einde
+
 # devise/sessions/new
   sign_in: Inloggen
 
