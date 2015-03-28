@@ -146,7 +146,7 @@ pt-BR:
   rule_deleted: Regra deletada
 
 # private_messages/_message
-  private_message_at: postado em -
+  private_message_at: postado em %{at} - por %{email}
 
   activerecord:
     attributes:
