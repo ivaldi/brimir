@@ -1,243 +1,243 @@
-en:
-  language_name: english
+ar:
+  language_name: العربية
 # layouts/application
-  new_ticket: New ticket
-  inbox: Inbox
-  mine: Mine
-  waiting: Waiting
-  closed_tickets: Closed
-  trashed: Trashed
-  users: Users
-  rules: Rules
-  personal_settings: Personal settings
-  sign_out: Sign out
-  delete: Remove
+  new_ticket: شكوى جديدة
+  inbox: صندوق الوارد
+  mine: الخاصة بي
+  waiting: قيد الانتظار
+  closed_tickets: مغلقة
+  trashed: محذوفة
+  users: مستخدمين
+  rules: القواعد
+  personal_settings: الاعدادات الخاصة
+  sign_out: الخروج
+  delete: حذف
 
   joyride:
-    tickets: Anybody can create tickets using this button.
-    personal_settings: Set your signature, timezone and other preferences via this menu.
-    labels: After adding labels to tickets or users, they will show up here. You can then use them as filters.
-    rules: Automatically add labels, assignees, change status and more.
-    users: Add more agents or normal users.
-    final: Thanks for using Brimir!
-    next: Next
-    previous: Previous
-    end: End
+    tickets: يمكن لأي مستخدم إضافة شكوى باستخدام هذا الزر.
+    personal_settings: قم بتحديد الإمضاء والتوقيت والإعدادات الشخصية الأخرى عن طريق هذه القائمة.
+    labels: العلامات المضافة سوف تظهر في هذا المكان ويمكن استخدامها للتنقيح.
+    rules: إضافة العلامات والمسئولين وتغيير الحالة بشكل تلقائي.
+    users: إضافة مستخدمين آخرين أو أعضاء آخرين في فريق المساعدة.
+    final: شكرا لاستخدامكم Brimir!
+    next: التالي
+    previous: السابق
+    end: النهاية
 
 # devise/sessions/new
-  sign_in: Sign in
+  sign_in: تسجيل الدخول
 
 # devise/shared/links
-  forgot_password: Forgot your password?
+  forgot_password: هل نسيت كلمة المرور?
 
 # devise/passwords/new
-  send_instructions: Send me instructions
+  send_instructions: أرسل التعليمات
 
 # devise/passwords/edit
-  change_password: Change password
-  new_password: New password
-  new_password_confirmation: Confirm new password
+  change_password: تغيير كلمة المرور
+  new_password: كلمة المرور الجديدة
+  new_password_confirmation: إعادة إدخال كلمة المرور
 
 # devise/mailer/reset_password_instructions
-  hello: Hello
-  someone_requested_link: Someone has requested a link to change your password, and you can do this through the link below.
-  ignore_if_not_requested: If you didn't request this, please ignore this email.
-  password_wont_change_without_opening_link: Your password won't change until you access the link above and create a new one.
+  hello: مرحبا
+  someone_requested_link: قام أحد بطلب تغيير كلمة المرور الخاصة بك. يمكنك القيام بذلك من خلال الرابط التالي.
+  ignore_if_not_requested: برجاء تجاهل هذه الرسالة إذا لم تكن انت الذي أرسلت الطلب.
+  password_wont_change_without_opening_link: لن يتم تغيير كلمة المرور الخاصة بك بدون الدخول على الرابط أعلاه والقيام بإدخال كلمة مرور جديدة.
 
 # tickets/index
   count_tickets:
-    one: '%{count} ticket'
-    other: '%{count} tickets'
+    one: '%{count} شكوى'
+    other: '%{count} شكاوى'
   count_tickets_containing:
-    one: '%{count} ticket containing'
-    other: '%{count} tickets containing'
-  priority: Priority
-  replies: replies
-  no_subject: No subject
-  unassigned: Unassigned
-  no_tickets_found: No tickets found.
-  search: Search
-  minutes: minutes
-  are_you_sure_empty_trash: Delete all tickets in the trash?
+    one: '%{count} شكوى تحتوي على'
+    other: '%{count} شكاوى تحتوي على'
+  priority: الأولوية
+  replies: الردود
+  no_subject: بدون عنوان
+  unassigned: غير مخصصة
+  no_tickets_found: لا يوجد شكاوى
+  search: البحث
+  minutes: دقائق
+  are_you_sure_empty_trash: هل أنت ترغب في إفراخ سلة المحذوفات من جميع الشكاوى المحذوفة?
 
 # tickets/show
-  add: Add
-  ticket_by_at: By %{email} on %{at}
-  no_content: No content
-  ticket_id: Ticketnumber
-  status: Status
-  assignee: Assignee
+  add: إضافة
+  ticket_by_at: عن طريق %{email} في %{at}
+  no_content: فارغ
+  ticket_id: رقم الشكوى
+  status: الحالة
+  assignee: المسئول
   num_replies:
-    one: '%{count} reply'
-    other: '%{count} replies'
-  ago: ago
-  high: High
-  medium: Medium
-  low: Low
-  unknown: Unknown
-  open: Open
-  closed: Closed
-  deleted: Deleted
-  labels: Labels
-  label_name: Label name
-  notification_sent_to: 'A notification was sent to the following addresses:'
-  no_notifications_sent: 'No notifications have been sent'
+    one: '%{count} رد'
+    other: '%{count} ردود'
+  ago: منذ
+  high: عالي
+  medium: متوسط
+  low: منخفضة
+  unknown: غير معروف
+  open: مفتوح
+  closed: مغلق
+  deleted: محذوف
+  labels: علامات
+  label_name: اسم العلامة
+  notification_sent_to: 'تم إرسال تنبيه للعناوين التالية:'
+  no_notifications_sent: 'لم يتم إرسال أي تنبيهات'
 
 # tickets/_change_priority_form
-  change: Change
-  change_priority: Change priority
+  change: تغيير
+  change_priority: تغيير الأولوية
 
 # tickets/_change_status_form
-  change_status: Change status
+  change_status: تغيير الحالة
 
 # tickets/_change_assignee_form
-  change_assignee: Assign ticket
-  assign: Assign
+  change_assignee: تعيين الشكوى
+  assign: تعيين
 
 # replies/new
-  add_reply: Add reply
+  add_reply: إضافة رد
 
 # replies/_form
-  reply: Reply
-  attach_files: Attach file(s)
-  attach_file: Attach file
-  send_reply: Send reply
-  on_date_author_wrote: 'On %{date}, %{author} wrote:'
-  notification_will_be_sent_to: Your notification will be sent to
+  reply: الرد
+  attach_files: إضافة مرفقات
+  attach_file: إضافة ملف مرفق
+  send_reply: أرسل رد
+  on_date_author_wrote: 'في %{date}, %{author} كتب:'
+  notification_will_be_sent_to: سيتم إرسال تنبيه إلى
 
 # ticket_mailer/notify_assigned.text.erb
-  ticket_assigned: Ticket assigned to you
+  ticket_assigned: شكوي محالة إلي
 
 # ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Ticket priority modified for ticket
+  ticket_priority_changed: تم تغيير أولوية الشكوى
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Ticket status modified for ticket
+  tickets_status_modified: تم تغيير حالة الشكوى
 
 # notification_mailer/new_ticket
-  view_new_ticket: View new ticket
+  view_new_ticket: عرض الشكوى الجديدة
 # notification_mailer/new_reply
-  new_reply: New reply
-  view_new_reply: View new reply
+  new_reply: إضافة رد
+  view_new_reply: عرض الرد الجديد
 
 # attachments/_attachment
-  download: download
+  download: تحميل
 
 # users/new
-  new_user: New User
+  new_user: إضافة مستخدم
 
 # users/edit
-  edit_user: Edit User
-  omniauth_connect_title: Authentication using Google
-  omniauth_connect_text: Activate authentication using a Google Account. Afterwards you can use "Sign in with Google" as an alternative to the default email address and password login.
-  omniauth_connect_google_text: Connect with Google
+  edit_user: تعديل بيانات المستخدم
+  omniauth_connect_title: الدخول بحساب Google
+  omniauth_connect_text: تفعيل الدخول بحساب Google، بعد ذلك يمكنك الدخول عن طريق "الدخول بحساب Google" بدلا من استخدام البريد الإلكتروني وكلمة المرور.
+  omniauth_connect_google_text: ربط حساب Google
 
 # users/index
-  email: Email
-  role: Role
-  agent: Agent
-  customer: Customer
+  email: البريد الإلكتروني
+  role: الصفة
+  agent: عضو فريق المساعدة
+  customer: المستخدم
 
 # users/_form
-  account_settings: Account Settings
-  only_fill_in_passwords_when_modifying: Only fill in these two fields if you want to modify your password.
-  user_is_an_agent: User is an agent
-  receive_new_ticket_notifications: Receive notifications for new tickets
-  email_settings: Email Settings
-  save: Save
-  access_control: Access Control
-  have_access_to_label: User has access to all tickets with any of these labels.
+  account_settings: إعدادات الحساب
+  only_fill_in_passwords_when_modifying: برجاء ملء الحقلين التاليين فقط لتغيير كلمة المرور.
+  user_is_an_agent: المستخديم عضو في فريق المساعدة
+  receive_new_ticket_notifications: استلام تنبيهات للشكاوى الجديدة
+  email_settings: إعدادات البريد الإلكتروني
+  save: حفظ
+  access_control: الصلاحيات
+  have_access_to_label: يمكن للمستخدم الدخول إلى جميع الشكاوى التي تحمل العلامات التالية.
 
 # controllers/attachments
-  file_not_found: File not found
+  file_not_found: الملف المطلوب غير موجود
 
 # controllers/users
-  settings_saved: Settings saved
-  user_added: User added
+  settings_saved: تم حفظ الإعدادات
+  user_added: تم إضافة المستخدم
 
 # controllers/tickets
-  ticket_added: Ticket added
-  ticket_updated: Ticket updated
+  ticket_added: تم إضافة الشكوى
+  ticket_updated: تم تحديث الشكوى
 
 # controllers/tickets/deleted
-  trash_emptied: All tickets were deleted from the trash
+  trash_emptied: تم حذف جميع الشكاوى من سلة المحذوفات
 
 # controllers/replies
-  reply_added: Reply added
+  reply_added: تم إضافة الرد
 
 # controllers/omniauth
-  already_linked_accounts: Already linked with Google Account
-  successfully_linked_account: Successfully linked with Google Account
-  not_linked_account_cant_login: There is no user attached to this provider yet. Please sign in first and connect through the personal settings screen.
-  third_party_failure: An error occured during authentication. Did you enable "Contacts API" and "Google+ API" via the Google API console?
+  already_linked_accounts: الحساب مرتبط بحساب Google من قبل
+  successfully_linked_account: تم ربط الحساب  بحساب Google بنجاح
+  not_linked_account_cant_login: لا يوجد مستخدم مربوط بهذا الحساب. برجاء الدخول بكلمة المرورو أولا ثم ربط الحساب عن طريق الإعدادات الشخصية.
+  third_party_failure: حدث خطأ اثناء الدخول. هل قتم بتفعيل "Contacts API" و "Google+ API" في إعدادات Google API console?
 
 # user/sign_in (omniauth)
-  omniauth_sign_in_title: Alternative sign in
+  omniauth_sign_in_title: الدخول بطرق بديلة
   omniauth_sign_in_google: Google
 
 # rules/index
-  new_rule: New rule
+  new_rule: إضافة صفة
 
 # rules/edit
-  edit_rule: Edit rule
-  delete_rule: Delete rule
-  are_you_sure: Are you sure?
+  edit_rule: تعديل الصفة
+  delete_rule: حذف الصفة
+  are_you_sure: هل أنت متأكد?
 
 # controllers/rules
-  rule_added: Rule added
-  rule_modified: Rule modified
-  rule_deleted: Rule deleted
+  rule_added: تم إذافة الصفة
+  rule_modified: تم تعديل الصفة
+  rule_deleted: تم حذف الصفة
 
 # email_addresses/index
-  new_email_address: New outgoing email address
-  email_addresses: Email addresses for outgoing email
+  new_email_address: إضافة عنوان بريد الإلكتروني  للبريد المرسل
+  email_addresses: عناوين البريد الإلكتروني للبريد المرسل
 
 # email_addresses/new
-  verification_mail_will_be_sent: Make sure this email address is forwarded correctly to Brimir. An automated verification email will be sent when you click save. Only verified email addresses can be used for outgoing mail.
-  mark_spam_spf: Brimir mails might be marked as spam when you don't add this server to the SPF DNS record of the above mail address.
+  verification_mail_will_be_sent: برجاء التأكد من أن هذه الرسالة قد تم تمريرها بنجاح إلى النظام. سيتم إرسال رسالة تحقق بشكل تلقائي عن اختيار "حفظ". يكن استخدام عناوين البريد الإلكترونية المحققة فقط للبريد المرسل.
+  mark_spam_spf: قد تعتبر رسائل النظام من ضمن الرسائل الغير مرغوب بها (spam) إذا لم تقم بإضافة هذا الخادم إلى إعدادات النطاق SPF Record للعناوين الإلكترونية المذكورة.
 
 # controllers/email_addresses
-  email_address_added: Email address added
-  email_address_removed: Email address removed
+  email_address_added: تم إضافة عنوان البريد الإلكتروني
+  email_address_removed: تم حذف عنوان البريد الإلكتروني
 
   activerecord:
     attributes:
       user:
-        email: Email
-        password: Password
-        password_confirmation: Password confirmation
-        signature: Email signature
-        remember_me: Remember me
-        label_ids: Labels
-        locale: Language
-        time_zone: Time zone
-        per_page: Tickets per page
+        email: الربيد الإلكتروني
+        password: كلمة المرور
+        password_confirmation: تأكيد كلمة المرور
+        signature: توقع البريد الإلكتروني
+        remember_me: تذكرني
+        label_ids: علامات
+        locale: اللغة
+        time_zone: التوقيت
+        per_page: عدد الشكاوى في الصفة
 
       ticket:
-        from: From email address
-        subject: Subject
-        content: Content
-        status: Status
-        priority: Priority
-        assignee_id: Assignee
-        created_at: Created at
+        from: البريد الإلكتروني للراسل
+        subject: عنوان الشكوى
+        content: محتوى الشكوى
+        status: الحالة
+        priority: الأولوية
+        assignee_id: المسئول
+        created_at: تاريخ الإضافة
 
       rule:
-        filter_field: Field
-        filter_operation: Operator
+        filter_field: حقل
+        filter_operation: طريقة التنقيح
         filter_operations:
-          contains: contains
-        filter_value: Value
-        action_operation: Action to perform
+          contains: تحتوى على
+        filter_value: القيمة
+        action_operation: العلامات التي يمكن القيام بها
         action_operations:
-          assign_label: assign label
-          notify_user: send notification to
-          change_status: change status to
-          change_priority: change priority to
-          assign_user: assign to
-        action_value: Parameter for action
+          assign_label: تعيين علامة
+          notify_user: إرسال تنبيه إلى
+          change_status: تغيير الحالة إلى
+          change_priority: تغيير الأولوية إلى
+          assign_user: تغيير المسئول
+        action_value: القيمة المستخدمة للعملية
 
       email_address:
-        email: Email address
-        default: Use as default outgoing mail address
-        verification_token: Verified
+        email: البريد الإلكتروني
+        default: العنوان الافتراضي للبريد المرسل
+        verification_token: تم التحقق
