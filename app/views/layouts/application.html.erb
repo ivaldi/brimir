@@ -15,7 +15,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body style="<%= 'background: #30363e' if user_signed_in? %>">
+  <body style="<%= 'direction:rtl;' if [:ar].include?(I18n.locale)%> <%= 'background: #30363e' if user_signed_in? %>">
 
     <% if user_signed_in? %>
       <nav class="top-bar" data-topbar>
