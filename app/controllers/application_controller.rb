@@ -58,7 +58,6 @@ class ApplicationController < ActionController::Base
         else
           I18n.locale = http_accept_language.compatible_language_from(locales)
         end
-        
         if user_signed_in?
           current_user.locale = I18n.locale
           current_user.save
