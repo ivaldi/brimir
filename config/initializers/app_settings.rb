@@ -16,4 +16,3 @@ class AppSettings
   end
 end
 AppSettings.load
-
