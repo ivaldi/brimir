@@ -28,7 +28,7 @@ ar:
   sign_in: تسجيل الدخول
 
 # devise/shared/links
-  forgot_password: هل نسيت كلمة المرور?
+  forgot_password: هل نسيت كلمة المرور؟
 
 # devise/passwords/new
   send_instructions: أرسل التعليمات
