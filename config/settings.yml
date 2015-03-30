@@ -1,0 +1,12 @@
+default: &defaults
+  ignore_user_agent_locale: true
+  site_name: Brimir
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
