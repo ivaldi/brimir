@@ -46,9 +46,11 @@ ar:
 
 # tickets/index
   count_tickets:
+    zero: 'لا يوجد'
     one: '%{count} شكوى'
     other: '%{count} شكاوى'
   count_tickets_containing:
+    zero: 'لا يوجد'
     one: '%{count} شكوى تحتوي على'
     other: '%{count} شكاوى تحتوي على'
   priority: الأولوية
