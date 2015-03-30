@@ -1,0 +1,243 @@
+en:
+  language_name: english
+# layouts/application
+  new_ticket: New ticket
+  inbox: Inbox
+  mine: Mine
+  waiting: Waiting
+  closed_tickets: Closed
+  trashed: Trashed
+  users: Users
+  rules: Rules
+  personal_settings: Personal settings
+  sign_out: Sign out
+  delete: Remove
+
+  joyride:
+    tickets: Anybody can create tickets using this button.
+    personal_settings: Set your signature, timezone and other preferences via this menu.
+    labels: After adding labels to tickets or users, they will show up here. You can then use them as filters.
+    rules: Automatically add labels, assignees, change status and more.
+    users: Add more agents or normal users.
+    final: Thanks for using Brimir!
+    next: Next
+    previous: Previous
+    end: End
+
+# devise/sessions/new
+  sign_in: Sign in
+
+# devise/shared/links
+  forgot_password: Forgot your password?
+
+# devise/passwords/new
+  send_instructions: Send me instructions
+
+# devise/passwords/edit
+  change_password: Change password
+  new_password: New password
+  new_password_confirmation: Confirm new password
+
+# devise/mailer/reset_password_instructions
+  hello: Hello
+  someone_requested_link: Someone has requested a link to change your password, and you can do this through the link below.
+  ignore_if_not_requested: If you didn't request this, please ignore this email.
+  password_wont_change_without_opening_link: Your password won't change until you access the link above and create a new one.
+
+# tickets/index
+  count_tickets:
+    one: '%{count} ticket'
+    other: '%{count} tickets'
+  count_tickets_containing:
+    one: '%{count} ticket containing'
+    other: '%{count} tickets containing'
+  priority: Priority
+  replies: replies
+  no_subject: No subject
+  unassigned: Unassigned
+  no_tickets_found: No tickets found.
+  search: Search
+  minutes: minutes
+  are_you_sure_empty_trash: Delete all tickets in the trash?
+
+# tickets/show
+  add: Add
+  ticket_by_at: By %{email} on %{at}
+  no_content: No content
+  ticket_id: Ticketnumber
+  status: Status
+  assignee: Assignee
+  num_replies:
+    one: '%{count} reply'
+    other: '%{count} replies'
+  ago: ago
+  high: High
+  medium: Medium
+  low: Low
+  unknown: Unknown
+  open: Open
+  closed: Closed
+  deleted: Deleted
+  labels: Labels
+  label_name: Label name
+  notification_sent_to: 'A notification was sent to the following addresses:'
+  no_notifications_sent: 'No notifications have been sent'
+
+# tickets/_change_priority_form
+  change: Change
+  change_priority: Change priority
+
+# tickets/_change_status_form
+  change_status: Change status
+
+# tickets/_change_assignee_form
+  change_assignee: Assign ticket
+  assign: Assign
+
+# replies/new
+  add_reply: Add reply
+
+# replies/_form
+  reply: Reply
+  attach_files: Attach file(s)
+  attach_file: Attach file
+  send_reply: Send reply
+  on_date_author_wrote: 'On %{date}, %{author} wrote:'
+  notification_will_be_sent_to: Your notification will be sent to
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Ticket assigned to you
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Ticket priority modified for ticket
+
+# ticket_mailer/notify_status_changed.text.erb
+  tickets_status_modified: Ticket status modified for ticket
+
+# notification_mailer/new_ticket
+  view_new_ticket: View new ticket
+# notification_mailer/new_reply
+  new_reply: New reply
+  view_new_reply: View new reply
+
+# attachments/_attachment
+  download: download
+
+# users/new
+  new_user: New User
+
+# users/edit
+  edit_user: Edit User
+  omniauth_connect_title: Authentication using Google
+  omniauth_connect_text: Activate authentication using a Google Account. Afterwards you can use "Sign in with Google" as an alternative to the default email address and password login.
+  omniauth_connect_google_text: Connect with Google
+
+# users/index
+  email: Email
+  role: Role
+  agent: Agent
+  customer: Customer
+
+# users/_form
+  account_settings: Account Settings
+  only_fill_in_passwords_when_modifying: Only fill in these two fields if you want to modify your password.
+  user_is_an_agent: User is an agent
+  receive_new_ticket_notifications: Receive notifications for new tickets
+  email_settings: Email Settings
+  save: Save
+  access_control: Access Control
+  have_access_to_label: User has access to all tickets with any of these labels.
+
+# controllers/attachments
+  file_not_found: File not found
+
+# controllers/users
+  settings_saved: Settings saved
+  user_added: User added
+
+# controllers/tickets
+  ticket_added: Ticket added
+  ticket_updated: Ticket updated
+
+# controllers/tickets/deleted
+  trash_emptied: All tickets were deleted from the trash
+
+# controllers/replies
+  reply_added: Reply added
+
+# controllers/omniauth
+  already_linked_accounts: Already linked with Google Account
+  successfully_linked_account: Successfully linked with Google Account
+  not_linked_account_cant_login: There is no user attached to this provider yet. Please sign in first and connect through the personal settings screen.
+  third_party_failure: An error occured during authentication. Did you enable "Contacts API" and "Google+ API" via the Google API console?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Alternative sign in
+  omniauth_sign_in_google: Google
+
+# rules/index
+  new_rule: New rule
+
+# rules/edit
+  edit_rule: Edit rule
+  delete_rule: Delete rule
+  are_you_sure: Are you sure?
+
+# controllers/rules
+  rule_added: Rule added
+  rule_modified: Rule modified
+  rule_deleted: Rule deleted
+
+# email_addresses/index
+  new_email_address: New outgoing email address
+  email_addresses: Email addresses for outgoing email
+
+# email_addresses/new
+  verification_mail_will_be_sent: Make sure this email address is forwarded correctly to Brimir. An automated verification email will be sent when you click save. Only verified email addresses can be used for outgoing mail.
+  mark_spam_spf: Brimir mails might be marked as spam when you don't add this server to the SPF DNS record of the above mail address.
+
+# controllers/email_addresses
+  email_address_added: Email address added
+  email_address_removed: Email address removed
+
+  activerecord:
+    attributes:
+      user:
+        email: Email
+        password: Password
+        password_confirmation: Password confirmation
+        signature: Email signature
+        remember_me: Remember me
+        label_ids: Labels
+        locale: Language
+        time_zone: Time zone
+        per_page: Tickets per page
+
+      ticket:
+        from: From email address
+        subject: Subject
+        content: Content
+        status: Status
+        priority: Priority
+        assignee_id: Assignee
+        created_at: Created at
+
+      rule:
+        filter_field: Field
+        filter_operation: Operator
+        filter_operations:
+          contains: contains
+        filter_value: Value
+        action_operation: Action to perform
+        action_operations:
+          assign_label: assign label
+          notify_user: send notification to
+          change_status: change status to
+          change_priority: change priority to
+          assign_user: assign to
+        action_value: Parameter for action
+
+      email_address:
+        email: Email address
+        default: Use as default outgoing mail address
+        verification_token: Verified
