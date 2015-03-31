@@ -47,7 +47,7 @@ Customization
 -------------
 Some applicant level configuration can be set through `config/settings.yml`
 
-Brimir is available in several languages. By default, it will use the locale corresponding to the user browser agent, if it was among the supported locales,. If you want to change this and force certain locale, you can do that by setting:   `ignore_user_agent_locale: true`  in  `config/settings.yml`
+Brimir is available in several languages. By default, it will use the locale corresponding to the user browser agent, if it was among the supported locales. If you want to change this and force certain locale, you can do that by setting:   `ignore_user_agent_locale: true`  in  `config/settings.yml`
 
 Incoming email
 --------------
