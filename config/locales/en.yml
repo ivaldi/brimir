@@ -200,6 +200,9 @@ en:
   email_address_added: Email address added
   email_address_removed: Email address removed
 
+# controllers/private_messages
+  private_message_at: posted by %{email} on %{at}'
+
   activerecord:
     attributes:
       user:

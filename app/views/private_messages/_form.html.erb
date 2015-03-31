@@ -1,0 +1,7 @@
+<%= form_for @private_message, html: { multipart: true } do |f| %>
+  <div class="ma">
+    <%= f.hidden_field :ticket_id%>
+    <%= f.text_area :message %>
+    <%= f.submit "Add Comment" %>
+  </div>
+<% end %>

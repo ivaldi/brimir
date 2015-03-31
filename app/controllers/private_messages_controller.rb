@@ -13,10 +13,25 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+class PrivateMessagesController < ApplicationController
+  def create
+    @message = PrivateMessage.new(private_messages_params)
 
-# tracks which user was notified for a notifiable object
-class Notification < ActiveRecord::Base
-  belongs_to :notifiable, polymorphic: true
-  belongs_to :user
-  belongs_to :ticket
+    @message.user = current_user
+
+    authorize! :create, @message
+
+    respond_to do |format|
+      if @message.save
+        format.html { redirect_to @message.ticket, notice: "Message Added" }
+        format.json { render json: @message.to_json, response: 201 }
+      end
+    end
+  end
+
+  private
+
+  def private_messages_params
+    params.require(:private_message).permit(:message, :ticket_id)
+  end
 end

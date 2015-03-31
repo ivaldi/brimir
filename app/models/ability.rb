@@ -27,6 +27,7 @@ class Ability
     if user.agent?
 
       can :manage, :all
+      can :create, PrivateMessage
 
     else
       customer user

@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
+  has_many :private_messages
 
   # identities for omniauth
   has_many :identities

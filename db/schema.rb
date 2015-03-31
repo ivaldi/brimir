@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150104173344) do
+ActiveRecord::Schema.define(version: 20150320182723) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -72,6 +72,17 @@ ActiveRecord::Schema.define(version: 20150104173344) do
   add_index "notifications", ["notifiable_id", "notifiable_type", "user_id"], name: "unique_notification", unique: true
   add_index "notifications", ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
+
+  create_table "private_messages", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "ticket_id"
+    t.text    "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "private_messages", ["ticket_id"], name: "index_private_messages_on_ticket_id"
+  add_index "private_messages", ["user_id"], name: "index_private_messages_on_user_id"
 
   create_table "replies", force: :cascade do |t|
     t.text     "content"

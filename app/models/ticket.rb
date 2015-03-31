@@ -34,6 +34,8 @@ class Ticket < ActiveRecord::Base
 
   has_many :status_changes, dependent: :destroy
 
+  has_many :private_messages, dependent: :destroy
+
   enum status: [:open, :closed, :deleted, :waiting]
   enum priority: [:unknown, :low, :medium, :high]
 
