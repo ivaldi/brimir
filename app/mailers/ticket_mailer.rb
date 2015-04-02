@@ -16,8 +16,12 @@
 
 class TicketMailer < ActionMailer::Base
 
+  def encode(string)
+    string.encode('UTF-8', invalid: :replace, undef: :replace)
+  end
+
   def normalize_body(part, charset)
-    part.body.decoded.force_encoding(charset).encode('UTF-8')
+    encode(part.body.decoded.force_encoding(charset))
   end
 
   def receive(message)
@@ -47,13 +51,13 @@ class TicketMailer < ActionMailer::Base
       if email.charset
         content = normalize_body(email, email.charset)
       else
-        content = email.body.decoded.encode('UTF-8')
+        content = encode(email.body.decoded)
       end
       content_type = 'text'
     end
 
     if email.charset
-      subject = email.subject.to_s.force_encoding(email.charset).encode('UTF-8')
+      subject = encode(email.subject.to_s.force_encoding(email.charset))
     else
       subject = email.subject.to_s.encode('UTF-8')
     end
