@@ -87,6 +87,7 @@ Some users have made requests for the following features. If you would like to c
 - Integration with OpsWeekly
 - Social media integration such as FreshDesk and Zoho have (reply to requests via social media)
 - Ticket creation api (and improving existing api)
+- Unread ticket status per user.
 
 License
 -------
