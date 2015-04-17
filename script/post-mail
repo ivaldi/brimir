@@ -1,2 +1,2 @@
 #!/bin/bash
-exec curl --data-urlencode message@- $1
+exec curl -s -o /dev/null --data-urlencode message@- $1

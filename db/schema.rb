@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150104173344) do
+ActiveRecord::Schema.define(version: 20150403130643) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
-    t.string   "attachable_type"
+    t.string   "attachable_type",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "file_file_name"
-    t.string   "file_content_type"
+    t.string   "file_file_name",    limit: 255
+    t.string   "file_content_type", limit: 255
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
   end
@@ -45,42 +45,42 @@ ActiveRecord::Schema.define(version: 20150104173344) do
   create_table "labelings", force: :cascade do |t|
     t.integer  "label_id"
     t.integer  "labelable_id"
-    t.string   "labelable_type"
+    t.string   "labelable_type", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "labelings", ["label_id", "labelable_id", "labelable_type"], name: "unique_labeling_label", unique: true
   add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
-  add_index "labelings", ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
+  add_index "labelings", ["labelable_id", "labelable_type"], name: "index_labelings_on_labelable_id_and_labelable_type"
 
   create_table "labels", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "color"
+    t.string   "color",      limit: 255
   end
 
   create_table "notifications", force: :cascade do |t|
     t.integer  "notifiable_id"
-    t.string   "notifiable_type"
+    t.string   "notifiable_type", limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "notifications", ["notifiable_id", "notifiable_type", "user_id"], name: "unique_notification", unique: true
-  add_index "notifications", ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
+  add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type"
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "replies", force: :cascade do |t|
-    t.text     "content"
+    t.text     "content",      limit: 1073741823
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ticket_id"
     t.integer  "user_id"
-    t.string   "message_id"
-    t.string   "content_type", default: "html"
+    t.string   "message_id",   limit: 255
+    t.string   "content_type", limit: 255,        default: "html"
   end
 
   add_index "replies", ["message_id"], name: "index_replies_on_message_id"
@@ -88,11 +88,11 @@ ActiveRecord::Schema.define(version: 20150104173344) do
   add_index "replies", ["user_id"], name: "index_replies_on_user_id"
 
   create_table "rules", force: :cascade do |t|
-    t.string   "filter_field"
-    t.integer  "filter_operation", default: 0, null: false
-    t.string   "filter_value"
-    t.integer  "action_operation", default: 0, null: false
-    t.string   "action_value"
+    t.string   "filter_field",     limit: 255
+    t.integer  "filter_operation",             default: 0, null: false
+    t.string   "filter_value",     limit: 255
+    t.integer  "action_operation",             default: 0, null: false
+    t.string   "action_value",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -107,16 +107,16 @@ ActiveRecord::Schema.define(version: 20150104173344) do
   add_index "status_changes", ["ticket_id"], name: "index_status_changes_on_ticket_id"
 
   create_table "tickets", force: :cascade do |t|
-    t.string   "subject"
-    t.text     "content"
+    t.string   "subject",      limit: 255
+    t.text     "content",      limit: 1073741823
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "assignee_id"
-    t.string   "message_id"
+    t.string   "message_id",   limit: 255
     t.integer  "user_id"
-    t.string   "content_type", default: "html"
-    t.integer  "status",       default: 0,      null: false
-    t.integer  "priority",     default: 0,      null: false
+    t.string   "content_type", limit: 255,        default: "html"
+    t.integer  "status",                          default: 0,      null: false
+    t.integer  "priority",                        default: 0,      null: false
   end
 
   add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"
@@ -128,23 +128,23 @@ ActiveRecord::Schema.define(version: 20150104173344) do
   create_table "users", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email",                  default: "",          null: false
-    t.string   "encrypted_password",     default: "",          null: false
-    t.string   "reset_password_token"
+    t.string   "email",                  limit: 255, default: "",          null: false
+    t.string   "encrypted_password",     limit: 255, default: "",          null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer  "sign_in_count",                      default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.boolean  "agent"
     t.text     "signature"
-    t.boolean  "notify",                 default: true
-    t.string   "authentication_token"
-    t.string   "time_zone",              default: "Amsterdam"
-    t.integer  "per_page",               default: 30,          null: false
-    t.string   "locale"
+    t.boolean  "notify",                             default: true
+    t.string   "authentication_token",   limit: 255
+    t.string   "time_zone",              limit: 255, default: "Amsterdam"
+    t.integer  "per_page",                           default: 30,          null: false
+    t.string   "locale",                 limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

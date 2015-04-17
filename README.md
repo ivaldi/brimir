@@ -43,6 +43,12 @@ If you want to use LDAP, configure config/ldap.yml accordingly, then change the 
     bin/rails console production
     u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
 
+Customization
+-------------
+Some applicant level configuration can be set through `config/settings.yml`
+
+Brimir is available in several languages. By default, it will use the locale corresponding to the user browser agent, if it was among the supported locales. If you want to change this and force certain locale, you can do that by setting:   `ignore_user_agent_locale: true`  in  `config/settings.yml`
+
 Incoming email
 --------------
 Incoming emails can be posted to the tickets url by using the script found in scripts/post-mail. Create an alias in your `/etc/aliases` file like this:
@@ -81,6 +87,8 @@ Some users have made requests for the following features. If you would like to c
 - Integration with OpsWeekly
 - Social media integration such as FreshDesk and Zoho have (reply to requests via social media)
 - Ticket creation api (and improving existing api)
+- Unread ticket status per user
+- Ticket search that also searches in from field and replies
 
 License
 -------

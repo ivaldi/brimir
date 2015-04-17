@@ -1,0 +1,11 @@
+default: &defaults
+  ignore_user_agent_locale: false
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

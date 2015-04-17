@@ -53,8 +53,11 @@ class ApplicationController < ActionController::Base
           end
         end
 
-        I18n.locale = http_accept_language.compatible_language_from(locales)
-
+        if AppSettings.ignore_user_agent_locale
+          I18n.locale = I18n.default_locale
+        else
+          I18n.locale = http_accept_language.compatible_language_from(locales)
+        end
         if user_signed_in?
           current_user.locale = I18n.locale
           current_user.save
