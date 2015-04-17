@@ -47,8 +47,8 @@
           </li>
           <li class="ib mrl">
             <% if can? :update, @ticket %>
-              <a href="#" data-dropdown="statuses-<%= @ticket.id %>" class="text-default">
-                <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"></span>
+              <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
+                <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %> text-default"></span>
                 <%= t(@ticket.status) %>
               </a>
               <%= render 'status_dropdown', ticket: @ticket %>
@@ -59,7 +59,7 @@
           </li>
           <li class="ib mrl">
             <% if can? :update, @ticket %>
-              <a href="#" data-dropdown="priorities-<%= @ticket.id %>" class="text-default">
+              <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
                 <span class="cc-priority-<%= @ticket.priority %> fa fa-fw fa-circle-o"></span>
                 <%= t(@ticket.priority) %>
               </a>
@@ -71,21 +71,19 @@
           </li>
           <li class="ib mrl">
             <% if can? :update, @ticket %>
-              <a href="#" data-reveal-id="change-assignee" class="text-default">
+              <a href="#" data-reveal-id="change-assignee">
+                <span class="fa fa-fw fa-user text-default"></span>
                 <% if !@ticket.assignee %>
-                  <span class="fa fa-fw fa-user"></span>
                   <%= t(:unassigned) %>
                 <% else %>
-                  <span class="fa fa-fw fa-user"></span>
                   <%= @ticket.assignee.email %>
                 <% end %>
               </a>
             <% else %>
+              <span class="fa fa-fw fa-user text-default"></span>
               <% if !@ticket.assignee %>
-                <span class="fa fa-fw fa-user"></span>
                 <%= t(:unassigned) %>
               <% else %>
-                <span class="fa fa-fw fa-user"></span>
                 <%= @ticket.assignee.email %>
               <% end %>
             <% end %>
