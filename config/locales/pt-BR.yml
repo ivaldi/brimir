@@ -6,9 +6,25 @@ pt-BR:
   new_ticket: Novo Ticket
   inbox: Caixa de Entrada
   mine: Meu
+  waiting: Aguardando
   closed_tickets: Fechado
   trashed: Excluído
+  users: Usuário
   rules: Regras
+  personal_settings: Configurações Pessoais
+  sign_out: Sair
+  delete: Remove
+
+  joyride:
+    tickets: Qualquer pessoa pode criar tickets usando este botão.
+    personal_settings: Defina sua assinatura, timezone e outras preferências via este menu.
+    labels: Depois de adicionar etiquetas para tickets ou usuários, eles aparecerão aqui. Você pode, em seguida, usá-los como filtros.
+    rules: Adicione, automaticamente, etiquetas, responsáveis, mudanças de status e muito mais.
+    users: Adicione mais agentes ou usuários normais.
+    final: Obrigado por usar o Brimir!
+    next: Próximo
+    previous: Anterior
+    end: Fim
 
 # devise/sessions/new
   sign_in: Entrar
@@ -31,6 +47,12 @@ pt-BR:
   password_wont_change_without_opening_link: Sua senha não será alterada até que você acesse o link acima e crie uma nova.
 
 # tickets/index
+  count_tickets:
+    one: '%{count} ticket'
+    other: '%{count} tickets'
+  count_tickets_containing:
+    one: 'Contém %{count} ticket'
+    other: 'Contém %{count} tickets'
   priority: Prioridade
   replies: respostas
   no_subject: Sem assunto
@@ -38,15 +60,19 @@ pt-BR:
   no_tickets_found: Nenhum ticket encontrado.
   search: Procurar
   minutes: minutos
+  are_you_sure_empty_trash: Deletar todos os tickets da lixeira?
 
 # tickets/show
+  add: Adicionar
   ticket_by_at: Por %{email} em %{at}
   no_content: Sem conteúdo
+  ticket_id: Número do Ticket
   status: Status
   assignee: Responsável
   num_replies:
     one: '%{count} resposta'
     other: '%{count} respostas'
+  ago: atrás
   high: Alta
   medium: Média
   low: Baixa
@@ -57,6 +83,7 @@ pt-BR:
   labels: Etiquetas
   label_name: Nome da etiqueta
   notification_sent_to: 'Uma notificação foi enviada para os seguintes endereços:'
+  no_notifications_sent: 'Nenhuma notificação foi enviada'
 
 # tickets/_change_priority_form
   change: Mudar
@@ -74,9 +101,11 @@ pt-BR:
 
 # replies/_form
   reply: Resposta
-  attach_files: Anexar arquivo(s)
+  attach_files: Anexar arquivos
+  attach_file: Anexar arquivo
   send_reply: Enviar resposta
   on_date_author_wrote: 'Em %{date}, %{author} escreveu:'
+  notification_will_be_sent_to: Sua notificação será enviada para
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket atribuído a você
@@ -101,6 +130,9 @@ pt-BR:
 
 # users/edit
   edit_user: Editar usuário
+  omniauth_connect_title: Autenticação usando o Google
+  omniauth_connect_text: Ative a autenticação usando uma conta do Google. Depois disso, você pode usar o "login no Google" como uma alternativa para o login com endereço de e-mail e senha padrão.
+  omniauth_connect_google_text: Conecte-se com Google
 
 # users/index
   email: Email
@@ -129,8 +161,21 @@ pt-BR:
   ticket_added: Ticket adicionado
   ticket_updated: Ticket atualizado
 
+# controllers/tickets/deleted
+  trash_emptied: Todos os tickets foram apagados da lixeira
+
 # controllers/replies
   reply_added: Resposta adicionada
+
+# controllers/omniauth
+  already_linked_accounts: Já ligada à conta do Google
+  successfully_linked_account: Ligada à conta do Google com sucesso
+  not_linked_account_cant_login: Não há nenhum usuário conectado a este provedor ainda. Faça o login em primeiro lugar e conecte-se através da tela de configurações pessoais.
+  third_party_failure: Ocorreu um erro durante a autenticação. Você ativou o "Contatos API" e "API do Google+" através do console API do Google?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Entrada alternativa
+  omniauth_sign_in_google: Google
 
 # rules/index
   new_rule: Nova regra
@@ -145,6 +190,17 @@ pt-BR:
   rule_modified: Regra adicionada
   rule_deleted: Regra deletada
 
+# email_addresses/index
+  new_email_address: Novo endereço de e-mail de envio
+  email_addresses: Endereço de e-mail para envio de e-mails
+
+# email_addresses/new
+  verification_mail_will_be_sent: Certifique-se que este endereço de e-mail foi passado corretamente ao Brimir. Um e-mail de verificação automatico será enviado quando você clicar em Salvar. Apenas endereços de e-mail verificados podem ser usados para mensagens de saída.
+  mark_spam_spf: Os e-mails do Brimir poderão ser marcados como spam caso você não adicione este servidor para o registro SPF DNS  do endereço de e-mail acima.
+
+# controllers/email_addresses
+  email_address_added: Endereço de e-mail adicionado
+  email_address_removed: Endereço de e-mail removido
 
   activerecord:
     attributes:
@@ -153,8 +209,11 @@ pt-BR:
         password: Senha
         password_confirmation: Confirmação da senha
         signature: Assinatura de email
-        remember_me: Relembre-me
+        remember_me: Continuar conectado
         label_ids: Etiquetas
+        locale: Idioma
+        time_zone: Fuso horário
+        per_page: Tickets por página
 
       ticket:
         from: Email remetente
@@ -163,6 +222,7 @@ pt-BR:
         status: Status
         priority: Prioridade
         assignee_id: Responsável
+        created_at: Criado em
 
       rule:
         filter_field: Campo
@@ -174,4 +234,12 @@ pt-BR:
         action_operations:
           assign_label: atribuir etiqueta
           notify_user: enviar notificação para
+          change_status: alterar status para
+          change_priority: alterar prioridade para
+          assign_user: atribir para
         action_value: Parâmetro para a ação
+
+      email_address:
+        email: Endereço de e-mail
+        default: Usar como endereço de e-mail de envio padrão
+        verification_token: Verificado
