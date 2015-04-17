@@ -79,26 +79,24 @@
                   href: tickets_path(assignee_id: current_user.id) do %>
                 <span class="fa fa-user"></span><%= t(:mine) %> <span class="right heading-six bubble pls prs">8</span>
               <% end %>
-              <ul class="no-m">
-                <li>
-                  <%= active_elem_if :a, params[:status] == 'waiting',
-                      href: tickets_path(status: 'waiting') do %>
-                    <span class="fa fa-clock-o"></span><%= t(:waiting) %>
-                  <% end %>
-                </li>
-                <li>
-                  <%= active_elem_if :a, params[:status] == 'closed',
-                       href: tickets_path(status: 'closed') do %>
-                    <span class="fa fa-check"></span><%= t(:closed_tickets) %>
-                  <% end %>
-                </li>
-                <li>
-                  <%= active_elem_if :a, params[:status] == 'deleted',
-                      href: tickets_path(status: 'deleted') do %>
-                    <span class="fa fa-trash-o"></span><%= t(:trashed) %>
-                  <% end %>
-                </li>
-              </ul>
+            </li>
+            <li>
+              <%= active_elem_if :a, params[:status] == 'waiting',
+                  href: tickets_path(status: 'waiting') do %>
+                <span class="fa fa-clock-o"></span><%= t(:waiting) %>
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, params[:status] == 'closed',
+                   href: tickets_path(status: 'closed') do %>
+                <span class="fa fa-check"></span><%= t(:closed_tickets) %>
+              <% end %>
+            </li>
+            <li>
+              <%= active_elem_if :a, params[:status] == 'deleted',
+                  href: tickets_path(status: 'deleted') do %>
+                <span class="fa fa-trash-o"></span><%= t(:trashed) %>
+              <% end %>
             </li>
           </ul>
 
