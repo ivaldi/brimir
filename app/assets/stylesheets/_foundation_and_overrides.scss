@@ -27,7 +27,10 @@ $anchor-font-color-hover: scale-color($secondary-color, $lightness: -14%);
 $paragraph-font-size: rem-calc(14);
 
 $tabs-navigation-bg-color: #fff;
-$accordion-content-active-bg-color: #f9f9f9;
+
+$accordion-navigation-bg-color: #fcfcfd;
+$accordion-navigation-active-bg-color: #fcfcfd;
+$accordion-content-active-bg-color: #fff;
 
 $table-bg: #fff;
 $table-even-row-bg: #fff;

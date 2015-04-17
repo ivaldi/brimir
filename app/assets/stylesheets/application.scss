@@ -111,7 +111,6 @@ table thead tr th{
 
 .replies{
 	border-top: 1px solid #eaeef0;
-	border-bottom: 1px solid #eaeef0;
 	background: #fcfcfd;
 	padding: 0;
 }
@@ -133,4 +132,14 @@ table thead tr th{
 .joyride-expose-wrapper{
 	box-shadow: none;
 	background: none;
+}
+
+.accordion-navigation > a:before {
+	@extend .fa;
+	@extend .fa-angle-right;
+	@extend .fa-fw;
+}
+
+.accordion-navigation.active > a:before {
+	@extend .fa-angle-down;
 }

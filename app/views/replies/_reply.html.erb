@@ -1,35 +1,40 @@
-<details>
-  <summary class="pal bb">
-    <span>Reply by <strong><%= reply.user.email %></strong></span>
-    <span class="right"><%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %> <%= t(:ago) %></span>
-  </summary>
-  <div id="reply-<%=reply.id%>" class="<%= div_class %> paxl bg-white bb">
-    <% if reply.content_type == 'html' %>
-      <% content = reply.content %>
-    <% else %>
-      <% content = text_to_html(reply.content) %>
-    <% end %>
-
-    <%= sanitize_html(content) %>
-
-    <% if reply.attachments.size > 0 %>
-      <hr />
-      <ul class="attachments">
-        <%= render reply.attachments %>
-      </ul>
-    <% end %>
-
-    <hr />
-    <ul class="inline-list text-secondary no-mb">
-      <% if reply.notified_users.count > 0 %>
-        <li class="no-ml"><%= t(:notification_sent_to) %></li>
-        <% reply.notified_users.each do |user| %>
-          <li><%= user.email %></li>
-        <% end %>
+<ul class="accordion" data-accordion>
+  <li class="accordion-navigation">
+    <a href="#reply-<%=reply.id%>" class="bb text-default">
+      <span>Reply by <strong><%= reply.user.email %></strong></span>
+      <span class="right">
+        <i class="fa fa-clock-o"></i>
+        <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %>
+        <%= t(:ago) %>
+      </span>
+    </a>
+    <div id="reply-<%=reply.id%>" class="content bb">
+      <% if reply.content_type == 'html' %>
+        <% content = reply.content %>
       <% else %>
-        <li class="no-ml"><%= t(:no_notifications_sent) %></li>
+        <% content = text_to_html(reply.content) %>
       <% end %>
-    </ul>
 
-  </div>
-</details>
+      <%= sanitize_html(content) %>
+
+      <% if reply.attachments.size > 0 %>
+        <hr />
+        <ul class="attachments">
+          <%= render reply.attachments %>
+        </ul>
+      <% end %>
+
+      <hr />
+      <ul class="inline-list text-secondary no-mb">
+        <% if reply.notified_users.count > 0 %>
+          <li class="no-ml"><%= t(:notification_sent_to) %></li>
+          <% reply.notified_users.each do |user| %>
+            <li><%= user.email %></li>
+          <% end %>
+        <% else %>
+          <li class="no-ml"><%= t(:no_notifications_sent) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </li>
+</ul>

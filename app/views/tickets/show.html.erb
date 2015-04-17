@@ -105,7 +105,7 @@
         </ul>
       </div>
     </div>
-    <div class="row">
+    <div class="row<% if @ticket.replies.size == 1 %> bb<% end %>">
       <div class="medium-12 columns ptxl pbxl">
         <% if @ticket.content.blank? %>
           (<%= t(:no_content) %>)
