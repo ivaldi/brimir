@@ -122,7 +122,8 @@
           </div>
         <% end %>
 
-        <ul class="inline-list text-secondary">
+        <hr />
+        <ul class="inline-list text-secondary no-mb">
           <li><%= t(:notification_sent_to) %></li>
           <% @ticket.notified_users.each do |user| %>
             <li><%= user.email %></li>

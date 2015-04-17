@@ -3,7 +3,7 @@
     <span>Reply by <strong><%= reply.user.email %></strong></span>
     <span class="right"><%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %> <%= t(:ago) %></span>
   </summary>
-  <div id="reply-<%=reply.id%>" class="<%= div_class %> plxxl prl pbl ptl bg-white bb">
+  <div id="reply-<%=reply.id%>" class="<%= div_class %> paxl bg-white bb">
     <% if reply.content_type == 'html' %>
       <% content = reply.content %>
     <% else %>
@@ -20,15 +20,16 @@
     <% end %>
 
     <hr />
-    <p class="no-m">
+    <ul class="inline-list text-secondary no-mb">
       <% if reply.notified_users.count > 0 %>
-        <%= t(:notification_sent_to) %>    
+        <li class="no-ml"><%= t(:notification_sent_to) %></li>
         <% reply.notified_users.each do |user| %>
-          <%= user.email %>
+          <li><%= user.email %></li>
         <% end %>
       <% else %>
-        <%= t(:no_notifications_sent) %>
+        <li class="no-ml"><%= t(:no_notifications_sent) %></li>
       <% end %>
-    </p>
+    </ul>
+
   </div>
 </details>

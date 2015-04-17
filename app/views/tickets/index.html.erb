@@ -68,7 +68,10 @@
       </div>
       <div class="medium-1 v-middle columns">
          <% if ticket.replies.size > 0 %>
-          <span class="ba label right alt" title="<%= ticket.replies.size %> <%= t(:replies) %>"><%= ticket.replies.size %></span>
+            <span class="ba label radius right alt text-secondary" title="<%= ticket.replies.size %> <%= t(:replies) %>">
+              <i class="fa fa-comment "></i>
+              <%= ticket.replies.size %>
+            </span>
           <% else %>
           <span>&nbsp;</span>
         <% end %>
@@ -83,7 +86,7 @@
           <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
             <% if can? :update, ticket %>
               <% if ticket.assignee %>
-                <a data-assignee-id="<%= ticket.assignee.id %>" href="#" class="text-default"><%= ticket.assignee.email %></a>
+                <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
               <% else %>
                 <a data-assignee-id="" href="#" class="text-default"><em><%= t(:unassigned) %></em></a>
               <% end %>
