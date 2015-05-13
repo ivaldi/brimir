@@ -54,6 +54,14 @@ ru:
   no_tickets_found: 'Не найдено заявок'
   search: 'Поиск'
   minutes: 'минут'
+  ticket:
+    id: 'Номер'
+    subject: 'Тема'
+    customer: 'Клиент'
+    date: 'Дата'
+    labels: 'Метки'
+    assignee: 'Ответственный'
+    replies: 'Ответов'
 
 # tickets/show
   add: 'Ок'
@@ -111,6 +119,7 @@ ru:
 
 # notification_mailer/new_ticket
   view_new_ticket: 'Посмотреть новую заявку'
+  views_ticket_id: 'Номер заявки №'
 
 # notification_mailer/new_reply
   new_reply: 'Новый ответ'

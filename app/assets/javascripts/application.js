@@ -17,6 +17,8 @@
 //= require tinymce-jquery
 //= require tickets
 //= require fancybox
+//= require jquery.dataTables.min
+//= require dataTables.foundation
 
 (function() {
 
@@ -107,6 +109,8 @@
       height: 150,
       plugins: 'autoresize,paste',
     });
+    
+    jQuery('#tickets_table').dataTable({info: false});
 
     jQuery(document).foundation();
 
