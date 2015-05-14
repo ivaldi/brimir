@@ -45,16 +45,20 @@
       <tr data-ticket-url="<%= ticket_url(ticket) %>">
 
         <td class="priority-<%= ticket.priority %> table-nowrap">
-          <span class="block"><%= ticket.user.email %></span>
-          <% unless ticket.subject.blank? %>
-            <a href="<%= ticket_url(ticket) %>">
-              <strong><%= ticket.subject %></strong>
-            </a>
-          <% else %>
-            <%= link_to ticket do %>
-              <em><%= t(:no_subject) %></em>
+          <div class="avatar-left"><%= user_avatar(ticket.user) %></div>
+          <div class="avatar-matter">
+            <span class="block"><%= ticket.user.email %></span>
+            <% unless ticket.subject.blank? %>
+              <a href="<%= ticket_url(ticket) %>">
+                <strong><%= ticket.subject %></strong>
+              </a>
+            <% else %>
+              <%= link_to ticket do %>
+                <em><%= t(:no_subject) %></em>
+              <% end %>
             <% end %>
-          <% end %>
+            <br />Test
+          </div>
         </td>
 
         <td>
@@ -72,13 +76,14 @@
           <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
           <% if can? :update, ticket %>
             <% if ticket.assignee %>
-              <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><i class="fa fa-user"></i> <%= ticket.assignee.email %></a>
+              <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= user_avatar_or_fa_user_icon(ticket.assignee) %> <%= ticket.assignee.email %></a>
             <% else %>
               <a data-assignee-id="" href="#"><em><%= t(:unassigned) %></em></a>
             <% end %>
           <% else %>
             <% if ticket.assignee %>
-              <i class="fa fa-user"></i> <%= ticket.assignee.email %>
+              <%= user_avatar_or_fa_user_icon(ticket.assignee) %>
+              <%= ticket.assignee.email %>
             <% else %>
               <em><%= t(:unassigned) %></em>
             <% end %>
