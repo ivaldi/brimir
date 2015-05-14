@@ -2,12 +2,16 @@
 #
 # This feature adds optional user avatars to email addresses
 # displayed in the application.
+# 
+# The avatars are fetched from an api defined by the 
+# `user_avatar_api_url` setting.
 #
-# The avatars are fetched using the gravatar service, which can
-# be found at http://gravatar.com.
+# If `user_avatar_api_url`is unset, the avatars are fetched using 
+# the gravatar service, which can be found at http://gravatar.com.
 # 
 # The gem *gravatar_image_tag* is used:
 # https://github.com/mdeering/gravatar_image_tag
+#
 # 
 # ## Global Settings
 # 
@@ -40,6 +44,16 @@
 #           a transparent PNG image
 # 
 #         See also: https://gravatar.com/site/implement/images/
+#
+#   * `user_avatar_api_url`: url of an api to fetch the avatar image
+#        url from.
+#        
+#        For example:
+#        "http://localhost:3000/avatars?email=:email&size=:size"
+# 
+#        The placeholders `:email` and `:size` will be replaced with
+#        the user's email and the size of the avatar to request.
+# 
 # 
 # ## Usage
 # 
@@ -56,6 +70,9 @@
 #      For example, an email of the user.
 #    </div>
 #
+# In places where the default layout uses `<i class="fa fa-user"></i>`,
+# use `<%= user_avatar_or_fa_user_icon(user) %>` instead.
+#
 module AvatarHelper
   
   # Generates a user avatar image tag if `display_user_avatars`
@@ -65,16 +82,16 @@ module AvatarHelper
   #   - size
   #   - (see gravatar_default_options)
   # 
-  def user_avatar(user, options = {})
+  def user_avatar(user, options = {size: 24})
     @user_avatar ||= {}
-    @user_avatar[[user.id, options]] ||= user_gravatar(user, options) if AppSettings.display_user_avatars
+    @user_avatar[[user.id, options]] ||= user_avatar_from_api(user, options) || user_gravatar(user, options) if AppSettings.display_user_avatars
   end
   
   # Display the user avatar if `AppSetting.display_user_avatars` is `true`.
   # Otherwise, display `<i class="fa fa-user"></i>`.
   #
   def user_avatar_or_fa_user_icon(user)
-    user_avatar(user) || content_tag(:i, class: 'fa fa-user')
+    user_avatar(user) || content_tag(:i, nil, class: 'fa fa-user')
   end
   
   private
@@ -94,6 +111,18 @@ module AvatarHelper
       },
       :class => 'user-avatar'
     }
+  end
+  
+  def user_avatar_from_api(user, options = {size: 24})
+    image_tag(user_avatar_url_from_api(user, options), width: options[:size], height: options[:size], class: 'user-avatar') if user_avatar_url_from_api(user)
+  end
+  
+  def user_avatar_url_from_api(user, options = {})
+    if AppSettings.user_avatar_api_url.present?
+      AppSettings.user_avatar_api_url
+        .gsub(':email', user.email)
+        .gsub(':size', options[:size].to_s)
+    end
   end
   
   # This sets the default gravatar image.

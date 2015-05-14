@@ -2,6 +2,7 @@ default: &defaults
   ignore_user_agent_locale: false
   display_user_avatars: false
   default_user_avatar: 'identicon'
+  user_avatar_api_url: ''
 
 development:
   <<: *defaults
