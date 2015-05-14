@@ -3,28 +3,32 @@
   <%= r.hidden_field :ticket_id %>
   <div class="ma">
     <h3><%= t(:reply) %></h3>
+    
+    <div class="avatar-left"><%= user_avatar(current_user) %></div>
+    <div class="avatar-matter">
 
-    <%
-      content = '<p></p>' + current_user.signature.to_s
-      reply_to = @reply.other_replies.order(:id).last
-
-      if reply_to.nil?
-        reply_to = @reply.ticket
-      end
-
-      content += '<br />'
-      content += t(:on_date_author_wrote, author: reply_to.user.email,
-          date: l(reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
-      content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
-    %>
-
-
-    <p>
-      <%= r.text_area :content, label: false, class: 'tinymce',
-          value: (@reply.content.nil? ? content : @reply.content) %>
-    </p>
-
-    <%= render 'attachments/form', f: r %>
+      <%
+        content = '<p></p>' + current_user.signature.to_s
+        reply_to = @reply.other_replies.order(:id).last
+      
+        if reply_to.nil?
+          reply_to = @reply.ticket
+        end
+      
+        content += '<br />'
+        content += t(:on_date_author_wrote, author: reply_to.user.email,
+            date: l(reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
+        content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
+      %>
+      
+      
+      <p>
+        <%= r.text_area :content, label: false, class: 'tinymce',
+            value: (@reply.content.nil? ? content : @reply.content) %>
+      </p>
+      
+      <%= render 'attachments/form', f: r %>
+    </div>
 
     <p class="no-m">
       <%= t(:notification_will_be_sent_to) %>

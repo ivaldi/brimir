@@ -1,36 +1,39 @@
 <li class="reply radius mb">
-  <p class="no-m">
-    <strong><%= reply.user.email %></strong>
-    <small class="pull-right"><%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %> <%= t(:ago) %></small>
-  </p>
-  <div id="reply-<%=reply.id%>" class="<%= div_class %>">
-
-    <% if reply.content_type == 'html' %>
-      <% content = reply.content %>
-    <% else %>
-      <% content = text_to_html(reply.content) %>
-    <% end %>
-
-    <%= sanitize_html(content) %>
-
-    <% if reply.attachments.size > 0 %>
-      <hr />
-      <ul class="attachments">
-        <%= render reply.attachments %>
-      </ul>
-    <% end %>
-
-    <hr />
+  <div class="avatar-left"><%= user_avatar(reply.user) %></div>
+  <div class="avatar-matter">
     <p class="no-m">
-      <% if reply.notified_users.count > 0 %>
-        <%= t(:notification_sent_to) %>    
-        <% reply.notified_users.each do |user| %>
-          <%= user.email %>
-        <% end %>
-      <% else %>
-        <%= t(:no_notifications_sent) %>
-      <% end %>
+      <strong><%= reply.user.email %></strong>
+      <small class="pull-right"><%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %> <%= t(:ago) %></small>
     </p>
-
+    <div id="reply-<%=reply.id%>" class="<%= div_class %>">
+    
+      <% if reply.content_type == 'html' %>
+        <% content = reply.content %>
+      <% else %>
+        <% content = text_to_html(reply.content) %>
+      <% end %>
+    
+      <%= sanitize_html(content) %>
+    
+      <% if reply.attachments.size > 0 %>
+        <hr />
+        <ul class="attachments">
+          <%= render reply.attachments %>
+        </ul>
+      <% end %>
+    
+      <hr />
+      <p class="no-m">
+        <% if reply.notified_users.count > 0 %>
+          <%= t(:notification_sent_to) %>    
+          <% reply.notified_users.each do |user| %>
+            <%= user.email %>
+          <% end %>
+        <% else %>
+          <%= t(:no_notifications_sent) %>
+        <% end %>
+      </p>
+    
+    </div>
   </div>
 </li>

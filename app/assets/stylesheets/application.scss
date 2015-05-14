@@ -86,6 +86,19 @@ td.priority-high{ border-left: 3px solid #da1500; color: #626262; }
 
 .text-secondary{ color: #999 !important; }
 
+@mixin vendor($property, $value...){
+    -webkit-#{$property}: $value;
+       -moz-#{$property}: $value;
+        -ms-#{$property}: $value;
+         -o-#{$property}: $value;
+            #{$property}: $value;
+}
+
+@mixin radius(){
+  @include vendor("border-radius", 5px);
+}
+
+
 /* --- Side menu --- */
 
 aside{
@@ -318,4 +331,17 @@ ul.off-canvas-list li:hover > a{
 .joyride-expose-wrapper{
 	box-shadow: none;
 	background: none;
+}
+
+.user-avatar{
+  @include radius();
+  margin-right: 5px;
+}
+
+.avatar-left{
+  float: left;
+}
+
+.avatar-matter{
+  overflow: hidden;
 }

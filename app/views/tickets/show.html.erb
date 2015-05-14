@@ -14,35 +14,39 @@
 <div class="row collapse">
   <div class="medium-9 columns br">
     <div class="ma">
-      <% if @ticket.content.blank? %>
-        (<%= t(:no_content) %>)
-      <% else %>
-
-        <div class="output">
-          <% if @ticket.content_type == 'html' %>
-            <% content = @ticket.content %>
-          <% else %>
-            <% content = text_to_html(@ticket.content) %>
-          <% end %>
-
-          <%= sanitize_html(content) %>
-        </div>
-      <% end %>
-
-      <ul class="inline-list text-secondary">
-        <li><%= t(:notification_sent_to) %></li>
-        <% @ticket.notified_users.each do |user| %>
-          <li><%= user.email %></li>
+      <div class="avatar-left"><%= user_avatar(@ticket.user) %></div>
+      <div class="avatar-matter">
+      
+        <% if @ticket.content.blank? %>
+          (<%= t(:no_content) %>)
+        <% else %>
+        
+          <div class="output">
+            <% if @ticket.content_type == 'html' %>
+              <% content = @ticket.content %>
+            <% else %>
+              <% content = text_to_html(@ticket.content) %>
+            <% end %>
+        
+            <%= sanitize_html(content) %>
+          </div>
         <% end %>
-      </ul>
-
-
-      <% if @ticket.attachments.size > 0 %>
-        <hr />
-        <ul class="attachments">
-          <%= render @ticket.attachments %>
+        
+        <ul class="inline-list text-secondary">
+          <li><%= t(:notification_sent_to) %></li>
+          <% @ticket.notified_users.each do |user| %>
+            <li><%= user.email %></li>
+          <% end %>
         </ul>
-      <% end %>
+        
+        
+        <% if @ticket.attachments.size > 0 %>
+          <hr />
+          <ul class="attachments">
+            <%= render @ticket.attachments %>
+          </ul>
+        <% end %>
+      </div>
     </div>
 
     <% if @ticket.replies.size > 1 %>
@@ -123,7 +127,7 @@
                 <span class="fa fa-fw fa-user"></span>
                 <%= t(:unassigned) %>
               <% else %>
-                <span class="fa fa-fw fa-user"></span>
+                <%= user_avatar_or_fa_user_icon(@ticket.assignee) %>
                 <%= @ticket.assignee.email %>
               <% end %>
             </a>
