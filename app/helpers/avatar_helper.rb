@@ -84,7 +84,7 @@ module AvatarHelper
   # 
   def user_avatar(user, options = {size: 24})
     @user_avatar ||= {}
-    @user_avatar[[user.id, options]] ||= user_avatar_from_api(user, options) || user_gravatar(user, options) if AppSettings.display_user_avatars
+    @user_avatar[[user.id, options]] ||= user_avatar_from_api(user, options) || user_gravatar(user, options) if display_user_avatars?
   end
   
   # Display the user avatar if `AppSetting.display_user_avatars` is `true`.
@@ -92,6 +92,10 @@ module AvatarHelper
   #
   def user_avatar_or_fa_user_icon(user)
     user_avatar(user) || content_tag(:i, nil, class: 'fa fa-user')
+  end
+  
+  def display_user_avatars?
+    AppSettings.display_user_avatars
   end
   
   private

@@ -16,6 +16,13 @@
     <div class="ma">
       <div class="avatar-left"><%= user_avatar(@ticket.user) %></div>
       <div class="avatar-matter">
+        
+        <% if display_user_avatars? # Redundant, but is more intuitive. %>
+          <p>
+            <strong><%= @ticket.user.email %></strong><br />
+            <%= @ticket.subject %>
+          </p>
+        <% end %>
       
         <% if @ticket.content.blank? %>
           (<%= t(:no_content) %>)
