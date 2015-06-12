@@ -146,7 +146,7 @@
 
 <% if can? :update, @ticket %>
   <div id="add-labels" class="reveal-modal small" data-reveal>
-    <h3>Labels toewijzen</h3>
+    <h3><%= t(:assign_label) %></h3>
     <%= form_for @labeling, remote: true do |f| %>
       <%= f.hidden_field :labelable_id %>
       <%= f.hidden_field :labelable_type %>

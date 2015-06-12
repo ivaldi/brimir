@@ -81,6 +81,7 @@ de:
   label_name: Label
   notification_sent_to: 'Es wurde eine Benachrichtigung an folgende E-Mail-Adressen gesendet:'
   no_notifications_sent: 'Es wurde keine Benachrichtigung gesendet.'
+  assign_label: Label zuweisen
 
 # tickets/_change_priority_form
   change: Priorität setzen
