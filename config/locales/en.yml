@@ -106,6 +106,9 @@ en:
   on_date_author_wrote: 'On %{date}, %{author} wrote:'
   notification_will_be_sent_to: Your notification will be sent to
 
+# replies/_reply
+  reply_by: Reply by
+
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket assigned to you
 

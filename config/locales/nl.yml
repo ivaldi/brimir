@@ -107,6 +107,9 @@ nl:
   on_date_author_wrote: 'Op %{date} schreef %{author}:'
   notification_will_be_sent_to: Een notificatie van je reactie wordt verstuurd naar
 
+# replies/_reply
+  reply_by: Reactie door
+
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket aan jou toegewezen
 

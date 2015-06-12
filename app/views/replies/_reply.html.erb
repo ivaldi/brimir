@@ -2,7 +2,7 @@
   <li class="accordion-navigation">
     <a href="#reply-<%=reply.id%>" class="bb text-default">
       <%= user_avatar reply.user, class: 'avatar left mrm' %>
-      <span>Reply by <strong><%= reply.user.email %></strong></span>
+      <span><%= t(:reply_by) %> <strong><%= reply.user.email %></strong></span>
       <span class="right">
         <i class="fa fa-clock-o"></i>
         <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %>
