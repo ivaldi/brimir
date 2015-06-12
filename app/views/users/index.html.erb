@@ -21,7 +21,10 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= link_to user.email, edit_user_path(user) %></td>
+            <td>
+              <%= user_avatar(user) %>
+              <%= link_to user.email, edit_user_path(user) %>
+            </td>
             <td><%= (user.agent?) ? t(:agent) : t(:customer) %></td>
           </tr>
         <% end %>

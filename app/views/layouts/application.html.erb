@@ -39,7 +39,7 @@
                 <li id="joyride-users"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
             <% end %>
             <li class="has-dropdown" id="joyride-settings">
-              <a href="#"><%= current_user.email %></a>
+              <a href="#"><%= user_avatar(current_user) %><%= current_user.email %></a>
               <ul class="dropdown">
                 <li>
                   <%= link_to edit_user_path(current_user) do %>
