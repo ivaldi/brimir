@@ -22,7 +22,7 @@
         <% @users.each do |user| %>
           <tr>
             <td>
-              <%= user_avatar(user) %>
+              <%= user_avatar user, class: 'avatar' %>
               <%= link_to user.email, edit_user_path(user) %>
             </td>
             <td><%= (user.agent?) ? t(:agent) : t(:customer) %></td>
