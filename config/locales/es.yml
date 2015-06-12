@@ -11,7 +11,7 @@ es:
   trashed: Borrados
 
 # devise/sessions/new
-  sign_in: Entrar
+  sign_in: Entrar Brimir
 
 # devise/shared/links
   forgot_password: ¿Olvidaste tu contraseña?

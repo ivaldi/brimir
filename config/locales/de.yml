@@ -25,7 +25,7 @@ de:
     end: Ende
 
 # devise/sessions/new
-  sign_in: Anmelden
+  sign_in: Anmelden zu Brimir
 
 # devise/shared/links
   forgot_password: Passwort vergessen?

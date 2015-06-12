@@ -26,7 +26,7 @@ nl:
     end: Aan de slag!
 
 # devise/sessions/new
-  sign_in: Inloggen
+  sign_in: Inloggen in Brimir
 
 # devise/shared/links
   forgot_password: Wachtwoord vergeten?

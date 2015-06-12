@@ -15,7 +15,7 @@ fr-CA:
   delete: Supprimer
 
 # devise/sessions/new
-  sign_in: S'authentifier
+  sign_in: S'authentifier au Brimir
 
 # devise/shared/links
   forgot_password: Mot de passe oublié?
