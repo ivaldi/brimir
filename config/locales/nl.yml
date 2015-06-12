@@ -23,7 +23,7 @@ nl:
     final: Bedankt voor het gebruiken van Brimir!
     next: Volgende
     previous: Vorige
-    end: Einde
+    end: Aan de slag!
 
 # devise/sessions/new
   sign_in: Inloggen

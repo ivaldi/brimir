@@ -22,7 +22,7 @@ en:
     final: Thanks for using Brimir!
     next: Next
     previous: Previous
-    end: End
+    end: Let's start!
 
 # devise/sessions/new
   sign_in: Sign in
