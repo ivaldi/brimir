@@ -42,8 +42,8 @@
 
 <section class="tickets">
   <% @tickets.each do |ticket| %>
-    <div class="priority-<%= ticket.priority %> row ticket bb" style="height: 5em;" data-ticket-url="<%= ticket_url(ticket) %>">
-      <div class="medium-6 plxxl v-middle columns">
+    <div class="priority-<%= ticket.priority %> row ticket bb" style="height: 4em;" data-ticket-url="<%= ticket_url(ticket) %>">
+      <div class="medium-6 plm v-middle columns">
         <%= user_avatar ticket.user, class: 'avatar left mrm', size: 50 %>
         <p class="no-mb plm">
           <span class="block"><%= ticket.user.email %></span>
