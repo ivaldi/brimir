@@ -7,9 +7,9 @@ env:
   - DB=sqlite3
 
 rvm:
-  - 2.0.0
-  - 2.1.5
-  - 2.2.0
+  - 2.0.0-p645
+  - 2.1.6
+  - 2.2.2
 
 before_script:
   - sudo apt-get update -qq
