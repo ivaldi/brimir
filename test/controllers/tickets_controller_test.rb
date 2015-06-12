@@ -162,7 +162,7 @@ class TicketsControllerTest < ActionController::TestCase
     assert_select "[id=reply-#{@ticket.replies.first.id}]"
 
     # should have this icon for label color update javascript (sidebar)
-    assert_select 'aside ul li i.fa-circle-o'
+    assert_select 'aside ul li span'
 
   end
 

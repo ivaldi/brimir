@@ -1,5 +1,5 @@
-jQuery('#label-id-<%= @label.id %>').css('background', '<%= @label.color %>');
-jQuery('[data-dropdown="label-<%= @label.id %>"]').closest('a').find('i.fa-circle-o').css('color', '<%= @label.color %>');
+jQuery('[data-label-id="<%= @label.id %>"]').css('background', '<%= @label.color %>');
+jQuery('[data-dropdown="label-<%= @label.id %>"]').closest('a').find('span').css('background-color', '<%= @label.color %>');
 
 <%# close all dropdowns %>
 var dropdowns = jQuery('.f-dropdown');

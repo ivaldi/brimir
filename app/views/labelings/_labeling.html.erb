@@ -1,4 +1,4 @@
-<span style="background: <%= labeling.label.color %>" class="radius label no-m" data-labeling-id="<%= labeling.id %>" id="label-id-<%= labeling.label.id %>">
+<span style="background: <%= labeling.label.color %>" class="radius label no-m" data-labeling-id="<%= labeling.id %>" data-label-id="<%= labeling.label.id %>">
   <%= labeling.label.name %>
   <% if can? :update, labeling.labelable %>
     <%= link_to labeling_path(labeling), method: :delete, remote: true do %>
