@@ -151,7 +151,7 @@ module AvatarHelper
   # See also: https://gravatar.com/site/implement/images/
   # 
   def default_avatar_url
-    AppSettings.default_user_avatar || 'identicon'
+    AppSettings.default_user_avatar || 'mm'
   end
   
 end
