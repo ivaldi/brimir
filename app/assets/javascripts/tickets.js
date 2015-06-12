@@ -25,7 +25,7 @@ jQuery(function() {
 
     /* set ticket id */
     dialog.find('form').attr('action',
-        elem.parents('tr').data('ticket-url'));
+        elem.parents('[data-ticket-url]').data('ticket-url'));
 
     /* select assigned user */
     options.removeAttr('selected');
