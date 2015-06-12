@@ -49,31 +49,36 @@
           <li class="ib mrl">
             <% if can? :update, @ticket %>
               <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
-                <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %> text-default"><%= t(:status) %></span>
+                <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %> text-default"></span>
+                <span class="show-for-print hide"><%= t(:status) %>:</span>
                 <%= t(@ticket.status) %>
               </a>
               <%= render 'status_dropdown', ticket: @ticket %>
             <% else %>
-              <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"><%= t(:status) %></span>
+              <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"></span>
+              <span class="show-for-print hide"><%= t(:status) %>:</span>
               <%= t(@ticket.status) %>
             <% end %>
           </li>
           <li class="ib mrl">
             <% if can? :update, @ticket %>
               <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
-                <span class="cc-priority-<%= @ticket.priority %> fa fa-fw fa-circle-o"><%= t(:priority) %></span>
+                <span class="cc-priority-<%= @ticket.priority %> fa fa-fw fa-circle-o"></span>
+                <span class="show-for-print hide"><%= t(:priority) %>:</span>
                 <%= t(@ticket.priority) %>
               </a>
               <%= render 'priority_dropdown', ticket: @ticket, short: false %>
             <% else %>
-              <span class="priority-<%= @ticket.priority %> fa fa-fw fa-circle"><%= t(:priority) %></span>
+              <span class="priority-<%= @ticket.priority %> fa fa-fw fa-circle"></span>
+              <span class="show-for-print hide"><%= t(:priority) %>:</span>
               <%= t(@ticket.priority) %>
             <% end %>
           </li>
           <li class="ib mrl">
             <% if can? :update, @ticket %>
               <a href="#" data-reveal-id="change-assignee">
-                <span class="fa fa-fw fa-user text-default"><%= t(:assignee) %></span>
+                <span class="fa fa-fw fa-user text-default"></span>
+                <span class="show-for-print hide"><%= t(:assignee) %>:</span>
                 <% if !@ticket.assignee %>
                   <%= t(:unassigned) %>
                 <% else %>
@@ -81,7 +86,8 @@
                 <% end %>
               </a>
             <% else %>
-              <span class="fa fa-fw fa-user text-default"><%= t(:assignee) %></span>
+              <span class="fa fa-fw fa-user text-default"></span>
+              <span class="show-for-print hide"><%= t(:assignee) %>:</span>
               <% if !@ticket.assignee %>
                 <%= t(:unassigned) %>
               <% else %>
