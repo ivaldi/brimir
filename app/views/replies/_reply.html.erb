@@ -1,6 +1,7 @@
 <ul class="accordion" data-accordion>
   <li class="accordion-navigation">
     <a href="#reply-<%=reply.id%>" class="bb text-default">
+      <%= user_avatar reply.user, class: 'left mrm' %>
       <span>Reply by <strong><%= reply.user.email %></strong></span>
       <span class="right">
         <i class="fa fa-clock-o"></i>
