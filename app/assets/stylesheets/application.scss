@@ -16,13 +16,13 @@
  *
  */
 
+@import "variables";
 @import "select2";
 @import "font-awesome";
 @import "fancybox";
 @import "avatar";
 @import "foundation_and_overrides";
 @import "foundation/functions";
-@import "variables";
 @import "spacing";
 @import "forms";
 @import "attachments";
@@ -143,4 +143,9 @@ table thead tr th{
 
 .accordion-navigation.active > a:before {
 	@extend .fa-angle-down;
+}
+
+.pagination {
+	@include clearfix();
+	margin-top: rem-calc(20);
 }
