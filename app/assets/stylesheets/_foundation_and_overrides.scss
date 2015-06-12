@@ -55,6 +55,12 @@ $panel-margin-bottom: rem-calc(0);
 $panel-font-color: #777;
 $panel-padding: rem-calc(5 20);
 
+$pagination-height: auto;
+$pagination-li-height: auto;
+$pagination-link-pad: rem-calc(10 20);
+$pagination-link-current-background: $success-color;
+$pagination-link-current-active-bg: $success-color;
+
 $input-font-size: rem-calc(14);
 $input-border-color: #ddd;
 $input-box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
