@@ -1,7 +1,7 @@
 //defaults
 $paddingMargins: p, m;
 $positions: a, t, r, b, l;
-$spacing-increment: 5px;
+$spacing-increment: rem-calc(5);
 $sizes: n, s, m, l, xl, xxl;
 $pm: padding;
 $pos: top;
