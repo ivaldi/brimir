@@ -113,12 +113,20 @@ module AvatarHelper
         :secure => true,
         :default => default_avatar_url
       },
-      :class => 'user-avatar'
+      :class => 'avatar left mrm'
     }
   end
   
-  def user_avatar_from_api(user, options = {size: 24})
-    image_tag(user_avatar_url_from_api(user, options), width: options[:size], height: options[:size], class: 'user-avatar') if user_avatar_url_from_api(user)
+  def user_avatar_from_api(user, options = {})
+    options = user_avatar_from_api_default_options.deep_merge(options)
+    image_tag(user_avatar_url_from_api(user, options), width: options[:size], height: options[:size], class: options[:class]) if user_avatar_url_from_api(user)
+  end
+  
+  def user_avatar_from_api_default_options
+    {
+      :class => 'avatar left mrm',
+      :size => 24
+    }
   end
   
   def user_avatar_url_from_api(user, options = {})
