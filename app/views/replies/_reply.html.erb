@@ -1,5 +1,5 @@
 <ul class="accordion" data-accordion>
-  <li class="accordion-navigation">
+  <li class="accordion-navigation <%= div_class %>">
     <a href="#reply-<%=reply.id%>" class="bb text-default">
       <div class="row collapse">
         <div class="medium-1 column pll">
@@ -15,7 +15,7 @@
         </div>
       </div>
     </a>
-    <div id="reply-<%=reply.id%>" class="content bb">
+    <div id="reply-<%=reply.id%>" class="content bb <%= div_class %>">
 
     <div class="row">
       <div class="medium-11 columns medium-push-1 mtl mbl">
