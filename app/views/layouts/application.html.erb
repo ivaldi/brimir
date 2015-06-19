@@ -70,15 +70,23 @@
                   params[:assignee_id].to_i == 0,
                   href: root_path do %>
 
-                <span class="fa fa-inbox"></span><%= t(:inbox) %> <span class="right heading-six bubble pls prs"><%= Ticket.open.count %></span>
+                <span class="fa fa-inbox"></span>
+                <%= t(:inbox) %>
+                <span class="right heading-six bubble pls prs">
+                  <%= Ticket.open.count %>
+                </span>
               <% end %>
             </li>
             <% if current_user.agent? %>
               <li>
                 <%= active_elem_if :a, params[:status] == 'open' &&
                     params[:assignee_id].to_i == current_user.id,
-                    href: tickets_path(assignee_id: current_user.id) do %>
-                  <span class="fa fa-user"></span><%= t(:mine) %> <span class="right heading-six bubble pls prs"><%= Ticket.open.filter_by_assignee_id( current_user.id).count %></span>
+                    href: tickets_path(assignee_id: current_user.id), class: 'plxxl' do %>
+                  <span class="fa fa-user"></span>
+                  <%= t(:mine) %>
+                  <span class="right heading-six bubble pls prs">
+                    <%= Ticket.open.filter_by_assignee_id( current_user.id).count %>
+                  </span>
                 <% end %>
               </li>
             <% end %>
