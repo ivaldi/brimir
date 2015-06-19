@@ -12,7 +12,7 @@
 // GNU Affero General Public License for more details.
 //
 // You should have received a copy of the GNU Affero General Public License
-// along with this program.  If not, see <http:gcwww.gnu.org/licenses/>.
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 jQuery(function() {
 
@@ -42,7 +42,7 @@ jQuery(function() {
 
   jQuery('[data-toggle-all]').on('change', function(){
     var checked = this.checked ? true : false;
-    jQuery('.ticket input[type="checkbox"]').each(function(){
+    jQuery('[data-toggle-check]').each(function(){
       if(checked && !this.checked || !checked && this.checked){
         jQuery(this).click();
       }

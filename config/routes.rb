@@ -4,11 +4,12 @@ Brimir::Application.routes.draw do
 
   resources :users
 
-  resources :tickets, only: [:index, :show, :update, :new, :create]
-
   namespace :tickets do
     resource :deleted, only: :destroy, controller: :deleted
+    resource :selected, only: :update, controller: :selected
   end
+
+  resources :tickets, only: [:index, :show, :update, :new, :create]
 
   resources :labelings, only: [:destroy, :create]
 
