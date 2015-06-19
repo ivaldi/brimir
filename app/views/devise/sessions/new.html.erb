@@ -1,6 +1,6 @@
-<div class="row mt">
+<div class="row mt ptxxl">
   <div class="medium-8 large-6 columns medium-centered">
-    <div class="panel paxl">
+    <div class="panel paxxl">
       <h3 class="mb"><%= t(:sign_in) %></h3>
       <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
@@ -28,7 +28,7 @@
             <%= f.check_box :remember_me %>
         <% end -%>
 
-        <%= f.submit(t(:sign_in), class: 'button radius no-mb mtm') %>
+        <%= f.submit(t(:sign_in), class: 'secondary button radius no-mb mtm') %>
 
         <%= render 'devise/shared/links' %>
 
