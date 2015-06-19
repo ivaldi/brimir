@@ -1,8 +1,11 @@
 <%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
 
   <%= r.hidden_field :ticket_id %>
-  <div class="row bb">
-    <div class="medium-12 columns ptm pbm">
+  <div class="row collapse bb">
+    <div class="medium-1 column ptl pll prl">
+      <%= user_avatar current_user, class: 'avatar', size: 35 %>
+    </div>
+    <div class="medium-11 columns ptm pbm pll prl">
       <h3 class="text-default"><%= t(:reply) %></h3>
 
       <%

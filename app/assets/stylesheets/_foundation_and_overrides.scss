@@ -5,6 +5,7 @@
 @import "foundation/functions";
 
 $body-font-color: #616b80;
+$column-gutter: rem-calc(30);
 
 $primary-color: #ffffff;
 $secondary-color: #67c2e5;
@@ -29,8 +30,9 @@ $paragraph-font-size: rem-calc(14);
 $tabs-navigation-bg-color: #fff;
 
 $accordion-navigation-bg-color: #fcfcfd;
-$accordion-navigation-active-bg-color: #fcfcfd;
+$accordion-navigation-active-bg-color: #ffffff;
 $accordion-content-active-bg-color: #fff;
+$accordion-content-padding: rem-calc($column-gutter/2 0);
 
 $table-bg: #fff;
 $table-even-row-bg: #fff;

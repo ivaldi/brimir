@@ -2,13 +2,11 @@
   <div class="row collapse">
     <div class="medium-6 columns">
       <h3 class="filter-title no-m pts plm">
-
         <% if params[:q].present? %>
           <%= t(:count_tickets_containing, count: @tickets.count) %> '<em><%= params[:q].to_s %></em>'
         <% else %>
           <%= t(:count_tickets, count: @tickets.count) %>
         <% end %>
-
       </h3>
     </div>
     <div class="medium-6 columns">

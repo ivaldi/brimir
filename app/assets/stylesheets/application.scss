@@ -135,14 +135,9 @@ table thead tr th{
 	background: none;
 }
 
-.accordion-navigation > a:before {
-	@extend .fa;
-	@extend .fa-angle-right;
-	@extend .fa-fw;
-}
-
-.accordion-navigation.active > a:before {
-	@extend .fa-angle-down;
+.accordion .accordion-navigation > a {
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .pagination {

@@ -1,10 +1,12 @@
 <div class="row collapse">
-  <div class="large-8 medium-12 columns bl">
-    <div class="row bb">
-      <div class="medium-12 columns ptm pbm">
-        <a class="pull-right mtm text-default" href="#print" onclick="window.print()"><%= fa_icon 'print' %></a>
-        <%= user_avatar @ticket.user, class: 'avatar left mrm mtm', size: 50 %>
-        <h3 class="mt no-mb text-default">
+  <div class="large-8 medium-12 columns bl br">
+    <div class="row bb ptm pbm collapse">
+      <div class="medium-1 column pll">
+        <%= user_avatar @ticket.user, class: 'avatar', size: 35 %>
+      </div>
+      <div class="medium-11 columns pll">
+        <a class="pull-right mtm text-default mrl" href="#print" onclick="window.print()"><%= fa_icon 'print' %></a>
+        <h3 class="no-m text-default">
           <%= !@ticket.subject.blank? ? @ticket.subject : "<em>(#{t(:no_subject)})</em>".html_safe %>
         </h3>
         <h5 class="text-default mb no-mt">
@@ -83,7 +85,7 @@
       </div>
     </div>
     <div class="row<% if @ticket.replies.size == 1 %> bb<% end %>">
-      <div class="medium-12 columns ptxl pbxl">
+      <div class="medium-11 medium-push-1 columns ptxl pbxl">
         <% if @ticket.content.blank? %>
           (<%= t(:no_content) %>)
         <% else %>

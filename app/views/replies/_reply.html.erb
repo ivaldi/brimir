@@ -1,41 +1,50 @@
 <ul class="accordion" data-accordion>
   <li class="accordion-navigation">
     <a href="#reply-<%=reply.id%>" class="bb text-default">
-      <%= user_avatar reply.user, class: 'avatar left mrm' %>
-      <span><%= t(:reply_by) %> <strong><%= reply.user.email %></strong></span>
-      <span class="right">
-        <i class="fa fa-clock-o"></i>
-        <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %>
-        <%= t(:ago) %>
-      </span>
+      <div class="row collapse">
+        <div class="medium-1 column pll">
+          <%= user_avatar reply.user, class: 'avatar', size: 35 %>
+        </div>
+        <div class="medium-11 columns pll pts prl">
+          <span><%= t(:reply_by) %> <strong><%= reply.user.email %></strong></span>
+          <span class="right">
+            <i class="fa fa-clock-o"></i>
+            <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %>
+            <%= t(:ago) %>
+          </span>
+        </div>
+      </div>
     </a>
     <div id="reply-<%=reply.id%>" class="content bb">
-      <% if reply.content_type == 'html' %>
-        <% content = reply.content %>
-      <% else %>
-        <% content = text_to_html(reply.content) %>
-      <% end %>
 
-      <%= sanitize_html(content) %>
-
-      <% if reply.attachments.size > 0 %>
-        <hr />
-        <ul class="attachments">
-          <%= render reply.attachments %>
-        </ul>
-      <% end %>
-
-      <hr />
-      <ul class="inline-list text-secondary no-mb">
-        <% if reply.notified_users.count > 0 %>
-          <li class="no-ml"><%= t(:notification_sent_to) %></li>
-          <% reply.notified_users.each do |user| %>
-            <li><%= user.email %></li>
-          <% end %>
+    <div class="row">
+      <div class="medium-11 columns medium-push-1 mtl mbl">
+        <% if reply.content_type == 'html' %>
+          <% content = reply.content %>
         <% else %>
-          <li class="no-ml"><%= t(:no_notifications_sent) %></li>
+          <% content = text_to_html(reply.content) %>
         <% end %>
-      </ul>
+
+        <%= sanitize_html(content) %>
+
+        <% if reply.attachments.size > 0 %>
+          <hr />
+          <ul class="attachments">
+            <%= render reply.attachments %>
+          </ul>
+        <% end %>
+
+        <hr />
+        <ul class="inline-list text-secondary no-mb">
+          <% if reply.notified_users.count > 0 %>
+            <li class="no-ml"><%= t(:notification_sent_to) %></li>
+            <% reply.notified_users.each do |user| %>
+              <li><%= user.email %></li>
+            <% end %>
+          <% else %>
+            <li class="no-ml"><%= t(:no_notifications_sent) %></li>
+          <% end %>
+        </ul>
     </div>
   </li>
 </ul>
