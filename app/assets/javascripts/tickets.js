@@ -42,7 +42,7 @@ jQuery(function() {
 
   jQuery('[data-toggle-all]').on('change', function(){
     var checked = this.checked ? true : false;
-    jQuery('.ticket input[type="checkbox"]').each(function(){
+    jQuery('[data-toggle-check]').each(function(){
       if(checked && !this.checked || !checked && this.checked){
         jQuery(this).click();
       }

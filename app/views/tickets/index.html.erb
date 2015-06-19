@@ -41,41 +41,55 @@
 </div>
 
 <section class="tickets">
-  <% @tickets.each do |ticket| %>
-    <div class="priority-<%= ticket.priority %> row ticket bb" style="height: 4em;" data-ticket-url="<%= ticket_url(ticket) %>">
-      <div class="medium-6 plm v-middle columns">
-        <%= user_avatar ticket.user, class: 'avatar left mrm', size: 50 %>
-        <p class="no-mb plm">
-          <span class="block"><%= ticket.user.email %></span>
-          <% unless ticket.subject.blank? %>
-            <a href="<%= ticket_url(ticket) %>">
-              <strong><%= ticket.subject %></strong>
-            </a>
-          <% else %>
-            <%= link_to ticket do %>
-              <em><%= t(:no_subject) %></em>
+  <%= form_tag tickets_selected_path, method: :patch do %>
+    <ul class="inline-list bb no-m">
+      <li class="pal no-m prs">
+        <input type="checkbox" value="" name="" class="no-mb mts left" data-toggle-all />
+      </li>
+      <% Ticket.statuses.keys.each do |value| %>
+        <li class="bl no-m">
+          <button type="submit" name="ticket[status]" value="<%= value %>" class="ptl plm prm pbl text-medium-light-grey no-m no-b">
+            <%= t(value) %>
+          </button>
+        </li>
+      <% end %>
+    </ul>
+    <% @tickets.each do |ticket| %>
+      <div class="priority-<%= ticket.priority %> row ticket bb" style="height: 4em;" data-ticket-url="<%= ticket_url(ticket) %>">
+        <div class="medium-6 plm v-middle columns">
+          <input type="checkbox" value="<%= ticket.id %>" name="id[]" class="no-mb" data-toggle-check />
+          <%= user_avatar ticket.user, class: 'avatar left mrm', size: 50 %>
+          <p class="no-mb plm mll">
+            <span class="block"><%= ticket.user.email %></span>
+            <% unless ticket.subject.blank? %>
+              <a href="<%= ticket_url(ticket) %>">
+                <strong><%= ticket.subject %></strong>
+              </a>
+            <% else %>
+              <%= link_to ticket do %>
+                <em><%= t(:no_subject) %></em>
+              <% end %>
             <% end %>
-          <% end %>
-        </p>
-      </div>
-      <div class="medium-1 v-middle columns">
-         <% if ticket.replies.size > 0 %>
-            <span class="ba label radius right alt text-secondary" title="<%= ticket.replies.size %> <%= t(:replies) %>">
-              <i class="fa fa-comment "></i>
-              <%= ticket.replies.size %>
-            </span>
+          </p>
+        </div>
+        <div class="medium-1 v-middle columns">
+          <% if ticket.replies.size > 0 %>
+             <span class="ba label radius right alt text-secondary" title="<%= ticket.replies.size %> <%= t(:replies) %>">
+               <i class="fa fa-comment "></i>
+               <%= ticket.replies.size %>
+             </span>
           <% else %>
-          <span>&nbsp;</span>
-        <% end %>
-      </div>
-      <div class="medium-2 v-middle columns">
-        <% ticket.labels.viewable_by(current_user).each do |label| %>
-          <%= render label %>
-        <% end %>
-      </div>
-      <div class="medium-3 v-middle columns">
-        <p class="no-mb text-right">
-          <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
+            <span>&nbsp;</span>
+          <% end %>
+        </div>
+        <div class="medium-2 v-middle columns">
+          <% ticket.labels.viewable_by(current_user).each do |label| %>
+            <%= render label %>
+          <% end %>
+        </div>
+        <div class="medium-3 v-middle columns">
+          <p class="no-mb text-right">
+            <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
             <% if can? :update, ticket %>
               <% if ticket.assignee %>
                 <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
@@ -89,9 +103,10 @@
                 <em><%= t(:unassigned) %></em>
               <% end %>
             <% end %>
-        </p>
+          </p>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 
   <% if @tickets.empty? %>

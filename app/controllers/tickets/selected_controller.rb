@@ -14,24 +14,27 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-require 'test_helper'
-
 module Tickets
-  # tests for interaction with deleted tickets
-  class DeletedControllerTest < ActionController::TestCase
+  # class to interact with all selected tickets (params[:id][...])
+  class SelectedController < ApplicationController
+    skip_load_and_authorize_resource
 
-    setup do
-      sign_in users(:alice)
+    def update
+      @tickets = Ticket.where(id: params[:id])
+
+      @tickets.each do |ticket|
+        authorize! :update, ticket
+        ticket.update_attributes(ticket_params)
+      end
+
+      redirect_to tickets_url, notice: t(:tickets_status_modified)
     end
 
-    test 'should empty trash' do
+    protected
 
-      Ticket.update_all(status: Ticket.statuses[:deleted])
-
-      assert_difference 'Ticket.count', -3 do
-        delete :destroy
-        assert_redirected_to tickets_url(status: :deleted)
-      end
+    def ticket_params
+      params.require(:ticket).permit(:status)
     end
   end
 end
+
