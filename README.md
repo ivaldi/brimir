@@ -91,6 +91,7 @@ Some users have made requests for the following features. If you would like to c
 - Ticket search that also searches in from field and replies.
 - Mark tickets as duplicate, linking it to the duplicated ticket.
 - CC or BCC people from the reply form.
+- Ability to rename tickets (change their subject).
 
 License
 -------
