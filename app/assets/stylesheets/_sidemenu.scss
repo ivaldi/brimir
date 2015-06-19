@@ -27,11 +27,10 @@ aside{
 				.bubble{
 					color: $body-font-color;
 					background-color: #fff;
-					font-weight: normal;
-					padding-top: 2px;
-					padding-bottom: 2px;
+					font-weight: bold;
 					min-width: 23px;
 					text-align: center;
+					border-radius: 3px;
 				}
 
 				&.hover-icon-a {
