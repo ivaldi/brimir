@@ -41,7 +41,7 @@
 <section class="tickets">
   <%= form_tag tickets_selected_path, method: :patch do %>
     <ul class="inline-list bb no-m">
-      <li class="pal no-m prs">
+      <li class="pal no-m prm">
         <input type="checkbox" value="" name="" class="no-mb mts left" data-toggle-all />
       </li>
       <% Ticket.statuses.keys.each do |value| %>
@@ -54,10 +54,10 @@
     </ul>
     <% @tickets.each do |ticket| %>
       <div class="priority-<%= ticket.priority %> row ticket bb" style="height: 4em;" data-ticket-url="<%= ticket_url(ticket) %>">
-        <div class="medium-6 plm v-middle columns">
+        <div class="medium-6 plxxl v-middle columns">
           <input type="checkbox" value="<%= ticket.id %>" name="id[]" class="no-mb" data-toggle-check />
-          <%= user_avatar ticket.user, class: 'avatar left mrm', size: 50 %>
-          <p class="no-mb plm mll">
+          <%= user_avatar ticket.user, class: 'avatar left mrl mts mlm', size: 30 %>
+          <p class="no-mb text-overflow">
             <span class="block"><%= ticket.user.email %></span>
             <% unless ticket.subject.blank? %>
               <a href="<%= ticket_url(ticket) %>">

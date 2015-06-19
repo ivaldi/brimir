@@ -28,6 +28,10 @@ body{
 		-o-transition: background-color 0.25s;
 		transition: background-color 0.25s;
 
+		p {
+			line-height: 1.3;
+		}
+
 		&:hover{
 			background: darken($white, 3);
 		}
