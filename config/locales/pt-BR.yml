@@ -114,7 +114,7 @@ pt-BR:
   ticket_priority_changed: Prioridade modificada para ticket
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Status modificado para ticket
+  ticket_status_modified: Status modificado para ticket
 
 # notification_mailer/new_ticket
   view_new_ticket: Ver novo ticket

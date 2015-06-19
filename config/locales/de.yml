@@ -112,7 +112,7 @@ de:
   ticket_priority_changed: Die Priorität des Tickets wurde geändert
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Der Status des Tickets geändert
+  ticket_status_modified: Der Status des Tickets geändert
 
 # notification_mailer/new_ticket
   view_new_ticket: Ticket anzeigen

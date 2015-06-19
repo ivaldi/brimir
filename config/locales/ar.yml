@@ -114,7 +114,7 @@ ar:
   ticket_priority_changed: تم تغيير أولوية الشكوى
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: تم تغيير حالة الشكوى
+  ticket_status_modified: تم تغيير حالة الشكوى
 
 # notification_mailer/new_ticket
   view_new_ticket: عرض الشكوى الجديدة

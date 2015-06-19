@@ -97,7 +97,7 @@ fr-CA:
   ticket_priority_changed: Priorité modifié pour le billet
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Statut modifié pour le billet
+  ticket_status_modified: Statut modifié pour le billet
 
 # notification_mailer/new_ticket
   view_new_ticket: Voir le nouveau billet

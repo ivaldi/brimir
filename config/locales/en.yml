@@ -116,7 +116,7 @@ en:
   ticket_priority_changed: Ticket priority modified for ticket
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Ticket status modified for ticket
+  ticket_status_modified: Ticket status modified for ticket
 
 # notification_mailer/new_ticket
   view_new_ticket: View new ticket

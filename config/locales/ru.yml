@@ -107,7 +107,7 @@ ru:
   ticket_priority_changed: 'Приоритет заявки изменен'
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: 'Статус заявки изменен'
+  ticket_status_modified: 'Статус заявки изменен'
 
 # notification_mailer/new_ticket
   view_new_ticket: 'Посмотреть новую заявку'

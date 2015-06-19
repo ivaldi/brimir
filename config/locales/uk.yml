@@ -99,7 +99,7 @@ uk:
   ticket_priority_changed: Пріорітет тікету змінено 
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Статус тікету змінено
+  ticket_status_modified: Статус тікету змінено
 
 # notification_mailer/new_ticket
   view_new_ticket: Переглянути новий тікет

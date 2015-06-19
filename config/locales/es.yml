@@ -85,7 +85,7 @@ es:
   ticket_priority_changed: Prioridad del ticket modificada
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Estado del ticket modificado
+  ticket_status_modified: Estado del ticket modificado
 
 # notification_mailer/new_ticket
   view_new_ticket: Ver nuevo ticket

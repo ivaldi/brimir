@@ -84,7 +84,7 @@ fi:
   ticket_priority_changed: Prioriteetti muutettiin tiketille
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Tila muutettiin tiketille
+  ticket_status_modified: Tila muutettiin tiketille
 
 # notification_mailer/new_ticket
   view_new_ticket: Näytä uusi tiketti

@@ -117,7 +117,7 @@ nl:
   ticket_priority_changed: Prioriteit van ticket is gewijzigd
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Status van ticket is gewijzigd
+  ticket_status_modified: Status van ticket is gewijzigd
 
 # notification_mailer/new_ticket
   view_new_ticket: Nieuw ticket bekijken

@@ -112,7 +112,7 @@ zh-CN:
   ticket_priority_changed: 咨询优先级设置
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: 咨询状态设置
+  ticket_status_modified: 咨询状态设置
 
 # notification_mailer/new_ticket
   view_new_ticket: 查看新咨询
