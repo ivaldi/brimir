@@ -27,7 +27,7 @@ module Tickets
         ticket.update_attributes(ticket_params)
       end
 
-      redirect_to :back, notice: t(:ticket_status_modified)
+      redirect_to :back, notice: t(:tickets_status_modified)
     end
 
     protected

@@ -118,6 +118,7 @@ nl:
 
 # ticket_mailer/notify_status_changed.text.erb
   ticket_status_modified: Status van ticket is gewijzigd
+  tickets_status_modified: Status van tickets is gewijzigd
 
 # notification_mailer/new_ticket
   view_new_ticket: Nieuw ticket bekijken

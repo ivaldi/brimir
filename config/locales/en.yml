@@ -117,6 +117,7 @@ en:
 
 # ticket_mailer/notify_status_changed.text.erb
   ticket_status_modified: Ticket status modified for ticket
+  tickets_status_modified: Ticket status modified for tickets
 
 # notification_mailer/new_ticket
   view_new_ticket: View new ticket
