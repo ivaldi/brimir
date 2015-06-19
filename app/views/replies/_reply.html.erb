@@ -7,7 +7,7 @@
         </div>
         <div class="medium-11 columns pll pts prl">
           <span><%= t(:reply_by) %> <strong><%= reply.user.email %></strong></span>
-          <span class="right">
+          <span class="right" title="<%= l reply.created_at.in_time_zone(current_user.time_zone), format: :long %>">
             <i class="fa fa-clock-o"></i>
             <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %>
             <%= t(:ago) %>
