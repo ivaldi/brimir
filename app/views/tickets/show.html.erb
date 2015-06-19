@@ -126,9 +126,9 @@
 
           <%# minus 2, because @reply is a new ticket that is counted as well... %>
           <% if @ticket.replies.size - 2 == count %>
-            <% div_class = 'content active' %>
+            <% div_class = 'active' %>
           <% else %>
-            <% div_class = 'content' %>
+            <% div_class = '' %>
           <% end %>
 
           <%= render reply, div_class: div_class %>

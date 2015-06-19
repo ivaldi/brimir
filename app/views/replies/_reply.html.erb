@@ -1,5 +1,5 @@
 <ul class="accordion" data-accordion>
-  <li class="accordion-navigation">
+  <li class="accordion-navigation <%= div_class %>">
     <a href="#reply-<%=reply.id%>" class="bb text-default">
       <div class="row collapse">
         <div class="medium-1 column pll">
@@ -7,7 +7,7 @@
         </div>
         <div class="medium-11 columns pll pts prl">
           <span><%= t(:reply_by) %> <strong><%= reply.user.email %></strong></span>
-          <span class="right">
+          <span class="right" title="<%= l reply.created_at.in_time_zone(current_user.time_zone), format: :long %>">
             <i class="fa fa-clock-o"></i>
             <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %>
             <%= t(:ago) %>
@@ -15,7 +15,7 @@
         </div>
       </div>
     </a>
-    <div id="reply-<%=reply.id%>" class="content bb">
+    <div id="reply-<%=reply.id%>" class="content bb <%= div_class %>">
 
     <div class="row">
       <div class="medium-11 columns medium-push-1 mtl mbl">
@@ -37,7 +37,7 @@
         <hr />
         <ul class="inline-list text-secondary no-mb">
           <% if reply.notified_users.count > 0 %>
-            <li class="no-ml"><%= t(:notification_sent_to) %></li>
+            <li><%= t(:notification_sent_to) %></li>
             <% reply.notified_users.each do |user| %>
               <li><%= user.email %></li>
             <% end %>
