@@ -25,6 +25,8 @@ module Tickets
     end
 
     test 'should update selected ticket status' do
+      request.env['HTTP_REFERER'] = tickets_url
+
       assert_equal 2, Ticket.open.count
 
       assert_difference 'Ticket.closed.count', 2 do
@@ -32,6 +34,14 @@ module Tickets
       end
 
       assert_equal 0, Ticket.open.count
+    end
+
+    test 'should not give error when id is missing' do
+      request.env['HTTP_REFERER'] = tickets_url
+
+      patch :update
+
+      assert_redirected_to tickets_url
     end
   end
 end

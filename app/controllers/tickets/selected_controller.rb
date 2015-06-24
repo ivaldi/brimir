@@ -22,6 +22,8 @@ module Tickets
     def update
       @tickets = Ticket.where(id: params[:id])
 
+      authorize! :update, Ticket # for empty params[:id]
+
       @tickets.each do |ticket|
         authorize! :update, ticket
         ticket.update_attributes(ticket_params)
