@@ -42,6 +42,7 @@ class TicketMailerTest < ActionMailer::TestCase
 
   test 'email threads are recognized correctly and assignee \
       is notified' do
+    Tenant.current_domain = Tenant.first.domain
 
     thread_start = read_fixture('thread_start').join
     thread_reply = read_fixture('thread_reply').join

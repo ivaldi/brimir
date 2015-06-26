@@ -1,0 +1,3 @@
+main:
+  domain: test.host
+  from: support@test.host

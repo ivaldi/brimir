@@ -26,18 +26,11 @@ class EmailAddress < ActiveRecord::Base
   }
 
   def self.default_email
-
-    if !EmailAddress.where(default: true, verification_token: nil).first.nil?
+    unless EmailAddress.where(default: true, verification_token: nil).first.nil?
       return EmailAddress.where(default: true, verification_token: nil).first.email
-
-    elsif ActionMailer::Base.default[:from].present?
-      ActionMailer::Base.default[:from]
-
-    elsif Rails.configuration.action_mailer.default_options.present?
-      Rails.configuration.action_mailer.default_options[:from]
-
+    else
+      Tenant.current_tenant.from
     end
-
   end
 
   protected

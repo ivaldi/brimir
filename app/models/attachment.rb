@@ -19,7 +19,7 @@ class Attachment < ActiveRecord::Base
   belongs_to :attachable, polymorphic: true
 
   has_attached_file :file,
-      path: ':rails_root/data/:class/:attachment/:id_partition/:style.:extension',
+      path: ':rails_root/data/:domain:class/:attachment/:id_partition/:style.:extension',
       url: '/attachments/:id/:style',
       styles: {
           thumb: {

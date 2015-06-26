@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   end
   protect_from_forgery
 
+  before_action :load_tenant
   before_action :authenticate_user!
   before_action :set_locale
   before_action :load_labels, if: :user_signed_in?
@@ -63,6 +64,14 @@ class ApplicationController < ActionController::Base
         current_user.locale = I18n.locale
         current_user.save
       end
+    end
+  end
+
+  def load_tenant
+    if request.subdomain.blank?
+      Tenant.current_domain = request.domain
+    else
+      Tenant.current_domain = "#{request.subdomain}.#{request.domain}"
     end
   end
 end
