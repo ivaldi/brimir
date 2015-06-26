@@ -9,12 +9,11 @@ Received: from [123.123.123.12] (example.com [12.123.12.123])
 Message-ID: <51712C0F.8020009@xxxx.com>
 Date: Fri, 19 Apr 2013 13:35:43 +0200
 From: Frank Groeneveld <frank@xxxx.com>
+Reply-To: Reply Address <reply@address.com>
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:17.0) Gecko/20130329 Thunderbird/17.0.5
 MIME-Version: 1.0
 To: Frank Groeneveld <frank@xxxx.com>
-Subject: Re: Test
-References: <51712C08.4000908@xxxx.com>
-In-Reply-To: <thisisnotknown0908@xxxx.com>
+Subject: Test
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 

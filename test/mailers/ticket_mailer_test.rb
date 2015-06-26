@@ -106,4 +106,22 @@ class TicketMailerTest < ActionMailer::TestCase
     end
   end
 
+  test 'reply to is used for incoming mail' do
+    email = read_fixture('reply_to').join
+
+    # ticket is created
+    assert_difference 'Ticket.count' do
+
+      # account for user created
+      assert_difference 'User.count' do
+
+        TicketMailer.receive(email)
+
+      end
+
+    end
+
+    assert_equal 'reply@address.com', User.last.email 
+  end
+
 end

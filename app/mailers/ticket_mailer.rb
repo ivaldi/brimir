@@ -81,6 +81,11 @@ class TicketMailer < ActionMailer::Base
       end
     end
 
+    from_address = email.from.first
+    unless email.reply_to.blank?
+      from_address = email.reply_to.first
+    end
+
     if response_to
       # reopen ticket
       ticket.status = :open
@@ -90,7 +95,7 @@ class TicketMailer < ActionMailer::Base
       incoming = Reply.create!({
         content: content,
         ticket_id: ticket.id,
-        from: email.from.first,
+        from: from_address,
         message_id: email.message_id,
         content_type: content_type
       })
@@ -99,7 +104,7 @@ class TicketMailer < ActionMailer::Base
 
       # add new ticket
       ticket = Ticket.create!({
-        from: email.from.first,
+        from: from_address,
         subject: subject,
         content: content,
         message_id: email.message_id,
