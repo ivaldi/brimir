@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
   end
   protect_from_forgery
 
-  before_filter :authenticate_user!
-  before_filter :set_locale
-  before_filter :load_labels, if: :user_signed_in?
+  before_action :authenticate_user!
+  before_action :set_locale
+  before_action :load_labels, if: :user_signed_in?
 
   check_authorization unless: :devise_controller?
 
