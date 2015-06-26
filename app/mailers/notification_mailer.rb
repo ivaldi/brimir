@@ -68,7 +68,7 @@ class NotificationMailer < ActionMailer::Base
     end
     mail(to: ticket.assignee.email, subject:
         'Ticket status modified in ' + ticket.status + ' for: ' \
-        + ticket.subject)
+        + ticket.subject, from: EmailAddress.default_email)
   end
 
   def priority_changed(ticket)
@@ -79,7 +79,7 @@ class NotificationMailer < ActionMailer::Base
     end
     mail(to: ticket.assignee.email, subject:
         'Ticket priority modified in ' + ticket.priority + ' for: ' \
-        + ticket.subject)
+        + ticket.subject, from: EmailAddress.default_email)
   end
 
   def assigned(ticket)
@@ -89,7 +89,7 @@ class NotificationMailer < ActionMailer::Base
       headers['Message-ID'] = "<#{ticket.message_id}>"
     end
     mail(to: ticket.assignee.email, subject:
-        'Ticket assigned to you: ' + ticket.subject)
+        'Ticket assigned to you: ' + ticket.subject, from: EmailAddress.default_email)
   end
 
 
