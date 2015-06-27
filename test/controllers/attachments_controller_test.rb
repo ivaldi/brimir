@@ -31,13 +31,13 @@ class AttachmentsControllerTest < ActionController::TestCase
   end
 
   test 'should show thumb' do
-    get :show, format: :thumb, id: @attachment
+    get :show, format: :thumb, id: @attachment.id
     assert_response :success
   end
 
 
-  test 'should download original ' do
-    get :show, format: :original, id: @attachment
+  test 'should download original' do
+    get :show, format: :original, id: @attachment.id
     assert_response :success
   end
 
