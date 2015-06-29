@@ -18,6 +18,7 @@ class AttachmentsControllerTest < ActionController::TestCase
 
   setup do
     sign_in users(:alice)
+    Tenant.current_domain = Tenant.first.domain
     @attachment = attachments(:default_page)
     @attachment.update_attributes!({
       file: fixture_file_upload('attachments/default-testpage.pdf', 'application/pdf')
