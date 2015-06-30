@@ -11,6 +11,6 @@
 
   <% params = { reply: true } if f.object.is_a?(Reply) %>
 
-  <%= link_to t(:attach_files), new_attachment_path(params), remote: true, class: 'small button radius secondary' %>
+  <%= link_to t(:attach_files), new_attachment_path(params), remote: true, class: 'small button radius' %>
 
 </div>
