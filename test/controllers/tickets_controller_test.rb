@@ -298,4 +298,17 @@ class TicketsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should not notify when a bounce message is received' do
+    email = File.new('test/fixtures/ticket_mailer/bounce').read
+
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      assert_difference 'Ticket.count' do
+
+        post :create, message: email, format: :json
+
+        assert_response :success
+
+      end
+    end
+  end
 end

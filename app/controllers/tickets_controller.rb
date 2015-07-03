@@ -119,7 +119,7 @@ class TicketsController < ApplicationController
       @ticket = Ticket.new(ticket_params)
     end
 
-    if @ticket.save
+    if !@ticket.nil? && @ticket.save
 
       Rule.apply_all(@ticket) unless @ticket.is_a?(Reply)
 

@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketMailer < ActionMailer::Base
+  include BounceHelper
 
   def encode(string)
     string.encode('UTF-8', invalid: :replace, undef: :replace)
@@ -127,7 +128,7 @@ class TicketMailer < ActionMailer::Base
         }
 
         file.original_filename = attachment.filename
-        file.content_type = attachment.mime_type 
+        file.content_type = attachment.mime_type
 
         a = incoming.attachments.create(file: file)
         a.save! # FIXME do we need this because of paperclip?
@@ -147,7 +148,10 @@ class TicketMailer < ActionMailer::Base
       incoming.save
     end
 
-    return incoming
-
+    if bounced?(email)
+      nil
+    else
+      incoming
+    end
   end
 end
