@@ -150,7 +150,11 @@ class TicketsController < ApplicationController
         if @ticket.valid?
 
           if current_user.nil?
-            render 'create'
+            if request.xhr?
+              return render I18n.translate(:ticket_added)
+            else
+              render 'create'
+            end
           else
             redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
           end
