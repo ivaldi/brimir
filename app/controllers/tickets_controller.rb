@@ -151,7 +151,7 @@ class TicketsController < ApplicationController
 
           if current_user.nil?
             if request.xhr?
-              return render I18n.translate(:ticket_added)
+              return render text: I18n.translate(:ticket_added)
             else
               render 'create'
             end
