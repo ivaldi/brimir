@@ -76,7 +76,7 @@ class TicketsControllerTest < ActionController::TestCase
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       assert_no_difference 'Ticket.count' do
         post :create, ticket: {
-            from: '',
+            from: 'invalid',
             content: '',
             subject: '',
         }

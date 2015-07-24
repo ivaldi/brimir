@@ -30,8 +30,12 @@ module CreateFromUser
         if !from_user
           password_length = 12
           password = Devise.friendly_token.first(password_length)
-          from_user = User.create!(email: email, password: password,
+          from_user = User.create(email: email, password: password,
               password_confirmation: password)
+
+          if !from_user
+            errors.add(:from, :invalid)
+          end
         end
 
         self.user = from_user
