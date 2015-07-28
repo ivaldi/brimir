@@ -1,6 +1,6 @@
 # author: https://github.com/social-org
 fr-FR:
-  language_name: canadienne-française
+  language_name: française
 # layouts/application
   new_ticket: Nouveau Billet
   inbox: Boîte de réception
@@ -167,7 +167,7 @@ fr-FR:
         signature: Signature de courriel
         remember_me: Maintenir la connexion
         label_ids: Étiquettes
-        time_zone: Time zone
+        time_zone: Fuseau horaire
 
       ticket:
         from: De l'adresse courriel

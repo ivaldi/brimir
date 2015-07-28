@@ -167,7 +167,7 @@ fr-CA:
         signature: Signature de courriel
         remember_me: Maintenir la connexion
         label_ids: Étiquettes
-        time_zone: Time zone
+        time_zone: Fuseau horaire
 
       ticket:
         from: De l'adresse courriel
