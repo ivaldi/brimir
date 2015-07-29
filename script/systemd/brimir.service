@@ -1,0 +1,8 @@
+[Unit]
+Description=Brimir Email Helpdesk
+[Service]
+PIDFile=/var/run/brimir.pid
+ExecStart=/usr/bin/passenger start /root/brimir -a 0.0.0.0 -p 3000 -e production
+Restart=on-abort
+[Install]
+WantedBy=multi-user.target
