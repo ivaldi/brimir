@@ -103,6 +103,7 @@ Some users have made requests for the following features. If you would like to c
 - CC or BCC people from the reply form.
 - Ability to rename tickets (change their subject).
 - Ability to limit agents to certain labels as well.
+- Ability to rename labels.
 
 License
 -------
