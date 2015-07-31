@@ -45,7 +45,7 @@ If you want to use LDAP, configure config/ldap.yml accordingly, then change the 
 
 Updating
 --------
-After downloading the new code run the following commands to install necessary gem updates, migrate the database and regenerate precompiled assets.
+First download the new code in the same directory by unpacking a release tarball or by running `git pull` (when you cloned the repo earlier). After updating code run the following commands to install necessary gem updates, migrate the database and regenerate precompiled assets.
 
     bundle install
     bin/rake db:migrate RAILS_ENV=production
