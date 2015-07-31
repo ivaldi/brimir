@@ -49,22 +49,28 @@ class RepliesController < ApplicationController
       Rails.logger.error 'Exception occured on Reply transaction!'
       Rails.logger.error "Message: #{e.message}"
       Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
+      @outgoing_addresses = EmailAddress.verified.ordered
       render action: 'new'
     end
   end
 
-  private
-    def reply_params
-      params.require(:reply).permit(
-          :content,
-          :ticket_id,
-          :message_id,
-          :user_id,
-          notified_user_ids: [],
-          attachments_attributes: [
-              :file
-          ]
-      )
-    end
+  protected
+
+  def reply_params
+    params.require(:reply).permit(
+        :content,
+        :ticket_id,
+        :message_id,
+        :user_id,
+        notified_user_ids: [],
+        attachments_attributes: [
+          :file
+        ],
+        ticket_attributes: [
+          :id,
+          :to_email_address_id
+        ]
+    )
+  end
 
 end

@@ -233,6 +233,9 @@ en:
         created_at: Created at
         to: To email address
 
+      reply:
+        from: From email address
+
       rule:
         filter_field: Field
         filter_operation: Operator

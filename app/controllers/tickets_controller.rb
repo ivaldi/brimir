@@ -31,6 +31,8 @@ class TicketsController < ApplicationController
     @reply.set_default_notifications!
 
     @labeling = Labeling.new(labelable: @ticket)
+
+    @outgoing_addresses = EmailAddress.verified.ordered
   end
 
   def index

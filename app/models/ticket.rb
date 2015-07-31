@@ -21,7 +21,7 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :assignee, class_name: 'User'
-  belongs_to :to_email_address, class_name: 'EmailAddress'
+  belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress'
   belongs_to :locked_by, class_name: 'User'
 
   has_many :attachments, as: :attachable, dependent: :destroy

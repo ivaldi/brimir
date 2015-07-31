@@ -30,6 +30,8 @@ class Reply < ActiveRecord::Base
   belongs_to :ticket
   belongs_to :user
 
+  accepts_nested_attributes_for :ticket
+
   scope :chronologically, -> { order(:id) }
   scope :with_message_id, lambda {
     where.not(message_id: nil)

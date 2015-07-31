@@ -7,6 +7,20 @@
     </div>
     <div class="medium-11 columns ptm pbm pll prl">
       <h3 class="text-default"><%= t(:reply) %></h3>
+      <% if can? :update, @reply.ticket %>
+        <div class="row">
+          <%= r.fields_for :ticket do |f| %>
+            <div class="medium-4 columns">
+              <%= f.label :to_email_address_id, t('activerecord.attributes.reply.from'), class: 'ptm' %>
+            </div>
+            <div class="medium-8 columns">
+              <% blank = @outgoing_addresses.count == 0 ? EmailAddress.default_email : '' %>
+              <%= f.collection_select :to_email_address_id, @outgoing_addresses, :id, :email,
+                  include_blank: blank, label: false %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
 
       <%
         content = '<p></p>' + current_user.signature.to_s
