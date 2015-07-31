@@ -38,6 +38,9 @@ class TicketMailerTest < ActionMailer::TestCase
       end
 
     end
+
+    assert_equal email_addresses(:brimir),
+        Ticket.order(:id).last.to_email_address
   end
 
   test 'email threads are recognized correctly and assignee \

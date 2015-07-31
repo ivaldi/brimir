@@ -21,16 +21,19 @@ class EmailAddress < ActiveRecord::Base
   before_save :ensure_one_default
   before_create :generate_verification_token
 
-  scope :ordered, -> {
-    order(:email)
-  }
+  scope :ordered, -> { order(:email) }
+  scope :verified, -> { where(verification_token: nil) }
 
   def self.default_email
-    unless EmailAddress.where(default: true, verification_token: nil).first.nil?
-      return EmailAddress.where(default: true, verification_token: nil).first.email
+    unless EmailAddress.verified.where(default: true).first.nil?
+      return EmailAddress.verified.where(default: true).first.email
     else
       Tenant.current_tenant.from
     end
+  end
+
+  def self.find_first_verified_email(addresses)
+    verified.where(email: addresses.map(&:downcase)).first
   end
 
   protected

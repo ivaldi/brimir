@@ -21,6 +21,7 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :assignee, class_name: 'User'
+  belongs_to :to_email_address, class_name: 'EmailAddress'
 
   has_many :attachments, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :attachments, allow_destroy: true
@@ -119,6 +120,14 @@ class Ticket < ActiveRecord::Base
     end
 
     total
+  end
+
+  def reply_from_address
+    if to_email_address.nil?
+      EmailAddress.default_email
+    else
+      to_email_address
+    end
   end
 
   protected

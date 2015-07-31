@@ -103,6 +103,8 @@ class TicketMailer < ActionMailer::Base
 
     else
 
+      to_email_address = EmailAddress.find_first_verified_email(email.to)
+
       # add new ticket
       ticket = Ticket.create!({
         from: from_address,
@@ -110,6 +112,7 @@ class TicketMailer < ActionMailer::Base
         content: content,
         message_id: email.message_id,
         content_type: content_type,
+        to_email_address: to_email_address,
       })
 
       incoming = ticket

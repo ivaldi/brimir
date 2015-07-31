@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626120401) do
+ActiveRecord::Schema.define(version: 20150731115936) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -114,22 +114,24 @@ ActiveRecord::Schema.define(version: 20150626120401) do
   end
 
   create_table "tickets", force: :cascade do |t|
-    t.string   "subject",      limit: 255
-    t.text     "content",      limit: 1073741823
+    t.string   "subject",             limit: 255
+    t.text     "content",             limit: 1073741823
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "assignee_id"
-    t.string   "message_id",   limit: 255
+    t.string   "message_id",          limit: 255
     t.integer  "user_id"
-    t.string   "content_type", limit: 255,        default: "html"
-    t.integer  "status",                          default: 0,      null: false
-    t.integer  "priority",                        default: 0,      null: false
+    t.string   "content_type",        limit: 255,        default: "html"
+    t.integer  "status",                                 default: 0,      null: false
+    t.integer  "priority",                               default: 0,      null: false
+    t.integer  "to_email_address_id"
   end
 
   add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"
   add_index "tickets", ["message_id"], name: "index_tickets_on_message_id"
   add_index "tickets", ["priority"], name: "index_tickets_on_priority"
   add_index "tickets", ["status"], name: "index_tickets_on_status"
+  add_index "tickets", ["to_email_address_id"], name: "index_tickets_on_to_email_address_id"
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
   create_table "users", force: :cascade do |t|
