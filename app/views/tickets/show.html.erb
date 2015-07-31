@@ -1,3 +1,9 @@
+<% if current_user.agent? %>
+  <% unless @ticket.locked?(current_user) %>
+    <%# execute JS to take/keep the ticket lock %>
+    <span data-lock-path="<%= ticket_lock_path(@ticket) %>"></span>
+  <% end %>
+<% end %>
 <div class="row collapse">
   <div class="large-8 medium-12 columns bl br">
     <div class="row bb ptm pbm collapse">
@@ -82,6 +88,12 @@
             <% end %>
           </li>
         </ul>
+
+        <% if @ticket.locked? current_user %>
+          <%= link_to t(:take_ticket_lock_from_user, user: @ticket.locked_by.email),
+              ticket_lock_path(@ticket), class: 'tiny alert button',
+              'data-method' => :delete %>
+        <% end %>
       </div>
     </div>
     <div class="row<% if @ticket.replies.size == 1 %> bb<% end %>">
@@ -161,6 +173,5 @@
     <a class="close-reveal-modal">&#215;</a>
   </div>
 <% end %>
-
 
 <%= render 'change_assignee_form', { ticket: @ticket } %>

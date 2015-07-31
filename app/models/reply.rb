@@ -35,6 +35,12 @@ class Reply < ActiveRecord::Base
     where.not(message_id: nil)
   }
 
+  scope :unlocked_for, ->(user) {
+    joins(:ticket)
+        .where('locked_by_id IN (?) OR locked_at < ?',
+            [user.id, nil], Time.zone.now - 5.minutes)
+  }
+
   def set_default_notifications!
     self.notified_user_ids = users_to_notify.map(&:id)
   end

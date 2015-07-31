@@ -25,9 +25,7 @@ class Ability
     can :create, Attachment
 
     if user.agent?
-
-      can :manage, :all
-
+      agent user
     else
       customer user
     end
@@ -52,5 +50,31 @@ class Ability
       # at least one label_id overlap
       (reply.ticket.label_ids & user.label_ids).size > 0
     end
+  end
+
+  def agent(user)
+    # agents can reply to tickets that are locked by themselves or unlocked
+    can [:new, :create, :read], Reply, Reply.unlocked_for(user) do |reply|
+      !reply.ticket.locked?(user)
+    end
+
+    # agents can edit all users
+    can :manage, User
+
+    can [:read], Ticket
+    # agents can manage all tickets that are locked by themselves or unlocked
+    can [:update, :destroy], Ticket, Ticket.unlocked_for(user) do |ticket|
+      !ticket.locked?(user)
+    end
+
+    # agent can create/destroy labelings for tickets locked by themselves or
+    # unlocked
+    can [:create, :destroy], Labeling, labelable_type: 'Ticket',
+        labelable: { locked_by_id: [user.id, nil] }
+
+    can [:create, :destroy], Labeling, labelable_type: 'User'
+    can :manage, Rule
+    can :manage, EmailAddress
+    can :manage, Label
   end
 end

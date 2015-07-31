@@ -60,6 +60,7 @@ nl:
   search: Zoek
   minutes: minuten
   are_you_sure_empty_trash: Alle tickets uit de prullenbak verwijderen?
+  locked_by_user: Ticket momenteel in behandling door %{user}
 
 # tickets/show
   add: Toevoegen
@@ -84,6 +85,7 @@ nl:
   notification_sent_to: 'Een notificatie is verstuurd aan de volgende adressen:'
   no_notifications_sent: 'Er zijn geen notificaties verzonden'
   assign_label: Voeg label toe
+  take_ticket_lock_from_user: Neem behandeling over van %{user}
 
 # tickets/_change_priority_form
   change: Wijzig
@@ -95,6 +97,9 @@ nl:
 # tickets/_change_assignee_form
   change_assignee: Ticket toewijzen
   assign: Toewijzen
+
+# tickets/locks/create
+  ticket_locked_by_somebody_else: Ticket wordt op dit al behandeld door iemand anders
 
 # replies/new
   add_reply: Reactie toevoegen

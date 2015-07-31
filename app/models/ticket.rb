@@ -22,6 +22,7 @@ class Ticket < ActiveRecord::Base
   belongs_to :user
   belongs_to :assignee, class_name: 'User'
   belongs_to :to_email_address, class_name: 'EmailAddress'
+  belongs_to :locked_by, class_name: 'User'
 
   has_many :attachments, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :attachments, allow_destroy: true
@@ -94,6 +95,10 @@ class Ticket < ActiveRecord::Base
     end
   }
 
+  scope :unlocked_for, ->(user) {
+    where('locked_by_id IN (?) OR locked_at < ?', [user.id, nil], Time.zone.now - 5.minutes)
+  }
+
   def set_default_notifications!
     self.notified_user_ids = User.agents_to_notify.pluck(:id)
   end
@@ -128,6 +133,10 @@ class Ticket < ActiveRecord::Base
     else
       to_email_address
     end
+  end
+
+  def locked?(for_user)
+    locked_by != for_user && locked_by != nil
   end
 
   protected

@@ -59,6 +59,7 @@ en:
   search: Search
   minutes: minutes
   are_you_sure_empty_trash: Delete all tickets in the trash?
+  locked_by_user: Ticket currently being handled by %{user}
 
 # tickets/show
   add: Add
@@ -83,6 +84,7 @@ en:
   notification_sent_to: 'A notification was sent to the following addresses:'
   no_notifications_sent: 'No notifications have been sent'
   assign_label: Assign label
+  take_ticket_lock_from_user: Take ticket handling from %{user}
 
 # tickets/_change_priority_form
   change: Change
@@ -94,6 +96,9 @@ en:
 # tickets/_change_assignee_form
   change_assignee: Assign ticket
   assign: Assign
+
+# tickets/locks/create
+  ticket_locked_by_somebody_else: Ticket is currently already being handled by somebody else
 
 # replies/new
   add_reply: Add reply

@@ -9,7 +9,9 @@ Brimir::Application.routes.draw do
     resource :selected, only: :update, controller: :selected
   end
 
-  resources :tickets, only: [:index, :show, :update, :new, :create]
+  resources :tickets, except: [:destroy, :edit] do
+    resource :lock, only: [:destroy, :create], module: :tickets
+  end
 
   resources :labelings, only: [:destroy, :create]
 

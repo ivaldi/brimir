@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150731115936) do
+ActiveRecord::Schema.define(version: 20150731123038) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -125,9 +125,12 @@ ActiveRecord::Schema.define(version: 20150731115936) do
     t.integer  "status",                                 default: 0,      null: false
     t.integer  "priority",                               default: 0,      null: false
     t.integer  "to_email_address_id"
+    t.integer  "locked_by_id"
+    t.datetime "locked_at"
   end
 
   add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"
+  add_index "tickets", ["locked_by_id"], name: "index_tickets_on_locked_by_id"
   add_index "tickets", ["message_id"], name: "index_tickets_on_message_id"
   add_index "tickets", ["priority"], name: "index_tickets_on_priority"
   add_index "tickets", ["status"], name: "index_tickets_on_status"

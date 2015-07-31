@@ -68,6 +68,9 @@
                 <em><%= t(:no_subject) %></em>
               <% end %>
             <% end %>
+            <% if ticket.locked?(current_user) %>
+              <br /><em><%= t(:locked_by_user, user: ticket.locked_by.email) %></em>
+            <% end %>
           </p>
         </div>
         <div class="medium-1 v-middle columns">
