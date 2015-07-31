@@ -25,6 +25,8 @@ module HtmlTextHelper
   end
 
   def sanitize_html(content)
+    # strip inline style tags completely
+    content = content.gsub(/<style[^>]*>[^<]*<\/style>/, '')
     sanitize(
         content,
         tags:       %w( a b br code div em i img li ol p pre table td tfoot
