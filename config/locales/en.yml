@@ -231,6 +231,7 @@ en:
         priority: Priority
         assignee_id: Assignee
         created_at: Created at
+        to: To email address
 
       rule:
         filter_field: Field

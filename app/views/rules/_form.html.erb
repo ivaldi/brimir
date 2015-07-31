@@ -3,7 +3,7 @@
     <div class="large-6 columns">
       <%
         fields = []
-        [:from, :subject, :content].each do |key|
+        [:from, :subject, :content, :to].each do |key|
           fields << [t(key, scope: 'activerecord.attributes.ticket'), key]
         end
       %>

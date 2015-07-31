@@ -228,6 +228,7 @@ nl:
         priority: Prioriteit
         assignee_id: Toegewezen aan
         created_at: Aangemaakt op
+        to: Aan e-mailadres
 
       rule:
         filter_field: Veld

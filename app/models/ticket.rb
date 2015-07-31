@@ -139,6 +139,10 @@ class Ticket < ActiveRecord::Base
     locked_by != for_user && locked_by != nil
   end
 
+  def to
+    to_email_address.try :email
+  end
+
   protected
     def create_status_change
       status_changes.create! status: self.status
