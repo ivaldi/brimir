@@ -26,15 +26,5 @@ module Tickets
         @ticket.save
       end
     end
-
-    def destroy
-      @ticket = Ticket.find(params[:ticket_id])
-      if current_user.agent?
-        @ticket.locked_by = nil
-        @ticket.locked_at = nil
-        @ticket.save
-      end
-      redirect_to ticket_path(@ticket)
-    end
   end
 end

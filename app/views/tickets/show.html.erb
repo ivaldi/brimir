@@ -88,12 +88,6 @@
             <% end %>
           </li>
         </ul>
-
-        <% if @ticket.locked? current_user %>
-          <%= link_to t(:take_ticket_lock_from_user, user: @ticket.locked_by.email),
-              ticket_lock_path(@ticket), class: 'tiny alert button',
-              'data-method' => :delete %>
-        <% end %>
       </div>
     </div>
     <div class="row<% if @ticket.replies.size == 1 %> bb<% end %>">
