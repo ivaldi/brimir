@@ -3,7 +3,7 @@ Description=Passenger running Brimir Email Helpdesk
 [Service]
 EnvironmentFile=/etc/default/brimir
 PIDFile=/var/run/brimir.pid
-ExecStart=/usr/bin/passenger start $brimir_path -a 0.0.0.0 -p 3000 -e production
+ExecStart=/usr/bin/passenger start $BRIMIR_PATH -a 0.0.0.0 -p 3000 -e production
 Restart=on-abort
 [Install]
 WantedBy=multi-user.target
