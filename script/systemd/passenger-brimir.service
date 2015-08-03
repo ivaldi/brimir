@@ -1,6 +1,7 @@
 [Unit]
 Description=Passenger running Brimir Email Helpdesk
 [Service]
+EnvironmentFile=/etc/default/brimir
 PIDFile=/var/run/brimir.pid
 ExecStart=/usr/bin/passenger start $brimir_path -a 0.0.0.0 -p 3000 -e production
 Restart=on-abort
