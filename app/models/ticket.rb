@@ -136,7 +136,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def locked?(for_user)
-    locked_by != for_user && locked_by != nil
+    locked_by != for_user && locked_by != nil && locked_at > Time.zone.now - 5.minutes
   end
 
   def to
