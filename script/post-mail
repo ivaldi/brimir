@@ -1,2 +1,7 @@
 #!/bin/bash
-exec curl -s -o /dev/null --data-urlencode message@- $1
+STATUSCODE=$(curl -s -o /dev/null -w '%{http_code}' --data-urlencode message@- $1)
+if [ "$STATUSCODE" -eq "201" ]; then # 201 Created
+	exit 0 # no errors detected
+else
+	exit 70 # internal software error
+fi
