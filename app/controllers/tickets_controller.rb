@@ -149,7 +149,7 @@ class TicketsController < ApplicationController
     respond_to do |format|
       format.html do
 
-        if @ticket.valid?
+        if !@ticket.nil? && @ticket.valid?
 
           if current_user.nil?
             if request.xhr?
@@ -168,7 +168,13 @@ class TicketsController < ApplicationController
       end
 
       format.json do
-        render json: @ticket, status: :created
+        if @ticket.nil?
+          render json: {}, status: :created  # bounce mail handled correctly
+        elsif @ticket.valid?
+          render json: @ticket, status: :created
+        else
+          render json: @ticket, status: :unprocessable_entity
+        end
       end
 
       format.js { render }

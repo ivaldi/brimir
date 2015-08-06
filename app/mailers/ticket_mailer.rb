@@ -93,7 +93,7 @@ class TicketMailer < ActionMailer::Base
       ticket.save
 
       # add reply
-      incoming = Reply.create!({
+      incoming = Reply.create({
         content: content,
         ticket_id: ticket.id,
         from: from_address,
@@ -106,7 +106,7 @@ class TicketMailer < ActionMailer::Base
       to_email_address = EmailAddress.find_first_verified_email(email.to)
 
       # add new ticket
-      ticket = Ticket.create!({
+      ticket = Ticket.create({
         from: from_address,
         subject: subject,
         content: content,

@@ -311,4 +311,18 @@ class TicketsControllerTest < ActionController::TestCase
       end
     end
   end
+
+  test 'should not save invalid' do
+    email = File.new('test/fixtures/ticket_mailer/invalid').read
+
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      assert_no_difference 'Ticket.count' do
+
+        post :create, message: email, format: :json
+
+        assert_response :unprocessable_entity
+
+      end
+    end
+  end
 end
