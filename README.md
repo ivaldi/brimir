@@ -84,7 +84,6 @@ Some users have made requests for the following features. If you would like to c
 - Ability to sign in using a Single Sign On functionality based on Shared Token or JWT.
 - Private note addition to tickets.
 - Automated replies based on the current rule system.
-- Closing issues from the overview page.
 - Remove user functionality, without losing ticket and reply information.
 - Adding knowledge base functionality.
 - Welcome mail for new users (after mailing a ticket for example) with their password.
