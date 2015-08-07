@@ -5,6 +5,7 @@ problem:
   assignee: alice
   priority: low
   message_id: 'test123@test123'
+  to_email_address: brimir
 
 multiple:
   subject: Some problems

@@ -164,6 +164,9 @@ class TicketsControllerTest < ActionController::TestCase
     # should have this icon for label color update javascript (sidebar)
     assert_select 'aside ul li span'
 
+    # should have selected same outgoing address as original received
+    assert_select 'option[selected="selected"]' +
+        "[value=\"#{email_addresses(:brimir).id}\"]"
   end
 
   test 'should email assignee if ticket is assigned by somebody else' do
