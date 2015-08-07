@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Api::V1::ApplicationController < ActionController::Base
-  protect_from_forgery
+  protect_from_forgery with: :null_session
 
   before_action :authenticate_user_from_token!
 
