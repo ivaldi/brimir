@@ -76,7 +76,7 @@
         </ul>
         <ul class="no-m">
           <li class="ib">
-            <% if can? :update, @ticket %>
+            <% if can?(:create, Labeling.new(labelable: @ticket)) %>
               <a href="#" data-reveal-id="add-labels" class="radius label secondary mrs text-light">
                 <i class="fa fa-fw fa-plus"></i> <%= t(:add) %>
               </a>

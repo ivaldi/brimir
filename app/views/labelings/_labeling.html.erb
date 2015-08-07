@@ -1,6 +1,6 @@
 <span style="background: <%= labeling.label.color %>" class="radius label no-m" data-labeling-id="<%= labeling.id %>" data-label-id="<%= labeling.label.id %>">
   <%= labeling.label.name %>
-  <% if can? :update, labeling.labelable %>
+  <% if can?(:destroy, labeling) %>
     <%= link_to labeling_path(labeling), method: :delete, remote: true do %>
       <span class="fa-times fa ib" style="color: #eee"></span>
     <% end %>

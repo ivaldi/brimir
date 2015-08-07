@@ -73,7 +73,7 @@
                 <span class="fa fa-inbox"></span>
                 <%= t(:inbox) %>
                 <span class="right heading-six bubble pls prs">
-                  <%= Ticket.open.count %>
+                  <%= Ticket.viewable_by(current_user).open.count %>
                 </span>
               <% end %>
             </li>
@@ -85,7 +85,7 @@
                   <span class="fa fa-user"></span>
                   <%= t(:mine) %>
                   <span class="right heading-six bubble pls prs">
-                    <%= Ticket.open.filter_by_assignee_id( current_user.id).count %>
+                    <%= Ticket.viewable_by(current_user).open.filter_by_assignee_id( current_user.id).count %>
                   </span>
                 <% end %>
               </li>

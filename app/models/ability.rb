@@ -25,7 +25,11 @@ class Ability
     can :create, Attachment
 
     if user.agent?
-      agent user
+      if user.labelings.count > 0
+        limited_agent user
+      else
+        agent user
+      end
     else
       customer user
     end
@@ -35,10 +39,10 @@ class Ability
 
   def customer(user)
     # customers can view their own tickets, its replies and attachments
-    can [:new, :create, :read], Reply, ticket: { user_id: user.id }
+    can [:create, :read], Reply, ticket: { user_id: user.id }
 
     # customers can edit their own account
-    can [:edit, :update], User, id: user.id
+    can :update, User, id: user.id
 
     # customer can see al tickets labeled with his/her labels
     can :read, Ticket, Ticket.viewable_by(user) do |ticket|
@@ -46,7 +50,27 @@ class Ability
       ticket.user == user || (ticket.label_ids & user.label_ids).size > 0
     end
 
-    can [:new, :create, :read], Reply do |reply|
+    can [:create, :read], Reply do |reply|
+      # at least one label_id overlap
+      (reply.ticket.label_ids & user.label_ids).size > 0
+    end
+  end
+
+  def limited_agent(user)
+    # limited agents can view their own tickets, replies and attachments
+    can [:create, :read], Reply, ticket: { user_id: user.id }
+
+    # limited agents can edit their own account
+    can :update, User, id: user.id
+
+    # limited agents can see al tickets labeled with his/her labels
+    can [:read, :update], Ticket, Ticket.viewable_by(user) do |ticket|
+      # at least one label_id overlap or assigned to
+      ticket.user == user || (ticket.label_ids & user.label_ids).size > 0 ||
+          ticket.assignee == user
+    end
+
+    can [:create, :read], Reply do |reply|
       # at least one label_id overlap
       (reply.ticket.label_ids & user.label_ids).size > 0
     end
@@ -54,7 +78,7 @@ class Ability
 
   def agent(user)
     # agents can reply to tickets that are locked by themselves or unlocked
-    can [:new, :create, :read], Reply, Reply.unlocked_for(user) do |reply|
+    can [:create, :read], Reply, Reply.unlocked_for(user) do |reply|
       !reply.ticket.locked?(user)
     end
 
@@ -72,7 +96,10 @@ class Ability
     can [:create, :destroy], Labeling, labelable_type: 'Ticket',
         labelable: { locked_by_id: [user.id, nil] }
 
-    can [:create, :destroy], Labeling, labelable_type: 'User'
+    can [:create, :destroy], Labeling, -> { where(labelable_type: 'User')
+        .where.not(labelable_id: user.id) } do |labeling|
+      labeling.labelable != user 
+    end
     can :manage, Rule
     can :manage, EmailAddress
     can :manage, Label

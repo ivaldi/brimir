@@ -87,11 +87,12 @@ class Ticket < ActiveRecord::Base
   }
 
   scope :viewable_by, ->(user) {
-    if !user.agent?
+    if !user.agent? || user.labelings.count > 0
       ticket_ids = Labeling.where(label_id: user.label_ids)
           .where(labelable_type: 'Ticket')
           .pluck(:labelable_id)
-      where('tickets.id IN (?) OR tickets.user_id = ?', ticket_ids, user.id)
+      where('tickets.id IN (?) OR tickets.user_id = ? OR tickets.assignee_id = ?',
+          ticket_ids, user.id, user.id)
     end
   }
 

@@ -31,16 +31,19 @@
         <% if @user.agent? %>
           <h5><%= t(:email_settings) %></h5>
 
-          <%= f.check_box :notify, label: t(:receive_new_ticket_notifications) %>
+          <%= f.check_box :notify,
+              label: t(:receive_new_ticket_notifications) %>
 
-          <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce' %>
-        <% elsif can? :create, Labeling %>
+          <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce mbl' %>
+        <% end %>
+
+        <% if can? :create, Labeling.new(labelable: @user) %>
           <h5><%= t(:access_control) %></h5>
 
           <p><%= t(:have_access_to_label) %></p>
 
-          <%= f.label :label_ids %>
-          <%= f.collection_select :label_ids, @labels, :id, :name, {}, {multiple: true, class: 'select2'} %>
+          <%= f.collection_select :label_ids, @labels, :id, :name, {}, {
+              multiple: true, class: 'select2 mbl' } %>
         <% end %>
 
         <% unless Rails.application.secrets[:google_client_id].blank? %>

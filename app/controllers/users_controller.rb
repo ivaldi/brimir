@@ -97,8 +97,8 @@ class UsersController < ApplicationController
           label_ids: []
       )
 
-      # prevent normal user from changing email and role
-      unless current_user.agent?
+      # prevent normal user and limited agent from changing email and role
+      if !current_user.agent? || current_user.labelings.count > 0
         attributes.delete(:email)
         attributes.delete(:agent)
         attributes.delete(:label_ids)
