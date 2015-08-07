@@ -19,21 +19,19 @@ class RepliesController < ApplicationController
   load_and_authorize_resource :reply, except: [:create]
 
   def create
-    @reply = Reply.new
-
-    @reply.assign_attributes(reply_params)
-
-    @reply.user = current_user
+    # store attributes and reopen ticket
+    @reply = current_user.replies.new({
+        'ticket_attributes' => {
+            'status' => 'open',
+            'id' => reply_params[:ticket_id]
+          }
+        }.merge(reply_params))
 
     authorize! :create, @reply
 
     begin
       Reply.transaction do
         @reply.save!
-
-        # reopen ticket
-        @reply.ticket.status = :open
-        @reply.ticket.save!
 
         @reply.notified_users.each do |user|
           mail = NotificationMailer.new_reply(@reply, user)
@@ -57,7 +55,7 @@ class RepliesController < ApplicationController
   protected
 
   def reply_params
-    params.require(:reply).permit(
+    attributes = params.require(:reply).permit(
         :content,
         :ticket_id,
         :message_id,
@@ -68,9 +66,16 @@ class RepliesController < ApplicationController
         ],
         ticket_attributes: [
           :id,
-          :to_email_address_id
+          :to_email_address_id,
+          :status,
         ]
     )
+
+    unless can?(:update, Ticket.find(attributes[:ticket_id]))
+      attributes.delete(:ticket_attributes)
+    end
+
+    attributes
   end
 
 end

@@ -8,7 +8,7 @@
     <div class="medium-11 columns ptm pbm pll prl">
       <h3 class="text-default"><%= t(:reply) %></h3>
       <% if can? :update, @reply.ticket %>
-        <div class="row">
+        <div class="row collapse">
           <%= r.fields_for :ticket do |f| %>
             <div class="medium-4 columns">
               <%= f.label :to_email_address_id, t('activerecord.attributes.reply.from'), class: 'ptm' %>
@@ -50,6 +50,23 @@
       <p>
         <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
       </p>
+
+
+
+      <% if can? :update, @reply.ticket %>
+        <div class="row collapse">
+          <%= r.fields_for :ticket do |f| %>
+            <div class="medium-4 columns">
+              <%= f.label :status, t(:change_status), class: 'ptm' %>
+            </div>
+            <div class="medium-8 columns">
+              <%= f.collection_select(:status,
+                  t('activerecord.attributes.ticket.statuses'), :first, :last,
+                  label: false) %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
 
       <p>
         <%= r.submit value: t(:send_reply), class: 'button regular radius secondary' %>
