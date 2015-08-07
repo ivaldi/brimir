@@ -85,6 +85,7 @@ nl:
   notification_sent_to: 'Een notificatie is verstuurd aan de volgende adressen:'
   no_notifications_sent: 'Er zijn geen notificaties verzonden'
   assign_label: Voeg label toe
+  take_ticket_lock_from_user: Neem behandeling over van %{user}
 
 # tickets/_change_priority_form
   change: Wijzig

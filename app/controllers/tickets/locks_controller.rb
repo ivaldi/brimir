@@ -26,5 +26,17 @@ module Tickets
         @ticket.save
       end
     end
+
+    def destroy
+      @ticket = Ticket.find(params[:ticket_id])
+      # if labels can be removed by this user,
+      # he can also unlock tickets, because he is not limited
+      if can?(:destroy, Labeling.new(labelable: @ticket))
+        @ticket.locked_by = nil
+        @ticket.locked_at = nil
+        @ticket.save
+      end
+      redirect_to ticket_path(@ticket)
+    end
   end
 end

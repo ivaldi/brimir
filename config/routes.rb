@@ -10,7 +10,7 @@ Brimir::Application.routes.draw do
   end
 
   resources :tickets, except: [:destroy, :edit] do
-    resource :lock, only: :create, module: :tickets
+    resource :lock, only: [:destroy, :create], module: :tickets
   end
 
   resources :labelings, only: [:destroy, :create]
