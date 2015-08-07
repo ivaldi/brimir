@@ -4,7 +4,6 @@ ar:
   new_ticket: شكوى جديدة
   inbox: صندوق الوارد
   mine: الخاصة بي
-  waiting: قيد الانتظار
   closed_tickets: مغلقة
   trashed: محذوفة
   users: مستخدمين
@@ -77,9 +76,6 @@ ar:
   medium: متوسط
   low: منخفضة
   unknown: غير معروف
-  open: مفتوح
-  closed: مغلق
-  deleted: محذوف
   labels: علامات
   label_name: اسم العلامة
   notification_sent_to: 'تم إرسال تنبيه للعناوين التالية:'
@@ -220,6 +216,11 @@ ar:
         subject: عنوان الشكوى
         content: محتوى الشكوى
         status: الحالة
+        statuses:
+          open: مفتوح
+          closed: مغلق
+          deleted: محذوف
+          waiting: قيد الانتظار
         priority: الأولوية
         assignee_id: المسئول
         created_at: تاريخ الإضافة

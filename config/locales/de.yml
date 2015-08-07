@@ -4,7 +4,6 @@ de:
   new_ticket: Ticket erstellen
   inbox: Offene Tickets
   mine: Meine Tickets
-  waiting: Ausstehend
   closed_tickets: Geschlossene Tickets
   trashed: Gelöschte Tickets
   users: Benutzer
@@ -74,9 +73,6 @@ de:
   medium: normal
   low: gering
   unknown: unbekannt
-  open: offen
-  closed: geschlossen
-  deleted: gelöscht
   labels: Label
   label_name: Label
   notification_sent_to: 'Es wurde eine Benachrichtigung an folgende E-Mail-Adressen gesendet:'
@@ -214,6 +210,11 @@ de:
         subject: Betreff
         content: Inhalt
         status: Status
+        statuses:
+          open: offen
+          closed: geschlossen
+          deleted: gelöscht
+          waiting: Ausstehend
         priority: Priorität
         assignee_id: Bearbeiter
 

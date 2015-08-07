@@ -4,7 +4,6 @@ zh-CN:
   new_ticket: 新建咨询
   inbox: 咨询夹
   mine: 我的
-  waiting: 等待中
   closed_tickets: 关闭
   trashed: 丢弃
   users: 用户
@@ -75,9 +74,6 @@ zh-CN:
   medium: 中
   low: 低
   unknown: 未知
-  open: 打开状态
-  closed: 关闭状态
-  deleted: 删除状态
   labels: 标签
   label_name: 标签名称
   notification_sent_to: '一条提醒将会发送到以下地址:'
@@ -218,6 +214,11 @@ zh-CN:
         subject: 主题
         content: 内容
         status: 状态
+        statuses:
+          open: 打开状态
+          closed: 关闭状态
+          deleted: 删除状态
+          waiting: 等待中
         priority: 优秀级
         assignee_id: 分配者
         created_at: 创建于

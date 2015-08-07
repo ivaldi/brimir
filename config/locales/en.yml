@@ -4,7 +4,6 @@ en:
   new_ticket: New ticket
   inbox: Inbox
   mine: Mine
-  waiting: Waiting
   closed_tickets: Closed
   trashed: Trashed
   users: Users
@@ -76,9 +75,6 @@ en:
   medium: Medium
   low: Low
   unknown: Unknown
-  open: Open
-  closed: Closed
-  deleted: Deleted
   labels: Labels
   label_name: Label name
   notification_sent_to: 'A notification was sent to the following addresses:'
@@ -228,6 +224,11 @@ en:
         subject: Subject
         content: Content
         status: Status
+        statuses:
+          open: Open
+          closed: Closed
+          deleted: Deleted
+          waiting: Waiting
         priority: Priority
         assignee_id: Assignee
         created_at: Created at

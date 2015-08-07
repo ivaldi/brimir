@@ -5,7 +5,6 @@ nl:
   new_ticket: Nieuw ticket
   inbox: Inbox
   mine: Van mij
-  waiting: Afwachtend
   closed_tickets: Gesloten
   trashed: Prullenbak
   users: Gebruikers
@@ -77,9 +76,6 @@ nl:
   medium: Gemiddeld
   low: Laag
   unknown: Onbekend
-  open: Open
-  closed: Gesloten
-  deleted: Verwijderd
   labels: Labels
   label_name: Label naam
   notification_sent_to: 'Een notificatie is verstuurd aan de volgende adressen:'
@@ -225,6 +221,11 @@ nl:
         subject: Onderwerp
         content: Inhoud
         status: Status
+        statuses:
+          open: Open
+          closed: Gesloten
+          deleted: Verwijderd
+          waiting: Afwachtend
         priority: Prioriteit
         assignee_id: Toegewezen aan
         created_at: Aangemaakt op

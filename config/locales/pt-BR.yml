@@ -6,7 +6,6 @@ pt-BR:
   new_ticket: Novo Ticket
   inbox: Caixa de Entrada
   mine: Meu
-  waiting: Aguardando
   closed_tickets: Fechado
   trashed: Excluído
   users: Usuário
@@ -77,9 +76,6 @@ pt-BR:
   medium: Média
   low: Baixa
   unknown: Desconhecida
-  open: Aberto
-  closed: Fechado
-  deleted: Deletado
   labels: Etiquetas
   label_name: Nome da etiqueta
   notification_sent_to: 'Uma notificação foi enviada para os seguintes endereços:'
@@ -220,6 +216,11 @@ pt-BR:
         subject: Assunto
         content: Conteúdo
         status: Status
+        statuses:
+          open: Aberto
+          closed: Fechado
+          deleted: Deletado
+          waiting: Aguardando
         priority: Prioridade
         assignee_id: Responsável
         created_at: Criado em

@@ -5,7 +5,6 @@ uk:
   new_ticket: Новий тікет
   inbox: Вхідні
   mine: Мої
-  waiting: Очікує
   closed_tickets: Закриті
   trashed: Видалені
   users: Користувачі
@@ -64,9 +63,6 @@ uk:
   medium: Середній
   low: Низький
   unknown: Невідомо
-  open: Відкрито
-  closed: Закрито
-  deleted: Видалено
   labels: Мітки
   label_name: Назва мітки
   notification_sent_to: 'A notification was sent to the following addresses:'
@@ -176,6 +172,11 @@ uk:
         subject: Заголовок
         content: Зміст
         status: Статус
+        statuses:
+          open: Відкрито
+          closed: Закрито
+          deleted: Видалено
+          waiting: Очікує
         priority: Пріоритет
         assignee_id: Назначено
 

@@ -29,13 +29,13 @@
               <a href="#" data-dropdown="statuses-<%= @ticket.id %>">
                 <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %> text-default"></span>
                 <span class="show-for-print hide"><%= t(:status) %>:</span>
-                <%= t(@ticket.status) %>
+                <%= t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses') %>
               </a>
               <%= render 'status_dropdown', ticket: @ticket %>
             <% else %>
               <span class="fa fa-fw fa-<%= status_icon(@ticket.status) %>"></span>
               <span class="show-for-print hide"><%= t(:status) %>:</span>
-              <%= t(@ticket.status) %>
+              <%= t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses') %>
             <% end %>
           </li>
           <li class="ib mrl">

@@ -47,7 +47,7 @@
       <% Ticket.statuses.except(params[:status]).keys.each do |value| %>
         <li class="bl no-m">
           <button type="submit" name="ticket[status]" value="<%= value %>" class="ptl plm prm pbl text-medium-light-grey no-m no-b">
-            <%= t(value) %>
+            <%= t(value, scope: 'activerecord.attributes.ticket.statuses') %>
           </button>
         </li>
       <% end %>

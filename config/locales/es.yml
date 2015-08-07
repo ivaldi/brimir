@@ -51,9 +51,6 @@ es:
   medium: Media
   low: Baja
   unknown: Desconocido
-  open: Abierto
-  closed: Cerrado
-  deleted: Borrado
   labels: Etiquetas
   label_name: Nombre de etiqueta
   notification_sent_to: 'Las notificaciones fueron enviadas a las siguientes direcciones:'
@@ -146,6 +143,11 @@ es:
         subject: Tema
         content: Contenido
         status: Estado
+        statuses:
+          open: Abierto
+          closed: Cerrado
+          deleted: Borrado
+          waiting: En espera
         priority: Prioridad
         assignee_id: Delegado
       rule:
@@ -202,4 +204,3 @@ es:
   rules: Reglas
   sign_out: Cerrar sesión
   users: Usuarios
-  waiting: En espera

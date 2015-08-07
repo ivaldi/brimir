@@ -5,7 +5,6 @@ fr-FR:
   new_ticket: Nouveau Billet
   inbox: Boîte de réception
   mine: Mes Billets
-  waiting: En attente
   closed_tickets: Fermé
   trashed: Corbeille
   users: Utilisateurs
@@ -62,9 +61,6 @@ fr-FR:
   medium: Moyenne
   low: Basse
   unknown: Inconnu
-  open: Ouvert
-  closed: Fermé
-  deleted: Supprimé
   labels: Étiquettes
   label_name: Nom étiquette
   notification_sent_to: 'Une notification a été envoyé aux addresses suivantes:'
@@ -174,6 +170,11 @@ fr-FR:
         subject: Sujet
         content: Objet
         status: Statut
+        statuses:
+          open: Ouvert
+          closed: Fermé
+          deleted: Supprimé
+          waiting: En attente
         priority: Priorité
         assignee_id: Attribué
 

@@ -50,9 +50,6 @@ fi:
   medium: Normaali
   low: Alhainen
   unknown: Tuntematon
-  open: Avoin
-  closed: Suljettu
-  deleted: Poistettu
   labels: Aiheet
   label_name: Aiheen nimi
   notification_sent_to: 'Viesti lähetettiin seuraaville vastaanottajille:'
@@ -146,5 +143,9 @@ fi:
         subject: Otsikko
         content: Sisältö
         status: Tila
+        statuses:
+          open: Avoin
+          closed: Suljettu
+          deleted: Poistettu
         priority: Prioriteetti
         assignee_id: Suorittaja
