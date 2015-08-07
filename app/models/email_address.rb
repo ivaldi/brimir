@@ -33,7 +33,11 @@ class EmailAddress < ActiveRecord::Base
   end
 
   def self.find_first_verified_email(addresses)
-    verified.where(email: addresses.map(&:downcase)).first
+    if addresses.nil?
+      nil
+    else
+      verified.where(email: addresses.map(&:downcase)).first
+    end
   end
 
   def formatted
