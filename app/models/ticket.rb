@@ -132,7 +132,7 @@ class Ticket < ActiveRecord::Base
     if to_email_address.nil?
       EmailAddress.default_email
     else
-      to_email_address.email
+      to_email_address.formatted
     end
   end
 

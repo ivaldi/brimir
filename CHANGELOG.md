@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Agents can now also be limited to certain labels, which lets them only manage tickets and replies with those labels.
 - If a ticket detail page is opened by an agent, it will be locked to avoid multiple agents from replying to the same ticket. Tickets are unlocked five minutes after the agent leaves the ticket detail page or by clicking the link on ticket detail by not limited agents.
 - The status of a ticket can now be changed directly when adding a reply.
+- Nice name outgoing email address support, i.e. `From: Test <test@test.nl>` instead of just the email address.
 
 ### Changed
 - The outgoing email address of replies will now be the same as the original incoming email addresses when it was configured correctly as an outgoing email address. The agent can choose a different address when replying.

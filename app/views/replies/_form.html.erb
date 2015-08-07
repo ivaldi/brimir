@@ -15,7 +15,7 @@
             </div>
             <div class="medium-8 columns">
               <% blank = @outgoing_addresses.count == 0 ? EmailAddress.default_email : '' %>
-              <%= f.collection_select :to_email_address_id, @outgoing_addresses, :id, :email,
+              <%= f.collection_select :to_email_address_id, @outgoing_addresses, :id, :formatted,
                   include_blank: blank, label: false %>
             </div>
           <% end %>

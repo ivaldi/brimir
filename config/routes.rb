@@ -24,7 +24,7 @@ Brimir::Application.routes.draw do
   get '/attachments/:id/:format' => 'attachments#show'
   resources :attachments, only: [:index, :new]
 
-  resources :email_addresses, only: [:index, :create, :new, :destroy]
+  resources :email_addresses
 
   root to: 'tickets#index'
 
