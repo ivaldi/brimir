@@ -16,3 +16,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - The content of inline HTML style tags is now correctly removed as well.
+- Adding of labels to tickets updates the interface correctly again, this was broken since the redesign.

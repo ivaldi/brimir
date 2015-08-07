@@ -75,14 +75,14 @@
           </li>
         </ul>
         <ul class="no-m">
-          <li class="ib">
+          <li class="ib" data-labelings>
             <% if can?(:create, Labeling.new(labelable: @ticket)) %>
               <a href="#" data-reveal-id="add-labels" class="radius label secondary mrs text-light">
                 <i class="fa fa-fw fa-plus"></i> <%= t(:add) %>
               </a>
             <% end %>
             <% @ticket.labelings.each do |labeling| %>
-              <span data-labelings="" class="ib no-m">
+              <span class="ib no-m">
                 <%= render labeling %>
               </span>
             <% end %>
