@@ -102,7 +102,6 @@ Some users have made requests for the following features. If you would like to c
 - Mark tickets as duplicate, linking it to the duplicated ticket.
 - CC or BCC people from the reply form.
 - Ability to rename tickets (change their subject).
-- Ability to limit agents to certain labels as well.
 - Ability to rename labels.
 
 License
