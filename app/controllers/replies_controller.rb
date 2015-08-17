@@ -36,7 +36,7 @@ class RepliesController < ApplicationController
         @reply.notified_users.each do |user|
           mail = NotificationMailer.new_reply(@reply, user)
 
-          mail.deliver_now
+          mail.deliver_now unless EmailAddress.pluck(:email).include?(user.email)
           @reply.message_id = mail.message_id
         end
 

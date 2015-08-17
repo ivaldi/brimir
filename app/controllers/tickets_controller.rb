@@ -135,7 +135,7 @@ class TicketsController < ApplicationController
         if @ticket.assignee.nil?
           @ticket.notified_users.each do |user|
             mail = NotificationMailer.new_ticket(@ticket, user)
-            mail.deliver_now
+            mail.deliver_now unless EmailAddress.pluck(:email).include?(user.email)
             @ticket.message_id = mail.message_id
           end
 
