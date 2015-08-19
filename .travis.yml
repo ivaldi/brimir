@@ -1,5 +1,13 @@
 language: ruby
+cache: bundler
 bundler_args: --without development --jobs 4
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - imagemagick
+      - ghostscript
 
 env:
   - DB=postgresql
@@ -8,12 +16,10 @@ env:
 
 rvm:
   - 2.0.0
-  - 2.1.5
-  - 2.2.0
+  - 2.1.6
+  - 2.2.2
 
 before_script:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq imagemagick ghostscript
   - psql -c 'CREATE DATABASE brimir_test;' -U postgres
   - mysql -e 'create database brimir_test;'
   - cp config/database.travis.yml config/database.yml

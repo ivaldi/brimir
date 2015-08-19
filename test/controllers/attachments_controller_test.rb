@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -18,6 +18,7 @@ class AttachmentsControllerTest < ActionController::TestCase
 
   setup do
     sign_in users(:alice)
+    Tenant.current_domain = Tenant.first.domain
     @attachment = attachments(:default_page)
     @attachment.update_attributes!({
       file: fixture_file_upload('attachments/default-testpage.pdf', 'application/pdf')
@@ -31,13 +32,13 @@ class AttachmentsControllerTest < ActionController::TestCase
   end
 
   test 'should show thumb' do
-    get :show, format: :thumb, id: @attachment
+    get :show, format: :thumb, id: @attachment.id
     assert_response :success
   end
 
 
-  test 'should download original ' do
-    get :show, format: :original, id: @attachment
+  test 'should download original' do
+    get :show, format: :original, id: @attachment.id
     assert_response :success
   end
 

@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -30,9 +30,17 @@ class Reply < ActiveRecord::Base
   belongs_to :ticket
   belongs_to :user
 
+  accepts_nested_attributes_for :ticket
+
   scope :chronologically, -> { order(:id) }
   scope :with_message_id, lambda {
     where.not(message_id: nil)
+  }
+
+  scope :unlocked_for, ->(user) {
+    joins(:ticket)
+        .where('locked_by_id IN (?) OR locked_at < ?',
+            [user.id, nil], Time.zone.now - 5.minutes)
   }
 
   def set_default_notifications!

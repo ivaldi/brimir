@@ -1,42 +1,78 @@
 <%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
 
   <%= r.hidden_field :ticket_id %>
-  <div class="ma">
-    <h3><%= t(:reply) %></h3>
+  <div class="row collapse bb">
+    <div class="medium-1 column ptl pll">
+      <%= user_avatar current_user, class: 'avatar', size: 35 %>
+    </div>
+    <div class="medium-11 columns ptm pbm pll prl">
+      <h3 class="text-default"><%= t(:reply) %></h3>
+      <% if can? :update, @reply.ticket %>
+        <div class="row collapse">
+          <%= r.fields_for :ticket do |f| %>
+            <div class="medium-4 columns">
+              <%= f.label :to_email_address_id, t('activerecord.attributes.reply.from'), class: 'ptm' %>
+            </div>
+            <div class="medium-8 columns">
+              <% blank = @outgoing_addresses.count == 0 ? EmailAddress.default_email : '' %>
+              <%= f.collection_select :to_email_address_id, @outgoing_addresses, :id, :formatted,
+                  include_blank: blank, label: false %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
 
-    <%
-      content = '<p></p>' + current_user.signature.to_s
-      reply_to = @reply.other_replies.order(:id).last
+      <%
+        content = '<p></p>' + current_user.signature.to_s
+        reply_to = @reply.other_replies.order(:id).last
 
-      if reply_to.nil?
-        reply_to = @reply.ticket
-      end
+        if reply_to.nil?
+          reply_to = @reply.ticket
+        end
 
-      content += '<br />'
-      content += t(:on_date_author_wrote, author: reply_to.user.email,
-          date: l(reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
-      content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
-    %>
+        content += '<br />'
+        content += t(:on_date_author_wrote, author: reply_to.user.email,
+            date: l(reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
+        content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
+      %>
 
 
-    <p>
-      <%= r.text_area :content, label: false, class: 'tinymce',
-          value: (@reply.content.nil? ? content : @reply.content) %>
-    </p>
+      <p>
+        <%= r.text_area :content, label: false, class: 'tinymce',
+            value: (@reply.content.nil? ? content : @reply.content) %>
+      </p>
 
-    <%= render 'attachments/form', f: r %>
+      <%= render 'attachments/form', f: r %>
 
-    <p class="no-m">
-      <%= t(:notification_will_be_sent_to) %>
-    </p>
-    <p>
-      <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
-    </p>
+      <p class="no-m">
+        <%= t(:notification_will_be_sent_to) %>
+      </p>
+      <p>
+        <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
+      </p>
 
-    <p>
-      <%= r.submit value: t(:send_reply), class: 'button regular radius' %>
-    </p>
 
+
+      <% if can? :update, @reply.ticket %>
+        <div class="row collapse">
+          <%= r.fields_for :ticket do |f| %>
+            <div class="medium-4 columns">
+              <%= f.label :status, t(:change_status), class: 'ptm' %>
+            </div>
+            <div class="medium-8 columns">
+              <%= f.collection_select(:status,
+                  t('activerecord.attributes.ticket.statuses'), :first, :last,
+                  label: false) %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <p>
+        <%= r.submit value: t(:send_reply), class: 'button regular radius secondary' %>
+      </p>
+
+    </div>
   </div>
 <% end %>
 

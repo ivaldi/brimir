@@ -5,7 +5,7 @@
     entity = [Ticket.new]
   end
 
-	output = ''
+  output = ''
   form_for entity do |f|
     f.fields_for :attachments, Attachment.new, child_index: Time.now.to_i do |ap|
       output = render 'attachments/form_row', f: ap

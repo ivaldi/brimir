@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -97,8 +97,8 @@ class UsersController < ApplicationController
           label_ids: []
       )
 
-      # prevent normal user from changing email and role
-      unless current_user.agent?
+      # prevent normal user and limited agent from changing email and role
+      if !current_user.agent? || current_user.labelings.count > 0
         attributes.delete(:email)
         attributes.delete(:agent)
         attributes.delete(:label_ids)

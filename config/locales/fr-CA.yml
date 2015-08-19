@@ -1,11 +1,10 @@
 # author: https://github.com/social-org
 fr-CA:
-  language_name: canadienne-française
+  language_name: Canadienne-Française
 # layouts/application
   new_ticket: Nouveau Billet
   inbox: Boîte de réception
   mine: Mes Billets
-  waiting: En attente
   closed_tickets: Fermé
   trashed: Corbeille
   users: Utilisateurs
@@ -15,7 +14,7 @@ fr-CA:
   delete: Supprimer
 
 # devise/sessions/new
-  sign_in: S'authentifier
+  sign_in: S'authentifier au Brimir
 
 # devise/shared/links
   forgot_password: Mot de passe oublié?
@@ -32,7 +31,7 @@ fr-CA:
   hello: Bonjour
   someone_requested_link: Quelqu'un a demandé un lien pour changer votre mot de passe, et vous pouvez le faire via le lien ci-dessous.
   ignore_if_not_requested: Si vous n'avez pas demandé ceci, vous pouvez ignorer ce courriel.
-  password_wont_change_without_opening_link: Votre mot de passe ne changera pas jusqu'a ce que vous accédez au lien ci-dessus et en créer un nouveau.
+  password_wont_change_without_opening_link: Votre mot de passe ne changera pas jusqu'à ce que vous accédiez au lien ci-dessus et en créer un nouveau.
 
 # tickets/index
   count_tickets:
@@ -62,9 +61,6 @@ fr-CA:
   medium: Moyenne
   low: Basse
   unknown: Inconnu
-  open: Ouvert
-  closed: Fermé
-  deleted: Supprimé
   labels: Étiquettes
   label_name: Nom étiquette
   notification_sent_to: 'Une notification a été envoyé aux addresses suivantes:'
@@ -97,7 +93,7 @@ fr-CA:
   ticket_priority_changed: Priorité modifié pour le billet
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Statut modifié pour le billet
+  ticket_status_modified: Statut modifié pour le billet
 
 # notification_mailer/new_ticket
   view_new_ticket: Voir le nouveau billet
@@ -167,13 +163,18 @@ fr-CA:
         signature: Signature de courriel
         remember_me: Maintenir la connexion
         label_ids: Étiquettes
-        time_zone: Time zone
+        time_zone: Fuseau horaire
 
       ticket:
-        from: De l'addresse courriel
+        from: De l'adresse courriel
         subject: Sujet
         content: Objet
         status: Statut
+        statuses:
+          open: Ouvert
+          closed: Fermé
+          deleted: Supprimé
+          waiting: En attente
         priority: Priorité
         assignee_id: Attribué
 

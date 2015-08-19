@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -16,8 +16,12 @@
 
 # helper functions to convert html mail to text mail and back
 module HtmlTextHelper
+  def strip_inline_style(content)
+    content.gsub(/<style[^>]*>[^<]*<\/style>/, '')
+  end
+
   def html_to_text(content)
-    sanitize(content.gsub(%r{(<br ?/?>|</p>)}, "\n"), tags: [])
+    sanitize(strip_inline_style(content).gsub(%r{(<br ?/?>|</p>)}, "\n"), tags: [])
   end
 
   def text_to_html(content)
@@ -25,8 +29,9 @@ module HtmlTextHelper
   end
 
   def sanitize_html(content)
+    # strip inline style tags completely
     sanitize(
-        content,
+        strip_inline_style(content),
         tags:       %w( a b br code div em i img li ol p pre table td tfoot
                         thead tr span strong ul font ),
         attributes: %w( src href style color )

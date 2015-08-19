@@ -64,7 +64,7 @@
 				type: 'post',
 				data: jQuery(this).serialize(),
 				success: function(data) {
-					alert(data);
+					alert('Ticket created');
 					brimir_plugin_popup_close();
 				},
 				error: brimir_plugin_insert_form

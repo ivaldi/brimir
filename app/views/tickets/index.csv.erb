@@ -6,10 +6,10 @@
     t(:status, scope: 'activerecord.attributes.ticket'),
     t(:assignee_id, scope: 'activerecord.attributes.ticket'),
     t(:created_at, scope: 'activerecord.attributes.ticket'),
-    "#{t(:open)} (#{t(:minutes)})",
-    "#{t(:waiting)} (#{t(:minutes)})",
-    "#{t(:closed)} (#{t(:minutes)})",
-    "#{t(:deleted)} (#{t(:minutes)})",
+    "#{t('activerecord.attributes.ticket.statuses.open')} (#{t(:minutes)})",
+    "#{t('activerecord.attributes.ticket.statuses.waiting')} (#{t(:minutes)})",
+    "#{t('activerecord.attributes.ticket.statuses.closed')} (#{t(:minutes)})",
+    "#{t('activerecord.attributes.ticket.statuses.deleted')} (#{t(:minutes)})",
   ]
 
   rows = []

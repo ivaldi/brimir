@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system that can be used to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -27,7 +27,7 @@ class NotificationMailerTest < ActionMailer::TestCase
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal ticket.message_id, mail.message_id
-    assert_equal email_addresses(:support).email, mail['From'].to_s
+    assert_equal email_addresses(:brimir).formatted, mail['From'].to_s
   end
 
   test 'should notify user of new reply' do
@@ -40,7 +40,7 @@ class NotificationMailerTest < ActionMailer::TestCase
     mail = ActionMailer::Base.deliveries.last
     assert_equal "<#{reply.ticket.message_id}>", mail['In-Reply-To'].to_s
     assert_equal reply.message_id, mail.message_id
-    assert_equal email_addresses(:support).email, mail['From'].to_s
+    assert_equal email_addresses(:brimir).formatted, mail['From'].to_s
   end
 
 end

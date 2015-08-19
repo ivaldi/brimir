@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -18,7 +18,7 @@ class VerificationMailer < ActionMailer::Base
 
   def verify(email_address)
     headers['X-Brimir-Verification'] = email_address.verification_token
-    mail(to: email_address.email)
+    mail(to: email_address.email, from: EmailAddress.default_email)
   end
 
   def receive(email)

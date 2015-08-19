@@ -5,13 +5,14 @@ problem:
   assignee: alice
   priority: low
   message_id: 'test123@test123'
+  to_email_address: brimir
 
 multiple:
   subject: Some problems
   content: Word doesn't open, internet doesn't work
   user: charlie
   assignee: alice
-  status: closed
+  status: 1 # closed
   priority: high
   message_id: 'test124@test124'
 

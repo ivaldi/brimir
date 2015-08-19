@@ -4,10 +4,13 @@ Brimir::Application.routes.draw do
 
   resources :users
 
-  resources :tickets, only: [:index, :show, :update, :new, :create]
-
   namespace :tickets do
     resource :deleted, only: :destroy, controller: :deleted
+    resource :selected, only: :update, controller: :selected
+  end
+
+  resources :tickets, except: [:destroy, :edit] do
+    resource :lock, only: [:destroy, :create], module: :tickets
   end
 
   resources :labelings, only: [:destroy, :create]
@@ -21,7 +24,7 @@ Brimir::Application.routes.draw do
   get '/attachments/:id/:format' => 'attachments#show'
   resources :attachments, only: [:index, :new]
 
-  resources :email_addresses, only: [:index, :create, :new, :destroy]
+  resources :email_addresses
 
   root to: 'tickets#index'
 

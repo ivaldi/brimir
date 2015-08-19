@@ -1,10 +1,9 @@
 en:
-  language_name: english
+  language_name: English
 # layouts/application
   new_ticket: New ticket
   inbox: Inbox
   mine: Mine
-  waiting: Waiting
   closed_tickets: Closed
   trashed: Trashed
   users: Users
@@ -22,10 +21,10 @@ en:
     final: Thanks for using Brimir!
     next: Next
     previous: Previous
-    end: End
+    end: Let's start!
 
 # devise/sessions/new
-  sign_in: Sign in
+  sign_in: Sign into Brimir
 
 # devise/shared/links
   forgot_password: Forgot your password?
@@ -59,6 +58,7 @@ en:
   search: Search
   minutes: minutes
   are_you_sure_empty_trash: Delete all tickets in the trash?
+  locked_by_user: Ticket currently being handled by %{user}
 
 # tickets/show
   add: Add
@@ -75,13 +75,12 @@ en:
   medium: Medium
   low: Low
   unknown: Unknown
-  open: Open
-  closed: Closed
-  deleted: Deleted
   labels: Labels
   label_name: Label name
   notification_sent_to: 'A notification was sent to the following addresses:'
   no_notifications_sent: 'No notifications have been sent'
+  assign_label: Assign label
+  take_ticket_lock_from_user: Take ticket handling from %{user}
 
 # tickets/_change_priority_form
   change: Change
@@ -94,6 +93,9 @@ en:
   change_assignee: Assign ticket
   assign: Assign
 
+# tickets/locks/create
+  ticket_locked_by_somebody_else: Ticket is currently already being handled by somebody else
+
 # replies/new
   add_reply: Add reply
 
@@ -105,6 +107,9 @@ en:
   on_date_author_wrote: 'On %{date}, %{author} wrote:'
   notification_will_be_sent_to: Your notification will be sent to
 
+# replies/_reply
+  reply_by: Reply by
+
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket assigned to you
 
@@ -112,7 +117,8 @@ en:
   ticket_priority_changed: Ticket priority modified for ticket
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Ticket status modified for ticket
+  ticket_status_modified: Ticket status modified for ticket
+  tickets_status_modified: Ticket status modified for tickets
 
 # notification_mailer/new_ticket
   view_new_ticket: View new ticket
@@ -192,11 +198,15 @@ en:
   new_email_address: New outgoing email address
   email_addresses: Email addresses for outgoing email
 
+# email_addresses/edit
+  modify_email_address: Modify outgoing email address
+
 # email_addresses/new
   verification_mail_will_be_sent: Make sure this email address is forwarded correctly to Brimir. An automated verification email will be sent when you click save. Only verified email addresses can be used for outgoing mail.
   mark_spam_spf: Brimir mails might be marked as spam when you don't add this server to the SPF DNS record of the above mail address.
 
 # controllers/email_addresses
+  email_address_modified: Email address modified
   email_address_added: Email address added
   email_address_removed: Email address removed
 
@@ -218,9 +228,18 @@ en:
         subject: Subject
         content: Content
         status: Status
+        statuses:
+          open: Open
+          closed: Closed
+          deleted: Deleted
+          waiting: Waiting
         priority: Priority
         assignee_id: Assignee
         created_at: Created at
+        to: To email address
+
+      reply:
+        from: From email address
 
       rule:
         filter_field: Field
@@ -239,5 +258,6 @@ en:
 
       email_address:
         email: Email address
+        name: Name
         default: Use as default outgoing mail address
         verification_token: Verified

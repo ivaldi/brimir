@@ -1,11 +1,10 @@
 # author: https://github.com/frenkel
 nl:
-  language_name: nederlands
+  language_name: Nederlands
 # layouts/application
   new_ticket: Nieuw ticket
   inbox: Inbox
   mine: Van mij
-  waiting: Afwachtend
   closed_tickets: Gesloten
   trashed: Prullenbak
   users: Gebruikers
@@ -14,8 +13,19 @@ nl:
   sign_out: Uitloggen
   delete: Verwijderen
 
+  joyride:
+    tickets: Via deze knop kan iedereen nieuwe tickets aanmaken.
+    personal_settings: Stel je handtekening, tijdzone en andere instellingen in via dit menu.
+    labels: Na het toevoegen van labels aan tickets of agents verschijnen ze hier. Je kunt ze gebruiken om te filteren.
+    rules: Voeg automatisch labels toe, wijs tickets toe aan agents, wijzig de status van een ticket, etcetera.
+    users: Voeg meer agents of normale gebruikers toe.
+    final: Bedankt voor het gebruiken van Brimir!
+    next: Volgende
+    previous: Vorige
+    end: Aan de slag!
+
 # devise/sessions/new
-  sign_in: Inloggen
+  sign_in: Inloggen in Brimir
 
 # devise/shared/links
   forgot_password: Wachtwoord vergeten?
@@ -49,6 +59,7 @@ nl:
   search: Zoek
   minutes: minuten
   are_you_sure_empty_trash: Alle tickets uit de prullenbak verwijderen?
+  locked_by_user: Ticket momenteel in behandling door %{user}
 
 # tickets/show
   add: Toevoegen
@@ -65,13 +76,12 @@ nl:
   medium: Gemiddeld
   low: Laag
   unknown: Onbekend
-  open: Open
-  closed: Gesloten
-  deleted: Verwijderd
   labels: Labels
   label_name: Label naam
   notification_sent_to: 'Een notificatie is verstuurd aan de volgende adressen:'
   no_notifications_sent: 'Er zijn geen notificaties verzonden'
+  assign_label: Voeg label toe
+  take_ticket_lock_from_user: Neem behandeling over van %{user}
 
 # tickets/_change_priority_form
   change: Wijzig
@@ -84,6 +94,9 @@ nl:
   change_assignee: Ticket toewijzen
   assign: Toewijzen
 
+# tickets/locks/create
+  ticket_locked_by_somebody_else: Ticket wordt op dit al behandeld door iemand anders
+
 # replies/new
   add_reply: Reactie toevoegen
 
@@ -95,6 +108,9 @@ nl:
   on_date_author_wrote: 'Op %{date} schreef %{author}:'
   notification_will_be_sent_to: Een notificatie van je reactie wordt verstuurd naar
 
+# replies/_reply
+  reply_by: Reactie door
+
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket aan jou toegewezen
 
@@ -102,7 +118,8 @@ nl:
   ticket_priority_changed: Prioriteit van ticket is gewijzigd
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Status van ticket is gewijzigd
+  ticket_status_modified: Status van ticket is gewijzigd
+  tickets_status_modified: Status van tickets is gewijzigd
 
 # notification_mailer/new_ticket
   view_new_ticket: Nieuw ticket bekijken
@@ -178,11 +195,15 @@ nl:
   new_email_address: Nieuw uitgaand e-mailadres
   email_addresses: E-mailadressen voor uitgaande e-mails
 
+# email_addresses/edit
+  modify_email_address: Wijzig uitgaand e-mailadres
+
 # email_addresses/new
   verification_mail_will_be_sent: Zorg dat dit e-mailadres correct doorstuurd naar Brimir. Een automatische verificatie e-mail wordt verstuurd nadat u op opslaan klikt. Alleen geverifieerde e-mailadressen kunnen gebruikt worden voor uitgaande e-mail.
   mark_spam_spf: Brimir mails worden mogelijk als spam gemarkeerd als deze server niet wordt toegevoegd aan het SPF DNS record van het bovenstaande e-mailadres.
 
 # controllers/email_addresses
+  email_address_modified: E-mailadres gewijzigd
   email_address_added: E-mailadres toevoegd
   email_address_removed: Email address verwijderd
 
@@ -204,9 +225,18 @@ nl:
         subject: Onderwerp
         content: Inhoud
         status: Status
+        statuses:
+          open: Open
+          closed: Gesloten
+          deleted: Verwijderd
+          waiting: Afwachtend
         priority: Prioriteit
         assignee_id: Toegewezen aan
         created_at: Aangemaakt op
+        to: Aan e-mailadres
+
+      reply:
+        from: Van e-mailadres
 
       rule:
         filter_field: Veld
@@ -225,5 +255,6 @@ nl:
 
       email_address:
         email: E-mailadres
+        name: Naam
         default: Gebruik als standaard uitgaand e-mailadres
         verification_token: Geverifieerd

@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system that can be used to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -38,10 +38,14 @@ class TicketMailerTest < ActionMailer::TestCase
       end
 
     end
+
+    assert_equal email_addresses(:brimir),
+        Ticket.order(:id).last.to_email_address
   end
 
   test 'email threads are recognized correctly and assignee \
       is notified' do
+    Tenant.current_domain = Tenant.first.domain
 
     thread_start = read_fixture('thread_start').join
     thread_reply = read_fixture('thread_reply').join
@@ -59,7 +63,7 @@ class TicketMailerTest < ActionMailer::TestCase
     end
 
     # agents receive notifications
-    assert_difference 'ActionMailer::Base.deliveries.size', 1 do
+    assert_difference 'ActionMailer::Base.deliveries.size' do
 
       # reply created?
       assert_difference 'Reply.count' do
@@ -106,4 +110,21 @@ class TicketMailerTest < ActionMailer::TestCase
     end
   end
 
+  test 'reply to is used for incoming mail' do
+    email = read_fixture('reply_to').join
+
+    # ticket is created
+    assert_difference 'Ticket.count' do
+
+      # account for user created
+      assert_difference 'User.count' do
+
+        TicketMailer.receive(email)
+
+      end
+
+    end
+
+    assert_equal 'reply@address.com', User.last.email 
+  end
 end

@@ -1,6 +1,6 @@
 # author: https://github.com/JanneMantyharju
 fi:
-  language_name: suomi
+  language_name: Suomi
 # layouts/application
   new_ticket: Uusi tiketti
   inbox: Saapuneet
@@ -50,9 +50,6 @@ fi:
   medium: Normaali
   low: Alhainen
   unknown: Tuntematon
-  open: Avoin
-  closed: Suljettu
-  deleted: Poistettu
   labels: Aiheet
   label_name: Aiheen nimi
   notification_sent_to: 'Viesti lähetettiin seuraaville vastaanottajille:'
@@ -84,7 +81,7 @@ fi:
   ticket_priority_changed: Prioriteetti muutettiin tiketille
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Tila muutettiin tiketille
+  ticket_status_modified: Tila muutettiin tiketille
 
 # notification_mailer/new_ticket
   view_new_ticket: Näytä uusi tiketti
@@ -146,5 +143,9 @@ fi:
         subject: Otsikko
         content: Sisältö
         status: Tila
+        statuses:
+          open: Avoin
+          closed: Suljettu
+          deleted: Poistettu
         priority: Prioriteetti
         assignee_id: Suorittaja

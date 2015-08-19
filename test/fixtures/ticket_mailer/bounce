@@ -1,0 +1,51 @@
+Delivered-To: agent@getbrimir.com
+Received: by 10.25.209.73 with SMTP id i70csp1095588lfg;
+        Fri, 3 Jul 2015 04:49:15 -0700 (PDT)
+X-Received: by 10.152.42.134 with SMTP id o6mr35776571lal.14.1435924155866;
+        Fri, 03 Jul 2015 04:49:15 -0700 (PDT)
+Return-Path: <>
+Received: by laer2 with SMTP id r2so27718773lae.3
+        for <agent@getbrimir.com>; Fri, 03 Jul 2015 04:49:15 -0700 (PDT)
+X-Received: by 10.181.11.165 with SMTP id ej5mr26345043wid.32.1435924155790;
+        Fri, 03 Jul 2015 04:49:15 -0700 (PDT)
+MIME-Version: 1.0
+Return-Path: <>
+Received: by 10.181.11.165 with SMTP id ej5mr18077784wid.32; Fri, 03 Jul 2015
+ 04:49:15 -0700 (PDT)
+From: Mail Delivery Subsystem <mailer-daemon@googlemail.com>
+To: agent@getbrimir.com
+X-Failed-Recipients: poep@getbrimir.com
+Subject: Delivery Status Notification (Failure)
+Message-ID: <f46d043891b73af30c0519f72517@google.com>
+Date: Fri, 03 Jul 2015 11:49:15 +0000
+Content-Type: text/plain; charset=UTF-8
+
+Delivery to the following recipient failed permanently:
+
+     poep@getbrimir.com
+
+Technical details of permanent failure: 
+Google tried to deliver your message, but it was rejected by the server for the recipient domain getbrimir.com by managed1.ivaldi.nl. [46.19.37.98].
+
+The error that the other server returned was:
+550 "Unknown User"
+
+
+----- Original message -----
+
+Return-Pth: <agent@getbrimir.com>
+Received: from [192.168.0.1]
+        by mx.google.com with ESMTPSA id l6sm32136392wib.18.2015.07.03.04.49.13
+        for <poep@getbrimir.com>
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Fri, 03 Jul 2015 04:49:14 -0700 (PDT)
+Message-ID: <559676B9.8090505@ivaldi.nl>
+Date: Fri, 03 Jul 2015 13:49:13 +0200
+From: Test <agent@getbrimir.com>
+MIME-Version: 1.0
+To: poep@getbrimir.com
+Subject: test
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+test

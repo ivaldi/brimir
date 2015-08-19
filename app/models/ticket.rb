@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -21,6 +21,8 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :assignee, class_name: 'User'
+  belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress'
+  belongs_to :locked_by, class_name: 'User'
 
   has_many :attachments, as: :attachable, dependent: :destroy
   accepts_nested_attributes_for :attachments, allow_destroy: true
@@ -85,12 +87,17 @@ class Ticket < ActiveRecord::Base
   }
 
   scope :viewable_by, ->(user) {
-    if !user.agent?
+    if !user.agent? || user.labelings.count > 0
       ticket_ids = Labeling.where(label_id: user.label_ids)
           .where(labelable_type: 'Ticket')
           .pluck(:labelable_id)
-      where('tickets.id IN (?) OR tickets.user_id = ?', ticket_ids, user.id)
+      where('tickets.id IN (?) OR tickets.user_id = ? OR tickets.assignee_id = ?',
+          ticket_ids, user.id, user.id)
     end
+  }
+
+  scope :unlocked_for, ->(user) {
+    where('locked_by_id IN (?) OR locked_at < ?', [user.id, nil], Time.zone.now - 5.minutes)
   }
 
   def set_default_notifications!
@@ -119,6 +126,22 @@ class Ticket < ActiveRecord::Base
     end
 
     total
+  end
+
+  def reply_from_address
+    if to_email_address.nil?
+      EmailAddress.default_email
+    else
+      to_email_address.formatted
+    end
+  end
+
+  def locked?(for_user)
+    locked_by != for_user && locked_by != nil && locked_at > Time.zone.now - 5.minutes
+  end
+
+  def to
+    to_email_address.try :email
   end
 
   protected

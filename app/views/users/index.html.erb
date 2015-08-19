@@ -1,6 +1,6 @@
 <div class="row collapse">
   <div class="medium-12 columns">
-    <div class="panel">
+    <div class="panel no-bt">
       <div class="row collapse">
         <div class="medium-9 columns">
             <h4 class="filter-title no-m pts"><%= t(:users) %></h4>
@@ -21,7 +21,10 @@
       <tbody>
         <% @users.each do |user| %>
           <tr>
-            <td><%= link_to user.email, edit_user_path(user) %></td>
+            <td>
+              <%= user_avatar user, class: 'avatar' %>
+              <%= link_to user.email, edit_user_path(user) %>
+            </td>
             <td><%= (user.agent?) ? t(:agent) : t(:customer) %></td>
           </tr>
         <% end %>

@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -44,11 +44,11 @@ class Rule < ActiveRecord::Base
       ticket.notified_users << user unless user.nil?
 
     elsif action_operation == 'change_status'
-      ticket.status = action_value
+      ticket.status = action_value.downcase
       ticket.save
 
     elsif action_operation == 'change_priority'
-      ticket.priority = action_value
+      ticket.priority = action_value.downcase
       ticket.save
 
     elsif action_operation == 'assign_user'

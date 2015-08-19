@@ -2,7 +2,7 @@
 # revisions: http://colina.net.ve e1th0r
 # 
 es:
-  language_name: español
+  language_name: Español
 # layouts/application
   new_ticket: Nuevo Ticket
   inbox: Bandeja
@@ -11,7 +11,7 @@ es:
   trashed: Borrados
 
 # devise/sessions/new
-  sign_in: Entrar
+  sign_in: Entrar Brimir
 
 # devise/shared/links
   forgot_password: ¿Olvidaste tu contraseña?
@@ -51,9 +51,6 @@ es:
   medium: Media
   low: Baja
   unknown: Desconocido
-  open: Abierto
-  closed: Cerrado
-  deleted: Borrado
   labels: Etiquetas
   label_name: Nombre de etiqueta
   notification_sent_to: 'Las notificaciones fueron enviadas a las siguientes direcciones:'
@@ -85,7 +82,7 @@ es:
   ticket_priority_changed: Prioridad del ticket modificada
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Estado del ticket modificado
+  ticket_status_modified: Estado del ticket modificado
 
 # notification_mailer/new_ticket
   view_new_ticket: Ver nuevo ticket
@@ -146,6 +143,11 @@ es:
         subject: Tema
         content: Contenido
         status: Estado
+        statuses:
+          open: Abierto
+          closed: Cerrado
+          deleted: Borrado
+          waiting: En espera
         priority: Prioridad
         assignee_id: Delegado
       rule:
@@ -202,4 +204,3 @@ es:
   rules: Reglas
   sign_out: Cerrar sesión
   users: Usuarios
-  waiting: En espera

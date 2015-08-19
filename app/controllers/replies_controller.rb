@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -19,11 +19,13 @@ class RepliesController < ApplicationController
   load_and_authorize_resource :reply, except: [:create]
 
   def create
-    @reply = Reply.new
-
-    @reply.assign_attributes(reply_params)
-
-    @reply.user = current_user
+    # store attributes and reopen ticket
+    @reply = current_user.replies.new({
+        'ticket_attributes' => {
+            'status' => 'open',
+            'id' => reply_params[:ticket_id]
+          }
+        }.merge(reply_params))
 
     authorize! :create, @reply
 
@@ -31,14 +33,10 @@ class RepliesController < ApplicationController
       Reply.transaction do
         @reply.save!
 
-        # reopen ticket
-        @reply.ticket.status = :open
-        @reply.ticket.save!
-
         @reply.notified_users.each do |user|
           mail = NotificationMailer.new_reply(@reply, user)
 
-          mail.deliver_now
+          mail.deliver_now unless EmailAddress.pluck(:email).include?(user.email)
           @reply.message_id = mail.message_id
         end
 
@@ -49,22 +47,35 @@ class RepliesController < ApplicationController
       Rails.logger.error 'Exception occured on Reply transaction!'
       Rails.logger.error "Message: #{e.message}"
       Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
+      @outgoing_addresses = EmailAddress.verified.ordered
       render action: 'new'
     end
   end
 
-  private
-    def reply_params
-      params.require(:reply).permit(
-          :content,
-          :ticket_id,
-          :message_id,
-          :user_id,
-          notified_user_ids: [],
-          attachments_attributes: [
-              :file
-          ]
-      )
+  protected
+
+  def reply_params
+    attributes = params.require(:reply).permit(
+        :content,
+        :ticket_id,
+        :message_id,
+        :user_id,
+        notified_user_ids: [],
+        attachments_attributes: [
+          :file
+        ],
+        ticket_attributes: [
+          :id,
+          :to_email_address_id,
+          :status,
+        ]
+    )
+
+    unless can?(:update, Ticket.find(attributes[:ticket_id]))
+      attributes.delete(:ticket_attributes)
     end
+
+    attributes
+  end
 
 end

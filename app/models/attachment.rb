@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,7 @@ class Attachment < ActiveRecord::Base
   belongs_to :attachable, polymorphic: true
 
   has_attached_file :file,
-      path: ':rails_root/data/:class/:attachment/:id_partition/:style.:extension',
+      path: ':rails_root/data/:domain:class/:attachment/:id_partition/:style.:extension',
       url: '/attachments/:id/:style',
       styles: {
           thumb: {

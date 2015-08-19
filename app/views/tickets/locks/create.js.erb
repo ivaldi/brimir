@@ -1,0 +1,5 @@
+<% if current_user != @ticket.locked_by %>
+  alert('<%= j t(:ticket_locked_by_somebody_else) %>');
+  <% # refresh page to make sure read-only view is shown %>
+  window.location.href = '<%= ticket_path(@ticket) %>';
+<% end %>

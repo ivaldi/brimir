@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -15,9 +15,14 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketMailer < ActionMailer::Base
+  include BounceHelper
+
+  def encode(string)
+    string.encode('UTF-8', invalid: :replace, undef: :replace)
+  end
 
   def normalize_body(part, charset)
-    part.body.decoded.force_encoding(charset).encode('UTF-8')
+    encode(part.body.decoded.force_encoding(charset))
   end
 
   def receive(message)
@@ -33,24 +38,27 @@ class TicketMailer < ActionMailer::Base
     content = ''
 
     if email.multipart?
-      if email.text_part
+      if email.html_part
+        content = normalize_body(email.html_part, email.html_part.charset)
+        content_type = 'html'
+      elsif email.text_part
         content = normalize_body(email.text_part, email.text_part.charset)
         content_type = 'text'
       else
-        content = normalize_body(email.html_part, email.html_part.charset)
+        content = normalize_body(email.parts[0], email.parts[0].charset)
         content_type = 'html'
       end
     else
       if email.charset
         content = normalize_body(email, email.charset)
       else
-        content = email.body.decoded.encode('UTF-8')
+        content = encode(email.body.decoded)
       end
       content_type = 'text'
     end
 
     if email.charset
-      subject = email.subject.to_s.force_encoding(email.charset).encode('UTF-8')
+      subject = encode(email.subject.to_s.force_encoding(email.charset))
     else
       subject = email.subject.to_s.encode('UTF-8')
     end
@@ -74,29 +82,37 @@ class TicketMailer < ActionMailer::Base
       end
     end
 
+    from_address = email.from.first
+    unless email.reply_to.blank?
+      from_address = email.reply_to.first
+    end
+
     if response_to
       # reopen ticket
       ticket.status = :open
       ticket.save
 
       # add reply
-      incoming = Reply.create!({
+      incoming = Reply.create({
         content: content,
         ticket_id: ticket.id,
-        from: email.from.first,
+        from: from_address,
         message_id: email.message_id,
         content_type: content_type
       })
 
     else
 
+      to_email_address = EmailAddress.find_first_verified_email(email.to)
+
       # add new ticket
-      ticket = Ticket.create!({
-        from: email.from.first,
+      ticket = Ticket.create({
+        from: from_address,
         subject: subject,
         content: content,
         message_id: email.message_id,
         content_type: content_type,
+        to_email_address: to_email_address,
       })
 
       incoming = ticket
@@ -115,7 +131,7 @@ class TicketMailer < ActionMailer::Base
         }
 
         file.original_filename = attachment.filename
-        file.content_type = attachment.mime_type 
+        file.content_type = attachment.mime_type
 
         a = incoming.attachments.create(file: file)
         a.save! # FIXME do we need this because of paperclip?
@@ -135,7 +151,10 @@ class TicketMailer < ActionMailer::Base
       incoming.save
     end
 
-    return incoming
-
+    if bounced?(email)
+      nil
+    else
+      incoming
+    end
   end
 end

@@ -4,7 +4,6 @@ de:
   new_ticket: Ticket erstellen
   inbox: Offene Tickets
   mine: Meine Tickets
-  waiting: Ausstehend
   closed_tickets: Geschlossene Tickets
   trashed: Gelöschte Tickets
   users: Benutzer
@@ -25,7 +24,7 @@ de:
     end: Ende
 
 # devise/sessions/new
-  sign_in: Anmelden
+  sign_in: Anmelden zu Brimir
 
 # devise/shared/links
   forgot_password: Passwort vergessen?
@@ -74,13 +73,11 @@ de:
   medium: normal
   low: gering
   unknown: unbekannt
-  open: offen
-  closed: geschlossen
-  deleted: gelöscht
   labels: Label
   label_name: Label
   notification_sent_to: 'Es wurde eine Benachrichtigung an folgende E-Mail-Adressen gesendet:'
   no_notifications_sent: 'Es wurde keine Benachrichtigung gesendet.'
+  assign_label: Label zuweisen
 
 # tickets/_change_priority_form
   change: Priorität setzen
@@ -111,7 +108,7 @@ de:
   ticket_priority_changed: Die Priorität des Tickets wurde geändert
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Der Status des Tickets geändert
+  ticket_status_modified: Der Status des Tickets geändert
 
 # notification_mailer/new_ticket
   view_new_ticket: Ticket anzeigen
@@ -213,6 +210,11 @@ de:
         subject: Betreff
         content: Inhalt
         status: Status
+        statuses:
+          open: offen
+          closed: geschlossen
+          deleted: gelöscht
+          waiting: Ausstehend
         priority: Priorität
         assignee_id: Bearbeiter
 

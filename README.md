@@ -9,7 +9,7 @@ Brimir is a rather simple Ruby on Rails application. The only difficulty in sett
 
 Any Rails application needs a web server with Ruby support first. We use Phusion Passenger (`mod_rails`) ourselves, but you can also use Thin, Puma or Unicorn. Phusion Passenger can be installed for Nginx or Apache, you can chose wichever you like best. The installation differs depending on your distribution, so have a look at their [Nginx installation manual](https://www.phusionpassenger.com/documentation/Users%20guide%20Nginx.html) or their [Apache installation manual](https://www.phusionpassenger.com/documentation/Users%20guide%20Apache.html).
 
-After setting up a webserver, you have to create a database for Brimir and modify the config file in `config/database.yml` to reflect the details. Set your details under the production section. We advise to use `adapter: postgresql` or `adapter: mysql2` for production usage, because those are the only two adapters and database servers we test.
+After setting up a webserver, you have to create a database for Brimir and modify the config file in `config/database.yml` to reflect the details. Set your details under the production section. We advise to use `adapter: postgresql` or `adapter: mysql2` for production usage, because those are the only two adapters and database servers we test. *If you plan to use MySQL, make sure you use utf8 as your charset and collation.*
 
 Next up: configuring your outgoing email address and url. This can be set in `config/environments/production.rb` by adding the following lines *before* the keyword `end`:
 
@@ -31,8 +31,8 @@ Generate a secret\_key\_base in the secrets.yml file:
 
 Next, load the database schema and precompile assets:
 
-    rake db:schema:load RAILS_ENV=production
-    rake assets:precompile RAILS_ENV=production
+    bin/rake db:schema:load RAILS_ENV=production
+    bin/rake assets:precompile RAILS_ENV=production
 
 If you want to use LDAP, configure config/ldap.yml accordingly, then change the auth strategy in your application config in file config/application.rb:
 
@@ -42,6 +42,22 @@ If you want to use LDAP, configure config/ldap.yml accordingly, then change the 
 
     bin/rails console production
     u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
+
+Updating
+--------
+First download the new code in the same directory by unpacking a release tarball or by running `git pull` (when you cloned the repo earlier). After updating code run the following commands to install necessary gem updates, migrate the database and regenerate precompiled assets.
+
+    bundle install
+    bin/rake db:migrate RAILS_ENV=production
+    bin/rake assets:precompile RAILS_ENV=production
+    
+Don't forget to restart your application server (`touch tmp/restart.txt` for Passenger).
+
+Customization
+-------------
+Some applicant level configuration can be set through `config/settings.yml`
+
+Brimir is available in several languages. By default, it will use the locale corresponding to the user browser agent, if it was among the supported locales. If you want to change this and force certain locale, you can do that by setting:   `ignore_user_agent_locale: true`  in  `config/settings.yml`
 
 Incoming email
 --------------
@@ -66,10 +82,8 @@ Some users have made requests for the following features. If you would like to c
 - Switchable property to support threads by using special tags in the subject line instead of relying on mail headers.
 - Support for hosted incoming mail services (Sendgrid, Mandrill), possibly using griddler gem.
 - Ability to sign in using a Single Sign On functionality based on Shared Token or JWT.
-- Queue sorting by column header.
 - Private note addition to tickets.
 - Automated replies based on the current rule system.
-- Closing issues from the overview page.
 - Remove user functionality, without losing ticket and reply information.
 - Adding knowledge base functionality.
 - Welcome mail for new users (after mailing a ticket for example) with their password.
@@ -81,6 +95,12 @@ Some users have made requests for the following features. If you would like to c
 - Integration with OpsWeekly
 - Social media integration such as FreshDesk and Zoho have (reply to requests via social media)
 - Ticket creation api (and improving existing api)
+- Unread ticket status per user.
+- Ticket search that also searches in from field and replies.
+- Mark tickets as duplicate, linking it to the duplicated ticket.
+- CC or BCC people from the reply form.
+- Ability to rename tickets (change their subject).
+- Ability to rename labels.
 
 License
 -------
