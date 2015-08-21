@@ -48,10 +48,8 @@
         <%= t(:notification_will_be_sent_to) %>
       </p>
       <p>
-        <%= r.collection_check_boxes :notified_user_ids, @reply.users_to_notify, :id, :email %>
+        <%= r.collection_select :notified_user_ids, User.ordered, :id, :email, { label: false }, { multiple: true, class: 'select2' } %>
       </p>
-
-
 
       <% if can? :update, @reply.ticket %>
         <div class="row collapse">
