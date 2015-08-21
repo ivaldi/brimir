@@ -37,12 +37,24 @@ class User < ActiveRecord::Base
     where(agent: true)
   }
 
+  scope :by_agent, ->(value) {
+    where(agent: value)
+  }
+
   scope :ordered, -> {
     order(:email)
   }
 
   scope :by_email, ->(email) {
     where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
+  }
+
+  scope :search, ->(term) {
+    if !term.nil?
+      term.gsub!(/[\\%_]/) { |m| "!#{m}" }
+      term = "%#{term.downcase}%"
+      where('LOWER(email) LIKE ? ESCAPE ?', term, '!')
+    end
   }
 
   def self.agents_to_notify

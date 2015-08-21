@@ -1,38 +1,57 @@
-<div class="row collapse">
-  <div class="medium-12 columns">
-    <div class="panel no-bt">
+<div class="panel pam no-bt">
+  <div class="row collapse">
+    <div class="medium-12 columns">
       <div class="row collapse">
-        <div class="medium-9 columns">
-            <h4 class="filter-title no-m pts"><%= t(:users) %></h4>
+        <div class="medium-6 columns">
+          <h3 class="filter-title no-m pts plm"><%= t(:users) %></h3>
         </div>
-        <div class="medium-3 columns">
-            <%= link_to t(:new_user), new_user_path, class: 'no-m tiny button right radius' %>
+        <div class="medium-6 columns">
+          <%= form_tag users_path, method: :get, class: 'prm' do %>
+
+            <div class="row collapse">
+
+              <%= link_to new_user_path, class: 'radius tiny button right mlm no-m' do %>
+                <i class="fa fa-plus" style="top:1px"></i>
+              <% end %>
+
+              <div class="small-2 columns right">
+                <%= button_tag '<i class="fa fa-search"></i>'.html_safe, type: 'submit', class: 'secondary radius no-bl no-m button postfix' %>
+              </div>
+              <div class="small-5 columns right">
+                <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
+              </div>
+
+              <label class="ib mts mll mrl pull-right"><%= radio_button_tag :agent, 0, params[:agent] == '0' %> <%= t(:customer) %></label>
+              <label class="ib mts pull-right"><%= radio_button_tag :agent, 1, params[:agent] == '1' %> <%= t(:agent) %></label>
+
+            </div>
+          <% end %>
         </div>
       </div>
     </div>
-
-    <table class="full">
-      <thead>
-        <tr>
-          <th><%= t(:email) %></th>
-          <th><%= t(:role) %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-          <tr>
-            <td>
-              <%= user_avatar user, class: 'avatar' %>
-              <%= link_to user.email, edit_user_path(user) %>
-            </td>
-            <td><%= (user.agent?) ? t(:agent) : t(:customer) %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-
-    <div class="pagination-centered">
-      <%= will_paginate @users %>
-    </div>
   </div>
+</div>
+
+<table class="full">
+  <thead>
+    <tr>
+      <th><%= t(:email) %></th>
+      <th><%= t(:role) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td>
+          <%= user_avatar user, class: 'avatar' %>
+          <%= link_to user.email, edit_user_path(user) %>
+        </td>
+        <td><%= (user.agent?) ? t(:agent) : t(:customer) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div class="pagination-centered">
+  <%= will_paginate @users %>
 </div>
