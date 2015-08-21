@@ -1,6 +1,7 @@
 <%= form_for @ticket, url: tickets_url, html: { multipart: true } do |f| %>
+  <% type = (!current_user.nil? && current_user.prefer_plain_text?) ? 'text' : 'html' %>
 
-  <%= f.hidden_field :content_type, value: current_user.prefer_plain_text? ? 'text' : 'html' %>
+  <%= f.hidden_field :content_type, value: type %>
 
   <h3><%= t(:new_ticket) %></h3>
 
@@ -12,7 +13,7 @@
     <%= f.text_field :subject %>
   </p>
   <p>
-    <%= f.text_area :content, class: ('tinymce' unless current_user.prefer_plain_text?) %>
+    <%= f.text_area :content, class: ('tinymce' if type == 'html') %>
   </p>
 
   <%= render 'attachments/form', f: f %>
