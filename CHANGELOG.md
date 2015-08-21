@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Nice name outgoing email address support, i.e. `From: Test <test@test.nl>` instead of just the email address.
 - Opt-in other users in conversations.
 - Filter users by type and/or email.
+- Possible to inline-edit the label name.
 
 ### Changed
 - The outgoing email address of replies will now be the same as the original incoming email addresses when it was configured correctly as an outgoing email address. The agent can choose a different address when replying.

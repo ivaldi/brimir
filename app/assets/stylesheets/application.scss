@@ -144,3 +144,23 @@ ul.accordion{
 	@include clearfix();
 	margin-top: rem-calc(20);
 }
+
+ul.off-canvas-list form a {
+	display: inline;
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+ul.off-canvas-list form button {
+	margin: 0;
+	padding: 8px 20px;
+	width: 50%;
+	background: none;
+	color: #fff;
+	border: none;
+}
+
+ul.off-canvas-list form button:hover {
+	background-color: #4b5363;
+}

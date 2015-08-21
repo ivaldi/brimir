@@ -25,9 +25,19 @@ class LabelsController < ApplicationController
   end
 
   def update
-    @label.color = Label::COLORS[ params[:color].to_i % Label::COLORS.count ]
+
+    if params[:label].present? && params[:label][:name].present?
+      @label.name = params[:label][:name]
+    elsif params[:color].present?
+      @label.color = Label::COLORS[ params[:color].to_i % Label::COLORS.count ]
+    end
+
     @label.save
 
+    respond_to :js
+  end
+
+  def edit
     respond_to :js
   end
 

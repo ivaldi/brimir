@@ -1,5 +1,10 @@
 jQuery('[data-label-id="<%= @label.id %>"]').css('background', '<%= @label.color %>');
+jQuery('[data-label-id="<%= @label.id %>"]').html('<%= @label.name %>');
+
 jQuery('[data-dropdown="label-<%= @label.id %>"]').closest('a').find('span').css('background-color', '<%= @label.color %>');
+jQuery('[data-dropdown="label-<%= @label.id %>"]').closest('a').find('span').html('<%= @label.name %>');
+
+jQuery('[data-edit-label-row="<%= @label.id %>"]').replaceWith("<%= j render 'label_li', label: @label %>");
 
 <%# close all dropdowns %>
 var dropdowns = jQuery('.f-dropdown');
