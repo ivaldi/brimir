@@ -21,11 +21,12 @@ module HtmlTextHelper
   end
 
   def html_to_text(content)
-    sanitize(strip_inline_style(content).gsub(%r{(<br ?/?>|</p>)}, "\n"), tags: [])
+    content = strip_inline_style(content).gsub(%r{(<br ?/?>|</p>)}, "\n")
+    CGI.unescapeHTML(sanitize(content, tags: []).to_str) # to_str for Rails #12672
   end
 
   def text_to_html(content)
-    content.gsub("\n", '<br />')
+    CGI.escapeHTML(content).gsub("\n", '<br />')
   end
 
   def sanitize_html(content)
@@ -40,9 +41,9 @@ module HtmlTextHelper
 
   def wrap_and_quote(content)
     content = html_to_text(content)
-    content = content.gsub(/^.*\n&gt;.*$/, '') # strip off last line before older quotes
-    content = content.gsub(/^&gt;.*$/, '') # strip off older quotes
+    content = content.gsub(/^.*\n>.*$/, '') # strip off last line before older quotes
+    content = content.gsub(/^>.*$/, '') # strip off older quotes
     content = word_wrap(content.strip, line_width: 72)
-    content.gsub(/^/, '&gt; ')
+    content.gsub(/^/, '> ')
   end
 end

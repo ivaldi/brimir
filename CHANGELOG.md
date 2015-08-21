@@ -33,3 +33,4 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - More robust incoming email support.
 - The content of inline HTML style tags is now correctly removed as well.
 - Adding of labels to tickets updates the interface correctly again, this was broken since the redesign.
+- HTML entities are now correctly escaped and unescaped in ticket and reply content.
