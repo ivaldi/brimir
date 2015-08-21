@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketsController < ApplicationController
+  include HtmlTextHelper
+  include ActionView::Helpers::SanitizeHelper # dependency of HtmlTextHelper
 
   before_filter :authenticate_user!, except: [:create, :new]
   load_and_authorize_resource :ticket, except: :create
@@ -99,7 +101,7 @@ class TicketsController < ApplicationController
   def new
     unless current_user.blank?
       if current_user.prefer_plain_text?
-        signature = { content: "\n#{current_user.signature}" }
+        signature = { content: "\n#{html_to_text current_user.signature}" }
       else
         signature = { content: "<p></p>#{current_user.signature}" }
       end
