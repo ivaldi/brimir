@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(version: 20150828125947) do
     t.integer  "user_id"
     t.string   "message_id"
     t.string   "content_type",                                default: "html"
+    t.boolean  "draft",                                       default: false,  null: false
     t.string   "raw_message_file_name"
     t.string   "raw_message_content_type"
     t.integer  "raw_message_file_size"

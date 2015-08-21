@@ -76,7 +76,9 @@
       <% end %>
 
       <p>
-        <%= r.submit value: t(:send_reply), class: 'button regular radius secondary' %>
+        <%= r.button t(:save_as_draft), name: 'reply[draft]', value: true, class: 'button regular radius primary' %>
+
+        <%= r.button t(:send_reply), name: 'reply[draft]', value: false, type: :submit, class: 'button regular radius secondary' %>
       </p>
 
     </div>

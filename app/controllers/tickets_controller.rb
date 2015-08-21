@@ -29,8 +29,13 @@ class TicketsController < ApplicationController
   def show
     @agents = User.agents
 
-    @reply = @ticket.replies.new(user: current_user)
-    @reply.set_default_notifications!
+    draft = @ticket.replies.where(user: current_user).where(draft: true).first
+    if draft.present?
+      @reply = draft
+    else
+      @reply = @ticket.replies.new(user: current_user)
+      @reply.set_default_notifications!
+    end
 
     @labeling = Labeling.new(labelable: @ticket)
 

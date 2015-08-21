@@ -38,6 +38,10 @@ class Reply < ActiveRecord::Base
     where.not(message_id: nil)
   }
 
+  scope :without_drafts, -> {
+    where(draft: false)
+  }
+
   scope :unlocked_for, ->(user) {
     joins(:ticket)
         .where('locked_by_id IN (?) OR locked_at < ?',

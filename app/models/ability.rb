@@ -23,6 +23,7 @@ class Ability
 
     can :create, Ticket
     can :create, Attachment
+    can :update, Reply, user_id: user.id
 
     if user.agent?
       if user.labelings.count > 0
@@ -39,7 +40,7 @@ class Ability
 
   def customer(user)
     # customers can view their own tickets, its replies and attachments
-    can [:create, :read], Reply, ticket: { user_id: user.id }
+    can [:create, :read], Reply, ticket: { user_id: user.id }    
 
     # customers can edit their own account
     can :update, User, id: user.id

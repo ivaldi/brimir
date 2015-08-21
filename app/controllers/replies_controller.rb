@@ -29,20 +29,35 @@ class RepliesController < ApplicationController
 
     authorize! :create, @reply
 
+    save_reply_and_redirect
+  end
+
+  def update
+    @reply.assign_attributes(reply_params)
+    save_reply_and_redirect
+  end
+
+  protected
+
+  def save_reply_and_redirect
     begin
-      Reply.transaction do
-        @reply.save!
+      if @reply.draft?
+        @reply.save        
+      else
+        Reply.transaction do
+          @reply.save!
 
-        @reply.notified_users.each do |user|
-          mail = NotificationMailer.new_reply(@reply, user)
+          @reply.notified_users.each do |user|
+            mail = NotificationMailer.new_reply(@reply, user)
 
-          mail.deliver_now unless EmailAddress.pluck(:email).include?(user.email)
-          @reply.message_id = mail.message_id
-        end
+            mail.deliver_now unless EmailAddress.pluck(:email).include?(user.email)
+            @reply.message_id = mail.message_id
+          end
 
-        @reply.save!
-        redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
+          @reply.save!          
+        end        
       end
+      redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
     rescue => e
       Rails.logger.error 'Exception occured on Reply transaction!'
       Rails.logger.error "Message: #{e.message}"
@@ -76,6 +91,7 @@ class RepliesController < ApplicationController
         :message_id,
         :user_id,
         :content_type,
+        :draft,
         notified_user_ids: [],
         attachments_attributes: [
           :file
