@@ -24,6 +24,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Deprecated
 - Support for Ruby 1.9 has been dropped. We're not automatically testing it anymore.
 
+### Removed
+- Database migrations from Markdown to HTML and required gems.
+
 ### Fixed
 - More robust incoming email support.
 - The content of inline HTML style tags is now correctly removed as well.

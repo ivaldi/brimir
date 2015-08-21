@@ -54,9 +54,6 @@ gem 'will_paginate'
 # attachments, thumbnails etc
 gem 'paperclip'
 
-# Markdown
-gem 'redcarpet'
-
 # select2 replacement for selectboxes
 gem 'select2-rails'
 
