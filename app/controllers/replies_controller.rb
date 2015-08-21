@@ -60,6 +60,7 @@ class RepliesController < ApplicationController
         :ticket_id,
         :message_id,
         :user_id,
+        :content_type,
         notified_user_ids: [],
         attachments_attributes: [
           :file

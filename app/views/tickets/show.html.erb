@@ -104,12 +104,11 @@
 
           <div class="output">
             <% if @ticket.content_type == 'html' %>
-              <% content = @ticket.content %>
+              <%= sanitize_html(@ticket.content) %>
             <% else %>
-              <% content = text_to_html(@ticket.content) %>
+              <pre><%= @ticket.content %></pre>
             <% end %>
 
-            <%= sanitize_html(content) %>
           </div>
         <% end %>
 

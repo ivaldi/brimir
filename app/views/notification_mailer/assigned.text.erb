@@ -1,3 +1,8 @@
+<%# WATCH OUT make sure you don't add whitespace accidentally -%>
 <%= t(:ticket_assigned) %>: <%= ticket_url(@ticket) %>
 
-<%= sanitize(@ticket.content.gsub(/(<br( )?\/>|<\/p>)/, "\n"), tags: []) %>
+<%- if reply.content_type == 'html' -%>
+<%= html_to_text reply.content -%>
+<%- else -%>
+<%= reply.content -%>
+<%- end -%>

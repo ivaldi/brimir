@@ -1,5 +1,10 @@
 <%# WATCH OUT make sure you don't add whitespace accidentally %>
-<% unless @user.current_sign_in_at.blank? %>
+<%- unless @user.current_sign_in_at.blank? -%>
 <%= t(:view_new_ticket, locale: @locale) %>: <%= ticket_url(@ticket) %>
-<% end %>
-<%= html_to_text(@ticket.content) %>
+<%- end -%>
+
+<%- if @ticket.content_type == 'html' -%>
+<%= html_to_text @ticket.content -%>
+<%- else -%>
+<%= @ticket.content -%>
+<%- end -%>

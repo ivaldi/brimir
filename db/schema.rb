@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150821125309) do
+ActiveRecord::Schema.define(version: 20150821131046) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -158,6 +158,7 @@ ActiveRecord::Schema.define(version: 20150821125309) do
     t.string   "time_zone",              default: "Amsterdam"
     t.integer  "per_page",               default: 30,          null: false
     t.string   "locale"
+    t.boolean  "prefer_plain_text",      default: false,       null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

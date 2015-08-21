@@ -222,6 +222,7 @@ en:
         locale: Language
         time_zone: Time zone
         per_page: Tickets per page
+        prefer_plain_text: Send and receive plain text replies
 
       ticket:
         from: From email address

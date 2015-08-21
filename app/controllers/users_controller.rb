@@ -96,6 +96,7 @@ class UsersController < ApplicationController
           :time_zone,
           :locale,
           :per_page,
+          :prefer_plain_text,
           label_ids: []
       )
 

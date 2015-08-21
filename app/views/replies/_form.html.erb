@@ -1,4 +1,5 @@
 <%= form_for @reply, html: { multipart: true, class: 'new_reply' } do |r| %>
+  <%= r.hidden_field :content_type, value: current_user.prefer_plain_text? ? 'text' : 'html' %>
 
   <%= r.hidden_field :ticket_id %>
   <div class="row collapse bb">
@@ -23,22 +24,30 @@
       <% end %>
 
       <%
-        content = '<p></p>' + current_user.signature.to_s
+        if current_user.prefer_plain_text?
+          content = "\n#{current_user.signature}\n"
+        else
+          content = "<p></p>#{current_user.signature}<br />"
+        end
         reply_to = @reply.other_replies.order(:id).last
 
         if reply_to.nil?
           reply_to = @reply.ticket
         end
 
-        content += '<br />'
         content += t(:on_date_author_wrote, author: reply_to.user.email,
             date: l(reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
-        content += '<br />' + text_to_html(wrap_and_quote(reply_to.content))
+
+        if current_user.prefer_plain_text?
+          content += "\n#{wrap_and_quote(reply_to.content)}"
+        else
+          content += "<br />#{text_to_html(wrap_and_quote(reply_to.content))}"
+        end
       %>
 
 
       <p>
-        <%= r.text_area :content, label: false, class: 'tinymce',
+        <%= r.text_area :content, label: false, class: ('tinymce' unless current_user.prefer_plain_text?),
             value: (@reply.content.nil? ? content : @reply.content) %>
       </p>
 

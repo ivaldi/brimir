@@ -20,12 +20,11 @@
     <div class="row">
       <div class="medium-11 columns medium-push-1 mtl mbl">
         <% if reply.content_type == 'html' %>
-          <% content = reply.content %>
+          <%= sanitize_html(reply.content) %>
         <% else %>
-          <% content = text_to_html(reply.content) %>
+          <pre><%= reply.content %></pre>
         <% end %>
 
-        <%= sanitize_html(content) %>
 
         <% if reply.attachments.size > 0 %>
           <hr />
