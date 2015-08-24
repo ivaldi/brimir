@@ -17,7 +17,7 @@
 # helper functions to convert html mail to text mail and back
 module HtmlTextHelper
   def strip_inline_style(content)
-    content.gsub(/<style[^>]*>[^<]*<\/style>/, '')
+    content.to_s.gsub(/<style[^>]*>[^<]*<\/style>/, '')
   end
 
   def html_to_text(content)
