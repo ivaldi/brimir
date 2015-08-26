@@ -30,7 +30,11 @@ class Rule < ActiveRecord::Base
       value = ticket.attributes[filter_field]
     end
 
-    value.include?(filter_value) if filter_operation == 'contains'
+    unless value.nil?
+      if filter_operation == 'contains'
+        value.include?(filter_value)
+      end
+    end
   end
 
   def execute(ticket)
