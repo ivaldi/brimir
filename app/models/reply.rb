@@ -44,7 +44,10 @@ class Reply < ActiveRecord::Base
   }
 
   def set_default_notifications!
-    self.notified_user_ids = users_to_notify.map(&:id)
+    users = users_to_notify.select do |user|
+      Ability.new(user).can? :show, self
+    end
+    self.notified_user_ids = users.map(&:id)
   end
 
   def other_replies

@@ -101,7 +101,10 @@ class Ticket < ActiveRecord::Base
   }
 
   def set_default_notifications!
-    self.notified_user_ids = User.agents_to_notify.pluck(:id)
+    users = User.agents_to_notify.select do |user|
+      Ability.new(user).can? :show, self
+    end
+    self.notified_user_ids = users.map(&:id)
   end
 
   def status_times
