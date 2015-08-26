@@ -21,7 +21,7 @@ module HtmlTextHelper
   end
 
   def html_to_text(content)
-    content = strip_inline_style(content).gsub(%r{(<br ?/?>|</p>)}, "\n")
+    content = sanitize_html(content).gsub(%r{(<br ?/?>|</p>)}, "\n")
     CGI.unescapeHTML(sanitize(content, tags: []).to_str) # to_str for Rails #12672
   end
 
