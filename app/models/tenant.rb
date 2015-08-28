@@ -57,7 +57,11 @@ class Tenant < ActiveRecord::Base
   end
 
   def self.current_tenant
-    @@current
+    if defined? @@current
+      @@current
+    else
+      Tenant.new # defaults for settings
+    end
   end
 
   protected

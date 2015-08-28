@@ -20,7 +20,6 @@ class LabelingsControllerTest < ActionController::TestCase
 
   setup do
     @labeling = labelings(:bug_ticket)
-    Tenant.current_domain = Tenant.first.domain
     sign_in users(:alice)
   end
 
