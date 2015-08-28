@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   # identities for omniauth
   has_many :identities
 
+  after_initialize :default_localization
+
   # All ldap users are agents by default, remove/comment this method if this
   # is not the intended behavior.
   def ldap_before_save
@@ -60,5 +62,10 @@ class User < ActiveRecord::Base
   def self.agents_to_notify
     User.agents
         .where(notify: true)
+  end
+
+  def default_localization
+    self.time_zone = Tenant.current_tenant.default_time_zone if time_zone.blank?
+    self.locale = Tenant.current_tenant.default_locale if locale.blank?
   end
 end

@@ -38,6 +38,9 @@
             <% if can? :manage, User %>
                 <li id="joyride-users"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
             <% end %>
+            <% if can? :update, Tenant.current_tenant %>
+                <li><a href="<%= edit_settings_path %>"><i class="fa fa-wrench fa-fw"></i></a></li>
+            <% end %>
             <li class="has-dropdown" id="joyride-settings">
               <a href="#"><%= user_avatar current_user, class: 'avatar mrm', size: 20 %><%= current_user.email %></a>
               <ul class="dropdown">

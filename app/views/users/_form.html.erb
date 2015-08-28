@@ -21,7 +21,6 @@
 
         <%= f.select :time_zone, @time_zones %>
 
-        <% @user.locale = 'en' if @user.locale.blank? # fallback on english  %>
         <%= f.select :locale, @locales %>
 
         <%= f.select :per_page, [10, 20, 30, 50, 75, 100] %>

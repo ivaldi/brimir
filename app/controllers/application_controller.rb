@@ -38,6 +38,18 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def load_locales
+    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
+    @locales = []
+
+    Dir.open("#{Rails.root}/config/locales").each do |file|
+      unless ['.', '..'].include?(file)
+        code = file[0...-4] # strip of .yml
+        @locales << [I18n.translate(:language_name, locale: code), code]
+      end
+    end
+  end
+
   def load_labels
     @labels = Label.viewable_by(current_user).ordered
   end
@@ -46,23 +58,12 @@ class ApplicationController < ActionController::Base
     if user_signed_in? && !current_user.locale.blank?
       I18n.locale = current_user.locale
     else
-      locales = []
-
-      Dir.open("#{Rails.root}/config/locales").each do |file|
-        unless ['.', '..'].include?(file)
-          # strip of .yml
-          locales << file[0...-4]
-        end
-      end
-
-      if AppSettings.ignore_user_agent_locale
-        I18n.locale = I18n.default_locale
+      if Tenant.current_tenant.ignore_user_agent_locale?
+        I18n.locale = Tenant.current_tenant.default_locale
       else
-        I18n.locale = http_accept_language.compatible_language_from(locales)
-      end
-      if user_signed_in?
-        current_user.locale = I18n.locale
-        current_user.save
+        load_locales
+
+        I18n.locale = http_accept_language.compatible_language_from(@locales)
       end
     end
   end

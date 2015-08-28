@@ -26,6 +26,8 @@ Brimir::Application.routes.draw do
 
   resources :email_addresses
 
+  resource :settings, only: [:edit, :update]
+
   root to: 'tickets#index'
 
   namespace :api do

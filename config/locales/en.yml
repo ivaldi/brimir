@@ -154,6 +154,13 @@ en:
   access_control: Access Control
   have_access_to_label: User has access to all tickets with any of these labels.
 
+# settings/edit
+  change_settings: Change settings
+  localization_settings: Localization settings
+
+# controllers/settings
+  settings_saved: Settings saved
+
 # controllers/attachments
   file_not_found: File not found
 
@@ -262,3 +269,8 @@ en:
         name: Name
         default: Use as default outgoing mail address
         verification_token: Verified
+
+      tenant:
+        default_locale: Default language
+        ignore_user_agent_locale: Ignore preferred browser language
+        default_time_zone: Default time zone

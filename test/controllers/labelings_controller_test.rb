@@ -20,7 +20,7 @@ class LabelingsControllerTest < ActionController::TestCase
 
   setup do
     @labeling = labelings(:bug_ticket)
-
+    Tenant.current_domain = Tenant.first.domain
     sign_in users(:alice)
   end
 
@@ -47,9 +47,4 @@ class LabelingsControllerTest < ActionController::TestCase
       assert_response :success
     end
   end
-
-  test 'should show labels in sidebar' do
-    
-  end
-
 end

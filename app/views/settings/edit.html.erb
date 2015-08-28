@@ -1,0 +1,30 @@
+<div class="panel no-bt mbl">
+  <div class="row collapse">
+    <div class="medium-12 columns">
+      <h4 class="no-m pts pbs"><%= t(:change_settings) %></h4>
+    </div>
+  </div>
+</div>
+<%= form_for @tenant, url: settings_path do |f| %>
+  <div class="row mt mb">
+
+    <div class="medium-6 columns">
+
+      <h5><%= t(:localization_settings) %></h5>
+
+      <%= f.select :default_time_zone, @time_zones %>
+
+      <%= f.check_box :ignore_user_agent_locale %>
+
+      <%= f.select :default_locale, @locales %>
+    </div>
+
+    <div class="medium-6 columns">
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-12 columns bt">
+      <%= f.submit t(:save), class: 'success button radius mtl' %>
+    </div>
+  </div>
+<% end %>

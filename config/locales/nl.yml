@@ -155,6 +155,13 @@ nl:
   access_control: Toegangscontrole
   have_access_to_label: Gebruiker heeft toegang tot alle tickets met één van deze labels.
 
+# settings/edit
+  change_settings: Wijzig instellingen
+  localization_settings: Localizatie instellingen
+
+# controllers/settings
+  settings_saved: Instellingen opgeslagen
+
 # controllers/attachments
   file_not_found: Bestand niet gevonden
 
@@ -259,3 +266,8 @@ nl:
         name: Naam
         default: Gebruik als standaard uitgaand e-mailadres
         verification_token: Geverifieerd
+
+      tenant:
+        default_locale: Standaard taal
+        ignore_user_agent_locale: Negeer voorkeur taal van browser
+        default_time_zone: Standaard tijdzone

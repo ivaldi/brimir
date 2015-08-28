@@ -103,5 +103,7 @@ class Ability
     can :manage, Rule
     can :manage, EmailAddress
     can :manage, Label
+
+    can :update, Tenant, id: Tenant.current_tenant.id
   end
 end
