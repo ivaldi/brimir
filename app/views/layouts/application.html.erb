@@ -30,16 +30,16 @@
           <!-- Right Nav Section -->
           <ul class="right">
             <% if can? :manage, EmailAddress %>
-                <li><a href="<%= email_addresses_path %>"><i class="fa fa-envelope fa-fw"></i></a></li>
+              <li><a href="<%= email_addresses_path %>"><i class="fa fa-envelope fa-fw"></i></a></li>
             <% end %>
             <% if can? :manage, Rule %>
-                <li id="joyride-rules"><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
+              <li id="joyride-rules"><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
             <% end %>
             <% if can? :manage, User %>
-                <li id="joyride-users"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
+              <li id="joyride-users"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
             <% end %>
             <% if can? :update, Tenant.current_tenant %>
-                <li><a href="<%= edit_settings_path %>"><i class="fa fa-wrench fa-fw"></i></a></li>
+              <li><a href="<%= edit_settings_path %>"><i class="fa fa-wrench fa-fw"></i></a></li>
             <% end %>
             <li class="has-dropdown" id="joyride-settings">
               <a href="#"><%= user_avatar current_user, class: 'avatar mrm', size: 20 %><%= current_user.email %></a>
