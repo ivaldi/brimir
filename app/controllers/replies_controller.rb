@@ -42,7 +42,7 @@ class RepliesController < ApplicationController
   def save_reply_and_redirect
     begin
       if @reply.draft?
-        @reply.save        
+        @reply.save touch: false
       else
         Reply.transaction do
           @reply.save!
