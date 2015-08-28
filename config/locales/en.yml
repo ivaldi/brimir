@@ -254,6 +254,7 @@ en:
         filter_operation: Operator
         filter_operations:
           contains: contains
+          equals: is equal to
         filter_value: Value
         action_operation: Action to perform
         action_operations:

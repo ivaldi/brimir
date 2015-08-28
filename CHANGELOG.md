@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Possible to inline-edit the label name.
 - Per user configuration option for plain text replies.
 - A global configuration page was added which can be used to set default locale and time zone.
+- Added "equal to" as option for rule matching.
 
 ### Changed
 - The outgoing email address of replies will now be the same as the original incoming email addresses when it was configured correctly as an outgoing email address. The agent can choose a different address when replying.

@@ -252,6 +252,7 @@ nl:
         filter_value: Waarde
         filter_operations:
           contains: bevat
+          equals: is gelijk aan
         action_operation: Uit te voeren actie
         action_operations:
           assign_label: voeg label toe
