@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828115955) do
+ActiveRecord::Schema.define(version: 20150828125947) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -75,13 +75,17 @@ ActiveRecord::Schema.define(version: 20150828115955) do
   add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "replies", force: :cascade do |t|
-    t.text     "content",      limit: 1073741823
+    t.text     "content",                  limit: 1073741823
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "ticket_id"
     t.integer  "user_id"
     t.string   "message_id"
-    t.string   "content_type",                    default: "html"
+    t.string   "content_type",                                default: "html"
+    t.string   "raw_message_file_name"
+    t.string   "raw_message_content_type"
+    t.integer  "raw_message_file_size"
+    t.datetime "raw_message_updated_at"
   end
 
   add_index "replies", ["message_id"], name: "index_replies_on_message_id"
@@ -119,18 +123,22 @@ ActiveRecord::Schema.define(version: 20150828115955) do
 
   create_table "tickets", force: :cascade do |t|
     t.string   "subject"
-    t.text     "content",             limit: 1073741823
+    t.text     "content",                  limit: 1073741823
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "assignee_id"
     t.string   "message_id"
     t.integer  "user_id"
-    t.string   "content_type",                           default: "html"
-    t.integer  "status",                                 default: 0,      null: false
-    t.integer  "priority",                               default: 0,      null: false
+    t.string   "content_type",                                default: "html"
+    t.integer  "status",                                      default: 0,      null: false
+    t.integer  "priority",                                    default: 0,      null: false
     t.integer  "to_email_address_id"
     t.integer  "locked_by_id"
     t.datetime "locked_at"
+    t.string   "raw_message_file_name"
+    t.string   "raw_message_content_type"
+    t.integer  "raw_message_file_size"
+    t.datetime "raw_message_updated_at"
   end
 
   add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"

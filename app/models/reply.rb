@@ -17,6 +17,7 @@
 # replies to tickets, made by a user, possibly with attachments
 class Reply < ActiveRecord::Base
   include CreateFromUser
+  include RawMessage
 
   has_many :attachments, as: :attachable, dependent: :destroy
 

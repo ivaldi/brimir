@@ -52,6 +52,21 @@ class RepliesController < ApplicationController
     end
   end
 
+  def show
+    respond_to do |format|
+      format.eml do
+        begin
+          send_file @reply.raw_message.path(:original),
+              filename: "reply-#{@reply.id}.eml",
+              type: 'text/plain',
+              disposition: :attachment
+        rescue
+          raise ActiveRecord::RecordNotFound
+        end
+      end
+    end
+  end
+
   protected
 
   def reply_params

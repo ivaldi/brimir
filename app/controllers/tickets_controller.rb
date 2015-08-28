@@ -35,6 +35,20 @@ class TicketsController < ApplicationController
     @labeling = Labeling.new(labelable: @ticket)
 
     @outgoing_addresses = EmailAddress.verified.ordered
+
+    respond_to do |format|
+      format.html
+      format.eml do
+        begin
+          send_file @ticket.raw_message.path(:original),
+              filename: "ticket-#{@ticket.id}.eml",
+              type: 'text/plain',
+              disposition: :attachment
+        rescue
+          raise ActiveRecord::RecordNotFound
+        end
+      end
+    end
   end
 
   def index

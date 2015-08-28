@@ -64,6 +64,10 @@ class Tenant < ActiveRecord::Base
     end
   end
 
+  def self.files_path
+    ':rails_root/data/:domain:class/:attachment/:id_partition/:style.:extension'
+  end
+
   protected
 
   def self.available_schemas

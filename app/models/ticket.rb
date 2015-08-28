@@ -16,6 +16,7 @@
 
 class Ticket < ActiveRecord::Base
   include CreateFromUser
+  include RawMessage
 
   validates_presence_of :user_id
 

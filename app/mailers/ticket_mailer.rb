@@ -25,10 +25,7 @@ class TicketMailer < ActionMailer::Base
     encode(part.body.decoded.force_encoding(charset))
   end
 
-  def receive(message)
-    require 'mail'
-
-    email = Mail.new(message)
+  def receive(email)
 
     # is this an address verification mail?
     if VerificationMailer.receive(email)
@@ -98,7 +95,8 @@ class TicketMailer < ActionMailer::Base
         ticket_id: ticket.id,
         from: from_address,
         message_id: email.message_id,
-        content_type: content_type
+        content_type: content_type,
+        raw_message: StringIO.new(email.to_s)
       })
 
     else
@@ -113,6 +111,7 @@ class TicketMailer < ActionMailer::Base
         message_id: email.message_id,
         content_type: content_type,
         to_email_address: to_email_address,
+        raw_message: StringIO.new(email.to_s)
       })
 
       incoming = ticket

@@ -12,6 +12,9 @@
       </div>
       <div class="medium-11 columns pll">
         <a class="pull-right mtm text-default mrl" href="#print" onclick="window.print()"><%= fa_icon 'print' %></a>
+        <% if @ticket.raw_message_file_size.to_i > 0 %>
+          <a class="pull-right mtm text-default mrl" href="<%= ticket_path(format: :eml) %>"><%= fa_icon 'save' %></a>
+        <% end %>
         <h3 class="no-m text-default">
           <%= !@ticket.subject.blank? ? @ticket.subject : "<em>(#{t(:no_subject)})</em>".html_safe %>
         </h3>
