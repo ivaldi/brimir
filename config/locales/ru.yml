@@ -53,9 +53,11 @@ ru:
   no_tickets_found: 'Не найдено заявок'
   search: 'Поиск'
   minutes: 'минут'
+  locked_by_user: 'Заявку обрабатывает %{user} в данный момент'
+  ticket_id_created_by_at: '#%{id} создал(а) %{user} в %{at}'
 
 # tickets/show
-  add: 'Ок'
+  add: 'Добавить'
   ticket_by_at: '%{email}, %{at}'
   no_content: 'Нет отписания'
   status: 'Статус'
