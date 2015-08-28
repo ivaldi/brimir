@@ -26,6 +26,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - The outgoing email address of replies will now be the same as the original incoming email addresses when it was configured correctly as an outgoing email address. The agent can choose a different address when replying.
 - The `script/post-mail` script now returns correct exit codes to the local delivery command of Postfix. This allows Postfix to bounce an email when the ticket could not be created.
+- Ordering of tickets is now based on last modified time. Tickets with new replies will show up on top.
 
 ### Deprecated
 - Support for Ruby 1.9 has been dropped. We're not automatically testing it anymore.

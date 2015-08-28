@@ -59,6 +59,7 @@ en:
   minutes: minutes
   are_you_sure_empty_trash: Delete all tickets in the trash?
   locked_by_user: Ticket currently being handled by %{user}
+  ticket_id_created_by_at: '#%{id} created by %{user} at %{at}'
 
 # tickets/show
   add: Add

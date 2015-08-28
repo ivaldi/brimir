@@ -27,7 +27,7 @@ class Reply < ActiveRecord::Base
 
   validates :ticket_id, :content, presence: true
 
-  belongs_to :ticket
+  belongs_to :ticket, touch: true
   belongs_to :user
 
   accepts_nested_attributes_for :ticket

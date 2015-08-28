@@ -83,7 +83,7 @@ class Ticket < ActiveRecord::Base
   }
 
   scope :ordered, -> {
-    order(:created_at).reverse_order
+    order(:updated_at).reverse_order
   }
 
   scope :viewable_by, ->(user) {

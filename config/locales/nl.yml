@@ -60,6 +60,7 @@ nl:
   minutes: minuten
   are_you_sure_empty_trash: Alle tickets uit de prullenbak verwijderen?
   locked_by_user: Ticket momenteel in behandling door %{user}
+  ticket_id_created_by_at: '#%{id} gemaakt door %{user} op %{at}'
 
 # tickets/show
   add: Toevoegen

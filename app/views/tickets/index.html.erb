@@ -58,7 +58,6 @@
           <input type="checkbox" value="<%= ticket.id %>" name="id[]" class="no-mb" data-toggle-check />
           <%= user_avatar ticket.user, class: 'avatar left mrl mts mlm', size: 30 %>
           <p class="no-mb text-overflow">
-            <span class="block"><%= ticket.user.email %></span>
             <% unless ticket.subject.blank? %>
               <a href="<%= ticket_url(ticket) %>">
                 <strong><%= ticket.subject %></strong>
@@ -68,6 +67,10 @@
                 <em><%= t(:no_subject) %></em>
               <% end %>
             <% end %>
+            <span class="block">
+              <%= t :ticket_id_created_by_at, id: ticket.id, user: ticket.user.email,
+                  at: l(ticket.created_at.in_time_zone(current_user.time_zone), format: :short) %>
+            </span>
             <% if ticket.locked?(current_user) %>
               <br /><em><%= t(:locked_by_user, user: ticket.locked_by.email) %></em>
             <% end %>
@@ -90,7 +93,7 @@
         </div>
         <div class="medium-3 v-middle columns">
           <p class="no-mb text-right">
-            <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
+            <span class="block"><%= l ticket.updated_at.in_time_zone(current_user.time_zone), format: :short %></span>
             <% if can? :update, ticket %>
               <% if ticket.assignee %>
                 <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
