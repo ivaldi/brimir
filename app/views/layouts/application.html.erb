@@ -29,17 +29,20 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
+            <div class="show-for-small-only">
+              <%= render 'inbox_menu' %>
+            </div>
             <% if can? :manage, EmailAddress %>
-              <li><a href="<%= email_addresses_path %>"><i class="fa fa-envelope fa-fw"></i></a></li>
+              <li class="hide-for-small-only"><a href="<%= email_addresses_path %>"><i class="fa fa-envelope fa-fw"></i></a></li>
             <% end %>
             <% if can? :manage, Rule %>
-              <li id="joyride-rules"><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
+              <li id="joyride-rules" class="hide-for-small-only"><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
             <% end %>
             <% if can? :manage, User %>
-              <li id="joyride-users"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
+              <li id="joyride-users" class="hide-for-small-only"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
             <% end %>
             <% if can? :update, Tenant.current_tenant %>
-              <li><a href="<%= edit_settings_path %>"><i class="fa fa-wrench fa-fw"></i></a></li>
+              <li class="hide-for-small-only"><a href="<%= edit_settings_path %>"><i class="fa fa-wrench fa-fw"></i></a></li>
             <% end %>
             <li class="has-dropdown" id="joyride-settings">
               <a href="#"><%= user_avatar current_user, class: 'avatar mrm', size: 20 %><%= current_user.email %></a>
@@ -68,50 +71,7 @@
             <%= link_to t(:new_ticket), new_ticket_path, class: 'tiny secondary expand button no-mb no-b', id: 'joyride-tickets' %>
           </div>
           <ul class="off-canvas-list mtm">
-            <li>
-              <%= active_elem_if :a, params[:status] == 'open' &&
-                  params[:assignee_id].to_i == 0,
-                  href: root_path do %>
-
-                <span class="fa fa-inbox"></span>
-                <%= t(:inbox) %>
-                <span class="right heading-six bubble pls prs">
-                  <%= Ticket.viewable_by(current_user).open.count %>
-                </span>
-              <% end %>
-            </li>
-            <% if current_user.agent? %>
-              <li>
-                <%= active_elem_if :a, params[:status] == 'open' &&
-                    params[:assignee_id].to_i == current_user.id,
-                    href: tickets_path(assignee_id: current_user.id), class: 'plxxl' do %>
-                  <span class="fa fa-user"></span>
-                  <%= t(:mine) %>
-                  <span class="right heading-six bubble pls prs">
-                    <%= Ticket.viewable_by(current_user).open.filter_by_assignee_id( current_user.id).count %>
-                  </span>
-                <% end %>
-              </li>
-            <% end %>
-            <li>
-              <%= active_elem_if :a, params[:status] == 'waiting',
-                  href: tickets_path(status: 'waiting') do %>
-                <span class="fa fa-clock-o"></span>
-                <%= t('activerecord.attributes.ticket.statuses.waiting') %>
-              <% end %>
-            </li>
-            <li>
-              <%= active_elem_if :a, params[:status] == 'closed',
-                   href: tickets_path(status: 'closed') do %>
-                <span class="fa fa-check"></span><%= t(:closed_tickets) %>
-              <% end %>
-            </li>
-            <li>
-              <%= active_elem_if :a, params[:status] == 'deleted',
-                  href: tickets_path(status: 'deleted') do %>
-                <span class="fa fa-trash-o"></span><%= t(:trashed) %>
-              <% end %>
-            </li>
+            <%= render 'inbox_menu' %>
           </ul>
 
           <ul class="off-canvas-list">
