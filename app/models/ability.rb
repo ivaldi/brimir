@@ -98,7 +98,7 @@ class Ability
 
     can [:create, :destroy], Labeling, -> { where(labelable_type: 'User')
         .where.not(labelable_id: user.id) } do |labeling|
-      labeling.labelable != user 
+      labeling.labelable != user
     end
     can :manage, Rule
     can :manage, EmailAddress
