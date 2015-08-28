@@ -179,6 +179,7 @@ en:
 
 # controllers/replies
   reply_added: Reply added
+  draft_saved: Draft saved
 
 # controllers/omniauth
   already_linked_accounts: Already linked with Google Account

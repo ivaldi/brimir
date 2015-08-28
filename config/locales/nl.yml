@@ -108,7 +108,7 @@ nl:
   send_reply: Verstuur reactie
   on_date_author_wrote: 'Op %{date} schreef %{author}:'
   notification_will_be_sent_to: Een notificatie van je reactie wordt verstuurd naar
-  save_as_draft: Sla op als concept
+  save_as_draft: Als concept opslaan
 
 # replies/_reply
   reply_by: Reactie door
@@ -180,6 +180,7 @@ nl:
 
 # controllers/replies
   reply_added: Reactie toegevoegd
+  draft_saved: Concept opgeslagen
 
 # controllers/omniauth
   already_linked_accounts: Al met een Google Account verbonden

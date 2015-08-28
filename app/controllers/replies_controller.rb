@@ -42,7 +42,14 @@ class RepliesController < ApplicationController
   def save_reply_and_redirect
     begin
       if @reply.draft?
-        @reply.save touch: false
+        original_updated_at = @reply.ticket.updated_at
+
+        @reply.save
+
+        # don't screw up the ordering of inbox by resetting updated_at
+        @reply.ticket.update_column :updated_at, original_updated_at
+
+        redirect_to @reply.ticket, notice: I18n::translate(:draft_saved)
       else
         Reply.transaction do
           @reply.save!
@@ -54,10 +61,11 @@ class RepliesController < ApplicationController
             @reply.message_id = mail.message_id
           end
 
-          @reply.save!          
-        end        
+          @reply.save!
+        end
+
+        redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
       end
-      redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
     rescue => e
       Rails.logger.error 'Exception occured on Reply transaction!'
       Rails.logger.error "Message: #{e.message}"
