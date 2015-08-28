@@ -72,7 +72,7 @@
                   at: l(ticket.created_at.in_time_zone(current_user.time_zone), format: :short) %>
             </span>
             <% if ticket.locked?(current_user) %>
-              <br /><em><%= t(:locked_by_user, user: ticket.locked_by.email) %></em>
+              <em><%= t(:locked_by_user, user: ticket.locked_by.email) %></em>
             <% end %>
           </p>
         </div>
