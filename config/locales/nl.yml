@@ -65,6 +65,7 @@ nl:
 # tickets/show
   add: Toevoegen
   ticket_by_at: Door %{email} op %{at}
+  to_email: to %{email}
   no_content: Geen inhoud
   ticket_id: Ticketnummer
   status: Status
