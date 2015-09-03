@@ -328,4 +328,11 @@ class TicketsControllerTest < ActionController::TestCase
       end
     end
   end
+
+  test 'should get new ticket form in correct language' do
+    I18n.locale = :nl
+    get :new
+    assert_response :success
+    refute_match I18n.t('activerecord.attributes.ticket.from', locale: :nl), @response.body
+  end
 end

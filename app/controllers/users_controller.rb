@@ -18,8 +18,6 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource :user
 
-  before_filter :load_locales, except: :index
-
   def edit
     @user = User.find(params[:id])
   end

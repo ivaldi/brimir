@@ -1,5 +1,4 @@
 class SettingsController < ApplicationController
-  before_action :load_locales
 
   def edit
     @tenant = Tenant.current_tenant

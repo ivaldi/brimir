@@ -38,7 +38,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def load_locales
+  def load_labels
+    @labels = Label.viewable_by(current_user).ordered
+  end
+
+  def set_locale
     @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
     @locales = []
 
@@ -48,22 +52,16 @@ class ApplicationController < ActionController::Base
         @locales << [I18n.translate(:language_name, locale: code), code]
       end
     end
-  end
 
-  def load_labels
-    @labels = Label.viewable_by(current_user).ordered
-  end
-
-  def set_locale
     if user_signed_in? && !current_user.locale.blank?
       I18n.locale = current_user.locale
     else
-      if Tenant.current_tenant.ignore_user_agent_locale?
+      locale = http_accept_language.compatible_language_from(@locales)
+
+      if Tenant.current_tenant.ignore_user_agent_locale? || locale.blank?
         I18n.locale = Tenant.current_tenant.default_locale
       else
-        load_locales
-
-        I18n.locale = http_accept_language.compatible_language_from(@locales)
+        I18n.locale = locale
       end
     end
   end
