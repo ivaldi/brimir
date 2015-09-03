@@ -1,0 +1,45 @@
+<li>
+  <%= active_elem_if :a, params[:status] == 'open' &&
+      params[:assignee_id].to_i == 0,
+      href: root_path do %>
+
+    <span class="fa fa-inbox"></span>
+    <%= t(:inbox) %>
+    <span class="right heading-six bubble pls prs">
+      <%= Ticket.viewable_by(current_user).open.count %>
+    </span>
+  <% end %>
+</li>
+<% if current_user.agent? %>
+  <li>
+    <%= active_elem_if :a, params[:status] == 'open' &&
+        params[:assignee_id].to_i == current_user.id,
+        href: tickets_path(assignee_id: current_user.id), class: 'plxxl' do %>
+      <span class="fa fa-user"></span>
+      <%= t(:mine) %>
+      <span class="right heading-six bubble pls prs">
+        <%= Ticket.viewable_by(current_user).open.filter_by_assignee_id( current_user.id).count %>
+      </span>
+    <% end %>
+  </li>
+<% end %>
+<li>
+  <%= active_elem_if :a, params[:status] == 'waiting',
+      href: tickets_path(status: 'waiting') do %>
+    <span class="fa fa-clock-o"></span>
+    <%= t('activerecord.attributes.ticket.statuses.waiting') %>
+  <% end %>
+</li>
+<li>
+  <%= active_elem_if :a, params[:status] == 'closed',
+       href: tickets_path(status: 'closed') do %>
+    <span class="fa fa-check"></span><%= t(:closed_tickets) %>
+  <% end %>
+</li>
+<li>
+  <%= active_elem_if :a, params[:status] == 'deleted',
+      href: tickets_path(status: 'deleted') do %>
+    <span class="fa fa-trash-o"></span><%= t(:trashed) %>
+  <% end %>
+</li>
+
