@@ -1,0 +1,280 @@
+en:
+  language_name: فارسی
+# layouts/application
+  new_ticket: تیکت جدید
+  inbox: صندوق
+  mine: مال من
+  closed_tickets: بسته
+  trashed: پاک‌شده
+  users: کاربران
+  rules: قوانین
+  personal_settings: تنظیمات شخصی
+  sign_out: خروج
+  delete: حذف
+
+  joyride:
+    tickets: هر کسی با این دکمه می‌تونه یک تیکت بسازه.
+    personal_settings: امضا، منطقه زمانی، و دیگر تنظیمات شخصی در اینجا تنظیم کنید.
+    labels: بعد از اضافه کردن برچسب به کاربر یا تیکت، آنها اینجا خواهند بود و به عنوان فیلتر میشه ازش استفاده کرد
+    rules: به صورت خودکار برچسب بزنید، مسولیت بدهید،تغییر وضعیت دهید و بیشتر.
+    users: کاربر و نماینده بیشتر اضافه کنید.
+    final: مرسی از اینکه از Brimir استفاده میکنید.
+    next: بعد
+    previous: قبل
+    end: شروع کنید!
+
+# devise/sessions/new
+  sign_in: وارد شوید
+
+# devise/shared/links
+  forgot_password: کلمه عبور خود را فراموش کردید؟
+
+# devise/passwords/new
+  send_instructions: دستورعمل بفرست
+
+# devise/passwords/edit
+  change_password: تغییر کلمه‌عبور
+  new_password: کلمه غبور جدید
+  new_password_confirmation: تایید کلمه‌عبور جدید
+
+# devise/mailer/reset_password_instructions
+  hello: سلام
+  someone_requested_link: یک نفر درخواست لینک تغییر کلمه عبور داده است و شما می‌توانید این کار را از لینک پایین انجام دهید.
+  ignore_if_not_requested: اگر شما این درخواست را ندادید، این ایمیل را نادیده بگیرید.
+  password_wont_change_without_opening_link: کلمه عبور شما تفییر نخواهد کرد مگر اینکه به لینک بالا رفته و آنرا تغییر دهید.
+
+# tickets/index
+  count_tickets:
+    one: '%{count} تیکت'
+    other: '%{count} تیکت‌ها'
+  count_tickets_containing:
+    one: '%{count} تیکت شامل'
+    other: '%{count} تیکت شامل'
+  priority: اولویت
+  replies: پاسخ‌ها
+  no_subject: بدون عنوان
+  unassigned: بی‌مسئول
+  no_tickets_found: تیکتی پیدا نشد
+  search: جستجو
+  minutes: دقیقه
+  are_you_sure_empty_trash: همه تیکت‌ها در زبایله حذف کنم؟
+  locked_by_user: تیکت توسط  %{user} پیگیری می‌شود.
+  ticket_id_created_by_at: '#%{id} درست شده توسط %{user} در %{at}'
+
+# tickets/show
+  add: اضافه
+  ticket_by_at: از %{email} در %{at}
+  no_content: بدون محتوا
+  ticket_id: شماره تیکت
+  status: وضعیت
+  assignee: مسئول
+  num_replies:
+    one: '%{count} پاسخ'
+    other: '%{count} پاسخ'
+  ago: قبل
+  high: مهم
+  medium: متوسط
+  low: کم اهمیت
+  unknown: ناشناس
+  labels: برچسب‌ها
+  label_name: اسم برچسب
+  notification_sent_to: 'به اطلاع آدرس‌های زیر رسانده شد:'
+  no_notifications_sent: 'هیچ اطلاعی داده نشده'
+  assign_label: تخصیص برچسب
+  take_ticket_lock_from_user: مسئولیت تیکت را از %{user} بگیرید
+
+# tickets/_change_priority_form
+  change: تغییر
+  change_priority: تغییر اولویت
+
+# tickets/_change_status_form
+  change_status: تغییر وضعیت
+
+# tickets/_change_assignee_form
+  change_assignee: تایین مسؤل
+  assign: تایین
+
+# tickets/locks/create
+  ticket_locked_by_somebody_else:  مسؤل این  هم اکنون توسط شخص دیگری هست.
+
+# replies/new
+  add_reply: پاسخ بده
+
+# replies/_form
+  reply: پاسخ
+  attach_files: فایل ضمیمه کن
+  attach_file: فایل ضمیمه کن
+  send_reply: پاسخ بفرست
+  on_date_author_wrote: 'در %{date}, %{author} نوشت:'
+  notification_will_be_sent_to: اطلاعیه شما فرستاده خواهد شد به
+  save_as_draft: ذخیره پیش نویس
+
+# replies/_reply
+  reply_by: پاسخ از
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: تیکت‌هایی که مسؤلش شمایی
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: اولویت این تیکت تغییر کرده
+
+# ticket_mailer/notify_status_changed.text.erb
+  ticket_status_modified: وضعیت این تیکت تغییر کرده
+  tickets_status_modified: وضعیت این تیکت تغییر کرده
+
+# notification_mailer/new_ticket
+  view_new_ticket: دیدن تیکت جدید
+# notification_mailer/new_reply
+  new_reply: پاسخ جدید
+  view_new_reply: دیدن پاسخ جدید
+
+# attachments/_attachment
+  download: دانلود
+
+# users/new
+  new_user: کاربر جدید
+
+# users/edit
+  edit_user: ویرایش کاربر
+  omniauth_connect_title: شناسایی با گوگل
+  omniauth_connect_text: شناسایی با گوگل را فعال کنید. سپس می‌توانید با "اتصال با گوگل" به عنوان راهی علاوه بر ایمیل و کلمه‌عبور خود وارد شوید
+  omniauth_connect_google_text: اتصال با گوگل
+
+# users/index
+  email: ایمیل 
+  role: نقش
+  agent: نماینده
+  customer: مشتری
+
+# users/_form
+  account_settings: تنظیمات حساب
+  only_fill_in_passwords_when_modifying: فقط این دوتا فیلد پر کنید اگر می‌خواهید کلمه عبور خود را تغییر دهید.
+  user_is_an_agent: کاربر یک نماینده است
+  receive_new_ticket_notifications: اطلاع رسانی تیکت‌های جدید
+  email_settings: تنظیمات ایمیل
+  save: ذخیره
+  access_control: کنترل دسترسی
+  have_access_to_label: کاربر به همه این تیکت ها با این برچسب‌ها دسترسی دارد
+
+# settings/edit
+  change_settings: تغییر تنظیمات
+  localization_settings: تنظیمات محلی
+
+# controllers/settings
+  settings_saved: تنظیمات ذخیره شد
+
+# controllers/attachments
+  file_not_found: فایل پیدا نشد
+
+# controllers/users
+  settings_saved: تنظیمات ذخیره شد
+  user_added: کاربر اضافه شد
+
+# controllers/tickets
+  ticket_added: تیکت اضافه شد
+  ticket_updated: تیکت به روز شد
+
+# controllers/tickets/deleted
+  trash_emptied: همه تیکت‌ها از زباله پاک شدن
+
+# controllers/replies
+  reply_added: پاسخ اضافه شد
+  draft_saved: پیش‌نویس ذخیره شد
+
+# controllers/omniauth
+  already_linked_accounts: قبلا به حساب گوگل وصل شده
+  successfully_linked_account: به حساب گوگل وصل شد
+  not_linked_account_cant_login: هیچ کاربری به این حساب وصل نشده.لطفا اول وارد شوید، سپس در تنظیمات شخصی این اتصال به حساب انجام بدین
+  third_party_failure: مشکلی در شناسایی شما به وجود آمد. آیا "Contacts API" و "Google+ API" را از طریق Google API console فعال کردین؟
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: روش‌های دیگر ورود
+  omniauth_sign_in_google: گوگل
+
+# rules/index
+  new_rule: قانون جدید
+
+# rules/edit
+  edit_rule: ویرایش قانون
+  delete_rule: حذف قانون
+  are_you_sure: مطمعن هستین؟
+
+# controllers/rules
+  rule_added: قانون اضافه شد
+  rule_modified: قانون تغییر کرد
+  rule_deleted: قانون پاک شد
+
+# email_addresses/index
+  new_email_address: آدرس ایمیل خروجی جدید
+  email_addresses: آدرس‌های ایمیل خروجی
+
+# email_addresses/edit
+  modify_email_address: تغییر آدرس ایمیل خروجی
+
+# email_addresses/new
+  verification_mail_will_be_sent: مطمعن شوید آدرس ایمیل به درستی به Brimir فرستاده میشه. یک ایمیل اتوماتیک برای تایید بعد از کلیک بر روی دکمه ذخیره،‌فرستاده خواهد شد. فقط ایمیل‌های تایید شده می‌توانند به عنوان ایمیل خروجی استفاده شوند.
+  mark_spam_spf: ایمیل‌ها ممکن هست به اسپم برن اگر شما SPF DNS record آدرس ایمیل بالا اضافه نکنید.
+
+# controllers/email_addresses
+  email_address_modified: آدرس ایمیل تغییر کرد
+  email_address_added: آدرس ایمیل اضافه شد
+  email_address_removed: آدرس ایمیل حذف شد
+
+  activerecord:
+    attributes:
+      user:
+        email: ایمیل
+        password: کلمه عبور
+        password_confirmation: تایید کلمه عبور
+        signature: امضاء ایمیل
+        remember_me: مرا به خاطر بیار
+        label_ids: برچسب‌ها
+        locale: زبان
+        time_zone: موقعیت زمانی
+        per_page: تیکت‌ها در هر صفحه
+        prefer_plain_text: ارسال و دریافت پاسخ‌های فقط متنی
+
+      ticket:
+        from: آدرس ایمیل فرستنده
+        subject: موضوع
+        content: محتوا
+        status: وضعیت
+        statuses:
+          open: باز
+          closed: بسته شده
+          deleted: حذف شده
+          waiting: انتظار
+        priority: اولویت
+        assignee_id: مسؤل
+        created_at: ایجاد شده در
+        to: آدرس ایمیل گیرنده
+
+      reply:
+        from: ایمیل فرستنده
+
+      rule:
+        filter_field: فیلد
+        filter_operation: عامل
+        filter_operations:
+          contains: شامل
+          equals: برابر
+        filter_value: مقدار
+        action_operation: انجام عملیات
+        action_operations:
+          assign_label: اختصاص برچسب
+          notify_user: ارسال اطلاع رسانی به
+          change_status: تغییر وضیعت به
+          change_priority: تغییر اولویت به
+          assign_user: واگزار شده به
+        action_value: پارامتر‌های این عملیات
+
+      email_address:
+        email: آدرس ایمیل
+        name: اسم
+        default: استفاده به عنوان آدرس ایمیل‌خروجی پیش فرض
+        verification_token: تایید شده
+
+      tenant:
+        default_locale: زبان پیش فرض
+        ignore_user_agent_locale: زبان پیش‌فرض مرورگر نادیده بگیر
+        default_time_zone: منطقه زمانی پیش فرض
