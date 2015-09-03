@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - A global configuration page was added which can be used to set default locale and time zone.
 - Added "equal to" as option for rule matching.
 - Original email messages are now stored and available from the ticket detail page. This can be helpfull if Brimir fails to show some HTML mails correctly or to resolve possible bugs in Brimir.
+- Farsi/Persian translation contributed by @hadifarnoud.
 
 ### Changed
 - The outgoing email address of replies will now be the same as the original incoming email addresses when it was configured correctly as an outgoing email address. The agent can choose a different address when replying.
