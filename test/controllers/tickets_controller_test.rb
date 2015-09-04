@@ -335,4 +335,14 @@ class TicketsControllerTest < ActionController::TestCase
     assert_response :success
     refute_match I18n.t('activerecord.attributes.ticket.from', locale: :nl), @response.body
   end
+
+  test 'should get raw message' do
+    sign_in users(:alice)
+
+    @ticket.raw_message = fixture_file_upload('ticket_mailer/simple')
+    @ticket.save!
+
+    get :show, id: @ticket.id, format: :eml
+    assert_response :success
+  end
 end

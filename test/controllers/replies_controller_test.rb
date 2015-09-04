@@ -124,4 +124,12 @@ class RepliesControllerTest < ActionController::TestCase
     assert_equal 'open', @ticket.status
   end
 
+  test 'should get raw message' do
+    @reply.raw_message = fixture_file_upload('ticket_mailer/simple')
+    @reply.save!
+
+    get :show, id: @reply.id, format: :eml
+    assert_response :success
+  end
+
 end

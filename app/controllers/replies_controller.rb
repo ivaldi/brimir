@@ -37,6 +37,21 @@ class RepliesController < ApplicationController
     save_reply_and_redirect
   end
 
+  def show
+    respond_to do |format|
+      format.eml do
+        begin
+          send_file @reply.raw_message.path(:original),
+              filename: "reply-#{@reply.id}.eml",
+              type: 'text/plain',
+              disposition: :attachment
+        rescue
+          raise ActiveRecord::RecordNotFound
+        end
+      end
+    end
+  end
+
   protected
 
   def save_reply_and_redirect
@@ -74,23 +89,6 @@ class RepliesController < ApplicationController
       render action: 'new'
     end
   end
-
-  def show
-    respond_to do |format|
-      format.eml do
-        begin
-          send_file @reply.raw_message.path(:original),
-              filename: "reply-#{@reply.id}.eml",
-              type: 'text/plain',
-              disposition: :attachment
-        rescue
-          raise ActiveRecord::RecordNotFound
-        end
-      end
-    end
-  end
-
-  protected
 
   def reply_params
     attributes = params.require(:reply).permit(
