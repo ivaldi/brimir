@@ -133,8 +133,12 @@ class TicketMailer < ActionMailer::Base
         file.content_type = attachment.mime_type
 
         # store content_id with stripped off '<' and '>'
+        content_id = nil
+        unless attachment.content_id.blank?
+          content_id = attachment.content_id[1..-2])
+        end
         incoming.attachments.create(file: file,
-            content_id: attachment.content_id[1..-2])
+            content_id: content_id)
       end
 
     end
