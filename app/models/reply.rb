@@ -17,14 +17,10 @@
 # replies to tickets, made by a user, possibly with attachments
 class Reply < ActiveRecord::Base
   include CreateFromUser
-  include RawMessage
-
-  has_many :attachments, as: :attachable, dependent: :destroy
+  include EmailMessage
 
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :notified_users, source: :user, through: :notifications
-
-  accepts_nested_attributes_for :attachments
 
   validates :ticket_id, :content, presence: true
 

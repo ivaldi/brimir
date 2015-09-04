@@ -110,7 +110,7 @@
 
           <div class="output">
             <% if @ticket.content_type == 'html' %>
-              <%= sanitize_html(@ticket.content) %>
+              <%= sanitize_html(@ticket.content, @ticket.inline_files) %>
             <% else %>
               <pre><%= @ticket.content %></pre>
             <% end %>
@@ -127,10 +127,10 @@
         </ul>
 
 
-        <% if @ticket.attachments.size > 0 %>
+        <% if @ticket.attached_files.size > 0 %>
           <hr />
           <ul class="attachments">
-            <%= render @ticket.attachments %>
+            <%= render @ticket.attached_files %>
           </ul>
         <% end %>
      </div>

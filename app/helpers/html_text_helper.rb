@@ -17,6 +17,7 @@
 # helper functions to convert html mail to text mail and back
 module HtmlTextHelper
   def strip_inline_style(content)
+    # strip inline style tags completely
     content.to_s.gsub(/<style[^>]*>[^<]*<\/style>/, '')
   end
 
@@ -29,14 +30,20 @@ module HtmlTextHelper
     CGI.escapeHTML(content).gsub("\n", '<br />')
   end
 
-  def sanitize_html(content)
-    # strip inline style tags completely
-    sanitize(
+  def sanitize_html(content, attachments = [])
+    result = sanitize(
         strip_inline_style(content),
         tags:       %w( a b br code div em i img li ol p pre table td tfoot
                         thead tr span strong ul font ),
         attributes: %w( src href style color )
-    ).html_safe
+    )
+
+    attachments.each do |attachment|
+      result.gsub!(/src="cid:#{attachment.content_id}"/,
+        "src=\"#{attachment.file.url(:original)}\"")
+    end
+
+    result.html_safe
   end
 
   def wrap_and_quote(content)

@@ -132,8 +132,9 @@ class TicketMailer < ActionMailer::Base
         file.original_filename = attachment.filename
         file.content_type = attachment.mime_type
 
-        a = incoming.attachments.create(file: file)
-        a.save! # FIXME do we need this because of paperclip?
+        # store content_id with stripped off '<' and '>'
+        incoming.attachments.create(file: file,
+            content_id: attachment.content_id[1..-2])
       end
 
     end

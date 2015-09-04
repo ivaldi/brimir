@@ -100,7 +100,6 @@ Some users have made requests for the following features. If you would like to c
 - Mark tickets as duplicate, linking it to the duplicated ticket.
 - Ability to rename tickets (change their subject).
 - Ability to rename labels.
-- Support inline images (CID).
 
 License
 -------

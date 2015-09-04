@@ -18,12 +18,13 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Nice name outgoing email address support, i.e. `From: Test <test@test.nl>` instead of just the email address.
 - Opt-in other users in conversations.
 - Filter users by type and/or email.
-- Possible to inline-edit the label name.
+- It is now possible to inline-edit the label name.
 - Per user configuration option for plain text replies.
 - A global configuration page was added which can be used to set default locale and time zone.
 - Added "equal to" as option for rule matching.
 - Original email messages are now stored and available from the ticket detail page. This can be helpfull if Brimir fails to show some HTML mails correctly or to resolve possible bugs in Brimir.
 - Farsi/Persian translation contributed by @hadifarnoud.
+- Support for inline email attachments has been added. It will only work for newly received messages.
 
 ### Changed
 - The outgoing email address of replies will now be the same as the original incoming email addresses when it was configured correctly as an outgoing email address. The agent can choose a different address when replying.

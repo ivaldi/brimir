@@ -24,16 +24,16 @@
         <% end %>
 
         <% if reply.content_type == 'html' %>
-          <%= sanitize_html(reply.content) %>
+          <%= sanitize_html(reply.content, reply.inline_files) %>
         <% else %>
           <pre><%= reply.content %></pre>
         <% end %>
 
 
-        <% if reply.attachments.size > 0 %>
+        <% if reply.attached_files.size > 0 %>
           <hr />
           <ul class="attachments">
-            <%= render reply.attachments %>
+            <%= render reply.attached_files %>
           </ul>
         <% end %>
 

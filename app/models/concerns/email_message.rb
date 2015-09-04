@@ -14,10 +14,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-module RawMessage
+module EmailMessage
   extend ActiveSupport::Concern
 
   included do
+    has_many :attachments, as: :attachable, dependent: :destroy
+    accepts_nested_attributes_for :attachments, allow_destroy: true
+
+    has_many :attached_files, -> { where(content_id: nil) }, as: :attachable, class_name: 'Attachment'
+    has_many :inline_files, -> { where.not(content_id: nil) }, as: :attachable, class_name: 'Attachment'
+
     has_attached_file :raw_message,
         path: Tenant.files_path
 

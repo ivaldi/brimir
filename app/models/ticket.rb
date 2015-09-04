@@ -16,7 +16,7 @@
 
 class Ticket < ActiveRecord::Base
   include CreateFromUser
-  include RawMessage
+  include EmailMessage
 
   validates_presence_of :user_id
 
@@ -24,9 +24,6 @@ class Ticket < ActiveRecord::Base
   belongs_to :assignee, class_name: 'User'
   belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress'
   belongs_to :locked_by, class_name: 'User'
-
-  has_many :attachments, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :attachments, allow_destroy: true
 
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
