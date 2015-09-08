@@ -56,6 +56,7 @@ en:
   unassigned: Unassigned
   no_tickets_found: No tickets found.
   search: Search
+  filter: Filter
   minutes: minutes
   are_you_sure_empty_trash: Delete all tickets in the trash?
   locked_by_user: Ticket currently being handled by %{user}

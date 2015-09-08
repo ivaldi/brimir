@@ -36,6 +36,15 @@
       <% end %>
     </div>
   </div>
+  <% if params[:user_id] %>
+    <dl class="sub-nav">
+      <dt><%= t :filter %>:</dt>
+      <dd class="active"><%= link_to root_path do %>
+        <%= User.find(params[:user_id]).email %>&nbsp;&nbsp;
+        <i class="fa fa-times-circle fa-fw"></i>
+      <% end %></dd>
+    </dl>
+  <% end %>
 </div>
 
 <section class="tickets">
@@ -68,8 +77,8 @@
               <% end %>
             <% end %>
             <span class="block">
-              <%= t :ticket_id_created_by_at, id: ticket.id, user: ticket.user.email,
-                  at: l(ticket.created_at.in_time_zone(current_user.time_zone), format: :short) %>
+              <%= t(:ticket_id_created_by_at, id: ticket.id, user: link_to(ticket.user.email, user_tickets_path(user_id: ticket.user)),
+                  at: l(ticket.created_at.in_time_zone(current_user.time_zone), format: :short)).html_safe %>
             </span>
             <% if ticket.locked?(current_user) %>
               <em><%= t(:locked_by_user, user: ticket.locked_by.email) %></em>
