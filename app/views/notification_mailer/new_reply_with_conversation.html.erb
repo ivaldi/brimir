@@ -17,7 +17,7 @@
           </div>
           <div style="overflow: hidden">
             <small>
-              <%= @ticket.reply_from_address %>,
+              <%= reply.user.agent? ? @ticket.reply_from_address : reply.user.email %>,
               <%= localize(reply.created_at) %>
             </small>
             <div class="reply_body">
