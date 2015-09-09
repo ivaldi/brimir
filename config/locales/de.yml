@@ -116,6 +116,9 @@ de:
 # notification_mailer/new_reply
   new_reply: Antwort
   view_new_reply: Antwort anzeigen
+  good_morning: Guten Morgen
+  good_day: Guten Tag
+  good_evening: Guten Abend
 
 # attachments/_attachment
   download: Öffnen

@@ -130,6 +130,9 @@ nl:
 # notification_mailer/new_reply
   new_reply: Nieuwe reactie
   view_new_reply: Nieuwe reactie bekijken
+  good_morning: Goedemorgen
+  good_day: Goedendag
+  good_evening: Goedenavond
 
 # attachments/_attachment
   download: download

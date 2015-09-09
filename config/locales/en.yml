@@ -129,6 +129,9 @@ en:
 # notification_mailer/new_reply
   new_reply: New reply
   view_new_reply: View new reply
+  good_morning: Good morning
+  good_day: Good day
+  good_evening: Good evening
 
 # attachments/_attachment
   download: download

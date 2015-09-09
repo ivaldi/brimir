@@ -5,6 +5,7 @@
 <div style="font-family: Helvetica; background-color: #F0F0F0">
   <div class="header" style="background-color: #337ab7; color: #ffffff; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 20px; padding: 20px;">
     <%= image_tag Tenant.current_tenant.logo_url, align: 'right' if Tenant.current_tenant.logo_url.present? %>
+    <p><%= @user.greeting %>!</p>
     <p><%= @title %></p>
   </div>
   <ul>
