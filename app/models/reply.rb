@@ -45,17 +45,39 @@ class Reply < ActiveRecord::Base
   }
   
   def content_without_quotes
+    # 1. Remove custom style from email.
+    #
     result = content
       .gsub(/<style.*<\/style>/im, "")
       .gsub(/<head.*<\/head>/im, "")
+    
+    # 2. Detect common ways that lead in email quotes or signatures.
+    #    http://stackoverflow.com/a/2193937/2066546
+    #
+    result = result
       .gsub(/<blockquote.*<\/blockquote>/im, "")
       .gsub(/----.*/m, "")
+      .gsub(/-----Original Message-----.*/im, "")
+      .gsub(/Sent from my iPhone*/im, "")
+      .gsub(/Sent from my BlackBerry*/im, "")
+      .gsub(/________________________________*/im, "")
+      
+    # 3. Detect phrases that are stored in the i18n definitions
+    #    like "On September 09, 2015 08:24, foo@example.com wrote:"
+    #
     I18n.available_locales.each do |locale|
       if (regex = I18n.translate(:on_date_author_wrote_regex, locale: locale)).present?
         # for example: .gsub(/On .*wrote:.*/im, "")
-        result = result.gsub(/#{regex}/im, "")
+        # The [^a-zA-Z0-9] part makes sure, the expression does not start within another word.
+        result = result.gsub(/[^a-zA-Z0-9](#{regex})/im, "")
       end
     end
+    
+    # 4. Remove line breaks from the beginning and the end of the string.
+    #
+    result.gsub!(/(<br \/>\s*)*$/, '')
+    result.gsub!(/^(\s*<br \/>)*/, '')
+    result.strip!
     return result
   end
   

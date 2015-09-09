@@ -99,7 +99,7 @@ de:
   attach_file: Datei anhängen
   send_reply: Anwort senden
   on_date_author_wrote: 'Am %{date} hat %{author} folgendes geschrieben:'
-  on_date_author_wrote_regex: 'Am [0-9].*geschrieben:.*'
+  on_date_author_wrote_regex: 'Am [0-9].*geschrieben:.*|Am [0-9].*schrieb.*:.*|Von:.*\@.*'
   notification_will_be_sent_to: 'Es wird eine Benachrichtung an folgende Adresse gesendet:'
 
 # ticket_mailer/notify_assigned.text.erb

@@ -107,7 +107,7 @@ en:
   attach_file: Attach file
   send_reply: Send reply
   on_date_author_wrote: 'On %{date}, %{author} wrote:'
-  on_date_author_wrote_regex: 'On .*wrote:.*'
+  on_date_author_wrote_regex: 'On .*wrote:.*|From:.*\@.*'
   notification_will_be_sent_to: Your notification will be sent to
   save_as_draft: Save as draft
 
