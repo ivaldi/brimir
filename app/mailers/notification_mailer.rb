@@ -17,6 +17,7 @@
 class NotificationMailer < ActionMailer::Base
 
   add_template_helper HtmlTextHelper
+  add_template_helper AvatarHelper
 
   def new_ticket(ticket, user)
     unless user.locale.blank?
@@ -58,6 +59,30 @@ class NotificationMailer < ActionMailer::Base
     @user = user
 
     mail(to: user.email, subject: title, from: reply.ticket.reply_from_address)
+  end
+  
+  def new_reply_with_conversation(replies, ticket, user)
+    unless user.locale.blank?
+      @locale = user.locale
+    else
+      @locale = Rails.configuration.i18n.default_locale
+    end
+    title = I18n::translate(:new_reply, locale: @locale) + ': ' + replies.last.ticket.subject
+
+    add_attachments(replies.last)
+    add_reference_message_ids(replies.last)
+    add_in_reply_to_message_id(replies.last)
+
+    unless replies.last.message_id.blank?
+      headers['Message-ID'] = "<#{replies.last.message_id}>"
+    end
+
+    @ticket = ticket
+    @replies = replies
+    @user = user
+    @title = title
+
+    mail(to: user.email, subject: title, from: replies.last.ticket.reply_from_address)
   end
 
   def status_changed(ticket)

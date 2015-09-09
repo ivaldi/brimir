@@ -1,0 +1,61 @@
+<style>
+  .reply_body { background-color: white; border: 1px solid #DBDBDB; -webkit-border-radius: 3px; border-radius: 3px; display: block; margin: 6px 0; padding: 10px 12px 0 12px; margin-right: 40px }
+  img.avatar { -webkit-border-radius: 3px; border-radius: 3px; }
+</style>
+<div style="font-family: Helvetica; background-color: #F0F0F0">
+  <div class="header" style="background-color: #337ab7; color: #ffffff; margin-top: 0; margin-left: 0; margin-right: 0; margin-bottom: 20px; padding: 20px;">
+    <%= image_tag Tenant.current_tenant.logo_url, align: 'right' if Tenant.current_tenant.logo_url.present? %>
+    <p><%= @title %></p>
+  </div>
+  <ul>
+    <% @replies.each do |reply| %>
+      <li style="list-style: none; margin-bottom: 20px; margin-top: 20px">
+        <div class="reply">
+          <div style="float: left; margin-right: 10px">
+            <%= user_avatar(reply.user, size: 32) %>
+          </div>
+          <div style="overflow: hidden">
+            <small>
+              <%= @ticket.reply_from_address %>,
+              <%= localize(reply.created_at) %>
+            </small>
+            <div class="reply_body">
+              <p>
+                <% if reply.content_type == 'html' %>
+                  <%= sanitize_html(reply.content_without_quotes) %>
+                <% else %>
+                  <pre><%= reply.content_without_quotes %></pre>
+                <% end %>
+              </p>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    <li style="list-style: none; margin-bottom: 20px; margin-top: 20px">
+      <div class="reply">
+        <div style="float: left; margin-right: 10px">
+          <%= user_avatar(@ticket.user, size: 32) %>
+        </div>
+        <div style="overflow: hidden">
+          <small>
+            <%= @ticket.user.email %>,
+            <%= localize(@ticket.created_at) %>
+          </small>
+          <div class="reply_body">
+            <p>
+              <% if @ticket.content_type == 'html' %>
+                <%= sanitize_html(@ticket.content) %>
+              <% else %>
+                <pre><%= @ticket.content %></pre>
+              <% end %>
+            </p>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div class="footer" style="background-color: white; padding-top: 10px">
+    <small><%= Tenant.current_tenant.reply_email_footer.html_safe %></small>
+  </div>
+</div>

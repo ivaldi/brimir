@@ -43,7 +43,22 @@ class Reply < ActiveRecord::Base
         .where('locked_by_id IN (?) OR locked_at < ?',
             [user.id, nil], Time.zone.now - 5.minutes)
   }
-
+  
+  def content_without_quotes
+    result = content
+      .gsub(/<style.*<\/style>/im, "")
+      .gsub(/<head.*<\/head>/im, "")
+      .gsub(/<blockquote.*<\/blockquote>/im, "")
+      .gsub(/----.*/m, "")
+    I18n.available_locales.each do |locale|
+      if (regex = I18n.translate(:on_date_author_wrote_regex, locale: locale)).present?
+        # for example: .gsub(/On .*wrote:.*/im, "")
+        result = result.gsub(/#{regex}/im, "")
+      end
+    end
+    return result
+  end
+  
   def set_default_notifications!
     users = users_to_notify.select do |user|
       Ability.new(user).can? :show, self
