@@ -20,6 +20,14 @@
     </div>
 
     <div class="medium-6 columns">
+
+      <h5><%= t(:reply_email_settings) %></h5>
+
+      <%= f.check_box :include_conversation_in_replies %>
+      
+      <%= f.text_area :reply_email_footer %>
+      
+      <%= f.text_field :logo_url %>
     </div>
   </div>
   <div class="row">

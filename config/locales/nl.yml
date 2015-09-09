@@ -161,6 +161,7 @@ nl:
 # settings/edit
   change_settings: Wijzig instellingen
   localization_settings: Localizatie instellingen
+  reply_email_settings: Reactie E-mailinstellingen
 
 # controllers/settings
   settings_saved: Instellingen opgeslagen

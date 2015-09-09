@@ -160,6 +160,7 @@ en:
 # settings/edit
   change_settings: Change settings
   localization_settings: Localization settings
+  reply_email_settings: Reply email settings
 
 # controllers/settings
   settings_saved: Settings saved
@@ -279,3 +280,6 @@ en:
         default_locale: Default language
         ignore_user_agent_locale: Ignore preferred browser language
         default_time_zone: Default time zone
+        include_conversation_in_replies: Include conversation in reply emails
+        logo_url: Logo url
+        reply_email_footer: Reply email footer

@@ -144,6 +144,14 @@ de:
   access_control: Zugriff gestatten
   have_access_to_label: 'Der Benutzer darf nur Tickets mit diesen Labels öffnen:'
 
+# settings/edit
+  change_settings: Einstellungen anpassen
+  localization_settings: Sprache und Zeitzone
+  reply_email_settings: Antwort-E-Mail-Einstellungen
+  
+# controllers/settings
+  settings_saved: Einstellungen gespeichert
+
 # controllers/attachments
   file_not_found: Datei nicht gefunden
 
@@ -237,3 +245,11 @@ de:
         email: E-Mail-Adresse
         default: Als Standard-E-Mail-Adresse für ausgehende Nachrichten verwenden
         verification_token: Verifiziert
+
+      tenant:
+        default_locale: Standard-Sprache
+        ignore_user_agent_locale: Sprache des Browsers ignorieren
+        default_time_zone: Standard-Zeitzone
+        include_conversation_in_replies: Konversation in Antwort-E-Mails einbeziehen
+        logo_url: Logo-URL
+        reply_email_footer: Antwort-E-Mail-Fußzeile
