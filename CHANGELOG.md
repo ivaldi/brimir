@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Original email messages are now stored and available from the ticket detail page. This can be helpfull if Brimir fails to show some HTML mails correctly or to resolve possible bugs in Brimir.
 - Farsi/Persian translation contributed by @hadifarnoud.
 - Support for inline email attachments has been added. It will only work for newly received messages.
+- Filter by user from tickets index. Contributed by @fiedl.
 
 ### Changed
 - The outgoing email address of replies will now be the same as the original incoming email addresses when it was configured correctly as an outgoing email address. The agent can choose a different address when replying.
