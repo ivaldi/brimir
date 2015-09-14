@@ -39,7 +39,7 @@ class Rule < ActiveRecord::Base
   def execute(ticket)
     if action_operation == 'assign_label'
       label = Label.where(name: action_value).first_or_create
-      ticket.labels << label
+      ticket.labels << label unless ticket.labels.include?(label)
 
     elsif action_operation == 'notify_user'
       user = User.where(email: action_value).first
