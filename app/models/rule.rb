@@ -30,9 +30,9 @@ class Rule < ActiveRecord::Base
     end
 
     if filter_operation == 'contains'
-      value.include?(filter_value)
+      value.downcase.include?(filter_value.downcase)
     elsif filter_operation == 'equals'
-      value == filter_value
+      value.downcase == filter_value.downcase
     end
   end
 
