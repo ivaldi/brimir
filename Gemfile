@@ -21,6 +21,9 @@ gem 'byebug', group: [:development, :test]
 group :development do
   # Spring application pre-loader
   gem 'spring'
+  
+  # open sent emails in the browser
+  gem 'letter_opener'
 end
 
 group :test do

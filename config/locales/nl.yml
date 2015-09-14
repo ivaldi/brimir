@@ -108,6 +108,7 @@ nl:
   attach_file: Bestand toevoegen
   send_reply: Verstuur reactie
   on_date_author_wrote: 'Op %{date} schreef %{author}:'
+  on_date_author_wrote_regex: 'Op .*schreef.*:.*'
   notification_will_be_sent_to: Een notificatie van je reactie wordt verstuurd naar
   save_as_draft: Als concept opslaan
 
@@ -129,6 +130,9 @@ nl:
 # notification_mailer/new_reply
   new_reply: Nieuwe reactie
   view_new_reply: Nieuwe reactie bekijken
+  good_morning: Goedemorgen
+  good_day: Goedendag
+  good_evening: Goedenavond
 
 # attachments/_attachment
   download: download
@@ -161,6 +165,7 @@ nl:
 # settings/edit
   change_settings: Wijzig instellingen
   localization_settings: Localizatie instellingen
+  reply_email_settings: Reactie E-mailinstellingen
 
 # controllers/settings
   settings_saved: Instellingen opgeslagen

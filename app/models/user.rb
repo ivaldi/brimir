@@ -58,6 +58,16 @@ class User < ActiveRecord::Base
       where('LOWER(email) LIKE ? ESCAPE ?', term, '!')
     end
   }
+  
+  def greeting
+    if Time.zone.now > "4:00".to_time and Time.zone.now < "11:00".to_time
+      I18n.t(:good_morning, locale: locale)
+    elsif Time.zone.now > "11:00".to_time and Time.zone.now < "17:00".to_time
+      I18n.t(:good_day, locale: locale)
+    else
+      I18n.t(:good_evening, locale: locale)
+    end
+  end
 
   def self.agents_to_notify
     User.agents

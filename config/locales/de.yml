@@ -104,6 +104,7 @@ de:
   attach_file: Datei anhängen
   send_reply: Anwort senden
   on_date_author_wrote: 'Am %{date} hat %{author} folgendes geschrieben:'
+  on_date_author_wrote_regex: 'Am [0-9].*geschrieben:.*|Am [0-9].*schrieb.*:.*|Von:.*\@.*'
   notification_will_be_sent_to: 'Es wird eine Benachrichtung an folgende Adresse gesendet:'
 
 # ticket_mailer/notify_assigned.text.erb
@@ -120,6 +121,9 @@ de:
 # notification_mailer/new_reply
   new_reply: Antwort
   view_new_reply: Antwort anzeigen
+  good_morning: Guten Morgen
+  good_day: Guten Tag
+  good_evening: Guten Abend
 
 # attachments/_attachment
   download: Öffnen
@@ -148,6 +152,14 @@ de:
   save: Speichern
   access_control: Zugriff gestatten
   have_access_to_label: 'Der Benutzer darf nur Tickets mit diesen Labels öffnen:'
+
+# settings/edit
+  change_settings: Einstellungen anpassen
+  localization_settings: Sprache und Zeitzone
+  reply_email_settings: Antwort-E-Mail-Einstellungen
+  
+# controllers/settings
+  settings_saved: Einstellungen gespeichert
 
 # controllers/attachments
   file_not_found: Datei nicht gefunden
@@ -242,3 +254,11 @@ de:
         email: E-Mail-Adresse
         default: Als Standard-E-Mail-Adresse für ausgehende Nachrichten verwenden
         verification_token: Verifiziert
+
+      tenant:
+        default_locale: Standard-Sprache
+        ignore_user_agent_locale: Sprache des Browsers ignorieren
+        default_time_zone: Standard-Zeitzone
+        include_conversation_in_replies: Konversation in Antwort-E-Mails einbeziehen
+        logo_url: Logo-URL
+        reply_email_footer: Antwort-E-Mail-Fußzeile
