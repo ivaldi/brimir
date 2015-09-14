@@ -56,7 +56,12 @@ de:
   unassigned: Nicht zugewiesen
   no_tickets_found: Keine Tickets gefunden.
   search: Suche
+  filter: Filter
   minutes: Minuten
+  are_you_sure_empty_trash: Papierkorb wirklich leeren?
+  locked_by_user: 'Das Ticket wird derzeit von %{user} bearbeitet.'
+  ticket_id_created_by_at: '#%{id} erstellt von %{user} am %{at}'
+  
 
 # tickets/show
   add: Neu

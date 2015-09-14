@@ -59,12 +59,13 @@ class TicketsController < ApplicationController
   def index
     @agents = User.agents
 
-    params[:status] ||= 'open'
+    params[:status] ||= 'open' unless params[:user_id]
 
     @tickets = @tickets.by_status(params[:status])
       .search(params[:q])
       .by_label_id(params[:label_id])
       .filter_by_assignee_id(params[:assignee_id])
+      .filter_by_user_id(params[:user_id])
       .ordered
 
     respond_to do |format|

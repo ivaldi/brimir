@@ -56,7 +56,11 @@ class Ticket < ActiveRecord::Base
   }
 
   scope :by_status, ->(status) {
-    where(status: Ticket.statuses[status.to_sym])
+    if status
+      where(status: Ticket.statuses[status.to_sym])
+    else
+      all
+    end
   }
 
   scope :filter_by_assignee_id, ->(assignee_id) {
@@ -66,6 +70,14 @@ class Ticket < ActiveRecord::Base
       else
         where(assignee_id: assignee_id)
       end
+    else
+      all
+    end
+  }
+  
+  scope :filter_by_user_id, ->(user_id) {
+    if user_id
+      where(user_id: user_id)
     else
       all
     end
