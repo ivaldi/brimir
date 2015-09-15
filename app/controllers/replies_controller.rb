@@ -19,11 +19,18 @@ class RepliesController < ApplicationController
   load_and_authorize_resource :reply, except: [:create]
 
   def create
+    if Tenant.current_tenant.share_drafts?
+      user_id = nil
+    else
+      user_id = current_user.id
+    end
+
     # store attributes and reopen ticket
-    @reply = current_user.replies.new({
-        'ticket_attributes' => {
-            'status' => 'open',
-            'id' => reply_params[:ticket_id]
+    @reply = Reply.new({
+        user_id: user_id,
+        ticket_attributes: {
+            status: 'open',
+            id: reply_params[:ticket_id]
           }
         }.merge(reply_params))
 

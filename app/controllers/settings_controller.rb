@@ -38,7 +38,8 @@ class SettingsController < ApplicationController
     params.require(:tenant).permit(
       :default_time_zone,
       :ignore_user_agent_locale,
-      :default_locale
+      :default_locale,
+      :share_drafts
     )
   end
 end

@@ -16,9 +16,9 @@ nl:
   joyride:
     tickets: Via deze knop kan iedereen nieuwe tickets aanmaken.
     personal_settings: Stel je handtekening, tijdzone en andere instellingen in via dit menu.
-    labels: Na het toevoegen van labels aan tickets of agents verschijnen ze hier. Je kunt ze gebruiken om te filteren.
-    rules: Voeg automatisch labels toe, wijs tickets toe aan agents, wijzig de status van een ticket, etcetera.
-    users: Voeg meer agents of normale gebruikers toe.
+    labels: Na het toevoegen van labels aan tickets of medewerkers verschijnen ze hier. Je kunt ze gebruiken om te filteren.
+    rules: Voeg automatisch labels toe, wijs tickets toe aan medewerkers, wijzig de status van een ticket, etcetera.
+    users: Voeg meer medewerkers of normale gebruikers toe.
     final: Bedankt voor het gebruiken van Brimir!
     next: Volgende
     previous: Vorige
@@ -57,6 +57,7 @@ nl:
   unassigned: Niet toegewezen
   no_tickets_found: Geen tickets gevonden.
   search: Zoek
+  filter: Filter
   minutes: minuten
   are_you_sure_empty_trash: Alle tickets uit de prullenbak verwijderen?
   locked_by_user: Ticket momenteel in behandling door %{user}
@@ -161,6 +162,7 @@ nl:
 # settings/edit
   change_settings: Wijzig instellingen
   localization_settings: Localizatie instellingen
+  permissions: Rechten
 
 # controllers/settings
   settings_saved: Instellingen opgeslagen
@@ -276,3 +278,4 @@ nl:
         default_locale: Standaard taal
         ignore_user_agent_locale: Negeer voorkeur taal van browser
         default_time_zone: Standaard tijdzone
+        share_drafts: Deel concepten met andere medewerkers

@@ -17,6 +17,10 @@
       <%= f.check_box :ignore_user_agent_locale %>
 
       <%= f.select :default_locale, @locales %>
+
+      <h5><%= t(:permissions) %></h5>
+
+      <%= f.check_box :share_drafts %>
     </div>
 
     <div class="medium-6 columns">

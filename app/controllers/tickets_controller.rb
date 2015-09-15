@@ -29,7 +29,11 @@ class TicketsController < ApplicationController
   def show
     @agents = User.agents
 
-    draft = @ticket.replies.where(user: current_user).where(draft: true).first
+    draft = @ticket.replies
+        .where('user_id IS NULL OR user_id = ?', current_user.id)
+        .where(draft: true)
+        .first
+
     if draft.present?
       @reply = draft
     else

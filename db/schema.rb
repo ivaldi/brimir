@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150904115735) do
+ActiveRecord::Schema.define(version: 20150915063710) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20150904115735) do
     t.string   "default_time_zone",        default: "Amsterdam"
     t.boolean  "ignore_user_agent_locale", default: false,       null: false
     t.string   "default_locale",           default: "en"
+    t.boolean  "share_drafts",             default: false
   end
 
   create_table "tickets", force: :cascade do |t|

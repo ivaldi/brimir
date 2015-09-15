@@ -29,7 +29,7 @@
         else
           content = "<p></p>#{current_user.signature}<br />"
         end
-        reply_to = @reply.other_replies.order(:id).last
+        reply_to = @reply.other_replies.where.not(draft: true).order(:id).last
 
         if reply_to.nil?
           reply_to = @reply.ticket

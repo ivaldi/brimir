@@ -24,6 +24,7 @@ class Ability
     can :create, Ticket
     can :create, Attachment
     can :update, Reply, user_id: user.id
+    can :update, Reply, user_id: nil
 
     if user.agent?
       if user.labelings.count > 0

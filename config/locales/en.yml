@@ -161,6 +161,7 @@ en:
 # settings/edit
   change_settings: Change settings
   localization_settings: Localization settings
+  permissions: Permissions
 
 # controllers/settings
   settings_saved: Settings saved
@@ -280,3 +281,4 @@ en:
         default_locale: Default language
         ignore_user_agent_locale: Ignore preferred browser language
         default_time_zone: Default time zone
+        share_drafts: Share drafts with other agents
