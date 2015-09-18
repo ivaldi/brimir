@@ -142,6 +142,7 @@ nl:
   omniauth_connect_title: Authenticatie via Google
   omniauth_connect_text: Activeer authenticatie via een Google Account. Daarna kunt u inloggen met uw google account als een alternatief voor e-mailadres en wachtwoord authenticatie.
   omniauth_connect_google_text: Verbind met Google Account
+  remove_user: Gebruiker verwijderen
 
 # users/index
   email: E-mailadres
@@ -173,6 +174,7 @@ nl:
 # controllers/users
   settings_saved: Instellingen opgeslagen
   user_added: Gebruiker toegevoegd
+  user_removed: Gebruiker verwijderd
 
 # controllers/tickets
   ticket_added: Ticket toegevoegd

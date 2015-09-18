@@ -38,9 +38,9 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
 
       if current_user.agent? && current_user.labelings.count == 0
-        redirect_to users_url, notice: I18n::translate(:settings_saved)
+        redirect_to users_url, notice: I18n.translate(:settings_saved)
       else
-        redirect_to tickets_url, notice: I18n::translate(:settings_saved)
+        redirect_to tickets_url, notice: I18n.translate(:settings_saved)
       end
 
     else
@@ -62,11 +62,16 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to users_url, notice: I18n::translate(:user_added)
+      redirect_to users_url, notice: I18n.translate(:user_added)
     else
       render 'new'
     end
+  end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_url, notice: I18n.translate(:user_removed)
   end
 
   protected

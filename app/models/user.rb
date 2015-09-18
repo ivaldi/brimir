@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
+  has_many :assigned_tickets, class_name: 'Ticket',
+      foreign_key: 'assignee_id', dependent: :nullify
 
   # identities for omniauth
   has_many :identities

@@ -32,13 +32,13 @@
             <div class="show-for-small-only">
               <%= render 'inbox_menu' %>
             </div>
-            <% if can? :manage, EmailAddress %>
+            <% if can? :index, EmailAddress %>
               <li class="hide-for-small-only"><a href="<%= email_addresses_path %>"><i class="fa fa-envelope fa-fw"></i></a></li>
             <% end %>
-            <% if can? :manage, Rule %>
+            <% if can? :index, Rule %>
               <li id="joyride-rules" class="hide-for-small-only"><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
             <% end %>
-            <% if can? :manage, User %>
+            <% if can? :index, User %>
               <li id="joyride-users" class="hide-for-small-only"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
             <% end %>
             <% if can? :update, Tenant.current_tenant %>

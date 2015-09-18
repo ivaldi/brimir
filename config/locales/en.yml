@@ -141,6 +141,7 @@ en:
   omniauth_connect_title: Authentication using Google
   omniauth_connect_text: Activate authentication using a Google Account. Afterwards you can use "Sign in with Google" as an alternative to the default email address and password login.
   omniauth_connect_google_text: Connect with Google
+  remove_user: Remove user
 
 # users/index
   email: Email
@@ -172,6 +173,7 @@ en:
 # controllers/users
   settings_saved: Settings saved
   user_added: User added
+  user_removed: Gebruiker removed
 
 # controllers/tickets
   ticket_added: Ticket added

@@ -7,7 +7,7 @@
 
         <p><%= t(:only_fill_in_passwords_when_modifying) %></p>
 
-        <% if can? :manage, User %>
+        <% if can? :create, User %>
             <%= f.text_field :email %>
         <% end %>
 
@@ -15,7 +15,7 @@
 
         <%= f.password_field :password_confirmation %>
 
-        <% if can? :manage, User %>
+        <% if can? :create, User %>
             <%= f.check_box :agent, label: t(:user_is_an_agent) %>
         <% end %>
 

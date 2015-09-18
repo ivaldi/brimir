@@ -85,7 +85,12 @@ class Ability
     end
 
     # agents can edit all users
-    can :manage, User
+    can [:read, :create, :update], User
+    can :destroy, User do |u|
+      u.tickets.count == 0 &&
+          u.replies.count == 0 &&
+          u.id != user.id
+    end
 
     can [:read], Ticket
     # agents can manage all tickets that are locked by themselves or unlocked

@@ -77,7 +77,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test 'should update user' do
-    sign_in @alice    
+    sign_in @alice
 
     assert_difference 'Labeling.count' do
       patch :update, id: @bob.id, user: {
@@ -85,7 +85,7 @@ class UsersControllerTest < ActionController::TestCase
         label_ids: [labels(:bug).id]
       }
     end
-    
+
     @bob.reload
 
     assert_equal 'test@test.test', @bob.email
@@ -106,12 +106,29 @@ class UsersControllerTest < ActionController::TestCase
         password_confirmation: 'testtest',
       }
     end
-    
+
     @bob.reload
 
     refute_equal 'test@test.test', @bob.email
     assert_equal 0, @bob.labels.count
 
     assert_redirected_to tickets_url
+  end
+
+  test 'should remove user' do
+    sign_in @alice
+
+    assert_no_difference 'User.count' do
+      delete :destroy, id: @bob.id
+      assert_response :unauthorized
+    end
+
+    @bob.tickets.destroy_all
+    @bob.replies.destroy_all
+
+    assert_difference 'User.count', -1 do
+      delete :destroy, id: @bob.id
+      assert_redirected_to users_url
+    end
   end
 end

@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     @locales = []
 
     Dir.open("#{Rails.root}/config/locales").each do |file|
-      unless ['.', '..'].include?(file)
+      unless ['.', '..'].include?(file) || file[0] == '.'
         code = file[0...-4] # strip of .yml
         @locales << [I18n.translate(:language_name, locale: code), code]
       end

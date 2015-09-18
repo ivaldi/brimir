@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Support for inline email attachments has been added. It will only work for newly received messages.
 - Filter by user from tickets index. Contributed by @fiedl.
 - It is now possible to save drafts. They can be shared with other agents using a global configuration option.
+- Users without tickets and replies can now be removed.
 
 ### Changed
 - The outgoing email address of replies will now be the same as the original incoming email addresses when it was configured correctly as an outgoing email address. The agent can choose a different address when replying.
