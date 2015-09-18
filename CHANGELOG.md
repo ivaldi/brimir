@@ -4,6 +4,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Brimir unreleased.unreleased.unreleased (to be announced)
 ### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## Brimir 0.6.0 (2015-09-18)
+### Added
 - Russian translation was improved by @mpakus.
 - Google Account single-sign on support was contributed by @FloHin.
 - LDAP authentication was contributed by @alisnic.
@@ -46,3 +54,5 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - The content of inline HTML style tags is now correctly removed as well.
 - Adding of labels to tickets updates the interface correctly again, this was broken since the redesign.
 - HTML entities are now correctly escaped and unescaped in ticket and reply content.
+
+### Security
