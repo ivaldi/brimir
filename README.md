@@ -100,6 +100,11 @@ Some users have made requests for the following features. If you would like to c
 - Mark tickets as duplicate, linking it to the duplicated ticket.
 - Ability to rename tickets (change their subject).
 - Ability to rename labels.
+- Improve rule form to allow only valid statuses (#150).
+- A better WYSIWYG editor, for example QuilJS (#172).
+- Timed rules, such as re-assigning when no reply is added withing 24 hours (#203).
+- Desktop notifications using web notifications (#218).
+- Auto page refresh on ticket index (#218).
 
 License
 -------
