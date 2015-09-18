@@ -102,7 +102,10 @@
         </div>
         <div class="medium-3 v-middle columns">
           <p class="no-mb text-right">
-            <span class="block"><%= l ticket.updated_at.in_time_zone(current_user.time_zone), format: :short %></span>
+            <span class="block" title="<%= l ticket.updated_at.in_time_zone(current_user.time_zone), format: :long %>">
+              <%= time_ago_in_words(ticket.updated_at.in_time_zone(current_user.time_zone)) %>
+              <%= t(:ago) %>
+            </span>
             <% if can? :update, ticket %>
               <% if ticket.assignee %>
                 <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>
