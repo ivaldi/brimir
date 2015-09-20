@@ -27,7 +27,8 @@ Run the following command to install gems if you want **MySQL support**:
 
 Generate a secret\_key\_base in the secrets.yml file:
 
-    sed -i "s/<%= ENV\[\"SECRET_KEY_BASE\"\] %>/`bin/rake secret`/g" config/secrets.yml
+    LINUX: sed -i "s/<%= ENV\[\"SECRET_KEY_BASE\"\] %>/`bin/rake secret`/g" config/secrets.yml
+    MAC: sed -i "" "s/<%= ENV\[\"SECRET_KEY_BASE\"\] %>/`bin/rake secret`/g" config/secrets.yml
 
 Next, load the database schema and precompile assets:
 
