@@ -197,6 +197,32 @@ de:
 # controllers/email_addresses
   email_address_added: E-Mail-Adresse wurde hinzugefügt
 
+  are_you_sure_empty_trash: Sollen wirklich alle Tickets gelöscht werden?
+  locked_by_user: Das Ticket wird derzeit von %{user} bearbeitet.
+  ticket_id_created_by_at: '#%{id} erstellt von %{user} am %{at}'
+  to_email: to %{email}
+  take_ticket_lock_from_user: Bearbeitung des Ticktes von %{user} übernehmen
+  ticket_locked_by_somebody_else: Das Ticket wird zur Zeit schon durch einen anderen Agenten bearbeitet
+  save_as_draft: Als Entwurf speichern
+  reply_by: Antwort durch
+  ticket_status_modified: Ticket Status wurde geändert
+  change_settings: Einstellungen ändern
+  localization_settings: Spracheinstellungen
+  trash_emptied: Alle Tickets wurden aus dem Papierborb gelöscht
+  draft_saved: Entwurf gespeichert
+  modify_email_address: Versand-Email-Adresse ändern
+  email_address_modified: Email Addresse wurde geändert
+  email_address_removed: Email Addresse wurde entfernt
+  prefer_plain_text: Plain Text Modus aktivieren (keine HTML Formatierung)
+  created_at: Erstellt am
+  to: Gesendet an
+  from: Gesendet von
+  equals: ist identisch zu
+  name: Name
+  default_locale: Standardsprache
+  ignore_user_agent_locale: Die bevorzugte Sprache der Browsers ignorieren
+  default_time_zone: Standard-Zeitzone
+
   activerecord:
     attributes:
       user:
