@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Brimir unreleased.unreleased.unreleased (to be announced)
 ### Added
+- Settings to require authenticated users or certain ip addresses for ticket creation.
 ### Changed
 ### Deprecated
 ### Removed

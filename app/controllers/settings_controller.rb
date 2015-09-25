@@ -39,7 +39,9 @@ class SettingsController < ApplicationController
       :default_time_zone,
       :ignore_user_agent_locale,
       :default_locale,
-      :share_drafts
+      :share_drafts,
+      :require_authenticated,
+      :require_authenticated_ip_whitelist,
     )
   end
 end

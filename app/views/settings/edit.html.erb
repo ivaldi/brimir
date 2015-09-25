@@ -20,6 +20,10 @@
 
       <h5><%= t(:permissions) %></h5>
 
+      <%= f.check_box :require_authenticated %>
+
+      <%= f.text_field :require_authenticated_ip_whitelist %>
+
       <%= f.check_box :share_drafts %>
     </div>
 

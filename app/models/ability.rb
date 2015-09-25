@@ -21,10 +21,12 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
 
-    can :create, Ticket
-    can :create, Attachment
-    can :update, Reply, user_id: user.id
-    can :update, Reply, user_id: nil
+    if ticket_creation_allowed?(user)
+      can :create, Ticket
+      can :create, Attachment
+      can :update, Reply, user_id: user.id
+      can :update, Reply, user_id: nil
+    end
 
     if user.agent?
       if user.labelings.count > 0
@@ -41,7 +43,7 @@ class Ability
 
   def customer(user)
     # customers can view their own tickets, its replies and attachments
-    can [:create, :read], Reply, ticket: { user_id: user.id }    
+    can [:create, :read], Reply, ticket: { user_id: user.id }
 
     # customers can edit their own account
     can :update, User, id: user.id
@@ -112,5 +114,13 @@ class Ability
     can :manage, Label
 
     can :update, Tenant, id: Tenant.current_tenant.id
+  end
+
+  def ticket_creation_allowed?(user)
+    return true unless user.new_record?
+
+    return true unless Tenant.current_tenant.require_authenticated?
+
+    false
   end
 end
