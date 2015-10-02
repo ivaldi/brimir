@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir 0.6.1 (2015-10-02)
 ### Changed
 - A number of missing German translations were contributed by Alexander Jackson.
+- CC and BCC addresses are now recognized as incoming address as well.
 ### Fixed
 - Prevented errors when using draft sharing.
 

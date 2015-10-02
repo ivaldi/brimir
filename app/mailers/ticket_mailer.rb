@@ -101,7 +101,8 @@ class TicketMailer < ActionMailer::Base
 
     else
 
-      to_email_address = EmailAddress.find_first_verified_email(email.to)
+      to_email_address = EmailAddress.find_first_verified_email(
+          email.to.to_a + email.cc.to_a + email.bcc.to_a)
 
       # add new ticket
       ticket = Ticket.create({
