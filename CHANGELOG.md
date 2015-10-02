@@ -10,6 +10,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 ### Security
 
+## Brimir 0.6.1 (2015-10-02)
+### Changed
+- A number of missing German translations were contributed by Alexander Jackson.
+### Fixed
+- Prevented errors when using draft sharing.
+
 ## Brimir 0.6.0 (2015-09-18)
 ### Added
 - Russian translation was improved by @mpakus.
