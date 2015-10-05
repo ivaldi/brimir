@@ -125,9 +125,9 @@ class TicketsController < ApplicationController
   def new
     unless current_user.blank?
       if current_user.prefer_plain_text?
-        signature = { content: "\n#{html_to_text current_user.signature}" }
+        #signature = { content: "\n#{html_to_text current_user.signature}" }
       else
-        signature = { content: "<p></p>#{current_user.signature}" }
+        #signature = { content: "<p></p>#{current_user.signature}" }
       end
     else
       signature = {}

@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased.unreleased.unreleased (to be announced)
 ### Added
 ### Changed
+- Lines of plain text tickets or replies are now wrapped at 72 characters.
 ### Deprecated
 ### Removed
 ### Fixed

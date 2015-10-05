@@ -26,7 +26,7 @@
         <% if reply.content_type == 'html' %>
           <%= sanitize_html(reply.content, reply.inline_files) %>
         <% else %>
-          <pre><%= reply.content %></pre>
+          <pre><%= word_wrap(reply.content, line_width: 72) %></pre>
         <% end %>
 
 
