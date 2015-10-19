@@ -108,6 +108,7 @@ Some users have made requests for the following features. If you would like to c
 - Auto page refresh on ticket index (#218).
 - Custom ticket statuses, all via database. (#217)
 - Filter on to/cc/bcc without verified addresses. (#227)
+- Add captcha for non-signed in ticket creation. (#228)
 
 License
 -------
