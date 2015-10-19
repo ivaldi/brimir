@@ -106,7 +106,8 @@ Some users have made requests for the following features. If you would like to c
 - Timed rules, such as re-assigning when no reply is added withing 24 hours (#203).
 - Desktop notifications using web notifications (#218).
 - Auto page refresh on ticket index (#218).
-- Custom ticket statuses, all via database, (#217)
+- Custom ticket statuses, all via database. (#217)
+- Filter on to/cc/bcc without verified addresses. (#227)
 
 License
 -------
