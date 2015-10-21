@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Deprecated
 ### Removed
 ### Fixed
+- French translation was imprroved by @sapk.
 ### Security
 
 ## Brimir 0.6.1 (2015-10-02)

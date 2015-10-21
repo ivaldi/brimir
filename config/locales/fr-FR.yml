@@ -1,4 +1,4 @@
-# author: https://github.com/social-org
+# author: https://github.com/social-org and https://github.com/sapk
 fr-FR:
   language_name: Française
 # layouts/application
@@ -12,6 +12,17 @@ fr-FR:
   personal_settings: Règlages personnel
   sign_out: Se déconnecter
   delete: Supprimer
+
+  joyride:
+    tickets: Tous le monde peut créer des tickets avec ce bouton.
+    personal_settings: Definissez votre signature, fuseau horaire et autres préférences à partir de ce menu.
+    labels: Après modification des étiquettes des tickets ou des utilisateurs, ils apparaîtront ici. Vous pourrez ensuite les utiliser comme filtre.
+    rules: Ajouter automatiquement des étiquettes, responsables, changer de status et autres.
+    users: Ajouter d'autres agents utilisateurs.
+    final: Merci d'utiliser Brimir!
+    next: Suivant
+    previous: Précédent
+    end: Allons-y !
 
 # devise/sessions/new
   sign_in: S'authentifier au Brimir
@@ -46,11 +57,18 @@ fr-FR:
   unassigned: Non affecté
   no_tickets_found: Aucun billet trouvé.
   search: Recherche
+  filter: Filtre
   minutes: minutes
+  are_you_sure_empty_trash: Supprimer tous les tickets dans la corbeille?
+  locked_by_user: Ticket actuellement géré par %{user}
+  ticket_id_created_by_at: '#%{id} créé par %{user} à %{at}'
 
 # tickets/show
+  add: Ajouter
   ticket_by_at: Par %{email} a %{at}
+  to_email: pour %{email}
   no_content: Aucun contenu
+  ticket_id: Numéro de ticket
   status: Statut
   assignee: Attribué
   num_replies:
@@ -64,6 +82,9 @@ fr-FR:
   labels: Étiquettes
   label_name: Nom étiquette
   notification_sent_to: 'Une notification a été envoyé aux addresses suivantes:'
+  no_notifications_sent: 'Aucune notification a été envoyé'
+  assign_label: Attribuer l'étiquette
+  take_ticket_lock_from_user: Prendre la gestion du ticket à %{user}
 
 # tickets/_change_priority_form
   change: Changer
@@ -76,15 +97,23 @@ fr-FR:
   change_assignee: Attribuer un billet
   assign: Attribuer
 
+# tickets/locks/create
+  ticket_locked_by_somebody_else: Ce ticket est actuellement déjà traitée par quelqu'un d'autre
+
 # replies/new
   add_reply: Ajouter une réponse
 
 # replies/_form
   reply: Répondre
   attach_files: Attacher fichier(s)
+  attach_file: Attacher fichier
   send_reply: Envoyer réponse
   on_date_author_wrote: 'Le %{date}, %{author} a écrit:'
   notification_will_be_sent_to: Votre notification sera envoyé a
+  save_as_draft: Enregistrer comme brouillon
+
+# replies/_reply
+  reply_by: Répondre par
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Un billet de support vous a été attribué
@@ -94,6 +123,7 @@ fr-FR:
 
 # ticket_mailer/notify_status_changed.text.erb
   ticket_status_modified: Statut modifié pour le billet
+  tickets_status_modified: Statut modifié pour les billets
 
 # notification_mailer/new_ticket
   view_new_ticket: Voir le nouveau billet
@@ -109,6 +139,10 @@ fr-FR:
 
 # users/edit
   edit_user: Modifier l'utilisateur
+  omniauth_connect_title: Authentification en utilisant Google
+  omniauth_connect_text: Activer l'authentification en utilisant un compte Google. Ensuite, vous pouvez utiliser "Connectez-vous avec Google" comme une alternative à l'adresse e-mail et mot de passe de connexion.
+  omniauth_connect_google_text: Connectez-vous avec votre compte Google
+  remove_user: Supprimer l'utilisateur
 
 # users/index
   email: Courriel
@@ -126,19 +160,42 @@ fr-FR:
   access_control: Contrôle d'accés
   have_access_to_label: L'utilisateur a accés à tous les billets avec l'une de ces étiquettes.
 
+# settings/edit
+  change_settings: Modifier les paramètres
+  localization_settings: Paramètres de localisation
+  permissions: Autorisations
+
+# controllers/settings
+  settings_saved: Paramètres sauvegardés
+
 # controllers/attachments
   file_not_found: Fichier introuvable
 
 # controllers/users
   settings_saved: Paramètres enregistés
   user_added: Utilisateur ajouté
+  user_removed: Utilisateur supprimé
 
 # controllers/tickets
   ticket_added: Billet ajouté
   ticket_updated: Billet mise à jour
 
+# controllers/tickets/deleted
+  trash_emptied: Tous les billets ont été supprimés de la corbeille
+
 # controllers/replies
   reply_added: Réponse ajouté
+  draft_saved: Brouillon sauvegardé
+
+# controllers/omniauth
+  already_linked_accounts: Déjà lié à compte Google
+  successfully_linked_account: Réussite de la liaison au compte Google
+  not_linked_account_cant_login: Il n'y a pas encore utilisateur attaché à ce fournisseur. S'il vous plaît connectez-vous une première fois et lier se compte via l'écran des paramètres personnels.
+  third_party_failure: Une erreur est survenue lors de l'authentification. Avez-vous activé "Contacts API" et "Google+ API" via la console Google API?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Authentification alternative
+  omniauth_sign_in_google: Google
 
 # rules/index
   new_rule: Nouvelle règle
@@ -153,7 +210,22 @@ fr-FR:
   rule_modified: Règle modifiée
   rule_deleted: Règle supprimée
 
+# email_addresses/index
+  new_email_address: Nouvelle adresse de courrier sortant
+  email_addresses: Les adresses email de courrier sortant
 
+# email_addresses/edit
+  modify_email_address: Modifier l'adresse du courrier électronique sortant
+
+# email_addresses/new
+  verification_mail_will_be_sent: Assurez-vous que cette adresse e-mail est transmise correctement à Brimir. Un email automatique de vérification sera envoyé lorsque vous cliquerez sur Enregistrer. Seules les adresses électroniques vérifiées peuvent être utilisées pour le courrier sortant.
+  mark_spam_spf: L'email de Brimir pourraient être identifié comme spam si vous n'ajouter pas ce serveur à l'entrée SPF des DNS pour l'adresse mail ci-dessus.
+
+# controllers/email_addresses
+  email_address_modified: Addresse email modifiée
+  email_address_added: Addresse email ajoutée
+  email_address_removed: Addresse email supprimée
+  
   activerecord:
     attributes:
       user:
@@ -163,7 +235,10 @@ fr-FR:
         signature: Signature de courriel
         remember_me: Maintenir la connexion
         label_ids: Étiquettes
+        locale: Langue
         time_zone: Fuseau horaire
+        per_page: Tickets par page
+        prefer_plain_text: Envoyer et recevoir les réponse au format texte
 
       ticket:
         from: De l'adresse courriel
@@ -177,12 +252,18 @@ fr-FR:
           waiting: En attente
         priority: Priorité
         assignee_id: Attribué
+        created_at: Crée à
+        to: Adresse email destinatiaire
+        
+      reply:
+        from: Adresse email source
 
       rule:
         filter_field: Champ
         filter_operation: Opérateur
         filter_operations:
           contains: contient
+          equals: est égal à
         filter_value: Valeur
         action_operation: Action à effectuer
         action_operations:
@@ -190,4 +271,17 @@ fr-FR:
           notify_user: envoyer une notification a
           change_status: changer le statut a
           change_priority: changer la priorité a
+          assign_user: attribué à
         action_value: Paramètres de l’action
+
+      email_address:
+        email: Adresse email
+        name: Nom
+        default: Utiliser comme adresse de courrier sortant par défaut
+        verification_token: Validé
+
+      tenant:
+        default_locale: Langage par défaut
+        ignore_user_agent_locale: Ignorer la langue préférée du navigateur
+        default_time_zone: Fuseau horaire par défaut
+        share_drafts: Partager les brouillons avec les autres agents
