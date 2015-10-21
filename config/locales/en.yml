@@ -173,7 +173,7 @@ en:
 # controllers/users
   settings_saved: Settings saved
   user_added: User added
-  user_removed: Gebruiker removed
+  user_removed: User removed
 
 # controllers/tickets
   ticket_added: Ticket added
