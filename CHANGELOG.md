@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 ### Changed
 - Lines of plain text tickets or replies are now wrapped at 72 characters.
+- The rule action to notify users now creates users if they don't exist yet.
 ### Deprecated
 ### Removed
 ### Fixed
