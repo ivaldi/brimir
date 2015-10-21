@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   has_many :identities
 
   after_initialize :default_localization
+  before_validation :generate_password
 
   # All ldap users are agents by default, remove/comment this method if this
   # is not the intended behavior.
@@ -69,5 +70,11 @@ class User < ActiveRecord::Base
   def default_localization
     self.time_zone = Tenant.current_tenant.default_time_zone if time_zone.blank?
     self.locale = Tenant.current_tenant.default_locale if locale.blank?
+  end
+
+  def generate_password
+    if encrypted_password.blank?
+      self.password = Devise.friendly_token.first(12)
+    end
   end
 end

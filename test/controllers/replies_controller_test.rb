@@ -27,23 +27,21 @@ class RepliesControllerTest < ActionController::TestCase
   end
 
   test 'reply should always contain text' do
-
     # no emails should be send when invalid reply
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      assert_no_difference 'Reply.count' do
 
-      user = users(:alice)
-      user.signature = nil
-      user.save
+        user = users(:alice)
+        user.signature = nil
+        user.save
 
-      post :create, reply: {
-          content: '',
-          ticket_id: @ticket.id,
-          notified_user_ids: @reply.users_to_notify.map { |u| u.id },
-      }
+        post :create, reply: {
+            content: '',
+            ticket_id: @ticket.id,
+            notified_user_ids: @reply.users_to_notify.map { |u| u.id },
+        }
+      end
     end
-
-    refute_equal 0, assigns(:reply).errors.size
-
   end
 
   test 'should send correct reply notification mail' do

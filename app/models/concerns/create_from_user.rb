@@ -27,13 +27,10 @@ module CreateFromUser
         # search using the same method as Devise validation
         from_user = User.find_first_by_auth_conditions(email: email)
 
-        if !from_user
-          password_length = 12
-          password = Devise.friendly_token.first(password_length)
-          from_user = User.create(email: email, password: password,
-              password_confirmation: password)
+        unless from_user
+          from_user = User.where(email: email).first_or_create
 
-          if !from_user
+          unless from_user
             errors.add(:from, :invalid)
           end
         end
