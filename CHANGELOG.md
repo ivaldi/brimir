@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Lines of plain text tickets or replies are now wrapped at 72 characters.
 - The rule action to notify users now creates users if they don't exist yet.
+
 ### Fixed
 - French translation was improved by @sapk.
 
@@ -21,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - A number of missing German translations were contributed by Alexander Jackson.
 - CC and BCC addresses are now recognized as incoming address as well.
+
 ### Fixed
 - Prevented errors when using draft sharing.
 
