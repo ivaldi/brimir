@@ -5,13 +5,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased.unreleased.unreleased (to be announced)
 ### Added
 ### Changed
-- Lines of plain text tickets or replies are now wrapped at 72 characters.
-- The rule action to notify users now creates users if they don't exist yet.
 ### Deprecated
 ### Removed
 ### Fixed
-- French translation was imprroved by @sapk.
 ### Security
+
+## Brimir 0.6.2 (2015-10-23)
+### Changed
+- Lines of plain text tickets or replies are now wrapped at 72 characters.
+- The rule action to notify users now creates users if they don't exist yet.
+### Fixed
+- French translation was improved by @sapk.
 
 ## Brimir 0.6.1 (2015-10-02)
 ### Changed
