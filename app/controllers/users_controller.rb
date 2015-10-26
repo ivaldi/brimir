@@ -18,8 +18,6 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource :user
 
-  before_filter :load_locales, except: :index
-
   def edit
     @user = User.find(params[:id])
   end
@@ -39,10 +37,10 @@ class UsersController < ApplicationController
 
     if @user.update_attributes(user_params)
 
-      if current_user.agent?
-        redirect_to users_url, notice: I18n::translate(:settings_saved)
+      if current_user.agent? && current_user.labelings.count == 0
+        redirect_to users_url, notice: I18n.translate(:settings_saved)
       else
-        redirect_to tickets_url, notice: I18n::translate(:settings_saved)
+        redirect_to tickets_url, notice: I18n.translate(:settings_saved)
       end
 
     else
@@ -52,6 +50,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.ordered.paginate(page: params[:page])
+    @users = @users.search(params[:q])
+    @users = @users.by_agent(params[:agent] == '1') unless params[:agent].blank?
   end
 
   def new
@@ -62,49 +62,43 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      redirect_to users_url, notice: I18n::translate(:user_added)
+      redirect_to users_url, notice: I18n.translate(:user_added)
     else
       render 'new'
     end
-
   end
 
-  private
-    def load_locales
-      @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
-      @locales = []
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_url, notice: I18n.translate(:user_removed)
+  end
 
-      Dir.open("#{Rails.root}/config/locales").each do |file|
-        unless ['.', '..'].include?(file)
-          code = file[0...-4] # strip of .yml
-          @locales << [I18n.translate(:language_name, locale: code), code]
-        end
-      end
+  protected
+
+  def user_params
+    attributes = params.require(:user).permit(
+        :email,
+        :password,
+        :password_confirmation,
+        :remember_me,
+        :signature,
+        :agent,
+        :notify,
+        :time_zone,
+        :locale,
+        :per_page,
+        :prefer_plain_text,
+        label_ids: []
+    )
+
+    # prevent normal user and limited agent from changing email and role
+    if !current_user.agent? || current_user.labelings.count > 0
+      attributes.delete(:email)
+      attributes.delete(:agent)
+      attributes.delete(:label_ids)
     end
 
-    def user_params
-      attributes = params.require(:user).permit(
-          :email,
-          :password,
-          :password_confirmation,
-          :remember_me,
-          :signature,
-          :agent,
-          :notify,
-          :time_zone,
-          :locale,
-          :per_page,
-          label_ids: []
-      )
-
-      # prevent normal user and limited agent from changing email and role
-      if !current_user.agent? || current_user.labelings.count > 0
-        attributes.delete(:email)
-        attributes.delete(:agent)
-        attributes.delete(:label_ids)
-      end
-
-      return attributes
-    end
-
+    return attributes
+  end
 end

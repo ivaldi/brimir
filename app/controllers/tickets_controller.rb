@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketsController < ApplicationController
+  include HtmlTextHelper
+  include ActionView::Helpers::SanitizeHelper # dependency of HtmlTextHelper
 
   before_filter :authenticate_user!, except: [:create, :new]
   load_and_authorize_resource :ticket, except: :create
@@ -27,23 +29,47 @@ class TicketsController < ApplicationController
   def show
     @agents = User.agents
 
-    @reply = @ticket.replies.new(user: current_user)
-    @reply.set_default_notifications!
+    draft = @ticket.replies
+        .where('user_id IS NULL OR user_id = ?', current_user.id)
+        .where(draft: true)
+        .first
+
+    if draft.present?
+      @reply = draft
+    else
+      @reply = @ticket.replies.new(user: current_user)
+      @reply.set_default_notifications!
+    end
 
     @labeling = Labeling.new(labelable: @ticket)
 
     @outgoing_addresses = EmailAddress.verified.ordered
+
+    respond_to do |format|
+      format.html
+      format.eml do
+        begin
+          send_file @ticket.raw_message.path(:original),
+              filename: "ticket-#{@ticket.id}.eml",
+              type: 'text/plain',
+              disposition: :attachment
+        rescue
+          raise ActiveRecord::RecordNotFound
+        end
+      end
+    end
   end
 
   def index
     @agents = User.agents
 
-    params[:status] ||= 'open'
+    params[:status] ||= 'open' unless params[:user_id]
 
     @tickets = @tickets.by_status(params[:status])
       .search(params[:q])
       .by_label_id(params[:label_id])
       .filter_by_assignee_id(params[:assignee_id])
+      .filter_by_user_id(params[:user_id])
       .ordered
 
     respond_to do |format|
@@ -98,7 +124,11 @@ class TicketsController < ApplicationController
 
   def new
     unless current_user.blank?
-      signature = { content: '<p></p>' + current_user.signature.to_s }
+      if current_user.prefer_plain_text?
+        #signature = { content: "\n#{html_to_text current_user.signature}" }
+      else
+        #signature = { content: "<p></p>#{current_user.signature}" }
+      end
     else
       signature = {}
     end
@@ -192,6 +222,7 @@ class TicketsController < ApplicationController
             :assignee_id,
             :priority,
             :message_id,
+            :content_type,
             attachments_attributes: [
               :file
             ])
@@ -201,6 +232,7 @@ class TicketsController < ApplicationController
             :content,
             :subject,
             :priority,
+            :content_type,
             attachments_attributes: [
               :file
             ])

@@ -16,6 +16,7 @@
 
 class Ticket < ActiveRecord::Base
   include CreateFromUser
+  include EmailMessage
 
   validates_presence_of :user_id
 
@@ -23,9 +24,6 @@ class Ticket < ActiveRecord::Base
   belongs_to :assignee, class_name: 'User'
   belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress'
   belongs_to :locked_by, class_name: 'User'
-
-  has_many :attachments, as: :attachable, dependent: :destroy
-  accepts_nested_attributes_for :attachments, allow_destroy: true
 
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
@@ -58,7 +56,11 @@ class Ticket < ActiveRecord::Base
   }
 
   scope :by_status, ->(status) {
-    where(status: Ticket.statuses[status.to_sym])
+    if status
+      where(status: Ticket.statuses[status.to_sym])
+    else
+      all
+    end
   }
 
   scope :filter_by_assignee_id, ->(assignee_id) {
@@ -68,6 +70,14 @@ class Ticket < ActiveRecord::Base
       else
         where(assignee_id: assignee_id)
       end
+    else
+      all
+    end
+  }
+  
+  scope :filter_by_user_id, ->(user_id) {
+    if user_id
+      where(user_id: user_id)
     else
       all
     end
@@ -83,7 +93,7 @@ class Ticket < ActiveRecord::Base
   }
 
   scope :ordered, -> {
-    order(:created_at).reverse_order
+    order(:updated_at).reverse_order
   }
 
   scope :viewable_by, ->(user) {
@@ -101,7 +111,10 @@ class Ticket < ActiveRecord::Base
   }
 
   def set_default_notifications!
-    self.notified_user_ids = User.agents_to_notify.pluck(:id)
+    users = User.agents_to_notify.select do |user|
+      Ability.new(user).can? :show, self
+    end
+    self.notified_user_ids = users.map(&:id)
   end
 
   def status_times

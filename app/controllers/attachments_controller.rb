@@ -39,8 +39,8 @@ class AttachmentsController < ApplicationController
             type: @attachment.file_content_type,
             disposition: :attachment
       end
-    rescue ActionController::MissingFile
-      render text: I18n::translate(:file_not_found), status: :not_found
+    rescue
+      raise ActiveRecord::RecordNotFound
     end
   end
 end

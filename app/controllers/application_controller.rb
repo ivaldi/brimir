@@ -43,26 +43,25 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
+    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
+    @locales = []
+
+    Dir.open("#{Rails.root}/config/locales").each do |file|
+      unless ['.', '..'].include?(file) || file[0] == '.'
+        code = file[0...-4] # strip of .yml
+        @locales << [I18n.translate(:language_name, locale: code), code]
+      end
+    end
+
     if user_signed_in? && !current_user.locale.blank?
       I18n.locale = current_user.locale
     else
-      locales = []
+      locale = http_accept_language.compatible_language_from(@locales)
 
-      Dir.open("#{Rails.root}/config/locales").each do |file|
-        unless ['.', '..'].include?(file)
-          # strip of .yml
-          locales << file[0...-4]
-        end
-      end
-
-      if AppSettings.ignore_user_agent_locale
-        I18n.locale = I18n.default_locale
+      if Tenant.current_tenant.ignore_user_agent_locale? || locale.blank?
+        I18n.locale = Tenant.current_tenant.default_locale
       else
-        I18n.locale = http_accept_language.compatible_language_from(locales)
-      end
-      if user_signed_in?
-        current_user.locale = I18n.locale
-        current_user.save
+        I18n.locale = locale
       end
     end
   end

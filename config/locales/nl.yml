@@ -16,9 +16,9 @@ nl:
   joyride:
     tickets: Via deze knop kan iedereen nieuwe tickets aanmaken.
     personal_settings: Stel je handtekening, tijdzone en andere instellingen in via dit menu.
-    labels: Na het toevoegen van labels aan tickets of agents verschijnen ze hier. Je kunt ze gebruiken om te filteren.
-    rules: Voeg automatisch labels toe, wijs tickets toe aan agents, wijzig de status van een ticket, etcetera.
-    users: Voeg meer agents of normale gebruikers toe.
+    labels: Na het toevoegen van labels aan tickets of medewerkers verschijnen ze hier. Je kunt ze gebruiken om te filteren.
+    rules: Voeg automatisch labels toe, wijs tickets toe aan medewerkers, wijzig de status van een ticket, etcetera.
+    users: Voeg meer medewerkers of normale gebruikers toe.
     final: Bedankt voor het gebruiken van Brimir!
     next: Volgende
     previous: Vorige
@@ -57,13 +57,16 @@ nl:
   unassigned: Niet toegewezen
   no_tickets_found: Geen tickets gevonden.
   search: Zoek
+  filter: Filter
   minutes: minuten
   are_you_sure_empty_trash: Alle tickets uit de prullenbak verwijderen?
   locked_by_user: Ticket momenteel in behandling door %{user}
+  ticket_id_created_by_at: '#%{id} gemaakt door %{user} op %{at}'
 
 # tickets/show
   add: Toevoegen
   ticket_by_at: Door %{email} op %{at}
+  to_email: to %{email}
   no_content: Geen inhoud
   ticket_id: Ticketnummer
   status: Status
@@ -107,6 +110,7 @@ nl:
   send_reply: Verstuur reactie
   on_date_author_wrote: 'Op %{date} schreef %{author}:'
   notification_will_be_sent_to: Een notificatie van je reactie wordt verstuurd naar
+  save_as_draft: Als concept opslaan
 
 # replies/_reply
   reply_by: Reactie door
@@ -138,6 +142,7 @@ nl:
   omniauth_connect_title: Authenticatie via Google
   omniauth_connect_text: Activeer authenticatie via een Google Account. Daarna kunt u inloggen met uw google account als een alternatief voor e-mailadres en wachtwoord authenticatie.
   omniauth_connect_google_text: Verbind met Google Account
+  remove_user: Gebruiker verwijderen
 
 # users/index
   email: E-mailadres
@@ -155,12 +160,21 @@ nl:
   access_control: Toegangscontrole
   have_access_to_label: Gebruiker heeft toegang tot alle tickets met één van deze labels.
 
+# settings/edit
+  change_settings: Wijzig instellingen
+  localization_settings: Localizatie instellingen
+  permissions: Rechten
+
+# controllers/settings
+  settings_saved: Instellingen opgeslagen
+
 # controllers/attachments
   file_not_found: Bestand niet gevonden
 
 # controllers/users
   settings_saved: Instellingen opgeslagen
   user_added: Gebruiker toegevoegd
+  user_removed: Gebruiker verwijderd
 
 # controllers/tickets
   ticket_added: Ticket toegevoegd
@@ -171,6 +185,7 @@ nl:
 
 # controllers/replies
   reply_added: Reactie toegevoegd
+  draft_saved: Concept opgeslagen
 
 # controllers/omniauth
   already_linked_accounts: Al met een Google Account verbonden
@@ -219,6 +234,7 @@ nl:
         locale: Taal
         time_zone: Tijdzone
         per_page: Tickets per pagina
+        prefer_plain_text: Verstuur en ontvang platte tekst reacties
 
       ticket:
         from: Van e-mailadres
@@ -244,6 +260,7 @@ nl:
         filter_value: Waarde
         filter_operations:
           contains: bevat
+          equals: is gelijk aan
         action_operation: Uit te voeren actie
         action_operations:
           assign_label: voeg label toe
@@ -258,3 +275,9 @@ nl:
         name: Naam
         default: Gebruik als standaard uitgaand e-mailadres
         verification_token: Geverifieerd
+
+      tenant:
+        default_locale: Standaard taal
+        ignore_user_agent_locale: Negeer voorkeur taal van browser
+        default_time_zone: Standaard tijdzone
+        share_drafts: Deel concepten met andere medewerkers

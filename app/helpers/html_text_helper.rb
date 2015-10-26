@@ -17,32 +17,40 @@
 # helper functions to convert html mail to text mail and back
 module HtmlTextHelper
   def strip_inline_style(content)
-    content.gsub(/<style[^>]*>[^<]*<\/style>/, '')
+    # strip inline style tags completely
+    content.to_s.gsub(/<style[^>]*>[^<]*<\/style>/, '')
   end
 
   def html_to_text(content)
-    sanitize(strip_inline_style(content).gsub(%r{(<br ?/?>|</p>)}, "\n"), tags: [])
+    content = sanitize_html(content).gsub(%r{(<br ?/?>|</p>)}, "\n")
+    CGI.unescapeHTML(sanitize(content, tags: []).to_str) # to_str for Rails #12672
   end
 
   def text_to_html(content)
-    content.gsub("\n", '<br />')
+    CGI.escapeHTML(content).gsub("\n", '<br />')
   end
 
-  def sanitize_html(content)
-    # strip inline style tags completely
-    sanitize(
+  def sanitize_html(content, attachments = [])
+    result = sanitize(
         strip_inline_style(content),
         tags:       %w( a b br code div em i img li ol p pre table td tfoot
                         thead tr span strong ul font ),
         attributes: %w( src href style color )
-    ).html_safe
+    )
+
+    attachments.each do |attachment|
+      result.gsub!(/src="cid:#{attachment.content_id}"/,
+        "src=\"#{attachment.file.url(:original)}\"")
+    end
+
+    result.html_safe
   end
 
   def wrap_and_quote(content)
     content = html_to_text(content)
-    content = content.gsub(/^.*\n&gt;.*$/, '') # strip off last line before older quotes
-    content = content.gsub(/^&gt;.*$/, '') # strip off older quotes
+    content = content.gsub(/^.*\n>.*$/, '') # strip off last line before older quotes
+    content = content.gsub(/^>.*$/, '') # strip off older quotes
     content = word_wrap(content.strip, line_width: 72)
-    content.gsub(/^/, '&gt; ')
+    content.gsub(/^/, '> ')
   end
 end

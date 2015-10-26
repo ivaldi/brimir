@@ -39,7 +39,9 @@ class Label < ActiveRecord::Base
   }
 
   scope :viewable_by, lambda { |user|
-    where(id: user.label_ids) unless user.agent?
+    if !user.agent? || user.labelings.count > 0
+      where(id: user.label_ids)
+    end
   }
 
   def assign_random_color

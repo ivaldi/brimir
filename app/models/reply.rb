@@ -17,17 +17,14 @@
 # replies to tickets, made by a user, possibly with attachments
 class Reply < ActiveRecord::Base
   include CreateFromUser
-
-  has_many :attachments, as: :attachable, dependent: :destroy
+  include EmailMessage
 
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :notified_users, source: :user, through: :notifications
 
-  accepts_nested_attributes_for :attachments
-
   validates :ticket_id, :content, presence: true
 
-  belongs_to :ticket
+  belongs_to :ticket, touch: true
   belongs_to :user
 
   accepts_nested_attributes_for :ticket
@@ -37,6 +34,10 @@ class Reply < ActiveRecord::Base
     where.not(message_id: nil)
   }
 
+  scope :without_drafts, -> {
+    where(draft: false)
+  }
+
   scope :unlocked_for, ->(user) {
     joins(:ticket)
         .where('locked_by_id IN (?) OR locked_at < ?',
@@ -44,7 +45,10 @@ class Reply < ActiveRecord::Base
   }
 
   def set_default_notifications!
-    self.notified_user_ids = users_to_notify.map(&:id)
+    users = users_to_notify.select do |user|
+      Ability.new(user).can? :show, self
+    end
+    self.notified_user_ids = users.map(&:id)
   end
 
   def other_replies

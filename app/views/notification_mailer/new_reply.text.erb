@@ -1,5 +1,10 @@
-<%# WATCH OUT make sure you don't add whitespace accidentally %>
-<% unless @user.current_sign_in_at.blank? %>
+<%# WATCH OUT make sure you don't add whitespace accidentally -%>
+<%- unless @user.current_sign_in_at.blank? -%>
 <%= t(:view_new_reply, locale: @locale) %>: <%= ticket_url(@reply.ticket) %>#reply-<%= @reply.id %>
-<% end %>
+<%- end -%>
+
+<%- if @reply.content_type == 'text' %>
+<%= @reply.content %>
+<%- else -%>
 <%= html_to_text(@reply.content) %>
+<%- end -%>

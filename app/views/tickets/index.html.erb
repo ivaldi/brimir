@@ -16,7 +16,7 @@
         <div class="row collapse">
           <% params.delete(:controller) %>
           <% params.delete(:action) %>
-          <%= link_to tickets_path(:csv, params), class: 'secondary radius tiny button right mlm no-m' do %>
+          <%= link_to tickets_path(:csv, params), class: 'radius tiny button right mlm no-m' do %>
             <i class="fa fa-cloud-download" style="top:1px"></i>
           <% end %>
 
@@ -36,6 +36,15 @@
       <% end %>
     </div>
   </div>
+  <% if params[:user_id] %>
+    <dl class="sub-nav">
+      <dt><%= t :filter %>:</dt>
+      <dd class="active"><%= link_to root_path do %>
+        <%= User.find(params[:user_id]).email %>&nbsp;&nbsp;
+        <i class="fa fa-times-circle fa-fw"></i>
+      <% end %></dd>
+    </dl>
+  <% end %>
 </div>
 
 <section class="tickets">
@@ -58,7 +67,6 @@
           <input type="checkbox" value="<%= ticket.id %>" name="id[]" class="no-mb" data-toggle-check />
           <%= user_avatar ticket.user, class: 'avatar left mrl mts mlm', size: 30 %>
           <p class="no-mb text-overflow">
-            <span class="block"><%= ticket.user.email %></span>
             <% unless ticket.subject.blank? %>
               <a href="<%= ticket_url(ticket) %>">
                 <strong><%= ticket.subject %></strong>
@@ -68,8 +76,12 @@
                 <em><%= t(:no_subject) %></em>
               <% end %>
             <% end %>
+            <span class="block">
+              <%= t(:ticket_id_created_by_at, id: ticket.id, user: link_to(ticket.user.email, user_tickets_path(user_id: ticket.user)),
+                  at: l(ticket.created_at.in_time_zone(current_user.time_zone), format: :short)).html_safe %>
+            </span>
             <% if ticket.locked?(current_user) %>
-              <br /><em><%= t(:locked_by_user, user: ticket.locked_by.email) %></em>
+              <em><%= t(:locked_by_user, user: ticket.locked_by.email) %></em>
             <% end %>
           </p>
         </div>
@@ -90,7 +102,10 @@
         </div>
         <div class="medium-3 v-middle columns">
           <p class="no-mb text-right">
-            <span class="block"><%= l ticket.created_at.in_time_zone(current_user.time_zone), format: :short %></span>
+            <span class="block" title="<%= l ticket.updated_at.in_time_zone(current_user.time_zone), format: :long %>">
+              <%= time_ago_in_words(ticket.updated_at.in_time_zone(current_user.time_zone)) %>
+              <%= t(:ago) %>
+            </span>
             <% if can? :update, ticket %>
               <% if ticket.assignee %>
                 <a data-assignee-id="<%= ticket.assignee.id %>" href="#"><%= ticket.assignee.email %></a>

@@ -20,7 +20,6 @@ class LabelingsControllerTest < ActionController::TestCase
 
   setup do
     @labeling = labelings(:bug_ticket)
-
     sign_in users(:alice)
   end
 
@@ -47,9 +46,4 @@ class LabelingsControllerTest < ActionController::TestCase
       assert_response :success
     end
   end
-
-  test 'should show labels in sidebar' do
-    
-  end
-
 end

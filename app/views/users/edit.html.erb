@@ -1,7 +1,15 @@
 <div class="panel no-bt mbl">
   <div class="row collapse">
-    <div class="medium-12 columns">
+    <div class="medium-6 columns">
       <h4 class="no-m pts pbs"><%= t(:edit_user) %></h4>
+    </div>
+    <div class="medium-6 columns">
+      <% if can? :destroy, @user %>
+        <%= link_to t(:remove_user), user_path(@user), 
+            method: :delete, 
+            data: { confirm: t(:are_you_sure) },
+            class: 'no-m radius right tiny button' %>
+      <% end %>
     </div>
   </div>
 </div>

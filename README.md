@@ -27,7 +27,8 @@ Run the following command to install gems if you want **MySQL support**:
 
 Generate a secret\_key\_base in the secrets.yml file:
 
-    sed -i "s/<%= ENV\[\"SECRET_KEY_BASE\"\] %>/`bin/rake secret`/g" config/secrets.yml
+    LINUX: sed -i "s/<%= ENV\[\"SECRET_KEY_BASE\"\] %>/`bin/rake secret`/g" config/secrets.yml
+    MAC: sed -i "" "s/<%= ENV\[\"SECRET_KEY_BASE\"\] %>/`bin/rake secret`/g" config/secrets.yml
 
 Next, load the database schema and precompile assets:
 
@@ -63,7 +64,7 @@ Incoming email
 --------------
 Incoming emails can be posted to the tickets url by using the script found in scripts/post-mail. Create an alias in your `/etc/aliases` file like this:
 
-    brimir: "|/bin/bash /path/to/your/brimir/repo/script/post-mail http://yoururl.com/tickets.json"
+    brimir: "|/bin/sh /path/to/your/brimir/repo/script/post-mail http://yoururl.com/tickets.json"
 
 Now sending an email to brimir@yoururl.com should start curl and post the email to your brimir installation.
 
@@ -98,9 +99,16 @@ Some users have made requests for the following features. If you would like to c
 - Unread ticket status per user.
 - Ticket search that also searches in from field and replies.
 - Mark tickets as duplicate, linking it to the duplicated ticket.
-- CC or BCC people from the reply form.
 - Ability to rename tickets (change their subject).
 - Ability to rename labels.
+- Improve rule form to allow only valid statuses (#150).
+- A better WYSIWYG editor, for example QuilJS (#172).
+- Timed rules, such as re-assigning when no reply is added withing 24 hours (#203).
+- Desktop notifications using web notifications (#218).
+- Auto page refresh on ticket index (#218).
+- Custom ticket statuses, all via database. (#217)
+- Filter on to/cc/bcc without verified addresses. (#227)
+- Add captcha for non-signed in ticket creation. (#228)
 
 License
 -------

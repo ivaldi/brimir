@@ -25,10 +25,7 @@ class TicketMailer < ActionMailer::Base
     encode(part.body.decoded.force_encoding(charset))
   end
 
-  def receive(message)
-    require 'mail'
-
-    email = Mail.new(message)
+  def receive(email)
 
     # is this an address verification mail?
     if VerificationMailer.receive(email)
@@ -98,12 +95,14 @@ class TicketMailer < ActionMailer::Base
         ticket_id: ticket.id,
         from: from_address,
         message_id: email.message_id,
-        content_type: content_type
+        content_type: content_type,
+        raw_message: StringIO.new(email.to_s)
       })
 
     else
 
-      to_email_address = EmailAddress.find_first_verified_email(email.to)
+      to_email_address = EmailAddress.find_first_verified_email(
+          email.to.to_a + email.cc.to_a + email.bcc.to_a)
 
       # add new ticket
       ticket = Ticket.create({
@@ -113,6 +112,7 @@ class TicketMailer < ActionMailer::Base
         message_id: email.message_id,
         content_type: content_type,
         to_email_address: to_email_address,
+        raw_message: StringIO.new(email.to_s)
       })
 
       incoming = ticket
@@ -133,8 +133,13 @@ class TicketMailer < ActionMailer::Base
         file.original_filename = attachment.filename
         file.content_type = attachment.mime_type
 
-        a = incoming.attachments.create(file: file)
-        a.save! # FIXME do we need this because of paperclip?
+        # store content_id with stripped off '<' and '>'
+        content_id = nil
+        unless attachment.content_id.blank?
+          content_id = attachment.content_id[1..-2]
+        end
+        incoming.attachments.create(file: file,
+            content_id: content_id)
       end
 
     end

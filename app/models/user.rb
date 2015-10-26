@@ -23,9 +23,14 @@ class User < ActiveRecord::Base
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
+  has_many :assigned_tickets, class_name: 'Ticket',
+      foreign_key: 'assignee_id', dependent: :nullify
 
   # identities for omniauth
   has_many :identities
+
+  after_initialize :default_localization
+  before_validation :generate_password
 
   # All ldap users are agents by default, remove/comment this method if this
   # is not the intended behavior.
@@ -37,6 +42,10 @@ class User < ActiveRecord::Base
     where(agent: true)
   }
 
+  scope :by_agent, ->(value) {
+    where(agent: value)
+  }
+
   scope :ordered, -> {
     order(:email)
   }
@@ -45,8 +54,27 @@ class User < ActiveRecord::Base
     where('LOWER(email) LIKE ?', '%' + email.downcase + '%')
   }
 
+  scope :search, ->(term) {
+    if !term.nil?
+      term.gsub!(/[\\%_]/) { |m| "!#{m}" }
+      term = "%#{term.downcase}%"
+      where('LOWER(email) LIKE ? ESCAPE ?', term, '!')
+    end
+  }
+
   def self.agents_to_notify
     User.agents
         .where(notify: true)
+  end
+
+  def default_localization
+    self.time_zone = Tenant.current_tenant.default_time_zone if time_zone.blank?
+    self.locale = Tenant.current_tenant.default_locale if locale.blank?
+  end
+
+  def generate_password
+    if encrypted_password.blank?
+      self.password = Devise.friendly_token.first(12)
+    end
   end
 end

@@ -57,7 +57,15 @@ class Tenant < ActiveRecord::Base
   end
 
   def self.current_tenant
-    @@current
+    if defined? @@current
+      @@current
+    else
+      Tenant.new # defaults for settings
+    end
+  end
+
+  def self.files_path
+    ':rails_root/data/:domain:class/:attachment/:id_partition/:style.:extension'
   end
 
   protected

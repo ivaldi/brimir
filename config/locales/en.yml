@@ -56,13 +56,16 @@ en:
   unassigned: Unassigned
   no_tickets_found: No tickets found.
   search: Search
+  filter: Filter
   minutes: minutes
   are_you_sure_empty_trash: Delete all tickets in the trash?
   locked_by_user: Ticket currently being handled by %{user}
+  ticket_id_created_by_at: '#%{id} created by %{user} at %{at}'
 
 # tickets/show
   add: Add
   ticket_by_at: By %{email} on %{at}
+  to_email: to %{email}
   no_content: No content
   ticket_id: Ticketnumber
   status: Status
@@ -106,6 +109,7 @@ en:
   send_reply: Send reply
   on_date_author_wrote: 'On %{date}, %{author} wrote:'
   notification_will_be_sent_to: Your notification will be sent to
+  save_as_draft: Save as draft
 
 # replies/_reply
   reply_by: Reply by
@@ -137,6 +141,7 @@ en:
   omniauth_connect_title: Authentication using Google
   omniauth_connect_text: Activate authentication using a Google Account. Afterwards you can use "Sign in with Google" as an alternative to the default email address and password login.
   omniauth_connect_google_text: Connect with Google
+  remove_user: Remove user
 
 # users/index
   email: Email
@@ -154,12 +159,21 @@ en:
   access_control: Access Control
   have_access_to_label: User has access to all tickets with any of these labels.
 
+# settings/edit
+  change_settings: Change settings
+  localization_settings: Localization settings
+  permissions: Permissions
+
+# controllers/settings
+  settings_saved: Settings saved
+
 # controllers/attachments
   file_not_found: File not found
 
 # controllers/users
   settings_saved: Settings saved
   user_added: User added
+  user_removed: User removed
 
 # controllers/tickets
   ticket_added: Ticket added
@@ -170,6 +184,7 @@ en:
 
 # controllers/replies
   reply_added: Reply added
+  draft_saved: Draft saved
 
 # controllers/omniauth
   already_linked_accounts: Already linked with Google Account
@@ -222,6 +237,7 @@ en:
         locale: Language
         time_zone: Time zone
         per_page: Tickets per page
+        prefer_plain_text: Send and receive plain text replies
 
       ticket:
         from: From email address
@@ -246,6 +262,7 @@ en:
         filter_operation: Operator
         filter_operations:
           contains: contains
+          equals: is equal to
         filter_value: Value
         action_operation: Action to perform
         action_operations:
@@ -261,3 +278,9 @@ en:
         name: Name
         default: Use as default outgoing mail address
         verification_token: Verified
+
+      tenant:
+        default_locale: Default language
+        ignore_user_agent_locale: Ignore preferred browser language
+        default_time_zone: Default time zone
+        share_drafts: Share drafts with other agents
