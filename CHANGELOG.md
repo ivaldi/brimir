@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Ordering of replies is now always chronologically, even when drafts were saved.
+- Attachments saved with a draft will not cause problems anymore.
 
 ### Security
 

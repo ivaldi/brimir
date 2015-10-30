@@ -3,7 +3,7 @@
 
   <div data-attachments>
 
-    <%= f.fields_for :attachments, f.object.attachments do |ff| %>
+    <%= f.fields_for :attachments do |ff| %>
       <%= render 'attachments/form_row', f: ff %>
     <% end %>
 

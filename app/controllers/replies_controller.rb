@@ -104,6 +104,8 @@ class RepliesController < ApplicationController
         :draft,
         notified_user_ids: [],
         attachments_attributes: [
+          :id,
+          :_destroy,
           :file
         ],
         ticket_attributes: [
