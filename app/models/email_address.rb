@@ -21,7 +21,7 @@ class EmailAddress < ActiveRecord::Base
   before_save :ensure_one_default
   before_create :generate_verification_token
 
-  scope :ordered, -> { order(:email) }
+  scope :ordered, -> { order(:default).reverse_order.order(:email) }
   scope :verified, -> { where(verification_token: nil) }
 
   def self.default_email

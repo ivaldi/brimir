@@ -9,6 +9,15 @@
     <%= f.text_field :from %>
   </p>
 
+  <% if current_user.agent? %>
+    <p>
+      <% blank = @email_addresses.count == 0 ? EmailAddress.default_email : nil %>
+      <%= f.label :to_email_address_id, t('activerecord.attributes.ticket.to'), class: 'ptm' %>
+      <%= f.collection_select :to_email_address_id, @email_addresses, :id, :formatted,
+          include_blank: blank, label: false %>
+    </p>
+  <% end %>
+
   <p>
     <%= f.text_field :subject %>
   </p>

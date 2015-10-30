@@ -142,6 +142,8 @@ class TicketsController < ApplicationController
     unless current_user.nil?
       @ticket.user = current_user
     end
+
+    @email_addresses = EmailAddress.verified.ordered
   end
 
   def create
@@ -192,6 +194,7 @@ class TicketsController < ApplicationController
           end
 
         else
+          @email_addresses = EmailAddress.verified.ordered
           render 'new'
         end
 
@@ -216,6 +219,7 @@ class TicketsController < ApplicationController
       if !current_user.nil? && current_user.agent?
         params.require(:ticket).permit(
             :from,
+            :to_email_address_id,
             :content,
             :subject,
             :status,
