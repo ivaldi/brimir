@@ -9,7 +9,7 @@
     <%= f.text_field :from %>
   </p>
 
-  <% if current_user.agent? %>
+  <% if !current_user.nil? && current_user.agent? %>
     <p>
       <% blank = @email_addresses.count == 0 ? EmailAddress.default_email : nil %>
       <%= f.label :to_email_address_id, t('activerecord.attributes.ticket.to'), class: 'ptm' %>
