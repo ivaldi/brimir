@@ -141,7 +141,6 @@ GEM
     netrc (0.10.3)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    non-stupid-digest-assets (1.0.4)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -272,7 +271,6 @@ DEPENDENCIES
   jbuilder (~> 2.2)
   jquery-rails
   mysql2
-  non-stupid-digest-assets
   omniauth-google-oauth2
   paperclip
   pg

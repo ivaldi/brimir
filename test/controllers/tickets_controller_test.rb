@@ -289,18 +289,6 @@ class TicketsControllerTest < ActionController::TestCase
 
   end
 
-  test 'should allow CORS' do
-    [:new, :create].each do |action|
-      process(action, 'OPTIONS')
-
-      assert_response :ok
-      assert_equal '*', response.headers['Access-Control-Allow-Origin']
-      assert_equal 'GET,POST', response.headers['Access-Control-Allow-Methods']
-      assert_equal 'Origin,Accept,Content-Type,X-Requested-With,X-CSRF-Token', 
-          response.headers['Access-Control-Allow-Headers']
-    end
-  end
-
   test 'should not notify when a bounce message is received' do
     email = File.new('test/fixtures/ticket_mailer/bounce').read
 

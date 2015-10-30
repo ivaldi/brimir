@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Deprecated
 
 ### Removed
+- The undocumented Brimir plugin to embed a new ticket form was removed.
 
 ### Fixed
 - Ordering of replies is now always chronologically, even when drafts were saved.

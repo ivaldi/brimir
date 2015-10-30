@@ -21,10 +21,9 @@ class TicketsController < ApplicationController
   before_filter :authenticate_user!, except: [:create, :new]
   load_and_authorize_resource :ticket, except: :create
   skip_authorization_check only: :create
-  skip_before_action :verify_authenticity_token, only: :create, if: 'request.format.json?'
 
-  # this is needed for brimir integration in other sites
-  before_filter :allow_cors, only: [:create, :new]
+  # allow ticket creation using json posts
+  skip_before_action :verify_authenticity_token, only: :create, if: 'request.format.json?'
 
   def show
     @agents = User.agents
@@ -184,11 +183,7 @@ class TicketsController < ApplicationController
         if !@ticket.nil? && @ticket.valid?
 
           if current_user.nil?
-            if request.xhr?
-              return render I18n.translate(:ticket_added)
-            else
-              render 'create'
-            end
+            render 'create'
           else
             redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
           end
@@ -242,14 +237,4 @@ class TicketsController < ApplicationController
             ])
       end
     end
-
-    def allow_cors
-      headers['Access-Control-Allow-Origin'] = '*'
-      headers['Access-Control-Allow-Methods'] = 'GET,POST'
-      headers['Access-Control-Allow-Headers'] =
-          %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(',')
-
-      head :ok if request.request_method == 'OPTIONS'
-    end
-
 end
