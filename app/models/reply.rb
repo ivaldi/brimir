@@ -29,7 +29,7 @@ class Reply < ActiveRecord::Base
 
   accepts_nested_attributes_for :ticket
 
-  scope :chronologically, -> { order(:id) }
+  scope :chronologically, -> { order(:created_at) }
   scope :with_message_id, lambda {
     where.not(message_id: nil)
   }
