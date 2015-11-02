@@ -51,7 +51,11 @@ class TicketMailer < ActionMailer::Base
       else
         content = encode(email.body.decoded)
       end
-      content_type = 'text'
+      if email.content_type.include? 'html'
+        content_type = 'html'
+      else
+        content_type = 'text'
+      end
     end
 
     if email.charset
