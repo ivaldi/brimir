@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Ordering of replies is now always chronologically, even when drafts were saved.
 - Attachments saved with a draft will not cause problems anymore.
 - Non-multi part HTML mails are now correctly recognized.
+- Outgoing plain text notifications are now wrapped at 72 characters as well.
 
 ### Security
 

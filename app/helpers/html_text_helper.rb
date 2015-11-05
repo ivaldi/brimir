@@ -23,7 +23,9 @@ module HtmlTextHelper
 
   def html_to_text(content)
     content = sanitize_html(content).gsub(%r{(<br ?/?>|</p>)}, "\n")
-    CGI.unescapeHTML(sanitize(content, tags: []).to_str) # to_str for Rails #12672
+    # to_str for Rails #12672
+    content = CGI.unescapeHTML(sanitize(content, tags: []).to_str)
+    word_wrap(content, line_width: 72)
   end
 
   def text_to_html(content)
