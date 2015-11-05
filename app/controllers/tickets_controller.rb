@@ -122,21 +122,7 @@ class TicketsController < ApplicationController
   end
 
   def new
-    unless current_user.blank?
-      if current_user.prefer_plain_text?
-        signature = { content: "\n#{html_to_text current_user.signature}" }
-      else
-        signature = { content: "<p></p>#{current_user.signature}" }
-      end
-    else
-      signature = {}
-    end
-
-    unless params[:ticket].nil? # prefill params given?
-      @ticket = Ticket.new(signature.merge(ticket_params))
-    else
-      @ticket = Ticket.new(signature)
-    end
+    @ticket = Ticket.new
 
     unless current_user.nil?
       @ticket.user = current_user
