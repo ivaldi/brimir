@@ -1,26 +1,24 @@
 <div class="row mt ptxxl">
   <div class="medium-8 large-6 columns medium-centered">
-    <div class="panel paxxl">
-      <h3 class="mb"><%= t(:sign_in) %></h3>
-      <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-
-        <%= f.label :email %>
+    <h2 class="text-center mbxl">
+      <strong>BRIMIR</strong>
+    </h2>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div class="panel paxxl mbxxl text-center">
         <div class="row collapse">
           <div class="small-1 columns">
             <span class="prefix"><i class="fa fa-user"></i></span>
           </div>
           <div class="small-11 columns">
-            <%= f.email_field :email, label: false %>
+            <%= f.email_field :email, label: false, placeholder: t(:email) %>
           </div>
         </div>
-
-        <%= f.label :password %>
         <div class="row collapse">
           <div class="small-1 columns">
-            <span class="prefix"><i class="fa fa-lock"></i></span>
+            <span class="prefix"><i class="fa fa-key"></i></span>
           </div>
           <div class="small-11 columns">
-            <%= f.password_field :password, label: false %>
+            <%= f.password_field :password, label: false, placeholder: :password %>
           </div>
         </div>
 
@@ -28,21 +26,28 @@
             <%= f.check_box :remember_me %>
         <% end -%>
 
-        <%= f.submit(t(:sign_in), class: 'secondary button radius no-mb mtm') %>
+        <p>
+          <%= f.submit t(:sign_in), class: 'secondary button radius no-mb mtm' %>
+        </p>
+      </div>
 
+      <p class="text-s no-mb text-center mtl">
         <%= render 'devise/shared/links' %>
-
+        <span class="mrs mls">&middot;</span>
+        <%= link_to t(:create_ticket), new_ticket_path %>
+        <span class="mrs mls">&middot;</span>
+        <%= link_to 'GetBrimir.com', 'https://getbrimir.com' %>
+      </p>
+      <p class="text-center">
         <% unless Rails.application.secrets[:google_client_id].blank? %>
-          <br/>
-          <h4><%= t(:omniauth_sign_in_title) %></h4>
-
+        <%= t(:omniauth_sign_in_title) %>:
           <%= link_to user_omniauth_authorize_path(:google_oauth2) do %>
             <i class="fa fa-google-plus-square"></i>
             <%= t(:omniauth_sign_in_google) %>
           <% end %>
         <% end %>
+      </p>
 
-      <% end %>
-    </div>
+    <% end %>
   </div>
 </div>

@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Signatures are added to new tickets again.
+- Realigned sign in view.
 
 ### Deprecated
 
