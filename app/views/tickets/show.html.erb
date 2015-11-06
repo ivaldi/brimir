@@ -151,7 +151,7 @@
     <% end %>
 
     <% if can? :create, @reply %>
-      <%= render 'replies/form' %>
+      <%= render 'replies/form', reply_to: @reply_to %>
     <% end %>
   </div>
 </div>

@@ -40,8 +40,20 @@ class Ability
   protected
 
   def customer(user)
-    # customers can view their own tickets, its replies and attachments
-    can [:create, :read], Reply, ticket: { user_id: user.id }    
+    # customers can view replies where they were notified of
+    can :read, Reply do |reply|
+      reply.notified_user_ids.include? user.id || reply.user_id == user.id
+    end
+    # customers can view their own replies
+    can :read, Reply, user_id: user.id
+    # customers can reply to their own tickets
+    can :create, Reply, ticket: { user_id: user.id }
+
+    # customers can reply when they have access to the label
+    can :create, Reply do |reply|
+      # at least one label_id overlap or ticket of user himself
+      (reply.ticket.label_ids & user.label_ids).size > 0
+    end
 
     # customers can edit their own account
     can :update, User, id: user.id
@@ -50,11 +62,6 @@ class Ability
     can :read, Ticket, Ticket.viewable_by(user) do |ticket|
       # at least one label_id overlap
       ticket.user == user || (ticket.label_ids & user.label_ids).size > 0
-    end
-
-    can [:create, :read], Reply do |reply|
-      # at least one label_id overlap
-      (reply.ticket.label_ids & user.label_ids).size > 0
     end
   end
 

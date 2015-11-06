@@ -29,11 +29,6 @@
         else
           content = "<p></p>#{current_user.signature}<br />"
         end
-        reply_to = @reply.other_replies.where.not(draft: true).order(:id).last
-
-        if reply_to.nil?
-          reply_to = @reply.ticket
-        end
 
         content += t(:on_date_author_wrote, author: reply_to.user.email,
             date: l(reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))

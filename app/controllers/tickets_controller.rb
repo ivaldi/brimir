@@ -48,6 +48,8 @@ class TicketsController < ApplicationController
       can? :show, reply
     end
 
+    @reply_to = @replies.last || @ticket
+
     respond_to do |format|
       format.html
       format.eml do
