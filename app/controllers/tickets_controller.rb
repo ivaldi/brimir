@@ -33,22 +33,21 @@ class TicketsController < ApplicationController
         .where(draft: true)
         .first
 
+    @replies = @ticket.replies.chronologically.without_drafts.select do |reply|
+      can? :show, reply
+    end
+
     if draft.present?
       @reply = draft
     else
       @reply = @ticket.replies.new(user: current_user)
+      @reply.reply_to = @replies.last || @ticket
       @reply.set_default_notifications!
     end
 
     @labeling = Labeling.new(labelable: @ticket)
 
     @outgoing_addresses = EmailAddress.verified.ordered
-
-    @replies = @ticket.replies.chronologically.without_drafts.select do |reply|
-      can? :show, reply
-    end
-
-    @reply_to = @replies.last || @ticket
 
     respond_to do |format|
       format.html

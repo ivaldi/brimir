@@ -100,7 +100,9 @@ class TicketMailer < ActionMailer::Base
         from: from_address,
         message_id: email.message_id,
         content_type: content_type,
-        raw_message: StringIO.new(email.to_s)
+        raw_message: StringIO.new(email.to_s),
+        reply_to_id: response_to.try(:id),
+        reply_to_type: response_to.try(:class).try(:name)
       })
 
     else

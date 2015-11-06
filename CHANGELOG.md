@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Signatures are added to new tickets again.
 - Customers can only see replies they were notified of, allowing replies to be used as internal communication between agents.
+- Reply notifications are now sent to the same users as the last reply by default.
 
 ### Deprecated
 

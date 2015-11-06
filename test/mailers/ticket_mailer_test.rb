@@ -57,6 +57,7 @@ class TicketMailerTest < ActionMailer::TestCase
 
         # assign to first user
         ticket.assignee = User.agents.first
+        ticket.notified_users << User.agents.first
         ticket.save!
       end
     end

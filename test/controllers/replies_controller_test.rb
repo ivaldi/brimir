@@ -38,7 +38,7 @@ class RepliesControllerTest < ActionController::TestCase
         post :create, reply: {
             content: '',
             ticket_id: @ticket.id,
-            notified_user_ids: @reply.users_to_notify.map { |u| u.id },
+            notified_user_ids: [users(:bob).id],
         }
       end
     end
@@ -51,7 +51,7 @@ class RepliesControllerTest < ActionController::TestCase
       post :create, reply: {
           content: '<br><br><p><strong>this is in bold</strong></p>',
           ticket_id: @ticket.id,
-          notified_user_ids: @reply.users_to_notify.map { |u| u.id },
+          notified_user_ids: User.agents.pluck(:id),
       }
     end
 
@@ -65,7 +65,7 @@ class RepliesControllerTest < ActionController::TestCase
     assert_match "\n\nthis is in bold\n", mail.text_part.body.decoded
 
     # correctly addressed
-    assert_equal [@reply.users_to_notify.last.email], mail.to
+    assert_equal [User.agents.last.email], mail.to
 
     # correct content type
     assert_match 'multipart/alternative', mail.content_type
@@ -83,7 +83,7 @@ class RepliesControllerTest < ActionController::TestCase
       post :create, reply: {
             content: '**this is in bold**',
             ticket_id: @ticket.id,
-            notified_user_ids: @reply.users_to_notify.map { |u| u.id },
+            notified_user_ids: [users(:bob).id],
             attachments_attributes: {
               '0' => { file: fixture_file_upload('attachments/default-testpage.pdf') },
               '1' => { file: fixture_file_upload('attachments/default-testpage.pdf') }
