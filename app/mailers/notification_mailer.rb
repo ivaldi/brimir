@@ -18,6 +18,67 @@ class NotificationMailer < ActionMailer::Base
 
   add_template_helper HtmlTextHelper
 
+  def self.incoming_message(ticket_or_reply, original_message)
+    if ticket_or_reply.is_a? Reply
+      reply = ticket_or_reply
+      reply.set_default_notifications!
+
+      message_id = nil
+
+      reply.notified_users.each do |user|
+        message = NotificationMailer.new_reply(reply, user)
+        message.message_id = message_id
+        message.deliver_now
+
+        reply.message_id = message.message_id
+        message_id = message.message_id
+      end
+
+      reply.save
+    else
+      ticket = ticket_or_reply
+
+      Rule.apply_all ticket
+
+      # where user notifications added?
+      if ticket.notified_users.count == 0
+        ticket.set_default_notifications!
+      end
+
+      if ticket.assignee.nil?
+        message_id = nil
+
+        ticket.notified_users.each do |user|
+          message = NotificationMailer.new_ticket(ticket, user)
+          message.message_id = message_id
+          message.deliver_now unless EmailAddress.pluck(:email).include?(user.email)
+
+          ticket.message_id = message.message_id
+          message_id = message.message_id
+        end
+
+        ticket.save
+      else
+        NotificationMailer.assigned(ticket).deliver_now
+      end
+    end
+
+    original_message = Mail.new(original_message)
+
+    # store original cc/to users as well
+    (original_message.to.to_a + original_message.cc.to_a).each do |email|
+      next if EmailAddress.pluck(:email).include?(email)
+
+      user = User.find_first_by_auth_conditions(email: email)
+      if user.nil?
+        ticket_or_reply.notified_users << User.create(email: email)
+      else
+        next if ticket_or_reply.notified_users.include?(user)
+        ticket_or_reply.notified_users << user
+      end
+    end
+  end
+
   def new_ticket(ticket, user)
     unless user.locale.blank?
       @locale = user.locale

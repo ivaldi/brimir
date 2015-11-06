@@ -5,10 +5,14 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased.unreleased.unreleased (to be announced)
 ### Added
 - Incoming email address selection on new ticket screen. Allowing rules to be applied for manually created tickets.
+- To/cc address now becomes visible as notified users for all incoming mails.
+- User preference to disable quoting of original message in the reply form.
 
 ### Changed
 - Signatures are added to new tickets again.
 - Realigned sign in view.
+- Customers can only see replies they were notified of, allowing replies to be used as internal communication between agents.
+- Reply notifications are now sent to the same users as the last reply by default.
 
 ### Deprecated
 

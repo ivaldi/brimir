@@ -19,6 +19,9 @@ class Reply < ActiveRecord::Base
   include CreateFromUser
   include EmailMessage
 
+  attr_accessor :reply_to_id
+  attr_accessor :reply_to_type
+
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :notified_users, source: :user, through: :notifications
 
@@ -45,29 +48,31 @@ class Reply < ActiveRecord::Base
   }
 
   def set_default_notifications!
-    users = users_to_notify.select do |user|
-      Ability.new(user).can? :show, self
+    unless reply_to_type.nil?
+      self.notified_users = [reply_to.user] + reply_to.notified_users - [user]
+    else
+      if ticket.assignee.present?
+        self.notified_users << ticket.assignee
+      else
+        self.notified_users = User.agents_to_notify
+      end
+
+      ticket.labels.each do |label|
+        self.notified_users += label.users
+      end
     end
-    self.notified_user_ids = users.map(&:id)
+  end
+
+  def reply_to
+    reply_to_type.constantize.where(id: self.reply_to_id).first
+  end
+
+  def reply_to=(value)
+    self.reply_to_id = value.id
+    self.reply_to_type = value.class.name
   end
 
   def other_replies
     ticket.replies.where.not(id: id)
-  end
-
-  def users_to_notify
-    to = [ticket.user] + other_replies.map(&:user)
-
-    if ticket.assignee.present?
-      to << ticket.assignee
-    else
-      to += User.agents_to_notify
-    end
-
-    ticket.labels.each do |label|
-      to += label.users
-    end
-
-    to.uniq - [user]
   end
 end

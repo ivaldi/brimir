@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915063710) do
+ActiveRecord::Schema.define(version: 20151106141707) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -116,12 +116,16 @@ ActiveRecord::Schema.define(version: 20150915063710) do
   create_table "tenants", force: :cascade do |t|
     t.string   "domain"
     t.string   "from"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.string   "default_time_zone",        default: "Amsterdam"
-    t.boolean  "ignore_user_agent_locale", default: false,       null: false
-    t.string   "default_locale",           default: "en"
-    t.boolean  "share_drafts",             default: false
+    t.datetime "created_at",                                                        null: false
+    t.datetime "updated_at",                                                        null: false
+    t.string   "default_time_zone",                           default: "Amsterdam"
+    t.boolean  "ignore_user_agent_locale",                    default: false,       null: false
+    t.string   "default_locale",                              default: "en"
+    t.boolean  "share_drafts",                                default: false
+    t.boolean  "ticket_creation_requires_authenticated_user", default: false,       null: false
+    t.string   "ticket_creation_whitelisted_ips"
+    t.boolean  "require_authenticated",                       default: false,       null: false
+    t.string   "require_authenticated_ip_whitelist"
   end
 
   create_table "tickets", force: :cascade do |t|
@@ -173,6 +177,7 @@ ActiveRecord::Schema.define(version: 20150915063710) do
     t.integer  "per_page",               default: 30,    null: false
     t.string   "locale"
     t.boolean  "prefer_plain_text",      default: false, null: false
+    t.boolean  "include_quote_in_reply", default: true,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

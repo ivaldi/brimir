@@ -64,7 +64,6 @@ class TicketMailer < ActionMailer::Base
       subject = email.subject.to_s.encode('UTF-8')
     end
 
-
     if email.in_reply_to
       # is this a reply to a ticket or to another reply?
       response_to = Ticket.find_by_message_id(email.in_reply_to)
@@ -100,7 +99,9 @@ class TicketMailer < ActionMailer::Base
         from: from_address,
         message_id: email.message_id,
         content_type: content_type,
-        raw_message: StringIO.new(email.to_s)
+        raw_message: StringIO.new(email.to_s),
+        reply_to_id: response_to.try(:id),
+        reply_to_type: response_to.try(:class).try(:name)
       })
 
     else
@@ -146,18 +147,6 @@ class TicketMailer < ActionMailer::Base
             content_id: content_id)
       end
 
-    end
-
-    if ticket != incoming
-      incoming.set_default_notifications!
-
-      incoming.notified_users.each do |user|
-        mail = NotificationMailer.new_reply(incoming, user)
-        mail.deliver_now
-        incoming.message_id = mail.message_id
-      end
-
-      incoming.save
     end
 
     if bounced?(email)

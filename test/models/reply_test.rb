@@ -23,8 +23,9 @@ class ReplyTest < ActiveSupport::TestCase
     ticket.labels << labels(:bug)
 
     reply = ticket.replies.new
+    reply.set_default_notifications!
 
-    assert reply.users_to_notify.include?(users(:dave))
+    assert reply.notified_users.include?(users(:dave))
   end
 
 end

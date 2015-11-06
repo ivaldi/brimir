@@ -43,8 +43,7 @@ class TicketMailerTest < ActionMailer::TestCase
         Ticket.order(:id).last.to_email_address
   end
 
-  test 'email threads are recognized correctly and assignee \
-      is notified' do
+  test 'email threads are recognized correctly and assignee is notified' do
     Tenant.current_domain = Tenant.first.domain
 
     thread_start = read_fixture('thread_start').join
@@ -58,6 +57,7 @@ class TicketMailerTest < ActionMailer::TestCase
 
         # assign to first user
         ticket.assignee = User.agents.first
+        ticket.notified_users << User.agents.first
         ticket.save!
       end
     end
@@ -69,7 +69,8 @@ class TicketMailerTest < ActionMailer::TestCase
       assert_difference 'Reply.count' do
         # user re-used?
         assert_difference 'User.count', 0 do
-          TicketMailer.receive(thread_reply)
+          reply = TicketMailer.receive(thread_reply)
+          NotificationMailer.incoming_message(reply, '')
         end
       end
     end
