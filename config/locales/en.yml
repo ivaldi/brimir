@@ -238,6 +238,7 @@ en:
         time_zone: Time zone
         per_page: Tickets per page
         prefer_plain_text: Send and receive plain text replies
+        include_quote_in_reply: Include quote of original message in reply
 
       ticket:
         from: From email address
