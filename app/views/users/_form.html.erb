@@ -31,6 +31,7 @@
         <h5><%= t(:email_settings) %></h5>
 
         <%= f.check_box :prefer_plain_text %>
+        <%= f.check_box :include_quote_in_reply %>
 
         <% if @user.agent? %>
 
@@ -39,6 +40,7 @@
 
           <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce mbl' %>
         <% end %>
+
 
         <% if can? :create, Labeling.new(labelable: @user) %>
           <h5><%= t(:access_control) %></h5>

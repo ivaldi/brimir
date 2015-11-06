@@ -30,13 +30,15 @@
           content = "<p></p>#{current_user.signature}<br />"
         end
 
-        content += t(:on_date_author_wrote, author: @reply.reply_to.user.email,
-            date: l(@reply.reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
+        if current_user.include_quote_in_reply?
+          content += t(:on_date_author_wrote, author: @reply.reply_to.user.email,
+              date: l(@reply.reply_to.created_at.in_time_zone(current_user.time_zone), format: :long))
 
-        if current_user.prefer_plain_text?
-          content += "\n#{wrap_and_quote(@reply.reply_to.content)}"
-        else
-          content += "<br />#{text_to_html(wrap_and_quote(@reply.reply_to.content))}"
+          if current_user.prefer_plain_text?
+            content += "\n#{wrap_and_quote(@reply.reply_to.content)}"
+          else
+            content += "<br />#{text_to_html(wrap_and_quote(@reply.reply_to.content))}"
+          end
         end
       %>
 

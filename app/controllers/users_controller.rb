@@ -89,6 +89,7 @@ class UsersController < ApplicationController
         :locale,
         :per_page,
         :prefer_plain_text,
+        :include_quote_in_reply,
         label_ids: []
     )
 
