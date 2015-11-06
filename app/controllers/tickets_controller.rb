@@ -144,33 +144,7 @@ class TicketsController < ApplicationController
     end
 
     if !@ticket.nil? && @ticket.save
-
-      Rule.apply_all(@ticket) unless @ticket.is_a?(Reply)
-
-      # where user notifications added?
-      if @ticket.notified_users.count == 0
-        @ticket.set_default_notifications!
-      end
-
-      # @ticket might be a Reply when via json post
-      if @ticket.is_a?(Ticket)
-        if @ticket.assignee.nil?
-          message_id = nil
-
-          @ticket.notified_users.each do |user|
-            mail = NotificationMailer.new_ticket(@ticket, user)
-            mail.message_id = message_id
-            mail.deliver_now unless EmailAddress.pluck(:email).include?(user.email)
-
-            @ticket.message_id = mail.message_id
-            message_id = mail.message_id
-          end
-
-          @ticket.save
-        else
-          NotificationMailer.assigned(@ticket).deliver_now
-        end
-      end
+      NotificationMailer.incoming_message(@ticket, params[:message])
     end
 
     respond_to do |format|

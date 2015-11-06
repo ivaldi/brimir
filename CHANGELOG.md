@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased.unreleased.unreleased (to be announced)
 ### Added
 - Incoming email address selection on new ticket screen. Allowing rules to be applied for manually created tickets.
+- To/cc address now becomes visible as notified users for all incoming mails.
 
 ### Changed
 - Signatures are added to new tickets again.

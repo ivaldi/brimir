@@ -69,7 +69,8 @@ class TicketMailerTest < ActionMailer::TestCase
       assert_difference 'Reply.count' do
         # user re-used?
         assert_difference 'User.count', 0 do
-          TicketMailer.receive(thread_reply)
+          reply = TicketMailer.receive(thread_reply)
+          NotificationMailer.incoming_message(reply, '')
         end
       end
     end
