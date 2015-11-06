@@ -44,6 +44,10 @@ class TicketsController < ApplicationController
 
     @outgoing_addresses = EmailAddress.verified.ordered
 
+    @replies = @ticket.replies.chronologically.without_drafts.select do |reply|
+      can? :show, reply
+    end
+
     respond_to do |format|
       format.html
       format.eml do

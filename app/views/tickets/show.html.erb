@@ -138,21 +138,14 @@
 
     <% if @ticket.replies.size > 1 %>
       <div class="row replies">
-        <% count = 0 %>
-        <% @ticket.replies.chronologically.without_drafts.each do |reply| %>
-
-          <%# minus 2, because @reply is a new ticket that is counted as well... %>
-          <% if @ticket.replies.size - 2 == count %>
+        <% @replies.each_with_index do |reply, index| %>
+          <% if @replies.count - 1 == index %>
             <% div_class = 'active' %>
           <% else %>
             <% div_class = '' %>
           <% end %>
 
           <%= render reply, div_class: div_class %>
-
-
-          <% count += 1 %>
-
         <% end %>
       </div>
     <% end %>
