@@ -43,7 +43,8 @@ class RepliesController < ApplicationController
               filename: "reply-#{@reply.id}.eml",
               type: 'text/plain',
               disposition: :attachment
-        rescue
+        rescue e
+          print e.inspect
           raise ActiveRecord::RecordNotFound
         end
       end
