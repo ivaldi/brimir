@@ -43,8 +43,7 @@ class TicketMailerTest < ActionMailer::TestCase
         Ticket.order(:id).last.to_email_address
   end
 
-  test 'email threads are recognized correctly and assignee \
-      is notified' do
+  test 'email threads are recognized correctly and assignee is notified' do
     Tenant.current_domain = Tenant.first.domain
 
     thread_start = read_fixture('thread_start').join
