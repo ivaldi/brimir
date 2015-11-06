@@ -155,10 +155,15 @@ class TicketsController < ApplicationController
       # @ticket might be a Reply when via json post
       if @ticket.is_a?(Ticket)
         if @ticket.assignee.nil?
+          message_id = nil
+
           @ticket.notified_users.each do |user|
             mail = NotificationMailer.new_ticket(@ticket, user)
+            mail.message_id = message_id
             mail.deliver_now unless EmailAddress.pluck(:email).include?(user.email)
+
             @ticket.message_id = mail.message_id
+            message_id = mail.message_id
           end
 
           @ticket.save
