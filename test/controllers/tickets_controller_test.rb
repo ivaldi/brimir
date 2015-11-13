@@ -167,6 +167,9 @@ class TicketsControllerTest < ActionController::TestCase
     # should have selected same outgoing address as original received
     assert_select 'option[selected="selected"]' +
         "[value=\"#{email_addresses(:brimir).id}\"]"
+
+    # should contain this for internal note switch
+    assert_select '[data-notified-users]'
   end
 
   test 'should email assignee if ticket is assigned by somebody else' do
