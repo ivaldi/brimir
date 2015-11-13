@@ -54,7 +54,7 @@
         <%= t(:notification_will_be_sent_to) %>
       </p>
       <p>
-        <%= r.collection_select :notified_user_ids, User.ordered, :id, :email, { label: false }, { multiple: true, class: 'select2' } %>
+        <%= render 'replies/notified_users', r: r %>
       </p>
 
       <% if can? :update, @reply.ticket %>
@@ -71,6 +71,8 @@
           <% end %>
         </div>
       <% end %>
+
+      <%= r.check_box :internal, data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" } %>
 
       <p>
         <%= r.button t(:save_as_draft), name: 'reply[draft]', value: true, class: 'button regular radius primary' %>

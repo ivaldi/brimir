@@ -18,6 +18,10 @@ class RepliesController < ApplicationController
 
   load_and_authorize_resource
 
+  def new
+    @reply.assign_attributes(reply_params)
+  end
+
   def create
     # store attributes and reopen ticket
     @reply = Reply.new({
@@ -103,6 +107,7 @@ class RepliesController < ApplicationController
         :user_id,
         :content_type,
         :draft,
+        :internal,
         notified_user_ids: [],
         attachments_attributes: [
           :id,

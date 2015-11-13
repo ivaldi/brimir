@@ -1,0 +1,15 @@
+<%
+  result = ''
+  form_for @reply do |r|
+    result = render 'replies/notified_users', r: r
+  end
+%>
+
+<% if @reply.internal? %>
+  jQuery('iframe').contents().find('#tinymce').css('background-color', 'yellow');
+<% else %>
+  jQuery('iframe').contents().find('#tinymce').css('background-color', '');
+<% end %>
+
+jQuery('[data-notified-users]').html('<%= j result %>');
+jQuery('[data-notified-users] select').select2({ width: 'resolve' });
