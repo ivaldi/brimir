@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased (to be announced)
 ### Added
 - Automatic refresh of inbox when browser tab receives focus again.
+- Internal notes can now be added to tickets.
 
 ### Changed
 
