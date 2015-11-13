@@ -2,12 +2,17 @@
   <%= r.hidden_field :content_type, value: current_user.prefer_plain_text? ? 'text' : 'html' %>
 
   <%= r.hidden_field :ticket_id %>
+
   <div class="row collapse bb">
     <div class="medium-1 column ptl pll">
       <%= user_avatar current_user, class: 'avatar', size: 35 %>
     </div>
     <div class="medium-11 columns ptm pbm pll prl">
       <h3 class="text-default"><%= t(:reply) %></h3>
+      <% if current_user.agent? %>
+        <%= r.radio_button :internal, false, label: t(:reply), data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" } %>
+        <%= r.radio_button :internal, true, label: t(:internal_note), data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" } %>
+      <% end %>
       <% if can? :update, @reply.ticket %>
         <div class="row collapse">
           <%= r.fields_for :ticket do |f| %>
@@ -22,6 +27,15 @@
           <% end %>
         </div>
       <% end %>
+
+      <div class="row collapse mbl">
+        <div class="medium-4 columns">
+          <label><%= t(:notification_will_be_sent_to) %></label>
+        </div>
+        <div class="medium-8 columns">
+          <%= render 'replies/notified_users', r: r %>
+        </div>
+      </div>
 
       <%
         if @reply.content.blank?
@@ -50,13 +64,6 @@
 
       <%= render 'attachments/form', f: r %>
 
-      <p class="no-m">
-        <%= t(:notification_will_be_sent_to) %>
-      </p>
-      <p>
-        <%= render 'replies/notified_users', r: r %>
-      </p>
-
       <% if can? :update, @reply.ticket %>
         <div class="row collapse">
           <%= r.fields_for :ticket do |f| %>
@@ -71,8 +78,6 @@
           <% end %>
         </div>
       <% end %>
-
-      <%= r.check_box :internal, data: { remote: true, url: new_reply_path, params: "reply[ticket_id]=#{@reply.ticket.id}" } %>
 
       <p>
         <%= r.button t(:save_as_draft), name: 'reply[draft]', value: true, class: 'button regular radius primary' %>

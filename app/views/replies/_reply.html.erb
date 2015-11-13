@@ -1,4 +1,4 @@
-<ul class="accordion" data-accordion>
+<ul class="accordion <%= 'internal-reply' if reply.internal? %>" data-accordion>
   <li class="accordion-navigation <%= div_class %>">
     <a href="#reply-<%=reply.id%>" class="bb text-default">
       <div class="row collapse">
