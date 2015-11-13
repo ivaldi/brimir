@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106141707) do
+ActiveRecord::Schema.define(version: 20151113142834) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -83,11 +83,12 @@ ActiveRecord::Schema.define(version: 20151106141707) do
     t.integer  "user_id"
     t.string   "message_id"
     t.string   "content_type",                                default: "html"
+    t.boolean  "draft",                                       default: false,  null: false
     t.string   "raw_message_file_name"
     t.string   "raw_message_content_type"
     t.integer  "raw_message_file_size"
     t.datetime "raw_message_updated_at"
-    t.boolean  "draft",                                       default: false,  null: false
+    t.boolean  "internal",                                    default: false,  null: false
   end
 
   add_index "replies", ["message_id"], name: "index_replies_on_message_id"
@@ -116,16 +117,12 @@ ActiveRecord::Schema.define(version: 20151106141707) do
   create_table "tenants", force: :cascade do |t|
     t.string   "domain"
     t.string   "from"
-    t.datetime "created_at",                                                        null: false
-    t.datetime "updated_at",                                                        null: false
-    t.string   "default_time_zone",                           default: "Amsterdam"
-    t.boolean  "ignore_user_agent_locale",                    default: false,       null: false
-    t.string   "default_locale",                              default: "en"
-    t.boolean  "share_drafts",                                default: false
-    t.boolean  "ticket_creation_requires_authenticated_user", default: false,       null: false
-    t.string   "ticket_creation_whitelisted_ips"
-    t.boolean  "require_authenticated",                       default: false,       null: false
-    t.string   "require_authenticated_ip_whitelist"
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "default_time_zone",        default: "Amsterdam"
+    t.boolean  "ignore_user_agent_locale", default: false,       null: false
+    t.string   "default_locale",           default: "en"
+    t.boolean  "share_drafts",             default: false
   end
 
   create_table "tickets", force: :cascade do |t|
