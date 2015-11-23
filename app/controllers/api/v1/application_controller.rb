@@ -28,7 +28,7 @@ class Api::V1::ApplicationController < ActionController::Base
     if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
       sign_in user, store: false
     else
-      redirect_to new_user_session_url
+      render nothing: true, status: :unauthorized
     end
   end
 end
