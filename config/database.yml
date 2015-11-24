@@ -22,5 +22,5 @@ production:
   adapter: postgresql
   host:
   database:
-  user:
+  username:
   password:
