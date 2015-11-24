@@ -49,17 +49,21 @@ class Reply < ActiveRecord::Base
 
   def set_default_notifications!
     unless reply_to_type.nil?
-      self.notified_users = [reply_to.user] + reply_to.notified_users - [user]
+      self.notified_users =
+          ([reply_to.user] + reply_to.notified_users - [user]).uniq
     else
+      result = []
       if ticket.assignee.present?
-        self.notified_users << ticket.assignee
+        result << ticket.assignee
       else
-        self.notified_users = User.agents_to_notify
+        result = User.agents_to_notify
       end
 
       ticket.labels.each do |label|
-        self.notified_users += label.users
+        result += label.users
       end
+
+      self.notified_users = result.uniq
     end
   end
 
