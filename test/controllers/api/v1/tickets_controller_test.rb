@@ -19,7 +19,6 @@ require 'test_helper'
 class Api::V1::TicketsControllerTest < ActionController::TestCase
 
   setup do
-
     @ticket = tickets(:problem)
   end
 
@@ -42,11 +41,11 @@ class Api::V1::TicketsControllerTest < ActionController::TestCase
     sign_in users(:bob)
     assert_difference 'Ticket.count', 1 do
       post :create, auth_token: users(:bob).authentication_token, ticket: {
-          content: 'I need help',
-          from: 'bob@xxxx.com',
-          subject: 'Remote from API',
-          priority: 'low'}, 
-          format: :json
+        content: 'I need help',
+        from: 'bob@xxxx.com',
+        subject: 'Remote from API',
+        priority: 'low'}, 
+        format: :json
     end
     assert_response :success
   end
