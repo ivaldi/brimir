@@ -60,6 +60,11 @@
           </button>
         </li>
       <% end %>
+      <li class="bl no-m">
+        <button type="submit" name="merge" value="true" class="ptl plm prm pbl text-medium-light-grey no-m no-b" title="<%=t :merge_explanation %>">
+          <%= t :merge %>
+        </button>
+      </li>
     </ul>
     <% @tickets.each do |ticket| %>
       <div class="priority-<%= ticket.priority %> row ticket bb" style="height: 4em;" data-ticket-url="<%= ticket_url(ticket) %>">

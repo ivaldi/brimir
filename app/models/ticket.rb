@@ -17,6 +17,7 @@
 class Ticket < ActiveRecord::Base
   include CreateFromUser
   include EmailMessage
+  include TicketMerge
 
   validates_presence_of :user_id
 
