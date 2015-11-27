@@ -38,4 +38,17 @@ class Api::V1::TicketsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should create ticket' do
+    sign_in users(:bob)
+    assert_difference 'Ticket.count', 1 do
+      post :create, auth_token: users(:bob).authentication_token, ticket: {
+          content: 'I need help',
+          from: 'bob@xxxx.com',
+          subject: 'Remote from API',
+          priority: 'low'}, 
+          format: :json
+    end
+    assert_response :success
+  end
+
 end
