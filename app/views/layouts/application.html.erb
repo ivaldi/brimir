@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en" dir="<%= 'rtl' if @rtl %>"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en" dir="<%= 'rtl' if @rtl %>"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en" dir="<%= 'rtl' if @rtl %>"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html dir="<%= 'rtl' if @rtl %>"> <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
     <%= favicon_link_tag 'favicon.png' %>
     <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,600italic' %>
-    <%= stylesheet_link_tag 'application' %>
+
+    <% if @rtl %>
+      <%= stylesheet_link_tag 'application-rtl' %>
+    <% else %>
+      <%= stylesheet_link_tag 'application' %>
+    <% end %>
+
     <%= stylesheet_link_tag 'application-print', media: 'print' %>
     <%= javascript_include_tag 'vendor/modernizr' %>
     <%= csrf_meta_tags %>

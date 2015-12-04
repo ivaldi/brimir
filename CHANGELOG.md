@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Automatic refresh of inbox when browser tab receives focus again.
 - Internal notes can now be added to tickets.
+- Right to left support for Farsi.
 
 ### Changed
 
