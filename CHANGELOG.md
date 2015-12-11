@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Ticket detail pages of tickets with draft replies could generate errors after saving a draft.
+- Replies can now be seen again by other agents when ticket is locked.
 
 ### Security
 
