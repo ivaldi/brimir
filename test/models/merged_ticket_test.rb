@@ -41,7 +41,7 @@ class TicketMergeTest < ActiveSupport::TestCase
     assert second_ticket.replies.last.user == agent_user
     assert second_ticket.replies.last.internal == true
     assert second_ticket.replies.last.content.include? first_ticket.id.to_s
-    assert second_ticket.status == 'closed'
+    assert second_ticket.status == 'merged'
   end
   
   test 'merging two tickets and copying over the notifications' do

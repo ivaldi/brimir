@@ -26,7 +26,7 @@ class MergedTicket < Ticket
     oldest_original_ticket.replies << copies_of_the_replies_of_the_younger_tickets
     oldest_original_ticket.replies << younger_tickets.collect { |ticket| ticket.to_reply }
     younger_tickets.each { |ticket| ticket.create_merge_notice(oldest_original_ticket, current_user) } if current_user
-    younger_tickets.each { |ticket| ticket.status = :closed; ticket.save }
+    younger_tickets.each { |ticket| ticket.status = :merged; ticket.save }
     return oldest_original_ticket
   end
   

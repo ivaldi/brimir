@@ -35,7 +35,7 @@ class Ticket < ActiveRecord::Base
 
   has_many :status_changes, dependent: :destroy
 
-  enum status: [:open, :closed, :deleted, :waiting]
+  enum status: [:open, :closed, :deleted, :waiting, :merged]
   enum priority: [:unknown, :low, :medium, :high]
 
   after_update :log_status_change

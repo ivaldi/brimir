@@ -53,7 +53,7 @@
       <li class="pal no-m prm">
         <input type="checkbox" value="" name="" class="no-mb mts left" data-toggle-all />
       </li>
-      <% Ticket.statuses.except(params[:status]).keys.each do |value| %>
+      <% Ticket.statuses.except(params[:status]).except(:merged).keys.each do |value| %>
         <li class="bl no-m">
           <button type="submit" name="ticket[status]" value="<%= value %>" class="ptl plm prm pbl text-medium-light-grey no-m no-b">
             <%= t(value, scope: 'activerecord.attributes.ticket.statuses') %>
