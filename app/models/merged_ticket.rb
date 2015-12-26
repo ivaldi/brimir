@@ -55,6 +55,7 @@ class MergedTicket < Ticket
       reply_copy = reply.dup 
       reply_copy.created_at = reply.created_at
       reply_copy.updated_at = reply.updated_at
+      reply_copy.attachments << reply.attachments.collect { |attachment| attachment.dup }
       reply
     end
   end

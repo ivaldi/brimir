@@ -33,7 +33,8 @@ concern :TicketMerge do
       raw_message_file_name: self.raw_message_file_name,
       raw_message_content_type: self.raw_message_content_type,
       raw_message_file_size: self.raw_message_file_size,
-      raw_message_updated_at: self.raw_message_updated_at
+      raw_message_updated_at: self.raw_message_updated_at,
+      attachments: self.attachments.collect { |attachment| attachment.dup }
     )
   end
   

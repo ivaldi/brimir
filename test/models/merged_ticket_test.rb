@@ -59,4 +59,28 @@ class TicketMergeTest < ActiveSupport::TestCase
     assert merged_ticket.replies.order(:created_at).last.notified_users.include? client_user
   end
   
+  test 'merging tickets with attachments' do
+    client_user = User.where(agent: false).first
+    agent_user = User.where(agent: true).first
+    first_ticket = Ticket.create subject: "First ticket", content: "I've got a question ...", user_id: client_user.id
+    Timecop.travel 2.minutes.from_now
+    first_reply = first_ticket.replies.create content: "Please send me some more info about ...", user_id: agent_user.id
+    Timecop.travel 20.minutes.from_now
+    second_ticket = Ticket.create subject: "Second ticket", content: "I forgot to mention ...", user_id: client_user.id
+    Timecop.travel 1.hour.from_now
+    
+    first_attachment = first_ticket.attachments.create!
+    second_attachment = second_ticket.attachments.create!
+    
+    reply_with_attachment = second_ticket.replies.create! content: "Reply with attachment"
+    reply_attachment = reply_with_attachment.attachments.create!
+    
+    separate_tickets = [first_ticket, second_ticket]
+    merged_ticket = MergedTicket.from separate_tickets
+    
+    assert merged_ticket.attachments.include? first_attachment
+    assert merged_ticket.replies.collect { |reply| reply.attachments }.flatten.include? reply_attachment
+    assert_equal merged_ticket.replies.collect { |reply| reply.attachments }.flatten.count, [second_attachment, reply_attachment].count
+  end
+  
 end
