@@ -99,6 +99,12 @@
           <% else %>
             <span>&nbsp;</span>
           <% end %>
+          <% if params[:status].nil? %>
+            <span class="ba label radius right alt text-secondary">
+              <%= status_icon(ticket.status, assigned_to_me: ticket.assignee == current_user) %>
+              <%= t ticket.status %>
+            </span>
+          <% end %>
         </div>
         <div class="medium-2 v-middle columns">
           <% ticket.labels.viewable_by(current_user).each do |label| %>
