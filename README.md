@@ -108,6 +108,7 @@ Some users have made requests for the following features. If you would like to c
 - Custom ticket statuses, all via database. (#217)
 - Filter on to/cc/bcc without verified addresses. (#227)
 - Add captcha for non-signed in ticket creation. (#228)
+- IMAP or POP3 pull mechanism for new tickets. (#249)
 
 License
 -------
