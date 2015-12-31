@@ -26,6 +26,11 @@
     <% if user_signed_in? %>
       <nav class="top-bar" data-topbar>
         <ul class="title-area medium-3 large-2">
+          <% if can? :create, Ticket %>
+            <li class="collapsed-only left">
+              <a href="<%= new_ticket_path %>" class="button info"><i class="fa fa-plus fa-fw"></i></a>
+            </li>
+          <% end %>
           <li class="name">
             <h1><a href="<%= root_path %>">BRIMIR</a></h1>
           </li>
