@@ -13,6 +13,23 @@
 				}
 			}
 		}
+
+		.left {
+			left: 1rem;
+		}
+
+		.collapsed-only {
+			@media #{$small-only} {
+				display: inline-block;
+				top: 50%;
+				margin-top: -1rem;
+				position: absolute;
+			}
+
+			@media #{$medium-up} {
+				display: none;
+			}
+		}
 	}
 
 	.top-bar-section{
