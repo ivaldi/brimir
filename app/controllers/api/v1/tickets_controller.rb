@@ -27,10 +27,12 @@ class Api::V1::TicketsController < Api::V1::ApplicationController
 
   def create
     @ticket = Ticket.new(ticket_params)
-    if !@ticket.nil? && @ticket.save
+    if @ticket.save
       NotificationMailer.incoming_message(@ticket, params[:message])
+      render nothing: true, status: :created
+    else
+      render nothing: true, status: :bad_request
     end
-    render nothing: true, status: :created
   end
 
   protected
