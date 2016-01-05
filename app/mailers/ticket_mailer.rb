@@ -22,6 +22,8 @@ class TicketMailer < ActionMailer::Base
   end
 
   def normalize_body(part, charset)
+    # some mail clients apparently send wrong charsets
+    charset = 'utf-8' if charset == 'utf8'
     encode(part.body.decoded.force_encoding(charset))
   end
 

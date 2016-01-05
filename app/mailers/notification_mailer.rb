@@ -117,7 +117,7 @@ class NotificationMailer < ActionMailer::Base
 
     @reply = reply
     @user = user
-
+    return if EmailAddress.pluck(:email).include?(user.email.to_s)
     mail(to: user.email, subject: title, from: reply.ticket.reply_from_address)
   end
 
