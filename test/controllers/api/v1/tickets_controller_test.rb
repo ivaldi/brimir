@@ -49,5 +49,4 @@ class Api::V1::TicketsControllerTest < ActionController::TestCase
     end
     assert_response :success
   end
-
 end
