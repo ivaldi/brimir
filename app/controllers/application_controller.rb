@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class ApplicationController < ActionController::Base
+
   include MultiTenancy
 
   rescue_from DeviseLdapAuthenticatable::LdapException do |exception|

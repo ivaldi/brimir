@@ -1,5 +1,6 @@
 module MultiTenancy
   extend ActiveSupport::Concern
+
   protected
   def load_tenant
     if request.subdomain.blank?

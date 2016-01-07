@@ -3,6 +3,9 @@ require 'test_helper'
 class API::V1::ApiLoginTest < ActionDispatch::IntegrationTest
 
   test 'should sign in using single sign on' do
+
+    host! "test.host"
+    
     post '/api/v1/sessions', { email: 'bob@xxxx.com', password: 'testtest' }
 
     assert_response :success
