@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Api::V1::ApplicationController < ActionController::Base
+  include MultiTenancy
+  
   protect_from_forgery with: :null_session
 
   before_action :authenticate_user_from_token!
