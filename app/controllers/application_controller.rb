@@ -15,6 +15,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class ApplicationController < ActionController::Base
+  include MultiTenancy
+
   rescue_from DeviseLdapAuthenticatable::LdapException do |exception|
     render text: exception, status: 500
   end
@@ -63,14 +65,6 @@ class ApplicationController < ActionController::Base
       else
         I18n.locale = locale
       end
-    end
-  end
-
-  def load_tenant
-    if request.subdomain.blank?
-      Tenant.current_domain = request.domain
-    else
-      Tenant.current_domain = "#{request.subdomain}.#{request.domain}"
     end
   end
 end
