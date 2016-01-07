@@ -20,6 +20,7 @@ class Api::V1::ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
 
   before_action :authenticate_user_from_token!
+  before_action :load_tenant
 
   check_authorization
 
