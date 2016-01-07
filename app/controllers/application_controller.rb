@@ -66,5 +66,11 @@ class ApplicationController < ActionController::Base
         I18n.locale = locale
       end
     end
+
+    if I18n.locale == :fa
+      @rtl = true
+    else
+      @rtl = false
+    end
   end
 end

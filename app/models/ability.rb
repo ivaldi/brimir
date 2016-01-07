@@ -87,9 +87,12 @@ class Ability
 
   def agent(user)
     # agents can reply to tickets that are locked by themselves or unlocked
-    can [:create, :read], Reply, Reply.unlocked_for(user) do |reply|
+    can :create, Reply, Reply.unlocked_for(user) do |reply|
       !reply.ticket.locked?(user)
     end
+
+    # can view all replies
+    can :read, Reply
 
     # agents can edit all users
     can [:read, :create, :update], User

@@ -43,4 +43,13 @@ class NotificationMailerTest < ActionMailer::TestCase
     assert_equal email_addresses(:brimir).formatted, mail['From'].to_s
   end
 
+  # Preventing infinite email loops
+  test 'should not notify our own outgoing addresses' do
+    reply = replies(:solution)
+    our_email = email_addresses(:support)
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      NotificationMailer.new_reply(reply, User.new(email: our_email.email)).deliver_now
+    end
+  end
+
 end

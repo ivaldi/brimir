@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Automatic refresh of inbox when browser tab receives focus again.
 - Internal notes can now be added to tickets.
+- Right to left support for Farsi.
+- Mobile menu fixes from @sapslaj.
 
 ### Changed
 
@@ -15,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 - Ticket detail pages of tickets with draft replies could generate errors after saving a draft.
+- Replies can now be seen again by other agents when ticket is locked.
 
 ### Security
 

@@ -336,4 +336,16 @@ class TicketsControllerTest < ActionController::TestCase
     get :show, id: @ticket.id, format: :eml
     assert_response :success
   end
+
+  test 'should show replies even when ticket is locked' do
+    sign_in users(:alice)
+
+    @ticket.locked_by = users(:charlie)
+    @ticket.locked_at = Time.now
+    @ticket.save!
+
+    get :show, id: @ticket.id
+    assert_response :success
+    assert_match replies(:solution).content, @response.body
+  end
 end

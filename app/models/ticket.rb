@@ -101,6 +101,12 @@ class Ticket < ActiveRecord::Base
       ticket_ids = Labeling.where(label_id: user.label_ids)
           .where(labelable_type: 'Ticket')
           .pluck(:labelable_id)
+
+      # all notified tickets
+      ticket_ids += Notification.where(user: user)
+          .where(notifiable_type: 'Ticket')
+          .pluck(:notifiable_id)
+
       where('tickets.id IN (?) OR tickets.user_id = ? OR tickets.assignee_id = ?',
           ticket_ids, user.id, user.id)
     end
