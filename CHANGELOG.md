@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Internal notes can now be added to tickets.
 - Right to left support for Farsi.
 - Mobile menu fixes from @sapslaj.
+- Ticket creation api by @bsylvain.
 
 ### Changed
 
