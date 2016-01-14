@@ -3,6 +3,7 @@ alice:
   agent: true
   signature: 'Greets, Alice'
   notify: true
+  authentication_token: blabla
 
 bob:
   email: bob@xxxx.com
