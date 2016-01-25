@@ -1,0 +1,285 @@
+tr:
+  language_name: Türkçe
+# layouts/application
+  new_ticket: Yeni kart
+  inbox: Gelen kutusu
+  mine: Kendime
+  closed_tickets: Kapalı
+  trashed: Silinmiş
+  users: Kullanıcılar
+  rules: Kurallar
+  personal_settings: Kişisel ayarlarım
+  sign_out: Çıkış
+  delete: Sil
+
+  joyride:
+    tickets: Anybody can create tickets using this button.
+    personal_settings: Set your signature, timezone and other preferences via this menu.
+    labels: After adding labels to tickets or users, they will show up here. You can then use them as filters.
+    rules: Automatically add labels, assignees, change status and more.
+    users: Add more agents or normal users.
+    final: Thanks for using Brimir!
+    next: Sonraki
+    previous: Önceki
+    end: Haydi Başla!
+
+# devise/sessions/new
+  sign_in: Brimir'e kaydol
+
+# devise/shared/links
+  forgot_password: Şifremi unuttum
+
+# devise/passwords/new
+  send_instructions: Yapılacakları bana gönder
+
+# devise/passwords/edit
+  change_password: Şifre değiştir
+  new_password: Yeni şifre
+  new_password_confirmation: Yeni şifre onayı
+
+# devise/mailer/reset_password_instructions
+  hello: Merhaba
+  someone_requested_link: Someone has requested a link to change your password, and you can do this through the link below.
+  ignore_if_not_requested: If you didn't request this, please ignore this email.
+  password_wont_change_without_opening_link: Your password won't change until you access the link above and create a new one.
+
+# tickets/index
+  count_tickets:
+    one: '%{count} ticket'
+    other: '%{count} tickets'
+  count_tickets_containing:
+    one: '%{count} ticket containing'
+    other: '%{count} tickets containing'
+  priority: Öncelik
+  replies: cevapla
+  no_subject: Konu yok
+  unassigned: Atanmamış
+  no_tickets_found: Kart bulunamadı.
+  search: Ara
+  filter: Filtre
+  minutes: dakika
+  are_you_sure_empty_trash: Delete all tickets in the trash?
+  locked_by_user: Ticket currently being handled by %{user}
+  ticket_id_created_by_at: '#%{id} created by %{user} at %{at}'
+
+# tickets/show
+  add: ekle
+  to_email: alıcı %{email}
+  no_content: içerik yok
+  ticket_id: Kart ID#
+  status: Durum
+  assignee: Atayan
+  num_replies:
+    one: '%{count} reply'
+    other: '%{count} replies'
+  ago: ago
+  high: Yüksek
+  medium: Orta
+  low: Düşük
+  unknown: Bilinmeyen
+  labels: Etiketler
+  label_name: Etkiket adı
+  notification_sent_to: 'A notification was sent to the following addresses:'
+  no_notifications_sent: 'No notifications have been sent'
+  assign_label: Atama etiketi
+  take_ticket_lock_from_user: Take ticket handling from %{user}
+
+# tickets/_change_priority_form
+  change: Değiştir
+  change_priority: Önceliği değiştir
+
+# tickets/_change_status_form
+  change_status: Durumu değiştir
+
+# tickets/_change_assignee_form
+  change_assignee: Kart ata
+  assign: Atama
+
+# tickets/locks/create
+  ticket_locked_by_somebody_else: Ticket is currently already being handled by somebody else
+
+# replies/new
+  add_reply: Yönlendirme ekle
+
+# replies/_form
+  reply: Yönlendir
+  attach_files: Dosya(ları) ekle
+  attach_file: Dosya ekle
+  send_reply: Send reply
+  on_date_author_wrote: 'On %{date}, %{author} wrote:'
+  notification_will_be_sent_to: Your notification will be sent to
+  save_as_draft: Taslak olarak kaydet
+
+# replies/_reply
+  reply_by: Reply by
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Ticket assigned to you
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Ticket priority modified for ticket
+
+# ticket_mailer/notify_status_changed.text.erb
+  ticket_status_modified: Ticket status modified for ticket
+  tickets_status_modified: Ticket status modified for tickets
+
+# notification_mailer/new_ticket
+  view_new_ticket: View new ticket
+# notification_mailer/new_reply
+  new_reply: New reply
+  view_new_reply: View new reply
+
+# attachments/_attachment
+  download: indir
+
+# users/new
+  new_user: Yeni kullanıcı
+
+# users/edit
+  edit_user: Kullanıcı düzenle
+  omniauth_connect_title: Authentication using Google
+  omniauth_connect_text: Activate authentication using a Google Account. Afterwards you can use "Sign in with Google" as an alternative to the default email address and password login.
+  omniauth_connect_google_text: Connect with Google
+  remove_user: Kullanıcı sil
+
+# users/index
+  email: E-posta
+  role: Rol
+  agent: Temsilci
+  customer: Müşteri
+
+# users/_form
+  account_settings: Hesap ayarları
+  only_fill_in_passwords_when_modifying: Only fill in these two fields if you want to modify your password.
+  user_is_an_agent: User is an agent
+  receive_new_ticket_notifications: Receive notifications for new tickets
+  email_settings: E-posta ayarları
+  save: Kaydet
+  access_control: Erişim kontrol
+  have_access_to_label: User has access to all tickets with any of these labels.
+
+# settings/edit
+  change_settings: Ayarları değiştir
+  localization_settings: Yerelleştirilmiş ayarlar
+  permissions: Yetkiler
+
+# controllers/settings
+  settings_saved: Ayarlar kaydedildi
+
+# controllers/attachments
+  file_not_found: Dosya bulunamadı
+
+# controllers/users
+  settings_saved: Ayarlar kaydedildi
+  user_added: Kullanıcı eklendi
+  user_removed: Kullanıcı silindi
+
+# controllers/tickets
+  ticket_added: Kart eklendi
+  ticket_updated: Kart güncellendi
+
+# controllers/tickets/deleted
+  trash_emptied: All tickets were deleted from the trash
+
+# controllers/replies
+  reply_added: Reply added
+  draft_saved: Taslak kaydedildi
+
+# controllers/omniauth
+  already_linked_accounts: Already linked with Google Account
+  successfully_linked_account: Successfully linked with Google Account
+  not_linked_account_cant_login: There is no user attached to this provider yet. Please sign in first and connect through the personal settings screen.
+  third_party_failure: An error occured during authentication. Did you enable "Contacts API" and "Google+ API" via the Google API console?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Alternatif giriş
+  omniauth_sign_in_google: Google
+
+# rules/index
+  new_rule: Yeni kural
+
+# rules/edit
+  edit_rule: Kural güncelle
+  delete_rule: Kural sil
+  are_you_sure: Emin misin?
+
+# controllers/rules
+  rule_added: Rule added
+  rule_modified: Rule modified
+  rule_deleted: Rule deleted
+
+# email_addresses/index
+  new_email_address: New outgoing email address
+  email_addresses: Email addresses for outgoing email
+
+# email_addresses/edit
+  modify_email_address: Modify outgoing email address
+
+# email_addresses/new
+  verification_mail_will_be_sent: Make sure this email address is forwarded correctly to Brimir. An automated verification email will be sent when you click save. Only verified email addresses can be used for outgoing mail.
+  mark_spam_spf: Brimir mails might be marked as spam when you don't add this server to the SPF DNS record of the above mail address.
+
+# controllers/email_addresses
+  email_address_modified: Email address modified
+  email_address_added: Email address added
+  email_address_removed: Email address removed
+
+  activerecord:
+    attributes:
+      user:
+        email: E-posta
+        password: Şifre
+        password_confirmation: Şifre onayı
+        signature: Email signature
+        remember_me: Beni hatırla
+        label_ids: Etiketler
+        locale: Dil
+        time_zone: Zaman dilimi
+        per_page: Tickets per page
+        prefer_plain_text: Send and receive plain text replies
+
+      ticket:
+        from: From email address
+        subject: Konu
+        content: İçerik
+        status: Durum
+        statuses:
+          open: Açık
+          closed: Kapalı
+          deleted: Silinmiş
+          waiting: Bekleyen
+        priority: Öncelik
+        assignee_id: Atayan
+        created_at: Created at
+        to: To email address
+
+      reply:
+        from: From email address
+
+      rule:
+        filter_field: Alan
+        filter_operation: Operator
+        filter_operations:
+          contains: içerir
+          equals: is equal to
+        filter_value: Değer
+        action_operation: Action to perform
+        action_operations:
+          assign_label: assign label
+          notify_user: send notification to
+          change_status: change status to
+          change_priority: change priority to
+          assign_user: assign to
+        action_value: Parameter for action
+
+      email_address:
+        email: E-posta adresi
+        name: Ad
+        default: Use as default outgoing mail address
+        verification_token: Onaylandı
+
+      tenant:
+        default_locale: Default language
+        ignore_user_agent_locale: Ignore preferred browser language
+        default_time_zone: Default time zone
+        share_drafts: Share drafts with other agents
