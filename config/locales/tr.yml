@@ -1,0 +1,286 @@
+tr:
+  language_name: Türkçe
+# layouts/application
+  new_ticket: Yeni kart
+  inbox: Gelen kutusu
+  mine: Kendime
+  closed_tickets: Kapalı
+  trashed: Silinmiş
+  users: Kullanıcılar
+  rules: Kurallar
+  personal_settings: Kişisel ayarlarım
+  sign_out: Çıkış
+  delete: Sil
+
+  joyride:
+    tickets: Bu butonu kullanarak herhangi birisi kart oluşturabilir.
+    personal_settings: Bu menüden e-posta imzanı, zaman dilimini ve diğer ayarlarını değiştirebilirsin.
+    labels: Kullanıcı veya kartlar için etiketleri ekledikten sonra eklediklerini yukarıda görebilirsin. Ayrıca onları filtreleme aracı olarak da kullanabilirsin.
+    rules: Otomatik olarak etiketleri, atayanları ekle, durumları değiştir.
+    users: Normal kullanıcı veya temsilci ekle
+    final: Brimiri kullandığın için teşekkürler.
+    next: Sonraki
+    previous: Önceki
+    end: Haydi Başla!
+
+# devise/sessions/new
+  sign_in: Brimir'e kaydol
+
+# devise/shared/links
+  forgot_password: Şifremi unuttum
+
+# devise/passwords/new
+  send_instructions: Yapılacakları bana gönder
+
+# devise/passwords/edit
+  change_password: Şifre değiştir
+  new_password: Yeni şifre
+  new_password_confirmation: Yeni şifre onayı
+
+# devise/mailer/reset_password_instructions
+  hello: Merhaba
+  someone_requested_link: Birisi şifreni değiştirmek için istekte bulundu ve istersen bunu aşağıdaki bağlantıdan sen de yapabilirsin.
+  ignore_if_not_requested: Eğer bunu sen istemedi isen, lütfen yoksay.
+  password_wont_change_without_opening_link: Şifren yukarıda belirtilen bağlantıya tıklayıp yeni bir şifre oluşturana kadar değişmeyecektir.
+
+# tickets/index
+  count_tickets:
+    one: '%{count} adet kart'
+    other: '%{count} adet kart'
+  count_tickets_containing:
+    one: '%{count} adet kart içeriyor'
+    other: '%{count} adet kart içeriyor'
+  priority: Öncelik
+  replies: cevapla
+  no_subject: Konu yok
+  unassigned: Atanmamış
+  no_tickets_found: Kart bulunamadı.
+  search: Ara
+  filter: Filtre
+  minutes: dakika
+  are_you_sure_empty_trash: Çöp kutusundaki tüm kartlar silinsin mi?
+  locked_by_user: Bu kart ile şu an %{user} ilgileniyor
+  ticket_id_created_by_at: '%{user} tarafından  %{at} yerinde  #%{id} numaralı kart oluşturuldu'
+
+# tickets/show
+  add: ekle
+  to_email: alıcı %{email}
+  no_content: içerik yok
+  ticket_id: Kart ID#
+  status: Durum
+  assignee: Atayan
+  num_replies:
+    one: '%{count} adet cevaplama'
+    other: '%{count} adet cevaplama'
+  ago: ago
+  high: Yüksek
+  medium: Orta
+  low: Düşük
+  unknown: Bilinmeyen
+  labels: Etiketler
+  label_name: Etkiket adı
+  notification_sent_to: 'Belirtilen adreslere bir bildiri gönderildi:'
+  no_notifications_sent: 'Gönderilmiş bildiri yok'
+  assign_label: Atama etiketi
+  take_ticket_lock_from_user: Bu kart %{user} tarafından ilgileniyor
+
+# tickets/_change_priority_form
+  change: Değiştir
+  change_priority: Önceliği değiştir
+
+# tickets/_change_status_form
+  change_status: Durumu değiştir
+
+# tickets/_change_assignee_form
+  change_assignee: Kart ata
+  assign: Atama
+
+# tickets/locks/create
+  ticket_locked_by_somebody_else: Kart şu an başkası tarafından ilgiliniyor
+
+# replies/new
+  add_reply: Yönlendirme ekle
+
+# replies/_form
+  reply: Yönlendir
+  attach_files: Dosya(ları) ekle
+  attach_file: Dosya ekle
+  send_reply: Cevap gönder
+  on_date_author_wrote: '%{date} tarihinde, %{author} yazdı:'
+  notification_will_be_sent_to: Bildiriminiz gönderilecektir
+  save_as_draft: Taslak olarak kaydet
+
+# replies/_reply
+  reply_by: Cevaplandı
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Kart size atandı
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Kartın önceliği güncellendi
+
+# ticket_mailer/notify_status_changed.text.erb
+  ticket_status_modified: Kartın durumu güncellendi
+  tickets_status_modified: Kartın durumu güncellendi
+
+# notification_mailer/new_ticket
+  view_new_ticket: Yeni kartı gör
+# notification_mailer/new_reply
+  new_reply: Yeni cevap
+  view_new_reply: Yeni cevabı gör
+
+# attachments/_attachment
+  download: indir
+
+# users/new
+  new_user: Yeni kullanıcı
+
+# users/edit
+  edit_user: Kullanıcı düzenle
+  omniauth_connect_title: Google ile giriş yap
+  omniauth_connect_text: Google hesabını kullanarak kimliğini doğrula. Sonrasında Google ile giriş yapabilirsin.
+
+  omniauth_connect_google_text: Google ile giriş yap
+  remove_user: Kullanıcı sil
+
+# users/index
+  email: E-posta
+  role: Rol
+  agent: Temsilci
+  customer: Müşteri
+
+# users/_form
+  account_settings: Hesap ayarları
+  only_fill_in_passwords_when_modifying: Şifreni değiştirmek istiyorsan sadece bu iki alanı doldur.
+  user_is_an_agent: Kullanıcı bir temsilcidir
+  receive_new_ticket_notifications: Yeni kartlar için bildirileri al
+  email_settings: E-posta ayarları
+  save: Kaydet
+  access_control: Erişim kontrol
+  have_access_to_label: Kullanıcının belirtilen etiketlerden herhangi biriyle işaretlenmiş kartlar erişimi vardır
+
+# settings/edit
+  change_settings: Ayarları değiştir
+  localization_settings: Yerelleştirilmiş ayarlar
+  permissions: Yetkiler
+
+# controllers/settings
+  settings_saved: Ayarlar kaydedildi
+
+# controllers/attachments
+  file_not_found: Dosya bulunamadı
+
+# controllers/users
+  settings_saved: Ayarlar kaydedildi
+  user_added: Kullanıcı eklendi
+  user_removed: Kullanıcı silindi
+
+# controllers/tickets
+  ticket_added: Kart eklendi
+  ticket_updated: Kart güncellendi
+
+# controllers/tickets/deleted
+  trash_emptied: Çöp kutusundaki tüm kartlar silindi
+
+# controllers/replies
+  reply_added: Cevap eklendi
+  draft_saved: Taslak kaydedildi
+
+# controllers/omniauth
+  already_linked_accounts: Bu Google hesabı zaten eklidir
+  successfully_linked_account: Google hesabı başarıyla eklendi
+  not_linked_account_cant_login: Giriş için bu yetki sağlayıcıyla ilişkilendirilmiş kullanıcı yoktur. Lütfen önce giriş yapın ve kişisel ayarlarım kısmından alternatif yetki sağlayıcısını bağlayın.
+  third_party_failure: Yetkilendirme sırasında hata oluştu. Google API konsolundan "Rehber" ve "Google+" erişmek istiyor musun?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Alternatif giriş
+  omniauth_sign_in_google: Google
+
+# rules/index
+  new_rule: Yeni kural
+
+# rules/edit
+  edit_rule: Kural güncelle
+  delete_rule: Kural sil
+  are_you_sure: Emin misin?
+
+# controllers/rules
+  rule_added: Kural eklendi
+  rule_modified: Kural güncellendi
+  rule_deleted: Kural silindi
+
+# email_addresses/index
+  new_email_address: Yeni giden e-posta adresi
+  email_addresses: Giden e-posta için e-posta adresi
+
+# email_addresses/edit
+  modify_email_address: Giden e-posta adresini güncelle
+
+# email_addresses/new
+  verification_mail_will_be_sent: Bu e-posta adresinin Brimir'e yönlendirildiğinden emin ol. Kaydete tıkladığında otomatik olarak onay maili gönderilecktir. Sadece onaylı e-posta adresleri giden e-posta adresi olarak kullanılabilir.
+  mark_spam_spf: Brimir mail spam olarak işaretlenebilir. Bunun olmaması için yukarıdaki e-posta adresleri için SPF DNS kayıtlarını ekleyin.
+
+# controllers/email_addresses
+  email_address_modified: E-posta adresi güncellendi
+  email_address_added: E-posta adresi eklendi
+  email_address_removed: E-posta adresi kaldırıldı
+
+  activerecord:
+    attributes:
+      user:
+        email: E-posta
+        password: Şifre
+        password_confirmation: Şifre onayı
+        signature: Email signature
+        remember_me: Beni hatırla
+        label_ids: Etiketler
+        locale: Dil
+        time_zone: Zaman dilimi
+        per_page: Sayfa başına kart adedi
+        prefer_plain_text: Düz metin mesajları gönder ve al
+
+      ticket:
+        from: Gönderen e-posta adresi
+        subject: Konu
+        content: İçerik
+        status: Durum
+        statuses:
+          open: Açık
+          closed: Kapalı
+          deleted: Silinmiş
+          waiting: Bekleyen
+        priority: Öncelik
+        assignee_id: Atayan
+        created_at: Uluşturma tarihi
+        to: Alıcı a-posta adresi
+
+      reply:
+        from: Gönderen e-posta adres(ler)i
+
+      rule:
+        filter_field: Alan
+        filter_operation: Operator
+        filter_operations:
+          contains: içerir
+          equals: eşittir
+        filter_value: Değer
+        action_operation: Eylemi gerçekleştir
+        action_operations:
+          assign_label: etiket ata
+          notify_user: bildirim gönder
+          change_status: durum değiştir
+          change_priority: öncelik değiştir
+          assign_user: atama yap
+        action_value: Parametre işlemleri
+
+      email_address:
+        email: E-posta adresi
+        name: Adı
+        default: Ön tanımlı giden e-posta adresi olarak kullan
+        verification_token: Onaylandı
+
+      tenant:
+        default_locale: Ön tanımlı dil
+        ignore_user_agent_locale: Tarayıcının önerdiği dili yoksay
+        default_time_zone: Ön tanımlı zaman dilimi
+        share_drafts: Taslakları diğer temsilciler ile paylaş
