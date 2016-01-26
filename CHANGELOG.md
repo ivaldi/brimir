@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Right to left support for Farsi.
 - Mobile menu fixes from @sapslaj.
 - Ticket creation api by @bsylvain.
+- Turkish translation by @yildizib.
 
 ### Changed
 
