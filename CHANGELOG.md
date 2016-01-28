@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Mobile menu fixes from @sapslaj.
 - Ticket creation api by @bsylvain.
 - Turkish translation by @yildizib.
+- Merge ticket feature by @fiedl.
 
 ### Changed
 
