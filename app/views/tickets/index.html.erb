@@ -53,13 +53,18 @@
       <li class="pal no-m prm">
         <input type="checkbox" value="" name="" class="no-mb mts left" data-toggle-all />
       </li>
-      <% Ticket.statuses.except(params[:status]).keys.each do |value| %>
+      <% Ticket.statuses.except(params[:status]).except(:merged).keys.each do |value| %>
         <li class="bl no-m">
           <button type="submit" name="ticket[status]" value="<%= value %>" class="ptl plm prm pbl text-medium-light-grey no-m no-b">
             <%= t(value, scope: 'activerecord.attributes.ticket.statuses') %>
           </button>
         </li>
       <% end %>
+      <li class="bl no-m">
+        <button type="submit" name="merge" value="true" class="ptl plm prm pbl text-medium-light-grey no-m no-b" title="<%=t :merge_explanation %>">
+          <%= t :merge %>
+        </button>
+      </li>
     </ul>
     <% @tickets.each do |ticket| %>
       <div class="priority-<%= ticket.priority %> row ticket bb" style="height: 4em;" data-ticket-url="<%= ticket_url(ticket) %>">
@@ -93,6 +98,12 @@
              </span>
           <% else %>
             <span>&nbsp;</span>
+          <% end %>
+          <% if params[:status].nil? %>
+            <span class="ba label radius right alt text-secondary">
+              <%= status_icon(ticket.status, assigned_to_me: ticket.assignee == current_user) %>
+              <%= t ticket.status %>
+            </span>
           <% end %>
         </div>
         <div class="medium-2 v-middle columns">

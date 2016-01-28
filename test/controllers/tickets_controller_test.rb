@@ -333,6 +333,7 @@ class TicketsControllerTest < ActionController::TestCase
     @ticket.raw_message = fixture_file_upload('ticket_mailer/simple')
     @ticket.save!
 
+    @ticket.reload
     get :show, id: @ticket.id, format: :eml
     assert_response :success
   end

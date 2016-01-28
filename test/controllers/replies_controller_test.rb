@@ -126,6 +126,7 @@ class RepliesControllerTest < ActionController::TestCase
     @reply.raw_message = fixture_file_upload('ticket_mailer/simple')
     @reply.save!
 
+    @reply.reload
     get :show, id: @reply.id, format: :eml
     assert_response :success
   end

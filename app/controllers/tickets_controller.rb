@@ -76,6 +76,10 @@ class TicketsController < ApplicationController
       .filter_by_assignee_id(params[:assignee_id])
       .filter_by_user_id(params[:user_id])
       .ordered
+    
+    if params[:status] != 'merged'
+      @tickets = @tickets.where.not(status: Ticket.statuses[:merged])
+    end
 
     respond_to do |format|
       format.html do
