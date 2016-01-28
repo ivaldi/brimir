@@ -13,31 +13,34 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-class Api::V1::TicketsController < Api::V1::ApplicationController
-  include TicketsStrongParams
-  
-  load_and_authorize_resource :ticket
 
-  def index
-    if current_user.agent && params.has_key?(:user_email)
-      user= User.find_by( email: Base64.urlsafe_decode64(params[:user_email]) )
-      @tickets = Ticket.by_status(:open).viewable_by(user)
-    else
-      @tickets = Ticket.by_status(:open).viewable_by(current_user)
+module UsersStrongParams
+  extend ActiveSupport::Concern
+  protected
+  def user_params
+    attributes = params.require(:user).permit(
+        :email,
+        :password,
+        :password_confirmation,
+        :remember_me,
+        :signature,
+        :agent,
+        :notify,
+        :time_zone,
+        :locale,
+        :per_page,
+        :prefer_plain_text,
+        :include_quote_in_reply,
+        label_ids: []
+    )
+
+    # prevent normal user and limited agent from changing email and role
+    if !current_user.agent? || current_user.labelings.count > 0
+      attributes.delete(:email)
+      attributes.delete(:agent)
+      attributes.delete(:label_ids)
     end
-  end
 
-  def show
-    @ticket = Ticket.find(params[:id])
-  end
-
-  def create
-    @ticket = Ticket.new(ticket_params)
-    if @ticket.save
-      NotificationMailer.incoming_message(@ticket, params[:message])
-      render nothing: true, status: :created
-    else
-      render nothing: true, status: :bad_request
-    end
+    return attributes
   end
 end

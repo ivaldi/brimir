@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class UsersController < ApplicationController
-
+  include UsersStrongParams
   load_and_authorize_resource :user
 
   def edit
@@ -72,34 +72,5 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.destroy
     redirect_to users_url, notice: I18n.translate(:user_removed)
-  end
-
-  protected
-
-  def user_params
-    attributes = params.require(:user).permit(
-        :email,
-        :password,
-        :password_confirmation,
-        :remember_me,
-        :signature,
-        :agent,
-        :notify,
-        :time_zone,
-        :locale,
-        :per_page,
-        :prefer_plain_text,
-        :include_quote_in_reply,
-        label_ids: []
-    )
-
-    # prevent normal user and limited agent from changing email and role
-    if !current_user.agent? || current_user.labelings.count > 0
-      attributes.delete(:email)
-      attributes.delete(:agent)
-      attributes.delete(:label_ids)
-    end
-
-    return attributes
   end
 end
