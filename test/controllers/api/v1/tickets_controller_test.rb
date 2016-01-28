@@ -39,7 +39,7 @@ class Api::V1::TicketsControllerTest < ActionController::TestCase
 
   test 'should show tickets as nested resource' do
     get :index, auth_token: users(:bob).authentication_token,
-      user_email: users(:alice).email,  :format => :json
+      user_email: Base64.urlsafe_encode64(users(:alice).email),  :format => :json
     assert_response :success
   end
 
