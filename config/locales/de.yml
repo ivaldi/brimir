@@ -95,6 +95,13 @@ de:
   change_assignee: Ticket zuweisen
   assign: Ticket zuweisen
 
+# tickets/merge
+  ticket_has_been_merged_to: "Dieses Ticket wurde mit Ticket #%{ticket_id} zusammengeführt."
+  merge: Zusammenführen
+  merge_explanation: "Ausgewählte Tickets zusammenführen. Dies kopiert die Antworten der ausgewählten Tickets in das älteste diser Tickets. Die übrigen ausgewählten Tickets werden geschlossen."
+  tickets_have_been_merged: "Tickets wurden zusammengeführt."
+  
+
 # replies/new
   add_reply: Antworten
 

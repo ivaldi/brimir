@@ -98,6 +98,12 @@ en:
 
 # tickets/locks/create
   ticket_locked_by_somebody_else: Ticket is currently already being handled by somebody else
+  
+# tickets/merge
+  ticket_has_been_merged_to: "This ticket has been merged to ticket #%{ticket_id}."
+  merge: Merge
+  merge_explanation: "Merge the selected tickets. This copies all replies to the oldest of the selected tickets and closes the other selected tickets."
+  tickets_have_been_merged: "Tickets have been merged."
 
 # replies/new
   add_reply: Add reply
