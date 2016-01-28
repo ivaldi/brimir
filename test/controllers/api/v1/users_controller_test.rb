@@ -10,7 +10,7 @@ class Api::V1::UsersControllerTest < ActionController::TestCase
   end
 
   test 'should find a User' do
-    get :show, auth_token: users(:alice).authentication_token, email: users(:alice).email, :format => :json
+    get :show, auth_token: users(:alice).authentication_token, email: Base64.urlsafe_encode64(users(:alice).email), :format => :json
     assert_response :success
   end
 
