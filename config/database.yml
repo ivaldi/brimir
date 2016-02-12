@@ -8,8 +8,6 @@ development:
   database: db/development.sqlite3
   pool: 5
   timeout: 5000
-  adapter: postgresql
-  database: brimir
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
