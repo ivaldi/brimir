@@ -76,9 +76,9 @@ jQuery(function() {
         url: jQuery('[data-lock-path]').data('lock-path'),
         type: 'post'
       });
-	}
-	keepLock();
-	/* renew lock every 4 minutes */
-	setInterval(keepLock, 1000 * 60 * 4);
+    }
+    keepLock();
+    /* renew lock every 4 minutes */
+    setInterval(keepLock, 1000 * 60 * 4);
   }
 });
