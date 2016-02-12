@@ -1,3 +1,9 @@
+PATH
+  remote: /home/frank/Source/ruby/tenanted
+  specs:
+    tenanted (0.0.1)
+      rails (~> 4.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -284,6 +290,7 @@ DEPENDENCIES
   select2-rails (~> 3.5)
   spring
   sqlite3
+  tenanted!
   timecop
   tinymce-rails
   uglifier (>= 1.0.3)

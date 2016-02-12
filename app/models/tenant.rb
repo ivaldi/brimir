@@ -15,13 +15,6 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Tenant < ActiveRecord::Base
-  def self.postgresql?
-    connection.adapter_name == 'PostgreSQL'
-  end
-
-  # force tenants table from postgresql public schema
-  self.table_name = 'public.tenants' if postgresql?
-
   def self.current_domain=(domain)
     # new tenant?
     if Tenant.count == 0
@@ -35,48 +28,24 @@ class Tenant < ActiveRecord::Base
         email = "support@#{domain}"
       end
 
-      @@current = Tenant.create! domain: domain, from: email
+      self.current_tenant = Tenant.create! domain: domain, from: email
     else
-      @@current = Tenant.find_by!(domain: domain)
-    end
-
-    if postgresql? && available_schemas.include?(domain)
-      ActiveRecord::Base.connection.schema_search_path = "\"#{domain}\",public"
+      self.current_tenant = Tenant.find_by! domain: domain
     end
 
     ActionMailer::Base.default_url_options = { host: "#{domain}" }
 
     Paperclip.interpolates :domain do |attachment, style|
-      # no schema based tenants, so no subdir
-      if Tenant.available_schemas.count == 0
-        ''
-      else
+      if Tenant.count > 1
         "#{Tenant.current_tenant.domain}/"
+      else
+        # no tenants, so no subdir
+        ''
       end
-    end
-  end
-
-  def self.current_tenant
-    if defined? @@current
-      @@current
-    else
-      Tenant.new # defaults for settings
     end
   end
 
   def self.files_path
     ':rails_root/data/:domain:class/:attachment/:id_partition/:style.:extension'
-  end
-
-  protected
-
-  def self.available_schemas
-    if postgresql?
-      sql = "SELECT nspname FROM pg_namespace WHERE nspname !~ '^pg_.*' AND
-          nspname != 'public' AND nspname != 'information_schema'"
-      ActiveRecord::Base.connection.query(sql).flatten
-    else
-      []
-    end
   end
 end
