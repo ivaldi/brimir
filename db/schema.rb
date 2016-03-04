@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151113142834) do
+ActiveRecord::Schema.define(version: 20160304085256) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(version: 20151113142834) do
     t.string   "default_locale",           default: "en"
     t.boolean  "share_drafts",             default: false
   end
+
+  add_index "tenants", ["domain"], name: "index_tenants_on_domain", unique: true
 
   create_table "tickets", force: :cascade do |t|
     t.string   "subject"
