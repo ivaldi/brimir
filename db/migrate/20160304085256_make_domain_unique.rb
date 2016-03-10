@@ -1,5 +1,7 @@
 class MakeDomainUnique < ActiveRecord::Migration
   def change
-    add_index :tenants, :domain, unique: true
+    unless index_exists?(:tenants, :domain)
+      add_index :tenants, :domain, unique: true
+    end
   end
 end
