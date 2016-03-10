@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Ticket detail pages of tickets with draft replies could generate errors after saving a draft.
 - Replies can now be seen again by other agents when ticket is locked.
 - Attachments sent by Apple Mail which are not embedded now show up as real attachments.
+- HTML comments are now stripped from all HTML mail content.
 
 ### Security
 

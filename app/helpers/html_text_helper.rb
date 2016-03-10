@@ -18,7 +18,9 @@
 module HtmlTextHelper
   def strip_inline_style(content)
     # strip inline style tags completely
-    content.to_s.gsub(/<style[^>]*>[^<]*<\/style>/, '')
+    content.to_s
+        .gsub(/<style[^>]*>[^<]*<\/style>/, '')
+        .gsub(/<!--[^>]*-->/, '')
   end
 
   def html_to_text(content)
