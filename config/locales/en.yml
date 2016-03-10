@@ -98,7 +98,7 @@ en:
 
 # tickets/locks/create
   ticket_locked_by_somebody_else: Ticket is currently already being handled by somebody else
-  
+
 # tickets/merge
   ticket_has_been_merged_to: "This ticket has been merged to ticket #%{ticket_id}."
   merge: Merge
@@ -170,6 +170,7 @@ en:
   change_settings: Change settings
   localization_settings: Localization settings
   permissions: Permissions
+  notification_settings: Notification settings
 
 # controllers/settings
   settings_saved: Settings saved
@@ -292,3 +293,4 @@ en:
         ignore_user_agent_locale: Ignore preferred browser language
         default_time_zone: Default time zone
         share_drafts: Share drafts with other agents
+        first_reply_ignores_notified_agents: No notifications of first reply to other agents

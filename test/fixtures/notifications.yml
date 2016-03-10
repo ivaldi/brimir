@@ -1,0 +1,7 @@
+daves_problem_notification_bob:
+  user: bob
+  notifiable: daves_problem(Ticket)
+
+daves_problem_notification_charlie:
+  user: charlie
+  notifiable: daves_problem(Ticket)

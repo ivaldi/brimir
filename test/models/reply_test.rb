@@ -28,4 +28,48 @@ class ReplyTest < ActiveSupport::TestCase
     assert reply.notified_users.include?(users(:dave))
   end
 
+  test 'should reply to all agents if not assigned' do
+    Tenant.current_domain = tenants(:main).domain
+    Tenant.current_tenant.first_reply_ignores_notified_agents = true
+
+    ticket = tickets(:daves_problem)
+    reply = ticket.replies.new
+    reply.set_default_notifications!
+
+    assert reply.notified_users.include?(users(:alice))
+    assert reply.notified_users.include?(users(:charlie))
+  end
+
+  test 'should not reply to all agents if assigned' do
+    Tenant.current_domain = tenants(:main).domain
+    Tenant.current_tenant.first_reply_ignores_notified_agents = true
+
+    ticket = tickets(:daves_problem)
+    ticket.assignee = users(:alice)
+    ticket.save
+    reply = ticket.replies.new
+    reply.user = users(:alice)
+    reply.reply_to = ticket
+    reply.set_default_notifications!
+
+    refute reply.notified_users.include?(users(:alice))
+    refute reply.notified_users.include?(users(:charlie))
+  end
+
+  test 'should reply to agent if assigned' do
+    Tenant.current_domain = tenants(:main).domain
+    Tenant.current_tenant.first_reply_ignores_notified_agents = false
+
+    ticket = tickets(:daves_problem)
+    ticket.assignee = users(:alice)
+    ticket.save
+    reply = ticket.replies.new
+    reply.user = users(:alice)
+    reply.reply_to = ticket
+    reply.set_default_notifications!
+
+    refute reply.notified_users.include?(users(:alice))
+    assert reply.notified_users.include?(users(:charlie))
+  end
+
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160304085256) do
+ActiveRecord::Schema.define(version: 20160310134243) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -117,12 +117,13 @@ ActiveRecord::Schema.define(version: 20160304085256) do
   create_table "tenants", force: :cascade do |t|
     t.string   "domain"
     t.string   "from"
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.string   "default_time_zone",        default: "Amsterdam"
-    t.boolean  "ignore_user_agent_locale", default: false,       null: false
-    t.string   "default_locale",           default: "en"
-    t.boolean  "share_drafts",             default: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+    t.string   "default_time_zone",                   default: "Amsterdam"
+    t.boolean  "ignore_user_agent_locale",            default: false,       null: false
+    t.string   "default_locale",                      default: "en"
+    t.boolean  "share_drafts",                        default: false
+    t.boolean  "first_reply_ignores_notified_agents", default: false,       null: false
   end
 
   add_index "tenants", ["domain"], name: "index_tenants_on_domain", unique: true

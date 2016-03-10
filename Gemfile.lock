@@ -69,7 +69,6 @@ GEM
       compass (~> 1.0.0)
       sass-rails (< 5.1)
       sprockets (< 2.13)
-    concurrent-ruby (1.0.1)
     coveralls (0.8.12)
       json (~> 1.8)
       simplecov (~> 0.11.0)
