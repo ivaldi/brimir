@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     arel (6.0.3)
     bcrypt (3.1.10)
     builder (3.2.2)
@@ -121,6 +122,10 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     jwt (1.5.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -260,6 +265,7 @@ DEPENDENCIES
   http_accept_language
   jbuilder (~> 2.2)
   jquery-rails
+  letter_opener
   mysql2
   omniauth-google-oauth2
   paperclip
