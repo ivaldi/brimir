@@ -112,6 +112,8 @@ de:
   send_reply: Anwort senden
   on_date_author_wrote: 'Am %{date} hat %{author} folgendes geschrieben:'
   notification_will_be_sent_to: 'Es wird eine Benachrichtung an folgende Adresse gesendet:'
+  save_as_draft: Als Entwurf speichern
+  internal_note: Interne Notiz
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ihnen wurde ein Ticket zugewiesen
