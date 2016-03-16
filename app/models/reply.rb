@@ -46,7 +46,7 @@ class Reply < ActiveRecord::Base
   }
 
   def reply_to
-    reply_to_type.constantize.where(id: self.reply_to_id).first
+    reply_to_type.constantize.where(id: self.reply_to_id).first if reply_to_type
   end
 
   def reply_to=(value)
@@ -56,5 +56,9 @@ class Reply < ActiveRecord::Base
 
   def other_replies
     ticket.replies.where.not(id: id)
+  end
+  
+  def first?
+    reply_to_type == 'Ticket'
   end
 end
