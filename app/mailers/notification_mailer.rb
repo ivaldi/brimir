@@ -118,7 +118,11 @@ class NotificationMailer < ActionMailer::Base
     @reply = reply
     @user = user
     return if EmailAddress.pluck(:email).include?(user.email.to_s)
-    mail(to: user.email, subject: title, from: reply.ticket.reply_from_address)
+    
+    displayed_to_field = reply.notified_users.where(agent: false).pluck(:email)
+    displayed_to_field = user.email if displayed_to_field.empty?
+    mail(smtp_envelope_to: user.email, to: displayed_to_field,
+      subject: title, from: reply.ticket.reply_from_address)
   end
 
   def status_changed(ticket)
