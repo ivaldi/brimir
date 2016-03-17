@@ -17,6 +17,7 @@ gem 'foundation_rails_helper'
 
 # to use debugger
 gem 'byebug', group: [:development, :test]
+gem 'pry', group: [:development, :test]
 
 group :development do
   # Spring application pre-loader
