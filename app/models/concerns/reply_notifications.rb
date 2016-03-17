@@ -115,11 +115,18 @@ concern :ReplyNotifications do
     has_many :notified_users, source: :user, through: :notifications
   end
   
-  def set_default_notifications!
+  def set_default_notifications!(mail_message = nil)
     unless reply_to_type.nil?
       
       self.notified_users = users_to_notify_based_on_ticket_assignment
-      self.notified_users = users_to_notify_based_on_former_reply if self.notified_users.none?
+      
+      if self.notified_users.none?
+        if mail_message && user && user.client?
+          self.notified_users = users_to_notify_based_on_former_reply.where(agent: true)  # (2)(b)(i)
+        else
+          self.notified_users = users_to_notify_based_on_former_reply  # (1)(a)(i), (2)(a)(i), (1)(b)(i)
+        end
+      end
       
       self.notified_users.uniq!
 

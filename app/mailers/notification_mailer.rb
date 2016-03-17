@@ -21,7 +21,7 @@ class NotificationMailer < ActionMailer::Base
   def self.incoming_message(ticket_or_reply, original_message)
     if ticket_or_reply.is_a? Reply
       reply = ticket_or_reply
-      reply.set_default_notifications!
+      reply.set_default_notifications!(original_message)
       reply.notify_users
     else
       ticket = ticket_or_reply
