@@ -22,19 +22,7 @@ class NotificationMailer < ActionMailer::Base
     if ticket_or_reply.is_a? Reply
       reply = ticket_or_reply
       reply.set_default_notifications!
-
-      message_id = nil
-
-      reply.notified_users.each do |user|
-        message = NotificationMailer.new_reply(reply, user)
-        message.message_id = message_id
-        message.deliver_now
-
-        reply.message_id = message.message_id
-        message_id = message.message_id
-      end
-
-      reply.save
+      reply.notify_users
     else
       ticket = ticket_or_reply
 

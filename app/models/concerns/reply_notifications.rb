@@ -14,7 +14,7 @@ concern :ReplyNotifications do
             reply_to.assignee.present?
         notified_users = [reply_to.assignee]
       end
-
+    
       self.notified_users =
           ([reply_to.user] + notified_users - [user]).uniq
     else
@@ -31,6 +31,17 @@ concern :ReplyNotifications do
 
       self.notified_users = result.uniq
     end
+  end
+  
+  def notify_users
+    self.message_id = nil
+    notified_users.each do |user|
+      mail = NotificationMailer.new_reply(self, user)
+      mail.message_id = self.message_id
+      mail.deliver_now unless user.ticket_system_address?
+      self.message_id = mail.message_id
+    end
+    self.save!
   end
   
 end
