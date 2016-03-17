@@ -146,6 +146,7 @@ de:
   email: E-Mail-Adresse
   role: Rolle
   agent: Agent
+  agents: Agenten
   customer: Kunde
 
 # users/_form
