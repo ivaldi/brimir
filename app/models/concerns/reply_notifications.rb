@@ -7,16 +7,12 @@ concern :ReplyNotifications do
   
   def set_default_notifications!
     unless reply_to_type.nil?
+      
+      self.notified_users = users_to_notify_based_on_ticket_assignment
+      self.notified_users = users_to_notify_based_on_former_reply if self.notified_users.none?
+      
+      self.notified_users.uniq!
 
-      notified_users = reply_to.notified_users
-      if Tenant.current_tenant.first_reply_ignores_notified_agents? &&
-            reply_to.is_a?(Ticket) &&
-            reply_to.assignee.present?
-        notified_users = [reply_to.assignee]
-      end
-    
-      self.notified_users =
-          ([reply_to.user] + notified_users - [user]).uniq
     else
       result = []
       if ticket.assignee.present?
@@ -52,6 +48,31 @@ concern :ReplyNotifications do
   end
   
   private
+  
+  def users_not_to_notify
+    # Do not notify the user that is sending the reply.
+    # Also, do not notify the ticket system email addresses to prevent
+    # email loops.
+    [user] + User.ticket_system_addresses
+  end
+  
+  def users_to_notify_based_on_former_reply
+    if reply_to
+      User.where(id: ([reply_to.user] + reply_to.notified_users - users_not_to_notify).map(&:id)) 
+    else
+      User.none
+    end
+  end
+  
+  def users_to_notify_based_on_ticket_assignment
+    if Tenant.current_tenant.first_reply_ignores_notified_agents? &&
+         reply_to.is_a?(Ticket) &&
+         reply_to.assignee.present?
+      return [reply_to.user, reply_to.assignee] - users_not_to_notify
+    else
+      return []
+    end
+  end
   
   # def notified_users_based_on_mail_message(message)
   #   recipient_emails = message.to.to_a + message.cc.to_a - notified_users.pluck(:email)
