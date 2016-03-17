@@ -33,6 +33,13 @@ concern :ReplyNotifications do
     end
   end
   
+  # # This is called from `NotificationMailer#incoming_message` after delivering
+  # # the notifications (i).
+  # #
+  # def add_notifications_based_on_mail_message(mail_message)
+  #   self.notified_users << notified_users_based_on_mail_message(mail_message)  # (ii)
+  # end
+  
   def notify_users
     self.message_id = nil
     notified_users.each do |user|
@@ -43,5 +50,12 @@ concern :ReplyNotifications do
     end
     self.save!
   end
+  
+  private
+  
+  # def notified_users_based_on_mail_message(message)
+  #   recipient_emails = message.to.to_a + message.cc.to_a - notified_users.pluck(:email)
+  #   recipient_emails.collect { |email| User.where(email: email).first_or_create }
+  # end
   
 end
