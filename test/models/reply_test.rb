@@ -113,5 +113,18 @@ class ReplyTest < ActiveSupport::TestCase
     assert reply_of_client2.notified_users.include?(agent)
     assert not(reply_of_client2.notified_users.include?(client1))
   end
+  
+  test 'should sync the message ids of notifications' do
+    ticket = tickets(:daves_problem)
+    reply = ticket.replies.create user: users(:alice), content: "This is the solution."
+    reply.notified_users << users(:dave)
+    reply.notified_users << users(:bob)
+    
+    message_ids = reply.notification_mails.map(&:message_id)
+    assert_equal message_ids.count,  2
+    assert_equal message_ids.uniq.count, 1
+    refute_equal message_ids.first, ""
+    refute_equal message_ids.first, nil
+  end
 
 end

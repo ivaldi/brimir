@@ -153,15 +153,25 @@ concern :ReplyNotifications do
   #   self.notified_users << notified_users_based_on_mail_message(mail_message)  # (ii)
   # end
   
-  def notify_users
-    self.message_id = nil
-    notified_users.each do |user|
-      mail = NotificationMailer.new_reply(self, user)
-      mail.message_id = self.message_id
-      mail.deliver_now unless user.ticket_system_address?
-      self.message_id = mail.message_id
-    end
+  # This is how to deliver the notification emails:
+  #
+  #     reply.notification_mails.each { |mail| mail.deliver_now }
+  #
+  # short:
+  #
+  #     reply.notification_mails.each(&:deliver_now)
+  #
+  def notification_mails
+    self.message_id = Mail::MessageIdField.new.message_id
     self.save!
+    
+    notified_users.collect do |user|
+      unless user.ticket_system_address?
+        mail = NotificationMailer.new_reply(self, user)
+        mail.message_id = self.message_id
+        mail
+      end
+    end - [nil]
   end
   
   private

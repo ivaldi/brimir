@@ -22,7 +22,7 @@ class NotificationMailer < ActionMailer::Base
     if ticket_or_reply.is_a? Reply
       reply = ticket_or_reply
       reply.set_default_notifications!(original_message)
-      reply.notify_users
+      reply.notification_mails.each(&:deliver_now)
     else
       ticket = ticket_or_reply
 
