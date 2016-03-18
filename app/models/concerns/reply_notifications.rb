@@ -92,10 +92,11 @@
 #          are listed in `To`. This way, the clients can include
 #          the other recipients in their replies intentionally.
 #
-# In order to distinguish notifications that are to be delivered
-# through brimir and notifications that are already sent, we use the
-# `Notification#state` attribute. Only notifications that are 
-# `due` are to be sent through brimir.
+# In order to distinguish notifications that are to be delivered through
+# brimir and notifications that are already sent, the other recipients
+# from the `original_message` are added **after** delivering the
+# notifications (`reply.notification_mails.each(&:deliver_now)`) in the 
+# `NotificationMailer`.
 
 
 # ## Why is this important.
