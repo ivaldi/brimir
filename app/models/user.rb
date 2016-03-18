@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :labels, through: :labelings
   has_many :assigned_tickets, class_name: 'Ticket',
       foreign_key: 'assignee_id', dependent: :nullify
+  has_many :notifications    
 
   # identities for omniauth
   has_many :identities
@@ -65,6 +66,29 @@ class User < ActiveRecord::Base
   def self.agents_to_notify
     User.agents
         .where(notify: true)
+  end
+
+  # Does the email address of this user belong to the ticket system
+  # itself? For example, there might be a user corresponding to
+  # support@example.com.
+  #
+  # This check is needed to prevent email loops. We do not want to
+  # deliver to those email addresses, since they would be received
+  # by the ticket system, again, creating an email loop.
+  #
+  def ticket_system_address?
+    User.ticket_system_addresses.pluck(:id).include? self.id
+  end
+
+  # Return all users that correspond to email addresses belonging
+  # to the ticket system, e.g. support@example.com.
+  #
+  def self.ticket_system_addresses
+    User.where(email: EmailAddress.pluck(:email))
+  end
+  
+  def client?
+    not agent?
   end
 
   def default_localization

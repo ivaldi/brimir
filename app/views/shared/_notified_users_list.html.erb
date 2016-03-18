@@ -1,0 +1,26 @@
+<%
+  reply_or_ticket ||=   
+  (reply if defined?(reply)) || 
+  (ticket if defined?(ticket)) ||
+  raise('no reply or ticket given') 
+%>
+
+<ul class="inline-list text-secondary no-mb">
+  <% if reply_or_ticket.notified_users.count > 0 %>
+    <li><%= t(:notification_sent_to) %></li>
+
+    <% reply_or_ticket.notified_users.where(agent: false).each do |user| %>
+      <li><%= link_to(user.email, user_tickets_path(user_id: user.id)) %></li>
+    <% end %>
+
+    <% if reply_or_ticket.notified_users.where(agent: true).any? %>
+      <li><strong><%= t(:agents) %>:</strong></li>
+      <% reply_or_ticket.notified_users.where(agent: true).each do |user| %>
+        <li><%= link_to(user.email, user_tickets_path(user_id: user.id)) %></li>
+      <% end %>
+    <% end %>
+
+  <% else %>
+    <li class="no-ml"><%= t(:no_notifications_sent) %></li>
+  <% end %>
+</ul>

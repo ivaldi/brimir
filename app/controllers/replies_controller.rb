@@ -77,15 +77,7 @@ class RepliesController < ApplicationController
       else
         Reply.transaction do
           @reply.save!
-
-          @reply.notified_users.each do |user|
-            mail = NotificationMailer.new_reply(@reply, user)
-
-            mail.deliver_now unless EmailAddress.pluck(:email).include?(user.email)
-            @reply.message_id = mail.message_id
-          end
-
-          @reply.save!
+          @reply.notification_mails.each(&:deliver_now)
         end
 
         redirect_to @reply.ticket, notice: I18n::translate(:reply_added)

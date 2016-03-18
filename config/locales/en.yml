@@ -154,6 +154,7 @@ en:
   email: Email
   role: Role
   agent: Agent
+  agents: Agents
   customer: Customer
 
 # users/_form

@@ -72,4 +72,59 @@ class ReplyTest < ActiveSupport::TestCase
     assert reply.notified_users.include?(users(:charlie))
   end
 
+  test 'should not notify other clients when one of the clients replies' do
+    #
+    # Suppose, several clients are part of a conversation. Now, one of the
+    # clients replies to something an agent wrote and only answers to the
+    # email address of the ticket system, e.g. support@example.com.
+    #
+    # The other clients that are part of this conversation should not be
+    # notified, since the sender can't see that they would receive this
+    # email.
+    #
+    # See also: https://github.com/ivaldi/brimir/issues/259
+    #
+    agent = User.create! email: 'agent@example.com', agent: true
+    client1 = User.create! email: 'client1@example.com'
+    client2 = User.create! email: 'client2@example.com'
+    
+    # client1 creates a ticket via email.
+    ticket = Ticket.create from: 'client1@example.com', content: 'This is my problem'
+    
+    # agent replies via the web ui of brimir.
+    reply_of_the_agent = ticket.replies.create! content: 'This might be the solution. It did work for client2 who also works in your office.', user: agent
+    reply_of_the_agent.notified_users << client1
+    reply_of_the_agent.notified_users << client2
+    
+    # client1 replies via email; cc to client2.
+    reply_of_client1 = ticket.replies.create! content: 'It did not work.', user: client1
+    reply_of_client1.reply_to = reply_of_the_agent
+    reply_of_client1.set_default_notifications!("From: client1@example.com\nTo: ...")
+    reply_of_client1.notified_users << client2 unless reply_of_client1.notified_users.include? client2
+    
+    assert reply_of_client1.notified_users.include?(agent)
+    assert reply_of_client1.notified_users.include?(client2)
+
+    # client2 replies via email, but not cc to client1.
+    reply_of_client2 = ticket.replies.create! content: 'client1 is stupid! Did he even start his computer?', user: client2
+    reply_of_client2.reply_to = reply_of_the_agent
+    reply_of_client2.set_default_notifications!("From: client2@example.com\nTo: ...")
+    
+    assert reply_of_client2.notified_users.include?(agent)
+    assert not(reply_of_client2.notified_users.include?(client1))
+  end
+  
+  test 'should sync the message ids of notifications' do
+    ticket = tickets(:daves_problem)
+    reply = ticket.replies.create user: users(:alice), content: "This is the solution."
+    reply.notified_users << users(:dave)
+    reply.notified_users << users(:bob)
+    
+    message_ids = reply.notification_mails.map(&:message_id)
+    assert_equal message_ids.count,  2
+    assert_equal message_ids.uniq.count, 1
+    refute_equal message_ids.first, ""
+    refute_equal message_ids.first, nil
+  end
+
 end

@@ -18,12 +18,10 @@
 class Reply < ActiveRecord::Base
   include CreateFromUser
   include EmailMessage
+  include ReplyNotifications
 
   attr_accessor :reply_to_id
   attr_accessor :reply_to_type
-
-  has_many :notifications, as: :notifiable, dependent: :destroy
-  has_many :notified_users, source: :user, through: :notifications
 
   validates :ticket_id, :content, presence: true
 
@@ -47,36 +45,8 @@ class Reply < ActiveRecord::Base
             [user.id, nil], Time.zone.now - 5.minutes)
   }
 
-  def set_default_notifications!
-    unless reply_to_type.nil?
-
-      notified_users = reply_to.notified_users
-      if Tenant.current_tenant.first_reply_ignores_notified_agents? &&
-            reply_to.is_a?(Ticket) &&
-            reply_to.assignee.present?
-        notified_users = [reply_to.assignee]
-      end
-
-      self.notified_users =
-          ([reply_to.user] + notified_users - [user]).uniq
-    else
-      result = []
-      if ticket.assignee.present?
-        result << ticket.assignee
-      else
-        result = User.agents_to_notify
-      end
-
-      ticket.labels.each do |label|
-        result += label.users
-      end
-
-      self.notified_users = result.uniq
-    end
-  end
-
   def reply_to
-    reply_to_type.constantize.where(id: self.reply_to_id).first
+    reply_to_type.constantize.where(id: self.reply_to_id).first if reply_to_type
   end
 
   def reply_to=(value)
@@ -86,5 +56,9 @@ class Reply < ActiveRecord::Base
 
   def other_replies
     ticket.replies.where.not(id: id)
+  end
+  
+  def first?
+    reply_to_type == 'Ticket'
   end
 end
