@@ -21,9 +21,10 @@ module Tickets
 
     def update
       @tickets = Ticket.where(id: params[:id])
-      return perform_merge if merge?
 
       authorize! :update, Ticket # for empty params[:id]
+
+      return perform_merge if merge?
 
       @tickets.each do |ticket|
         authorize! :update, ticket
@@ -38,16 +39,19 @@ module Tickets
     def ticket_params
       params.require(:ticket).permit(:status)
     end
-    
+
     def merge?
-      params[:merge] == "true"
+      params[:merge] == 'true'
     end
-    
+
     def perform_merge
-      authorize! :update, Ticket
-      @tickets.each { |ticket| authorize! :update, ticket }
-      
-      merged_ticket = Ticket.merge @tickets, current_user: current_user
+      @tickets.each do |ticket|
+        authorize! :update, ticket
+      end
+
+      unless @tickets.count == 0
+        merged_ticket = Ticket.merge @tickets, current_user: current_user
+      end
       redirect_to merged_ticket, notice: t(:tickets_have_been_merged)
     end
   end
