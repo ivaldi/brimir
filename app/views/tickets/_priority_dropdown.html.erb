@@ -1,11 +1,19 @@
-<ul id="priorities-<%= ticket.id %>" class="f-dropdown" data-dropdown-content>
-  <% Ticket.priorities.keys.each do |value| %>
-    <li>
-      <%= link_to ticket_path(ticket, ticket: { priority: value }, short: short),
-          method: :patch, remote: true do %>
-        <span class="cc-priority-<%= value %> fa fa-fw fa-circle-o"></span>
-        <%= t(value) %>
-      <% end %>
-    </li>
-  <% end %>
-</ul>
+<% if ticket.id %>
+  <ul id="priorities-<%= ticket.id %>" class="f-dropdown" data-dropdown-content>
+    <% Ticket.priorities.keys.each do |value| %>
+      <li>
+        <%= link_to ticket_path(ticket, ticket: { priority: value }, short: short),
+            method: :patch, remote: true do %>
+          <span class="cc-priority-<%= value %> fa fa-fw fa-circle-o"></span>
+          <%= t(value) %>
+        <% end %>
+      </li>
+    <% end %>
+ </ul>
+<% else %>
+  <div class="panel mb ptl pbl mbxl">
+    <h5><%= t(:priority) %></h5>
+    <%= select_tag 'ticket[priority]', options_for_select(Ticket.priorities.keys, 
+                                                          Ticket.priorities.keys[0]) %>
+  </div>
+<% end %>

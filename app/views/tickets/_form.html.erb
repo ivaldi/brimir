@@ -38,6 +38,8 @@
 
   <%= render 'attachments/form', f: f %>
 
+  <%= render 'priority_dropdown', ticket: @ticket, short: false %>
+
   <p>
     <%= f.submit class: 'button regular radius' %>
   </p>
