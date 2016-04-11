@@ -38,6 +38,18 @@
 
   <%= render 'attachments/form', f: f %>
 
+  <% if can? :update, @ticket %>
+    <div class="panel mb ptl pbl mbxl">
+      <%= 
+      f.select :priority, 
+                options_for_select(
+                                  Ticket.priorities.keys.each { |k| [t(k), k] },
+                                  f.object.priority
+                                  )
+      %>
+    </div>
+  <% end %>
+
   <p>
     <%= f.submit class: 'button regular radius' %>
   </p>
