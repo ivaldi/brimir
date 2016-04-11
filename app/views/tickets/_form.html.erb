@@ -40,6 +40,15 @@
 
   <% if can? :update, @ticket %>
     <div class="panel mb ptl pbl mbxl">
+      <%=
+      f.select :assignee_id,
+                options_for_select(User.agents.map.each {|u| [u.email, u.id]},
+                @current_user.id
+                )
+      %>
+    </div>
+
+    <div class="panel mb ptl pbl mbxl">
       <%= 
       f.select :priority, 
                 options_for_select(
