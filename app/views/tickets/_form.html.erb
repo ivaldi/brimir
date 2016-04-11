@@ -41,10 +41,10 @@
   <% if can? :update, @ticket %>
     <div class="panel mb ptl pbl mbxl">
       <%=
+      options = [ ['unassigned', 0] ]
+      User.agents.map.each {|u| options << [u.email, u.id]}
       f.select :assignee_id,
-                options_for_select(User.agents.map.each {|u| [u.email, u.id]},
-                @current_user.id
-                )
+                options_for_select(options, 0)
       %>
     </div>
 
