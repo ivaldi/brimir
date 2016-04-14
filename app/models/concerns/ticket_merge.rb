@@ -14,9 +14,9 @@ concern :TicketMerge do
     def merge(separate_tickets, options = {})
       MergedTicket.from separate_tickets, options
     end
-    
+
   end
-  
+
   # When converting separate tickets to a merged ticket, this
   # method allows to convert the message of a ticket to a reply:
   #
@@ -37,19 +37,19 @@ concern :TicketMerge do
       attachments: self.attachments.collect { |attachment| attachment.dup }
     )
   end
-  
+
   # Create an internal note that describes the ticket merge.
   #
   def create_merge_notice(refer_to_ticket, merging_user)
     message = I18n.with_locale(merging_user.locale) {
       I18n.translate :ticket_has_been_merged_to, ticket_id: refer_to_ticket.id
     }
-    
+
     self.replies.create(
       content: message,
       user_id: merging_user.id,
       internal: true
     )
   end
-  
+
 end
