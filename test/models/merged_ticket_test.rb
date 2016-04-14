@@ -48,14 +48,18 @@ class TicketMergeTest < ActiveSupport::TestCase
     client_user = User.where(agent: false).first
     agent_user = User.where(agent: true).first
     first_ticket = Ticket.create subject: "First ticket", content: "I've got a question ...", user_id: client_user.id
+    first_ticket.notified_users << agent_user
     Timecop.travel 2.minutes.from_now
     second_ticket = Ticket.create subject: "Second ticket", content: "I forgot to mention ...", user_id: client_user.id
+    second_ticket.notified_users << agent_user
     Timecop.travel 4.minutes.from_now
     second_reply = second_ticket.replies.create content: "Please send me some more info about ...", user_id: agent_user.id
     second_reply.notified_users << client_user
 
     merged_ticket = MergedTicket.from [first_ticket, second_ticket], current_user: agent_user
 
+    assert merged_ticket.notified_users.include? agent_user
+    assert merged_ticket.replies.order(:created_at).first.notified_users.include? agent_user
     assert merged_ticket.replies.order(:created_at).last.notified_users.include? client_user
   end
 
