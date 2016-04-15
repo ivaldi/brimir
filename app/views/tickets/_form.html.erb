@@ -21,6 +21,22 @@
   <p>
     <%= f.text_field :subject %>
   </p>
+
+  <% if can? :update, @ticket %>
+    <p>
+      <%
+        options = [ ['unassigned', 0] ]
+        User.agents.map.each {|u| options << [u.email, u.id]}
+      %>
+      <%= f.select :assignee_id, options_for_select(options, 0) %>
+    </p>
+
+    <p>
+      <%= f.select :priority, options_for_select(
+          Ticket.priorities.keys.each { |k| [t(k), k] }, f.object.priority) %>
+    </p>
+  <% end %>
+
   <p>
     <%
       content = ''
@@ -37,27 +53,6 @@
   </p>
 
   <%= render 'attachments/form', f: f %>
-
-  <% if can? :update, @ticket %>
-    <div class="panel mb ptl pbl mbxl">
-      <%=
-      options = [ ['unassigned', 0] ]
-      User.agents.map.each {|u| options << [u.email, u.id]}
-      f.select :assignee_id,
-                options_for_select(options, 0)
-      %>
-    </div>
-
-    <div class="panel mb ptl pbl mbxl">
-      <%= 
-      f.select :priority, 
-                options_for_select(
-                                  Ticket.priorities.keys.each { |k| [t(k), k] },
-                                  f.object.priority
-                                  )
-      %>
-    </div>
-  <% end %>
 
   <p>
     <%= f.submit class: 'button regular radius' %>
