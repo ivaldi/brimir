@@ -11,8 +11,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Ticket creation and user creation api by @bsylvain.
 - Turkish translation by @yildizib.
 - Merge ticket feature by @fiedl.
+- Possibility to assign and set priority on ticket create form by @fshahy.
 
 ### Changed
+- Do not notify other clients silently, when a client replies via email by @fiedl, see #265.
 
 ### Deprecated
 
