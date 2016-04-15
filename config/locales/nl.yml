@@ -12,6 +12,8 @@ nl:
   personal_settings: Persoonlijke instellingen
   sign_out: Uitloggen
   delete: Verwijderen
+  close: Sluiten
+  wait: Wachten
 
   joyride:
     tickets: Via deze knop kan iedereen nieuwe tickets aanmaken.
@@ -99,6 +101,12 @@ nl:
 
 # tickets/locks/create
   ticket_locked_by_somebody_else: Ticket wordt op dit al behandeld door iemand anders
+
+# tickets/merge
+  ticket_has_been_merged_to: "Dit ticket is samengevoegd met ticket #%{ticket_id}."
+  merge: Samenvoegen
+  merge_explanation: "Voeg de geselecteerde tickets samen. Dit zal alle reacties kopiëren naar de oudste geselecteerde ticket en sluit de andere geselecteerde tickets."
+  tickets_have_been_merged: "Tickets zijn samengevoegd."
 
 # replies/new
   add_reply: Reactie toevoegen

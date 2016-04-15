@@ -11,6 +11,8 @@ en:
   personal_settings: Personal settings
   sign_out: Sign out
   delete: Remove
+  close: Close
+  wait: Wait
 
   joyride:
     tickets: Anybody can create tickets using this button.
