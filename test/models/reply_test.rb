@@ -54,6 +54,8 @@ class ReplyTest < ActiveSupport::TestCase
 
     refute reply.notified_users.include?(users(:alice))
     refute reply.notified_users.include?(users(:charlie))
+    assert reply.notified_users.include?(users(:dave))
+    assert reply.notified_users.include?(users(:bob)) # was CC-ed by Dave
   end
 
   test 'should reply to agent if assigned' do

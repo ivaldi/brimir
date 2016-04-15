@@ -196,15 +196,10 @@ concern :ReplyNotifications do
     if Tenant.current_tenant.first_reply_ignores_notified_agents? &&
          reply_to.is_a?(Ticket) &&
          reply_to.assignee.present?
-      return [reply_to.user, reply_to.assignee] - users_not_to_notify
+      return reply_to.notified_users - User.agents +
+          [reply_to.user, reply_to.assignee] - users_not_to_notify
     else
       return []
     end
   end
-  
-  # def notified_users_based_on_mail_message(message)
-  #   recipient_emails = message.to.to_a + message.cc.to_a - notified_users.pluck(:email)
-  #   recipient_emails.collect { |email| User.where(email: email).first_or_create }
-  # end
-  
 end
