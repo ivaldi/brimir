@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Mobile menu fixes from @sapslaj.
 - Ticket creation and user creation api by @bsylvain.
 - Turkish translation by @yildizib.
+- Option to disable default reply to all agents for first reply by.
 - Merge ticket feature by @fiedl.
 - Possibility to assign and set priority on ticket create form by @fshahy.
 
