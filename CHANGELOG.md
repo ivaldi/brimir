@@ -4,6 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Brimir unreleased (to be announced)
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## Brimir 0.7.0 (2016-04-15)
+### Added
 - Automatic refresh of inbox when browser tab receives focus again.
 - Internal notes can now be added to tickets.
 - Right to left support for Farsi.
@@ -17,17 +30,11 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Do not notify other clients silently, when a client replies via email by @fiedl, see #265.
 
-### Deprecated
-
-### Removed
-
 ### Fixed
 - Ticket detail pages of tickets with draft replies could generate errors after saving a draft.
 - Replies can now be seen again by other agents when ticket is locked.
 - Attachments sent by Apple Mail which are not embedded now show up as real attachments.
 - HTML comments are now stripped from all HTML mail content.
-
-### Security
 
 ## Brimir 0.6.3 (2015-11-06)
 ### Added
