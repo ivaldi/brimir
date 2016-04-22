@@ -18,7 +18,7 @@ require 'test_helper'
 
 class NotificationMailerTest < ActionMailer::TestCase
 
-  test 'should notify agent of new ticket' do
+  test 'should notify assignee of new ticket' do
     ticket = tickets(:problem)
 
     assert_difference 'ActionMailer::Base.deliveries.size' do
@@ -52,4 +52,20 @@ class NotificationMailerTest < ActionMailer::TestCase
     end
   end
 
+  test 'should notify agents of new ticket' do
+    Tenant.current_domain = tenants(:main).domain
+    ticket = tickets(:daves_problem)
+
+    assert_difference 'ActionMailer::Base.deliveries.size', 2 do
+      NotificationMailer.incoming_message(ticket, ticket)
+    end
+
+    first = ActionMailer::Base.deliveries.count - 2
+    last = ActionMailer::Base.deliveries.count - 1
+    while last >= first
+      mail = ActionMailer::Base.deliveries[last]
+      assert_equal ticket.message_id, mail.message_id
+      last -= 1
+    end
+  end
 end

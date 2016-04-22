@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ### Fixed
+- Notification mails of new tickets now always have correct message-id headers.
 
 ### Security
 
