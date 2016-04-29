@@ -109,6 +109,7 @@ Some users have made requests for the following features. If you would like to c
 - Filter on to/cc/bcc without verified addresses. (#227)
 - Add captcha for non-signed in ticket creation. (#228)
 - IMAP or POP3 pull mechanism for new tickets. (#249)
+- Notes field for customer account, to add info about them, such as website url.
 
 License
 -------
