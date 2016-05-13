@@ -17,7 +17,7 @@ en:
   joyride:
     tickets: Anybody can create tickets using this button.
     personal_settings: Set your signature, timezone and other preferences via this menu.
-    labels: After adding labels to tickets or users, they will show up here. You can then use them as filters.
+    labels: After adding labels to tickets or users, they will show up here. You can then use them as filters. New labels can be created on a ticket page.
     rules: Automatically add labels, assignees, change status and more.
     users: Add more agents or normal users.
     final: Thanks for using Brimir!

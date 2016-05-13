@@ -18,7 +18,7 @@ nl:
   joyride:
     tickets: Via deze knop kan iedereen nieuwe tickets aanmaken.
     personal_settings: Stel je handtekening, tijdzone en andere instellingen in via dit menu.
-    labels: Na het toevoegen van labels aan tickets of medewerkers verschijnen ze hier. Je kunt ze gebruiken om te filteren.
+    labels: Na het toevoegen van labels aan tickets of medewerkers verschijnen ze hier. Je kunt ze gebruiken om te filteren. Nieuwe labels maak je op een ticket pagina.
     rules: Voeg automatisch labels toe, wijs tickets toe aan medewerkers, wijzig de status van een ticket, etcetera.
     users: Voeg meer medewerkers of normale gebruikers toe.
     final: Bedankt voor het gebruiken van Brimir!
