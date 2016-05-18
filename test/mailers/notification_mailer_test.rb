@@ -68,4 +68,22 @@ class NotificationMailerTest < ActionMailer::TestCase
       last -= 1
     end
   end
+
+  test 'should notify agents of new reply' do
+    Tenant.current_domain = tenants(:main).domain
+
+    reply = replies(:solution)
+
+    assert_difference 'ActionMailer::Base.deliveries.size', 2 do
+      NotificationMailer.incoming_message(reply, tickets(:problem))
+    end
+
+    first = ActionMailer::Base.deliveries.count - 2
+    last = ActionMailer::Base.deliveries.count - 1
+    while last >= first
+      mail = ActionMailer::Base.deliveries[last]
+      assert_equal "<#{reply.message_id}>", mail['Message-Id'].to_s
+      last -= 1
+    end
+  end
 end

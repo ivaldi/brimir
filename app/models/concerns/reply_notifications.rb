@@ -169,7 +169,7 @@ concern :ReplyNotifications do
     notified_users.collect do |user|
       unless user.ticket_system_address?
         mail = NotificationMailer.new_reply(self, user)
-        mail.message_id = self.message_id
+        mail.headers['Message-ID'] = "<#{self.message_id}>"
         mail
       end
     end - [nil]
