@@ -8,14 +8,14 @@
 # ## How is the reply sent?
 #
 # (1) The user may reply via the web ui of brimir.
-# 
+#
 #       - The ticket system suggests recipients based on the former
 #         conversation.
 #       - The user can change the recipients in the web form before
 #         sending the reply.
 #
 # (2) The user may reply via email to support@example.com.
-# 
+#
 #       - The ticket system has to determine who, at least, needs to
 #         be notified, since the user just writes to support@example.com,
 #         not to the separate clients or agents.
@@ -26,13 +26,13 @@
 # ## Who is sending the reply?
 #
 # (a) The reply author can be an agent.
-# 
+#
 #       - Agents can reply to agents and clients via email to
 #         support@example.com.
 #       - This mechanism mainly is a convenience shortcut if there is
 #         only one possible recipient, i.e. the client that
 #         asked the question.
-#       
+#
 # (b) The reply author can be a client.
 #
 #       - Clients can only reply to agents via email to
@@ -95,7 +95,7 @@
 # In order to distinguish notifications that are to be delivered through
 # brimir and notifications that are already sent, the other recipients
 # from the `original_message` are added **after** delivering the
-# notifications (`reply.notification_mails.each(&:deliver_now)`) in the 
+# notifications (`reply.notification_mails.each(&:deliver_now)`) in the
 # `NotificationMailer`.
 
 
@@ -110,17 +110,17 @@
 
 
 concern :ReplyNotifications do
-  
+
   included do
     has_many :notifications, as: :notifiable, dependent: :destroy
     has_many :notified_users, source: :user, through: :notifications
   end
-  
+
   def set_default_notifications!(mail_message = nil)
     unless reply_to_type.nil?
-      
+
       self.notified_users = users_to_notify_based_on_ticket_assignment
-      
+
       if self.notified_users.none?
         if mail_message && user && user.client?
           self.notified_users = users_to_notify_based_on_former_reply.where(agent: true)  # (2)(b)(i)
@@ -128,7 +128,7 @@ concern :ReplyNotifications do
           self.notified_users = users_to_notify_based_on_former_reply  # (1)(a)(i), (2)(a)(i), (1)(b)(i)
         end
       end
-      
+
       self.notified_users.uniq!
 
     else
@@ -146,14 +146,14 @@ concern :ReplyNotifications do
       self.notified_users = result.uniq
     end
   end
-  
+
   # # This is called from `NotificationMailer#incoming_message` after delivering
   # # the notifications (i).
   # #
   # def add_notifications_based_on_mail_message(mail_message)
   #   self.notified_users << notified_users_based_on_mail_message(mail_message)  # (ii)
   # end
-  
+
   # This is how to deliver the notification emails:
   #
   #     reply.notification_mails.each { |mail| mail.deliver_now }
@@ -165,7 +165,7 @@ concern :ReplyNotifications do
   def notification_mails
     self.message_id = Mail::MessageIdField.new.message_id
     self.save!
-    
+
     notified_users.collect do |user|
       unless user.ticket_system_address?
         mail = NotificationMailer.new_reply(self, user)
@@ -174,24 +174,24 @@ concern :ReplyNotifications do
       end
     end - [nil]
   end
-  
+
   private
-  
+
   def users_not_to_notify
     # Do not notify the user that is sending the reply.
     # Also, do not notify the ticket system email addresses to prevent
     # email loops.
     [user] + User.ticket_system_addresses
   end
-  
+
   def users_to_notify_based_on_former_reply
     if reply_to
-      User.where(id: ([reply_to.user] + reply_to.notified_users - users_not_to_notify).map(&:id)) 
+      User.where(id: ([reply_to.user] + reply_to.notified_users - users_not_to_notify).map(&:id))
     else
       User.none
     end
   end
-  
+
   def users_to_notify_based_on_ticket_assignment
     if Tenant.current_tenant.first_reply_ignores_notified_agents? &&
          reply_to.is_a?(Ticket) &&
