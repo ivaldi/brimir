@@ -26,7 +26,7 @@ class NotificationMailerTest < ActionMailer::TestCase
     end
 
     mail = ActionMailer::Base.deliveries.last
-    assert_equal ticket.message_id, mail.message_id
+    assert_equal "<#{ticket.message_id}>", mail['Message-Id'].to_s
     assert_equal email_addresses(:brimir).formatted, mail['From'].to_s
   end
 
@@ -39,7 +39,7 @@ class NotificationMailerTest < ActionMailer::TestCase
 
     mail = ActionMailer::Base.deliveries.last
     assert_equal "<#{reply.ticket.message_id}>", mail['In-Reply-To'].to_s
-    assert_equal reply.message_id, mail.message_id
+    assert_equal "<#{reply.message_id}>", mail['Message-Id'].to_s
     assert_equal email_addresses(:brimir).formatted, mail['From'].to_s
   end
 
@@ -64,7 +64,7 @@ class NotificationMailerTest < ActionMailer::TestCase
     last = ActionMailer::Base.deliveries.count - 1
     while last >= first
       mail = ActionMailer::Base.deliveries[last]
-      assert_equal ticket.message_id, mail.message_id
+      assert_equal "<#{ticket.message_id}>", mail['Message-Id'].to_s
       last -= 1
     end
   end
