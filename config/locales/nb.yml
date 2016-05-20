@@ -1,0 +1,303 @@
+nb:
+  language_name: Norsk (Bokmål)
+# layouts/application
+  new_ticket: Ny henvendelse
+  inbox: Innboks
+  mine: Tildelt meg
+  closed_tickets: Lukket
+  trashed: Kastet
+  users: Brukere
+  rules: Regler
+  personal_settings: Personlige innstillinger
+  sign_out: Logg ut
+  delete: Slett
+  close: Lukk
+  wait: Avvent
+
+  joyride:
+    tickets: Hvem som helst kan opprette henvendelser ved å klikke på denne knappen.
+    personal_settings: Sett signaturen din, tidssone og andre innstillinger i denne menyen.
+    labels: Når man har lagt til merkelapper til henvendelser eller brukere vil de dukke opp her. Du kan så benytte dem som filtere. Nye merkelapper kan opprettes inne i en henvendelse.
+    rules: Automatisk legg til merkelapper, ansvarlige og annet!
+    users: Legg til flere agenter eller vanlige brukere.
+    final: Takk for at du benytter systemet!
+    next: Neste
+    previous: Forrige
+    end: Sett i gang!
+
+# devise/sessions/new
+  sign_in: Logg inn
+
+# devise/shared/links
+  forgot_password: Glemt passord?
+
+# devise/passwords/new
+  send_instructions: Send meg beskrivelse
+
+# devise/passwords/edit
+  change_password: Endre passord
+  new_password: Nytt passord
+  new_password_confirmation: Bekreft nytt passord
+
+# devise/mailer/reset_password_instructions
+  hello: Hei
+  someone_requested_link: Noen har spurt om en passordendring på kontoen i sakssystemet. Du kan endre passord med linken under.
+  ignore_if_not_requested: Hvis du ikke ønsker å bytte passord, og ikke har bedt om denne e-posten, vennligst ignorer den.
+  password_wont_change_without_opening_link: Passordet ditt vil ikke bli endret med mindre du besøker linken over for å opprette et nytt.
+
+# tickets/index
+  count_tickets:
+    one: '%{count} henvendelse'
+    other: '%{count} henvendelser'
+  count_tickets_containing:
+    one: '%{count} henvendelse som inneholder'
+    other: '%{count} henvendelser som inneholder'
+  priority: Prioritet
+  replies: svar
+  no_subject: Uten emne
+  unassigned: Ikke tildelt
+  no_tickets_found: Ingen henvendelser funnet.
+  search: Søk
+  filter: Filter
+  minutes: minutter
+  are_you_sure_empty_trash: Vil du virkelig slette alle henvendelser som er kastet?
+  locked_by_user: Denne henvendelsen har blitt tildelt til %{user}
+  ticket_id_created_by_at: '#%{id} opprettet av %{user} den %{at}'
+
+# tickets/show
+  add: Legg til
+  ticket_by_at: Av %{email} den %{at}
+  to_email: til %{email}
+  no_content: Uten innhold
+  ticket_id: Henvendelsesnummer
+  status: Status
+  assignee: Ansvarlig
+  num_replies:
+    one: '%{count} svar'
+    other: '%{count} svar'
+  ago: siden
+  high: Høy
+  medium: Middels
+  low: Lav
+  unknown: Ukjent
+  labels: Merkelapper
+  label_name: Merkelapp
+  notification_sent_to: 'En varsling ble sendt til følgende e-postadresse:'
+  no_notifications_sent: 'Ingen varslinger har blitt sendt'
+  assign_label: Velg merkelapp
+  take_ticket_lock_from_user: Overta henvendelse fra %{user}
+
+# tickets/_change_priority_form
+  change: Endre
+  change_priority: Endre prioritet
+
+# tickets/_change_status_form
+  change_status: Endre status
+
+# tickets/_change_assignee_form
+  change_assignee: Tildel henvendelse
+  assign: Tildel
+
+# tickets/locks/create
+  ticket_locked_by_somebody_else: Henvendelsen blir allerede håndtert av noen andre.
+
+# tickets/merge
+  ticket_has_been_merged_to: "Henvendelsen har blitt slått sammen med henvendelses-ID #%{ticket_id}."
+  merge: Slå sammen
+  merge_explanation: "Slå sammen de valgte henvendelsene. Dette kopierer alle svar til den eldste henveldelsen og lukker de andre."
+  tickets_have_been_merged: "Henvendelsene har blitt slått sammen"
+
+# ticket/new
+  create_ticket: Send henvendelse
+
+# replies/new
+  add_reply: Legg til svar
+
+# replies/_form
+  reply: Svar
+  attach_files: Legg til fil(er)
+  attach_file: Legg til fil
+  send_reply: Send svar
+  on_date_author_wrote: 'Den %{date} skrev %{author}:'
+  notification_will_be_sent_to: Varsling vil bli sendt til
+  save_as_draft: Lagre som kladd
+  internal_note: Intern notis
+
+# replies/_reply
+  reply_by: Svar fra
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Ticket assigned to you
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Ticket priority modified for ticket
+
+# ticket_mailer/notify_status_changed.text.erb
+  ticket_status_modified: Ticket status modified for ticket
+  tickets_status_modified: Ticket status modified for tickets
+
+# notification_mailer/new_ticket
+  view_new_ticket: Vis ny henvendelse
+# notification_mailer/new_reply
+  new_reply: Nytt svar
+  view_new_reply: Vis nytt svar
+
+# attachments/_attachment
+  download: download
+
+# users/new
+  new_user: Ny bruker
+
+# users/edit
+  edit_user: Endre bruker
+  omniauth_connect_title: Autentiser med Google
+  omniauth_connect_text: Aktiver autentisering med en Google-konto. Etter aktivering kan du benytte "Logg inn med Google" som et alternativ til standard brukernavn og passord-innlogging.
+  omniauth_connect_google_text: Knytt til Google
+  remove_user: Fjern bruker
+
+# users/index
+  email: E-post
+  password: Passord
+  role: Rolle
+  agent: Agent
+  agents: Agenter
+  customer: Bruker
+
+# users/_form
+  account_settings: Kontoinnstillinger
+  only_fill_in_passwords_when_modifying: Fyll kun inn disse feltene dersom du ønsker å endre passord.
+  user_is_an_agent: Brukeren er en agent
+  receive_new_ticket_notifications: Motta varsling ved nye henvendelser
+  email_settings: E-postinnstillinger
+  save: Lagre
+  access_control: Tilgangskontroll
+  have_access_to_label: Brukeren har tilgang til alle henvendelser med disse merkelappene
+
+# settings/edit
+  change_settings: Endre innstillinger
+  localization_settings: Regionalinnstillinger
+  permissions: Rettigheter
+  notification_settings: Varslingsinnstillinger
+
+# controllers/settings
+  settings_saved: Innstillinger lagret
+
+# controllers/attachments
+  file_not_found: Fil ikke funnet
+
+# controllers/users
+  settings_saved: Innstillinger lagret
+  user_added: Bruker opprettet
+  user_removed: Bruker slettet
+
+# controllers/tickets
+  ticket_added: Henvendelse opprettet
+  ticket_updated: Henvendelse oppdatert
+
+# controllers/tickets/deleted
+  trash_emptied: Alle kastede henvendelser ble slettet
+
+# controllers/replies
+  reply_added: Svar lagt til
+  draft_saved: Kladd lagret
+
+# controllers/omniauth
+  already_linked_accounts: Allerede knyttet til en Google-konto.
+  successfully_linked_account: Kontoen knyttet til din Google-konto
+  not_linked_account_cant_login: Det er ingen brukere knyttet til denne autentiseringstilbyderen enda. Vennligst logg inn først og knytt kontoen din til den under "Personlige Innstillinger"-menyen.
+  third_party_failure: En feil oppstod under autentiseringen. Aktiverte du "Contacts API" og "Google+ API" i Google API-panelet?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Alternativ innlogging
+  omniauth_sign_in_google: Google
+
+# rules/index
+  new_rule: New rule
+
+# rules/edit
+  edit_rule: Endre regel
+  delete_rule: Slett rule
+  are_you_sure: Er du sikker?
+
+# controllers/rules
+  rule_added: Regel lagt til
+  rule_modified: Regel endret
+  rule_deleted: Regel slettet
+
+# email_addresses/index
+  new_email_address: Ny utgående e-postadresse
+  email_addresses: E-postadresser for utgående mail
+
+# email_addresses/edit
+  modify_email_address: Endre utgående e-postadresse
+
+# email_addresses/new
+  verification_mail_will_be_sent: Sørg for at denne e-postadressen blir videresendt riktig til systemet. En automatisk verifiksjonse-post vil bli sendt når du trykker "Lagre". Kun verifiserte e-postadresser kan benyttes til utgående e-post.
+  mark_spam_spf: E-poster fra sakssystemet kan bli merket som spam hvis du ikke legger denne serveren til SPF DNS-innslagene til e-postadressene som legges til.
+
+# controllers/email_addresses
+  email_address_modified: E-postadresse endret
+  email_address_added: E-postadresse lagt til
+  email_address_removed: E-postadresse fjernet
+
+  activerecord:
+    attributes:
+      user:
+        email: E-post
+        password: Passord
+        password_confirmation: Bekreft passord
+        signature: E-postsignatur
+        remember_me: Husk meg
+        label_ids: Merkelapper
+        locale: Språk
+        time_zone: Tidssone
+        per_page: Henvendelser per side
+        prefer_plain_text: Send og motta henvendelser i klartekst
+        include_quote_in_reply: Inkluder sitering av original henvendelse i svaret.
+
+      ticket:
+        from: Fra e-post adresse
+        subject: Emne
+        content: Innhold
+        status: Status
+        statuses:
+          open: Åpen
+          closed: Lukket
+          deleted: Slettet
+          waiting: Venter
+        priority: Prioritet
+        assignee_id: Ansvarlig
+        created_at: Opprettet
+        to: Til e-post adresse
+
+      reply:
+        from: Fra e-post adresse
+
+      rule:
+        filter_field: Felt
+        filter_operation: Operatør
+        filter_operations:
+          contains: inneholder
+          equals: er lik
+        filter_value: Verdi
+        action_operation: Handling som utføres
+        action_operations:
+          assign_label: tildel merkelapp
+          notify_user: send varsling til
+          change_status: endre status til
+          change_priority: endre prioritet til
+          assign_user: tildel til
+        action_value: Parameter for handling
+
+      email_address:
+        email: E-postadresse
+        name: Navn
+        default: Bruk som standard utgående e-postadresse
+        verification_token: Verifisert
+
+      tenant:
+        default_locale: Standardspråk
+        ignore_user_agent_locale: Ignorer standard nettleserspråk
+        default_time_zone: Standard tidssone
+        share_drafts: Vis kladder til andre deltagere
+        first_reply_ignores_notified_agents: Ikke varsle andre deltagere ved første svar
