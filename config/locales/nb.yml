@@ -157,7 +157,6 @@ nb:
 
 # users/index
   email: E-post
-  password: Passord
   role: Rolle
   agent: Agent
   agents: Agenter
