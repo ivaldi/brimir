@@ -25,10 +25,10 @@
   <% if can? :update, @ticket %>
     <p>
       <%
-        options = [ ['unassigned', 0] ]
+        options = [ ['unassigned', nil] ]
         User.agents.map.each {|u| options << [u.email, u.id]}
       %>
-      <%= f.select :assignee_id, options_for_select(options, 0) %>
+      <%= f.select :assignee_id, options_for_select(options) %>
     </p>
 
     <p>
