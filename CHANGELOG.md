@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Brimir unreleased (to be announced)
 ### Added
+- Norsk translation by @viddypiddy.
 
 ### Changed
 
