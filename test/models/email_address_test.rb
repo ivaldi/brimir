@@ -7,7 +7,7 @@ class EmailAddressTest < ActiveSupport::TestCase
 
     assert_equal 'outgoing@support.bla', EmailAddress.default_email
 
-    EmailAddress.delete_all
+    EmailAddress.destroy_all
 
     assert_equal 'support@test.host', EmailAddress.default_email
   end
