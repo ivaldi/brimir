@@ -17,7 +17,7 @@
 class EmailAddress < ActiveRecord::Base
 
   validates :email, uniqueness: true, presence: true
-  has_many :tickets, dependent: :nullify
+  has_many :tickets, foreign_key: :to_email_address_id, dependent: :nullify
 
   before_save :ensure_one_default
   before_create :generate_verification_token
