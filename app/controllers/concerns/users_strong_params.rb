@@ -20,6 +20,7 @@ module UsersStrongParams
   def user_params
     attributes = params.require(:user).permit(
         :email,
+        :name,
         :password,
         :password_confirmation,
         :remember_me,
