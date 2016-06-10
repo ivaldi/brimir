@@ -45,7 +45,7 @@ class Tenant < ActiveRecord::Base
     end
 
     ActionMailer::Base.default_url_options = { host: "#{domain}" }
-    Rails.configuration.devise.mailer_sender = self.default_email
+    Rails.configuration.devise.mailer_sender = EmailAddress.default_email
 
     Paperclip.interpolates :domain do |attachment, style|
       # no schema based tenants, so no subdir
