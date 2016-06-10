@@ -18,6 +18,10 @@ require 'test_helper'
 
 class ReplyTest < ActiveSupport::TestCase
 
+  setup do
+    Tenant.current_domain = tenants(:main).domain
+  end
+
   test 'should notify label users' do
     ticket = Ticket.new from: 'test@test.com', content: 'test'
     ticket.labels << labels(:bug)
@@ -29,7 +33,6 @@ class ReplyTest < ActiveSupport::TestCase
   end
 
   test 'should reply to all agents if not assigned' do
-    Tenant.current_domain = tenants(:main).domain
     Tenant.current_tenant.first_reply_ignores_notified_agents = true
 
     ticket = tickets(:daves_problem)
@@ -41,7 +44,6 @@ class ReplyTest < ActiveSupport::TestCase
   end
 
   test 'should not reply to all agents if assigned' do
-    Tenant.current_domain = tenants(:main).domain
     Tenant.current_tenant.first_reply_ignores_notified_agents = true
 
     ticket = tickets(:daves_problem)
@@ -59,7 +61,6 @@ class ReplyTest < ActiveSupport::TestCase
   end
 
   test 'should reply to agent if assigned' do
-    Tenant.current_domain = tenants(:main).domain
     Tenant.current_tenant.first_reply_ignores_notified_agents = false
 
     ticket = tickets(:daves_problem)
