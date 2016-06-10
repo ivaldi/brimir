@@ -61,7 +61,7 @@ de:
   are_you_sure_empty_trash: Papierkorb wirklich leeren?
   locked_by_user: 'Das Ticket wird derzeit von %{user} bearbeitet.'
   ticket_id_created_by_at: '#%{id} erstellt von %{user} am %{at}'
-  
+
 
 # tickets/show
   add: Neu
@@ -100,7 +100,7 @@ de:
   merge: Zusammenführen
   merge_explanation: "Ausgewählte Tickets zusammenführen. Dies kopiert die Antworten der ausgewählten Tickets in das älteste diser Tickets. Die übrigen ausgewählten Tickets werden geschlossen."
   tickets_have_been_merged: "Tickets wurden zusammengeführt."
-  
+
 
 # replies/new
   add_reply: Antworten
@@ -126,9 +126,12 @@ de:
 
 # notification_mailer/new_ticket
   view_new_ticket: Ticket anzeigen
+
 # notification_mailer/new_reply
   new_reply: Antwort
   view_new_reply: Antwort anzeigen
+  your_ticket_has_been_closed: 'Ihr Support-Ticket wurde geschlossen. Wenn das Problem noch nicht gelöst wurde, antworten Sie einfach auf diese Nachricht. Für neue Anliegen schreiben Sie bitte eine separate E-Mail. Danke!'
+  str_is_working_on_your_ticket: "%{str} bearbeitet jetzt Ihr Anliegen."
 
 # attachments/_attachment
   download: Öffnen

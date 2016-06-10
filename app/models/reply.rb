@@ -19,6 +19,7 @@ class Reply < ActiveRecord::Base
   include CreateFromUser
   include EmailMessage
   include ReplyNotifications
+  include ReplyCreateFromStatusChange
 
   attr_accessor :reply_to_id
   attr_accessor :reply_to_type
@@ -57,7 +58,7 @@ class Reply < ActiveRecord::Base
   def other_replies
     ticket.replies.where.not(id: id)
   end
-  
+
   def first?
     reply_to_type == 'Ticket'
   end

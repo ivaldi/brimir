@@ -76,7 +76,7 @@ class TicketsController < ApplicationController
       .filter_by_assignee_id(params[:assignee_id])
       .filter_by_user_id(params[:user_id])
       .ordered
-    
+
     if params[:status] != 'merged'
       @tickets = @tickets.where.not(status: Ticket.statuses[:merged])
     end
@@ -109,6 +109,15 @@ class TicketsController < ApplicationController
             NotificationMailer.priority_changed(@ticket).deliver_now
           end
 
+        end
+
+        # status replies
+        if !@ticket.assignee.nil?
+          if @ticket.previous_changes.include? :assignee_id
+            Reply.create_from_assignment(@ticket, current_user).try(:notification_mails).try(:each, &:deliver_now)
+          elsif @ticket.previous_changes.include? :status
+            Reply.create_from_status_change(@ticket, current_user).try(:notification_mails).try(:each, &:deliver_now)
+          end
         end
 
         format.html {
