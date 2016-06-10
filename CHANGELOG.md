@@ -4,7 +4,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Brimir unreleased (to be announced)
 ### Added
-- Norsk translation by @viddypiddy.
 
 ### Changed
 
@@ -13,9 +12,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ### Fixed
-- Notification mails of new tickets now always have correct message-id headers.
 
 ### Security
+
+## Brimir 0.7.1 (2016-06-10)
+### Added
+- Norsk translation by @viddypiddy.
+
+### Fixed
+- Notification mails of new tickets now always have correct message-id headers.
+- Inline images are now displayed correctly again.
 
 ## Brimir 0.7.0 (2016-04-15)
 ### Added

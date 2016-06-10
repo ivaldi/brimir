@@ -55,4 +55,10 @@ On date, person wrote:
     stripped = strip_inline_style(content)
     assert_equal 'Hello', stripped
   end
+
+  test 'should replace cid: src with actual urls' do
+    content = '<img src="cid:CONTENT_ID" />'
+    assert_match(/<img src="TEST".*>/,
+        sanitize_html(content, { 'CONTENT_ID' => 'TEST' }))
+  end
 end

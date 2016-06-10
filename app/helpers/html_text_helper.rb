@@ -34,18 +34,19 @@ module HtmlTextHelper
     CGI.escapeHTML(content).gsub("\n", '<br />')
   end
 
-  def sanitize_html(content, attachments = [])
+  def sanitize_html(content, attachments = {})
+    result = content
+
+    attachments.each do |content_id,url|
+      result.gsub!(/src="cid:#{content_id}"/, "src=\"#{url}\"")
+    end
+
     result = sanitize(
-        strip_inline_style(content),
+        strip_inline_style(result),
         tags:       %w( a b br code div em i img li ol p pre table td tfoot
                         thead tr span strong ul font ),
         attributes: %w( src href style color )
     )
-
-    attachments.each do |attachment|
-      result.gsub!(/src="cid:#{attachment.content_id}"/,
-        "src=\"#{attachment.file.url(:original)}\"")
-    end
 
     result.html_safe
   end
