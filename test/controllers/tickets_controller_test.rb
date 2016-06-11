@@ -176,7 +176,8 @@ class TicketsControllerTest < ActionController::TestCase
     sign_in users(:alice)
 
     # new assignee should receive notification
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    # as well as the ticket's user
+    assert_difference 'ActionMailer::Base.deliveries.size', 2 do
 
       put :update, id: @ticket.id, ticket: { assignee_id: users(:charlie).id }
       assert_redirected_to ticket_path(@ticket)
@@ -185,14 +186,16 @@ class TicketsControllerTest < ActionController::TestCase
 
     # currently we can check whether the hardcoded word assigned is in the body
     # in the future we might use templates or translations...
-    assert_match 'assigned', ActionMailer::Base.deliveries.last.body.decoded
+    assert_match 'assigned', ActionMailer::Base.deliveries[-2].body.decoded
+    assert_match 'working on your request', ActionMailer::Base.deliveries.last.body.encoded
   end
 
   test 'should email assignee if status of ticket is changed by somebody else' do
     sign_in users(:charlie)
 
     # assignee should receive notification
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    # as well as the ticket's user
+    assert_difference 'ActionMailer::Base.deliveries.size', 2 do
 
       put :update, id: @ticket.id, ticket: { status: 'closed' }
       assert_redirected_to ticket_path(@ticket)
@@ -201,7 +204,8 @@ class TicketsControllerTest < ActionController::TestCase
 
     # currently we can check whether the hardcoded word status is in the body
     # in the future we might use templates or translations...
-    assert_match 'status', ActionMailer::Base.deliveries.last.body.decoded
+    assert_match 'status', ActionMailer::Base.deliveries[-2].body.decoded
+    assert_match 'has been closed', ActionMailer::Base.deliveries.last.body.encoded
   end
 
   test 'should email assignee if priority of ticket is changed by somebody else' do
@@ -225,7 +229,8 @@ class TicketsControllerTest < ActionController::TestCase
     sign_in users(:charlie)
 
     # new assignee should not receive notification
-    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+    # but the ticket's user
+    assert_difference 'ActionMailer::Base.deliveries.size', 1 do
 
       put :update, id: @ticket.id, ticket: { assignee_id: users(:charlie).id }
       assert_redirected_to ticket_path(@ticket)
@@ -238,7 +243,8 @@ class TicketsControllerTest < ActionController::TestCase
     sign_in users(:alice)
 
     # assignee should not receive notification
-    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+    # but the ticket's user
+    assert_difference 'ActionMailer::Base.deliveries.size', 1 do
 
       put :update, id: @ticket.id, ticket: { status: 'closed' }
       assert_redirected_to ticket_path(@ticket)
