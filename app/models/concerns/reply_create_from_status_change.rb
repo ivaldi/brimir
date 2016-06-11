@@ -15,6 +15,7 @@ concern :ReplyCreateFromStatusChange do
 
     def create_from_status_message(message, ticket, current_user)
       reply = self.create content: message, ticket_id: ticket.id, user_id: current_user.id
+      reply.reply_to = ticket
       reply.set_default_notifications!
       reply.notified_users = (reply.notified_users + [ticket.user] - [ticket.assignee] - [nil]).uniq
       return reply
