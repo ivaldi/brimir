@@ -42,7 +42,7 @@ class TicketsController < ApplicationController
       @reply = draft
     else
       @reply = @ticket.replies.new(user: current_user)
-      @reply.reply_to = @replies.select{ |r| !r.internal? }.last || @ticket
+      @reply.reply_to = @replies.select{ |r| !r.internal? && !r.kind_of?(StatusReply) }.last || @ticket
       @reply.set_default_notifications!
     end
 
