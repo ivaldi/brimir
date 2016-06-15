@@ -139,6 +139,8 @@ nl:
 # notification_mailer/new_reply
   new_reply: Nieuwe reactie
   view_new_reply: Nieuwe reactie bekijken
+  your_ticket_has_been_closed: "Uw ticket is gesloten. Reageer op deze e-mail als het probleem niet is opgelost. Voor een nieuw probleem kunt u een losse e-mail sturen."
+  str_is_working_on_your_ticket: "%{str} zal uw ticket behandelen."
 
 # attachments/_attachment
   download: download
@@ -235,6 +237,7 @@ nl:
   activerecord:
     attributes:
       user:
+        name: Naam
         email: E-mailadres
         password: Wachtwoord
         password_confirmation: Wachtwoord bevestiging
@@ -293,3 +296,4 @@ nl:
         default_time_zone: Standaard tijdzone
         share_drafts: Deel concepten met andere medewerkers
         first_reply_ignores_notified_agents: Geen notificatie van eerste reactie aan andere agents voor toegewezen tickets
+        notify_client_when_ticket_is_assigned_or_closed: Stuur een notificatie naar de klant als zijn ticket toegekend of gesloten wordt.
