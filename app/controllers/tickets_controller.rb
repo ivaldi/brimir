@@ -115,9 +115,9 @@ class TicketsController < ApplicationController
         if Tenant.current_tenant.notify_client_when_ticket_is_assigned_or_closed
           if !@ticket.assignee.nil?
             if @ticket.previous_changes.include? :assignee_id
-              Reply.create_from_assignment(@ticket, current_user).try(:notification_mails).try(:each, &:deliver_now)
+              StatusReply.create_from_assignment(@ticket, current_user).try(:notification_mails).try(:each, &:deliver_now)
             elsif @ticket.previous_changes.include? :status
-              Reply.create_from_status_change(@ticket, current_user).try(:notification_mails).try(:each, &:deliver_now)
+              StatusReply.create_from_status_change(@ticket, current_user).try(:notification_mails).try(:each, &:deliver_now)
             end
           end
         end

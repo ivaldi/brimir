@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613202222) do
+ActiveRecord::Schema.define(version: 20160615124420) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20160613202222) do
     t.integer  "raw_message_file_size"
     t.datetime "raw_message_updated_at"
     t.boolean  "internal",                                    default: false,  null: false
+    t.string   "type"
   end
 
   add_index "replies", ["message_id"], name: "index_replies_on_message_id"

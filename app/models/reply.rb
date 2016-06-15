@@ -19,7 +19,6 @@ class Reply < ActiveRecord::Base
   include CreateFromUser
   include EmailMessage
   include ReplyNotifications
-  include ReplyCreateFromStatusChange
 
   attr_accessor :reply_to_id
   attr_accessor :reply_to_type
@@ -44,6 +43,10 @@ class Reply < ActiveRecord::Base
     joins(:ticket)
         .where('locked_by_id IN (?) OR locked_at < ?',
             [user.id, nil], Time.zone.now - 5.minutes)
+  }
+
+  scope :without_status_replies, -> {
+    where.not(type: "StatusReply")
   }
 
   def reply_to
