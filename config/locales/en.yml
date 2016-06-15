@@ -138,6 +138,8 @@ en:
 # notification_mailer/new_reply
   new_reply: New reply
   view_new_reply: View new reply
+  your_ticket_has_been_closed: "Your support ticket has been closed. If the issue is not resolved, yet, please feel free to reply. For new requests, please send a separate email. Thanks!"
+  str_is_working_on_your_ticket: "%{str} is working on your request, now."
 
 # attachments/_attachment
   download: download
@@ -297,3 +299,4 @@ en:
         default_time_zone: Default time zone
         share_drafts: Share drafts with other agents
         first_reply_ignores_notified_agents: No notifications of first reply to other agents
+        notify_client_when_ticket_is_assigned_or_closed: Notify the client when his ticket is assigned or closed.

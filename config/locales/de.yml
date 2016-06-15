@@ -61,7 +61,7 @@ de:
   are_you_sure_empty_trash: Papierkorb wirklich leeren?
   locked_by_user: 'Das Ticket wird derzeit von %{user} bearbeitet.'
   ticket_id_created_by_at: '#%{id} erstellt von %{user} am %{at}'
-  
+
 
 # tickets/show
   add: Neu
@@ -100,7 +100,7 @@ de:
   merge: Zusammenführen
   merge_explanation: "Ausgewählte Tickets zusammenführen. Dies kopiert die Antworten der ausgewählten Tickets in das älteste diser Tickets. Die übrigen ausgewählten Tickets werden geschlossen."
   tickets_have_been_merged: "Tickets wurden zusammengeführt."
-  
+
 
 # replies/new
   add_reply: Antworten
@@ -126,9 +126,12 @@ de:
 
 # notification_mailer/new_ticket
   view_new_ticket: Ticket anzeigen
+
 # notification_mailer/new_reply
   new_reply: Antwort
   view_new_reply: Antwort anzeigen
+  your_ticket_has_been_closed: 'Ihr Support-Ticket wurde geschlossen. Wenn das Problem noch nicht gelöst wurde, antworten Sie einfach auf diese Nachricht. Für neue Anliegen schreiben Sie bitte eine separate E-Mail. Danke!'
+  str_is_working_on_your_ticket: "%{str} bearbeitet jetzt Ihr Anliegen."
 
 # attachments/_attachment
   download: Öffnen
@@ -158,6 +161,14 @@ de:
   save: Speichern
   access_control: Zugriff gestatten
   have_access_to_label: 'Der Benutzer darf nur Tickets mit diesen Labels öffnen:'
+
+# settings/edit
+  change_settings: Einstellungen ändern
+  permissions: Berechtigungen
+  notification_settings: Benachrichtigungs-Einstellungen
+
+# controllers/settings
+  settings_saved: Settings saved
 
 # controllers/attachments
   file_not_found: Datei nicht gefunden
@@ -278,3 +289,10 @@ de:
         email: E-Mail-Adresse
         default: Als Standard-E-Mail-Adresse für ausgehende Nachrichten verwenden
         verification_token: Verifiziert
+
+      tenant:
+        default_locale: Standard-Sprache
+        ignore_user_agent_locale: Sprache des Browsers ignorieren
+        default_time_zone: Standard-Zeit-Zone
+        share_drafts: Entwürfe mit anderen Agenten teilen
+        notify_client_when_ticket_is_assigned_or_closed: "Den Klienten benachrichtigen, wenn sein Ticket einem Bearbeiter zugewiesen oder geschlossen wird."

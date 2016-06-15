@@ -45,6 +45,10 @@ class Reply < ActiveRecord::Base
             [user.id, nil], Time.zone.now - 5.minutes)
   }
 
+  scope :without_status_replies, -> {
+    where.not(type: "StatusReply")
+  }
+
   def reply_to
     reply_to_type.constantize.where(id: self.reply_to_id).first if reply_to_type
   end
@@ -57,7 +61,7 @@ class Reply < ActiveRecord::Base
   def other_replies
     ticket.replies.where.not(id: id)
   end
-  
+
   def first?
     reply_to_type == 'Ticket'
   end

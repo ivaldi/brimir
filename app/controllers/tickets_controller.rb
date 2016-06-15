@@ -42,7 +42,7 @@ class TicketsController < ApplicationController
       @reply = draft
     else
       @reply = @ticket.replies.new(user: current_user)
-      @reply.reply_to = @replies.select{ |r| !r.internal? }.last || @ticket
+      @reply.reply_to = @replies.select{ |r| !r.internal? && !r.kind_of?(StatusReply) }.last || @ticket
       @reply.set_default_notifications!
     end
 
@@ -76,7 +76,7 @@ class TicketsController < ApplicationController
       .filter_by_assignee_id(params[:assignee_id])
       .filter_by_user_id(params[:user_id])
       .ordered
-    
+
     if params[:status] != 'merged'
       @tickets = @tickets.where.not(status: Ticket.statuses[:merged])
     end
@@ -109,6 +109,17 @@ class TicketsController < ApplicationController
             NotificationMailer.priority_changed(@ticket).deliver_now
           end
 
+        end
+
+        # status replies
+        if Tenant.current_tenant.notify_client_when_ticket_is_assigned_or_closed
+          if !@ticket.assignee.nil?
+            if @ticket.previous_changes.include? :assignee_id
+              StatusReply.create_from_assignment(@ticket, current_user).try(:notification_mails).try(:each, &:deliver_now)
+            elsif @ticket.previous_changes.include? :status
+              StatusReply.create_from_status_change(@ticket, current_user).try(:notification_mails).try(:each, &:deliver_now)
+            end
+          end
         end
 
         format.html {

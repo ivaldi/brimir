@@ -63,6 +63,14 @@ class User < ActiveRecord::Base
     end
   }
 
+  def name
+    super || name_from_email_address
+  end
+
+  def name_from_email_address
+    email.split('@').first
+  end
+
   def self.agents_to_notify
     User.agents
         .where(notify: true)
@@ -86,7 +94,7 @@ class User < ActiveRecord::Base
   def self.ticket_system_addresses
     User.where(email: EmailAddress.pluck(:email))
   end
-  
+
   def client?
     not agent?
   end
