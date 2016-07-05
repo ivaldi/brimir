@@ -1,4 +1,5 @@
 # author: https://github.com/neilor
+# revisions: https://github.com/caiotarifa
 
 pt-BR:
   language_name: Português do Brasil
@@ -8,11 +9,13 @@ pt-BR:
   mine: Meu
   closed_tickets: Fechado
   trashed: Excluído
-  users: Usuário
+  users: Usuários
   rules: Regras
   personal_settings: Configurações Pessoais
   sign_out: Sair
-  delete: Remove
+  delete: Excluir
+  close: Fechar
+  wait: Aguardar
 
   joyride:
     tickets: Qualquer pessoa pode criar tickets usando este botão.
@@ -42,7 +45,7 @@ pt-BR:
 # devise/mailer/reset_password_instructions
   hello: Olá
   someone_requested_link: Alguém pediu um link para alterar sua senha, e você pode alterá-la através do link abaixo.
-  ignore_if_not_requested: Se você não fez esta requisição, por favor, ignore este email.
+  ignore_if_not_requested: Se você não fez esta requisição, por favor, ignore este e-mail.
   password_wont_change_without_opening_link: Sua senha não será alterada até que você acesse o link acima e crie uma nova.
 
 # tickets/index
@@ -58,12 +61,16 @@ pt-BR:
   unassigned: Não atribuído
   no_tickets_found: Nenhum ticket encontrado.
   search: Procurar
+  filter: Filtrar
   minutes: minutos
   are_you_sure_empty_trash: Deletar todos os tickets da lixeira?
+  locked_by_user: O ticket está sob a responsabilidade de %{user}
+  ticket_id_created_by_at: '#%{id} criado por %{user} em %{at}'
 
 # tickets/show
   add: Adicionar
   ticket_by_at: Por %{email} em %{at}
+  to_email: para %{email}
   no_content: Sem conteúdo
   ticket_id: Número do Ticket
   status: Status
@@ -80,6 +87,8 @@ pt-BR:
   label_name: Nome da etiqueta
   notification_sent_to: 'Uma notificação foi enviada para os seguintes endereços:'
   no_notifications_sent: 'Nenhuma notificação foi enviada'
+  assign_label: Atribuir rótulo
+  take_ticket_lock_from_user: Tomar a responsabilidade pelo ticket de %{user}
 
 # tickets/_change_priority_form
   change: Mudar
@@ -92,6 +101,15 @@ pt-BR:
   change_assignee: Atribuir ticket
   assign: Atribuir
 
+# tickets/locks/create
+  ticket_locked_by_somebody_else: O ticket já está sob a responsabilidade de alguém.
+
+# tickets/merge
+  ticket_has_been_merged_to: "Este ticket já foi mesclado com o ticket #%{ticket_id}."
+  merge: Mesclar
+  merge_explanation: "Mesclar os tickets selecionados. Isto irá copiar todas as interações para o ticket mais velho e fechará os outros tickets."
+  tickets_have_been_merged: "Os tickets foram mesclados."
+
 # replies/new
   add_reply: Adicionar resposta
 
@@ -102,6 +120,11 @@ pt-BR:
   send_reply: Enviar resposta
   on_date_author_wrote: 'Em %{date}, %{author} escreveu:'
   notification_will_be_sent_to: Sua notificação será enviada para
+  save_as_draft: Salvar como rascunho
+  internal_note: Nota interna
+
+# replies/_reply
+  reply_by: Respondido por
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket atribuído a você
@@ -110,13 +133,16 @@ pt-BR:
   ticket_priority_changed: Prioridade modificada para ticket
 
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Status modificado para ticket
+  ticket_status_modified: Status modificado para o ticket
+  tickets_status_modified: Status modificado para os tickets
 
 # notification_mailer/new_ticket
   view_new_ticket: Ver novo ticket
 # notification_mailer/new_reply
   new_reply: Nova resposta
   view_new_reply: Ver nova resposta
+  your_ticket_has_been_closed: "O seu ticket foi fechado. Se o problema ainda não foi resolvido, sinta-se livre para incluir uma resposta. Para novos pedidos, por gentileza abra outro ticket."
+  str_is_working_on_your_ticket: "%{str} irá cuidar do seu ticket."
 
 # attachments/_attachment
   download: download
@@ -129,22 +155,33 @@ pt-BR:
   omniauth_connect_title: Autenticação usando o Google
   omniauth_connect_text: Ative a autenticação usando uma conta do Google. Depois disso, você pode usar o "login no Google" como uma alternativa para o login com endereço de e-mail e senha padrão.
   omniauth_connect_google_text: Conecte-se com Google
+  remove_user: Remover usuário
 
 # users/index
-  email: Email
+  email: E-mail
   role: Regra
   agent: Agente
-  customer: Consumidor
+  agents: Agentes
+  customer: Cliente
 
 # users/_form
   account_settings: Configurações da conta
   only_fill_in_passwords_when_modifying: Somente preencha estes dois campos se você deseja modificar sua senha.
   user_is_an_agent: Usuário é um agente
   receive_new_ticket_notifications: Receba notificações de novos tickets
-  email_settings: Configurações de Email
+  email_settings: Configurações de E-mail
   save: Salvar
   access_control: Controle de acesso
   have_access_to_label: O usuário tem acesso a todos tickets com qualquer uma destas etiquetas.
+
+# settings/edit
+  change_settings: Alterar configurações
+  localization_settings: Configurações de localização
+  permissions: Permissões
+  notification_settings: Configurações de notificação
+
+# controllers/settings
+  settings_saved: Configurações salvas
 
 # controllers/attachments
   file_not_found: Arquivo não encontrado
@@ -152,6 +189,7 @@ pt-BR:
 # controllers/users
   settings_saved: Configurações salvas
   user_added: Usuário adicionado
+  user_removed: Usuário removido
 
 # controllers/tickets
   ticket_added: Ticket adicionado
@@ -162,6 +200,7 @@ pt-BR:
 
 # controllers/replies
   reply_added: Resposta adicionada
+  draft_saved: Rascunho salvo
 
 # controllers/omniauth
   already_linked_accounts: Já ligada à conta do Google
@@ -190,29 +229,36 @@ pt-BR:
   new_email_address: Novo endereço de e-mail de envio
   email_addresses: Endereço de e-mail para envio de e-mails
 
+# email_addresses/edit
+  modify_email_address: Modificar endereço de e-mail de saída
+
 # email_addresses/new
   verification_mail_will_be_sent: Certifique-se que este endereço de e-mail foi passado corretamente ao Brimir. Um e-mail de verificação automatico será enviado quando você clicar em Salvar. Apenas endereços de e-mail verificados podem ser usados para mensagens de saída.
   mark_spam_spf: Os e-mails do Brimir poderão ser marcados como spam caso você não adicione este servidor para o registro SPF DNS  do endereço de e-mail acima.
 
 # controllers/email_addresses
+  email_address_modified: Endereço de e-mail modificado
   email_address_added: Endereço de e-mail adicionado
   email_address_removed: Endereço de e-mail removido
 
   activerecord:
     attributes:
       user:
-        email: Email
+        name: Nome
+        email: E-mail
         password: Senha
         password_confirmation: Confirmação da senha
-        signature: Assinatura de email
+        signature: Assinatura de e-mail
         remember_me: Continuar conectado
         label_ids: Etiquetas
         locale: Idioma
         time_zone: Fuso horário
         per_page: Tickets por página
+        prefer_plain_text: Enviar e receber respostas em texto simples
+        include_quote_in_reply: Incluir citação da mensagem original na resposta
 
       ticket:
-        from: Email remetente
+        from: Remetente
         subject: Assunto
         content: Conteúdo
         status: Status
@@ -224,12 +270,17 @@ pt-BR:
         priority: Prioridade
         assignee_id: Responsável
         created_at: Criado em
+        to: Responsável
+
+      reply:
+        from: Remetente
 
       rule:
         filter_field: Campo
         filter_operation: Operador
         filter_operations:
           contains: contém
+          equals: é igual a
         filter_value: Valor
         action_operation: Ação a ser executada
         action_operations:
@@ -242,5 +293,14 @@ pt-BR:
 
       email_address:
         email: Endereço de e-mail
+        name: Nome
         default: Usar como endereço de e-mail de envio padrão
         verification_token: Verificado
+
+      tenant:
+        default_locale: Idioma Principal
+        ignore_user_agent_locale: Ignorar o idioma padrão do navegador
+        default_time_zone: Fuso horário padrão
+        share_drafts: Compartilhar rascunhos com outros agentes
+        first_reply_ignores_notified_agents: Nenhuma notificação de resposta inicial por outros agentes
+        notify_client_when_ticket_is_assigned_or_closed: Notificar o cliente quando seu ticket for atribuído ou fechado.
