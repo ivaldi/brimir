@@ -42,7 +42,7 @@ class Rule < ActiveRecord::Base
       ticket.labels << label unless ticket.labels.include?(label)
 
     elsif action_operation == 'notify_user'
-      user = User.where(email: action_value).first_or_create
+      user = User.where(email: action_value.downcase.trim).first_or_create
 
       if !user.nil? && !ticket.notified_users.include?(user)
         ticket.notified_users << user
