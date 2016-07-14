@@ -44,7 +44,9 @@ class Rule < ActiveRecord::Base
     elsif action_operation == 'notify_user'
       user = User.where(email: action_value).first_or_create
 
-      ticket.notified_users << user unless user.nil?
+      if !user.nil? && !ticket.notified_users.include?(user)
+        ticket.notified_users << user
+      end
 
     elsif action_operation == 'change_status'
       ticket.status = action_value.downcase
