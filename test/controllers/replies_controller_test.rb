@@ -106,7 +106,7 @@ class RepliesControllerTest < ActionController::TestCase
       }
     end
     mail = ActionMailer::Base.deliveries.last
-    assert_equal users(:alice).email, mail.header_fields.select { |field| field.name == 'smtp-envelope-to' }.last.value
+    assert_equal [users(:alice).email], mail.smtp_envelope_to
   end
 
   test 'should re-open ticket' do
