@@ -87,4 +87,74 @@ class TicketMergeTest < ActiveSupport::TestCase
     assert_equal merged_ticket.replies.collect { |reply| reply.attachments }.flatten.count, [second_attachment, reply_attachment].count
   end
 
+  test 'accessing attachment file for merged ticket' do
+    # Create two tickets with one attachment each.
+    ticket1 = tickets(:problem)
+    ticket2 = tickets(:daves_problem)
+    ticket1.attachments.create! file: File.open('test/fixtures/attachments/default-testpage.pdf')
+    ticket2.attachments.create! file: File.open('test/fixtures/attachments/default-testpage.pdf')
+    assert File.file? ticket1.attachments.first.file.path(:original)
+    assert File.file? ticket2.attachments.first.file.path(:original)
+
+    # Merge tickets and make sure the message ids are as expected.
+    merged_ticket = MergedTicket.from [ticket1, ticket2]
+    assert_equal merged_ticket.message_id, ticket1.message_id
+    assert_equal merged_ticket.replies.last.message_id, ticket2.message_id
+
+    # Test if the attachment files can still be accessed.
+    assert File.file? merged_ticket.attachments.first.file.path(:original)
+    assert File.file? merged_ticket.replies.last.attachments.first.file.path(:original)
+
+    # Actually, it should point to the same physical file.
+    assert_equal ticket1.attachments.first.file.path(:original), merged_ticket.attachments.first.file.path(:original)
+    assert_equal ticket2.attachments.first.file.path(:original), merged_ticket.replies.last.attachments.first.file.path(:original)
+  end
+
+  test 'accessing attachment file for merged reply' do
+    # Create two tickets and attach a file to a reply.
+    ticket1 = tickets(:daves_problem); ticket1.update! created_at: 1.hour.ago
+    ticket2 = tickets(:problem); ticket2.update! created_at: 30.minutes.ago
+    ticket2.replies.first.update! created_at: 15.minutes.ago
+    ticket2.replies.first.attachments.create! file: File.open('test/fixtures/attachments/default-testpage.pdf')
+    assert File.file? ticket2.replies.first.attachments.first.file.path(:original)
+
+    # Merge tickets and make sure the message ids are as expected.
+    merged_ticket = MergedTicket.from [ticket1, ticket2]
+    assert_equal merged_ticket.message_id, ticket1.message_id
+    assert_equal merged_ticket.replies.count, 2
+    assert_equal merged_ticket.replies.order(:created_at).first.message_id, ticket2.message_id
+    assert_equal merged_ticket.replies.order(:created_at).last.message_id, ticket2.replies.first.message_id
+
+    # Test if the attachment file can still be accessed.
+    assert File.file? merged_ticket.replies.order(:created_at).last.attachments.first.file.path(:original)
+  end
+
+  test 'accessing raw message for merged ticket' do
+    # Create two tickets with a raw message fake each.
+    ticket1 = tickets(:problem)
+    ticket2 = tickets(:daves_problem)
+    ticket1.update! raw_message: File.open('test/fixtures/attachments/default-testpage.pdf')
+    ticket2.update! raw_message: File.open('test/fixtures/attachments/default-testpage.pdf')
+    assert File.file? ticket1.raw_message.path(:original)
+    assert File.file? ticket2.raw_message.path(:original)
+
+    # Merge tickets and check if the raw message can still be accessed.
+    merged_ticket = MergedTicket.from [ticket1, ticket2]
+    assert File.file? merged_ticket.raw_message.path(:original)
+    assert File.file? merged_ticket.replies.last.raw_message.path(:original)
+  end
+
+  test 'accessing raw message for merged reply' do
+    # Create two tickets and attach a raw message fake to a reply.
+    ticket1 = tickets(:daves_problem); ticket1.update! created_at: 1.hour.ago
+    ticket2 = tickets(:problem); ticket2.update! created_at: 30.minutes.ago
+    ticket2.replies.first.update! created_at: 15.minutes.ago
+    ticket2.replies.first.update! raw_message: File.open('test/fixtures/attachments/default-testpage.pdf')
+    assert File.file? ticket2.replies.first.raw_message.path(:original)
+
+    # Merge tickets and check if the raw message can still be accessed.
+    merged_ticket = MergedTicket.from [ticket1, ticket2]
+    assert File.file? merged_ticket.replies.order(:created_at).last.raw_message.path(:original)
+  end
+
 end
