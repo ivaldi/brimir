@@ -19,6 +19,7 @@ class Reply < ActiveRecord::Base
   include CreateFromUser
   include EmailMessage
   include ReplyNotifications
+  prepend MergedReply
 
   attr_accessor :reply_to_id
   attr_accessor :reply_to_type
