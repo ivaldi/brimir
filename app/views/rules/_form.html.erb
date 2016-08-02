@@ -3,29 +3,17 @@
     <div class="large-6 columns">
       <%
         fields = []
-        [:from, :subject, :content].each do |key|
+        [:from, :subject, :content, :to].each do |key|
           fields << [t(key, scope: 'activerecord.attributes.ticket'), key]
         end
       %>
       <%= f.select(:filter_field, fields) %>
 
-      <%
-        operations = []
-        Rule.filter_operations.each do |key, value|
-          operations << [t(key, scope: 'activerecord.attributes.rule.filter_operations'), key]
-        end
-      %>
-      <%= f.select(:filter_operation, operations) %>
+      <%= f.collection_select(:filter_operation, t('activerecord.attributes.rule.filter_operations'), :first, :last) %>
 
       <%= f.text_field :filter_value %>
 
-      <%
-        operations = []
-        Rule.action_operations.each do |key, value|
-          operations << [t(key, scope: 'activerecord.attributes.rule.action_operations'), key]
-        end
-      %>
-      <%= f.select(:action_operation, operations) %>
+      <%= f.collection_select(:action_operation, t('activerecord.attributes.rule.action_operations'), :first, :last) %>
 
       <%= f.text_field :action_value %>
     </div>
@@ -33,7 +21,7 @@
 
   <div class="row">
     <div class="medium-12 columns bt">
-      <%= f.submit t(:save), class: 'success button radius mt' %>
+      <%= f.submit t(:save), class: 'success button radius mtl' %>
     </div>
   </div>
 <% end %>

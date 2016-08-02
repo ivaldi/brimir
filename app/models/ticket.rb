@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -16,22 +16,30 @@
 
 class Ticket < ActiveRecord::Base
   include CreateFromUser
+  include EmailMessage
+  include TicketMerge
 
   validates_presence_of :user_id
 
   belongs_to :user
   belongs_to :assignee, class_name: 'User'
+  belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress'
+  belongs_to :locked_by, class_name: 'User'
 
-  has_many :attachments, as: :attachable, dependent: :destroy
   has_many :replies, dependent: :destroy
-  has_many :labelings, as: :labelable
+  has_many :labelings, as: :labelable, dependent: :destroy
   has_many :labels, through: :labelings
 
   has_many :notifications, as: :notifiable, dependent: :destroy
   has_many :notified_users, source: :user, through: :notifications
 
-  enum status: [:open, :closed, :deleted]
+  has_many :status_changes, dependent: :destroy
+
+  enum status: [:open, :closed, :deleted, :waiting, :merged]
   enum priority: [:unknown, :low, :medium, :high]
+
+  after_update :log_status_change
+  after_create :create_status_change
 
   def self.active_labels(status)
     label_ids = where(status: Ticket.statuses[status])
@@ -49,7 +57,11 @@ class Ticket < ActiveRecord::Base
   }
 
   scope :by_status, ->(status) {
-    where(status: Ticket.statuses[status.to_sym])
+    if status
+      where(status: Ticket.statuses[status.to_sym])
+    else
+      all
+    end
   }
 
   scope :filter_by_assignee_id, ->(assignee_id) {
@@ -63,47 +75,112 @@ class Ticket < ActiveRecord::Base
       all
     end
   }
+  
+  scope :filter_by_user_id, ->(user_id) {
+    if user_id
+      where(user_id: user_id)
+    else
+      all
+    end
+  }
 
   scope :search, ->(term) {
     if !term.nil?
-      term = '%' + term.downcase + '%'
-      where('LOWER(subject) LIKE ? OR LOWER(content) LIKE ?',
-          term, term)
+      term.gsub!(/[\\%_]/) { |m| "!#{m}" }
+      term = "%#{term.downcase}%"
+      where('LOWER(subject) LIKE ? ESCAPE ? OR LOWER(content) LIKE ? ESCAPE ?',
+          term, '!', term, '!')
     end
   }
 
   scope :ordered, -> {
-    order(:created_at).reverse_order
+    order(:updated_at).reverse_order
   }
 
   scope :viewable_by, ->(user) {
-    if !user.agent?
+    if !user.agent? || user.labelings.count > 0
       ticket_ids = Labeling.where(label_id: user.label_ids)
           .where(labelable_type: 'Ticket')
           .pluck(:labelable_id)
-      where('tickets.id IN (?) OR tickets.user_id = ?', ticket_ids, user.id)
+
+      # all notified tickets
+      ticket_ids += Notification.where(user: user)
+          .where(notifiable_type: 'Ticket')
+          .pluck(:notifiable_id)
+
+      where('tickets.id IN (?) OR tickets.user_id = ? OR tickets.assignee_id = ?',
+          ticket_ids, user.id, user.id)
     end
   }
 
-  def set_default_notifications!(created_by)
+  scope :unlocked_for, ->(user) {
+    where('locked_by_id IN (?) OR locked_at < ?', [user.id, nil], Time.zone.now - 5.minutes)
+  }
 
-    # customer created ticket for another user
-    if !created_by.agent? && created_by != user
-      self.notified_user_ids = User.agents_to_notify.pluck(:id)
-      self.notified_user_ids << user.id
+  def set_default_notifications!
+    users = User.agents_to_notify.select do |user|
+      Ability.new(user).can? :show, self
+    end
+    self.notified_user_ids = users.map(&:id)
+  end
 
-    # ticket created by customer
-    elsif !created_by.agent?
-      self.notified_user_ids = User.agents_to_notify.pluck(:id)
+  def status_times
+    total = {}
 
-    # ticket created by agent for another user
-    elsif created_by.agent? && created_by != user
-      self.notified_user_ids = [user.id]
+    Ticket.statuses.keys.each do |key|
+      total[key.to_sym] = 0
+    end
 
-    # agent created ticket for himself
+    status_changes.each do |status_change|
+      total[status_change.status.to_sym] += status_change.updated_at - status_change.created_at
+    end
+
+    # add the current status as well
+    current = status_changes.ordered.last
+    unless current.nil?
+      total[current.status.to_sym] += Time.now - current.created_at
+    end
+
+    Ticket.statuses.keys.each do |key|
+      total[key.to_sym] /= 1.minute
+    end
+
+    total
+  end
+
+  def reply_from_address
+    if to_email_address.nil?
+      EmailAddress.default_email
     else
-      self.notified_user_ids = []
+      to_email_address.formatted
     end
   end
+
+  def locked?(for_user)
+    locked_by != for_user && locked_by != nil && locked_at > Time.zone.now - 5.minutes
+  end
+
+  def to
+    to_email_address.try :email
+  end
+
+  protected
+    def create_status_change
+      status_changes.create! status: self.status
+    end
+
+    def log_status_change
+
+      if self.changed.include? 'status'
+        previous = status_changes.ordered.last
+
+        unless previous.nil?
+          previous.updated_at = Time.now
+          previous.save
+        end
+
+        status_changes.create! status: self.status
+      end
+    end
 
 end

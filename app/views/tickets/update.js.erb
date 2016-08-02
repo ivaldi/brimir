@@ -1,13 +1,13 @@
 <% if !params[:ticket][:status].blank? %>
   jQuery('[data-dropdown="statuses-<%= @ticket.id %>"]')
       .empty()
-      .append('<span class="fa fa-<%= status_icon(@ticket.status) %>"></span> ' +
-          '<%= j(t(@ticket.status)) %>');
+      .append('<span class="<%= status_icon_class(@ticket.status) %>"></span> ' +
+          '<%= j(t(@ticket.status, scope: 'activerecord.attributes.ticket.statuses')) %>');
 
 <% elsif !params[:ticket][:priority].blank? %>
   jQuery('[data-dropdown="priorities-<%= @ticket.id %>"]')
       .empty()
-      .append('<span class="priority-<%= @ticket.priority %> fa fa-circle"></span> ' +
+      .append('<span class="cc-priority-<%= @ticket.priority %> fa fa-circle-o"></span> ' +
           '<%= j(t(@ticket.priority)) unless params[:short] == 'true' %>');
 
 <% else %>

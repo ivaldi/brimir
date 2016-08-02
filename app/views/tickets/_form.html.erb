@@ -1,4 +1,7 @@
 <%= form_for @ticket, url: tickets_url, html: { multipart: true } do |f| %>
+  <% type = (!current_user.nil? && current_user.prefer_plain_text?) ? 'text' : 'html' %>
+
+  <%= f.hidden_field :content_type, value: type %>
 
   <h3><%= t(:new_ticket) %></h3>
 
@@ -6,16 +9,53 @@
     <%= f.text_field :from %>
   </p>
 
+  <% if !current_user.nil? && current_user.agent? %>
+    <p>
+      <% blank = @email_addresses.count == 0 ? EmailAddress.default_email : nil %>
+      <%= f.label :to_email_address_id, t('activerecord.attributes.ticket.to'), class: 'ptm' %>
+      <%= f.collection_select :to_email_address_id, @email_addresses, :id, :formatted,
+          include_blank: blank, label: false %>
+    </p>
+  <% end %>
+
   <p>
     <%= f.text_field :subject %>
   </p>
+
+  <% if can? :update, @ticket %>
+    <p>
+      <%
+        options = [ ['unassigned', nil] ]
+        User.agents.map.each {|u| options << [u.email, u.id]}
+      %>
+      <%= f.select :assignee_id, options_for_select(options) %>
+    </p>
+
+    <p>
+      <%= f.select :priority, options_for_select(
+          Ticket.priorities.keys.each { |k| [t(k), k] }, f.object.priority) %>
+    </p>
+  <% end %>
+
   <p>
-    <%= f.text_area :content, class: 'tinymce' %>
+    <%
+      content = ''
+      unless current_user.nil?
+        if current_user.prefer_plain_text?
+          content = "\n#{html_to_text current_user.signature}"
+        else
+          content = "<p></p>#{current_user.signature}"
+        end
+      end
+    %>
+    <%= f.text_area :content, class: ('tinymce' if type == 'html'),
+        value: (f.object.content.nil? ? content : f.object.content) %>
   </p>
+
+  <%= render 'attachments/form', f: f %>
+
   <p>
     <%= f.submit class: 'button regular radius' %>
   </p>
 
 <% end %>
-
-

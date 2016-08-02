@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,6 @@ require 'test_helper'
 class Api::V1::TicketsControllerTest < ActionController::TestCase
 
   setup do
-
     @ticket = tickets(:problem)
   end
 
@@ -38,4 +37,22 @@ class Api::V1::TicketsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'should show tickets as nested resource' do
+    get :index, auth_token: users(:bob).authentication_token,
+      user_email: Base64.urlsafe_encode64(users(:alice).email),  :format => :json
+    assert_response :success
+  end
+
+  test 'should create ticket' do
+    sign_in users(:bob)
+    assert_difference 'Ticket.count', 1 do
+      post :create, auth_token: users(:bob).authentication_token, ticket: {
+        content: 'I need help',
+        from: 'bob@xxxx.com',
+        subject: 'Remote from API',
+        priority: 'low'}, 
+        format: :json
+    end
+    assert_response :success
+  end
 end

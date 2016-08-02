@@ -3,6 +3,7 @@ alice:
   agent: true
   signature: 'Greets, Alice'
   notify: true
+  authentication_token: blabla
 
 bob:
   email: bob@xxxx.com
@@ -12,6 +13,8 @@ bob:
 charlie:
   email: charlie@xxxx.com
   agent: true
+  current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails
 
 dave:
   email: dave@xxxx.com
+  current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails

@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -25,10 +25,25 @@ class LabelsController < ApplicationController
   end
 
   def update
-    @label.color = Label::COLORS[ params[:color].to_i % Label::COLORS.count ]
+
+    if params[:label].present? && params[:label][:name].present?
+      @label.name = params[:label][:name]
+    elsif params[:color].present?
+      @label.color = Label::COLORS[ params[:color].to_i % Label::COLORS.count ]
+    end
+
     @label.save
 
     respond_to :js
+  end
+
+  def edit
+    respond_to :js
+  end
+
+  def index
+    @labels = Label.viewable_by(current_user).where('name LIKE ?', "#{params[:q]}%")
+    respond_to :json
   end
 
 end

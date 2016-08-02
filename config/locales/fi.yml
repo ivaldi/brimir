@@ -1,5 +1,6 @@
 # author: https://github.com/JanneMantyharju
 fi:
+  language_name: Suomi
 # layouts/application
   new_ticket: Uusi tiketti
   inbox: Saapuneet
@@ -29,14 +30,13 @@ fi:
   password_wont_change_without_opening_link: Salasanasi pysyy ennallaan, ellet avaa linkkiä ja vaihda itse salasanaasi.
 
 # tickets/index
-  tickets: Tiketit
-  tickets_containing: Tiketit jotka sisältävät
   priority: Prioriteetti
   replies: vastaukset
   no_subject: Ei otsikkoa
   unassigned: Ei suorittajaa
   no_tickets_found: Tikettejä ei löytynyt.
   search: Etsi
+  minutes: minuuttia
 
 # tickets/show
   ticket_by_at: Lähettänyt %{email} kello %{at}
@@ -50,9 +50,6 @@ fi:
   medium: Normaali
   low: Alhainen
   unknown: Tuntematon
-  open: Avoin
-  closed: Suljettu
-  deleted: Poistettu
   labels: Aiheet
   label_name: Aiheen nimi
   notification_sent_to: 'Viesti lähetettiin seuraaville vastaanottajille:'
@@ -84,7 +81,7 @@ fi:
   ticket_priority_changed: Prioriteetti muutettiin tiketille
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Tila muutettiin tiketille
+  ticket_status_modified: Tila muutettiin tiketille
 
 # notification_mailer/new_ticket
   view_new_ticket: Näytä uusi tiketti
@@ -146,10 +143,9 @@ fi:
         subject: Otsikko
         content: Sisältö
         status: Tila
+        statuses:
+          open: Avoin
+          closed: Suljettu
+          deleted: Poistettu
         priority: Prioriteetti
         assignee_id: Suorittaja
-
-      reply:
-        to: Vastaanottaja
-        cc: Kopio
-        Bcc: Piilokopio

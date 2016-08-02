@@ -1,2 +1,2 @@
-jQuery('#label-id-<%= @label.id %>').fadeOut();
+jQuery('[data-label-id="<%= @label.id %>"]').fadeOut();
 jQuery('[data-dropdown="label-<%= @label.id %>"]').closest('li').fadeOut();

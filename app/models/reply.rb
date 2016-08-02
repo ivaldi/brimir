@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -14,56 +14,56 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# replies to tickets, made by a user, possibly with attachments
 class Reply < ActiveRecord::Base
   include CreateFromUser
+  include EmailMessage
+  include ReplyNotifications
+  prepend MergedReply
 
-  has_many :attachments, as: :attachable, dependent: :destroy
+  attr_accessor :reply_to_id
+  attr_accessor :reply_to_type
 
-  has_many :notifications, as: :notifiable, dependent: :destroy
-  has_many :notified_users, source: :user, through: :notifications
+  validates :ticket_id, :content, presence: true
 
-  accepts_nested_attributes_for :attachments
-
-  validates_presence_of :ticket_id, :content
-
-  belongs_to :ticket
+  belongs_to :ticket, touch: true
   belongs_to :user
 
-  scope :chronologically, -> { order(:id) }
-  scope :with_message_id, -> {
+  accepts_nested_attributes_for :ticket
+
+  scope :chronologically, -> { order(:created_at) }
+  scope :with_message_id, lambda {
     where.not(message_id: nil)
   }
 
-  def set_default_notifications!
-    self.notified_user_ids = users_to_notify.map do |user|
-      user.id
-    end
+  scope :without_drafts, -> {
+    where(draft: false)
+  }
+
+  scope :unlocked_for, ->(user) {
+    joins(:ticket)
+        .where('locked_by_id IN (?) OR locked_at < ?',
+            [user.id, nil], Time.zone.now - 5.minutes)
+  }
+
+  scope :without_status_replies, -> {
+    where.not(type: "StatusReply")
+  }
+
+  def reply_to
+    reply_to_type.constantize.where(id: self.reply_to_id).first if reply_to_type
+  end
+
+  def reply_to=(value)
+    self.reply_to_id = value.id
+    self.reply_to_type = value.class.name
   end
 
   def other_replies
-    self.ticket.replies.where.not(id: self.id)
+    ticket.replies.where.not(id: id)
   end
 
-  def users_to_notify
-    to = [ticket.user]
-
-    other_replies.each do |r|
-      to << r.user
-    end
-
-    assignee = ticket.assignee
-
-    if assignee.present?
-      to << assignee
-    else
-      to += User.agents_to_notify
-    end
-
-    ticket.labels.each do |label|
-      to += label.users
-    end
-
-    to.uniq - [user]
+  def first?
+    reply_to_type == 'Ticket'
   end
-
 end

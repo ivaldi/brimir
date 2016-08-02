@@ -1,0 +1,10 @@
+<%= form_for @label, html: { class: 'clearfix' }, remote: true do |f| %>
+  <%= f.text_field :name, label: false, class: 'no-m' %>
+  
+  <%= link_to label_path(@label), data: { method: :put, remote: true } do %>
+    <i class="fa fa-close"></i>
+  <% end %>
+
+  <button type="submit"><i class="fa fa-check"></i></button>
+
+<% end %>

@@ -1,32 +1,44 @@
-<li class="reply radius mb">
-  <p class="no-m">
-    <strong><%= reply.user.email %></strong>
-    <small class="pull-right"><%= time_ago_in_words(reply.created_at) %> <%= t(:ago) %></small>
-  </p>
-  <div id="reply-<%=reply.id%>" class="<%= div_class %>">
+<ul class="accordion <%= 'internal-reply' if reply.internal? %> <%= 'status-reply' if reply.kind_of?(StatusReply) %>" data-accordion>
+  <li class="accordion-navigation <%= div_class %>">
+    <a href="#reply-<%=reply.id%>" class="bb text-default">
+      <div class="row collapse">
+        <div class="medium-1 column pll">
+          <%= user_avatar reply.user, class: 'avatar', size: 35 %>
+        </div>
+        <div class="medium-11 columns pll pts prl">
+          <span><%= t(:reply_by) %> <strong><%= reply.user.email %></strong></span>
+          <span class="right" title="<%= l reply.updated_at.in_time_zone(current_user.time_zone), format: :long %>">
+            <i class="fa fa-clock-o"></i>
+            <%= time_ago_in_words(reply.updated_at.in_time_zone(current_user.time_zone)) %>
+            <%= t(:ago) %>
+          </span>
+        </div>
+      </div>
+    </a>
+    <div id="reply-<%=reply.id%>" class="content bb <%= div_class %>">
 
-    <% if reply.content_type == 'html' %>
-      <% content = reply.content %>
-    <% else %>
-      <% content = text_to_html(reply.content) %>
-    <% end %>
+    <div class="row">
+      <div class="medium-11 columns medium-push-1 mtl mbl">
+        <% if reply.raw_message_file_size.to_i > 0 %>
+          <a class="pull-right text-default" href="<%= reply_path(reply, format: :eml) %>"><%= fa_icon 'save' %></a>
+        <% end %>
 
-    <%= sanitize_html(content) %>
+        <% if reply.content_type == 'html' %>
+          <%= sanitize_html(reply.content, reply.inline_files) %>
+        <% else %>
+          <pre><%= word_wrap(reply.content, line_width: 72) %></pre>
+        <% end %>
 
-    <% if reply.attachments.size > 0 %>
-      <hr />
-      <ul class="block-grid three-up attachments">
-        <%= render reply.attachments %>
-      </ul>
-    <% end %>
 
-    <hr />
-    <p class="no-m">
-      <%= t(:notification_sent_to) %>    
-      <% reply.notified_users.each do |user| %>
-        <%= user.email %>
-      <% end %>
-    </p>
+        <% if reply.attached_files.size > 0 %>
+          <hr />
+          <ul class="attachments">
+            <%= render reply.attached_files %>
+          </ul>
+        <% end %>
 
-  </div>
-</li>
+        <hr />
+        <%= render partial: 'shared/notified_users_list', locals: {reply: reply} %>
+    </div>
+  </li>
+</ul>

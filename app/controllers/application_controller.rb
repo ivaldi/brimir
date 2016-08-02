@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -15,10 +15,18 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class ApplicationController < ActionController::Base
-  protect_from_forgery
 
-  before_filter :authenticate_user!
-  before_filter :set_locale
+  include MultiTenancy
+
+  rescue_from DeviseLdapAuthenticatable::LdapException do |exception|
+    render text: exception, status: 500
+  end
+  protect_from_forgery with: :null_session
+
+  before_action :load_tenant
+  before_action :authenticate_user!
+  before_action :set_locale
+  before_action :load_labels, if: :user_signed_in?
 
   check_authorization unless: :devise_controller?
 
@@ -31,24 +39,39 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # Always automatically call strong parameters filter based on controller name
-  # this fixes cancan problems for create etc.
-  before_filter do
-    resource = controller_path.singularize.gsub('/', '_').to_sym
-    method = "#{resource}_params"
-    params[resource] &&= send(method) if respond_to?(method, true)
+  protected
+
+  def load_labels
+    @labels = Label.viewable_by(current_user).ordered
   end
 
-  before_filter :load_labels, if: :user_signed_in?
+  def set_locale
+    @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
+    @locales = []
 
-  protected
-    def load_labels
-      @labels = Label.viewable_by(current_user).ordered
+    Dir.open("#{Rails.root}/config/locales").each do |file|
+      unless ['.', '..'].include?(file) || file[0] == '.'
+        code = file[0...-4] # strip of .yml
+        @locales << [I18n.translate(:language_name, locale: code), code]
+      end
     end
 
-    def set_locale
-      I18n.locale = http_accept_language.compatible_language_from(
-          I18n.available_locales)
+    if user_signed_in? && !current_user.locale.blank?
+      I18n.locale = current_user.locale
+    else
+      locale = http_accept_language.compatible_language_from(@locales)
+
+      if Tenant.current_tenant.ignore_user_agent_locale? || locale.blank?
+        I18n.locale = Tenant.current_tenant.default_locale
+      else
+        I18n.locale = locale
+      end
     end
 
+    if I18n.locale == :fa
+      @rtl = true
+    else
+      @rtl = false
+    end
+  end
 end

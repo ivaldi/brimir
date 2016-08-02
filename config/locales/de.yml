@@ -1,16 +1,30 @@
-# author: https://github.com/cschlack
 de:
+  language_name: Deutsch
 # layouts/application
   new_ticket: Ticket erstellen
   inbox: Offene Tickets
   mine: Meine Tickets
   closed_tickets: Geschlossene Tickets
   trashed: Gelöschte Tickets
-  users: Benutzers
+  users: Benutzer
   rules: Regeln
+  personal_settings: Persönliche Einstellungen
+  sign_out: Ausloggen
+  delete: Entfernen
+
+  joyride:
+    tickets: Mit diesem Button kann jeder ein Ticket erstellen.
+    personal_settings: Erstelle eine Signatur, definiere eine Zeitzone oder ändere weitere Einstellungen.
+    labels: Nach der Erstellung eines Labels für einen Benutzer oder ein Ticket, erscheint es hier. Labels können als Filter verwendet werden.
+    rules: Weise einem Ticket mit Regeln automatisiert Attribute zu.
+    users: Füge weitere Agenten oder Benutzer hinzu.
+    final: Danke, dass du Brimir verwendest!
+    next: Weiter
+    previous: Zurück
+    end: Ende
 
 # devise/sessions/new
-  sign_in: Anmelden
+  sign_in: Anmelden zu Brimir
 
 # devise/shared/links
   forgot_password: Passwort vergessen?
@@ -26,38 +40,49 @@ de:
 # devise/mailer/reset_password_instructions
   hello: Hallo
   someone_requested_link: 'Jemand hat einen Link angefordert, damit Sie Ihr Passwort ändern können. Wenn Sie Ihr Passwort ändern möchten, klicken Sie bitte auf den folgenden Link:'
-  ignore_if_not_requested: Wenn nicht Sie diesen Link angefordert haben, ignorieren Sie bitte diese Email.
-  password_wont_change_without_opening_link: Ihr passwort wird nur geändert, wenn Sie den obigen Link benutzen, um ein neues Passwort zu erstellen.
+  ignore_if_not_requested: Wenn nicht Sie diesen Link angefordert haben, ignorieren Sie bitte diese E-Mail.
+  password_wont_change_without_opening_link: Ihr Passwort wird nur geändert, wenn Sie den obigen Link benutzen, um ein neues Passwort zu erstellen.
 
 # tickets/index
-  tickets: Tickets
-  tickets_containing: 'Tickets: Suche nach'
+  count_tickets:
+    one: '%{count} Ticket'
+    other: '%{count} Tickets'
+  count_tickets_containing:
+    one: '%{count} Ticket enthalten'
+    other: '%{count} Tickets enthalten'
   priority: Priorität
   replies: Antworten
   no_subject: Kein Betreff
   unassigned: Nicht zugewiesen
   no_tickets_found: Keine Tickets gefunden.
   search: Suche
+  filter: Filter
+  minutes: Minuten
+  are_you_sure_empty_trash: Papierkorb wirklich leeren?
+  locked_by_user: 'Das Ticket wird derzeit von %{user} bearbeitet.'
+  ticket_id_created_by_at: '#%{id} erstellt von %{user} am %{at}'
+
 
 # tickets/show
   add: Neu
   ticket_by_at: Erstellt von %{email} am %{at}
   no_content: Kein Inhalt
+  ticket_id: Ticketnummer
   status: Status
   assignee: Bearbeiter
   num_replies:
     one: '%{count} Antwort'
     other: '%{count} Antworten'
+  ago: vor
   high: hoch
   medium: normal
   low: gering
   unknown: unbekannt
-  open: offen
-  closed: geschlossen
-  deleted: gelöscht
   labels: Label
   label_name: Label
-  notification_sent_to: 'Es wurde eine Benachrichtigung an folgende Email-Adressen geschickt:'
+  notification_sent_to: 'Es wurde eine Benachrichtigung an folgende E-Mail-Adressen gesendet:'
+  no_notifications_sent: 'Es wurde keine Benachrichtigung gesendet.'
+  assign_label: Label zuweisen
 
 # tickets/_change_priority_form
   change: Priorität setzen
@@ -70,29 +95,43 @@ de:
   change_assignee: Ticket zuweisen
   assign: Ticket zuweisen
 
+# tickets/merge
+  ticket_has_been_merged_to: "Dieses Ticket wurde mit Ticket #%{ticket_id} zusammengeführt."
+  merge: Zusammenführen
+  merge_explanation: "Ausgewählte Tickets zusammenführen. Dies kopiert die Antworten der ausgewählten Tickets in das älteste diser Tickets. Die übrigen ausgewählten Tickets werden geschlossen."
+  tickets_have_been_merged: "Tickets wurden zusammengeführt."
+
+
 # replies/new
   add_reply: Antworten
 
 # replies/_form
   reply: Antwort schreiben
   attach_files: Datei(en) anhängen
+  attach_file: Datei anhängen
   send_reply: Anwort senden
   on_date_author_wrote: 'Am %{date} hat %{author} folgendes geschrieben:'
+  notification_will_be_sent_to: 'Es wird eine Benachrichtung an folgende Adresse gesendet:'
+  save_as_draft: Als Entwurf speichern
+  internal_note: Interne Notiz
 
 # ticket_mailer/notify_assigned.text.erb
-  ticket_assigned: Ein Ticket wurde Ihnen zugewiesen
+  ticket_assigned: Ihnen wurde ein Ticket zugewiesen
 
 # ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Die Priority würde geändert für folgendes Ticket
+  ticket_priority_changed: Die Priorität des Tickets wurde geändert
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: 'Der Status würde für folgedes Ticket geändert:'
+  ticket_status_modified: Der Status des Tickets geändert
 
 # notification_mailer/new_ticket
   view_new_ticket: Ticket anzeigen
+
 # notification_mailer/new_reply
   new_reply: Antwort
   view_new_reply: Antwort anzeigen
+  your_ticket_has_been_closed: 'Ihr Support-Ticket wurde geschlossen. Wenn das Problem noch nicht gelöst wurde, antworten Sie einfach auf diese Nachricht. Für neue Anliegen schreiben Sie bitte eine separate E-Mail. Danke!'
+  str_is_working_on_your_ticket: "%{str} bearbeitet jetzt Ihr Anliegen."
 
 # attachments/_attachment
   download: Öffnen
@@ -102,25 +141,37 @@ de:
 
 # users/edit
   edit_user: Benutzer bearbeiten
+  omniauth_connect_title: Authentifizierung per Google
+  omniauth_connect_text: Die Möglichkeit der Authentifizierung per Google muss hier einmalig vorgenommen werden. Danach ist die Anmeldung per Google zusätzlich zum Standardlogin möglich.
+  omniauth_connect_google_text: Mit Google-Konto verbinden
 
 # users/index
-  email: Email-Adresse
+  email: E-Mail-Adresse
   role: Rolle
-  agent: Kundenbetreuer
+  agent: Agent
+  agents: Agenten
   customer: Kunde
 
 # users/_form
-  account_settings: Einstellungen
-  only_fill_in_passwords_when_modifying: Die beiden Passwort Felder können leer bleiben, wenn das Passwort beibehalten werden soll.
-  user_is_an_agent: Dieser Benutzer ist Kundenbetreuer
+  account_settings: Account-Einstellungen
+  only_fill_in_passwords_when_modifying: Passwort-Felder leer lassen, um aktuelles Passwort beizubehalten.
+  user_is_an_agent: Dieser Benutzer ist ein Agent
   receive_new_ticket_notifications: Benachrichtigen, wenn ein neues Ticket erstellt wird
-  email_settings: Email Einstellungen
+  email_settings: E-Mail-Einstellungen
   save: Speichern
-  access_control: Zugriff erlauben
+  access_control: Zugriff gestatten
   have_access_to_label: 'Der Benutzer darf nur Tickets mit diesen Labels öffnen:'
 
+# settings/edit
+  change_settings: Einstellungen ändern
+  permissions: Berechtigungen
+  notification_settings: Benachrichtigungs-Einstellungen
+
+# controllers/settings
+  settings_saved: Settings saved
+
 # controllers/attachments
-  file_not_found: Datei wurde nicht gefunden
+  file_not_found: Datei nicht gefunden
 
 # controllers/users
   settings_saved: Einstellungen wurden gespeichert
@@ -131,44 +182,93 @@ de:
   ticket_updated: Ticket aktualisiert
 
 # controllers/replies
-  reply_added: Geantwortet
+  reply_added: Antwort hinzugefügt
+
+# controllers/omniauth
+  already_linked_accounts: Ihr Benutzer ist bereits mit diesem Google-Konto verbunden
+  successfully_linked_account: Das Google-Konto wurde Ihrem Account hinzugefügt. Sie können sich nun durch Google anmelden.
+  not_linked_account_cant_login:  Dieser Benutzer ist noch nicht mit einem Google-Konto verbunden. In den Benutzereinstellungen können Konten verknüpft werden.
+  third_party_failure: Bei der Verbindung mit Google ist ein Fehler aufgetreten. Haben sie "Contacts API" und "Google+ API" aktiviert?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Alternative Anmeldung
+  omniauth_sign_in_google: Google
 
 # rules/index
   new_rule: Neue Regel hinzufügen
 
 # rules/edit
   edit_rule: Regel bearbeiten
-  delete_rule: Regel löschen
+  delete_rule: Regel entfernen
   are_you_sure: Sind Sie sicher?
 
 # controllers/rules
   rule_added: Regel hinzugefügt
   rule_modified: Regel geändert
-  rule_deleted: Regel gelöscht
+  rule_deleted: Regel entfernt
 
+# email_addresses/index
+  new_email_address: Neue E-Mail-Adresse für ausgehende Nachrichten anlegen
+  email_addresses: E-Mail-Adressen für ausgehende Nachrichten
+
+# email_addresses/new
+  verification_mail_will_be_sent: Bitte stelle sicher, dass diese E-Mail-Adresse korrekt an Brimir weiterleitet. Es wurde eine Nachricht an die angegebene Adresse verschickt, die verifiziert werden muss. Nur verifizierte E-Mail-Adressen können für ausgehende Nachrichten verwendet werden.
+  mark_spam_spf: Nachrichten könnten beim Empfänger als Spam eingestuft werden, wenn ein vorhandener SPF-Record im DNS-Server nicht aktualisiert wird.
+
+# controllers/email_addresses
+  email_address_added: E-Mail-Adresse wurde hinzugefügt
+
+  are_you_sure_empty_trash: Sollen wirklich alle Tickets gelöscht werden?
+  locked_by_user: Das Ticket wird derzeit von %{user} bearbeitet.
+  ticket_id_created_by_at: '#%{id} erstellt von %{user} am %{at}'
+  to_email: to %{email}
+  take_ticket_lock_from_user: Bearbeitung des Ticktes von %{user} übernehmen
+  ticket_locked_by_somebody_else: Das Ticket wird zur Zeit schon durch einen anderen Agenten bearbeitet
+  save_as_draft: Als Entwurf speichern
+  reply_by: Antwort durch
+  ticket_status_modified: Ticket Status wurde geändert
+  change_settings: Einstellungen ändern
+  localization_settings: Spracheinstellungen
+  trash_emptied: Alle Tickets wurden aus dem Papierborb gelöscht
+  draft_saved: Entwurf gespeichert
+  modify_email_address: Versand-Email-Adresse ändern
+  email_address_modified: Email Addresse wurde geändert
+  email_address_removed: Email Addresse wurde entfernt
+  prefer_plain_text: Plain Text Modus aktivieren (keine HTML Formatierung)
+  created_at: Erstellt am
+  to: Gesendet an
+  from: Gesendet von
+  equals: ist identisch zu
+  name: Name
+  default_locale: Standardsprache
+  ignore_user_agent_locale: Die bevorzugte Sprache der Browsers ignorieren
+  default_time_zone: Standard-Zeitzone
 
   activerecord:
     attributes:
       user:
-        email: Email-Adresse
+        email: E-Mail-Adresse
         password: Passwort
         password_confirmation: Password wiederholen
-        signature: Email Signatur
+        signature: E-Mail-Signatur
         remember_me: Angemeldet bleiben
-        label_ids: Labels
+        label_ids: Label
+        locale: Sprache
+        time_zone: Zeitzone
+        per_page: Tickets pro Seite
 
       ticket:
-        from: Email-Adresse des Kunden
+        from: E-Mail-Adresse des Absenders
         subject: Betreff
         content: Inhalt
         status: Status
+        statuses:
+          open: offen
+          closed: geschlossen
+          deleted: gelöscht
+          waiting: Ausstehend
         priority: Priorität
         assignee_id: Bearbeiter
-
-      reply:
-        to: Empfänger
-        cc: Kopie
-        Bcc: Blindkopie
 
       rule:
         filter_field: Feld
@@ -181,4 +281,18 @@ de:
           assign_label: Label zuweisen
           notify_user: Benachrichtigung senden an
           change_status: Status setzen auf
-        action_value: Parameter für die Aktion
+          change_priority: Priorität verändern auf
+          assign_user: Zuweisen an
+        action_value: Aktions-Parameter
+
+      email_address:
+        email: E-Mail-Adresse
+        default: Als Standard-E-Mail-Adresse für ausgehende Nachrichten verwenden
+        verification_token: Verifiziert
+
+      tenant:
+        default_locale: Standard-Sprache
+        ignore_user_agent_locale: Sprache des Browsers ignorieren
+        default_time_zone: Standard-Zeit-Zone
+        share_drafts: Entwürfe mit anderen Agenten teilen
+        notify_client_when_ticket_is_assigned_or_closed: "Den Klienten benachrichtigen, wenn sein Ticket einem Bearbeiter zugewiesen oder geschlossen wird."

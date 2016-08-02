@@ -1,5 +1,5 @@
 /* Brimir is a helpdesk system to handle email support requests.
- * Copyright (C) 2012-2014 Ivaldi http:gcivaldi.nl
+ * Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -12,103 +12,39 @@
  * GNU Affero General Public License for more details.
  *
  * You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http:gcwww.gnu.org/licenses/>.
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- *= require foundation_and_overrides
- *= require select2
- *= require font-awesome
- *= require_self
+ *= require fancybox
  */
 
+@import "variables";
+@import "select2";
+@import "font-awesome";
+@import "avatar";
+@import "foundation_and_overrides";
 @import "foundation/functions";
-
-/* --- Helpers --- */
-
-.full{ width: 100%; }
-
-.ma{ margin: rem-calc(15); }
-.mt{ margin-top: 30px !important; }
-.mb{ margin-bottom: 30px !important; }
-
-.no-m{ margin: 0 !important; }
-
-.pts{ padding-top: 5px; }
-.pbs{ padding-bottom: 5px; }
-
-.priority-unknown{ color: #ccc; }
-.priority-low{ color: #ffd700; }
-.priority-medium{ color: #ff8000; }
-.priority-high{ color: #da1500; }
-
-.ba{ border: 1px solid #bec8dc; }
-.bt{ border-top: 1px solid #bec8dc; }
-.br{ border-right: 1px solid #bec8dc; }
-.bb{ border-bottom: 1px solid #bec8dc; }
-.bl{ border-left: 1px solid #bec8dc; }
-
-.text-secondary{ color: #999 !important; }
-
-/* --- Side menu --- */
-aside{
-	min-height: calc(100vh - 60px);
-}
-
-aside .fa{
-	width: 20px;
-	text-align: center;
-	margin-right: 10px
-}
-
-ul.off-canvas-list li label{
-	font-size: 11px;
-}
-
-.off-canvas-list li label{
-	margin-top: 30px;
-}
-
-.off-canvas-list a.active{
-	color: #fff;
-}
-
-/* --- Attachments --- */
-
-.attachments{
-  list-style-type: none;
-}
-
-.attachments li{
-  line-height: 1.2;
-}
-
-.attachments img{
-  margin-right: 10px;
-  border: 1px solid #ddd;
-  padding: 2px;
-  background: #fff;
-  float: left;
-}
-
-.attachments strong{
-  display: block;
-}
-
-.attachments .meta{
-  font-size: 13px;
-}
+@import "spacing";
+@import "forms";
+@import "attachments";
+@import "helpers";
+@import "sidemenu";
+@import "topbar";
+@import "forms";
+@import "inbox";
 
 /* --- Table --- */
 
 table td, .nowrap{
 	white-space: nowrap;
+	border-bottom: 1px solid #eaeef0;
 }
 
 table tr:hover td{
-	background: #dfe4ee;
+	background: #f9f9f9;
 }
 
 .table-nowrap{
-	max-width: 500px;
+	max-width: 300px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -126,35 +62,17 @@ table thead tr th{
 	padding: 0.5625rem 1.25rem;
 }
 
-/* --- Forms --- */
-
-#new_ticket textarea, .new_reply textarea{
-	width: 100%;
-	height: 300px !important;
-}
-
-.edit_user textarea{
-	width: 100%;
-	height: 100px !important;
-}
-
-.preview{
-	height: 300px;
-}
-
-.select2-container-multi .select2-choices .select2-search-choice {
-	margin-top: 9px !important;
-}
-
-.reveal-modal form{
-  margin: 0;
-}
-
-input[type="checkbox"]{
-  margin-right: 5px;
-}
 
 /* --- Uncategorized --- */
+
+.label{
+	text-transform: uppercase;
+}
+
+.tiny{
+	text-transform: uppercase;
+	font-weight: bold;
+}
 
 .notification{
 	position: fixed;
@@ -177,10 +95,6 @@ input[type="checkbox"]{
 	100% { opacity: 1; -webkit-transform: translate3d(0,0,0); transform: translate3d(0,0,0); }
 }
 
-
-
-/* --- Uncategorized --- */
-
 .contain-to-grid{
 	margin-bottom: 1rem;
 }
@@ -192,34 +106,73 @@ input[type="checkbox"]{
 
 .button .fa{
 	font-size: 14px;
+	top: -1px;
+	position: relative;
 }
 
 .replies{
-	border-top: 1px solid #bec8dc;
-	border-bottom: 1px solid #bec8dc;
-	background: #eceff3;
+	border-top: 1px solid #eaeef0;
+	background: #fcfcfd;
 	padding: 0;
-}
-
-.replies ul{
-	list-style: none;
-	margin-left: 0;
 }
 
 .reply{
 	background: #fff;
-	border: 1px solid #bec8dc;
+	border: 1px solid #eaeef0;
 	padding: 30px;
+}
+ul.accordion{
+	list-style-type: none;
+	margin-left: 0;
 }
 
 .output{
 	line-height: 1.45;
 }
 
-.off-canvas-list .f-dropdown a{
-	color: #555;
+.joyride-expose-wrapper{
+	box-shadow: none;
+	background: none;
 }
 
-.off-canvas-list .f-dropdown a:hover{
-	background-color: #eee;
+.accordion .accordion-navigation > a {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.pagination {
+	@include clearfix();
+	margin-top: rem-calc(20);
+}
+
+ul.off-canvas-list form a {
+	display: inline;
+	width: 50%;
+	float: left;
+	text-align: center;
+}
+
+ul.off-canvas-list form button {
+	margin: 0;
+	padding: 8px 20px;
+	width: 50%;
+	background: none;
+	color: #fff;
+	border: none;
+}
+
+ul.off-canvas-list form button:hover {
+	background-color: #4b5363;
+}
+
+pre {
+	overflow-x: auto;
+}
+
+.internal-reply li > a, .internal-reply .row {
+	background-color: #fff6d9 !important;
+}
+
+.status-reply li > a, .status-reply .row {
+	background-color: #eaeef0 !important;
 }

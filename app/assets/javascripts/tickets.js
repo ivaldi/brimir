@@ -1,5 +1,5 @@
 // Brimir is a helpdesk system to handle email support requests.
-// Copyright (C) 2012-2014 Ivaldi http:gcivaldi.nl
+// Copyright (C) 2012-2015 Ivaldi http://ivaldi.nl
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as published by
@@ -12,7 +12,7 @@
 // GNU Affero General Public License for more details.
 //
 // You should have received a copy of the GNU Affero General Public License
-// along with this program.  If not, see <http:gcwww.gnu.org/licenses/>.
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 jQuery(function() {
 
@@ -25,8 +25,7 @@ jQuery(function() {
 
     /* set ticket id */
     dialog.find('form').attr('action',
-        elem.parents('tr').data('ticket-url'));
-      
+        elem.parents('[data-ticket-url]').data('ticket-url'));
 
     /* select assigned user */
     options.removeAttr('selected');
@@ -37,5 +36,49 @@ jQuery(function() {
 
   });
 
-});
+  jQuery('.ticket input[type="checkbox"]').on('change', function(){
+    jQuery(this).parents('.ticket').toggleClass('highlight');
+  });
 
+  jQuery('[data-toggle-all]').on('change', function(){
+    var checked = this.checked ? true : false;
+    jQuery('[data-toggle-check]').each(function(){
+      if(checked && !this.checked || !checked && this.checked){
+        jQuery(this).click();
+      }
+    });
+  });
+
+  jQuery('.select2-create').select2({
+    width: 'resolve',
+    createSearchChoicePosition: 'bottom',
+    createSearchChoice: function(term, data) {
+      return { id:term, text:term };
+    },
+    ajax: {
+      url: '/labels.json',
+      dataType: 'json',
+      data: function (term, page) {
+        return {
+          q: term
+        };
+      },
+      results: function (data) {
+        return { results: data };
+      }
+    }
+  });
+
+  if(jQuery('[data-lock-path]').length > 0) {
+
+    function keepLock() {
+      jQuery.ajax({
+        url: jQuery('[data-lock-path]').data('lock-path'),
+        type: 'post'
+      });
+    }
+    keepLock();
+    /* renew lock every 4 minutes */
+    setInterval(keepLock, 1000 * 60 * 4);
+  }
+});

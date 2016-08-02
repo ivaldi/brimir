@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -20,7 +20,6 @@ class LabelingsControllerTest < ActionController::TestCase
 
   setup do
     @labeling = labelings(:bug_ticket)
-
     sign_in users(:alice)
   end
 
@@ -47,5 +46,4 @@ class LabelingsControllerTest < ActionController::TestCase
       assert_response :success
     end
   end
-
 end

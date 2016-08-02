@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -16,54 +16,108 @@
 
 class RepliesController < ApplicationController
 
-  load_and_authorize_resource :reply, except: [:create]
+  load_and_authorize_resource
+
+  def new
+    @reply.assign_attributes(reply_params)
+  end
 
   def create
-    @reply = Reply.new
+    # store attributes and reopen ticket
+    @reply = Reply.new({
+        ticket_attributes: {
+            status: 'open',
+            id: reply_params[:ticket_id]
+          }
+        }.merge(reply_params))
 
-    if !params[:attachment].nil?
+    save_reply_and_redirect
+  end
 
-      params[:attachment].each do |file|
-
-        @reply.attachments.new(file: file)
-
-      end
-
-      params[:reply].delete(:attachments_attributes)
-    end
-
+  def update
     @reply.assign_attributes(reply_params)
+    save_reply_and_redirect
+  end
 
-    @reply.user = current_user
+  def show
+    respond_to do |format|
+      format.eml do
+        begin
+          send_file @reply.raw_message.path(:original),
+              filename: "reply-#{@reply.id}.eml",
+              type: 'text/plain',
+              disposition: :attachment
+        rescue => e
+          print e.inspect
+          raise ActiveRecord::RecordNotFound
+        end
+      end
+    end
+  end
 
-    authorize! :create, @reply
+  protected
 
+  def save_reply_and_redirect
+    if @reply.draft? && Tenant.current_tenant.share_drafts?
+      @reply.user_id = nil
+    else
+      @reply.user_id = current_user.id
+      @reply.created_at = Time.now
+    end
     begin
-      Reply.transaction do
-        @reply.save!
-        mail = NotificationMailer.new_reply(@reply)
+      if @reply.draft?
+        original_updated_at = @reply.ticket.updated_at
 
-        mail.deliver
+        @reply.save
 
-        @reply.message_id = mail.message_id
+        # don't screw up the ordering of inbox by resetting updated_at
+        @reply.ticket.update_column :updated_at, original_updated_at
 
-        @reply.save!
+        redirect_to @reply.ticket, notice: I18n::translate(:draft_saved)
+      else
+        Reply.transaction do
+          @reply.save!
+          @reply.notification_mails.each(&:deliver_now)
+        end
+
         redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
       end
-    rescue
+    rescue => e
+      Rails.logger.error 'Exception occured on Reply transaction!'
+      Rails.logger.error "Message: #{e.message}"
+      Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
+      @outgoing_addresses = EmailAddress.verified.ordered
       render action: 'new'
     end
   end
 
-  private
-    def reply_params
-      params.require(:reply).permit(
-          :content,
-          :ticket_id,
-          :message_id,
-          :user_id,
-          notified_user_ids: []
-      )
+  def reply_params
+    attributes = params.require(:reply).permit(
+        :content,
+        :ticket_id,
+        :message_id,
+        :user_id,
+        :content_type,
+        :draft,
+        :internal,
+        notified_user_ids: [],
+        attachments_attributes: [
+          :id,
+          :_destroy,
+          :file
+        ],
+        ticket_attributes: [
+          :id,
+          :to_email_address_id,
+          :status,
+        ]
+    )
+
+    unless can?(:update, Ticket.find(attributes[:ticket_id]))
+      attributes.delete(:ticket_attributes)
     end
+
+    attributes
+  end
 
 end

@@ -1,24 +1,21 @@
 <div class="row mt">
-  <div class="medium-10 large-8 columns medium-centered ba">
-    <div class="row mt mb">
-      <div class="medium-10 large-8 columns medium-centered">
-        <h3><%= t(:change_password) %></h3>
+  <div class="medium-8 large-6 columns medium-centered">
+    <div class="panel paxl">
+      <h3 class="mb"><%= t(:change_password) %></h3>
+      <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :patch }) do |f| %>
+        <%= devise_error_messages! %>
+        <%= f.hidden_field :reset_password_token %>
 
-        <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :patch }) do |f| %>
-          <%= devise_error_messages! %>
-          <%= f.hidden_field :reset_password_token %>
+        <%= f.label :password, t(:new_password) %>
+        <%= f.password_field :password, label: false %>
 
-          <%= f.label :password, t(:new_password) %>
-          <%= f.password_field :password, label: false %>
+        <%= f.label :password_confirmation, t(:new_password_confirmation) %>
+        <%= f.password_field :password_confirmation, label: false %>
 
-          <%= f.label :password_confirmation, t(:new_password_confirmation) %>
-          <%= f.password_field :password_confirmation, label: false %>
+        <%= f.submit t(:change_password), class: 'button radius' %>
 
-          <%= f.submit t(:change_password), class: 'button radius' %>
-
-          <%= render 'devise/shared/links' %>
-        <% end %>
-      </div>
+        <%= render 'devise/shared/links' %>
+      <% end %>
     </div>
   </div>
 </div>

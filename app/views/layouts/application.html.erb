@@ -1,25 +1,38 @@
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<!--[if lt IE 7 ]> <html class="ie6" lang="<%= I18n.locale %>" dir="<%= 'rtl' if @rtl %>"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="<%= I18n.locale %>" dir="<%= 'rtl' if @rtl %>"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="<%= I18n.locale %>" dir="<%= 'rtl' if @rtl %>"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="<%= I18n.locale %>" dir="<%= 'rtl' if @rtl %>"> <!--<![endif]-->
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= content_for?(:title) ? yield(:title) : 'Brimir' %></title>
     <%= favicon_link_tag 'favicon.png' %>
-    <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' %>
-    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag '//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,600italic' %>
+
+    <% if @rtl %>
+      <%= stylesheet_link_tag 'application-rtl' %>
+    <% else %>
+      <%= stylesheet_link_tag 'application' %>
+    <% end %>
+
+    <%= stylesheet_link_tag 'application-print', media: 'print' %>
+    <%= javascript_include_tag 'vendor/modernizr' %>
     <%= csrf_meta_tags %>
   </head>
 
-  <body style="<%= 'background: #30363e' if user_signed_in? %>">
+  <body style="<%= 'direction:rtl;' if [:ar].include?(I18n.locale)%> <%= 'background: #30363e' if user_signed_in? %>">
 
     <% if user_signed_in? %>
       <nav class="top-bar" data-topbar>
-        <ul class="title-area">
+        <ul class="title-area medium-3 large-2">
+          <% if can? :create, Ticket %>
+            <li class="collapsed-only left">
+              <a href="<%= new_ticket_path %>" class="button info"><i class="fa fa-plus fa-fw"></i></a>
+            </li>
+          <% end %>
           <li class="name">
-            <h1><a href="<%= root_path %>">Brimir</a></h1>
+            <h1><a href="<%= root_path %>">BRIMIR</a></h1>
           </li>
           <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
         </ul>
@@ -27,14 +40,23 @@
         <section class="top-bar-section">
           <!-- Right Nav Section -->
           <ul class="right">
-            <% if can? :manage, Rule %>
-                <li><a href="<%= rules_path %>"><%= t(:rules) %></a></li>
+            <div class="show-for-small-only">
+              <%= render 'inbox_menu' %>
+            </div>
+            <% if can? :index, EmailAddress %>
+              <li class="hide-for-small-only"><a href="<%= email_addresses_path %>"><i class="fa fa-envelope fa-fw"></i></a></li>
             <% end %>
-            <% if can? :manage, User %>
-                <li><a href="<%= users_path %>"><%= t(:users) %></a></li>
+            <% if can? :index, Rule %>
+              <li id="joyride-rules" class="hide-for-small-only"><a href="<%= rules_path %>"><i class="fa fa-random fa-fw"></i></a></li>
             <% end %>
-            <li class="has-dropdown">
-              <a href="#"><%= current_user.email %></a>
+            <% if can? :index, User %>
+              <li id="joyride-users" class="hide-for-small-only"><a href="<%= users_path %>"><i class="fa fa-users fa-fw"></i></a></li>
+            <% end %>
+            <% if can? :update, Tenant.current_tenant %>
+              <li class="hide-for-small-only"><a href="<%= edit_settings_path %>"><i class="fa fa-wrench fa-fw"></i></a></li>
+            <% end %>
+            <li class="has-dropdown" id="joyride-settings">
+              <a href="#"><%= user_avatar current_user, class: 'avatar mrm', size: 20 %><%= current_user.email %></a>
               <ul class="dropdown">
                 <li>
                   <%= link_to edit_user_path(current_user) do %>
@@ -49,10 +71,6 @@
               </ul>
             </li>
           </ul>
-          <!-- Left Nav Section -->
-          <ul class="left">
-            <li><%= link_to t(:new_ticket), new_ticket_path %></li>
-          </ul>
         </section>
       </nav>
     <% end %>
@@ -60,71 +78,23 @@
     <div class="row collapse">
       <% if user_signed_in? %>
         <aside class="hide-for-small medium-3 large-2 columns">
-          <ul class="off-canvas-list mt">
-            <li>
-              <%= active_elem_if :a, params[:status] == 'open' &&
-                  params[:assignee_id].to_i == 0,
-                  href: root_path do %>
-
-                <span class="fa fa-inbox"></span><%= t(:inbox) %>
-              <% end %>
-            </li>
-            <li>
-              <%= active_elem_if :a, params[:status] == 'open' &&
-                  params[:assignee_id].to_i == current_user.id,
-                  href: tickets_path(assignee_id: current_user.id) do %>
-                <span class="fa fa-user"></span><%= t(:mine) %>
-              <% end %>
-            </li>
-            <li>
-              <%= active_elem_if :a, params[:status] == 'closed',
-                   href: tickets_path(status: 'closed') do %>
-                <span class="fa fa-check"></span><%= t(:closed_tickets) %>
-              <% end %>
-            </li>
-            <li>
-              <%= active_elem_if :a, params[:status] == 'deleted',
-                  href: tickets_path(status: 'deleted') do %>
-                <span class="fa fa-trash-o"></span><%= t(:trashed) %>
-              <% end %>
-            </li>
+          <div class="new-ticket ptm plxl prxl pbm">
+            <%= link_to t(:new_ticket), new_ticket_path, class: 'tiny secondary expand button no-mb no-b', id: 'joyride-tickets' %>
+          </div>
+          <ul class="off-canvas-list mtm">
+            <%= render 'inbox_menu' %>
           </ul>
 
           <ul class="off-canvas-list">
-            <li><label><%= t(:labels) %></label></li>
+            <li id="joyride-labels"><label><%= t(:labels) %></label></li>
             <% @labels.each do |label| %>
-              <%
-                # toggle label on/off
-                if params[:label_id].to_i == label.id
-                  p = params.merge(label_id: nil)
-                else
-                  p = params.merge(label_id: label.id)
-                end
-              %>
-              <li>
-                <a href="<%= tickets_url(p) %>"<%= ' class="active"'.html_safe if params[:label_id].to_i == label.id %>>
-                  <i class="fa fa-square" style="color: <%= label.color %>"></i><%= label.name %>
-                  <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down right"></i>
-                </a>
-                <!--<a href="#" class="right" data-dropdown="label-<%= label.id %>"></a>-->
-                <ul id="label-<%= label.id %>" class="f-dropdown" data-dropdown-content>
-                  <li>
-                    <%= link_to t(:remove), label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true %>
-                  </li>
-                  <% Label::COLORS.each_with_index do |color, index| %>
-                    <li>
-                      <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
-                        <i class="fa fa-square" style="color: <%= color %>"></i>
-                      <% end %>
-                    </li>
-                  <% end %>
-                </ul>
-              </li>
+              <%= render 'labels/label_li', label: label %>
             <% end %>
           </ul>
+
         </aside>
-        <%# 100vh - 60px because top-bar height is 60px %>
-        <div class="medium-9 large-10 columns" style="background: #fff; min-height: calc(100vh - 60px);" data-main>
+        <%# 100vh - 65px because top-bar height is 65px %>
+        <div class="medium-9 large-10 columns" style="background: #fff; min-height: calc(100vh - 65px);" data-main>
       <% else %>
         <div class="medium-9 large-10 columns medium-centered large-centered">
       <% end %>
@@ -148,6 +118,40 @@
     </div>
 
     <%= javascript_include_tag 'application' %>
+
+    <% if user_signed_in? && current_user.agent? && current_user.sign_in_count == 1 %>
+      <% current_user.sign_in_count += 1 %>
+      <% current_user.save %>
+      <ol class="joyride-list" data-joyride data-options="expose: true;scroll_speed: 1000;">
+        <li data-id="joyride-tickets" data-text="<%= t('joyride.next') %>" data-options="prev_button: false; tip_location: top;">
+          <h4><%= t(:new_ticket) %></h4>
+          <p><%= t('joyride.tickets') %></p>
+        </li>
+        <li data-id="joyride-settings" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
+          <h4><%= t(:personal_settings) %></h4>
+          <p><%= t('joyride.personal_settings') %></p>
+        </li>
+        <li data-id="joyride-labels" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: top;">
+          <h4><%= t(:labels) %></h4>
+          <p><%= t('joyride.labels') %></p>
+        </li>
+        <li data-id="joyride-rules" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
+          <h4><%= t(:rules) %></h4>
+          <p><%= t('joyride.rules') %></p>
+        </li>
+        <li data-id="joyride-users" data-button="<%= t('joyride.next') %>" data-prev-text="<%= t('joyride.previous') %>" data-options="tip_location: right;">
+          <h4><%= t(:users) %></h4>
+          <p><%= t('joyride.users') %></p>
+        </li>
+        <li data-button="<%= t('joyride.end') %>" data-prev-text="<%= t('joyride.previous') %>">
+          <h4><%= t('joyride.final') %></h4>
+          <p>&nbsp;</p>
+        </li>
+      </ol>
+      <script>
+       jQuery(document).foundation('joyride','start');
+      </script>
+    <% end %>
 
   </body>
 </html>

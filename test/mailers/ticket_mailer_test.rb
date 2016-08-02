@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system that can be used to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -38,34 +38,39 @@ class TicketMailerTest < ActionMailer::TestCase
       end
 
     end
+
+    assert_equal email_addresses(:brimir),
+        Ticket.order(:id).last.to_email_address
   end
 
-  test 'email threads are recognized correctly and assignee \
-      is notified' do
+  test 'email threads are recognized correctly and assignee is notified' do
+    Tenant.current_domain = Tenant.first.domain
 
     thread_start = read_fixture('thread_start').join
     thread_reply = read_fixture('thread_reply').join
 
     # ticket created?
-    assert_difference 'Ticket.count' do 
+    assert_difference 'Ticket.count' do
       # user created?
-      assert_difference 'User.count' do 
+      assert_difference 'User.count' do
         ticket = TicketMailer.receive(thread_start)
 
         # assign to first user
-        ticket.assignee = User.first
+        ticket.assignee = User.agents.first
+        ticket.notified_users << User.agents.first
         ticket.save!
       end
     end
 
     # agents receive notifications
-    assert_difference 'ActionMailer::Base.deliveries.size', 1 do
+    assert_difference 'ActionMailer::Base.deliveries.size' do
 
       # reply created?
-      assert_difference 'Reply.count' do 
+      assert_difference 'Reply.count' do
         # user re-used?
-        assert_difference 'User.count', 0 do 
-          TicketMailer.receive(thread_reply)
+        assert_difference 'User.count', 0 do
+          reply = TicketMailer.receive(thread_reply)
+          NotificationMailer.incoming_message(reply, '')
         end
       end
     end
@@ -75,28 +80,52 @@ class TicketMailerTest < ActionMailer::TestCase
   test 'email with attachments work' do
 
     attachments = read_fixture('attachments').join
-    assert_difference 'Ticket.count' do 
-      assert_difference 'Attachment.count', 2 do 
+    assert_difference 'Ticket.count' do
+      assert_difference 'Attachment.count', 2 do
         TicketMailer.receive(attachments)
       end
     end
-  
+
   end
 
   test 'email with unkown reply_to' do
 
     unknown_reply_to = read_fixture('unknown_reply_to').join
-    assert_difference 'Ticket.count' do 
+    assert_difference 'Ticket.count' do
       TicketMailer.receive(unknown_reply_to)
     end
   end
 
   test 'email with capitalized from address' do
     capitalized = read_fixture('capitalized').join
-    assert_difference 'Ticket.count', 2 do 
+    assert_difference 'Ticket.count', 2 do
       TicketMailer.receive(capitalized)
       TicketMailer.receive(capitalized)
     end
   end
 
+  test 'should verify email address' do
+    verification = read_fixture('verification').join
+    assert_difference 'EmailAddress.where(verification_token: nil).count' do
+      TicketMailer.receive(verification)
+    end
+  end
+
+  test 'reply to is used for incoming mail' do
+    email = read_fixture('reply_to').join
+
+    # ticket is created
+    assert_difference 'Ticket.count' do
+
+      # account for user created
+      assert_difference 'User.count' do
+
+        TicketMailer.receive(email)
+
+      end
+
+    end
+
+    assert_equal 'reply@address.com', User.last.email 
+  end
 end

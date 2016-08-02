@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -27,47 +27,45 @@ class RepliesControllerTest < ActionController::TestCase
   end
 
   test 'reply should always contain text' do
-
     # no emails should be send when invalid reply
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      assert_no_difference 'Reply.count' do
 
-      user = users(:alice)
-      user.signature = nil
-      user.save
+        user = users(:alice)
+        user.signature = nil
+        user.save
 
-      post :create, reply: {
-          content: '',
-          ticket_id: @ticket.id,
-          notified_user_ids: @reply.users_to_notify.map { |u| u.id },
-      }
+        post :create, reply: {
+            content: '',
+            ticket_id: @ticket.id,
+            notified_user_ids: [users(:bob).id],
+        }
+      end
     end
-
-    refute_equal 0, assigns(:reply).errors.size
-
   end
 
   test 'should send correct reply notification mail' do
 
     # do we send a mail?
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       post :create, reply: {
-          content: '<br /><br /><p><strong>this is in bold</strong></p>',
+          content: '<br><br><p><strong>this is in bold</strong></p>',
           ticket_id: @ticket.id,
-          notified_user_ids: @reply.users_to_notify.map { |u| u.id },
+          notified_user_ids: User.agents.pluck(:id),
       }
     end
 
     mail = ActionMailer::Base.deliveries.last
 
     # html in the html part
-    assert_match '<br /><br /><p><strong>this is in bold</strong></p>',
+    assert_match '<br><br><p><strong>this is in bold</strong></p>',
         mail.html_part.body.decoded
 
     # no html in the text part
     assert_match "\n\nthis is in bold\n", mail.text_part.body.decoded
 
     # correctly addressed
-    assert_equal @reply.users_to_notify.map { |u| u.email }, mail.to
+    assert_equal [User.agents.last.email], mail.to
 
     # correct content type
     assert_match 'multipart/alternative', mail.content_type
@@ -85,12 +83,12 @@ class RepliesControllerTest < ActionController::TestCase
       post :create, reply: {
             content: '**this is in bold**',
             ticket_id: @ticket.id,
-            notified_user_ids: @reply.users_to_notify.map { |u| u.id },
-        },
-        attachment: [
-            fixture_file_upload('attachments/default-testpage.pdf'),
-            fixture_file_upload('attachments/default-testpage.pdf')
-        ]
+            notified_user_ids: [users(:bob).id],
+            attachments_attributes: {
+              '0' => { file: fixture_file_upload('attachments/default-testpage.pdf') },
+              '1' => { file: fixture_file_upload('attachments/default-testpage.pdf') }
+            }
+      }
     end
   end
 
@@ -100,7 +98,7 @@ class RepliesControllerTest < ActionController::TestCase
     sign_in(users(:dave))
 
     # do we send a mail?
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       post :create, reply: {
           content: 'test',
           ticket_id: @ticket.id,
@@ -108,8 +106,29 @@ class RepliesControllerTest < ActionController::TestCase
       }
     end
     mail = ActionMailer::Base.deliveries.last
-    assert_equal [users(:bob).email, users(:alice).email], mail.to
+    assert_equal [users(:alice).email], mail.smtp_envelope_to
   end
 
+  test 'should re-open ticket' do
+    @ticket.status = 'closed'
+    @ticket.save
+
+    post :create, reply: {
+        content: 're-open please',
+        ticket_id: @ticket.id,
+    }
+
+    @ticket.reload
+    assert_equal 'open', @ticket.status
+  end
+
+  test 'should get raw message' do
+    @reply.raw_message = fixture_file_upload('ticket_mailer/simple')
+    @reply.save!
+
+    @reply.reload
+    get :show, id: @reply.id, format: :eml
+    assert_response :success
+  end
 
 end

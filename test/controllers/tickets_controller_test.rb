@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -22,9 +22,12 @@ class TicketsControllerTest < ActionController::TestCase
 
     @ticket = tickets(:problem)
 
-
     # read_fixture doesn't work in ActionController::TestCase, so use File.new
     @simple_email = File.new('test/fixtures/ticket_mailer/simple').read
+  end
+
+  teardown do
+    I18n.locale = :en
   end
 
   test 'should get new as customer' do
@@ -49,7 +52,10 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should create ticket when posted from MTA' do
 
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    # should ignore this in emails, but use application default
+    I18n.locale = :nl
+
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
 
         post :create, message: @simple_email, format: :json
@@ -57,6 +63,9 @@ class TicketsControllerTest < ActionController::TestCase
         assert_response :success
       end
     end
+
+    # should have used English locale
+    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
 
     refute_equal 0, assigns(:ticket).notified_users.count
 
@@ -67,7 +76,7 @@ class TicketsControllerTest < ActionController::TestCase
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       assert_no_difference 'Ticket.count' do
         post :create, ticket: {
-            from: '',
+            from: 'invalid',
             content: '',
             subject: '',
         }
@@ -81,8 +90,8 @@ class TicketsControllerTest < ActionController::TestCase
 
   test 'should create ticket when not signed in' do
 
-    assert_difference 'ActionMailer::Base.deliveries.size' do
-      assert_difference 'Ticket.count', 1 do
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
+      assert_difference 'Ticket.count' do
         post :create, ticket: {
             from: 'test@test.nl',
             content: @ticket.content,
@@ -99,7 +108,7 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should create ticket when signed in' do
     sign_in users(:alice)
 
-    assert_difference 'ActionMailer::Base.deliveries.size' do
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count', 1 do
         post :create, ticket: {
             from: 'test@test.nl',
@@ -129,6 +138,14 @@ class TicketsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:tickets)
   end
 
+  test 'should get csv index' do
+    sign_in users(:alice)
+
+    get :index, format: :csv
+    assert_response :success
+    assert_not_nil assigns(:tickets)
+  end
+
   test 'should show ticket' do
     sign_in users(:alice)
 
@@ -139,11 +156,20 @@ class TicketsControllerTest < ActionController::TestCase
     assert_select '[data-labelings]'
 
     # should contain this for label removing with javascript
-    assert_select '[data-labeling-id=?]',
-        @ticket.labelings.first.id
+    assert_select "[data-labeling-id='#{@ticket.labelings.first.id}']"
 
     # should contain this anchor for linking from notification email
-    assert_select '[id=reply-' + @ticket.replies.first.id.to_s + ']'
+    assert_select "[id=reply-#{@ticket.replies.first.id}]"
+
+    # should have this icon for label color update javascript (sidebar)
+    assert_select 'aside ul li span'
+
+    # should have selected same outgoing address as original received
+    assert_select 'option[selected="selected"]' +
+        "[value=\"#{email_addresses(:brimir).id}\"]"
+
+    # should contain this for internal note switch
+    assert_select '[data-notified-users]'
   end
 
   test 'should email assignee if ticket is assigned by somebody else' do
@@ -266,16 +292,61 @@ class TicketsControllerTest < ActionController::TestCase
 
   end
 
-  test 'should allow CORS' do
-    [:new, :create].each do |action|
-      process(action, 'OPTIONS')
+  test 'should not notify when a bounce message is received' do
+    email = File.new('test/fixtures/ticket_mailer/bounce').read
 
-      assert_response :ok
-      assert_equal '*', response.headers['Access-Control-Allow-Origin']
-      assert_equal 'GET,POST', response.headers['Access-Control-Allow-Methods']
-      assert_equal 'Origin,Accept,Content-Type,X-Requested-With,X-CSRF-Token', 
-          response.headers['Access-Control-Allow-Headers']
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      assert_difference 'Ticket.count' do
+
+        post :create, message: email, format: :json
+
+        assert_response :success
+
+      end
     end
   end
 
+  test 'should not save invalid' do
+    email = File.new('test/fixtures/ticket_mailer/invalid').read
+
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      assert_no_difference 'Ticket.count' do
+
+        post :create, message: email, format: :json
+
+        assert_response :unprocessable_entity
+
+      end
+    end
+  end
+
+  test 'should get new ticket form in correct language' do
+    I18n.locale = :nl
+    get :new
+    assert_response :success
+    refute_match I18n.t('activerecord.attributes.ticket.from', locale: :nl), @response.body
+  end
+
+  test 'should get raw message' do
+    sign_in users(:alice)
+
+    @ticket.raw_message = fixture_file_upload('ticket_mailer/simple')
+    @ticket.save!
+
+    @ticket.reload
+    get :show, id: @ticket.id, format: :eml
+    assert_response :success
+  end
+
+  test 'should show replies even when ticket is locked' do
+    sign_in users(:alice)
+
+    @ticket.locked_by = users(:charlie)
+    @ticket.locked_at = Time.now
+    @ticket.save!
+
+    get :show, id: @ticket.id
+    assert_response :success
+    assert_match replies(:solution).content, @response.body
+  end
 end

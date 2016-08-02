@@ -1,0 +1,13 @@
+default: &defaults
+  display_user_avatars: true
+  default_user_avatar: 'mm'
+  user_avatar_api_url: ''
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

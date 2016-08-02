@@ -1,6 +1,6 @@
 Return-Path: <frank@xxxx.com>
 Delivered-To: frank@xxxx.com
-Received: from [192.168.178.43] (ivaldi.xs4all.nl [83.163.14.133])
+Received: from [123.123.123.12] (example.com [12.123.12.123])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
 	(Authenticated sender: frank@xxxx.com)

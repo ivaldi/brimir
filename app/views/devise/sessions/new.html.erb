@@ -1,24 +1,53 @@
-<div class="row mt">
-  <div class="medium-10 large-8 columns medium-centered ba">
-    <div class="row mt mb">
-      <div class="medium-10 large-8 columns medium-centered">
-        <h3><%= t(:sign_in) %> in Brimir</h3>
-        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+<div class="row mt ptxxl">
+  <div class="medium-8 large-6 columns medium-centered">
+    <h2 class="text-center mbxl">
+      <strong>BRIMIR</strong>
+    </h2>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div class="panel paxxl mbxxl text-center">
+        <div class="row collapse">
+          <div class="small-1 columns">
+            <span class="prefix"><i class="fa fa-user"></i></span>
+          </div>
+          <div class="small-11 columns">
+            <%= f.email_field :email, label: false, placeholder: t(:email) %>
+          </div>
+        </div>
+        <div class="row collapse">
+          <div class="small-1 columns">
+            <span class="prefix"><i class="fa fa-key"></i></span>
+          </div>
+          <div class="small-11 columns">
+            <%= f.password_field :password, label: false, placeholder: t('activerecord.attributes.user.password') %>
+          </div>
+        </div>
 
-          <%= f.email_field :email %>
-        
-          <%= f.password_field :password %>
-        
-          <% if devise_mapping.rememberable? -%>
+        <% if devise_mapping.rememberable? -%>
             <%= f.check_box :remember_me %>
-          <% end -%>
+        <% end -%>
 
-          <%= f.submit(t(:sign_in), class: 'button radius') %>
-          
-          <%= render 'devise/shared/links' %>
-        
-        <% end %>
+        <p>
+          <%= f.submit t(:sign_in), class: 'secondary button radius no-mb mtm' %>
+        </p>
       </div>
-    </div>
+
+      <p class="text-s no-mb text-center mtl">
+        <%= render 'devise/shared/links' %>
+        <span class="mrs mls">&middot;</span>
+        <%= link_to t(:new_ticket), new_ticket_path %>
+        <span class="mrs mls">&middot;</span>
+        <%= link_to 'GetBrimir.com', 'https://getbrimir.com' %>
+      </p>
+      <p class="text-center">
+        <% unless Rails.application.secrets[:google_client_id].blank? %>
+        <%= t(:omniauth_sign_in_title) %>:
+          <%= link_to user_omniauth_authorize_path(:google_oauth2) do %>
+            <i class="fa fa-google-plus-square"></i>
+            <%= t(:omniauth_sign_in_google) %>
+          <% end %>
+        <% end %>
+      </p>
+
+    <% end %>
   </div>
 </div>

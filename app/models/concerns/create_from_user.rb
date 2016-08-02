@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -27,11 +27,12 @@ module CreateFromUser
         # search using the same method as Devise validation
         from_user = User.find_first_by_auth_conditions(email: email)
 
-        if !from_user
-          password_length = 12
-          password = Devise.friendly_token.first(password_length)
-          from_user = User.create!(email: email, password: password,
-              password_confirmation: password)
+        unless from_user
+          from_user = User.where(email: email).first_or_create
+
+          unless from_user
+            errors.add(:from, :invalid)
+          end
         end
 
         self.user = from_user

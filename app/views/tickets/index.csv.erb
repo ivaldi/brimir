@@ -1,0 +1,36 @@
+<%-
+  header = [
+    'Id',
+    t(:subject, scope: 'activerecord.attributes.ticket'),
+    t(:priority, scope: 'activerecord.attributes.ticket'),
+    t(:status, scope: 'activerecord.attributes.ticket'),
+    t(:assignee_id, scope: 'activerecord.attributes.ticket'),
+    t(:created_at, scope: 'activerecord.attributes.ticket'),
+    "#{t('activerecord.attributes.ticket.statuses.open')} (#{t(:minutes)})",
+    "#{t('activerecord.attributes.ticket.statuses.waiting')} (#{t(:minutes)})",
+    "#{t('activerecord.attributes.ticket.statuses.closed')} (#{t(:minutes)})",
+    "#{t('activerecord.attributes.ticket.statuses.deleted')} (#{t(:minutes)})",
+  ]
+
+  rows = []
+
+  @tickets.each do |ticket|
+    status_times = ticket.status_times
+    rows << [
+        ticket.id,
+        '"' + ticket.subject.gsub(/"/, '""') + '"',
+        t(ticket.priority),
+        t(ticket.status),
+        (ticket.assignee.email unless ticket.assignee.nil?),
+        '"' + l(ticket.created_at.in_time_zone(current_user.time_zone), format: :long).gsub(/"/, '""') + '"',
+        status_times[:open].round(1),
+        status_times[:waiting].round(1),
+        status_times[:closed].round(1),
+        status_times[:deleted].round(1)
+    ]
+  end
+-%>
+<%= header.join(',') %>
+<%- rows.each do |row| -%>
+<%= row.join(',').html_safe %>
+<%- end -%>

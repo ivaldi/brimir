@@ -1,20 +1,23 @@
-# author: https://www.facebook.com/aunsinpagina
+# author: https://www.facebook.com/aunsinpagina & daniel.seijo_at_urbincasa.es
+# revisions: http://colina.net.ve e1th0r
+# 
 es:
+  language_name: Español
 # layouts/application
   new_ticket: Nuevo Ticket
   inbox: Bandeja
   mine: Mios
-  closed_tickets: Cerrado
-  trashed: Borrado
+  closed_tickets: Cerrados
+  trashed: Borrados
 
 # devise/sessions/new
-  sign_in: Entrar
+  sign_in: Entrar Brimir
 
 # devise/shared/links
-  forgot_password: Olvidaste tu contraseña?
+  forgot_password: ¿Olvidaste tu contraseña?
 
 # devise/passwords/new
-  send_instructions: Enviame las instrucciones
+  send_instructions: Envíame las instrucciones
 
 # devise/passwords/edit
   change_password: Cambiar contraseña
@@ -23,19 +26,18 @@ es:
   
 # devise/mailer/reset_password_instructions
   hello: Hola
-  someone_requested_link: Alguien ha solicitado un link para cambiar tu contraseña, puedes proceder haciendo clic en el link siguiente.
-  ignore_if_not_requested: Si tu no lo solicitaste, ignora este correo.
-  password_wont_change_without_opening_link: Tu contraseña no cambiara hasta que acceses haciendo clic en la liga de arriba y generes una nueva.
+  someone_requested_link: Alguien ha solicitado un enlace para cambiar tu contraseña, puedes proceder haciendo click en el siguiente enlace.
+  ignore_if_not_requested: Si tú no lo solicitaste, ignora este correo.
+  password_wont_change_without_opening_link: Tu contraseña no cambiará hasta que accedas haciendo clic en el enlace de arriba y generes una nueva.
 
 # tickets/index
-  tickets: Tickets
-  tickets_containing: Tickets que contienen
   priority: Prioridad
   replies: Respuestas
-  no_subject: Sin tema
+  no_subject: Sin asunto
   unassigned: Sin asignar
-  no_tickets_found: No tickets encontrados.
+  no_tickets_found: Sin tickets.
   search: Buscar
+  minutes: minutos
 
 # tickets/show
   ticket_by_at: Por %{email} en %{at}
@@ -46,15 +48,12 @@ es:
     one: '%{count} respuesta'
     other: '%{count} respuestas'
   high: Alta
-  medium: Medio
-  low: Bajo
+  medium: Media
+  low: Baja
   unknown: Desconocido
-  open: Abierto
-  closed: Cerrado
-  deleted: Borrado
   labels: Etiquetas
   label_name: Nombre de etiqueta
-  notification_sent_to: 'Una notificacion fue enviada a las siguientes direcciones:'
+  notification_sent_to: 'Las notificaciones fueron enviadas a las siguientes direcciones:'
 
 # tickets/_change_priority_form
   change: Cambiar
@@ -68,22 +67,22 @@ es:
   assign: Asignar
 
 # replies/new
-  add_reply: Agrergar respuesta
+  add_reply: Añadir respuesta
 
 # replies/_form
   reply: Responder
   attach_files: Adjuntar archivo(s)
   send_reply: Enviar respuesta
-  on_date_author_wrote: 'En %{date}, %{author} escribio:'
+  on_date_author_wrote: 'En %{date}, %{author} escribió:'
 
 # ticket_mailer/notify_assigned.text.erb
-  ticket_assigned: Se te asigno un Ticket
+  ticket_assigned: Te asignaron un Ticket
 
 # ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Prioridad del ticket modificada para el ticket
+  ticket_priority_changed: Prioridad del ticket modificada
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Estado del ticket modificado para el ticket
+  ticket_status_modified: Estado del ticket modificado
 
 # notification_mailer/new_ticket
   view_new_ticket: Ver nuevo ticket
@@ -92,7 +91,7 @@ es:
   view_new_reply: Ver nueva respuesta
   
 # attachments/_attachment
-  download: Descarga
+  download: Descargar
 
 # users/new
   new_user: Nuevo Usuario
@@ -107,48 +106,101 @@ es:
   customer: Cliente
 
 # users/_form
-  account_settings: Configuracion de Cuenta
-  only_fill_in_passwords_when_modifying: Solo llene los siguientes dos campos si desea modificar su contraseña.
-  user_is_an_agent: Usuario es un agente
+  account_settings: Configuración de Cuenta
+  only_fill_in_passwords_when_modifying: Rellena solo los siguientes dos campos si deseas modificar tu contraseña.
+  user_is_an_agent: El usuario es un agente
   receive_new_ticket_notifications: Recibir notificaciones para nuevos tickets
-  email_settings: Configuracion de Correo
+  email_settings: Configuración de Correo
   save: Guardar
   access_control: Control de Acceso
-  have_access_to_label: Usuario tiene acceso a todos los tickets con cualquiera de estas etiquetas.
+  have_access_to_label: El usuario tiene acceso a todos los tickets con cualquiera de estas etiquetas.
 
 # controllers/attachments
   file_not_found: Archivo no encontrado
 
 # controllers/users
-  settings_saved: Configuracion guardada
-  user_added: Usuario agregado
+  settings_saved: Configuración guardada
+  user_added: Usuario añadido
 
 # controllers/tickets
-  ticket_added: Ticket agregado
+  ticket_added: Ticket añadido
   ticket_updated: Ticket actualizado
 
 # controllers/replies
-  reply_added: Respuesta agregada
+  reply_added: Respuesta añadida
 
   activerecord:
     attributes:
       user:
         email: Correo
         password: Contraseña
-        password_confirmation: Confirmacion de contraseña
+        password_confirmation: Confirmación de contraseña
         signature: Firma de correo
         remember_me: Recordarme
         label_ids: Etiquetas
-
       ticket:
-        from: De direccion de correo
+        from: De (Email)
         subject: Tema
         content: Contenido
         status: Estado
+        statuses:
+          open: Abierto
+          closed: Cerrado
+          deleted: Borrado
+          waiting: En espera
         priority: Prioridad
         assignee_id: Delegado
+      rule:
+        filter_field: Campo
+        filter_operation: Operación
+        filter_operations:
+          contains: contiene
+        filter_value: Valor
+        action_operation: Acción a ejecutar
+        action_operations:
+          assign_label: asignar etiqueta
+          notify_user: enviar notificación a
+          change_status: cambiar estado a
+          change_priority: cambiar prioridad a
+          assign_user: asignar a
+        action_value: Parámetros para acción
+      user:
+        time_zone: Zona horaria
+        per_page: Tickets por página
 
-      reply:
-        to: Para
-        cc: Cc
-        Bcc: Cco
+
+  add: Añadir
+  ago: hace
+  are_you_sure: ¿Estás seguro?
+  count_tickets:
+    one: '%{count} ticket'
+    other: '%{count} tickets'
+  count_tickets_containing:
+    one: 'contiene %{count} ticket'
+    other: 'contiene %{count} tickets'
+
+  delete_rule: Quitar regla
+  delete: Eliminar
+  edit_rule: Editar regla
+
+  joyride:
+    tickets: Nadie puede crear tickets activando este botón.
+    personal_settings: Introduce tu firma, zona horaria y otras preferencias con este menú.
+    labels: Después de añadir etiquetas a tickets o usuarios, ellos podrán verlas aquí y, entonces, podrán usarlas como filtros.
+    rules: Añade automáticamente etiquetas, asignaciones, cambia estados y más.
+    users: Añade más agentes o usuarios.
+    final: Gracias por usar Brimir!
+    next: Siguiente
+    previous: Anterior
+    end: Fin
+
+  new_rule: Nueva regla
+  no_notifications_sent: 'Ninguna notificación ha sido enviada'
+  notification_will_be_sent_to: Tus notificaciones serán enviadas a
+  personal_settings: Configuración personal
+  rule_added: Regla añadida
+  rule_modified: Regla modificada
+  rule_deleted: Regla eliminada
+  rules: Reglas
+  sign_out: Cerrar sesión
+  users: Usuarios

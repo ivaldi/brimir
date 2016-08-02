@@ -1,0 +1,7 @@
+<div data-notified-users>
+  <% if r.object.internal? %>
+    <%= r.collection_select :notified_user_ids, User.agents.ordered, :id, :email, { label: false }, { multiple: true, class: 'select2' } %>
+  <% else %>
+    <%= r.collection_select :notified_user_ids, User.ordered, :id, :email, { label: false }, { multiple: true, class: 'select2' } %>
+  <% end %>
+</div>

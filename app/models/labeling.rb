@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -19,6 +19,7 @@ class Labeling < ActiveRecord::Base
   belongs_to :labelable, polymorphic: true
 
   validates_uniqueness_of :label_id, scope: [:labelable_id, :labelable_type]
+  validates :label_id, presence: true
 
   def initialize(attributes={})
     unless attributes[:label].blank? ||
@@ -26,9 +27,12 @@ class Labeling < ActiveRecord::Base
 
       label = Label.where(name: attributes[:label][:name]).first_or_create!
 
-      attributes.delete(:label)
       attributes[:label_id] = label.id
+    else
+      attributes[:label_id] = nil
     end
+
+    attributes.delete(:label)
 
     super(attributes)
   end

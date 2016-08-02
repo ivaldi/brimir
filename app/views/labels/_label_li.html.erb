@@ -1,0 +1,38 @@
+<%
+  # toggle label on/off
+  if params[:label_id].to_i == label.id
+    p = params.merge(label_id: nil)
+  else
+    p = params.merge(label_id: label.id)
+  end
+  # remove pagination from link, start at first page
+  p.delete(:page)
+  p.delete(:controller)
+  p.delete(:action)
+%>
+<li data-edit-label-row="<%= label.id %>">
+  <a href="<%= tickets_url(p) %>" class="<%= 'active ' if params[:label_id].to_i == label.id %>hover-icon-a">
+    <span class="pas ib mrl" style="background-color: <%= label.color %>"></span>
+    <%= label.name %>
+    <i data-dropdown="label-<%= label.id %>" class="fa fa-toggle-down hover-icon-i"></i>
+  </a>
+  <ul id="label-<%= label.id %>" class="f-dropdown medium-block-grid-3" data-dropdown-content>
+    <% Label::COLORS.each_with_index do |color, index| %>
+      <li>
+        <%= link_to label_path(label, color: index), method: :patch, remote: true do %>
+          <span class="pas ib" style="background-color: <%= color %>"></span>
+        <% end %>
+      </li>
+    <% end %>
+    <li>
+      <%= link_to label_path(label), method: :delete, data: { confirm: t(:are_you_sure) }, remote: true do %>
+        <%= fa_icon 'trash' %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to edit_label_path(label), remote: true do %>
+        <%= fa_icon 'edit' %>
+      <% end %>
+    </li>
+  </ul>
+</li>

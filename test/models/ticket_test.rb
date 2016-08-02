@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system that can be used to handle email support requests.
-# Copyright (C) 2012-2014 Ivaldi http://ivaldi.nl
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -18,6 +18,10 @@ require 'test_helper'
 
 class TicketTest < ActiveSupport::TestCase
 
+  teardown do
+    Timecop.return
+  end
+
   test 'should return accessible tickets for customer' do
     dave = users(:dave)
 
@@ -28,6 +32,34 @@ class TicketTest < ActiveSupport::TestCase
     tickets.each do |ticket|
       assert dave == ticket.user || (ticket.label_ids & dave.label_ids).size > 0
     end
+  end
+
+  test 'should store status changes' do
+    ticket = tickets(:problem)
+
+    assert_difference 'StatusChange.count' do
+      ticket.status = 'waiting'
+      ticket.save
+    end
+
+    # a few hours later
+    Timecop.travel(Time.now.advance(hours: 3))
+
+    assert_difference 'StatusChange.count' do
+      ticket.status = 'open'
+      ticket.save
+    end
+
+    first = ticket.status_changes.first
+    assert_not_equal first.created_at, first.updated_at
+
+    last = ticket.status_changes.last
+    assert_equal last.created_at, last.updated_at
+  end
+
+  test 'should escape special char search' do
+    assert_equal 1, Ticket.search('%').count
+    assert_equal 1, Ticket.search('_').count
   end
 
 end
