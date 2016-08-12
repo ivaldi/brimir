@@ -16,25 +16,16 @@
 
 class RepliesController < ApplicationController
 
-  load_and_authorize_resource :reply, except: [:create]
+  load_and_authorize_resource
 
   def create
-    if Tenant.current_tenant.share_drafts?
-      user_id = nil
-    else
-      user_id = current_user.id
-    end
-
     # store attributes and reopen ticket
     @reply = Reply.new({
-        user_id: user_id,
         ticket_attributes: {
             status: 'open',
             id: reply_params[:ticket_id]
           }
         }.merge(reply_params))
-
-    authorize! :create, @reply
 
     save_reply_and_redirect
   end
@@ -62,6 +53,11 @@ class RepliesController < ApplicationController
   protected
 
   def save_reply_and_redirect
+    if @reply.draft? && Tenant.current_tenant.share_drafts?
+      @reply.user_id = nil
+    else
+      @reply.user_id = current_user.id
+    end
     begin
       if @reply.draft?
         original_updated_at = @reply.ticket.updated_at

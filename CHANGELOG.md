@@ -5,10 +5,18 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased.unreleased.unreleased (to be announced)
 ### Added
 ### Changed
+- Lines of plain text tickets or replies are now wrapped at 72 characters.
 ### Deprecated
 ### Removed
 ### Fixed
 ### Security
+
+## Brimir 0.6.1 (2015-10-02)
+### Changed
+- A number of missing German translations were contributed by Alexander Jackson.
+- CC and BCC addresses are now recognized as incoming address as well.
+### Fixed
+- Prevented errors when using draft sharing.
 
 ## Brimir 0.6.0 (2015-09-18)
 ### Added

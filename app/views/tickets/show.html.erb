@@ -112,7 +112,7 @@
             <% if @ticket.content_type == 'html' %>
               <%= sanitize_html(@ticket.content, @ticket.inline_files) %>
             <% else %>
-              <pre><%= @ticket.content %></pre>
+              <pre><%= word_wrap(@ticket.content, line_width: 72) %></pre>
             <% end %>
 
           </div>
