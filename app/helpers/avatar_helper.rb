@@ -101,6 +101,7 @@ module AvatarHelper
   private
 
   def user_gravatar(user, options = {})
+    options[:size] = options[:size].to_s if options[:size]
     options[:gravatar] ||= {}
     options[:gravatar][:size] ||= options[:size] if options[:size]
     gravatar_image_tag(user.email, gravatar_default_options.deep_merge(options))
