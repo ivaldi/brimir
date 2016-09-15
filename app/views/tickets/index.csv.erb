@@ -19,8 +19,8 @@
     rows << [
         ticket.id,
         '"' + ticket.subject.gsub(/"/, '""') + '"',
-        t(ticket.priority),
-        t(ticket.status),
+        ticket.priority.humanize,
+        ticket.status.humanize,
         (ticket.assignee.email unless ticket.assignee.nil?),
         '"' + l(ticket.created_at.in_time_zone(current_user.time_zone), format: :long).gsub(/"/, '""') + '"',
         status_times[:open].round(1),
