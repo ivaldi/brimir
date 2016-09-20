@@ -30,9 +30,9 @@ class TicketsController < ApplicationController
     @agents = User.agents
 
     draft = @ticket.replies
-        .where('user_id IS NULL OR user_id = ?', current_user.id)
-        .where(draft: true)
-        .first
+      .where('user_id IS NULL OR user_id = ?', current_user.id)
+      .where(draft: true)
+      .first
 
     @replies = @ticket.replies.chronologically.without_drafts.select do |reply|
       can? :show, reply
@@ -55,9 +55,9 @@ class TicketsController < ApplicationController
       format.eml do
         begin
           send_file @ticket.raw_message.path(:original),
-              filename: "ticket-#{@ticket.id}.eml",
-              type: 'text/plain',
-              disposition: :attachment
+            filename: "ticket-#{@ticket.id}.eml",
+            type: 'text/plain',
+            disposition: :attachment
         rescue
           raise ActiveRecord::RecordNotFound
         end
@@ -84,7 +84,7 @@ class TicketsController < ApplicationController
     respond_to do |format|
       format.html do
         @tickets = @tickets.paginate(page: params[:page],
-            per_page: current_user.per_page)
+                                     per_page: current_user.per_page)
       end
       format.csv do
         @tickets = @tickets.includes(:status_changes)
@@ -159,26 +159,23 @@ class TicketsController < ApplicationController
       @ticket = Ticket.new(ticket_params)
     end
 
-    if !@ticket.nil? && @ticket.save
-      NotificationMailer.incoming_message(@ticket, params[:message])
+    if Ticket.recaptcha_keys_present? && verify_recaptcha
+      ticket_save_and_sent_notification
+    elsif !Ticket.recaptcha_keys_present?
+      ticket_save_and_sent_notification
     end
 
     respond_to do |format|
       format.html do
 
-        if !@ticket.nil? && @ticket.valid?
-
-          if current_user.nil?
-            render 'create'
-          else
-            redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
-          end
-
+        # if recpatcha is enabled, set conditionals
+        if Ticket.recaptcha_keys_present? && verify_recaptcha 
+          ticket_respond_to_html
+        elsif !Ticket.recaptcha_keys_present?
+          ticket_respond_to_html
         else
-          @email_addresses = EmailAddress.verified.ordered
-          render 'new'
+          render_new_with_email_addresses
         end
-
       end
 
       format.json do
@@ -192,6 +189,31 @@ class TicketsController < ApplicationController
       end
 
       format.js { render }
+    end
+
+  end
+
+  private
+  def ticket_respond_to_html
+    if !@ticket.nil? && @ticket.valid?
+      if current_user.nil?
+        render 'create'
+      else
+        redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
+      end
+    else
+      render_new_with_email_addresses
+    end
+  end
+
+  def render_new_with_email_addresses
+    @email_addresses = EmailAddress.verified.ordered
+    render 'new'
+  end 
+
+  def ticket_save_and_sent_notification
+    if !@ticket.nil? && @ticket.save
+      NotificationMailer.incoming_message(@ticket, params[:message])
     end
   end
 end

@@ -164,6 +164,15 @@ class Ticket < ActiveRecord::Base
     to_email_address.try :email
   end
 
+  def self.recaptcha_keys_present?
+    if Recaptcha.configuration.public_key.blank? &&
+        Recaptcha.configuration.private_key.blank?
+      false
+    else
+      true
+    end
+  end
+
   protected
     def create_status_change
       status_changes.create! status: self.status

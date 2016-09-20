@@ -76,9 +76,9 @@ class TicketsControllerTest < ActionController::TestCase
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       assert_no_difference 'Ticket.count' do
         post :create, ticket: {
-            from: 'invalid',
-            content: '',
-            subject: '',
+          from: 'invalid',
+          content: '',
+          subject: '',
         }
 
         assert_response :success
@@ -93,9 +93,9 @@ class TicketsControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
         post :create, ticket: {
-            from: 'test@test.nl',
-            content: @ticket.content,
-            subject: @ticket.subject,
+          from: 'test@test.nl',
+          content: @ticket.content,
+          subject: @ticket.subject,
         }
 
         assert_response :success
@@ -111,9 +111,9 @@ class TicketsControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count', 1 do
         post :create, ticket: {
-            from: 'test@test.nl',
-            content: @ticket.content,
-            subject: @ticket.subject,
+          from: 'test@test.nl',
+          content: @ticket.content,
+          subject: @ticket.subject,
         }
 
         assert_redirected_to ticket_url(assigns(:ticket))
@@ -166,7 +166,7 @@ class TicketsControllerTest < ActionController::TestCase
 
     # should have selected same outgoing address as original received
     assert_select 'option[selected="selected"]' +
-        "[value=\"#{email_addresses(:brimir).id}\"]"
+      "[value=\"#{email_addresses(:brimir).id}\"]"
 
     # should contain this for internal note switch
     assert_select '[data-notified-users]'
@@ -317,6 +317,32 @@ class TicketsControllerTest < ActionController::TestCase
         assert_response :unprocessable_entity
 
       end
+    end
+  end
+
+  test 'shown captcha should not break new ticket page when not signed in' do
+    # Stub keys Recaptcha
+    Recaptcha.configuration.public_key = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+    Recaptcha.configuration.private_key = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
+
+    if Ticket.recaptcha_keys_present?
+
+      get :new
+
+      assert_response :success
+    end
+  end
+
+  test 'not shown captcha should not break new ticket page when not signed' do
+    # Stub keys Recaptcha
+    Recaptcha.configuration.public_key = ''
+    Recaptcha.configuration.private_key = ''
+
+    if !(Ticket.recaptcha_keys_present?)
+
+      get :new
+
+      assert_response :success
     end
   end
 
