@@ -30,9 +30,9 @@ class TicketsController < ApplicationController
     @agents = User.agents
 
     draft = @ticket.replies
-      .where('user_id IS NULL OR user_id = ?', current_user.id)
-      .where(draft: true)
-      .first
+        .where('user_id IS NULL OR user_id = ?', current_user.id)
+        .where(draft: true)
+        .first
 
     @replies = @ticket.replies.chronologically.without_drafts.select do |reply|
       can? :show, reply
@@ -55,9 +55,9 @@ class TicketsController < ApplicationController
       format.eml do
         begin
           send_file @ticket.raw_message.path(:original),
-            filename: "ticket-#{@ticket.id}.eml",
-            type: 'text/plain',
-            disposition: :attachment
+              filename: "ticket-#{@ticket.id}.eml",
+              type: 'text/plain',
+              disposition: :attachment
         rescue
           raise ActiveRecord::RecordNotFound
         end
@@ -84,7 +84,7 @@ class TicketsController < ApplicationController
     respond_to do |format|
       format.html do
         @tickets = @tickets.paginate(page: params[:page],
-                                     per_page: current_user.per_page)
+            per_page: current_user.per_page)
       end
       format.csv do
         @tickets = @tickets.includes(:status_changes)
@@ -159,23 +159,13 @@ class TicketsController < ApplicationController
       @ticket = Ticket.new(ticket_params)
     end
 
-    if Ticket.recaptcha_keys_present? && verify_recaptcha
-      ticket_save_and_sent_notification
-    elsif !Ticket.recaptcha_keys_present?
-      ticket_save_and_sent_notification
-    end
+    send_notification_email
 
     respond_to do |format|
       format.html do
 
-        # if recpatcha is enabled, set conditionals
-        if Ticket.recaptcha_keys_present? && verify_recaptcha 
-          ticket_respond_to_html
-        elsif !Ticket.recaptcha_keys_present?
-          ticket_respond_to_html
-        else
-          render_new_with_email_addresses
-        end
+        respond_to_html
+
       end
 
       format.json do
@@ -190,30 +180,54 @@ class TicketsController < ApplicationController
 
       format.js { render }
     end
-
   end
 
-  private
-  def ticket_respond_to_html
-    if !@ticket.nil? && @ticket.valid?
-      if current_user.nil?
-        render 'create'
+  protected
+  def respond_to_html
+    # not signed in
+    if current_user.nil?
+      # we need to verify the captcha
+      if verify_recaptcha
+        # we need to verify the ticket
+        if !@ticket.nil? && @ticket.valid?
+          render 'create'
+        else
+          # ticket validation failed
+          render_new
+        end
       else
-        redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
+        # captcha validation failed
+        render_new
       end
     else
-      render_new_with_email_addresses
+      # signed in we redirect
+      redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
     end
   end
 
-  def render_new_with_email_addresses
+  def send_notification_email
+    # not signed in
+    if current_user.nil?
+      # we need to verify the capthca
+      if verify_recaptcha
+        # we need to verify the ticket
+        if !@ticket.nil? && @ticket.save
+          # everything passed notify!
+          notifier @ticket
+        end
+      end
+    elsif !@ticket.nil? && @ticket.save
+      # signed in we notify
+      notifier @ticket
+    end
+  end
+
+  def render_new
     @email_addresses = EmailAddress.verified.ordered
     render 'new'
-  end 
+  end
 
-  def ticket_save_and_sent_notification
-    if !@ticket.nil? && @ticket.save
-      NotificationMailer.incoming_message(@ticket, params[:message])
-    end
+  def notifier(ticket)
+    NotificationMailer.incoming_message ticket, params[:message]
   end
 end

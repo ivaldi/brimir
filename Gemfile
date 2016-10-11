@@ -86,4 +86,4 @@ gem 'fancybox2-rails', '~> 0.2.8'
 gem 'gravatar_image_tag'
 
 # Captcha for brimir
-gem "recaptcha", require: "recaptcha/rails"
+gem 'recaptcha', require: 'recaptcha/rails'

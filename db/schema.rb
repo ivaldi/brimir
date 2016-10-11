@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20160615124420) do
     t.string   "default_locale",                                  default: "en"
     t.boolean  "share_drafts",                                    default: false
     t.boolean  "first_reply_ignores_notified_agents",             default: false,       null: false
-    t.boolean  "notify_client_when_ticket_is_assigned_or_closed", default: false
+    t.boolean  "notify_client_when_ticket_is_assigned_or_closed", default: false,       null: false
   end
 
   add_index "tenants", ["domain"], name: "index_tenants_on_domain", unique: true

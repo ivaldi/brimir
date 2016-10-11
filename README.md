@@ -44,12 +44,13 @@ If you want to use LDAP, configure config/ldap.yml accordingly, then change the 
     bin/rails console production
     u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
 
-IMPORTANT Captcha Notice:
+Configuring Captcha's
+---------------------
 If you want to use recaptcha in production you have to go to
 https://www.google.com/recaptcha, create your private and public keys and export these to your production environment, by running:
 
     export RECAPTCHA_PUBLIC_KEY="[YOUR_KEY]"
-    export RECAPTCHA_PRIVATE_KEY="["YOUR_KEY"]"
+    export RECAPTCHA_PRIVATE_KEY="[YOUR_KEY]"
 
 Updating
 --------

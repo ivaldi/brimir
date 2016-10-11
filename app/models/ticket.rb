@@ -165,12 +165,8 @@ class Ticket < ActiveRecord::Base
   end
 
   def self.recaptcha_keys_present?
-    if Recaptcha.configuration.public_key.blank? &&
-        Recaptcha.configuration.private_key.blank?
-      false
-    else
-      true
-    end
+    !Recaptcha.configuration.public_key.blank? ||
+      !Recaptcha.configuration.private_key.blank?
   end
 
   protected
