@@ -43,6 +43,9 @@
             <div class="show-for-small-only">
               <%= render 'inbox_menu' %>
             </div>
+            <% if can? :index, EmailTemplate %>
+              <li class="hide-for-small-only"><a href="<%= email_templates_path %>"><i class="fa fa-file fa-fw"></i></a></li>
+            <% end %>
             <% if can? :index, EmailAddress %>
               <li class="hide-for-small-only"><a href="<%= email_addresses_path %>"><i class="fa fa-envelope fa-fw"></i></a></li>
             <% end %>

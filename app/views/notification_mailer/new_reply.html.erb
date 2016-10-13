@@ -7,7 +7,11 @@
 <% end %>
 
 <% if @reply.content_type == 'html' %>
-  <%= sanitize_html(@reply.content) %>
+  <% if @reply.is_a? SystemReply %>
+    <%= render('/shared/content_for_system_reply', reply: @reply) %>
+  <% else %>
+    <%= sanitize_html(@reply.content) %>
+  <% end %>
 <% else %>
   <pre><%= word_wrap(@reply.content, line_width: 72) %></pre>
 <% end %>

@@ -64,6 +64,17 @@ class NotificationMailer < ActionMailer::Base
     end
   end
 
+  def new_account(user, template, tenant)
+    if tenant.notify_user_when_account_is_created
+      return unless template.is_active?
+      @template = template
+      @domain = tenant.domain
+      @user = user
+
+      mail(to: user.email, from: tenant.from, subject: I18n.t('new_account_subject'))
+    end
+  end
+
   def new_ticket(ticket, user)
     unless user.locale.blank?
       @locale = user.locale

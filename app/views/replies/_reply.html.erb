@@ -1,20 +1,38 @@
 <ul class="accordion <%= 'internal-reply' if reply.internal? %> <%= 'status-reply' if reply.kind_of?(StatusReply) %>" data-accordion>
   <li class="accordion-navigation <%= div_class %>">
-    <a href="#reply-<%=reply.id%>" class="bb text-default">
-      <div class="row collapse">
-        <div class="medium-1 column pll">
-          <%= user_avatar reply.user, class: 'avatar', size: 35 %>
+    <% if reply.is_a? SystemReply %>
+      <a href="#reply-<%=reply.id%>" class="bb text-default">
+        <div class="row collapse">
+          <div class="medium-1 column pll">
+            <%= system_gravatar class: 'avatar', size: 35 %>
+          </div>
+          <div class="medium-11 columns pll pts prl">
+            <span><%= t(:reply_by) %> <strong><%= reply.ticket.reply_from_address %></strong></span>
+            <span class="right" title="<%= l reply.updated_at.in_time_zone(current_user.time_zone), format: :long %>">
+              <i class="fa fa-clock-o"></i>
+              <%= time_ago_in_words(reply.updated_at.in_time_zone(current_user.time_zone)) %>
+              <%= t(:ago) %>
+            </span>
+          </div>
         </div>
-        <div class="medium-11 columns pll pts prl">
-          <span><%= t(:reply_by) %> <strong><%= reply.user.email %></strong></span>
-          <span class="right" title="<%= l reply.updated_at.in_time_zone(current_user.time_zone), format: :long %>">
-            <i class="fa fa-clock-o"></i>
-            <%= time_ago_in_words(reply.updated_at.in_time_zone(current_user.time_zone)) %>
-            <%= t(:ago) %>
-          </span>
+      </a>
+    <% else %>
+      <a href="#reply-<%=reply.id%>" class="bb text-default">
+        <div class="row collapse">
+          <div class="medium-1 column pll">
+            <%= user_avatar reply.user, class: 'avatar', size: 35 %>
+          </div>
+          <div class="medium-11 columns pll pts prl">
+            <span><%= t(:reply_by) %> <strong><%= reply.user.email %></strong></span>
+            <span class="right" title="<%= l reply.updated_at.in_time_zone(current_user.time_zone), format: :long %>">
+              <i class="fa fa-clock-o"></i>
+              <%= time_ago_in_words(reply.updated_at.in_time_zone(current_user.time_zone)) %>
+              <%= t(:ago) %>
+            </span>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    <% end %>
     <div id="reply-<%=reply.id%>" class="content bb <%= div_class %>">
 
     <div class="row">
@@ -22,13 +40,15 @@
         <% if reply.raw_message_file_size.to_i > 0 %>
           <a class="pull-right text-default" href="<%= reply_path(reply, format: :eml) %>"><%= fa_icon 'save' %></a>
         <% end %>
-
         <% if reply.content_type == 'html' %>
-          <%= sanitize_html(reply.content, reply.inline_files) %>
+          <% if reply.is_a? SystemReply %>
+            <%= render('/shared/content_for_system_reply', reply: reply) %>
+          <% else %>
+            <%= sanitize_html(reply.content, reply.inline_files) %>
+          <% end %>
         <% else %>
-          <pre><%= word_wrap(reply.content, line_width: 72) %></pre>
+          <pre><%= word_wrap(html_to_text(reply.content), line_width: 72) %></pre>
         <% end %>
-
 
         <% if reply.attached_files.size > 0 %>
           <hr />

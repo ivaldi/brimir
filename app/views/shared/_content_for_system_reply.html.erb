@@ -1,0 +1,8 @@
+<% reply.content = match_values_inside_brackets_and_replace_with_variable_assignments(
+  reply.content,
+  name: reply.ticket.user.name,
+  created_at: reply.created_at.strftime("%d-%m-%Y %H:%M"),
+  content: reply.ticket.content,
+  id: reply.ticket.id.to_s,
+  domain: Tenant.current_tenant.domain) %>
+<%= sanitize_html(reply.content, reply.inline_files) %>

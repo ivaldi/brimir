@@ -18,3 +18,8 @@ charlie:
 dave:
   email: dave@xxxx.com
   current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails
+
+new_user:
+  name: dummy
+  email: dummy@person.net
+  agent: false

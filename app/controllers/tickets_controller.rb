@@ -42,7 +42,7 @@ class TicketsController < ApplicationController
       @reply = draft
     else
       @reply = @ticket.replies.new(user: current_user)
-      @reply.reply_to = @replies.select{ |r| !r.internal? && !r.kind_of?(StatusReply) }.last || @ticket
+      @reply.reply_to = @replies.select{ |r| !r.internal? && !r.kind_of?(StatusReply) && !r.kind_of?(SystemReply) }.last || @ticket
       @reply.set_default_notifications!
     end
 
@@ -155,6 +155,14 @@ class TicketsController < ApplicationController
   def create
     if params[:format] == 'json'
       @ticket = TicketMailer.receive(params[:message])
+      if Tenant.current_tenant.notify_client_when_ticket_is_created
+        # we should always have a (defualt) template when option is selected
+        template = EmailTemplate.by_kind('ticket_received').active.first
+        unless template.nil?
+          @reply = SystemReply.create_from_assignment(@ticket, template)
+          @reply.try(:notification_mails).try(:each, &:deliver_now)
+        end
+      end
     else
       @ticket = Ticket.new(ticket_params)
     end
@@ -169,13 +177,9 @@ class TicketsController < ApplicationController
       end
 
       format.json do
-        if @ticket.nil?
-          render json: {}, status: :created  # bounce mail handled correctly
-        elsif @ticket.valid?
-          render json: @ticket, status: :created
-        else
-          render json: @ticket, status: :unprocessable_entity
-        end
+
+        respond_to_json
+
       end
 
       format.js { render }
@@ -183,6 +187,16 @@ class TicketsController < ApplicationController
   end
 
   protected
+  def respond_to_json
+    if @ticket.nil?
+      render json: {}, status: :created  # bounce mail handled correctly
+    elsif @ticket.valid?
+      render json: @ticket, status: :created
+    else
+      render json: @ticket, status: :unprocessable_entity
+    end
+  end
+
   def respond_to_html
     # not signed in
     if current_user.nil?
@@ -213,12 +227,12 @@ class TicketsController < ApplicationController
         # we need to verify the ticket
         if !@ticket.nil? && @ticket.save
           # everything passed notify!
-          notifier @ticket
+          notify_incoming @ticket
         end
       end
     elsif !@ticket.nil? && @ticket.save
       # signed in we notify
-      notifier @ticket
+      notify_incoming @ticket
     end
   end
 
@@ -227,7 +241,7 @@ class TicketsController < ApplicationController
     render 'new'
   end
 
-  def notifier(ticket)
+  def notify_incoming(ticket)
     NotificationMailer.incoming_message ticket, params[:message]
   end
 end

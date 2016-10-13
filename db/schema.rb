@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615124420) do
+ActiveRecord::Schema.define(version: 20161104003026) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 20160615124420) do
     t.datetime "updated_at"
     t.string   "verification_token"
     t.string   "name"
+  end
+
+  create_table "email_templates", force: :cascade do |t|
+    t.string   "name"
+    t.text     "message"
+    t.integer  "kind",                      null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "draft",      default: true, null: false
   end
 
   create_table "identities", force: :cascade do |t|
@@ -126,9 +135,13 @@ ActiveRecord::Schema.define(version: 20160615124420) do
     t.boolean  "share_drafts",                                    default: false
     t.boolean  "first_reply_ignores_notified_agents",             default: false,       null: false
     t.boolean  "notify_client_when_ticket_is_assigned_or_closed", default: false,       null: false
+    t.boolean  "notify_user_when_account_is_created",             default: false
+    t.boolean  "notify_client_when_ticket_is_created",            default: false
+    t.integer  "email_template_id"
   end
 
   add_index "tenants", ["domain"], name: "index_tenants_on_domain", unique: true
+  add_index "tenants", ["email_template_id"], name: "index_tenants_on_email_template_id"
 
   create_table "tickets", force: :cascade do |t|
     t.string   "subject"

@@ -1,0 +1,7 @@
+<% message = match_values_inside_brackets_and_replace_with_variable_assignments(
+    @template.message,
+    name: @user.name,
+    email: @user.email,
+    password: @user.password,
+    domain: @domain) %>
+<%= (html_to_text message) %>

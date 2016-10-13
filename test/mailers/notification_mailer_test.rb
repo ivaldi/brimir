@@ -43,6 +43,48 @@ class NotificationMailerTest < ActionMailer::TestCase
     assert_equal email_addresses(:brimir).formatted, mail['From'].to_s
   end
 
+  test 'should notify user of account creation' do
+    user = users(:new_user)
+    template = email_templates(:active_user_welcome)
+    tenant = tenants(:main)
+
+    # user needs a one time plain password
+    user.password = 'testtest'
+
+    # Setting needs to be enabled
+    tenant.notify_user_when_account_is_created = true
+
+    assert_difference 'ActionMailer::Base.deliveries.size' do
+      NotificationMailer.new_account(user, template, tenant).deliver_now
+    end
+  end
+
+  test 'should not notify user of account creation' do
+    user = users(:new_user)
+    template = email_templates(:active_user_welcome)
+    tenant = tenants(:main)
+
+    # user needs a one time plain password
+    user.password = 'testtest'
+
+    # Setting needs to be enabled
+    tenant.notify_user_when_account_is_created = false
+
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      NotificationMailer.new_account(user, template, tenant).deliver_now
+    end
+
+    tenant.notify_user_when_account_is_created = true
+    # template is inactive now
+    template = email_templates(:inactive_user_welcome)
+
+    assert_no_difference 'ActionMailer::Base.deliveries.size' do
+      NotificationMailer.new_account(user, template, tenant).deliver_now
+    end
+
+  end
+
+
   # Preventing infinite email loops
   test 'should not notify our own outgoing addresses' do
     reply = replies(:solution)

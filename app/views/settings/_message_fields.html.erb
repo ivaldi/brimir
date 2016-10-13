@@ -1,0 +1,3 @@
+<%= f.hidden_field :kind %>
+<%= f.text_field :subject, label: (t 'message_subject', scope: 'activerecord.attributes.message') %>
+<%= f.text_area :body, label: (t 'message_body', scope: 'activerecord.attributes.message'), rows: 10 %>
