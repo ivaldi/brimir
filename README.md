@@ -97,7 +97,6 @@ Some users have made requests for the following features. If you would like to c
 - Automated replies based on the current rule system.
 - Remove user functionality, without losing ticket and reply information.
 - Adding knowledge base functionality.
-- Welcome mail for new users (after mailing a ticket for example) with their password.
 - Set priority, assignee and labels on the create ticket form.
 - Assign tickets to groups of users
 - When replying, select a response from pre-defined canned responses and modify to your needs

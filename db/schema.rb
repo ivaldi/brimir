@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615124420) do
+ActiveRecord::Schema.define(version: 20161031121524) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -126,9 +126,12 @@ ActiveRecord::Schema.define(version: 20160615124420) do
     t.boolean  "share_drafts",                                    default: false
     t.boolean  "first_reply_ignores_notified_agents",             default: false,       null: false
     t.boolean  "notify_client_when_ticket_is_assigned_or_closed", default: false,       null: false
+    t.boolean  "notify_user_when_account_is_created",             default: false
+    t.integer  "welcome_message_id"
   end
 
   add_index "tenants", ["domain"], name: "index_tenants_on_domain", unique: true
+  add_index "tenants", ["welcome_message_id"], name: "index_tenants_on_welcome_message_id"
 
   create_table "tickets", force: :cascade do |t|
     t.string   "subject"
@@ -185,5 +188,15 @@ ActiveRecord::Schema.define(version: 20160615124420) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "welcome_messages", force: :cascade do |t|
+    t.text     "body"
+    t.string   "subject"
+    t.integer  "tenant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "welcome_messages", ["tenant_id"], name: "index_welcome_messages_on_tenant_id"
 
 end

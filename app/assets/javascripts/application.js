@@ -16,6 +16,7 @@
 //= require select2
 //= require tinymce-jquery
 //= require tickets
+//= require settings
 //= require fancybox
 
 (function() {

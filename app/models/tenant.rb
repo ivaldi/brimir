@@ -15,6 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Tenant < ActiveRecord::Base
+  has_one :welcome_message
+
+  accepts_nested_attributes_for :welcome_message
+
   def self.postgresql?
     connection.adapter_name == 'PostgreSQL'
   end
@@ -65,11 +69,29 @@ class Tenant < ActiveRecord::Base
     end
   end
 
+  def has_welcome_message?
+    welcome_message.present?
+  end
+
+ def build_or_prefill(locale)
+    if has_welcome_message?
+      welcome_message
+    else
+      build_welcome_message prefill(locale)
+    end
+  end
+
   def self.files_path
     ':rails_root/data/:domain:class/:attachment/:id_partition/:style.:extension'
   end
 
   protected
+  def prefill(locale)
+    {
+      subject: (I18n.t 'subject', locale: locale, scope: 'user_mailer.new_account'),
+      body: (I18n.t 'body', locale: locale, scope: 'user_mailer.new_account')
+    }
+  end
 
   def self.available_schemas
     if postgresql?
