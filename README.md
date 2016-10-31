@@ -44,6 +44,14 @@ If you want to use LDAP, configure config/ldap.yml accordingly, then change the 
     bin/rails console production
     u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
 
+Configuring Captcha's
+---------------------
+If you want to use recaptcha in production you have to go to
+https://www.google.com/recaptcha, create your private and public keys and export these to your production environment, by running:
+
+    export RECAPTCHA_PUBLIC_KEY="[YOUR_KEY]"
+    export RECAPTCHA_PRIVATE_KEY="[YOUR_KEY]"
+
 Updating
 --------
 First download the new code in the same directory by unpacking a release tarball or by running `git pull` (when you cloned the repo earlier). After updating code run the following commands to install necessary gem updates, migrate the database and regenerate precompiled assets.
@@ -107,7 +115,6 @@ Some users have made requests for the following features. If you would like to c
 - Desktop notifications using web notifications (#218).
 - Custom ticket statuses, all via database. (#217)
 - Filter on to/cc/bcc without verified addresses. (#227)
-- Add captcha for non-signed in ticket creation. (#228)
 - IMAP or POP3 pull mechanism for new tickets. (#249)
 - Notes field for customer account, to add info about them, such as website url.
 

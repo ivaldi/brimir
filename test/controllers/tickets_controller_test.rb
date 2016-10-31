@@ -320,6 +320,27 @@ class TicketsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'shown captcha should not break new ticket page when not signed in' do
+    if Ticket.recaptcha_keys_present?
+
+      get :new
+
+      assert_response :success
+    end
+  end
+
+  test 'not shown captcha should not break new ticket page when not signed' do
+    Recaptcha.configuration.public_key = ''
+    Recaptcha.configuration.private_key = ''
+
+    if !(Ticket.recaptcha_keys_present?)
+
+      get :new
+
+      assert_response :success
+    end
+  end
+
   test 'should get new ticket form in correct language' do
     I18n.locale = :nl
     get :new

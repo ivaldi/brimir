@@ -159,25 +159,12 @@ class TicketsController < ApplicationController
       @ticket = Ticket.new(ticket_params)
     end
 
-    if !@ticket.nil? && @ticket.save
-      NotificationMailer.incoming_message(@ticket, params[:message])
-    end
+    send_notification_email
 
     respond_to do |format|
       format.html do
 
-        if !@ticket.nil? && @ticket.valid?
-
-          if current_user.nil?
-            render 'create'
-          else
-            redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
-          end
-
-        else
-          @email_addresses = EmailAddress.verified.ordered
-          render 'new'
-        end
+        respond_to_html
 
       end
 
@@ -193,5 +180,54 @@ class TicketsController < ApplicationController
 
       format.js { render }
     end
+  end
+
+  protected
+  def respond_to_html
+    # not signed in
+    if current_user.nil?
+      # we need to verify the captcha
+      if verify_recaptcha
+        # we need to verify the ticket
+        if !@ticket.nil? && @ticket.valid?
+          render 'create'
+        else
+          # ticket validation failed
+          render_new
+        end
+      else
+        # captcha validation failed
+        render_new
+      end
+    else
+      # signed in we redirect
+      redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
+    end
+  end
+
+  def send_notification_email
+    # not signed in
+    if current_user.nil?
+      # we need to verify the capthca
+      if verify_recaptcha
+        # we need to verify the ticket
+        if !@ticket.nil? && @ticket.save
+          # everything passed notify!
+          notifier @ticket
+        end
+      end
+    elsif !@ticket.nil? && @ticket.save
+      # signed in we notify
+      notifier @ticket
+    end
+  end
+
+  def render_new
+    @email_addresses = EmailAddress.verified.ordered
+    render 'new'
+  end
+
+  def notifier(ticket)
+    NotificationMailer.incoming_message ticket, params[:message]
   end
 end
