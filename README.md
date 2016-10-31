@@ -52,6 +52,8 @@ https://www.google.com/recaptcha, create your private and public keys and export
     export RECAPTCHA_PUBLIC_KEY="[YOUR_KEY]"
     export RECAPTCHA_PRIVATE_KEY="[YOUR_KEY]"
 
+Remove the recaptcha lines from config/secrets.yml if you don't want to use captcha's all together.
+
 Updating
 --------
 First download the new code in the same directory by unpacking a release tarball or by running `git pull` (when you cloned the repo earlier). After updating code run the following commands to install necessary gem updates, migrate the database and regenerate precompiled assets.
