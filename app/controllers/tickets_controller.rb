@@ -187,7 +187,7 @@ class TicketsController < ApplicationController
     # not signed in
     if current_user.nil?
       # we need to verify the captcha
-      if verify_recaptcha
+      if verify_recaptcha || !Ticket.recaptcha_keys_present?
         # we need to verify the ticket
         if !@ticket.nil? && @ticket.valid?
           render 'create'

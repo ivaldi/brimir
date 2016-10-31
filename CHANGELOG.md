@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased (to be announced)
 ### Added
 - Optional notification of customers when ticket is assigned or status is changed. Contributed by @fiedl.
+- Optional captcha for non-signed in ticket creation. Constributed by @git-jls.
 ### Changed
 
 ### Deprecated
