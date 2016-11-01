@@ -54,7 +54,7 @@
 
   <%= render 'attachments/form', f: f %>
 
-  <% if Ticket.recaptcha_keys_present? %>
+  <% if Ticket.recaptcha_keys_present? && !user_signed_in? %>
     <p>
       <%= recaptcha_tags %>
     </p>
