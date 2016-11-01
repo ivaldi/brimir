@@ -41,7 +41,12 @@ class SettingsController < ApplicationController
       :default_locale,
       :share_drafts,
       :first_reply_ignores_notified_agents,
-      :notify_client_when_ticket_is_assigned_or_closed
+      :notify_client_when_ticket_is_assigned_or_closed,
+      :notify_user_when_account_is_created,
+      welcome_message_attributes: [
+        :subject,
+        :body,
+      ]
     )
   end
 end

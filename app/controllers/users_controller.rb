@@ -62,6 +62,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      UserMailer.new_account(@user, Tenant.current_tenant.welcome_message)
+          .deliver_now if Tenant.current_tenant
+          .notify_user_when_account_is_created
       redirect_to users_url, notice: I18n.translate(:user_added)
     else
       render 'new'

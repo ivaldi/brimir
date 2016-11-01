@@ -141,6 +141,27 @@ en:
   your_ticket_has_been_closed: "Your support ticket has been closed. If the issue is not resolved, yet, please feel free to reply. For new requests, please send a separate email."
   str_is_working_on_your_ticket: "%{str} will handle your support ticket."
 
+# user_mailer/new_account.{html,text}.erb
+  user_mailer:
+    new_account:
+      subject: "BRIMIR: An account has been created for you!"
+      body: |
+        Dear <name>,
+
+        First of all we like to thank you for choosing BRIMIR!
+
+        Your account for the open source ticket system BRIMIR
+        has just been created!
+
+        To sign in you will need the following information.
+
+        E-mail <email>
+        Password <password>
+
+        With kind regards,
+
+        Webmaster <domain>
+
 # attachments/_attachment
   download: download
 
@@ -301,3 +322,6 @@ en:
         share_drafts: Share drafts with other agents
         first_reply_ignores_notified_agents: No notifications of first reply to other agents
         notify_client_when_ticket_is_assigned_or_closed: Notify the client when his ticket is assigned or closed.
+        notify_user_when_account_is_created: Notify user when account is created.
+        welcome_messages_subject: Subject
+        welcome_messages_body: Message

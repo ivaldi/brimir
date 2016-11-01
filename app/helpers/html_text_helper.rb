@@ -23,6 +23,18 @@ module HtmlTextHelper
         .gsub(/<!--[^>]*-->/, '')
   end
 
+  def match_values_inside_guillemet_and_replace_with_variable_assignments(text, options={})
+    # grab everything between the guillemets
+    matches = text.to_enum(:scan, /(?<=\<)([^\>]+)(?=\>)/).map {$&}
+    # replace the guillemets with options
+    matches.each do |match|
+      pattern = "\<(#{match}?)\>"
+      text = text.gsub(/#{pattern}/, options[match.to_sym]) if options.has_key?(match.to_sym)
+    end
+    # return the text
+    text
+  end
+
   def html_to_text(content)
     content = sanitize_html(content).gsub(%r{(<br ?/?>|</p>)}, "\n")
     # to_str for Rails #12672
