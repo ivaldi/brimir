@@ -4,9 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Brimir unreleased (to be announced)
 ### Added
-- Optional notification of customers when ticket is assigned or status is changed. Contributed by @fiedl.
-- Optional captcha for non-signed in ticket creation. Constributed by @git-jls.
-- Optional emails and templates when a user account has been created and when a ticket has been received. Contributed by @git-jls.
+
 ### Changed
 
 ### Deprecated
@@ -14,9 +12,17 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ### Fixed
-- Posting an empty reply will no longer result in an error.
 
 ### Security
+
+## Brimir 0.7.2 (2016-11-11)
+### Added
+- Optional notification of customers when ticket is assigned or status is changed. Contributed by @fiedl.
+- Optional captcha for non-signed in ticket creation. Constributed by @git-jls.
+- Optional emails and templates when a user account has been created and when a ticket has been received. Contributed by @git-jls.
+
+### Fixed
+- Posting an empty reply will no longer result in an error.
 
 ## Brimir 0.7.1 (2016-06-10)
 ### Added
