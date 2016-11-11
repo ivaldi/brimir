@@ -38,7 +38,9 @@
       </div>
 
       <%
-        if @reply.content.blank?
+        if @reply.content.blank? &&
+            @reply.errors.messages.count == 0 # not on reply error view
+
           if current_user.prefer_plain_text?
             @reply.content = "\n#{html_to_text current_user.signature}\n"
           else

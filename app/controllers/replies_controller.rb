@@ -87,7 +87,7 @@ class RepliesController < ApplicationController
       Rails.logger.error "Message: #{e.message}"
       Rails.logger.error "Backtrace: #{e.backtrace.join("\n")}"
       @outgoing_addresses = EmailAddress.verified.ordered
-      render action: 'new'
+      render 'new'
     end
   end
 

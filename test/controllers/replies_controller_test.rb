@@ -31,15 +31,13 @@ class RepliesControllerTest < ActionController::TestCase
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       assert_no_difference 'Reply.count' do
 
-        user = users(:alice)
-        user.signature = nil
-        user.save
-
         post :create, reply: {
             content: '',
             ticket_id: @ticket.id,
             notified_user_ids: [users(:bob).id],
         }
+
+        assert_response :success # should get a form instead of a 500
       end
     end
   end

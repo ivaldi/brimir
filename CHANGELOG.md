@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ### Fixed
+- Posting an empty reply will no longer result in an error.
 
 ### Security
 
