@@ -23,6 +23,18 @@ module HtmlTextHelper
         .gsub(/<!--[^>]*-->/, '')
   end
 
+  def match_values_inside_brackets_and_replace_with_variable_assignments(content, options={})
+    # grab everything between the brackets
+    matches = content.to_enum(:scan, /(?<=\[)([^\]]+)(?=\])/).map {$&}
+    # replace the brackets with options
+    matches.each do |match|
+      variable = options[match.to_sym]
+      content = content.gsub(/\[(#{match}?)\]/, variable) if variable
+    end
+    # return content
+    content
+  end
+
   def html_to_text(content)
     content = sanitize_html(content).gsub(%r{(<br ?/?>|</p>)}, "\n")
     # to_str for Rails #12672

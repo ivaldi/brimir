@@ -142,6 +142,9 @@ nl:
   your_ticket_has_been_closed: "Uw ticket is gesloten. Reageer op deze e-mail als het probleem niet is opgelost. Voor een nieuw probleem kunt u een losse e-mail sturen."
   str_is_working_on_your_ticket: "%{str} zal uw ticket behandelen."
 
+# notificantion_mailer/new_account
+  new_account_subject: 'Welkom bij Brimir!'
+
 # attachments/_attachment
   download: download
 
@@ -229,10 +232,27 @@ nl:
   verification_mail_will_be_sent: Zorg dat dit e-mailadres correct doorstuurd naar Brimir. Een automatische verificatie e-mail wordt verstuurd nadat u op opslaan klikt. Alleen geverifieerde e-mailadressen kunnen gebruikt worden voor uitgaande e-mail.
   mark_spam_spf: Brimir mails worden mogelijk als spam gemarkeerd als deze server niet wordt toegevoegd aan het SPF DNS record van het bovenstaande e-mailadres.
 
+# email_templates/index
+  already_active_template: Er is al een actief sjabloon voor een %{kind} e-mail, het instellen van de huidge optie zal de ander ongedaan maken.
+  new_email_template: Nieuw e-mailsjabloon
+  email_templates: E-mailsjablonen
+  deleting_this_item_will_unset_option: 'Het verwijderen van dit sjabloon zal de volgende optie ongedaan maken:'
+  set_active: Activeer
+  status: Toestand
+
+# email_templates/edit
+  modify_email_template: Wijzig e-mailsjabloon
+  tooltip: Blokhaken binnen het tekstveld worden automatisch vervangen door de nodige waardes.
+
 # controllers/email_addresses
   email_address_modified: E-mailadres gewijzigd
   email_address_added: E-mailadres toevoegd
   email_address_removed: Email address verwijderd
+
+# controllers/email_templates
+  email_template_modified: E-mailsjabloon gewijzigd
+  email_template_added: E-mailsjabloon toevoegd
+  email_template_removed: Emailsjabloon verwijderd
 
   activerecord:
     attributes:
@@ -290,6 +310,77 @@ nl:
         default: Gebruik als standaard uitgaand e-mailadres
         verification_token: Geverifieerd
 
+      email_template:
+        name: Sjabloon naam
+        from: Van
+        kind: Soort
+        message: Bericht
+        kinds:
+          user_welcome:
+            template_name: Standaard gebruikers welkom
+            message: |
+              <p>
+              Beste [name],
+              <br />
+              </p>
+              <p>
+              Er is voor u een account aangemaakt bij voor Brimir!
+              <br />
+              </p>
+              <p>
+              Om in te kunnen loggen heeft u de volgende informatie nodig.
+              <br />
+              E-mail: [email]
+              <br />
+              Password: [password]
+              <br />
+              </p>
+              <p>
+              <strong>IMPORTANT!</strong>
+              <br />
+              Deze informatie wordt eenmalig verstrekt, bewaar deze goed!
+              <br />
+              </p>
+              <p>
+              Wachtwoord vergeten of kwijt? Herstel uw wachtwoord op:
+              <br />
+              http://[domain]/users/password/new
+              <br />
+              </p>
+              <p>
+              Met vriendelijke groet,
+              <br />
+              Webmaster [domain]
+              <br />
+              </p>
+              *** Dit is een automatisch gegenereerde e-mail, reageer alstublieft niet ***"
+
+          ticket_received:
+            template_name: Standaard ticket received
+            message: |
+              <p>
+              Beste [name],
+              <br />
+              </p>
+              <p>
+              Op [created_at], schreef u:
+              <br />
+              </p>
+              <p>
+              [content]
+              <br />
+              </p>
+              <p>
+              U ontvangt deze e-mail als bevestiging dat u ticket is ontvangen met onder het nummer [id] en zo spoedig mogelijk in behandeling zal worden genomen.
+              <br />
+              </p>
+              <p>
+              Met vriendelijke groet,
+              <br />
+              Webmaster [domain]
+              <br />
+              </p>
+
       tenant:
         default_locale: Standaard taal
         ignore_user_agent_locale: Negeer voorkeur taal van browser
@@ -297,3 +388,5 @@ nl:
         share_drafts: Deel concepten met andere medewerkers
         first_reply_ignores_notified_agents: Geen notificatie van eerste reactie aan andere agents voor toegewezen tickets
         notify_client_when_ticket_is_assigned_or_closed: Stuur een notificatie naar de klant als zijn ticket toegekend of gesloten wordt.
+        notify_client_when_ticket_is_created: Stuur een notificatie naar de klant, wanneer zijn nieuw aangemaakte ticket is ontvangen.
+        notify_user_when_account_is_created: Stuur de gebruiker een notificatie, wanneer een account is aangemaakt.

@@ -141,6 +141,9 @@ en:
   your_ticket_has_been_closed: "Your support ticket has been closed. If the issue is not resolved, yet, please feel free to reply. For new requests, please send a separate email."
   str_is_working_on_your_ticket: "%{str} will handle your support ticket."
 
+# notificantion_mailer/new_account
+  new_account_subject: 'Welcome to Brimir!'
+
 # attachments/_attachment
   download: download
 
@@ -233,10 +236,27 @@ en:
   verification_mail_will_be_sent: Make sure this email address is forwarded correctly to Brimir. An automated verification email will be sent when you click save. Only verified email addresses can be used for outgoing mail.
   mark_spam_spf: Brimir mails might be marked as spam when you don't add this server to the SPF DNS record of the above mail address.
 
+# email_templates/index
+  already_active_template: There is already an active template for a %{kind} email, setting this option will unset the now active template.
+  new_email_template: New email template
+  email_templates: Email templates
+  deleting_this_item_will_unset_option: 'Deleting this template will unset the following option:'
+  set_active: Set active
+  status: Status
+
+# email_templates/edit
+  modify_email_template: Modify email template
+  tooltip: Brackets inside the textarea will automatically be replaced by the necessary values.
+
 # controllers/email_addresses
   email_address_modified: Email address modified
   email_address_added: Email address added
   email_address_removed: Email address removed
+
+# controllers/email_templates
+  email_template_modified: Email template modified
+  email_template_added: Email template added
+  email_template_removed: Email template removed
 
   activerecord:
     attributes:
@@ -294,6 +314,77 @@ en:
         default: Use as default outgoing mail address
         verification_token: Verified
 
+      email_template:
+        name: Template name
+        from: From
+        kind: Kind
+        message: Message
+        kinds:
+          user_welcome:
+            template_name: Default user welcome
+            message: |
+              <p>
+              Dear [name],
+              <br />
+              </p>
+              <p>
+              Your account for the ticket system Brimir has just been created!
+              <br />
+              </p>
+              <p>
+              To sign in you will need the following information:
+              <br />
+              E-mail: [email]
+              <br />
+              Password: [password]
+              <br />
+              </p>
+              <p>
+              <strong>IMPORTANT!</strong>
+              <br />
+              This information will be provided only once, keep it safe!
+              <br />
+              </p>
+              <p>
+              Lost or forgot password? Reset your password at:
+              <br />
+              http://[domain]/users/password/new
+              <br />
+              </p>
+              <p>
+              With kind regards,
+              <br />
+              Webmaster [domain]
+              <br />
+              </p>
+              *** this is an automatically generated email, please do not reply ***
+
+          ticket_received:
+            template_name: Default ticket received
+            message: |
+              <p>
+              Dear [name],
+              <br />
+              </p>
+              <p>
+              On [created_at], you wrote:
+              <br />
+              </p>
+              <p>
+              [content]
+              <br />
+              </p>
+              <p>
+              You are receiving this email to let you know that your ticket with the number [id], has been received.
+              <br />
+              </p>
+              <p>
+              With kind regards,
+              <br />
+              Webmaster [domain]
+              <br />
+              </p>
+
       tenant:
         default_locale: Default language
         ignore_user_agent_locale: Ignore preferred browser language
@@ -301,3 +392,5 @@ en:
         share_drafts: Share drafts with other agents
         first_reply_ignores_notified_agents: No notifications of first reply to other agents
         notify_client_when_ticket_is_assigned_or_closed: Notify the client when his ticket is assigned or closed.
+        notify_client_when_ticket_is_created: Notify the client when his newly created ticket is received.
+        notify_user_when_account_is_created: Notify user when account is created.

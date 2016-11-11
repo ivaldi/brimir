@@ -15,6 +15,11 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class Tenant < ActiveRecord::Base
+
+  after_update :check_for_or_create_default_templates_for_selected_options
+
+  has_many :email_templates
+
   def self.postgresql?
     connection.adapter_name == 'PostgreSQL'
   end
@@ -65,12 +70,26 @@ class Tenant < ActiveRecord::Base
     end
   end
 
+  def check_for_or_create_default_templates_for_selected_options
+    kinds = []
+    if notify_user_when_account_is_created
+      kinds << :user_welcome unless EmailTemplate
+          .exists?(kind: EmailTemplate.kinds[:user_welcome])
+    end
+    if notify_client_when_ticket_is_created
+      kinds << :ticket_received unless EmailTemplate
+          .exists?(kind: EmailTemplate.kinds[:ticket_received])
+    end
+
+    EmailTemplate.create_default_templates(kinds) unless kinds.empty?
+  end
+
+
   def self.files_path
     ':rails_root/data/:domain:class/:attachment/:id_partition/:style.:extension'
   end
 
   protected
-
   def self.available_schemas
     if postgresql?
       sql = "SELECT nspname FROM pg_namespace WHERE nspname !~ '^pg_.*' AND

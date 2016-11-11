@@ -1,0 +1,57 @@
+<div class="panel no-bt">
+  <div class="row collapse">
+    <div class="medium-6 columns">
+      <h4 class="no-m pts pbs"><%= t(:email_templates) %></h4>
+    </div>
+    <div class="medium-6 columns">
+      <%= link_to t(:new_email_template), new_email_template_path, class: 'no-m tiny button right radius' %>
+    </div>
+  </div>
+</div>
+
+<div class="row collapse">
+  <div class="large-12 columns">
+
+    <table class="full">
+      <thead>
+        <tr>
+          <th><%= t('activerecord.attributes.email_template.name') %></th>
+          <th><%= t('activerecord.attrib!utes.email_template.kind') %></th>
+          <th><%= t(:status) %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @email_templates.each do |email_template| %>
+          <tr>
+            <td><%= email_template.name %></td>
+            <td><%= email_template.kind.humanize %></td>
+            <td>
+              <% if email_template.is_active?  %>
+                  <%= fa_icon 'check' %>
+              <% else %>
+                <%= link_to t(:set_active), email_template_path(
+                  email_template, email_template: { draft: false }), method: :put,
+                      'data-confirm' => ask_if_not_draft_exists(
+                          @email_templates, email_template.kind) %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to edit_email_template_path(email_template), class: 'mrl' do %>
+                <%= fa_icon 'pencil' %>
+              <% end %>
+              <%= link_to email_template_path(email_template), method: :delete,
+                  'data-confirm' => check_settings(@tenant, email_template) do %>
+                <%= fa_icon 'trash' %>
+              <% end %>
+            </td>
+        <% end %>
+      </tbody>
+    </table>
+
+    <div class="pagination-centered">
+      <%= will_paginate @email_template %>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+<%= form_for @email_template do |f| %>
+  <div class="row mt">
+    <div class="large-6 columns">
+      <%= f.text_field :name %>
+      <%= f.select :kind, EmailTemplate.kinds.keys.map { |k| [k.humanize, k] } %>
+      <%= f.label :message do %>
+        <%= t('activerecord.attributes.email_template.message') %>
+        <%= content_tag :span, content_tag(:i, '', class: 'fa fa-info-circle'),
+          data: { tooltip: '' }, class: 'has-tip', title: t(:tooltip) %>
+      <% end %>
+      <%= f.text_area :message, rows: 10, class: :tinymce, label: false %>
+    </div>
+    <div class="large-6 columns" id="preview-area"></div>
+  </div>
+
+  <div class="row">
+    <div class="medium-12 columns bt">
+      <%= f.submit t(:save), class: 'success button radius mtl' %>
+    </div>
+  </div>
+<% end %>
