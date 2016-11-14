@@ -48,8 +48,14 @@
         end
       end
     %>
-    <%= f.text_area :content, class: ('tinymce' if type == 'html'),
-        value: (f.object.content.nil? ? content : f.object.content) %>
+
+    <% if type == 'html' %>
+      <%= f.trix_editor :content,
+          value: (f.object.content.nil? ? content : f.object.content) %>
+    <% else %>
+      <%= f.text_area :content,
+          value: (f.object.content.nil? ? content : f.object.content) %>
+    <% end %>
   </p>
 
   <%= render 'attachments/form', f: f %>

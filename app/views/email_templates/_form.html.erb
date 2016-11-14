@@ -8,7 +8,7 @@
         <%= content_tag :span, content_tag(:i, '', class: 'fa fa-info-circle'),
           data: { tooltip: '' }, class: 'has-tip', title: t(:tooltip) %>
       <% end %>
-      <%= f.text_area :message, rows: 10, class: :tinymce, label: false %>
+      <%= f.trix_editor :message, label: false %>
     </div>
     <div class="large-6 columns" id="preview-area"></div>
   </div>

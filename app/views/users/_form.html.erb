@@ -40,7 +40,7 @@
           <%= f.check_box :notify,
               label: t(:receive_new_ticket_notifications) %>
 
-          <%= f.text_area :signature, rows: 5, cols: 20, class: 'tinymce mbl' %>
+          <%= f.trix_editor :signature, class: 'mbl' %>
         <% end %>
 
 

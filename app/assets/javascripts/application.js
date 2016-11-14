@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require select2
-//= require tinymce-jquery
+//= require trix
 //= require tickets
 //= require fancybox
 
@@ -98,15 +98,8 @@
 
     });
 
-    tinyMCE.init({
-      autoresize_bottom_margin: 0,
-      selector: 'textarea.tinymce',
-      statusbar: false,
-      menubar: false,
-      toolbar: 'undo redo | bold italic | bullist numlist | outdent indent removeformat',
-      height: 150,
-      plugins: 'autoresize,paste',
-    });
+    jQuery('trix-editor').addClass('trix-editor');
+    jQuery('trix-toolbar').addClass('trix-toolbar');
 
     jQuery(document).foundation();
 
