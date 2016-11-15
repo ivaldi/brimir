@@ -323,67 +323,59 @@ en:
           user_welcome:
             template_name: Default user welcome
             message: |
-              <p>
+              <div>
               Dear [name],
               <br />
-              </p>
-              <p>
+              <br />
               Your account for the ticket system Brimir has just been created!
               <br />
-              </p>
-              <p>
+              <br />
               To sign in you will need the following information:
               <br />
               E-mail: [email]
               <br />
               Password: [password]
               <br />
-              </p>
-              <p>
+              <br />
               <strong>IMPORTANT!</strong>
               <br />
               This information will be provided only once, keep it safe!
               <br />
-              </p>
-              <p>
+              <br />
               Lost or forgot password? Reset your password at:
               <br />
               http://[domain]/users/password/new
               <br />
-              </p>
-              <p>
+              <br />
               With kind regards,
               <br />
               Webmaster [domain]
               <br />
-              </p>
+              <br />
               *** this is an automatically generated email, please do not reply ***
+              </div>
 
           ticket_received:
             template_name: Default ticket received
             message: |
-              <p>
+              <div>
               Dear [name],
               <br />
-              </p>
-              <p>
+              <br />
               On [created_at], you wrote:
               <br />
-              </p>
-              <p>
               [content]
               <br />
-              </p>
-              <p>
+              <br />
               You are receiving this email to let you know that your ticket with the number [id], has been received.
               <br />
-              </p>
-              <p>
+              <br />
               With kind regards,
               <br />
               Webmaster [domain]
               <br />
-              </p>
+              <br />
+              </div>
 
       tenant:
         default_locale: Default language

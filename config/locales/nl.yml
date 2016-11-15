@@ -319,67 +319,56 @@ nl:
           user_welcome:
             template_name: Standaard gebruikers welkom
             message: |
-              <p>
+              <div>
               Beste [name],
               <br />
-              </p>
-              <p>
+              <br />
               Er is voor u een account aangemaakt bij voor Brimir!
               <br />
-              </p>
-              <p>
+              <br />
               Om in te kunnen loggen heeft u de volgende informatie nodig.
               <br />
               E-mail: [email]
               <br />
               Password: [password]
               <br />
-              </p>
-              <p>
+              <br />
               <strong>IMPORTANT!</strong>
               <br />
               Deze informatie wordt eenmalig verstrekt, bewaar deze goed!
               <br />
-              </p>
-              <p>
+              <br />
               Wachtwoord vergeten of kwijt? Herstel uw wachtwoord op:
               <br />
               http://[domain]/users/password/new
               <br />
-              </p>
-              <p>
+              <br />
               Met vriendelijke groet,
               <br />
               Webmaster [domain]
               <br />
-              </p>
+              <br />
               *** Dit is een automatisch gegenereerde e-mail, reageer alstublieft niet ***"
+              </div>
 
           ticket_received:
             template_name: Standaard ticket received
             message: |
-              <p>
+              <div>
               Beste [name],
               <br />
-              </p>
-              <p>
-              Op [created_at], schreef u:
               <br />
-              </p>
-              <p>
+              Op [created_at], schreef u:
               [content]
               <br />
-              </p>
-              <p>
               U ontvangt deze e-mail als bevestiging dat u ticket is ontvangen met onder het nummer [id] en zo spoedig mogelijk in behandeling zal worden genomen.
-              <br />
-              </p>
-              <p>
               Met vriendelijke groet,
+              <br />
               <br />
               Webmaster [domain]
               <br />
-              </p>
+              <br />
+              </div>
 
       tenant:
         default_locale: Standaard taal

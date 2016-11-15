@@ -111,7 +111,6 @@ Some users have made requests for the following features. If you would like to c
 - Ability to rename tickets (change their subject).
 - Ability to rename labels.
 - Improve rule form to allow only valid statuses (#150).
-- A better WYSIWYG editor, for example QuilJS (#172).
 - Timed rules, such as re-assigning when no reply is added withing 24 hours (#203).
 - Desktop notifications using web notifications (#218).
 - Custom ticket statuses, all via database. (#217)

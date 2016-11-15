@@ -25,3 +25,30 @@ input[type="checkbox"]{
 .button.postfix{
 	border: 1px solid rgba(0,0,0,.1);
 }
+
+.trix-editor{
+	min-height: 150px !important;
+}
+
+.trix-toolbar .button_groups button {
+	padding: 0px;
+
+	&.strike,
+	&.link,
+	&.code,
+	&.heading-1,
+	&.quote{
+		display: none;
+	}
+}
+
+@media #{$small-only}{
+	.trix-toolbar .button_groups{
+		button {
+			width: 30px;
+		}
+		button:before {
+			background-size: 20px 20px;
+		}
+	}
+}

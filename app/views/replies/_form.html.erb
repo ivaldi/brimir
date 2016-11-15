@@ -61,7 +61,11 @@
       %>
 
       <p>
-        <%= r.text_area :content, label: false, class: ('tinymce' unless current_user.prefer_plain_text?) %>
+      <% if current_user.prefer_plain_text? %>
+        <%= r.text_area :content, label: false %>
+      <% else %>
+        <%= r.trix_editor :content, label: false %>
+      <% end %>
       </p>
 
       <%= render 'attachments/form', f: r %>
