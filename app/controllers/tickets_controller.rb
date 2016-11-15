@@ -221,7 +221,7 @@ class TicketsController < ApplicationController
 
   def send_notification_email
     # not signed in
-    if current_user.nil?
+    if current_user.nil? && params[:format] != 'json'
       # we need to verify the capthca
       if verify_recaptcha
         # we need to verify the ticket
