@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Optional notification of customers when ticket is assigned or status is changed. Contributed by @fiedl.
 - Optional captcha for non-signed in ticket creation. Constributed by @git-jls.
+- Disable captcha check for incoming email posts. Constributed by @git-jls.
+
 ### Changed
 
 ### Deprecated
