@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ### Fixed
+- Disable captcha check for incoming email posts. Constributed by @git-jls.
 
 ### Security
 
