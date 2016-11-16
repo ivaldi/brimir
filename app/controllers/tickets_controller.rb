@@ -165,6 +165,9 @@ class TicketsController < ApplicationController
       end
     else
       @ticket = Ticket.new(ticket_params)
+      if current_user.nil? && !verify_recaptcha
+        return render 'new'
+      end
     end
 
     send_notification_email
@@ -220,17 +223,7 @@ class TicketsController < ApplicationController
   end
 
   def send_notification_email
-    # not signed in
-    if current_user.nil? && params[:format] != 'json'
-      # we need to verify the capthca
-      if verify_recaptcha
-        # we need to verify the ticket
-        if !@ticket.nil? && @ticket.save
-          # everything passed notify!
-          notify_incoming @ticket
-        end
-      end
-    elsif !@ticket.nil? && @ticket.save
+    if !@ticket.nil? && @ticket.save
       # signed in we notify
       notify_incoming @ticket
     end
