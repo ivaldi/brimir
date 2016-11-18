@@ -301,12 +301,11 @@ en:
         filter_value: Value
         action_operation: Action to perform
         action_operations:
-          assign_label: assign label
-          notify_user: send notification to
-          change_status: change status to
-          change_priority: change priority to
-          assign_user: assign to
-        action_value: Parameter for action
+          assign_label: Assign label
+          notify_user: Send notification to
+          change_status: Change status to
+          change_priority: Change priority to
+          assign_user: Assign to
 
       email_address:
         email: Email address

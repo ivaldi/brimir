@@ -297,12 +297,11 @@ nl:
           equals: is gelijk aan
         action_operation: Uit te voeren actie
         action_operations:
-          assign_label: voeg label toe
-          notify_user: stuur notificatie aan
-          change_status: wijzig status in
-          change_priority: wijzig prioriteit in
-          assign_user: toewijzen aan
-        action_value: Parameter voor actie
+          assign_label: Voeg label toe
+          notify_user: Stuur notificatie aan
+          change_status: Wijzig status in
+          change_priority: Wijzig prioriteit in
+          assign_user: Toewijzen aan
 
       email_address:
         email: E-mailadres

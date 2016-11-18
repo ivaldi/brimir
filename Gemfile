@@ -87,3 +87,6 @@ gem 'recaptcha', require: 'recaptcha/rails'
 
 # Trix WYSIWYG editor
 gem 'trix'
+
+# React support
+gem 'react-rails'
