@@ -18,6 +18,8 @@ class RulesController < ApplicationController
 
   load_and_authorize_resource :rule
 
+  before_action :load_resources
+
   def index
     @rules = @rules.paginate(page: params[:page])
   end
@@ -61,6 +63,33 @@ class RulesController < ApplicationController
           :action_operation,
           :action_value,
       )
+    end
+
+    def load_resources
+      @label_options = Label.ordered.map do |l|
+        {
+          key: l.name,
+          value: l.name,
+        }
+      end
+      @users = User.agents.ordered.map do |u|
+        {
+          key: u.email,
+          value: u.email
+        }
+      end
+      @statuses = Ticket.statuses.except(:merged).map do |s,i|
+        {
+          key: s,
+          value: t(s, scope: 'activerecord.attributes.ticket.statuses')
+        }
+      end
+      @priorities = Ticket.priorities.map do |p,i|
+        {
+          key: p,
+          value: t(p)
+        }
+      end
     end
 
 end

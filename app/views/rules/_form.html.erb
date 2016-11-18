@@ -13,9 +13,31 @@
 
       <%= f.text_field :filter_value %>
 
-      <%= f.collection_select(:action_operation, t('activerecord.attributes.rule.action_operations'), :first, :last) %>
-
-      <%= f.text_field :action_value %>
+      <%= react_component('RuleFields', {
+          actions: {
+            assign_label: {
+              label: t('activerecord.attributes.rule.action_operations.assign_label'),
+              values: @label_options
+            },
+            assign_user: {
+              label: t('activerecord.attributes.rule.action_operations.assign_user'),
+              values: @users
+            },
+            change_status: {
+              label: t('activerecord.attributes.rule.action_operations.change_status'),
+              values: @statuses
+            },
+            change_priority: {
+              label: t('activerecord.attributes.rule.action_operations.change_priority'),
+              values: @priorities
+            },
+            notify_user: {
+              label: t('activerecord.attributes.rule.action_operations.notify_user'),
+              values: @users
+            }
+          },
+          label_action_operation: t('activerecord.attributes.rule.action_operation')
+      }) %>
     </div>
   </div>
 

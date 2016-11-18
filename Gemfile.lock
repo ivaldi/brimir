@@ -38,6 +38,10 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.4.0)
     arel (6.0.3)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (8.2.5)
@@ -71,6 +75,7 @@ GEM
       compass (~> 1.0.0)
       sass-rails (< 5.1)
       sprockets (< 2.13)
+    connection_pool (2.2.0)
     coveralls (0.8.13)
       json (~> 1.8)
       simplecov (~> 0.11.0)
@@ -209,6 +214,13 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    react-rails (1.9.0)
+      babel-transpiler (>= 0.7.0)
+      coffee-script-source (~> 1.8)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     recaptcha (3.3.0)
       json
     responders (2.2.0)
@@ -285,6 +297,7 @@ DEPENDENCIES
   rails (~> 4.2.0)
   rails-i18n
   rake
+  react-rails
   recaptcha
   sass-rails (~> 5.0.0)
   select2-rails (~> 3.5)
