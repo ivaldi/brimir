@@ -290,7 +290,8 @@ en:
         priority: Priority
         assignee_id: Assignee
         created_at: Created at
-        to: To email address
+        orig_to: To email address
+        orig_cc: CC email address
 
       reply:
         from: From email address

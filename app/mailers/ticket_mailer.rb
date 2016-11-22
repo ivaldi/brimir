@@ -85,6 +85,9 @@ class TicketMailer < ActionMailer::Base
     end
 
     from_address = email.from.first
+    # yes this can get really long...
+    to_addresses = email.to.join ',' unless email.to.nil?
+    cc_addresses = email.cc.join ',' unless email.cc.nil?
     unless email.reply_to.blank?
       from_address = email.reply_to.first
     end
@@ -114,6 +117,8 @@ class TicketMailer < ActionMailer::Base
       # add new ticket
       ticket = Ticket.create({
         from: from_address,
+        orig_to: to_addresses,
+        orig_cc: cc_addresses,
         subject: subject,
         content: content,
         message_id: email.message_id,
