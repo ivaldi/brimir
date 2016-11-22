@@ -39,7 +39,7 @@ class Ticket < ActiveRecord::Base
   enum priority: [:unknown, :low, :medium, :high]
 
   after_update :log_status_change
-  after_create :create_status_change
+  after_create :create_status_change, :create_message_id_if_blank
 
   def self.active_labels(status)
     label_ids = where(status: Ticket.statuses[status])
@@ -172,6 +172,13 @@ class Ticket < ActiveRecord::Base
   protected
     def create_status_change
       status_changes.create! status: self.status
+    end
+
+    def create_message_id_if_blank
+      if self.message_id.blank?
+        self.message_id = Mail::MessageIdField.new.message_id
+        self.save!
+      end
     end
 
     def log_status_change

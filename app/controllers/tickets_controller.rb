@@ -156,7 +156,7 @@ class TicketsController < ApplicationController
     if params[:format] == 'json'
       @ticket = TicketMailer.receive(params[:message])
       if Tenant.current_tenant.notify_client_when_ticket_is_created
-        # we should always have a (defualt) template when option is selected
+        # we should always have a (default) template when option is selected
         template = EmailTemplate.by_kind('ticket_received').active.first
         unless template.nil?
           @reply = SystemReply.create_from_assignment(@ticket, template)
