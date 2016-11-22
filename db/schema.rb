@@ -162,6 +162,8 @@ ActiveRecord::Schema.define(version: 20161125000749) do
     t.string   "raw_message_content_type"
     t.integer  "raw_message_file_size"
     t.datetime "raw_message_updated_at"
+    t.string   "orig_to"
+    t.string   "orig_cc"
   end
 
   add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"
