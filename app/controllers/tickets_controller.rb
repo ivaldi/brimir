@@ -143,13 +143,15 @@ class TicketsController < ApplicationController
   end
 
   def new
-    @ticket = Ticket.new
-
-    unless current_user.nil?
-      @ticket.user = current_user
+    if ::Rails.application.config.ticket_is_open_to_the_world  == false && current_user.nil?
+      render :status => :forbidden, :text => "Access Denied"
+    else
+      @ticket = Ticket.new
+      unless current_user.nil?
+        @ticket.user = current_user
+      end
+      @email_addresses = EmailAddress.verified.ordered
     end
-
-    @email_addresses = EmailAddress.verified.ordered
   end
 
   def create
@@ -170,7 +172,9 @@ class TicketsController < ApplicationController
       @ticket = Ticket.new(ticket_params)
     end
 
-    if can_create_a_ticket(using_hook) && @ticket.save
+    if ::Rails.application.config.ticket_is_open_to_the_world  == false && current_user.nil? && using_hook == false
+      render :status => :forbidden, :text => "Access Denied"
+    elsif can_create_a_ticket(using_hook) && @ticket.save
       notify_incoming @ticket
 
       respond_to do |format|
