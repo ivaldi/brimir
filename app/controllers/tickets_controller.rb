@@ -28,6 +28,9 @@ class TicketsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create, if: 'request.format.json?'
 
   def show
+    # first time seeing this ticket?
+    @ticket.mark_read current_user if @ticket.is_unread? current_user
+
     @agents = User.agents
 
     draft = @ticket.replies
@@ -229,6 +232,15 @@ class TicketsController < ApplicationController
       else
         true
       end
+    end
+  end
+
+  def send_notification_email
+    if !@ticket.nil? && @ticket.save
+      # we set ticket as unread for every user
+      @ticket.unread_users << User.all
+      # signed in we notify
+      notify_incoming @ticket
     end
   end
 
