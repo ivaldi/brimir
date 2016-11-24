@@ -174,7 +174,7 @@ class TicketsController < ApplicationController
 
     if ::Rails.application.config.ticket_is_open_to_the_world  == false && current_user.nil? && using_hook == false
       render :status => :forbidden, :text => "Access Denied"
-    elsif can_create_a_ticket(using_hook) && @ticket.save
+    elsif can_create_a_ticket(using_hook) && save_current_ticket
       notify_incoming @ticket
 
       respond_to do |format|
@@ -226,6 +226,14 @@ class TicketsController < ApplicationController
         true
       end
     end
+  end
+
+  def save_current_ticket
+    label = params[:label]
+    if label
+      @ticket.labels.new(:name => label)
+    end
+    @ticket.save
   end
 
   def send_notification_email
