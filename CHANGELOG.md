@@ -6,6 +6,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Rule management interface has been improved, making it understandable for more users.
 - Tabindex for a better user experience when filling out ticket forms. Constributed by @git-jls.
+- Allows adding rules to filter on cc and actual to addresses. Constributed by @git-jls.
+
 
 ### Changed
 - Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.

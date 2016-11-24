@@ -64,7 +64,7 @@ class RuleTest < ActiveSupport::TestCase
 
         Rule.apply_all @ticket
 
-        assert_includes @ticket.labels.collect{|l| l.name}, label
+        assert_includes @ticket.labels.collect{|l| l.name.downcase}, label
       end
     end
   end
