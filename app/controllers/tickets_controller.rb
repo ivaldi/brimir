@@ -165,8 +165,15 @@ class TicketsController < ApplicationController
       end
     else
       @ticket = Ticket.new(ticket_params)
-      if current_user.nil? && !verify_recaptcha
-        return render 'new'
+      # no signed in user
+      if current_user.nil?
+        # are the captcha's present?
+        if Ticket.recaptcha_keys_present?
+          # if they are present and not verified
+          if !verify_recaptcha
+            return render 'new'
+          end
+        end
       end
     end
 

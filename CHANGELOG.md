@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed issue with tickets missing a message_id. Constributed by @git-jls.
 - Disable captcha check for incoming email posts. Constributed by @git-jls.
 - Fixed signature and logic around recaptcha. Constributed by @git-jls.
+- Fixed issue for non signed in users not able to create tickets from the web gui when the captcha is disabled. Constributed by @git-jls.
 
 ### Security
 
