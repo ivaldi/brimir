@@ -175,14 +175,6 @@ ActiveRecord::Schema.define(version: 20161125125817) do
   add_index "tickets", ["to_email_address_id"], name: "index_tickets_on_to_email_address_id"
   add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
-  create_table "user_tickets", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "ticket_id"
-  end
-
-  add_index "user_tickets", ["ticket_id"], name: "index_user_tickets_on_ticket_id"
-  add_index "user_tickets", ["user_id"], name: "index_user_tickets_on_user_id"
-
   create_table "users", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -35,7 +35,7 @@ class Ticket < ActiveRecord::Base
 
   has_many :status_changes, dependent: :destroy
 
-  has_and_belongs_to_many :unread_users, class_name: 'User', join_table: 'user_tickets'
+  has_and_belongs_to_many :unread_users, class_name: 'User'
 
   enum status: [:open, :closed, :deleted, :waiting, :merged]
   enum priority: [:unknown, :low, :medium, :high]

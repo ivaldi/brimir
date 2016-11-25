@@ -7,6 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Rule management interface has been improved, making it understandable for more users.
 - Tabindex for a better user experience when filling out ticket forms. Constributed by @git-jls.
 - Allows adding rules to filter on cc and actual to addresses. Constributed by @git-jls.
+- Unread ticket status, so the user can differentiate read/unread tickets in the inbox. Constributed by @git-jls.
 
 
 ### Changed
