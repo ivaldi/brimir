@@ -104,6 +104,14 @@
     jQuery('trix-editor').addClass('trix-editor');
     jQuery('trix-toolbar').addClass('trix-toolbar');
 
+    (function setTabIndexForTextArea() {
+      var index = jQuery('[tabindex]').last()[0].tabIndex;
+      var area  = jQuery('text-area');
+      var trix  = jQuery('trix-editor');
+      area.tabIndex = index+1;
+      trix.attr('tabIndex', index+1);
+    })();
+
     jQuery(document).foundation();
 
   });

@@ -38,4 +38,9 @@ module ApplicationHelper
     end
     super(*[collection_or_options, options].compact)
   end
+
+  def tabindex
+    @tabindex ||= 0
+    @tabindex += 1
+  end
 end
