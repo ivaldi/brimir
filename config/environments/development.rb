@@ -42,7 +42,4 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-
-  # The page to create a ticket is open to the world by default?
-  config.ticket_creation_is_open_to_the_world_by_default = true
 end
