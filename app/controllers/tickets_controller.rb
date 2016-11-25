@@ -143,7 +143,7 @@ class TicketsController < ApplicationController
   end
 
   def new
-    if ::Rails.application.config.ticket_is_open_to_the_world  == false && current_user.nil?
+    if Tenant.current_tenant.ticket_creation_is_open_to_the_world  == false && current_user.nil?
       render :status => :forbidden, :text => "Access Denied"
     else
       @ticket = Ticket.new
@@ -172,7 +172,7 @@ class TicketsController < ApplicationController
       @ticket = Ticket.new(ticket_params)
     end
 
-    if ::Rails.application.config.ticket_is_open_to_the_world  == false && current_user.nil? && using_hook == false
+    if Tenant.current_tenant.ticket_creation_is_open_to_the_world == false && current_user.nil? && using_hook == false
       render :status => :forbidden, :text => "Access Denied"
     elsif can_create_a_ticket(using_hook) && save_current_ticket
       notify_incoming @ticket

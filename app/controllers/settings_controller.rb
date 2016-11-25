@@ -43,7 +43,8 @@ class SettingsController < ApplicationController
       :first_reply_ignores_notified_agents,
       :notify_client_when_ticket_is_assigned_or_closed,
       :notify_user_when_account_is_created,
-      :notify_client_when_ticket_is_created
+      :notify_client_when_ticket_is_created,
+      :ticket_creation_is_open_to_the_world
     )
   end
 end
