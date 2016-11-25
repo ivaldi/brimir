@@ -169,6 +169,25 @@ class Ticket < ActiveRecord::Base
       !Recaptcha.configuration.private_key.blank?
   end
 
+  def save_with_label(label_name)
+    if label_name
+      label = Label.where(name: label_name).take
+      if label
+        self.labels << label
+        self.save
+      else
+        label = Label.new(name: label_name)
+        Ticket.transaction do
+          label.save
+          self.labels << label
+          self.save
+        end
+      end
+    else
+      self.save
+    end
+  end
+
   protected
     def create_status_change
       status_changes.create! status: self.status
