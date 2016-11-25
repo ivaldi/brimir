@@ -33,8 +33,10 @@
 
       <p class="text-s no-mb text-center mtl">
         <%= render 'devise/shared/links' %>
-        <span class="mrs mls">&middot;</span>
-        <%= link_to t(:new_ticket), new_ticket_path %>
+	<% if Tenant.current_tenant.ticket_creation_is_open_to_the_world %>
+          <span class="mrs mls">&middot;</span>
+          <%= link_to t(:new_ticket), new_ticket_path %>
+	<% end %>
         <span class="mrs mls">&middot;</span>
         <%= link_to 'GetBrimir.com', 'https://getbrimir.com' %>
       </p>
