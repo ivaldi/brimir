@@ -177,6 +177,12 @@ fr-FR:
   user_removed: Utilisateur supprimé
 
 # controllers/tickets
+  ticket_added_public: Votre demande a été transmise au service compétent, qui ne manquera pas de vous apporter une réponse dès que possible
+  ticket_added: Billet ajouté
+  ticket_updated: Billet mise à jour
+  ticket_error: Merci de bien remplir le formulaire correctement
+  captcha_error: Merci de résoudre le captcha correctement
+
   ticket_added: Billet ajouté
   ticket_updated: Billet mise à jour
 

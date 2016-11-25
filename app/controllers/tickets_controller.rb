@@ -143,17 +143,21 @@ class TicketsController < ApplicationController
   end
 
   def new
-    @ticket = Ticket.new
-
-    unless current_user.nil?
-      @ticket.user = current_user
+    if Tenant.current_tenant.ticket_creation_is_open_to_the_world  == false && current_user.nil?
+      render :status => :forbidden, :text => "Access Denied"
+    else
+      @ticket = Ticket.new
+      unless current_user.nil?
+        @ticket.user = current_user
+      end
+      @email_addresses = EmailAddress.verified.ordered
     end
-
-    @email_addresses = EmailAddress.verified.ordered
   end
 
   def create
+    # the hooks that is triggered when receiving an email.
     if params[:format] == 'json'
+      using_hook = true # we assume different policies to create a ticket when we receive an email
       @ticket = TicketMailer.receive(params[:message])
       if Tenant.current_tenant.notify_client_when_ticket_is_created
         # we should always have a (default) template when option is selected
@@ -164,76 +168,66 @@ class TicketsController < ApplicationController
         end
       end
     else
+      using_hook = false
       @ticket = Ticket.new(ticket_params)
-      if current_user.nil? && !verify_recaptcha
-        return render 'new'
-      end
     end
 
-    send_notification_email
-
-    respond_to do |format|
-      format.html do
-
-        respond_to_html
-
+    if Tenant.current_tenant.ticket_creation_is_open_to_the_world == false && current_user.nil? && using_hook == false
+      render :status => :forbidden, :text => "Access Denied"
+    elsif can_create_a_ticket(using_hook) && @ticket.save_with_label(params[:label])
+      notify_incoming @ticket
+      
+      respond_to do |format|
+        format.json { render json: @ticket, status: :created }
+        format.html {
+          if current_user.nil?
+            flash.now[:notice] = I18n::translate(:ticket_added_public)
+            render 'create'
+          else
+            redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
+          end
+        }
       end
-
-      format.json do
-
-        respond_to_json
-
+    else
+      respond_to do |format|
+        format.html {
+          @email_addresses = EmailAddress.verified.ordered
+          render 'new'
+        }
+        format.json {
+          if @ticket.nil?
+            render json: {}, status: :created  # bounce mail handled correctly
+          else
+            render json: @ticket, status: :unprocessable_entity
+          end 
+        }
       end
-
-      format.js { render }
     end
   end
 
   protected
-  def respond_to_json
-    if @ticket.nil?
-      render json: {}, status: :created  # bounce mail handled correctly
-    elsif @ticket.valid?
-      render json: @ticket, status: :created
+  def can_create_a_ticket(using_hook)
+    if @ticket.nil? || !@ticket.valid?
+      flash.now[:alert] = I18n::translate(:form_validation_error)
+      false
+    # relax policy for request coming from emails
+    elsif using_hook
+      true
+    # strict policy for request coming from the application      
     else
-      render json: @ticket, status: :unprocessable_entity
-    end
-  end
-
-  def respond_to_html
-    # not signed in
-    if current_user.nil?
-      # we need to verify the captcha
-      if verify_recaptcha || !Ticket.recaptcha_keys_present?
-        # we need to verify the ticket
-        if !@ticket.nil? && @ticket.valid?
-          render 'create'
-        else
-          # ticket validation failed
-          render_new
+      if Ticket.recaptcha_keys_present? && current_user.nil?
+        if verify_recaptcha
+          true
+        else          
+          flash.now[:alert] = I18n::translate(:captcha_error)
+          false
         end
       else
-        # captcha validation failed
-        render_new
+        true
       end
-    else
-      # signed in we redirect
-      redirect_to ticket_url(@ticket), notice: I18n::translate(:ticket_added)
     end
   end
-
-  def send_notification_email
-    if !@ticket.nil? && @ticket.save
-      # signed in we notify
-      notify_incoming @ticket
-    end
-  end
-
-  def render_new
-    @email_addresses = EmailAddress.verified.ordered
-    render 'new'
-  end
-
+  
   def notify_incoming(ticket)
     NotificationMailer.incoming_message ticket, params[:message]
   end

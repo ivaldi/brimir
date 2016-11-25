@@ -193,6 +193,9 @@ en:
 
 # controllers/tickets
   ticket_added: Ticket added
+  ticket_added_public: Your enquiry has been sent to the relevant service who will get back to you as soon as possible
+  form_validation_error: Malformed form. Please fill the form correctly
+  captcha_error: Please solve the captcha first
   ticket_updated: Ticket updated
 
 # controllers/tickets/deleted
