@@ -7,16 +7,16 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Rule management interface has been improved, making it understandable for more users.
 
 ### Changed
-
+- Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- Fixed issue with tickets missing a message_id. Constributed by @git-jls.
-- Disable captcha check for incoming email posts. Constributed by @git-jls.
-- Fixed signature and logic around recaptcha. Constributed by @git-jls.
-- Fixed issue for non signed in users not able to create tickets from the web gui when the captcha is disabled. Constributed by @git-jls.
+- Fixed issue with tickets missing a message_id. Contributed by @git-jls.
+- Disable captcha check for incoming email posts. Contributed by @git-jls.
+- Fixed signature and logic around recaptcha. Contributed by @git-jls.
+- Fixed issue for non signed in users not able to create tickets from the web gui when the captcha is disabled. Contributed by @git-jls.
 
 ### Security
 
