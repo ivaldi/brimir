@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased (to be announced)
 ### Added
 - Rule management interface has been improved, making it understandable for more users.
+- Tabindex for a better user experience when filling out ticket forms. Constributed by @git-jls.
 
 ### Changed
 - Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.
