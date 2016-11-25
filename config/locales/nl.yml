@@ -283,6 +283,7 @@ nl:
         priority: Prioriteit
         assignee_id: Toegewezen aan
         created_at: Aangemaakt op
+        to: Aan gevalideerd e-mailadres
         orig_to: Aan e-mailadres
         orig_cc: CC e-mailadres
 
