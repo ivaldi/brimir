@@ -17,6 +17,10 @@
     <% end %>
 
     <%= stylesheet_link_tag 'application-print', media: 'print' %>
+    <% if true %>
+      <%= stylesheet_link_tag Tenant.current_tenant.stylesheet_url %>
+    <% end %>
+
     <%= javascript_include_tag 'vendor/modernizr' %>
     <%= csrf_meta_tags %>
   </head>

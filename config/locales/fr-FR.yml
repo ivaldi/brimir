@@ -164,6 +164,7 @@ fr-FR:
   change_settings: Modifier les paramètres
   localization_settings: Paramètres de localisation
   permissions: Autorisations
+  look_and_feel: Présentation
 
 # controllers/settings
   settings_saved: Paramètres sauvegardés

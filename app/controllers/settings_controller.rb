@@ -44,7 +44,8 @@ class SettingsController < ApplicationController
       :notify_client_when_ticket_is_assigned_or_closed,
       :notify_user_when_account_is_created,
       :notify_client_when_ticket_is_created,
-      :ticket_creation_is_open_to_the_world
+      :ticket_creation_is_open_to_the_world,
+      :stylesheet_url
     )
   end
 end
