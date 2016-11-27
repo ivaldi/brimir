@@ -17,7 +17,7 @@
     <% end %>
 
     <%= stylesheet_link_tag 'application-print', media: 'print' %>
-    <% if true %>
+    <% if Tenant.current_tenant.stylesheet_url? %>
       <%= stylesheet_link_tag Tenant.current_tenant.stylesheet_url %>
     <% end %>
 
