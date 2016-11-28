@@ -197,6 +197,7 @@ en:
   form_validation_error: Malformed form. Please fill the form correctly
   captcha_error: Please solve the captcha first
   ticket_updated: Ticket updated
+  access_denied: Access denied
 
 # controllers/tickets/deleted
   trash_emptied: All tickets were deleted from the trash
