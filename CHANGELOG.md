@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.
+- Better coverage for ticket creation, now covering situations with captcha. Constributed by @git-jls.
+
 ### Deprecated
 
 ### Removed
