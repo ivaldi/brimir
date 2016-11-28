@@ -20,6 +20,7 @@ class TicketsController < ApplicationController
   include ActionView::Helpers::SanitizeHelper # dependency of HtmlTextHelper
 
   before_filter :authenticate_user!, except: [:create, :new]
+  before_action :current_tenant, only: [:update, :create, :new]
   load_and_authorize_resource :ticket, except: :create
   skip_authorization_check only: :create
 
@@ -112,7 +113,7 @@ class TicketsController < ApplicationController
         end
 
         # status replies
-        if Tenant.current_tenant.notify_client_when_ticket_is_assigned_or_closed
+        if @tenant.notify_client_when_ticket_is_assigned_or_closed
           if !@ticket.assignee.nil?
             if @ticket.previous_changes.include? :assignee_id
               StatusReply.create_from_assignment(@ticket, current_user).try(:notification_mails).try(:each, &:deliver_now)
@@ -143,8 +144,9 @@ class TicketsController < ApplicationController
   end
 
   def new
-    if Tenant.current_tenant.ticket_creation_is_open_to_the_world  == false && current_user.nil?
-      render :status => :forbidden, :text => "Access Denied"
+    if @tenant.ticket_creation_is_open_to_the_world  == false &&
+          current_user.nil?
+      render status: :forbidden, text: t(:access_denied)
     else
       @ticket = Ticket.new
       unless current_user.nil?
@@ -159,7 +161,7 @@ class TicketsController < ApplicationController
     if params[:format] == 'json'
       using_hook = true # we assume different policies to create a ticket when we receive an email
       @ticket = TicketMailer.receive(params[:message])
-      if Tenant.current_tenant.notify_client_when_ticket_is_created
+      if @tenant.notify_client_when_ticket_is_created
         # we should always have a (default) template when option is selected
         template = EmailTemplate.by_kind('ticket_received').active.first
         unless template.nil?
@@ -172,9 +174,11 @@ class TicketsController < ApplicationController
       @ticket = Ticket.new(ticket_params)
     end
 
-    if Tenant.current_tenant.ticket_creation_is_open_to_the_world == false && current_user.nil? && using_hook == false
-      render :status => :forbidden, :text => "Access Denied"
-    elsif can_create_a_ticket(using_hook) && @ticket.save_with_label(params[:label])
+    if @tenant.ticket_creation_is_open_to_the_world == false &&
+          current_user.nil? && !using_hook
+      render status: :forbidden, text: t(:access_denied)
+    elsif can_create_a_ticket(using_hook) &&
+        @ticket.save_with_label(params[:label])
       notify_incoming @ticket
 
       respond_to do |format|
@@ -226,6 +230,10 @@ class TicketsController < ApplicationController
         true
       end
     end
+  end
+
+  def current_tenant
+    @tenant = Tenant.current_tenant
   end
 
   def notify_incoming(ticket)
