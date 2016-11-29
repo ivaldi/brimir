@@ -108,9 +108,11 @@
     // tabindexes. You can remove this block of code if 
     // https://github.com/maclover7/trix/pull/19 is merged.
     (function setTabIndexForTextArea() {
+      var trix  = jQuery('trix-editor');
+      if (trix.length == 0)
+        return
       var index = jQuery('[tabindex]').last()[0].tabIndex;
       var area  = jQuery('text-area');
-      var trix  = jQuery('trix-editor');
       area.tabIndex = index+1;
       trix.attr('tabIndex', index+1);
     })();
