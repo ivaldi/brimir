@@ -80,6 +80,4 @@ Rails.application.configure do
 
   # The page to create a ticket is open to the world by default?
   config.ticket_creation_is_open_to_the_world_by_default = true
-
-  config.tenant_default_stylesheet_url = nil
 end
