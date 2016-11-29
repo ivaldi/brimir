@@ -77,7 +77,4 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
-
-  # The page to create a ticket is open to the world by default?
-  config.ticket_creation_is_open_to_the_world_by_default = true
 end

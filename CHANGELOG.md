@@ -5,18 +5,23 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased (to be announced)
 ### Added
 - Rule management interface has been improved, making it understandable for more users.
+- Tabindex for a better user experience when filling out ticket forms. Constributed by @git-jls.
+- Allows adding rules to filter on cc and actual to addresses. Constributed by @git-jls.
+
 
 ### Changed
+- Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.
+- Better coverage for ticket creation, now covering situations with captcha. Constributed by @git-jls.
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
-- Fixed issue with tickets missing a message_id. Constributed by @git-jls.
-- Disable captcha check for incoming email posts. Constributed by @git-jls.
-- Fixed signature and logic around recaptcha. Constributed by @git-jls.
-- Fixed issue for non signed in users not able to create tickets from the web gui when the captcha is disabled. Constributed by @git-jls.
+- Fixed issue with tickets missing a message_id. Contributed by @git-jls.
+- Disable captcha check for incoming email posts. Contributed by @git-jls.
+- Fixed signature and logic around recaptcha. Contributed by @git-jls.
+- Fixed issue for non signed in users not able to create tickets from the web gui when the captcha is disabled. Contributed by @git-jls.
 
 ### Security
 

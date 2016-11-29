@@ -198,6 +198,7 @@ en:
   form_validation_error: Malformed form. Please fill the form correctly
   captcha_error: Please solve the captcha first
   ticket_updated: Ticket updated
+  access_denied: Access denied
 
 # controllers/tickets/deleted
   trash_emptied: All tickets were deleted from the trash
@@ -291,7 +292,9 @@ en:
         priority: Priority
         assignee_id: Assignee
         created_at: Created at
-        to: To email address
+        to: To verified email address
+        orig_to: To email address
+        orig_cc: CC email address
 
       reply:
         from: From email address

@@ -193,7 +193,11 @@ nl:
 
 # controllers/tickets
   ticket_added: Ticket toegevoegd
+  ticket_added_public: Uw aanvraag is verzonden naar de relevante service, u krijgt zo spoedig mogelijk bericht
+  form_validation_error: Ongeldig formulier. Vul het formululier correct in alstublieft
+  captcha_error: Los de captcha op alstublieft
   ticket_updated: Ticket gewijzigd
+  access_denied: Toegang geweigerd
 
 # controllers/tickets/deleted
   trash_emptied: Alle tickets zijn uit de prullenbak verwijderd
@@ -283,7 +287,9 @@ nl:
         priority: Prioriteit
         assignee_id: Toegewezen aan
         created_at: Aangemaakt op
-        to: Aan e-mailadres
+        to: Aan gevalideerd e-mailadres
+        orig_to: Aan e-mailadres
+        orig_cc: CC e-mailadres
 
       reply:
         from: Van e-mailadres

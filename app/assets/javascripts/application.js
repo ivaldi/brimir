@@ -104,6 +104,17 @@
     jQuery('trix-editor').addClass('trix-editor');
     jQuery('trix-toolbar').addClass('trix-toolbar');
 
+    // this was added because the trix editor doesn't support
+    // tabindexes. You can remove this block of code if 
+    // https://github.com/maclover7/trix/pull/19 is merged.
+    (function setTabIndexForTextArea() {
+      var index = jQuery('[tabindex]').last()[0].tabIndex;
+      var area  = jQuery('text-area');
+      var trix  = jQuery('trix-editor');
+      area.tabIndex = index+1;
+      trix.attr('tabIndex', index+1);
+    })();
+
     jQuery(document).foundation();
 
   });

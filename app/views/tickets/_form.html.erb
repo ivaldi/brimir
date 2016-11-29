@@ -6,7 +6,7 @@
   <h3><%= t(:new_ticket) %></h3>
 
   <p>
-    <%= f.text_field :from %>
+    <%= f.text_field :from, tabindex: tabindex %>
   </p>
 
   <% if !current_user.nil? && current_user.agent? %>
@@ -14,7 +14,7 @@
       <% blank = @email_addresses.count == 0 ? EmailAddress.default_email : nil %>
       <%= f.label :to_email_address_id, t('activerecord.attributes.ticket.to'), class: 'ptm' %>
       <%= f.collection_select :to_email_address_id, @email_addresses, :id, :formatted,
-          include_blank: blank, label: false %>
+        {include_blank: blank, label: false}, tabindex: tabindex %>
     </p>
   <% end %>
 
@@ -23,7 +23,7 @@
   <% end %>
 
   <p>
-    <%= f.text_field :subject %>
+    <%= f.text_field :subject, tabindex: tabindex %>
   </p>
 
   <% if can? :update, @ticket %>
@@ -32,12 +32,12 @@
         options = [ ['unassigned', nil] ]
         User.agents.map.each {|u| options << [u.email, u.id]}
       %>
-      <%= f.select :assignee_id, options_for_select(options) %>
+    <%= f.select :assignee_id, options_for_select(options), {}, tabindex: tabindex %>
     </p>
 
     <p>
       <%= f.select :priority, options_for_select(
-          Ticket.priorities.keys.each { |k| [t(k), k] }, f.object.priority) %>
+        Ticket.priorities.keys.each { |k| [t(k), k] }, f.object.priority), {}, tabindex: tabindex %>
     </p>
   <% end %>
 
@@ -55,10 +55,10 @@
 
     <% if type == 'html' %>
       <%= f.trix_editor :content,
-          value: (f.object.content.nil? ? content : f.object.content) %>
+        value: (f.object.content.nil? ? content : f.object.content), tabindex: tabindex %>
     <% else %>
       <%= f.text_area :content,
-          value: (f.object.content.nil? ? content : f.object.content) %>
+        value: (f.object.content.nil? ? content : f.object.content), tabindex: tabindex %>
     <% end %>
   </p>
 
