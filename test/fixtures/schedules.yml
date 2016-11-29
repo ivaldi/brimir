@@ -1,0 +1,9 @@
+default:
+  work_days: sunday, monday, tuesday, wednesday, thursday, friday, saturday
+  start: <%= DateTime.parse('08:00') %>
+  end: <%= DateTime.parse('17:00') %>
+
+parttimer:
+  work_days: monday, tuesday, wednesday
+  start: <%= DateTime.parse('08:00') %>
+  end: <%= DateTime.parse('17:00') %>

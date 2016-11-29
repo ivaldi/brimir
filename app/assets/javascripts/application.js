@@ -101,6 +101,15 @@
 
     });
 
+    jQuery('input[type="radio"]').on('click', function() {
+      if(jQuery('#user_schedule_enabled_false').is(':checked')) {
+          jQuery('[data-work-can-wait]').hide("slow");
+      }
+      if(jQuery('#user_schedule_enabled_true').is(':checked')) {
+          jQuery('[data-work-can-wait]').show("slow");
+      }
+    });
+
     jQuery('trix-editor').addClass('trix-editor');
     jQuery('trix-toolbar').addClass('trix-toolbar');
 

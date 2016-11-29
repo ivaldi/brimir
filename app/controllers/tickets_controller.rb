@@ -160,7 +160,7 @@ class TicketsController < ApplicationController
   end
 
   def create
-    # the hooks that is triggered when receiving an email.
+    # the hook that is triggered when receiving an email.
     if params[:format] == 'json'
       using_hook = true # we assume different policies to create a ticket when we receive an email
       @ticket = TicketMailer.receive(params[:message])
@@ -217,10 +217,10 @@ class TicketsController < ApplicationController
     if @ticket.nil? || !@ticket.valid?
       flash.now[:alert] = I18n::translate(:form_validation_error)
       false
-    # relax policy for request coming from emails
+    # relax policy for requests coming from emails
     elsif using_hook
       true
-    # strict policy for request coming from the application
+    # strict policy for requests coming from the application
     else
       if Ticket.recaptcha_keys_present? && current_user.nil?
         if verify_recaptcha

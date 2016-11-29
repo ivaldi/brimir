@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
       foreign_key: 'assignee_id', dependent: :nullify
   has_many :notifications, dependent: :destroy
 
+  belongs_to :schedule, dependent: :destroy
+
   # identities for omniauth
   has_many :identities
 
@@ -34,6 +36,8 @@ class User < ActiveRecord::Base
 
   after_initialize :default_localization
   before_validation :generate_password
+
+  accepts_nested_attributes_for :schedule
 
   # All ldap users are agents by default, remove/comment this method if this
   # is not the intended behavior.
@@ -67,6 +71,13 @@ class User < ActiveRecord::Base
 
   def name
     super || name_from_email_address
+  end
+
+  def is_working?(time_in_hour = Time.zone.now.hour, weekday = Time.zone.now.wday)
+    #sanity checks for default behaviour
+    return true unless schedule_enabled # this is the default behaviour
+    return true if schedule.nil? # this is the default behaviour
+    schedule.is_during_work?(time_in_hour, weekday)
   end
 
   def name_from_email_address

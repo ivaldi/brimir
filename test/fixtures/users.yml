@@ -4,22 +4,28 @@ alice:
   signature: 'Greets, Alice'
   notify: true
   authentication_token: blabla
+  schedule: nil
 
 bob:
   email: bob@xxxx.com
   encrypted_password: $2a$10$R4kIaHGeNs1ssPGxh7pT/ulEx.P3umqE9CJKQKpDYgXuLVI6DKC9i #testtest
   authentication_token: blabla
+  schedule: default
 
 charlie:
   email: charlie@xxxx.com
   agent: true
   current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails
+  schedule_enabled: false
+  schedule: default
 
 dave:
   email: dave@xxxx.com
   current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails
+  schedule: default
 
 new_user:
   name: dummy
   email: dummy@person.net
   agent: false
+  schedule: default
