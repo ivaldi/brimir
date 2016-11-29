@@ -1,5 +1,13 @@
 # author: https://github.com/frenkel
 nl:
+  week_days:
+    sunday: Zondag
+    monday: Maandag
+    tuesday: Dinsdag
+    wednesday: Woensdag
+    thursday: Donderdag
+    friday: Vrijdag
+    saturday: Zaterdag
   language_name: Nederlands
 # layouts/application
   new_ticket: Nieuw ticket
@@ -14,6 +22,7 @@ nl:
   delete: Verwijderen
   close: Sluiten
   wait: Wachten
+  to: Tot
 
   joyride:
     tickets: Via deze knop kan iedereen nieuwe tickets aanmaken.
@@ -271,8 +280,12 @@ nl:
         locale: Taal
         time_zone: Tijdzone
         per_page: Tickets per pagina
+        schedule_enabled_false: Altijd 24/7/365
+        schedule_enabled_true: Werk kan wachten, alleen tijdens mijn dienst uren!
         prefer_plain_text: Verstuur en ontvang platte tekst reacties
         include_quote_in_reply: Voeg quote van originele bericht toe aan reactie
+        schedule:
+          work_days: Werkdagen
 
       ticket:
         from: Van e-mailadres
@@ -384,3 +397,4 @@ nl:
         notify_client_when_ticket_is_assigned_or_closed: Stuur een notificatie naar de klant als zijn ticket toegekend of gesloten wordt.
         notify_client_when_ticket_is_created: Stuur een notificatie naar de klant, wanneer zijn nieuw aangemaakte ticket is ontvangen.
         notify_user_when_account_is_created: Stuur de gebruiker een notificatie, wanneer een account is aangemaakt.
+

@@ -55,6 +55,10 @@
 .text-secondary{ color: #999 !important; }
 .text-default{ color: $body-font-color !important; }
 
+.label-helper{
+  margin-top: 20px !important;
+}
+
 .bg-white{
 	background-color: $white;
 }

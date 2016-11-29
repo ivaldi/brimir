@@ -30,6 +30,41 @@
       </div>
 
       <div class="medium-6 columns">
+
+        <h5><%= t(:notification_settings) %></h5>
+
+        <label>
+          <%= f.radio_button :schedule_enabled, false, label: false %>
+          <%= t('activerecord.attributes.user.schedule_enabled_false') %>
+        </label>
+
+        <label>
+          <%= f.radio_button :schedule_enabled, true, label: false %>
+          <%= t('activerecord.attributes.user.schedule_enabled_true') %>
+        </label>
+
+        <div data-work-can-wait style="<%= @user.schedule_enabled? ?
+            'display: block;' : 'display: none;' %>">
+          <%= f.fields_for :schedule, build_schedule_for_user do |ff|  %>
+            <div class="row">
+              <div class="small-5 medium-4 large-3 columns">
+                <%= custom_time_select @user.schedule, :start, { default: '08:00', name: 'user[schedule_attributes][start]', id: 'user_schedule_attributes_start' }, minutes: true  %>
+              </div>
+              <div class="small-2 medium-2 large-1 column">
+                <label class="inline text-center">
+                  <%= t(:to) %>
+                </label>
+              </div>
+              <div class="small-5 medium-4 large-3 columns end">
+                <%= custom_time_select @user.schedule, :end, { default: '08:00', name: 'user[schedule_attributes][end]', id: 'user_schedule_attributes_end' }, minutes: true  %>
+              </div>
+            </div>
+            <%= ff.collection_select :work_day_ids, WorkDay.all, :id,
+              :translated_day, { label: t('activerecord.attributes.user.schedule.work_days') },
+                { multiple: true, class: 'select2 mbl' } %>
+          <% end %>
+        </div>
+
         <h5><%= t(:email_settings) %></h5>
 
         <%= f.check_box :prefer_plain_text, tabindex: tabindex %>
@@ -42,7 +77,6 @@
 
           <%= f.trix_editor :signature, class: 'mbl', tabindex: tabindex %>
         <% end %>
-
 
         <% if can? :create, Labeling.new(labelable: @user) %>
           <h5><%= t(:access_control) %></h5>
@@ -75,3 +109,4 @@
     </div>
 
 <% end %>
+

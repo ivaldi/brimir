@@ -43,4 +43,40 @@ module ApplicationHelper
     @tabindex ||= 0
     @tabindex += 1
   end
+
+  def custom_time_select(object, method, attributes={}, options={})
+    return if object.nil?
+
+    attributes[:default] ||= ''
+    attributes[:name] ||= ''
+    attributes[:id] ||= ''
+
+    options[:minutes] ||= false
+    options[:military] ||= true
+
+    if options[:military]
+      range = 0..23
+    else
+      range = 0..11
+    end
+
+    result = object.try(:send, method)
+    result = result.hour if result.kind_of?(DateTime) || result.kind_of?(Time)
+    has_value = range.include?(result)
+
+    content_tag(:select, name: attributes[:name], id: attributes[:id]) do
+      result = "#{result}:00" if options[:minutes]
+      range.each do |e|
+        e = "#{e}:00" if options[:minutes]
+        if has_value && e == result
+          concat content_tag(:option, e, selected: :selected)
+        elsif e == options[:default]
+          concat content_tag(:option, e, selected: :selected)
+        else
+          concat content_tag(:option, e)
+        end
+      end
+    end
+  end
+
 end
