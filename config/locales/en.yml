@@ -179,6 +179,7 @@ en:
   localization_settings: Localization settings
   permissions: Permissions
   notification_settings: Notification settings
+  look_and_feel: Look and feel
 
 # controllers/settings
   settings_saved: Settings saved

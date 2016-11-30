@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125000749) do
+ActiveRecord::Schema.define(version: 20161125125817) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -138,7 +138,8 @@ ActiveRecord::Schema.define(version: 20161125000749) do
     t.boolean  "notify_user_when_account_is_created",             default: false
     t.boolean  "notify_client_when_ticket_is_created",            default: false
     t.integer  "email_template_id"
-    t.boolean  "ticket_creation_is_open_to_the_world"
+    t.boolean  "ticket_creation_is_open_to_the_world",            default: true
+    t.string   "stylesheet_url"
   end
 
   add_index "tenants", ["domain"], name: "index_tenants_on_domain", unique: true
