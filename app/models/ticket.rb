@@ -35,6 +35,8 @@ class Ticket < ActiveRecord::Base
 
   has_many :status_changes, dependent: :destroy
 
+  has_and_belongs_to_many :unread_users, class_name: 'User'
+
   enum status: [:open, :closed, :deleted, :waiting, :merged]
   enum priority: [:unknown, :low, :medium, :high]
 
@@ -122,6 +124,14 @@ class Ticket < ActiveRecord::Base
       Ability.new(user).can? :show, self
     end
     self.notified_user_ids = users.map(&:id)
+  end
+
+  def is_unread?(user)
+    unread_users.include? user
+  end
+
+  def mark_read(user)
+    unread_users.delete user
   end
 
   def status_times

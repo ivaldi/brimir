@@ -500,4 +500,61 @@ class TicketsControllerTest < ActionController::TestCase
     assert_response :success
     assert_match replies(:solution).content, @response.body
   end
+  
+  test 'should mark new ticket from MTA as unread for all users' do
+    assert_difference 'Ticket.count' do
+
+      post :create, message: @simple_email, format: :json
+
+      assert_response :success
+
+      ticket = Ticket.last
+      assert_not_nil ticket.unread_users.nil?
+    end
+  end
+
+  test 'should mark new ticket as unread for all users' do
+    assert_difference 'Ticket.count' do
+      post :create, ticket: {
+          from: 'test@test.nl',
+          content: @ticket.content,
+          subject: @ticket.subject,
+      }
+
+      assert_response :success
+
+      ticket = Ticket.last
+
+      assert_not_nil ticket.unread_users.nil?
+    end
+  end
+
+  test 'should mark new ticket as unread for all users when posted from MTA' do
+    assert_difference 'Ticket.count' do
+
+      post :create, message: @simple_email, format: :json
+
+      assert_response :success
+
+      ticket = Ticket.last
+      assert_not_nil ticket.unread_users
+    end
+  end
+
+  test 'should mark ticket as read when clicked' do
+    user = users(:alice)
+    sign_in user
+    ticket = Ticket.last
+    ticket.unread_users << User.all
+    assert_difference 'Ticket.last.unread_users.count', -1 do
+
+      assert_not_nil ticket.unread_users
+
+      get :show, id: ticket.id
+
+      assert_response :success
+
+      assert_not ticket.unread_users.include?(user)
+    end
+  end
 end

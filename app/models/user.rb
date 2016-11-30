@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   # identities for omniauth
   has_many :identities
 
+  has_and_belongs_to_many :unread_tickets, class_name: 'Ticket'
+
   after_initialize :default_localization
   before_validation :generate_password
 
