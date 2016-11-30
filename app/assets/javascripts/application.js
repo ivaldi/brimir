@@ -110,7 +110,7 @@
     (function setTabIndexForTextArea() {
       var trix  = jQuery('trix-editor');
       if (trix.length == 0)
-        return
+        return;
       var index = jQuery('[tabindex]').last()[0].tabIndex;
       var area  = jQuery('text-area');
       area.tabIndex = index+1;
