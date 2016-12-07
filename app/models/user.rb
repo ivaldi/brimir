@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       foreign_key: 'assignee_id', dependent: :nullify
   has_many :notifications, dependent: :destroy
 
-  belongs_to :schedule, dependent: :destroy
+  belongs_to :schedule
 
   # identities for omniauth
   has_many :identities

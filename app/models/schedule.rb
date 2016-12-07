@@ -1,6 +1,7 @@
 class Schedule < ActiveRecord::Base
 
-  has_one :user
+  has_one :user, dependent: :destroy
+
   has_and_belongs_to_many :work_days
 
   after_initialize :prefill_schedule, unless: :can_be_filled?
