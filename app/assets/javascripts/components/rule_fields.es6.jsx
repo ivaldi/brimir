@@ -1,7 +1,7 @@
 class RuleFields extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { operation: 'assign_label' };
+    this.state = { operation: this.props.action_operation };
     /* XXX Why can't we use ES6 fat-arrow for this? Gem too old? */
     this.operationSelected = this.operationSelected.bind(this);
   }
@@ -19,7 +19,8 @@ class RuleFields extends React.Component {
   }
 
   render () {
-    let action_value = <select name="rule[action_value]">
+    let action_value = <select name="rule[action_value]"
+            value={this.props.action_value}>
       {this.options(this.state.operation)}
     </select>;
 
@@ -33,7 +34,9 @@ class RuleFields extends React.Component {
         <label htmlFor="rule[action_operation]">
           {this.props.label_action_operation}
         </label>
-        <select onChange={this.operationSelected} name="rule[action_operation]">
+        <select onChange={this.operationSelected}
+            name="rule[action_operation]"
+            value={this.props.action_operation}>
           {actions}
         </select>
         <label htmlFor="rule[action_value]">
