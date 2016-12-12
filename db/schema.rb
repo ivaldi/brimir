@@ -154,8 +154,6 @@ ActiveRecord::Schema.define(version: 20161212081319) do
     t.integer  "email_template_id"
     t.boolean  "ticket_creation_is_open_to_the_world"
     t.string   "stylesheet_url"
-    t.boolean  "always_notify_me",                                default: true
-    t.boolean  "work_can_wait",                                   default: false
   end
 
   add_index "tenants", ["domain"], name: "index_tenants_on_domain", unique: true
