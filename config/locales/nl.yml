@@ -1,13 +1,5 @@
 # author: https://github.com/frenkel
 nl:
-  week_days:
-    sunday: Zondag
-    monday: Maandag
-    tuesday: Dinsdag
-    wednesday: Woensdag
-    thursday: Donderdag
-    friday: Vrijdag
-    saturday: Zaterdag
   language_name: Nederlands
 # layouts/application
   new_ticket: Nieuw ticket
@@ -284,8 +276,6 @@ nl:
         schedule_enabled_true: Werk kan wachten, alleen tijdens mijn dienst uren!
         prefer_plain_text: Verstuur en ontvang platte tekst reacties
         include_quote_in_reply: Voeg quote van originele bericht toe aan reactie
-        schedule:
-          work_days: Werkdagen
 
       ticket:
         from: Van e-mailadres

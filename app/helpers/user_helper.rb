@@ -24,10 +24,12 @@ module UserHelper
     # build schedule
     @user.build_schedule
 
-    @user.schedule.add_default_work_days
-
     # we need this
     @user.schedule
+  end
+
+  def localize_day_name(weekday)
+    t('date.day_names')[weekday].downcase
   end
 
 end

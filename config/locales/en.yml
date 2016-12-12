@@ -1,12 +1,4 @@
 en:
-  week_days:
-    sunday: Sunday
-    monday: Monday
-    tuesday: Tuesday
-    wednesday: Wednesday
-    thursday: Thursday
-    friday: Friday
-    saturday: Saturday
   language_name: English
 # layouts/application
   new_ticket: New ticket
@@ -288,8 +280,6 @@ en:
         schedule_enabled_true: Work can wait, only during my work hours!
         prefer_plain_text: Send and receive plain text replies
         include_quote_in_reply: Include quote of original message in reply
-        schedule:
-          work_days: Working days
 
       ticket:
         from: From email address

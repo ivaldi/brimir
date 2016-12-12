@@ -38,7 +38,13 @@ module UsersStrongParams
           :id,
           :start,
           :end,
-          work_day_ids: []
+          :monday,
+          :tuesday,
+          :wednesday,
+          :thursday,
+          :friday,
+          :saturday,
+          :sunday,
         ]
     )
 

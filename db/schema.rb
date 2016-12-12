@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201110620) do
+ActiveRecord::Schema.define(version: 20161212081319) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -116,15 +116,17 @@ ActiveRecord::Schema.define(version: 20161201110620) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.datetime "start"
     t.datetime "end"
-  end
-
-  create_table "schedules_work_days", id: false, force: :cascade do |t|
-    t.integer "schedule_id", null: false
-    t.integer "work_day_id", null: false
+    t.boolean  "monday",     default: true,  null: false
+    t.boolean  "tuesday",    default: true,  null: false
+    t.boolean  "wednesday",  default: true,  null: false
+    t.boolean  "thursday",   default: true,  null: false
+    t.boolean  "friday",     default: true,  null: false
+    t.boolean  "saturday",   default: false, null: false
+    t.boolean  "sunday",     default: false, null: false
   end
 
   create_table "status_changes", force: :cascade do |t|
@@ -224,11 +226,5 @@ ActiveRecord::Schema.define(version: 20161201110620) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   add_index "users", ["schedule_id"], name: "index_users_on_schedule_id"
-
-  create_table "work_days", force: :cascade do |t|
-    t.integer  "day"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
 end
