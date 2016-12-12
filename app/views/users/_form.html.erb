@@ -48,7 +48,15 @@
           <%= f.fields_for :schedule, build_schedule_for_user do |ff|  %>
             <div class="row">
               <div class="small-5 medium-4 large-3 columns">
-                <%= custom_time_select @user.schedule, :start, { name: 'user[schedule_attributes][start]', id: 'user_schedule_attributes_start' }, minutes: true, default: '8:00' %>
+                <%
+                  selected = '8:00'
+                  unless ff.object.start.nil?
+                    selected = "#{ff.object.start.hour}:00"
+                  end
+                %>
+                <%= ff.select :start,
+                    options_for_select((0..23).map { |n| "#{n}:00" }, selected),
+                    label: false %>
               </div>
               <div class="small-2 medium-2 large-1 column">
                 <label class="inline text-center">
@@ -56,7 +64,15 @@
                 </label>
               </div>
               <div class="small-5 medium-4 large-3 columns end">
-                <%= custom_time_select @user.schedule, :end, { name: 'user[schedule_attributes][end]', id: 'user_schedule_attributes_end' }, minutes: true, default: '17:00' %>
+                <%
+                  selected = '18:00'
+                  unless ff.object.end.nil?
+                    selected = "#{ff.object.end.hour}:00"
+                  end
+                %>
+                <%= ff.select :end,
+                    options_for_select((0..23).map { |n| "#{n}:00" }, selected),
+                    label: false %>
               </div>
             </div>
             <label class="checkbox-helper">
