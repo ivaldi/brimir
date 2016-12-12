@@ -1,16 +1,15 @@
 <%= form_for @email_template do |f| %>
   <div class="row mt">
     <div class="large-6 columns">
-      <%= f.text_field :name %>
-      <%= f.select :kind, EmailTemplate.kinds.keys.map { |k| [k.humanize, k] } %>
+      <%= f.text_field :name, tabindex: tabindex %>
+      <%= f.select :kind, EmailTemplate.kinds.keys.map { |k| [k.humanize, k] }, {}, tabindex: tabindex %>
       <%= f.label :message do %>
         <%= t('activerecord.attributes.email_template.message') %>
         <%= content_tag :span, content_tag(:i, '', class: 'fa fa-info-circle'),
           data: { tooltip: '' }, class: 'has-tip', title: t(:tooltip) %>
       <% end %>
-      <%= f.trix_editor :message, label: false %>
+      <%= f.trix_editor :message, label: false, tabindex: tabindex %>
     </div>
-    <div class="large-6 columns" id="preview-area"></div>
   </div>
 
   <div class="row">
