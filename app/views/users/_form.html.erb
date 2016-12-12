@@ -8,39 +8,39 @@
         <p><%= t(:only_fill_in_passwords_when_modifying) %></p>
 
         <% if can? :create, User %>
-            <%= f.text_field :email %>
+            <%= f.text_field :email, tabindex: tabindex %>
         <% end %>
 
-        <%= f.text_field :name %>
+        <%= f.text_field :name, tabindex: tabindex %>
 
-        <%= f.password_field :password %>
+        <%= f.password_field :password, tabindex: tabindex %>
 
-        <%= f.password_field :password_confirmation %>
+        <%= f.password_field :password_confirmation, tabindex: tabindex %>
 
         <% if can? :create, User %>
-            <%= f.check_box :agent, label: t(:user_is_an_agent) %>
+            <%= f.check_box :agent, label: t(:user_is_an_agent), tabindex: tabindex %>
         <% end %>
 
-        <%= f.select :time_zone, @time_zones %>
+        <%= f.select :time_zone, @time_zones, {}, tabindex: tabindex %>
 
-        <%= f.select :locale, @locales %>
+        <%= f.select :locale, @locales, {}, tabindex: tabindex %>
 
-        <%= f.select :per_page, [10, 20, 30, 50, 75, 100] %>
+        <%= f.select :per_page, [10, 20, 30, 50, 75, 100], {}, tabindex: tabindex %>
 
       </div>
 
       <div class="medium-6 columns">
         <h5><%= t(:email_settings) %></h5>
 
-        <%= f.check_box :prefer_plain_text %>
-        <%= f.check_box :include_quote_in_reply %>
+        <%= f.check_box :prefer_plain_text, tabindex: tabindex %>
+        <%= f.check_box :include_quote_in_reply, tabindex: tabindex %>
 
         <% if @user.agent? %>
 
           <%= f.check_box :notify,
-              label: t(:receive_new_ticket_notifications) %>
+              label: t(:receive_new_ticket_notifications), tabindex: tabindex %>
 
-          <%= f.trix_editor :signature, class: 'mbl' %>
+          <%= f.trix_editor :signature, class: 'mbl', tabindex: tabindex %>
         <% end %>
 
 
@@ -50,7 +50,7 @@
           <p><%= t(:have_access_to_label) %></p>
 
           <%= f.collection_select :label_ids, @labels, :id, :name, {}, {
-              multiple: true, class: 'select2 mbl' } %>
+              multiple: true, class: 'select2 mbl', tabindex: tabindex } %>
         <% end %>
 
         <% unless Rails.application.secrets[:google_client_id].blank? %>
