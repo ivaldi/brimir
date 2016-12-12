@@ -402,9 +402,11 @@ class TicketsControllerTest < ActionController::TestCase
     agent.save!
 
     agent.reload
-    assert_not_nil agent.schedule
-    assert_equal 3, agent.schedule.work_days.count
     assert agent.schedule_enabled
+    assert_not_nil agent.schedule
+    assert agent.schedule.monday?
+    assert agent.schedule.tuesday?
+    assert agent.schedule.wednesday?
 
     new_time = Time.zone.parse('2016-12-03 08:00') # is a saturday, weekend yay!
     Timecop.freeze(new_time)
@@ -577,9 +579,11 @@ class TicketsControllerTest < ActionController::TestCase
     agent.save!
 
     agent.reload
-    assert_not_nil agent.schedule
-    assert_equal 3, agent.schedule.work_days.count
     assert agent.schedule_enabled
+    assert_not_nil agent.schedule
+    assert agent.schedule.monday?
+    assert agent.schedule.tuesday?
+    assert agent.schedule.wednesday?
 
     new_time = Time.zone.parse('2016-12-03 08:00') # is a saturday, weekend yay!
     Timecop.freeze(new_time)
@@ -769,9 +773,11 @@ class TicketsControllerTest < ActionController::TestCase
     agent.reload
     sign_in agent
 
-    assert_not_nil agent.schedule
-    assert_equal 3, agent.schedule.work_days.count
     assert agent.schedule_enabled
+    assert_not_nil agent.schedule
+    assert agent.schedule.monday?
+    assert agent.schedule.tuesday?
+    assert agent.schedule.wednesday?
 
     new_time = Time.zone.parse('2016-12-03 08:00') # is a saturday, weekend yay!
     Timecop.freeze(new_time)

@@ -56,7 +56,7 @@
 .text-default{ color: $body-font-color !important; }
 
 .label-helper{
-  margin-top: 20px !important;
+	margin-top: 20px !important;
 }
 
 .bg-white{
@@ -71,3 +71,27 @@
 	-ms-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
+
+.checkbox-helper {
+	overflow: hidden;
+	display: inline-block;
+	span{
+		line-height: 30px;
+		display: block;
+		width: 50px;
+		border-radius: 3px;
+		text-align: center;
+		border: 1px solid #eee;
+	}
+	input{
+		opacity: 0;
+		position: absolute;
+		top: -50px;
+	}
+	input:checked + span {
+		border-color:$secondary-color;
+		background: $secondary-color;
+		color: $primary-color;
+	}
+}
+
