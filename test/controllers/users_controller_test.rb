@@ -23,6 +23,10 @@ class UsersControllerTest < ActionController::TestCase
     @bob = users(:bob)
   end
 
+  teardown do
+    Time.zone = 'Etc/UTC'
+  end
+
   test 'should get index' do
     sign_in @alice
 
@@ -131,4 +135,33 @@ class UsersControllerTest < ActionController::TestCase
       assert_redirected_to users_url
     end
   end
+
+  test 'should create a schedule' do
+    sign_in @alice
+    assert_nil @alice.schedule
+
+    assert_not @alice.schedule_enabled
+
+    assert_difference 'Schedule.count' do
+      patch :update, id: @alice.id, user: {
+        email: @alice.email,
+        schedule_enabled: true,
+        schedule_attributes: {
+          # this is a hidden field used to pass the timezone
+          time_zone: @alice.time_zone,
+          start: '08:00',
+          end: '18:00'
+        }
+      }
+      assert_redirected_to users_url
+    end
+
+      @alice.reload
+
+      Time.zone = 'Amsterdam'
+
+      assert_equal @alice.schedule.start, Time.zone.parse('08:00')
+      assert_equal @alice.schedule.end, Time.zone.parse('18:00')
+  end
+
 end

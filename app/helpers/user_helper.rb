@@ -17,12 +17,10 @@
 # helpers used for EmailTemplate views
 module UserHelper
   def build_schedule_for_user
-    # sanity checks
+    # sanity check
     return if @user.nil?
-    return unless @user.schedule.nil?
 
-    # build schedule
-    @user.build_schedule
+    @user.schedule ||= @user.build_schedule
 
     # we need this
     @user.schedule
