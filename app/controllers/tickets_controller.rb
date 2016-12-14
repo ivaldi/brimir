@@ -147,7 +147,7 @@ class TicketsController < ApplicationController
   end
 
   def new
-    if @tenant.ticket_creation_is_open_to_the_world  == false &&
+    if !@tenant.ticket_creation_is_open_to_the_world? &&
           current_user.nil?
       render status: :forbidden, text: t(:access_denied)
     else

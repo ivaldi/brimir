@@ -24,6 +24,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Disable captcha check for incoming email posts. Contributed by @git-jls.
 - Fixed signature and logic around recaptcha. Contributed by @git-jls.
 - Fixed issue for non signed in users not able to create tickets from the web gui when the captcha is disabled. Contributed by @git-jls.
+- Fixed issue with zone not being properly taken into account if schedule is set and ticket is created. by @git-jls.
 - Fixed issue with save_with_label method being called on a reply. Constributed by @git-jls.
 
 ### Security
