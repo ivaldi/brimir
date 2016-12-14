@@ -177,11 +177,11 @@ class TicketsController < ApplicationController
       @ticket = Ticket.new(ticket_params)
     end
 
-    if @tenant.ticket_creation_is_open_to_the_world == false &&
+    if !@tenant.ticket_creation_is_open_to_the_world? &&
           current_user.nil? && !using_hook
       render status: :forbidden, text: t(:access_denied)
-    elsif can_create_a_ticket(using_hook) &&
-        @ticket.save_with_label(params[:label])
+    elsif can_create_a_ticket(using_hook) && 
+        (@ticket.is_a?(Reply) || @ticket.save_with_label(params[:label]))
       notify_incoming @ticket
 
       respond_to do |format|
