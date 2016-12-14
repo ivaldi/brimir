@@ -6,8 +6,6 @@ default:
   thursday: true
   friday: true
   saturday: true
-  start: <%= DateTime.parse('08:00') %>
-  end: <%= DateTime.parse('17:00') %>
 
 parttimer:
   sunday: false
@@ -17,5 +15,13 @@ parttimer:
   thursday: false
   friday: false
   saturday: false
-  start: <%= DateTime.parse('08:00') %>
-  end: <%= DateTime.parse('17:00') %>
+
+empty:
+  sunday: false
+  monday: false
+  tuesday: false
+  wednesday: false
+  thursday: false
+  friday: false
+  saturday: false
+

@@ -124,8 +124,7 @@ class Ticket < ActiveRecord::Base
       Ability.new(user).can? :show, self
     end
     self.notified_user_ids = users.map do |user|
-      time_with_zone_for_user = Time.now.in_time_zone(user.time_zone)
-      user.id if user.is_working?(time_with_zone_for_user.hour, time_with_zone_for_user.wday)
+      user.id if user.is_working?
     end
   end
 

@@ -273,7 +273,7 @@ nl:
         time_zone: Tijdzone
         per_page: Tickets per pagina
         schedule_enabled_false: Altijd 24/7/365
-        schedule_enabled_true: Werk kan wachten, alleen tijdens mijn dienst uren!
+        schedule_enabled_true: Werk kan wachten, alleen tijdens mijn diensturen!
         prefer_plain_text: Verstuur en ontvang platte tekst reacties
         include_quote_in_reply: Voeg quote van originele bericht toe aan reactie
 

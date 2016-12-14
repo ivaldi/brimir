@@ -73,11 +73,11 @@ class User < ActiveRecord::Base
     super || name_from_email_address
   end
 
-  def is_working?(time_in_hour = Time.zone.now.hour, weekday = Time.zone.now.wday)
+  def is_working?
     #sanity checks for default behaviour
     return true unless schedule_enabled # this is the default behaviour
     return true if schedule.nil? # this is the default behaviour
-    schedule.is_during_work?(time_in_hour, weekday)
+    schedule.is_during_work?(Time.now.in_time_zone(self.time_zone))
   end
 
   def name_from_email_address

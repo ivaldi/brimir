@@ -19,9 +19,7 @@ require 'test_helper'
 class TicketsControllerTest < ActionController::TestCase
 
   setup do
-
     @ticket = tickets(:problem)
-
     # read_fixture doesn't work in ActionController::TestCase, so use File.new
     @simple_email = File.new('test/fixtures/ticket_mailer/simple').read
   end
@@ -338,17 +336,21 @@ class TicketsControllerTest < ActionController::TestCase
     agent = users(:charlie)
 
     agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '23:00'
 
     agent.save!
-
     agent.reload
+
     assert_not_nil agent.schedule
     assert agent.schedule_enabled
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('23:00')
 
-    new_time = Time.zone.parse('2016-12-02 08:00') # it is friday
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-02 00:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
@@ -368,16 +370,21 @@ class TicketsControllerTest < ActionController::TestCase
     agent = users(:charlie)
 
     agent.schedule_enabled = true
-    agent.save!
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '23:00'
 
+    agent.save!
     agent.reload
+
     assert_not_nil agent.schedule
     assert agent.schedule_enabled
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('23:00')
 
-    new_time = Time.zone.parse('2016-12-02 13:00') # it is a friday
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-02 23:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
@@ -396,22 +403,27 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should not notify agent with schedule enabled and day not within working days range when ticked created from MTA' do
     agent = users(:charlie)
 
-    agent.schedule_enabled = true
 
     agent.schedule = schedules(:parttimer) # charlie is now a parttimer
-    agent.save!
+    agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '23:00'
 
+    agent.save!
     agent.reload
+
     assert agent.schedule_enabled
     assert_not_nil agent.schedule
     assert agent.schedule.monday?
     assert agent.schedule.tuesday?
     assert agent.schedule.wednesday?
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('23:00')
 
-    new_time = Time.zone.parse('2016-12-03 08:00') # is a saturday, weekend yay!
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-03 00:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
       assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count-1 do
         assert_difference 'Ticket.count' do
           post :create, message: @simple_email, format: :json
@@ -423,21 +435,25 @@ class TicketsControllerTest < ActionController::TestCase
       refute_equal 0, assigns(:ticket).notified_users.count
   end
 
-  test 'should not notify agent with schedule enabled and time within range working hours when ticked created from MTA' do
+  test 'should not notify agent with schedule enabled and time not within range working hours when ticked created from MTA' do
     agent = users(:charlie)
 
     agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '22:00'
 
     agent.save!
-
     agent.reload
+
     assert_not_nil agent.schedule
     assert agent.schedule_enabled
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('22:00')
 
-    new_time = Time.zone.parse('2016-12-02 19:00') # it's friday after 17:00, weekend yay!
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-02 23:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count-1 do
       assert_difference 'Ticket.count' do
@@ -507,17 +523,21 @@ class TicketsControllerTest < ActionController::TestCase
     agent = users(:charlie)
 
     agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '23:00'
 
     agent.save!
-
     agent.reload
+
     assert_not_nil agent.schedule
     assert agent.schedule_enabled
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('23:00')
 
-    new_time = Time.zone.parse('2016-12-02 08:00') # it is friday
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-02 00:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
@@ -541,16 +561,21 @@ class TicketsControllerTest < ActionController::TestCase
     agent = users(:charlie)
 
     agent.schedule_enabled = true
-    agent.save!
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '23:00'
 
+    agent.save!
     agent.reload
+
     assert_not_nil agent.schedule
     assert agent.schedule_enabled
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('23:00')
 
-    new_time = Time.zone.parse('2016-12-02 13:00') # it is a friday
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-02 23:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
@@ -573,22 +598,27 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should not notify agent with schedule enabled and day not within working days range when ticked created' do
     agent = users(:charlie)
 
-    agent.schedule_enabled = true
-
     agent.schedule = schedules(:parttimer) # charlie is now a parttimer
-    agent.save!
+    agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '23:00'
 
+    agent.save!
     agent.reload
+
     assert agent.schedule_enabled
     assert_not_nil agent.schedule
     assert agent.schedule.monday?
     assert agent.schedule.tuesday?
     assert agent.schedule.wednesday?
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('23:00')
 
-    new_time = Time.zone.parse('2016-12-03 08:00') # is a saturday, weekend yay!
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-03 00:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
+
       assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count-1 do
         assert_difference 'Ticket.count' do
           post :create, ticket: {
@@ -604,21 +634,25 @@ class TicketsControllerTest < ActionController::TestCase
       refute_equal 0, assigns(:ticket).notified_users.count
   end
 
-  test 'should not notify agent with schedule enabled and time within range working hours when ticked created' do
+  test 'should not notify agent with schedule enabled and time not within range working hours when ticked created' do
     agent = users(:charlie)
 
     agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '22:00'
 
     agent.save!
-
     agent.reload
+
     assert_not_nil agent.schedule
     assert agent.schedule_enabled
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('22:00')
 
-    new_time = Time.zone.parse('2016-12-02 19:00') # it's friday after 17:00, weekend yay!
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-02 23:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count-1 do
       assert_difference 'Ticket.count' do
@@ -695,19 +729,22 @@ class TicketsControllerTest < ActionController::TestCase
     agent = users(:charlie)
 
     agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '23:00'
 
     agent.save!
-
     agent.reload
-    sign_in agent
 
+    sign_in agent
     assert_not_nil agent.schedule
     assert agent.schedule_enabled
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('23:00')
 
-    new_time = Time.zone.parse('2016-12-02 08:00') # it is friday
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-02 00:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
@@ -730,19 +767,24 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should notify agent with schedule enabled and time within range working hours when ticked created with logged in agent' do
     agent = users(:charlie)
 
+    # we need to stub the start and end 
     agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '23:00'
+
     agent.save!
-
     agent.reload
-    sign_in agent
 
+    sign_in agent
     assert_not_nil agent.schedule
     assert agent.schedule_enabled
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('23:00')
 
-    new_time = Time.zone.parse('2016-12-02 13:00') # it is a friday
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-02 00:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
@@ -765,24 +807,27 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should not notify agent with schedule enabled and day not within working days range when ticked created with logged in agent' do
     agent = users(:charlie)
 
-    agent.schedule_enabled = true
-
     agent.schedule = schedules(:parttimer) # charlie is now a parttimer
+    agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '23:00'
+
     agent.save!
-
     agent.reload
-    sign_in agent
 
+    sign_in agent
     assert agent.schedule_enabled
     assert_not_nil agent.schedule
     assert agent.schedule.monday?
     assert agent.schedule.tuesday?
     assert agent.schedule.wednesday?
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('23:00')
 
-    new_time = Time.zone.parse('2016-12-03 08:00') # is a saturday, weekend yay!
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-03 00:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
       assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count-1 do
         assert_difference 'Ticket.count' do
           post :create, ticket: {
@@ -798,23 +843,26 @@ class TicketsControllerTest < ActionController::TestCase
       refute_equal 0, assigns(:ticket).notified_users.count
   end
 
-  test 'should not notify agent with schedule enabled and time within range working hours when ticked created with logged in agent' do
+  test 'should not notify agent with schedule enabled and time not within range working hours when ticked created with logged in agent' do
     agent = users(:charlie)
 
     agent.schedule_enabled = true
+    agent.schedule.start = '00:00'
+    agent.schedule.end = '22:00'
 
     agent.save!
-
     agent.reload
-    sign_in agent
 
+    sign_in agent
     assert_not_nil agent.schedule
     assert agent.schedule_enabled
+    assert_equal agent.schedule.start, Time.find_zone('UTC').parse('00:00')
+    assert_equal agent.schedule.end, Time.find_zone('UTC').parse('22:00')
 
-    new_time = Time.zone.parse('2016-12-02 19:00') # it's friday after 17:00, weekend yay!
+    new_time = Time.find_zone(agent.time_zone).parse('2016-12-02 23:00')
     Timecop.freeze(new_time)
 
-    assert_equal new_time, Time.zone.now # we succesfully froze
+    assert_equal new_time, Time.now
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count-1 do
       assert_difference 'Ticket.count' do

@@ -16,8 +16,38 @@
 
 require 'test_helper'
 
-class AttachmentTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+class ScheduleTest < ActiveSupport::TestCase
+
+  test 'should parse and write start' do
+    # stub a schedule
+    schedule = schedules(:empty)
+
+    assert_nil schedule.start 
+
+    schedule.start = '08:00'
+
+    schedule.save!
+    schedule.reload
+
+    assert_equal schedule.start, Time.find_zone('UTC').parse('08:00')
+    assert_equal schedule.start.hour, 8
+
+  end
+
+  test 'should parse and write end' do
+
+    # stub a schedule
+    schedule = schedules(:empty)
+
+    assert_nil schedule.end
+
+    schedule.end = '18:00'
+
+    schedule.save!
+    schedule.reload
+
+    assert_equal schedule.end, Time.find_zone('UTC').parse('18:00')
+    assert_equal schedule.end.hour, 18
+  end
+
 end
