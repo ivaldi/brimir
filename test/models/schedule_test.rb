@@ -18,10 +18,6 @@ require 'test_helper'
 
 class ScheduleTest < ActiveSupport::TestCase
 
-  teardown do
-    Time.zone = 'Etc/UTC'
-  end
-
   test 'should parse and write start' do
     # stub a schedule
     schedule = schedules(:empty)
@@ -33,11 +29,7 @@ class ScheduleTest < ActiveSupport::TestCase
     schedule.save!
     schedule.reload
 
-    Time.zone = 'Amsterdam'
-
-    assert_match 'Amsterdam', Time.zone.name
-
-    assert_equal schedule.start, Time.zone.parse('08:00')
+    assert_equal schedule.start, Time.find_zone('UTC').parse('08:00')
     assert_equal schedule.start.hour, 8
 
   end
@@ -49,17 +41,13 @@ class ScheduleTest < ActiveSupport::TestCase
 
     assert_nil schedule.end
 
-    schedule.end = '08:00'
+    schedule.end = '18:00'
 
     schedule.save!
     schedule.reload
 
-    Time.zone = 'Amsterdam'
-
-    assert_match 'Amsterdam', Time.zone.name
-
-    assert_equal schedule.end, Time.zone.parse('08:00')
-    assert_equal schedule.end.hour, 8
+    assert_equal schedule.end, Time.find_zone('UTC').parse('18:00')
+    assert_equal schedule.end.hour, 18
   end
 
 end

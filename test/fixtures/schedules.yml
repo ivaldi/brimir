@@ -1,4 +1,3 @@
-<% Time.zone = 'Amsterdam' %>
 default:
   sunday: true
   monday: true
@@ -7,8 +6,6 @@ default:
   thursday: true
   friday: true
   saturday: true
-  start: <%= Time.zone.parse('08:00') %>
-  end: <%= Time.zone.parse('17:00') %>
 
 parttimer:
   sunday: false
@@ -18,8 +15,6 @@ parttimer:
   thursday: false
   friday: false
   saturday: false
-  start: <%= Time.zone.parse('08:00') %>
-  end: <%= Time.zone.parse('17:00') %>
 
 empty:
   sunday: false
@@ -29,6 +24,4 @@ empty:
   thursday: false
   friday: false
   saturday: false
-  start: <%= nil %>
-  end: <%= nil %>
 

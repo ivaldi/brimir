@@ -3,8 +3,18 @@ class Schedule < ActiveRecord::Base
   has_one :user, dependent: :destroy
 
   def is_during_work?(time_in_zone_for_user)
-    wday = time_in_zone_for_user.wday
-    is_on_day?(wday) && working_hours.cover?(time_in_zone_for_user)
+    zone = time_in_zone_for_user.zone
+    user_wday = time_in_zone_for_user.wday
+    user_hour = time_in_zone_for_user.hour
+    return false unless is_on_day?(user_wday)
+    if user_hour <= self.end.hour && user_hour >= self.start.hour
+      # if true we need to check minutes
+      if user_hour == self.end.hour 
+        return false if time_in_zone_for_user.min > 0
+      end
+      return true
+    end
+    return false
   end
 
   def is_on_day?(weekday)
@@ -28,33 +38,13 @@ class Schedule < ActiveRecord::Base
     end
   end
 
-  def working_hours
-    self.start..self.end
-  end
-
-  def start
-    if user.nil?
-      read_attribute(:start)
-    else
-      read_attribute(:start).in_time_zone(user.time_zone)
-    end
-  end
-
-  def end
-    if user.nil?
-      read_attribute(:end)
-    else
-      read_attribute(:end).in_time_zone(user.time_zone)
-    end
-  end
-
   def start=(attribute)
-    time = Time.parse(attribute)
+    time = Time.find_zone('UTC').parse(attribute)
     write_attribute(:start, time)
   end
 
   def end=(attribute)
-    time = Time.parse(attribute)
+    time = Time.find_zone('UTC').parse(attribute)
     write_attribute(:end, time)
   end
 
