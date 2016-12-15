@@ -16,6 +16,7 @@ pt-BR:
   delete: Excluir
   close: Fechar
   wait: Aguardar
+  to: Para
 
   joyride:
     tickets: Qualquer pessoa pode criar tickets usando este botão.
@@ -144,6 +145,9 @@ pt-BR:
   your_ticket_has_been_closed: "O seu ticket foi fechado. Se o problema ainda não foi resolvido, sinta-se livre para incluir uma resposta. Para novos pedidos, por gentileza abra outro ticket."
   str_is_working_on_your_ticket: "%{str} irá cuidar do seu ticket."
 
+# notificantion_mailer/new_account
+  new_account_subject: 'Bem-vindo ao Brimir!'
+
 # attachments/_attachment
   download: download
 
@@ -179,6 +183,7 @@ pt-BR:
   localization_settings: Configurações de localização
   permissions: Permissões
   notification_settings: Configurações de notificação
+  look_and_feel: Aparência
 
 # controllers/settings
   settings_saved: Configurações salvas
@@ -192,8 +197,12 @@ pt-BR:
   user_removed: Usuário removido
 
 # controllers/tickets
-  ticket_added: Ticket adicionado
-  ticket_updated: Ticket atualizado
+  ticket_added: Chamado adicionado
+  ticket_added_public: O seu chamado foi enviado para o serviço relevante, que lhe responderá o mais rapidamente possível
+  form_validation_error: Formulário com erros. Preencha o formulário corretamente
+  captcha_error: Por gentileza, resolva o captcha antes
+  ticket_updated: Chamado atualizado
+  access_denied: Acesso negado
 
 # controllers/tickets/deleted
   trash_emptied: Todos os tickets foram apagados da lixeira
@@ -234,12 +243,29 @@ pt-BR:
 
 # email_addresses/new
   verification_mail_will_be_sent: Certifique-se que este endereço de e-mail foi passado corretamente ao Brimir. Um e-mail de verificação automatico será enviado quando você clicar em Salvar. Apenas endereços de e-mail verificados podem ser usados para mensagens de saída.
-  mark_spam_spf: Os e-mails do Brimir poderão ser marcados como spam caso você não adicione este servidor para o registro SPF DNS  do endereço de e-mail acima.
+  mark_spam_spf: Os e-mails do Brimir poderão ser marcados como spam caso você não adicione este servidor para o registro SPF DNS do endereço de e-mail acima.
+
+# email_templates/index
+  already_active_template: Já existe um template ativo para o e-mail %{kind}, definir esta opção irá anular o já ativo
+  new_email_template: Novo template de e-mail
+  email_templates: Templates de e-mail
+  deleting_this_item_will_unset_option: 'Deletar este template irá desativar a seguinte opção:'
+  set_active: Ativar
+  status: Situação
+
+# email_templates/edit
+  modify_email_template: Modificar template de e-mail
+  tooltip: Os colchetes dentro da área de texto serão automaticamente substituídos pelos valores correspondentes.
 
 # controllers/email_addresses
   email_address_modified: Endereço de e-mail modificado
   email_address_added: Endereço de e-mail adicionado
   email_address_removed: Endereço de e-mail removido
+
+# controllers/email_templates
+  email_template_modified: Template de e-mail modificado
+  email_template_added: Template de e-mail adicionado
+  email_template_removed: Template de e-mail removido
 
   activerecord:
     attributes:
@@ -254,11 +280,13 @@ pt-BR:
         locale: Idioma
         time_zone: Fuso horário
         per_page: Tickets por página
+        schedule_enabled_false: Sempre 24/7/365
+        schedule_enabled_true: O trabalho pode esperar, somente em meu horário de serviço!
         prefer_plain_text: Enviar e receber respostas em texto simples
         include_quote_in_reply: Incluir citação da mensagem original na resposta
 
       ticket:
-        from: Remetente
+        from: De
         subject: Assunto
         content: Conteúdo
         status: Status
@@ -271,9 +299,11 @@ pt-BR:
         assignee_id: Responsável
         created_at: Criado em
         to: Responsável
+        orig_to: Para o e-mail
+        orig_cc: Com cópia para o e-mail
 
       reply:
-        from: Remetente
+        from: De
 
       rule:
         filter_field: Campo
@@ -284,18 +314,80 @@ pt-BR:
         filter_value: Valor
         action_operation: Ação a ser executada
         action_operations:
-          assign_label: atribuir etiqueta
-          notify_user: enviar notificação para
-          change_status: alterar status para
-          change_priority: alterar prioridade para
-          assign_user: atribir para
-        action_value: Parâmetro para a ação
+          assign_label: Atribuir etiqueta
+          notify_user: Enviar notificação para
+          change_status: Alterar status para
+          change_priority: Alterar prioridade para
+          assign_user: Atribir para
 
       email_address:
         email: Endereço de e-mail
         name: Nome
         default: Usar como endereço de e-mail de envio padrão
         verification_token: Verificado
+
+      email_template:
+        name: Nome do template
+        from: De
+        kind: Tipo
+        message: Mensagem
+        kinds:
+          user_welcome:
+            template_name: Padrão de boas-vindas
+            message: |
+              <div>
+              Olá, [name].
+              <br />
+              <br />
+              A sua conta para o sistema de chamados foi criada!
+              <br />
+              <br />
+              Para se conectar você precisará armazenas as seguintes informações:
+              <br />
+              E-mail: [email]
+              <br />
+              Senha: [password]
+              <br />
+              <br />
+              <strong>ATENÇÃO!</strong>
+              <br />
+              Esta informação é enviada uma única vez, guarde em segurança.
+              <br />
+              <br />
+              Perdeu ou esqueceu a sua senha? Resete a sua senha em:
+              <br />
+              http://[domain]/users/password/new
+              <br />
+              <br />
+              Atenciosamente,
+              <br />
+              Webmaster [domain]
+              <br />
+              <br />
+              *** este e-mail foi automaticamente gerado, por gentileza, não responda ***
+              </div>
+
+          ticket_received:
+            template_name: Padrão de ticket recebido
+            message: |
+              <div>
+              Olá, [name].
+              <br />
+              <br />
+              Em [created_at], você escreveu:
+              <br />
+              [content]
+              <br />
+              <br />
+              Você está recebendo este e-mail para que você saiba que o seu chamado com o número [id] foi recebido.
+              <br />
+              <br />
+              Atenciosamente,
+              <br />
+              Webmaster [domain]
+              <br />
+              <br />
+              </div>
 
       tenant:
         default_locale: Idioma Principal
@@ -304,3 +396,6 @@ pt-BR:
         share_drafts: Compartilhar rascunhos com outros agentes
         first_reply_ignores_notified_agents: Nenhuma notificação de resposta inicial por outros agentes
         notify_client_when_ticket_is_assigned_or_closed: Notificar o cliente quando seu ticket for atribuído ou fechado.
+        notify_client_when_ticket_is_created: Notificar o cliente quando um novo ticket criado é recebido.
+        notify_user_when_account_is_created: Notificar quando uma conta de usuário for criada.
+        stylesheet_url: Adicione o caminho do seu estilo personalizado.
