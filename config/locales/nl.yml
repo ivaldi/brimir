@@ -180,6 +180,7 @@ nl:
   localization_settings: Localizatie instellingen
   permissions: Rechten
   notification_settings: Notificatie instellingen
+  look_and_feel: Uitstraling
 
 # controllers/settings
   settings_saved: Instellingen opgeslagen
@@ -387,4 +388,4 @@ nl:
         notify_client_when_ticket_is_assigned_or_closed: Stuur een notificatie naar de klant als zijn ticket toegekend of gesloten wordt.
         notify_client_when_ticket_is_created: Stuur een notificatie naar de klant, wanneer zijn nieuw aangemaakte ticket is ontvangen.
         notify_user_when_account_is_created: Stuur de gebruiker een notificatie, wanneer een account is aangemaakt.
-
+        stylesheet_url: Voeg de locatie van uw eigen stylesheet toe.
