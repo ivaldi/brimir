@@ -31,80 +31,83 @@
 
       <div class="medium-6 columns">
 
-        <h5><%= t(:notification_settings) %></h5>
+        <% if @user.agent? %>
 
-        <label>
-          <%= f.radio_button :schedule_enabled, false, label: false %>
-          <%= t('activerecord.attributes.user.schedule_enabled_false') %>
-        </label>
+          <h5><%= t(:notification_settings) %></h5>
 
-        <label>
-          <%= f.radio_button :schedule_enabled, true, label: false %>
-          <%= t('activerecord.attributes.user.schedule_enabled_true') %>
-        </label>
+          <label>
+            <%= f.radio_button :schedule_enabled, false, label: false %>
+            <%= t('activerecord.attributes.user.schedule_enabled_false') %>
+          </label>
 
-        <div data-work-can-wait style="<%= @user.schedule_enabled? ?
-            'display: block;' : 'display: none;' %>">
-          <%= f.fields_for :schedule, build_schedule_for_user do |ff|  %>
-            <div class="row">
-              <div class="small-5 medium-4 large-3 columns">
-                <%
-                  selected = '8:00'
-                  unless ff.object.start.nil?
-                    selected = "#{ff.object.start.hour}:00"
-                  end
-                %>
-                <%= ff.select :start,
-                    options_for_select((0..23).map { |n| "#{n}:00" }, selected),
-                    label: false %>
+          <label>
+            <%= f.radio_button :schedule_enabled, true, label: false %>
+            <%= t('activerecord.attributes.user.schedule_enabled_true') %>
+          </label>
+
+          <div data-work-can-wait style="<%= @user.schedule_enabled? ?
+              'display: block;' : 'display: none;' %>">
+            <%= f.fields_for :schedule, build_schedule_for_user do |ff|  %>
+              <div class="row">
+                <div class="small-5 medium-4 large-3 columns">
+                  <%
+                    selected = '8:00'
+                    unless ff.object.start.nil?
+                      selected = "#{ff.object.start.hour}:00"
+                    end
+                  %>
+                  <%= ff.select :start,
+                      options_for_select((0..23).map { |n| "#{n}:00" }, selected),
+                      label: false %>
+                </div>
+                <div class="small-2 medium-2 large-1 column">
+                  <label class="inline text-center">
+                    <%= t(:to) %>
+                  </label>
+                </div>
+                <div class="small-5 medium-4 large-3 columns end">
+                  <%
+                    selected = '18:00'
+                    unless ff.object.end.nil?
+                      selected = "#{ff.object.end.hour}:00"
+                    end
+                  %>
+                  <%= ff.select :end,
+                      options_for_select((0..23).map { |n| "#{n}:00" }, selected),
+                      label: false %>
+                </div>
               </div>
-              <div class="small-2 medium-2 large-1 column">
-                <label class="inline text-center">
-                  <%= t(:to) %>
-                </label>
-              </div>
-              <div class="small-5 medium-4 large-3 columns end">
-                <%
-                  selected = '18:00'
-                  unless ff.object.end.nil?
-                    selected = "#{ff.object.end.hour}:00"
-                  end
-                %>
-                <%= ff.select :end,
-                    options_for_select((0..23).map { |n| "#{n}:00" }, selected),
-                    label: false %>
-              </div>
-            </div>
-            <label class="checkbox-helper">
-              <%= ff.check_box :sunday, label: false %>
-              <span><%= localize_day_name(0).first(2) %></span>
-            </label>
-            <label class="checkbox-helper">
-              <%= ff.check_box :monday, label: false %>
-              <span><%= localize_day_name(1).first(2) %></span>
-            </label>
-            <label class="checkbox-helper">
-              <%= ff.check_box :tuesday, label: false %>
-              <span><%= localize_day_name(2).first(2) %></span>
-            </label>
-            <label class="checkbox-helper">
-              <%= ff.check_box :wednesday, label: false %>
-              <span><%= localize_day_name(3).first(2) %></span>
-            </label>
-            <label class="checkbox-helper">
-              <%= ff.check_box :thursday, label: false %>
-              <span><%= localize_day_name(4).first(2) %></span>
-            </label>
-            <label class="checkbox-helper">
-              <%= ff.check_box :friday, label: false %>
-              <span><%= localize_day_name(5).first(2) %></span>
-            </label>
-            <label class="checkbox-helper">
-              <%= ff.check_box :saturday, label: false %>
-              <span><%= localize_day_name(6).first(2) %></span>
-            </label>
-          <% end %>
-        </div>
+              <label class="checkbox-helper">
+                <%= ff.check_box :sunday, label: false %>
+                <span><%= localize_day_name(0).first(2) %></span>
+              </label>
+              <label class="checkbox-helper">
+                <%= ff.check_box :monday, label: false %>
+                <span><%= localize_day_name(1).first(2) %></span>
+              </label>
+              <label class="checkbox-helper">
+                <%= ff.check_box :tuesday, label: false %>
+                <span><%= localize_day_name(2).first(2) %></span>
+              </label>
+              <label class="checkbox-helper">
+                <%= ff.check_box :wednesday, label: false %>
+                <span><%= localize_day_name(3).first(2) %></span>
+              </label>
+              <label class="checkbox-helper">
+                <%= ff.check_box :thursday, label: false %>
+                <span><%= localize_day_name(4).first(2) %></span>
+              </label>
+              <label class="checkbox-helper">
+                <%= ff.check_box :friday, label: false %>
+                <span><%= localize_day_name(5).first(2) %></span>
+              </label>
+              <label class="checkbox-helper">
+                <%= ff.check_box :saturday, label: false %>
+                <span><%= localize_day_name(6).first(2) %></span>
+              </label>
+            <% end %>
+          </div>
+        <% end %>
 
         <h5><%= t(:email_settings) %></h5>
 
