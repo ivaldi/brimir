@@ -395,4 +395,4 @@ en:
         notify_client_when_ticket_is_assigned_or_closed: Notify the client when his ticket is assigned or closed.
         notify_client_when_ticket_is_created: Notify the client when his newly created ticket is received.
         notify_user_when_account_is_created: Notify user when account is created.
-        stylesheet_url: Add the path to you own custom stylesheet.
+        stylesheet_url: Add the path to your own custom stylesheet.
