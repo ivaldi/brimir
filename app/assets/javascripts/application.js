@@ -101,6 +101,10 @@
 
     });
 
+    jQuery('[data-ticket-url] a').on('click', function(e){
+      jQuery(this).closest('[data-ticket-url]').removeClass('unread');
+    });
+
     jQuery('input[type="radio"]').on('click', function() {
       if(jQuery('#user_schedule_enabled_false').is(':checked')) {
           jQuery('[data-work-can-wait]').hide("slow");
@@ -114,7 +118,7 @@
     jQuery('trix-toolbar').addClass('trix-toolbar');
 
     // this was added because the trix editor doesn't support
-    // tabindexes. You can remove this block of code if 
+    // tabindexes. You can remove this block of code if
     // https://github.com/maclover7/trix/pull/19 is merged.
     (function setTabIndexForTextArea() {
       var trix  = jQuery('trix-editor');
