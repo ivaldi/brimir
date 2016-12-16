@@ -20,15 +20,15 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      render nothing: true, status: :created
+      head :created
     else
-      render nothing: true, status: :bad_request
+      head :bad_request
     end
   end
 
   def show
     unless @user = User.find_by(email: Base64.urlsafe_decode64(params[:email]))
-      render nothing: true, status: :bad_request
+      head :bad_request
     end
   end
 end

@@ -35,9 +35,11 @@ class SettingsControllerTest < ActionController::TestCase
 
     if EmailTemplate.count == 0
       assert_difference 'EmailTemplate.count', 2 do
-        put :update, id: @tenant.id, tenant: {
+        put :update, params: {
+          id: @tenant.id, tenant: {
           notify_user_when_account_is_created: true,
           notify_client_when_ticket_is_created: true
+          }
         }
       end
     end

@@ -5,8 +5,10 @@ class API::V1::ApiLoginTest < ActionDispatch::IntegrationTest
   test 'should sign in using single sign on' do
 
     host! "test.host"
-    
-    post '/api/v1/sessions', { email: 'bob@xxxx.com', password: 'testtest' }
+
+    post '/api/v1/sessions', params: {
+      email: 'bob@xxxx.com', password: 'testtest'
+    }
 
     assert_response :success
 
@@ -14,13 +16,15 @@ class API::V1::ApiLoginTest < ActionDispatch::IntegrationTest
 
     assert_not_nil result['authorization_token']
 
-    get '/api/v1/tickets.json?auth_token=' + result['authorization_token']
+    get '/api/v1/tickets.json',
+      params: { 'auth_token': result['authorization_token'] }
 
     assert_response :success
   end
 
   test 'do not login with fault post' do
-    post '/api/v1/sessions', wrong_param: 'wrong'
+    post '/api/v1/sessions',
+      params: { wrong_param: 'wrong' }
 
     assert_response :unauthorized
 

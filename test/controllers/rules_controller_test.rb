@@ -42,15 +42,19 @@ class RulesControllerTest < ActionController::TestCase
   test 'should get edit' do
     sign_in @alice
 
-    get :edit, id: @rule
+    get :edit, params: {
+      id: @rule
+    }
     assert_response :success
   end
 
   test 'should update' do
     sign_in @alice
 
-    put :update, id: @rule, rule: {
+    put :update, params: {
+      id: @rule, rule: {
         filter_field: 'subject',
+      }
     }
     assert_equal 'subject', assigns(:rule).filter_field
     assert_redirected_to rules_url
@@ -67,12 +71,14 @@ class RulesControllerTest < ActionController::TestCase
     sign_in @alice
 
     assert_difference 'Rule.count' do
-      post :create, rule: {
-        filter_field: @rule.filter_field,
-        filter_operation: @rule.filter_operation,
-        filter_value: @rule.filter_value,
-        action_operation: @rule.action_operation,
-        action_value: @rule.action_value,
+      post :create, params: {
+        rule: {
+          filter_field: @rule.filter_field,
+          filter_operation: @rule.filter_operation,
+          filter_value: @rule.filter_value,
+          action_operation: @rule.action_operation,
+          action_value: @rule.action_value,
+        }
       }
 
       assert_redirected_to rules_url
@@ -83,7 +89,9 @@ class RulesControllerTest < ActionController::TestCase
     sign_in @alice
 
     assert_difference 'Rule.count', -1 do
-      delete :destroy, id: @rule
+      delete :destroy, params: {
+        id: @rule
+      }
 
       assert_redirected_to rules_url
     end
