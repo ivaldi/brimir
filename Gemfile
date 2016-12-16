@@ -1,65 +1,68 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.2.0'
+gem 'rails', '~> 5.0'
 
-gem 'sass-rails', '~> 5.0.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'sass-rails', "~> 5.0"
+gem 'coffee-rails', "~> 4.2"
 
-gem 'uglifier', '>= 1.0.3'
+gem 'uglifier', "~> 3.0"
 
-gem 'compass-rails', '~> 2.0.0'
+gem 'compass-rails', '~> 3.0.0'
 gem 'foundation-rails', '~> 5.5.0'
 
-gem 'jquery-rails'
+gem 'jquery-rails', "~> 4.2"
 
 # foundation form errors
-gem 'foundation_rails_helper'
+gem 'foundation_rails_helper', "~> 2.0"
 
 # to use debugger
-gem 'byebug', group: [:development, :test]
-gem 'pry', group: [:development, :test]
+gem 'byebug', "~> 9.0", group: [:development, :test]
+gem 'pry', "~> 0.10", group: [:development, :test]
 
 
 group :development do
   # Spring application pre-loader
-  gem 'spring'
+  gem 'spring', "~> 2.0"
 
   # open sent emails in the browser
-  gem 'letter_opener'
+  gem 'letter_opener', "~> 1.4"
 end
 
 group :test do
   # for travis-ci
-  gem 'rake'
+  gem 'rake', "~> 12.0"
 
   # for coveralls
-  gem 'coveralls'
+  gem 'coveralls', "~> 0.8"
 
-  gem 'timecop'
+  gem 'timecop', "~> 0.8"
 end
 
 # Optional PostgreSQL for production
-gem 'pg', group: :postgresql
+gem 'pg', "~> 0.19", group: :postgresql
 # Optional MySQL for production
-gem 'mysql2', group: :mysql
+gem 'mysql2', "~> 0.4", group: :mysql
 # Optional SQLite for development
-gem 'sqlite3', group: :sqlite
+gem 'sqlite3', "~> 1.3", group: :sqlite
 
 # authentication
-gem 'devise'
-gem 'devise_ldap_authenticatable'
+gem 'devise', "~> 4.2"
+gem 'devise_ldap_authenticatable', "~> 0.8"
+
+# mail see https://github.com/mikel/mail/issues/912
+gem 'mail'
 
 # omniauth
-gem 'omniauth-google-oauth2'
+gem 'omniauth-google-oauth2', "~> 0.4"
 
 # authorization
-gem 'cancancan'
+gem 'cancancan', "~> 1.15"
 
 # pagination
-gem 'will_paginate'
+gem 'will_paginate', "~> 3.1"
 
 # attachments, thumbnails etc
-gem 'paperclip'
+gem 'paperclip', "~> 5.1"
 
 # select2 replacement for selectboxes
 gem 'select2-rails', '~> 3.5' # newer breaks Foundation Reveal on tickets#show
@@ -67,26 +70,26 @@ gem 'select2-rails', '~> 3.5' # newer breaks Foundation Reveal on tickets#show
 gem 'font-awesome-rails', '~> 4.0'
 
 # for language detection
-gem 'http_accept_language'
+gem 'http_accept_language', "~> 2.1"
 
 # internationalisation
-gem 'rails-i18n'
-gem 'devise-i18n'
+gem 'rails-i18n', "~> 5.0"
+gem 'devise-i18n', "~> 1.1"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.2'
+gem 'jbuilder', '~> 2.6'
 
 # fancybox for showing image in lightbox
-gem 'fancybox2-rails', '~> 0.2.8'
+gem 'fancybox2-rails', "~> 0.2"
 
 # gravatar for user avatar images
-gem 'gravatar_image_tag'
+gem 'gravatar_image_tag', "~> 1.2"
 
 # Captcha for brimir
-gem 'recaptcha', require: 'recaptcha/rails'
+gem 'recaptcha', "~> 4.0", require: 'recaptcha/rails'
 
 # Trix WYSIWYG editor
-gem 'trix'
+gem 'trix', "~> 0.9"
 
 # React support
-gem 'react-rails'
+gem 'react-rails', "~> 1.10"

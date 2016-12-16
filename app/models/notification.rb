@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # tracks which user was notified for a notifiable object
-class Notification < ActiveRecord::Base
+class Notification < ApplicationRecord
   belongs_to :notifiable, polymorphic: true
   belongs_to :user
 end
