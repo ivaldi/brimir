@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
       redirect_to root_url, alert: exception.message
     else
       # for tests and development, we want unauthorized status codes
-      render text: exception, status: :unauthorized
+      render plain: exception, status: :unauthorized
     end
   end
 

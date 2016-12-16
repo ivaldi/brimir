@@ -29,7 +29,7 @@ class RepliesController < ApplicationController
             status: 'open',
             id: reply_params[:ticket_id]
           }
-        }.merge(reply_params))
+    }.merge(reply_params.to_h))
 
     save_reply_and_redirect
   end

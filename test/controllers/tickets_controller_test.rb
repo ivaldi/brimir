@@ -887,7 +887,7 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should only allow agents to view others tickets' do
     sign_in users(:bob)
 
-    get :show, id: tickets(:multiple)
+    get :show, { id: tickets(:multiple) }
     assert_response :unauthorized # redirect to sign in page
   end
 
@@ -1155,12 +1155,13 @@ class TicketsControllerTest < ActionController::TestCase
     user = users(:alice)
     sign_in user
     ticket = Ticket.last
-    ticket.unread_users << User.all
+    user.unread_tickets << ticket
     assert_difference 'Ticket.last.unread_users.count', -1 do
 
       assert_not_nil ticket.unread_users
+      assert_not_nil user.unread_tickets
 
-      get :show, id: ticket.id
+      get :show, { id: ticket.id }
 
       assert_response :success
 

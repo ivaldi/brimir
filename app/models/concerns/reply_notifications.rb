@@ -129,7 +129,7 @@ concern :ReplyNotifications do
         end
       end
 
-      self.notified_users.uniq!
+      self.notified_users.distinct!
 
     else
       result = []
