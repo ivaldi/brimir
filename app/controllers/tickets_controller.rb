@@ -19,7 +19,7 @@ class TicketsController < ApplicationController
   include TicketsStrongParams
   include ActionView::Helpers::SanitizeHelper # dependency of HtmlTextHelper
 
-  before_filter :authenticate_user!, except: [:create, :new]
+  before_action :authenticate_user!, except: [:create, :new]
   before_action :current_tenant, only: [:update, :create, :new]
   load_and_authorize_resource :ticket, except: :create
   skip_authorization_check only: :create
