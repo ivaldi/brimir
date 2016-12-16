@@ -16,7 +16,7 @@
         <div class="row collapse">
           <% params.delete(:controller) %>
           <% params.delete(:action) %>
-          <%= link_to tickets_path(:csv, params), class: 'radius tiny button right mlm no-m' do %>
+          <%= link_to tickets_path(format: :csv, status: params[:status]), class: 'radius tiny button right mlm no-m' do %>
             <i class="fa fa-cloud-download" style="top:1px"></i>
           <% end %>
 

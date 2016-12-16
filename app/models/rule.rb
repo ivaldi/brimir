@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # filter rules applied to a ticket when it is created
-class Rule < ActiveRecord::Base
+class Rule < ApplicationRecord
   validates :filter_field, presence: true
 
   enum filter_operation: [:contains, :equals]

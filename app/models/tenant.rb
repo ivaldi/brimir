@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Tenant < ActiveRecord::Base
+class Tenant < ApplicationRecord
 
   after_update :check_for_or_create_default_templates_for_selected_options
 

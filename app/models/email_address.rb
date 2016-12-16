@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class EmailAddress < ActiveRecord::Base
+class EmailAddress < ApplicationRecord
 
   validates :email, uniqueness: true, presence: true
   has_many :tickets, foreign_key: :to_email_address_id, dependent: :nullify

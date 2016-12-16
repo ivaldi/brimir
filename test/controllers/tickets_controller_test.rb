@@ -156,12 +156,12 @@ class TicketsControllerTest < ActionController::TestCase
   # FIFTH
   test 'should create ticket when signed in and no captcha' do
     # we need these after the test
-    private_key = Recaptcha.configuration.private_key
-    public_key  = Recaptcha.configuration.public_key
+    secret_key = Recaptcha.configuration.secret_key
+    site_key  = Recaptcha.configuration.site_key
 
     # set blank for this test
-    Recaptcha.configuration.private_key = ''
-    Recaptcha.configuration.public_key = ''
+    Recaptcha.configuration.secret_key = ''
+    Recaptcha.configuration.site_key = ''
     sign_in users(:alice)
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
@@ -176,8 +176,8 @@ class TicketsControllerTest < ActionController::TestCase
       end
 
       # set the configration back to default
-      Recaptcha.configuration.private_key = private_key
-      Recaptcha.configuration.public_key = public_key
+      Recaptcha.configuration.secret_key = secret_key
+      Recaptcha.configuration.site_key = site_key
 
       refute_equal 0, assigns(:ticket).notified_users.count
     end
@@ -186,12 +186,12 @@ class TicketsControllerTest < ActionController::TestCase
   # SIXTH
   test 'should not create ticket when signed in and invalid and no captcha' do
     # we need these after the test
-    private_key = Recaptcha.configuration.private_key
-    public_key  = Recaptcha.configuration.public_key
+    secret_key = Recaptcha.configuration.secret_key
+    site_key  = Recaptcha.configuration.site_key
 
     # set blank for this test
-    Recaptcha.configuration.private_key = ''
-    Recaptcha.configuration.public_key = ''
+    Recaptcha.configuration.secret_key = ''
+    Recaptcha.configuration.site_key = ''
 
     sign_in users(:alice)
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
@@ -207,8 +207,8 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # set the configration back to default
-    Recaptcha.configuration.private_key = private_key
-    Recaptcha.configuration.public_key = public_key
+    Recaptcha.configuration.secret_key = secret_key
+    Recaptcha.configuration.site_key = site_key
 
     assert_equal 0, assigns(:ticket).notified_users.count
   end
@@ -216,12 +216,12 @@ class TicketsControllerTest < ActionController::TestCase
   # SEVENTH
   test 'should create ticket when not signed in and no captcha' do
     # we need these after the test
-    private_key = Recaptcha.configuration.private_key
-    public_key  = Recaptcha.configuration.public_key
+    secret_key = Recaptcha.configuration.secret_key
+    site_key  = Recaptcha.configuration.site_key
 
     # set blank for this test
-    Recaptcha.configuration.private_key = ''
-    Recaptcha.configuration.public_key = ''
+    Recaptcha.configuration.secret_key = ''
+    Recaptcha.configuration.site_key = ''
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count', 1 do
@@ -236,8 +236,8 @@ class TicketsControllerTest < ActionController::TestCase
 
 
       # set the configration back to default
-      Recaptcha.configuration.private_key = private_key
-      Recaptcha.configuration.public_key = public_key
+      Recaptcha.configuration.secret_key = secret_key
+      Recaptcha.configuration.site_key = site_key
 
       refute_equal 0, assigns(:ticket).notified_users.count
     end
@@ -246,12 +246,12 @@ class TicketsControllerTest < ActionController::TestCase
   # EIGHT
   test 'should not create ticket when not signed in and no captcha' do
     # we need these after the test
-    private_key = Recaptcha.configuration.private_key
-    public_key  = Recaptcha.configuration.public_key
+    secret_key = Recaptcha.configuration.secret_key
+    site_key  = Recaptcha.configuration.site_key
 
     # set blank for this test
-    Recaptcha.configuration.private_key = ''
-    Recaptcha.configuration.public_key = ''
+    Recaptcha.configuration.secret_key = ''
+    Recaptcha.configuration.site_key = ''
 
     assert_no_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_no_difference 'Ticket.count' do
@@ -266,8 +266,8 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # set the configration back to default
-    Recaptcha.configuration.private_key = private_key
-    Recaptcha.configuration.public_key = public_key
+    Recaptcha.configuration.secret_key = secret_key
+    Recaptcha.configuration.site_key = site_key
     assert_equal 0, assigns(:ticket).notified_users.count
   end
 

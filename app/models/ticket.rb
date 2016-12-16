@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Ticket < ActiveRecord::Base
+class Ticket < ApplicationRecord
   include CreateFromUser
   include EmailMessage
   include TicketMerge
@@ -177,8 +177,8 @@ class Ticket < ActiveRecord::Base
   end
 
   def self.recaptcha_keys_present?
-    !Recaptcha.configuration.public_key.blank? ||
-      !Recaptcha.configuration.private_key.blank?
+    !Recaptcha.configuration.site_key.blank? ||
+      !Recaptcha.configuration.secret_key.blank?
   end
 
   def save_with_label(label_name)

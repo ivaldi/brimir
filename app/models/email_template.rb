@@ -1,4 +1,4 @@
-class EmailTemplate < ActiveRecord::Base
+class EmailTemplate < ApplicationRecord
 
   enum kind: [:user_welcome, :ticket_received]
 
