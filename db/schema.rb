@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161214155109) do
+ActiveRecord::Schema.define(version: 20161212081319) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "attachable_id"
@@ -22,8 +23,9 @@ ActiveRecord::Schema.define(version: 20161214155109) do
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.string   "content_id"
-    t.index ["attachable_id"], name: "index_attachments_on_attachable_id"
   end
+
+  add_index "attachments", ["attachable_id"], name: "index_attachments_on_attachable_id"
 
   create_table "email_addresses", force: :cascade do |t|
     t.string   "email"
@@ -47,19 +49,21 @@ ActiveRecord::Schema.define(version: 20161214155109) do
     t.integer "user_id"
     t.string  "uid"
     t.string  "provider"
-    t.index ["user_id"], name: "index_identities_on_user_id"
   end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id"
 
   create_table "labelings", force: :cascade do |t|
     t.integer  "label_id"
-    t.string   "labelable_type"
     t.integer  "labelable_id"
+    t.string   "labelable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["label_id", "labelable_id", "labelable_type"], name: "unique_labeling_label", unique: true
-    t.index ["label_id"], name: "index_labelings_on_label_id"
-    t.index ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
   end
+
+  add_index "labelings", ["label_id", "labelable_id", "labelable_type"], name: "unique_labeling_label", unique: true
+  add_index "labelings", ["label_id"], name: "index_labelings_on_label_id"
+  add_index "labelings", ["labelable_type", "labelable_id"], name: "index_labelings_on_labelable_type_and_labelable_id"
 
   create_table "labels", force: :cascade do |t|
     t.string   "name"
@@ -69,15 +73,16 @@ ActiveRecord::Schema.define(version: 20161214155109) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.string   "notifiable_type"
     t.integer  "notifiable_id"
+    t.string   "notifiable_type"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["notifiable_id", "notifiable_type", "user_id"], name: "unique_notification", unique: true
-    t.index ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
-    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
+
+  add_index "notifications", ["notifiable_id", "notifiable_type", "user_id"], name: "unique_notification", unique: true
+  add_index "notifications", ["notifiable_type", "notifiable_id"], name: "index_notifications_on_notifiable_type_and_notifiable_id"
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "replies", force: :cascade do |t|
     t.text     "content",                  limit: 1073741823
@@ -94,10 +99,11 @@ ActiveRecord::Schema.define(version: 20161214155109) do
     t.datetime "raw_message_updated_at"
     t.boolean  "internal",                                    default: false,  null: false
     t.string   "type"
-    t.index ["message_id"], name: "index_replies_on_message_id"
-    t.index ["ticket_id"], name: "index_replies_on_ticket_id"
-    t.index ["user_id"], name: "index_replies_on_user_id"
   end
+
+  add_index "replies", ["message_id"], name: "index_replies_on_message_id"
+  add_index "replies", ["ticket_id"], name: "index_replies_on_ticket_id"
+  add_index "replies", ["user_id"], name: "index_replies_on_user_id"
 
   create_table "rules", force: :cascade do |t|
     t.string   "filter_field"
@@ -128,8 +134,9 @@ ActiveRecord::Schema.define(version: 20161214155109) do
     t.integer  "status",     default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.index ["ticket_id"], name: "index_status_changes_on_ticket_id"
   end
+
+  add_index "status_changes", ["ticket_id"], name: "index_status_changes_on_ticket_id"
 
   create_table "tenants", force: :cascade do |t|
     t.string   "domain"
@@ -145,11 +152,12 @@ ActiveRecord::Schema.define(version: 20161214155109) do
     t.boolean  "notify_user_when_account_is_created",             default: false
     t.boolean  "notify_client_when_ticket_is_created",            default: false
     t.integer  "email_template_id"
-    t.boolean  "ticket_creation_is_open_to_the_world",            default: true
+    t.boolean  "ticket_creation_is_open_to_the_world"
     t.string   "stylesheet_url"
-    t.index ["domain"], name: "index_tenants_on_domain", unique: true
-    t.index ["email_template_id"], name: "index_tenants_on_email_template_id"
   end
+
+  add_index "tenants", ["domain"], name: "index_tenants_on_domain", unique: true
+  add_index "tenants", ["email_template_id"], name: "index_tenants_on_email_template_id"
 
   create_table "tickets", force: :cascade do |t|
     t.string   "subject"
@@ -171,14 +179,15 @@ ActiveRecord::Schema.define(version: 20161214155109) do
     t.datetime "raw_message_updated_at"
     t.string   "orig_to"
     t.string   "orig_cc"
-    t.index ["assignee_id"], name: "index_tickets_on_assignee_id"
-    t.index ["locked_by_id"], name: "index_tickets_on_locked_by_id"
-    t.index ["message_id"], name: "index_tickets_on_message_id"
-    t.index ["priority"], name: "index_tickets_on_priority"
-    t.index ["status"], name: "index_tickets_on_status"
-    t.index ["to_email_address_id"], name: "index_tickets_on_to_email_address_id"
-    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
+
+  add_index "tickets", ["assignee_id"], name: "index_tickets_on_assignee_id"
+  add_index "tickets", ["locked_by_id"], name: "index_tickets_on_locked_by_id"
+  add_index "tickets", ["message_id"], name: "index_tickets_on_message_id"
+  add_index "tickets", ["priority"], name: "index_tickets_on_priority"
+  add_index "tickets", ["status"], name: "index_tickets_on_status"
+  add_index "tickets", ["to_email_address_id"], name: "index_tickets_on_to_email_address_id"
+  add_index "tickets", ["user_id"], name: "index_tickets_on_user_id"
 
   create_table "tickets_users", id: false, force: :cascade do |t|
     t.integer "ticket_id", null: false
@@ -210,9 +219,10 @@ ActiveRecord::Schema.define(version: 20161214155109) do
     t.string   "name"
     t.integer  "schedule_id"
     t.boolean  "schedule_enabled",       default: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["schedule_id"], name: "index_users_on_schedule_id"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["schedule_id"], name: "index_users_on_schedule_id"
 
 end

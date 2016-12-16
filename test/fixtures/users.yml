@@ -5,6 +5,7 @@ alice:
   notify: true
   authentication_token: blabla
   schedule: nil
+  current_sign_in_at: <%= Time.now.to_s :db %>
 
 bob:
   email: bob@xxxx.com
@@ -18,6 +19,7 @@ charlie:
   current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails
   schedule_enabled: false
   schedule: default
+  current_sign_in_at: <%= Time.now.to_s :db %>
 
 dave:
   email: dave@xxxx.com

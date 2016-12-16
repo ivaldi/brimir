@@ -6,6 +6,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
+- Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.
+- Better coverage for ticket creation, now covering situations with captcha. Contributed by @git-jls.
+- Moved Brimir to Rails version 5.0.0.1. Contributed by @git-jls.
 
 ### Deprecated
 
