@@ -27,11 +27,13 @@ class LabelingsControllerTest < ActionController::TestCase
 
     assert_difference 'Labeling.count' do
 
-      post :create, format: :js, labeling: {
-        labelable_id: tickets(:problem).id,
-        labelable_type: 'Ticket',
-        label: {
-          name: 'Hello'
+      post :create, format: :js, params: {
+        labeling: {
+          labelable_id: tickets(:problem).id,
+          labelable_type: 'Ticket',
+          label: {
+            name: 'Hello'
+          }
         }
       }
 
@@ -41,7 +43,7 @@ class LabelingsControllerTest < ActionController::TestCase
 
   test 'should remove labeling' do
     assert_difference 'Labeling.count', -1 do
-      delete :destroy, id: @labeling, format: :js
+      delete :destroy, params: { id: @labeling, format: :js }
 
       assert_response :success
     end

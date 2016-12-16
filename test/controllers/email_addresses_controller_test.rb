@@ -51,7 +51,7 @@ class EmailAddressesControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size' do
       assert_no_difference 'EmailAddress.where(default: true).count' do
         assert_difference 'EmailAddress.count' do
-          post :create, email_address: { email: 'support@support.bla', default: '1' }
+          post :create, params: { email_address: { email: 'support@support.bla', default: '1' } }
         end
       end
     end
@@ -65,7 +65,7 @@ class EmailAddressesControllerTest < ActionController::TestCase
     sign_in @alice
 
     assert_difference 'EmailAddress.count', -1 do
-      delete :destroy, id: @email_address.id
+      delete :destroy, params: { id: @email_address.id }
     end
 
     assert_redirected_to email_addresses_url
