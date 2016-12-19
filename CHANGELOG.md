@@ -4,6 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Brimir unreleased (to be announced)
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+### Security
+
+## Brimir 0.7.3 (2016-12-19)
+### Added
 - Rule management interface has been improved, making it understandable for more users.
 - Tabindex for a better user experience when filling out ticket forms. Contributed by @git-jls.
 - Allows adding rules to filter on cc and actual to addresses. Contributed by @git-jls.
@@ -11,14 +24,9 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - User setting to turn off notifications during work or off-duty. Contributed by @git-jls.
 - Dutch and English translations for look and feel section settings page. Contributed by @git-jls.
 
-
 ### Changed
 - Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.
 - Better coverage for ticket creation, now covering situations with captcha. Contributed by @git-jls.
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Fixed issue with tickets missing a message_id. Contributed by @git-jls.
@@ -27,8 +35,6 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed issue for non signed in users not able to create tickets from the web gui when the captcha is disabled. Contributed by @git-jls.
 - Fixed issue with zone not being properly taken into account if schedule is set and ticket is created. by @git-jls.
 - Fixed issue with save_with_label method being called on a reply. Contributed by @git-jls.
-
-### Security
 
 ## Brimir 0.7.2 (2016-11-11)
 ### Added
