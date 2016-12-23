@@ -27,6 +27,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 - Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.
 - Better coverage for ticket creation, now covering situations with captcha. Contributed by @git-jls.
+- Removed unused code. Contributed by @git-jls
 
 ### Fixed
 - Fixed issue with tickets missing a message_id. Contributed by @git-jls.
