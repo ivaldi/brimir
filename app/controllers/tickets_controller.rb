@@ -235,15 +235,6 @@ class TicketsController < ApplicationController
     end
   end
 
-  def send_notification_email
-    if !@ticket.nil? && @ticket.save
-      # we set ticket as unread for every user
-      @ticket.unread_users << User.all
-      # signed in we notify
-      notify_incoming @ticket
-    end
-  end
-
   def current_tenant
     @tenant = Tenant.current_tenant
   end

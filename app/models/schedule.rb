@@ -3,7 +3,6 @@ class Schedule < ActiveRecord::Base
   has_one :user, dependent: :destroy
 
   def is_during_work?(time_in_zone_for_user)
-    zone = time_in_zone_for_user.zone
     user_wday = time_in_zone_for_user.wday
     user_hour = time_in_zone_for_user.hour
     return false unless is_on_day?(user_wday)
