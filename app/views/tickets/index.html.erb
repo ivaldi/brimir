@@ -21,7 +21,7 @@
           <% end %>
 
           <% if params[:status] == 'deleted' %>
-            <%= link_to tickets_deleted_path, method: :delete, 'data-confirm' => t(:are_you_sure_empty_trash), class: 'secondary radius tiny button right mlm' do %>
+            <%= link_to tickets_deleted_path, data: { remote: true, method: :delete, confirm: t(:are_you_sure_empty_trash) }, class: 'secondary radius tiny button right mlm' do %>
               <i class="fa fa-bomb" style="top:1px"></i>
             <% end %>
           <% end %>
