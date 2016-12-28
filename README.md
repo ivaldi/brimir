@@ -49,8 +49,8 @@ Configuring Captcha's
 If you want to use recaptcha in production you have to go to
 https://www.google.com/recaptcha, create your private and public keys and export these to your production environment, by running:
 
-    export recaptcha_site_key="[YOUR_KEY]"
-    export recaptcha_secret_key="[YOUR_KEY]"
+    export RECAPTCHA_SITE_KEY="[YOUR_KEY]"
+    export RECAPTCHA_SECRET_KEY="[YOUR_KEY]"
 
 Remove the recaptcha lines from config/secrets.yml if you don't want to use captcha's all together.
 
