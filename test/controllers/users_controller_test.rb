@@ -149,7 +149,13 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test 'should create a schedule' do
+
+    @alice.schedule = nil
+    @alice.save!
+    @alice.reload
+
     sign_in @alice
+
     assert_nil @alice.schedule
 
     assert_not @alice.schedule_enabled

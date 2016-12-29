@@ -4,7 +4,7 @@ alice:
   signature: 'Greets, Alice'
   notify: true
   authentication_token: blabla
-  schedule: nil
+  schedule: default
   current_sign_in_at: <%= Time.now.to_s :db %>
 
 bob:
