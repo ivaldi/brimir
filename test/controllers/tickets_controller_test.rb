@@ -313,6 +313,10 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should notify agent when schedule is nil and ticket is created from MTA' do
     agent = users(:alice)
 
+    agent.schedule = nil
+    agent.save!
+    agent.reload
+
     assert_nil agent.schedule
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
@@ -502,6 +506,10 @@ class TicketsControllerTest < ActionController::TestCase
   # SCHEDULE NIL
   test 'should notify agent when schedule is nil when ticket is created' do
     agent = users(:alice)
+
+    agent.schedule = nil
+    agent.save!
+    agent.reload
 
     assert_nil agent.schedule
 
@@ -718,6 +726,11 @@ class TicketsControllerTest < ActionController::TestCase
   # SCHEDULE NIL
   test 'should notify agent when schedule is nil when ticket is created with logged in agent' do
     agent = users(:alice)
+
+    agent.schedule = nil
+    agent.save!
+    agent.reload
+
     sign_in agent
 
     assert_nil agent.schedule
