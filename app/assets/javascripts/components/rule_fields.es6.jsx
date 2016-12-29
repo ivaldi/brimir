@@ -36,7 +36,7 @@ class RuleFields extends React.Component {
         </label>
         <select onChange={this.operationSelected}
             name="rule[action_operation]"
-            value={this.props.action_operation}>
+            value={this.state.operation}>
           {actions}
         </select>
         <label htmlFor="rule[action_value]">
