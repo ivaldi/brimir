@@ -1,9 +1,9 @@
 <%
   # toggle label on/off
   if params[:label_id].to_i == label.id
-    p = { label_id: nil }
+    p = permitted_params.merge({ label_id: nil })
   else
-    p = { label_id: label.id }
+    p = permitted_params.merge({ label_id: label.id })
   end
 %>
 <li data-edit-label-row="<%= label.id %>">

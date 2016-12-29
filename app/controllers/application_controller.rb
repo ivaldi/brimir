@@ -39,6 +39,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def permitted_params
+    params.permit(:q, :status, :label_id)
+  end
+
+  helper_method :permitted_params
+
   protected
 
   def load_labels
