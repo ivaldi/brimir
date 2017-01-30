@@ -12,6 +12,9 @@ fr-FR:
   personal_settings: Règlages personnel
   sign_out: Se déconnecter
   delete: Supprimer
+  close: Fermer
+  wait: En Attente
+  merge: Fusionner
 
   joyride:
     tickets: Tous le monde peut créer des tickets avec ce bouton.
@@ -113,7 +116,7 @@ fr-FR:
   save_as_draft: Enregistrer comme brouillon
 
 # replies/_reply
-  reply_by: Répondre par
+  reply_by: Réponse de 
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Un billet de support vous a été attribué
@@ -129,13 +132,13 @@ fr-FR:
   view_new_ticket: Voir le nouveau billet
 # notification_mailer/new_reply
   new_reply: Nouvelle réponse
-  view_new_reply: Voir nouvelle réponse
+  view_new_reply: Voir la nouvelle réponse
 
 # attachments/_attachment
   download: télécharger
 
 # users/new
-  new_user: Nouveau utilisateur
+  new_user: Nouvel utilisateur
 
 # users/edit
   edit_user: Modifier l'utilisateur
@@ -191,12 +194,12 @@ fr-FR:
   trash_emptied: Tous les billets ont été supprimés de la corbeille
 
 # controllers/replies
-  reply_added: Réponse ajouté
+  reply_added: Réponse ajoutée
   draft_saved: Brouillon sauvegardé
 
 # controllers/omniauth
-  already_linked_accounts: Déjà lié à compte Google
-  successfully_linked_account: Réussite de la liaison au compte Google
+  already_linked_accounts: Déjà lié au compte Google
+  successfully_linked_account: Connection au compte Google réussie
   not_linked_account_cant_login: Il n'y a pas encore utilisateur attaché à ce fournisseur. S'il vous plaît connectez-vous une première fois et lier se compte via l'écran des paramètres personnels.
   third_party_failure: Une erreur est survenue lors de l'authentification. Avez-vous activé "Contacts API" et "Google+ API" via la console Google API?
 
@@ -210,7 +213,7 @@ fr-FR:
 # rules/edit
   edit_rule: Modifier règle
   delete_rule: Supprimer règle
-  are_you_sure: Êtes-vous sûr?
+  are_you_sure: En êtes-vous sûr?
 
 # controllers/rules
   rule_added: Règle ajoutée
