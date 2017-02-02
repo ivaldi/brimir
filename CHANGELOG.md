@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Better coverage for ticket creation, now covering situations with captcha. Contributed by @git-jls.
 - Moved Brimir to Rails version 5.0.0.1. Contributed by @git-jls.
 - Only add "New reply: " to subject of agent mails.
+- Return-Path is now filled with Tenant from address, to capture bounce mails when using aliases.
 
 ### Deprecated
 

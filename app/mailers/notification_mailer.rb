@@ -89,6 +89,9 @@ class NotificationMailer < ActionMailer::Base
       headers['Message-ID'] = "<#{ticket.message_id}>"
     end
 
+    # for bounces, we don't use aliases
+    headers['Return-Path'] = Tenant.current_tenant.from
+
     @ticket = ticket
     @user = user
 
@@ -113,6 +116,9 @@ class NotificationMailer < ActionMailer::Base
     unless reply.message_id.blank?
       headers['Message-ID'] = "<#{reply.message_id}>"
     end
+
+    # for bounces, we don't use aliases
+    headers['Return-Path'] = Tenant.current_tenant.from
 
     @reply = reply
     @user = user

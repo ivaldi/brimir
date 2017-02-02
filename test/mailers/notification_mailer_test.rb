@@ -28,6 +28,7 @@ class NotificationMailerTest < ActionMailer::TestCase
     mail = ActionMailer::Base.deliveries.last
     assert_equal "<#{ticket.message_id}>", mail['Message-ID'].to_s
     assert_equal email_addresses(:brimir).formatted, mail['From'].to_s
+    assert_equal 'support@test.host', mail['Return-Path'].to_s
   end
 
   test 'should notify user of new reply' do
@@ -41,6 +42,7 @@ class NotificationMailerTest < ActionMailer::TestCase
     assert_equal "<#{reply.ticket.message_id}>", mail['In-Reply-To'].to_s
     assert_equal "<#{reply.message_id}>", mail['Message-ID'].to_s
     assert_equal email_addresses(:brimir).formatted, mail['From'].to_s
+    assert_equal 'support@test.host', mail['Return-Path'].to_s
   end
 
   test 'should notify user of account creation' do
