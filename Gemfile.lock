@@ -263,7 +263,7 @@ GEM
     tilt (2.0.5)
     timecop (0.8.1)
     tins (1.13.0)
-    trix (0.9.10)
+    trix (0.10.1)
       rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -314,9 +314,9 @@ DEPENDENCIES
   spring (~> 2.0)
   sqlite3 (~> 1.3)
   timecop (~> 0.8)
-  trix (~> 0.9)
+  trix (~> 0.10, >= 0.10.1)
   uglifier (~> 3.0.0)
   will_paginate (~> 3.1)
 
 BUNDLED WITH
-   1.13.6
+   1.13.7

@@ -92,7 +92,7 @@ gem 'gravatar_image_tag', "~> 1.2"
 gem 'recaptcha', "~> 4.0", require: 'recaptcha/rails'
 
 # Trix WYSIWYG editor
-gem 'trix', "~> 0.9"
+gem 'trix', "~> 0.10", ">= 0.10.1"
 
 # React support
 gem 'react-rails', "~> 1.10"
