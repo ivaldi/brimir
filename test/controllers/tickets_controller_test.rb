@@ -22,6 +22,7 @@ class TicketsControllerTest < ActionController::TestCase
     @ticket = tickets(:problem)
     # read_fixture doesn't work in ActionController::TestCase, so use File.new
     @simple_email = File.new('test/fixtures/ticket_mailer/simple').read
+    @simple_base64_email = File.new('test/fixtures/ticket_mailer/simple_base64').read
   end
 
   teardown do
@@ -70,6 +71,18 @@ class TicketsControllerTest < ActionController::TestCase
 
     refute_equal 0, assigns(:ticket).notified_users.count
 
+  end
+
+  test 'should accept tickets in Base64 encoding' do
+    I18n.locale = :nl
+
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
+      assert_difference 'Ticket.count' do
+        post :create, message: @simple_base64_email, format: :json
+
+        assert_response :success
+      end
+    end
   end
 
   # BEGIN OF TESTS FOR TICKET CREATION
@@ -828,7 +841,7 @@ class TicketsControllerTest < ActionController::TestCase
   test 'should notify agent with schedule enabled and time within range working hours when ticked created with logged in agent' do
     agent = users(:charlie)
 
-    # we need to stub the start and end 
+    # we need to stub the start and end
     agent.schedule_enabled = true
     agent.schedule.start = '00:00'
     agent.schedule.end = '23:00'

@@ -163,7 +163,9 @@ class TicketsController < ApplicationController
     # the hook that is triggered when receiving an email.
     if params[:format] == 'json'
       using_hook = true # we assume different policies to create a ticket when we receive an email
-      @ticket = TicketMailer.receive(params[:message])
+      base64_message = ((params[:base64] == true) || !(params[:message][0,64] =~ /^([A-Za-z0-9+\/]{4})*([A-Za-z0-9+\/]{4}|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{2}==)$/).nil?)
+      message = base64_message ? Base64.decode64(params[:message].strip) : params[:message]
+      @ticket = TicketMailer.receive(message)
       if @tenant.notify_client_when_ticket_is_created
         # we should always have a (default) template when option is selected
         template = EmailTemplate.by_kind('ticket_received').active.first
@@ -180,7 +182,7 @@ class TicketsController < ApplicationController
     if !@tenant.ticket_creation_is_open_to_the_world? &&
           current_user.nil? && !using_hook
       render status: :forbidden, text: t(:access_denied)
-    elsif can_create_a_ticket(using_hook) && 
+    elsif can_create_a_ticket(using_hook) &&
         (@ticket.is_a?(Reply) || @ticket.save_with_label(params[:label]))
       notify_incoming @ticket
 
