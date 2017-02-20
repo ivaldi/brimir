@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Removed
 
 ### Fixed
+- Unread ticket status resulted in a big performance regression #345.
 
 ### Security
 

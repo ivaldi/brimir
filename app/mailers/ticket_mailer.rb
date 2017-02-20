@@ -125,7 +125,7 @@ class TicketMailer < ActionMailer::Base
         content_type: content_type,
         to_email_address: to_email_address,
         raw_message: StringIO.new(email.to_s),
-        unread_users: User.all # none of the users could have read this
+        unread_users: User.where(agent: true)
       })
 
       incoming = ticket
