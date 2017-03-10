@@ -59,7 +59,7 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
 
         post :create, params: {
-          message: @simple_email, format: :json 
+          message: @simple_email, format: :json
         }
 
         assert_response :success
@@ -78,7 +78,7 @@ class TicketsControllerTest < ActionController::TestCase
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
-        post :create, message: @simple_base64_email, format: :json
+        post :create, params: { message: @simple_base64_email, format: :json }
 
         assert_response :success
       end
