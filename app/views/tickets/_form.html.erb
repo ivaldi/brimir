@@ -30,7 +30,7 @@
     <p>
       <%
         options = [ ['unassigned', nil] ]
-        User.agents.map.each {|u| options << [u.email, u.id]}
+        User.agents.ordered.map.each {|u| options << [u.email, u.id]}
       %>
     <%= f.select :assignee_id, options_for_select(options), {}, tabindex: tabindex %>
     </p>
