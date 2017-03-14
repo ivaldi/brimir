@@ -3,7 +3,7 @@
 
   <%= form_for ticket, remote: true, method: :patch do |f| %>
     <p>
-      <%= f.select :assignee_id, options_from_collection_for_select(@agents, 'id', 'email', ticket.assignee_id), { include_blank: t(:unassigned) }, { class: 'select2' } %>
+      <%= f.select :assignee_id, options_from_collection_for_select(@agents.ordered, 'id', 'email', ticket.assignee_id), { include_blank: t(:unassigned) }, { class: 'select2' } %>
     </p>
     <%= f.submit t(:assign), class: 'small success no-m button' %>
   <% end %>
