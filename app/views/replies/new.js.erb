@@ -8,9 +8,12 @@
 <% if @reply.internal? %>
   jQuery('iframe').contents().find('#tinymce').css('background-color', '#fff6d9');
   jQuery('#reply_content').css('background-color', '').css('background-color', '#fff6d9');
+  jQuery('.reply-submit').text('<%= I18n.t(:attach_note) %>')
 <% else %>
   jQuery('iframe').contents().find('#tinymce').css('background-color', '');
   jQuery('#reply_content').css('background-color', '');
+  jQuery('.reply-submit').text('<%= I18n.t(:send_reply) %>')
+
 <% end %>
 
 jQuery('[data-notified-users]').html('<%= j result %>');
