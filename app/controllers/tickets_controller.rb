@@ -166,14 +166,7 @@ class TicketsController < ApplicationController
       base64_message = ((params[:base64] == true) || !(params[:message][0,64] =~ /^([A-Za-z0-9+\/]{4})*([A-Za-z0-9+\/]{4}|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{2}==)$/).nil?)
       message = base64_message ? Base64.decode64(params[:message].strip) : params[:message]
       @ticket = TicketMailer.receive(message)
-      if @tenant.notify_client_when_ticket_is_created
-        # we should always have a (default) template when option is selected
-        template = EmailTemplate.by_kind('ticket_received').active.first
-        unless template.nil?
-          @reply = SystemReply.create_from_assignment(@ticket, template)
-          @reply.try(:notification_mails).try(:each, &:deliver_now)
-        end
-      end
+      send_system_replies_when_needed
     else
       using_hook = false
       @ticket = Ticket.new(ticket_params)
@@ -185,6 +178,10 @@ class TicketsController < ApplicationController
     elsif can_create_a_ticket(using_hook) &&
         (@ticket.is_a?(Reply) || @ticket.save_with_label(params[:label]))
       notify_incoming @ticket
+
+      if @ticket.is_a?(Ticket)
+        send_system_replies_when_needed
+      end
 
       respond_to do |format|
         format.json { render json: @ticket, status: :created }
@@ -243,5 +240,16 @@ class TicketsController < ApplicationController
 
   def notify_incoming(ticket)
     NotificationMailer.incoming_message ticket, params[:message]
+  end
+
+  def send_system_replies_when_needed
+    if @tenant.notify_client_when_ticket_is_created
+      # we should always have a (default) template when option is selected
+      template = EmailTemplate.by_kind('ticket_received').active.first
+      unless template.nil?
+        @reply = SystemReply.create_from_assignment(@ticket, template)
+        @reply.try(:notification_mails).try(:each, &:deliver_now)
+      end
+    end
   end
 end
