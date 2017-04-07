@@ -156,9 +156,11 @@
 </section>
 
 <script>
-  window.onblur = function() {
-    window.onfocus = function() {
-      location.reload(true);
-    };
-  };
+  document.addEventListener("DOMContentLoaded", function(event) {
+    $(document).on('hide', function() {
+      $(document).on('show', function() {
+        location.reload(true);
+      });
+    });
+  });
 </script>
