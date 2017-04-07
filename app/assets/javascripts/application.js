@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery-visibility/jquery-visibility
 //= require react
 //= require react_ujs
 //= require components
