@@ -20,6 +20,7 @@
 //= require trix
 //= require tickets
 //= require fancybox
+//= require jquery-visibility
 
 (function() {
 
