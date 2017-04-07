@@ -127,9 +127,7 @@
 
     <%= javascript_include_tag 'application' %>
 
-    <% if user_signed_in? && current_user.agent? && current_user.sign_in_count == 1 %>
-      <% current_user.sign_in_count += 1 %>
-      <% current_user.save %>
+    <% if user_signed_in? && @show_joyride %>
       <ol class="joyride-list" data-joyride data-options="expose: true;scroll_speed: 1000;">
         <li data-id="joyride-tickets" data-text="<%= t('joyride.next') %>" data-options="prev_button: false; tip_location: top;">
           <h4><%= t(:new_ticket) %></h4>
