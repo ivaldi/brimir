@@ -98,7 +98,7 @@ gem 'trix', "~> 0.10", ">= 0.10.1"
 # React support
 gem 'react-rails', "~> 1.10"
 
-# Capistrano support
+# Capistrano for deployment
 group :development do
   gem 'capistrano', '~> 3.8'
   gem 'capistrano-rails', require: false
