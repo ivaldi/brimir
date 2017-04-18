@@ -108,6 +108,9 @@ en:
   merge_explanation: "Merge the selected tickets. This copies all replies to the oldest of the selected tickets and closes the other selected tickets."
   tickets_have_been_merged: "Tickets have been merged."
 
+# ticket/new
+  create_ticket: Create ticket
+  
 # replies/new
   add_reply: Add reply
 
