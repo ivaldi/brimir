@@ -109,7 +109,8 @@ de:
   reply: Antwort schreiben
   attach_files: Datei(en) anhängen
   attach_file: Datei anhängen
-  send_reply: Anwort senden
+  send_reply: Antwort senden
+  attach_note: Notiz anhängen
   on_date_author_wrote: 'Am %{date} hat %{author} folgendes geschrieben:'
   notification_will_be_sent_to: 'Es wird eine Benachrichtung an folgende Adresse gesendet:'
   save_as_draft: Als Entwurf speichern
