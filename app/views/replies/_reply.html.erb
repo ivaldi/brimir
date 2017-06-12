@@ -43,6 +43,14 @@
         <% if reply.raw_message_file_size.to_i > 0 %>
           <a class="pull-right text-default" href="<%= reply_path(reply, format: :eml) %>"><%= fa_icon 'save' %></a>
         <% end %>
+
+        <% if can?(:split_off, reply) && !reply.kind_of?(StatusReply) %>
+          <%= link_to reply_split_off_path(reply_id: reply.id), method: 'post', class: 'pull-right text-default split-off-ticket' do %>
+            <i class="fa fa-code-fork"></i>
+            <%= t :split_off_ticket %>
+          <% end %>
+        <% end %>
+
         <% if reply.content_type == 'html' %>
           <% if reply.is_a? SystemReply %>
             <%= render('/shared/content_for_system_reply', reply: reply) %>

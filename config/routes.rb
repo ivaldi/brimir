@@ -23,7 +23,9 @@ Brimir::Application.routes.draw do
 
   resources :labels, only: [:destroy, :update, :index, :edit]
 
-  resources :replies, only: [:create, :new, :update, :show]
+  resources :replies, only: [:create, :new, :update, :show] do
+    post :split_off, to: 'tickets/split_off#create'
+  end
 
   get '/attachments/:id/:format' => 'attachments#show'
   resources :attachments, only: [:index, :new]
