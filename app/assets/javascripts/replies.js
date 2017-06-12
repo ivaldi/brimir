@@ -1,10 +1,16 @@
 jQuery(function() {
-  //jQuery(document).on('click', '.split-off-ticket', function(event) {
+
+  var current_selection = "";
+
+  jQuery(document).on('mouseup', 'body', function() {
+    current_selection = window.getSelection().toString();
+  })
+
   jQuery('.split-off-ticket').bind('click', function(event) {
-    if (window.getSelection().toString() != "") {
+    if (current_selection != "") {
       var url = $(this).attr('href') + ".json";
       var data = {
-        selected_text: window.getSelection().toString()
+        selected_text: current_selection
       }
 
       jQuery.ajax({
