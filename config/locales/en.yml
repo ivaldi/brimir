@@ -99,6 +99,10 @@ en:
   change_assignee: Assign ticket
   assign: Assign
 
+# tickets/_change_subject_form
+  change_subject: Rename subject
+  str1_has_renamed_ticket_from_str2_to_str3: "%{str1} has renamed the ticket from '%{str2}' to '%{str3}'."
+
 # tickets/locks/create
   ticket_locked_by_somebody_else: Ticket is currently already being handled by somebody else
 

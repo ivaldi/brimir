@@ -1,0 +1,13 @@
+<div id="change-subject" class="reveal-modal small" data-reveal>
+  <h3><%= t(:change_subject) %></h3>
+
+  <%= form_for ticket, remote: true, method: :patch do |f| %>
+    <p>
+      <%= f.text_field :subject %>
+    </p>
+    <%= f.submit t(:change_subject), class: 'small success no-m button' %>
+  <% end %>
+
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
