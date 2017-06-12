@@ -125,6 +125,10 @@ de:
   save_as_draft: Als Entwurf speichern
   internal_note: Interne Notiz
 
+# replies/_reply
+  reply_by: Antwort von
+  split_off_ticket: Ticket abspalten
+
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ihnen wurde ein Ticket zugewiesen
 

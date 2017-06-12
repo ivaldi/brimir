@@ -135,6 +135,7 @@ en:
 
 # replies/_reply
   reply_by: Reply by
+  split_off_ticket: Split off ticket
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket assigned to you

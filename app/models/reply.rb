@@ -66,4 +66,27 @@ class Reply < ApplicationRecord
   def first?
     reply_to_type == 'Ticket'
   end
+
+  def to_ticket
+    Ticket.new(
+      content: self.content,
+      subject: self.ticket.subject,
+      text_content: self.text_content,
+      created_at: self.created_at,
+      updated_at: self.updated_at,
+      user_id: self.user_id,
+      message_id: self.message_id,
+      content_type: self.content_type,
+      raw_message_file_name: self.raw_message_file_name,
+      raw_message_content_type: self.raw_message_content_type,
+      raw_message_file_size: self.raw_message_file_size,
+      raw_message_updated_at: self.raw_message_updated_at,
+      notified_user_ids: self.notified_user_ids,
+      attachments: self.attachments.collect { |attachment|
+        new_attachment = attachment.dup
+        new_attachment.file = attachment.file
+        new_attachment
+      }
+    )
+  end
 end

@@ -69,6 +69,11 @@ class Ability
     # limited agents can view their own tickets, replies and attachments
     can [:create, :read], Reply, ticket: { user_id: user.id }
 
+    # agents can split off replies as tickets
+    can :split_off, Reply do |reply|
+      can?(:update, reply.ticket)
+    end
+
     # limited agents can edit their own account
     can :update, User, id: user.id
 
@@ -93,6 +98,9 @@ class Ability
 
     # can view all replies
     can :read, Reply
+
+    # agents can split off replies as tickets
+    can :split_off, Reply
 
     # agents can edit all users
     can [:read, :create, :update], User
