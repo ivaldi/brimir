@@ -115,6 +115,13 @@ class TicketsController < ApplicationController
 
         end
 
+        # change ticket subject
+        if @ticket.previous_changes.include? :subject
+          old_subject = @ticket.previous_changes[:subject].first
+          new_subject = @ticket.previous_changes[:subject].last
+          StatusReply.create_from_subject_change(@ticket, old_subject, new_subject, current_user)
+        end
+
         # status replies
         if @tenant.notify_client_when_ticket_is_assigned_or_closed
           if !@ticket.assignee.nil?

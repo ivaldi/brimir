@@ -12,6 +12,14 @@ class StatusReply < Reply
     create_from_status_message message, ticket, current_user
   end
 
+  def self.create_from_subject_change(ticket, old_subject, new_subject, current_user)
+    message = I18n.t(:str1_has_renamed_ticket_from_str2_to_str3, str1: current_user.name, str2: old_subject, str3: new_subject)
+    reply = create_from_status_message message, ticket, current_user
+    reply.notified_users = []
+    reply.save
+    return reply
+  end
+
   def self.create_from_status_message(message, ticket, current_user)
     reply = self.create content: message, ticket_id: ticket.id, user_id: current_user.id
     reply.reply_to = ticket

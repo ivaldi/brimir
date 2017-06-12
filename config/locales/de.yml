@@ -95,6 +95,10 @@ de:
   change_assignee: Ticket zuweisen
   assign: Ticket zuweisen
 
+# tickets/_change_subject_form
+  change_subject: Ticket umbenennen
+  str1_has_renamed_ticket_from_str2_to_str3: "%{str1} hat das Ticket von '%{str2}' in '%{str3}' umbenannt."
+
 # tickets/merge
   ticket_has_been_merged_to: "Dieses Ticket wurde mit Ticket #%{ticket_id} zusammengeführt."
   merge: Zusammenführen
