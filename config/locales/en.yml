@@ -100,7 +100,7 @@ en:
   assign: Assign
 
 # tickets/_change_subject_form
-  change_subject: Rename subject
+  change_subject: Rename ticket
   str1_has_renamed_ticket_from_str2_to_str3: "%{str1} has renamed the ticket from '%{str2}' to '%{str3}'."
 
 # tickets/locks/create
