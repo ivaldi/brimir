@@ -8,9 +8,9 @@
           </div>
           <div class="medium-11 columns pll pts prl">
             <span><%= t(:reply_by) %> <strong><%= reply.ticket.reply_from_address %></strong></span>
-            <span class="right" title="<%= l reply.updated_at.in_time_zone(current_user.time_zone), format: :long %>">
+            <span class="right" title="<%= l reply.created_at.in_time_zone(current_user.time_zone), format: :long %>">
               <i class="fa fa-clock-o"></i>
-              <%= time_ago_in_words(reply.updated_at.in_time_zone(current_user.time_zone)) %>
+              <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %>
               <%= t(:ago) %>
             </span>
           </div>
@@ -24,12 +24,12 @@
           </div>
           <div class="medium-11 columns pll pts prl">
             <span><%= t(:reply_by) %> <strong><%= reply.user.email %></strong></span>
-            <span class="right" title="<%= l reply.updated_at.in_time_zone(current_user.time_zone), format: :long %>">
+            <span class="right" title="<%= l reply.created_at.in_time_zone(current_user.time_zone), format: :long %>">
             <% if reply.attachments.count > 0 %>
               <i class="fa fa-paperclip"></i>
             <% end %>
               <i class="fa fa-clock-o"></i>
-              <%= time_ago_in_words(reply.updated_at.in_time_zone(current_user.time_zone)) %>
+              <%= time_ago_in_words(reply.created_at.in_time_zone(current_user.time_zone)) %>
               <%= t(:ago) %>
             </span>
           </div>
