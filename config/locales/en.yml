@@ -108,6 +108,12 @@ en:
   merge_explanation: "Merge the selected tickets. This copies all replies to the oldest of the selected tickets and closes the other selected tickets."
   tickets_have_been_merged: "Tickets have been merged."
 
+# email_imports/new
+  import_emails: Import emails
+  upload_eml_files_to_import_them_as_new_tickets: "Upload eml files here in order to import them as new tickets."
+  upload_files: Upload files
+  perform_email_import: Perform email import
+
 # replies/new
   add_reply: Add reply
 
