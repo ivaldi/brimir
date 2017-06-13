@@ -11,7 +11,7 @@ class Tickets::SplitOffController < ApplicationController
       # then a new ticket is created with just that text.
       # This is useful if the client has presented several issues
       # in one ticket.
-      ticket.content = params[:selected_text] if params[:selected_text]
+      ticket.content = params[:selected_text]
     else
       # If the agent has not selected text, the reply is just converted
       # into a ticket. The reply can be destroyed as the complete reply
