@@ -101,6 +101,11 @@ de:
   merge_explanation: "Ausgewählte Tickets zusammenführen. Dies kopiert die Antworten der ausgewählten Tickets in das älteste diser Tickets. Die übrigen ausgewählten Tickets werden geschlossen."
   tickets_have_been_merged: "Tickets wurden zusammengeführt."
 
+# email_imports/new
+  import_emails: E-Mails importieren
+  upload_eml_files_to_import_them_as_new_tickets: "E-Mail-Dateien (*.eml) hochladen, um die E-Mails als neue Tickets zu importieren."
+  upload_files: Dateien hochladen
+  perform_email_import: E-Mail-Import ausführen
 
 # replies/new
   add_reply: Antworten

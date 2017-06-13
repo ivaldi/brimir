@@ -122,6 +122,8 @@ class Ability
     can :manage, Label
     can :manage, EmailTemplate
 
+    can :create, :email_imports
+
     can :update, Tenant, id: Tenant.current_tenant.id
   end
 end

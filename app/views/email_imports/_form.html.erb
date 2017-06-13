@@ -1,0 +1,12 @@
+<%= form_for :email_import, url: email_imports_path, html: {multipart: true} do |f| %>
+  <h3><%= t(:import_emails) %></h3>
+  <p><%= t(:upload_eml_files_to_import_them_as_new_tickets) %></p>
+
+  <div class="panel mb ptl pbl mbxl">
+    <h5><%= fa_icon 'paperclip fw' %><%= t(:upload_files) %></h5>
+
+    <%= file_field_tag :files, label: false, multiple: true, accept: '.eml', name: 'files[]' %>
+  </div>
+
+  <p><%= f.submit t(:perform_email_import), class: 'button regular radius' %></p>
+<% end %>

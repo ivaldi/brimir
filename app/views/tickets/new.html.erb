@@ -1,4 +1,8 @@
 <div class="row">
+  <% if can? :create, :email_imports %>
+    <%= link_to t(:import_emails), new_email_import_path, class: 'button pull-right'%>
+  <% end %>
+
   <div class="medium-9 columns" style="background: #fff <%# for unauthenticated form %>">
 
     <%= render 'form' %>
