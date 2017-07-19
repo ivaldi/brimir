@@ -5,6 +5,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## Brimir unreleased (to be announced)
 ### Added
 - Ability to import .eml files for mails sent to wrong email address. Contributed by @fiedl.
+- Ability to rename tickets. Contributed by @fiedl.
 
 ### Changed
 - Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.
