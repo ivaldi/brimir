@@ -173,7 +173,6 @@ class TicketsController < ApplicationController
       base64_message = ((params[:base64] == true) || !(params[:message][0,64] =~ /^([A-Za-z0-9+\/]{4})*([A-Za-z0-9+\/]{4}|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{2}==)$/).nil?)
       message = base64_message ? Base64.decode64(params[:message].strip) : params[:message]
       @ticket = TicketMailer.receive(message)
-      send_system_replies_when_needed
     else
       using_hook = false
       @ticket = Ticket.new(ticket_params)
