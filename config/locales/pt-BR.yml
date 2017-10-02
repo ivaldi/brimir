@@ -52,7 +52,7 @@ pt-BR:
 # tickets/index
   count_tickets:
     one: '%{count} chamado'
-    other: '%{count} chamadoss'
+    other: '%{count} chamados'
   count_tickets_containing:
     one: 'Contém %{count} chamados'
     other: 'Contém %{count} chamados'
@@ -212,8 +212,8 @@ pt-BR:
   draft_saved: Rascunho salvo
 
 # controllers/omniauth
-  already_linked_accounts: Já ligada à conta do Google
-  successfully_linked_account: Ligada à conta do Google com sucesso
+  already_linked_accounts: Já está conectado à conta do Google
+  successfully_linked_account: Conectado à conta do Google com sucesso
   not_linked_account_cant_login: Não há nenhum usuário conectado a este provedor ainda. Faça o login em primeiro lugar e conecte-se através da tela de configurações pessoais.
   third_party_failure: Ocorreu um erro durante a autenticação. Você ativou o "Contatos API" e "API do Google+" através do console API do Google?
 
