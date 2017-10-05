@@ -399,3 +399,4 @@ pt-BR:
         notify_client_when_ticket_is_created: Notificar o cliente quando um novo chamado criado é recebido.
         notify_user_when_account_is_created: Notificar quando uma conta de usuário for criada.
         stylesheet_url: Adicione o caminho do seu estilo personalizado.
+        ticket_creation_is_open_to_the_world: Criação de tickets aberta para todos.

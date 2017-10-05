@@ -29,7 +29,7 @@
   <% if can? :update, @ticket %>
     <p>
       <%
-        options = [ ['unassigned', nil] ]
+        options = [ [t(:unassigned), nil] ]
         User.agents.ordered.map.each {|u| options << [u.email, u.id]}
       %>
     <%= f.select :assignee_id, options_for_select(options), {}, tabindex: tabindex %>
@@ -37,7 +37,7 @@
 
     <p>
       <%= f.select :priority, options_for_select(
-        Ticket.priorities.keys.each { |k| [t(k), k] }, f.object.priority), {}, tabindex: tabindex %>
+        Ticket.priorities.keys.map { |k| [t(k.to_sym), k] }, f.object.priority), {}, tabindex: tabindex %>
     </p>
   <% end %>
 
