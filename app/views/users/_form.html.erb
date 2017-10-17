@@ -21,6 +21,8 @@
             <%= f.check_box :agent, label: t(:user_is_an_agent), tabindex: tabindex %>
         <% end %>
 
+        <%= f.check_box :is_active, label: t(:is_active), tabindex: tabindex %>
+
         <%= f.select :time_zone, @time_zones, {}, tabindex: tabindex %>
 
         <%= f.select :locale, @locales, {}, tabindex: tabindex %>

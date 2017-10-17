@@ -45,6 +45,14 @@ class User < ApplicationRecord
     self.agent = true
   end
 
+  scope :actives, -> {
+    where(is_active: true)
+  }
+
+  scope :inactives, -> {
+    where(is_active: false)
+  }
+
   scope :agents, -> {
     where(agent: true)
   }
@@ -84,9 +92,10 @@ class User < ApplicationRecord
     email.split('@').first
   end
 
+  # notify only active agents
   def self.agents_to_notify
     User.agents
-        .where(notify: true)
+        .where(notify: true).actives
   end
 
   # Does the email address of this user belong to the ticket system
@@ -121,5 +130,9 @@ class User < ApplicationRecord
     if encrypted_password.blank?
       self.password = Devise.friendly_token.first(12)
     end
+  end
+
+  def active_for_authentication?
+      super and self.is_active
   end
 end
