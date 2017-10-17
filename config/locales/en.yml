@@ -181,7 +181,7 @@ en:
   account_settings: Account Settings
   only_fill_in_passwords_when_modifying: Only fill in these two fields if you want to modify your password.
   user_is_an_agent: User is an agent
-  is_active: Is active
+  active: Is active
   receive_new_ticket_notifications: Receive notifications for new tickets
   email_settings: Email Settings
   save: Save

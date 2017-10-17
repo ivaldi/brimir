@@ -210,7 +210,8 @@ ActiveRecord::Schema.define(version: 20171016140901) do
     t.string   "name"
     t.integer  "schedule_id"
     t.boolean  "schedule_enabled",       default: false
-    t.boolean  "is_active",              default: true,  null: false
+    t.boolean  "active",              default: true,  null: false
+    t.boolean  "active",                 default: true,  null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["schedule_id"], name: "index_users_on_schedule_id"

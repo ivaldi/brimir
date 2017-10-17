@@ -46,11 +46,11 @@ class User < ApplicationRecord
   end
 
   scope :actives, -> {
-    where(is_active: true)
+    where(active: true)
   }
 
   scope :inactives, -> {
-    where(is_active: false)
+    where(active: false)
   }
 
   scope :agents, -> {
@@ -133,6 +133,6 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-      super and self.is_active
+      super and self.active
   end
 end

@@ -26,7 +26,7 @@ module UsersStrongParams
         :remember_me,
         :signature,
         :agent,
-        :is_active,
+        :active,
         :notify,
         :time_zone,
         :locale,
