@@ -21,6 +21,7 @@
                 <%= text_field_tag :q, params[:q], class: 'no-m radius-tl radius-bl' %>
               </div>
 
+              <label class="ib mts"><%= check_box_tag :is_active, 0, params[:is_active] %><%= t(:inactive) %></label>
               <label class="ib mts mll mrl pull-right"><%= radio_button_tag :agent, 0, params[:agent] == '0' %> <%= t(:customer) %></label>
               <label class="ib mts pull-right"><%= radio_button_tag :agent, 1, params[:agent] == '1' %> <%= t(:agent) %></label>
 
