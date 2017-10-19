@@ -51,7 +51,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.ordered.paginate(page: params[:page])
-    @users = @users.search(params[:q])
+    @users = @users.actives.search(params[:q]) if params[:active].blank?
+    @users = @users.inactives.search(params[:q]) unless params[:active].blank?
     @users = @users.by_agent(params[:agent] == '1') unless params[:agent].blank?
   end
 

@@ -51,9 +51,10 @@ module Tickets
 
       unless @tickets.count == 0
         merged_ticket = Ticket.merge @tickets, current_user: current_user
+        redirect_to merged_ticket, notice: t(:tickets_have_been_merged)
+      else
+        redirect_to :back, notice: t(:tickets_status_modified)
       end
-      redirect_to merged_ticket, notice: t(:tickets_have_been_merged)
     end
   end
 end
-

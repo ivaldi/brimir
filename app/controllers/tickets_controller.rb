@@ -28,10 +28,12 @@ class TicketsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :create, if: 'request.format.json?'
 
   def show
+    @users = User.actives
+    
     # first time seeing this ticket?
     @ticket.mark_read current_user if @ticket.is_unread? current_user
 
-    @agents = User.agents
+    @agents = User.agents.actives
 
     draft = @ticket.replies
         .where('user_id IS NULL OR user_id = ?', current_user.id)
@@ -70,7 +72,7 @@ class TicketsController < ApplicationController
   end
 
   def index
-    @agents = User.agents
+    @agents = User.agents.actives
 
     params[:status] ||= 'open' unless params[:user_id]
 
@@ -154,6 +156,8 @@ class TicketsController < ApplicationController
   end
 
   def new
+    @agents = User.agents.actives
+
     if !@tenant.ticket_creation_is_open_to_the_world? &&
           current_user.nil?
       render status: :forbidden, text: t(:access_denied)
