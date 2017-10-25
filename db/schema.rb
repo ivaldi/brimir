@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(version: 20171016140901) do
 
   create_table "labelings", force: :cascade do |t|
     t.integer  "label_id"
-    t.integer  "labelable_id"
     t.string   "labelable_type"
+    t.integer  "labelable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["label_id", "labelable_id", "labelable_type"], name: "unique_labeling_label", unique: true
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 20171016140901) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer  "notifiable_id"
     t.string   "notifiable_type"
+    t.integer  "notifiable_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
