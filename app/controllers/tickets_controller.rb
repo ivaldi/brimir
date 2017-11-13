@@ -208,6 +208,7 @@ class TicketsController < ApplicationController
       respond_to do |format|
         format.html {
           @email_addresses = EmailAddress.verified.ordered
+          @agents = User.agents.actives
           render 'new'
         }
         format.json {
