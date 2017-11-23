@@ -11,6 +11,9 @@ zh-CN:
   personal_settings: 个人设置
   sign_out: 注销
   delete: 删除
+  close: 关闭
+  wait: 等待
+  merge: 合并
 
   joyride:
     tickets: 任何人都可以使用这个按钮新建一个咨询
