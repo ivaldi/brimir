@@ -42,7 +42,7 @@ If you want to use LDAP, configure config/ldap.yml accordingly, then change the 
 (Optional for LDAP) Last thing left to do before logging in is making a user and adding some statuses. You can do this by running:
 
     bin/rails console production
-    u = User.new({ email: 'your@email.address', password: 'somepassword', password_confirmation: 'somepassword' }); u.agent = true; u.save!
+    u = User.new({ email: 'your@email.address', password: 'somepassword' }); u.agent = true; u.save!
 
 Configuring Captcha's
 ---------------------
