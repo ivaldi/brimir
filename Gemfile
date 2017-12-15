@@ -7,6 +7,8 @@ gem 'coffee-rails', "~> 4.2.0"
 
 gem 'uglifier', "~> 3.0.0"
 
+gem 'therubyracer'
+
 gem 'compass-rails', '~> 3.0.0'
 gem 'foundation-rails', '~> 5.5.0'
 
