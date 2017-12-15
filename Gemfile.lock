@@ -150,6 +150,7 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.4.1)
       launchy (~> 2.2)
+    libv8 (3.16.14.19)
     loofah (2.1.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -250,6 +251,7 @@ GEM
       tilt
     recaptcha (4.0.0)
       json
+    ref (2.0.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     sass (3.4.22)
@@ -282,6 +284,9 @@ GEM
       net-ssh (>= 2.8.0)
     term-ansicolor (1.4.0)
       tins (~> 1.0)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
+      ref
     thor (0.19.4)
     thread_safe (0.3.6)
     tilt (2.0.5)
@@ -341,10 +346,11 @@ DEPENDENCIES
   select2-rails (~> 3.5)
   spring (~> 2.0)
   sqlite3 (~> 1.3)
+  therubyracer
   timecop (~> 0.8)
   trix (~> 0.10, >= 0.10.1)
   uglifier (~> 3.0.0)
   will_paginate (~> 3.1)
 
 BUNDLED WITH
-   1.15.4
+   1.16.0
