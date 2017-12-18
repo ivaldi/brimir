@@ -11,6 +11,8 @@ Any Rails application needs a web server with Ruby support first. We use Phusion
 
 After setting up a webserver, you have to create a database for Brimir and modify the config file in `config/database.yml` to reflect the details. Set your details under the production section. We advise to use `adapter: postgresql` or `adapter: mysql2` for production usage, because those are the only two adapters and database servers we test. *If you plan to use MySQL, make sure you use utf8 as your charset and collation.*
 
+Your server will need a JavaScript runtime supported by [execjs](https://github.com/rails/execjs). We recommend [Node.js](https://nodejs.org/). The Node.js packages shipped by your distribution should be sufficient for this application.  Install via `apt-get install nodejs` on Debian/Ubuntu or `yum install nodejs` on RHEL/CentOS.
+
 Next up: configuring your outgoing email address and url. This can be set in `config/environments/production.rb` by adding the following lines *before* the keyword `end`:
 
     config.action_mailer.default_options = { from: 'brimir@yoururl.com' }
