@@ -224,7 +224,7 @@ class TicketsController < ApplicationController
 
   protected
   def can_create_a_ticket(using_hook)
-    if @ticket.nil? || !@ticket.valid?
+    if @ticket.nil? || !@ticket.valid? || (!using_hook && !@ticket.valid?(:web_form))
       flash.now[:alert] = I18n::translate(:form_validation_error)
       false
     # relax policy for requests coming from emails

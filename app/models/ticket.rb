@@ -20,6 +20,7 @@ class Ticket < ApplicationRecord
   include TicketMerge
 
   validates_presence_of :user_id
+  validates_presence_of :content, :subject, on: :web_form
 
   belongs_to :user
   belongs_to :assignee, class_name: 'User'
