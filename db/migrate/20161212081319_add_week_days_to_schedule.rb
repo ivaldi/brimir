@@ -1,4 +1,4 @@
-class AddWeekDaysToSchedule < ActiveRecord::Migration
+class AddWeekDaysToSchedule < ActiveRecord::Migration[4.2]
   def change
     add_column :schedules, :monday, :boolean, default: true, null: false
     add_column :schedules, :tuesday, :boolean, default: true, null: false

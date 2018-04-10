@@ -21,10 +21,10 @@ class Ticket < ApplicationRecord
 
   validates_presence_of :user_id
 
-  belongs_to :user
-  belongs_to :assignee, class_name: 'User'
-  belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress'
-  belongs_to :locked_by, class_name: 'User'
+  belongs_to :user, optional: true
+  belongs_to :assignee, class_name: 'User', optional: true
+  belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress', optional: true
+  belongs_to :locked_by, class_name: 'User', optional: true
 
   has_many :replies, dependent: :destroy
   has_many :labelings, as: :labelable, dependent: :destroy
@@ -77,7 +77,7 @@ class Ticket < ApplicationRecord
       all
     end
   }
-  
+
   scope :filter_by_user_id, ->(user_id) {
     if user_id
       where(user_id: user_id)
@@ -213,8 +213,7 @@ class Ticket < ApplicationRecord
     end
 
     def log_status_change
-
-      if self.changed.include? 'status'
+      if saved_changes.transform_values(&:first).include? 'status'
         previous = status_changes.ordered.last
 
         unless previous.nil?

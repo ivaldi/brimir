@@ -1,4 +1,4 @@
-class CreateLabelings < ActiveRecord::Migration
+class CreateLabelings < ActiveRecord::Migration[4.2]
   def change
     create_table :labelings do |t|
       t.references :label, index: true

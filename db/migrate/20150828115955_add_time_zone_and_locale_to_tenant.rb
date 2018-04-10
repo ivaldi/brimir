@@ -1,4 +1,4 @@
-class AddTimeZoneAndLocaleToTenant < ActiveRecord::Migration
+class AddTimeZoneAndLocaleToTenant < ActiveRecord::Migration[4.2]
   def change
     if Tenant.postgresql?
       old = Tenant.connection.schema_search_path

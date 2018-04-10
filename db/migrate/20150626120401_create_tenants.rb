@@ -1,4 +1,4 @@
-class CreateTenants < ActiveRecord::Migration
+class CreateTenants < ActiveRecord::Migration[4.2]
   def up
     if Tenant.postgresql?
       old = Tenant.connection.schema_search_path

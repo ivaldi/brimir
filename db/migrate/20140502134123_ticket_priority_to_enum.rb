@@ -1,4 +1,4 @@
-class TicketPriorityToEnum < ActiveRecord::Migration
+class TicketPriorityToEnum < ActiveRecord::Migration[4.2]
   class OldPriority < ActiveRecord::Base
     self.table_name = 'priorities'
     has_many :tickets, foreign_key: 'priority_id'

@@ -27,10 +27,10 @@ class User < ApplicationRecord
       foreign_key: 'assignee_id', dependent: :nullify
   has_many :notifications, dependent: :destroy
 
-  belongs_to :schedule
+  belongs_to :schedule, optional: true
 
-  # identities for omniauth
-  has_many :identities
+  # identities for omniaut
+  has_many :identitie
 
   has_and_belongs_to_many :unread_tickets, class_name: 'Ticket'
 

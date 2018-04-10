@@ -27,7 +27,7 @@ class Reply < ApplicationRecord
   validates :ticket_id, :content, presence: true
 
   belongs_to :ticket, touch: true
-  belongs_to :user
+  belongs_to :user, optional: true
 
   accepts_nested_attributes_for :ticket
 

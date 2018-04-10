@@ -1,4 +1,4 @@
-class AddContentTypesToRepliesAndTickets < ActiveRecord::Migration
+class AddContentTypesToRepliesAndTickets < ActiveRecord::Migration[4.2]
   def change
     Reply.all.each do |reply|
       if reply.content_type == 'markdown'

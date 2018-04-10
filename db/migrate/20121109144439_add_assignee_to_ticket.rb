@@ -1,4 +1,4 @@
-class AddAssigneeToTicket < ActiveRecord::Migration
+class AddAssigneeToTicket < ActiveRecord::Migration[4.2]
   def change
     add_column :tickets, :assignee_id, :integer
 
