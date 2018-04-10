@@ -49,8 +49,8 @@ GEM
       execjs (~> 2.0)
     bcrypt (3.1.11)
     builder (3.2.3)
-    byebug (9.1.0)
-    cancancan (1.17.0)
+    byebug (10.0.2)
+    cancancan (2.1.4)
     capistrano (3.10.1)
       airbrussh (>= 1.0.0)
       i18n
@@ -301,8 +301,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug (~> 9.0)
-  cancancan (~> 1.15)
+  byebug (~> 10.0)
+  cancancan (~> 2.1, >= 2.1.4)
   capistrano (~> 3.8)
   capistrano-bundler
   capistrano-rails
@@ -313,7 +313,7 @@ DEPENDENCIES
   devise-i18n (~> 1.1)
   devise_ldap_authenticatable (~> 0.8)
   fancybox2-rails (~> 0.2)
-  font-awesome-rails (~> 4.0)
+  font-awesome-rails (~> 4.7)
   foundation-rails (~> 5.5.0)
   foundation_rails_helper (~> 2.0)
   gravatar_image_tag (~> 1.2)
@@ -325,9 +325,9 @@ DEPENDENCIES
   mail
   mysql2 (~> 0.4)
   omniauth-google-oauth2 (~> 0.4)
-  paperclip (~> 5.1)
+  paperclip (~> 5.3)
   pg (~> 0.19)
-  pry (~> 0.10)
+  pry (~> 0.11)
   rails (~> 5.1.0)
   rails-controller-testing
   rails-i18n (~> 5.0)
@@ -338,7 +338,7 @@ DEPENDENCIES
   select2-rails (~> 3.5)
   spring (~> 2.0)
   sqlite3 (~> 1.3)
-  timecop (~> 0.8)
+  timecop (~> 0.9)
   trix (~> 0.10, >= 0.10.1)
   uglifier (~> 3.0.0)
   will_paginate (~> 3.1)

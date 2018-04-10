@@ -17,8 +17,8 @@ gem 'jquery-visibility-rails'
 gem 'foundation_rails_helper', "~> 2.0"
 
 # to use debugger
-gem 'byebug', "~> 9.0", group: [:development, :test]
-gem 'pry', "~> 0.10", group: [:development, :test]
+gem 'byebug', '~> 10.0', group: [:development, :test]
+gem 'pry', "~> 0.11", group: [:development, :test]
 
 # We need this to not break the test suite as `assigns` and `assert_template` have been remove and extracted to a gem in Rails 5
 gem 'rails-controller-testing', group: [:test]
@@ -39,7 +39,7 @@ group :test do
   # for coveralls
   gem 'coveralls', "~> 0.8"
 
-  gem 'timecop', "~> 0.8"
+  gem 'timecop', "~> 0.9"
 end
 
 # Optional PostgreSQL for production
@@ -60,18 +60,18 @@ gem 'mail'
 gem 'omniauth-google-oauth2', "~> 0.4"
 
 # authorization
-gem 'cancancan', "~> 1.15"
+gem 'cancancan', '~> 2.1', '>= 2.1.4'
 
 # pagination
 gem 'will_paginate', "~> 3.1"
 
 # attachments, thumbnails etc
-gem 'paperclip', "~> 5.1"
+gem 'paperclip', "~> 5.3"
 
 # select2 replacement for selectboxes
 gem 'select2-rails', '~> 3.5' # newer breaks Foundation Reveal on tickets#show
 
-gem 'font-awesome-rails', '~> 4.0'
+gem 'font-awesome-rails', '~> 4.7'
 
 # for language detection
 gem 'http_accept_language', "~> 2.1"
