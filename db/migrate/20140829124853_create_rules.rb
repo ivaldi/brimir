@@ -1,4 +1,4 @@
-class CreateRules < ActiveRecord::Migration
+class CreateRules < ActiveRecord::Migration[4.2]
   def change
     create_table :rules do |t|
       t.string :filter_field

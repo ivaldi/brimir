@@ -1,4 +1,4 @@
-class AddTypeToReplies < ActiveRecord::Migration
+class AddTypeToReplies < ActiveRecord::Migration[4.2]
   def change
     add_column :replies, :type, :string
   end

@@ -1,4 +1,4 @@
-class CreateStatusChanges < ActiveRecord::Migration
+class CreateStatusChanges < ActiveRecord::Migration[4.2]
   def change
     create_table :status_changes do |t|
       t.references :ticket, index: true

@@ -1,4 +1,4 @@
-class RemoveSubAgents < ActiveRecord::Migration
+class RemoveSubAgents < ActiveRecord::Migration[4.2]
   def up
     # convert sub agents to normal customers
     User.where.not(incoming_address: nil).each do |user|

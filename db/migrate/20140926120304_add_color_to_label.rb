@@ -1,4 +1,4 @@
-class AddColorToLabel < ActiveRecord::Migration
+class AddColorToLabel < ActiveRecord::Migration[4.2]
   def change
     add_column :labels, :color, :string
     Label.all.each do |label|

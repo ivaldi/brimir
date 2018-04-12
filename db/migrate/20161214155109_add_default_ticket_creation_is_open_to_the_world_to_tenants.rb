@@ -1,4 +1,4 @@
-class AddDefaultTicketCreationIsOpenToTheWorldToTenants < ActiveRecord::Migration
+class AddDefaultTicketCreationIsOpenToTheWorldToTenants < ActiveRecord::Migration[4.2]
   def up
     change_column :tenants, :ticket_creation_is_open_to_the_world, :boolean, default: true
     Tenant.where(ticket_creation_is_open_to_the_world: nil).update_all(ticket_creation_is_open_to_the_world: true)
