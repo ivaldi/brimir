@@ -21,7 +21,7 @@ class Ticket < ApplicationRecord
 
   validates_presence_of :user_id
 
-  belongs_to :user, optional: true
+  belongs_to :user, optional: false
   belongs_to :assignee, class_name: 'User', optional: true
   belongs_to :to_email_address, -> { EmailAddress.verified }, class_name: 'EmailAddress', optional: true
   belongs_to :locked_by, class_name: 'User', optional: true
