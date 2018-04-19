@@ -53,8 +53,8 @@ gem 'sqlite3', "~> 1.3", group: :sqlite
 gem 'devise', "~> 4.2"
 gem 'devise_ldap_authenticatable', "~> 0.8"
 
-# mail see https://github.com/mikel/mail/issues/912
-gem 'mail'
+# 2.7.0 appears to have regressions that are fixed in 2.7.1
+gem 'mail', '~> 2.6', '!= 2.7.0'
 
 # omniauth
 gem 'omniauth-google-oauth2', "~> 0.4"
