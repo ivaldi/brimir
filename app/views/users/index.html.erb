@@ -37,6 +37,7 @@
   <thead>
     <tr>
       <th><%= t(:email) %></th>
+      <th><%= User.human_attribute_name(:name) -%></th>
       <th><%= t(:role) %></th>
     </tr>
   </thead>
@@ -47,6 +48,7 @@
           <%= user_avatar user, class: 'avatar' %>
           <%= link_to user.email, edit_user_path(user) %>
         </td>
+        <td><%= user.name -%></td>
         <td><%= (user.agent?) ? t(:agent) : t(:customer) %></td>
       </tr>
     <% end %>
