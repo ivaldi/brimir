@@ -223,8 +223,8 @@ zh-CN:
           closed: 关闭状态
           deleted: 删除状态
           waiting: 等待中
-        priority: 优秀级
-        assignee_id: 分配者
+        priority: 优先级
+        assignee_id: 分配给
         created_at: 创建于
 
       rule:
