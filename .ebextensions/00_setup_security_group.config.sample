@@ -1,0 +1,4 @@
+option_settings:
+  - namespace:  aws:autoscaling:launchconfiguration
+    option_name: SSHSourceRestriction
+    value: tcp, 22, 22, sg-XXXXXXXXXXXX

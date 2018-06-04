@@ -13,12 +13,14 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+require 'nkf'
 
 class TicketMailer < ActionMailer::Base
   include BounceHelper
 
   def encode(string)
-    string.encode('UTF-8', invalid: :replace, undef: :replace)
+#    string.encode('UTF-8', invalid: :replace, undef: :replace)
+    NKF.nkf('-wd', string)
   end
 
   def normalize_body(part, charset)
@@ -68,11 +70,11 @@ class TicketMailer < ActionMailer::Base
 
     if email.in_reply_to
       # is this a reply to a ticket or to another reply?
-      response_to = Ticket.find_by_message_id(email.in_reply_to)
+      response_to = Ticket.find_by_message_id([email.in_reply_to] + email.references)
 
       if !response_to
 
-        response_to = Reply.find_by_message_id(email.in_reply_to)
+        response_to = Reply.find_by_message_id([email.in_reply_to] + email.references)
 
         if response_to
           ticket = response_to.ticket

@@ -1,0 +1,15 @@
+/home/brimir/brimir/log/*.log {
+  su
+  daily
+  missingok
+  rotate 7
+  compress
+  ifempty
+  lastaction
+    pid=/home/brimir/brimir/tmp/pids/unicorn.pid
+    test -s $pid && kill -USR1 "$(cat $pid)"
+
+    pid=/home/brimir/brimir/tmp/pids/sidekiq.pid
+    test -s $pid && kill -USR2 "$(cat $pid)"
+  endscript
+}

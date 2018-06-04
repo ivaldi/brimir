@@ -1,0 +1,56 @@
+files:
+  /etc/nginx/conf.d/ssl.conf:
+    mode: "000755"
+    owner: root
+    group: root
+    content: |
+      # HTTPS Server
+      server {
+        listen 443;
+        server_name localhost;
+        
+        ssl on;
+        ssl_certificate /etc/pki/tls/certs/server.crt;
+        ssl_certificate_key /etc/pki/tls/certs/server.key;
+        
+        ssl_session_timeout 5m;
+        
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+        ssl_prefer_server_ciphers on;
+        
+        location / {
+          proxy_pass http://docker;
+          proxy_http_version 1.1;
+          
+          proxy_set_header Connection "";
+          proxy_set_header Host $host;
+          proxy_set_header X-Forwarded-Proto https;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        }
+      }
+      
+  /etc/pki/tls/certs/server.crt:
+    mode: "000400"
+    owner: root
+    group: root
+    content: |
+      -----BEGIN CERTIFICATE-----
+      sample
+      -----END CERTIFICATE-----
+      -----BEGIN CERTIFICATE-----
+      sample
+      -----END CERTIFICATE-----
+      -----BEGIN CERTIFICATE-----
+      sample
+      -----END CERTIFICATE-----
+      
+  /etc/pki/tls/certs/server.key:
+    mode: "000400"
+    owner: root
+    group: root
+    content: |
+      -----BEGIN RSA PRIVATE KEY-----
+      sample
+      -----END RSA PRIVATE KEY-----

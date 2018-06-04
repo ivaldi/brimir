@@ -1,0 +1,412 @@
+ja:
+  language_name: 日本語
+# layouts/application
+  new_ticket: チケットを新規作成
+  inbox: 受信箱
+  mine: 自分が担当
+  closed_tickets: 完了
+  trashed: ゴミ箱
+  users: ユーザー
+  rules: ルール
+  personal_settings: 個人の設定
+  sign_out: ログアウト
+  delete: 削除
+  close: 完了
+  wait: 待ち
+  to: To
+  inactive: 無効
+
+  joyride:
+    tickets: Anybody can create tickets using this button.
+    personal_settings: Set your signature, timezone and other preferences via this menu.
+    labels: After adding labels to tickets or users, they will show up here. You can then use them as filters. New labels can be created on a ticket page.
+    rules: Automatically add labels, assignees, change status and more.
+    users: Add more agents or normal users.
+    final: Thanks for using Brimir!
+    next: Next
+    previous: Previous
+    end: Let's start!
+
+# devise/sessions/new
+  sign_in: ログイン
+
+# devise/shared/links
+  forgot_password: パスワード忘れた場合
+
+# devise/passwords/new
+  send_instructions: 送信
+
+# devise/passwords/edit
+  change_password: パスワード変更
+  new_password: 新しいパスワード
+  new_password_confirmation: 新しいパスワード(確認)
+
+# devise/mailer/reset_password_instructions
+  hello: こんにちは
+  someone_requested_link: あなたのパスワード変更が要求されました。以下のリンクから実行してください。
+  ignore_if_not_requested: もし身に覚えがない場合は、このメールを無視してください。
+  password_wont_change_without_opening_link: 上記のリンクにアクセスするまでパスワードが変更されることはありません。
+
+# tickets/index
+  count_tickets:
+    one: '%{count}件のチケット'
+    other: '%{count}件のチケット'
+  count_tickets_containing:
+    one: '%{count}件のチケット'
+    other: '%{count}件のチケット'
+  priority: 優先度
+  replies: 返信
+  no_subject: タイトルなし
+  unassigned: 担当者未設定
+  no_tickets_found: チケットが見つかりませんでした。
+  search: 検索
+  filter: フィルタ
+  minutes: 分
+  are_you_sure_empty_trash: ゴミ箱のチケットをすべて削除してよろしいですか?
+  locked_by_user: チケットは現在 %{user} が担当しています
+  ticket_id_created_by_at: '#%{id} 作成者: %{user} 作成日時: %{at}'
+
+# tickets/show
+  add: 追加
+  ticket_by_at: '作成者: %{email} 作成日時 %{at}'
+  to_email: to %{email}
+  no_content: 本文なし
+  ticket_id: チケット番号
+  status: ステータス
+  assignee: 担当者
+  num_replies:
+    one: '%{count}件の返信'
+    other: '%{count}件の返信'
+  ago: 前
+  high: 高
+  medium: 中
+  low: 低
+  unknown: 不明
+  labels: ラベル
+  label_name: ラベル名
+  notification_sent_to: '通知が次のメールアドレスに送信されました:'
+  no_notifications_sent: '通知は送られませんでした'
+  assign_label: ラベル割り当て
+  take_ticket_lock_from_user: Take ticket handling from %{user}
+
+# tickets/_change_priority_form
+  change: 変更
+  change_priority: 優先度を変更
+
+# tickets/_change_status_form
+  change_status: ステータス変更
+
+# tickets/_change_assignee_form
+  change_assignee: チケット割り当て
+  assign: 割り当て
+
+# tickets/_change_subject_form
+  change_subject: チケットのタイトルを変更
+  str1_has_renamed_ticket_from_str2_to_str3: "%{str1} は '%{str2}' から'%{str3}' に 変更されました"
+
+# tickets/locks/create
+  ticket_locked_by_somebody_else: チケットはすでに別の担当者に割当たっています
+
+# tickets/merge
+  ticket_has_been_merged_to: "このチケットは#%{ticket_id} のチケットに併合されました"
+  merge: 併合
+  merge_explanation: "Merge the selected tickets. This copies all replies to the oldest of the selected tickets and closes the other selected tickets."
+  tickets_have_been_merged: "チケットは併合されました"
+
+# email_imports/new
+  import_emails: メールをインポート
+  upload_eml_files_to_import_them_as_new_tickets: "メールをインポートしてチケットを新規作成するために.emlファイルをアップロードしてください。"
+  upload_files: ファイルをアップロード
+  perform_email_import: メールのインポートを実行
+
+# replies/new
+  add_reply: 返信を追加
+
+# replies/_form
+  reply: 返信
+  attach_files: ファイルを添付
+  attach_file: ファイルを添付
+  send_reply: 返信を送信
+  attach_note: メモを添付
+  on_date_author_wrote: 'On %{date}, %{author} wrote:'
+  notification_will_be_sent_to: 通知先メールアドレス
+  save_as_draft: 下書きを保存
+  internal_note: 内部メモ
+
+# replies/_reply
+  reply_by: "返信者: "
+
+# ticket_mailer/notify_assigned.text.erb
+  ticket_assigned: Ticket assigned to you
+
+# ticket_mailer/notify_priority_changed.text.erb
+  ticket_priority_changed: Ticket priority modified for ticket
+
+# ticket_mailer/notify_status_changed.text.erb
+  ticket_status_modified: Ticket status modified for ticket
+  tickets_status_modified: Ticket status modified for tickets
+
+# notification_mailer/new_ticket
+  view_new_ticket: チケットを表示
+# notification_mailer/new_reply
+  new_reply: 新規返信
+  view_new_reply: 返信を表示
+  your_ticket_has_been_closed: "あなたが関わっているチケットが完了になりました。もし、まだ問題が解決されていない場合は、かまわずにご自由にご返信ください。もし新しい要望等がある場合は、メールをわけて送ってください。"
+  str_is_working_on_your_ticket: "%{str} が あなたが関わっているチケットの担当者に割当たりました。"
+
+# notificantion_mailer/new_account
+  new_account_subject: 'Welcome to Brimir!'
+
+# attachments/_attachment
+  download: ダウンロード
+
+# users/new
+  new_user: New User
+
+# users/edit
+  edit_user: ユーザー修正
+  omniauth_connect_title: Authentication using Google
+  omniauth_connect_text: Activate authentication using a Google Account. Afterwards you can use "Sign in with Google" as an alternative to the default email address and password login.
+  omniauth_connect_google_text: Connect with Google
+  remove_user: Remove user
+
+# users/index
+  email: メールアドレス
+  role: 役割
+  agent: 担当者
+  agents: 担当者
+  customer: 顧客
+
+# users/_form
+  account_settings: アカウント設定
+  only_fill_in_passwords_when_modifying: パスワード欄にはパスワードを変更したい時だけ入力してください
+  user_is_an_agent: 担当者
+  active: 有効
+  receive_new_ticket_notifications: 新規チケットに対する通知を受け取る
+  email_settings: メール設定
+  save: 保存
+  access_control: アクセス制御
+  have_access_to_label: このユーザーは以下のいずれかのラベルがセットされている全チケットにアクセスできます
+
+# settings/edit
+  change_settings: 設定変更
+  localization_settings: 地域設定
+  permissions: 権限設定
+  notification_settings: 通知設定
+  look_and_feel: デザイン設定
+
+# controllers/settings
+  settings_saved: 設定を保存しました
+
+# controllers/attachments
+  file_not_found: ファイルが見つかりません
+
+# controllers/users
+  settings_saved: 設定を保存しました
+  user_added: ユーザーを追加しました
+  user_removed: ユーザーを削除しました
+
+# controllers/tickets
+  ticket_added: チケットが追加されました
+  ticket_added_public: Your enquiry has been sent to the relevant service who will get back to you as soon as possible
+  form_validation_error: Malformed form. Please fill the form correctly
+  captcha_error: Please solve the captcha first
+  ticket_updated: チケットが更新されました
+  access_denied: アクセスが拒否されました
+
+# controllers/tickets/deleted
+  trash_emptied: すべてのチケットがゴミ箱から削除されいました
+
+# controllers/replies
+  reply_added: 返信が追加されました
+  draft_saved: 下書きが保存されました
+
+# controllers/omniauth
+  already_linked_accounts: Already linked with Google Account
+  successfully_linked_account: Successfully linked with Google Account
+  not_linked_account_cant_login: There is no user attached to this provider yet. Please sign in first and connect through the personal settings screen.
+  third_party_failure: An error occured during authentication. Did you enable "Contacts API" and "Google+ API" via the Google API console?
+
+# user/sign_in (omniauth)
+  omniauth_sign_in_title: Alternative sign in
+  omniauth_sign_in_google: Google
+
+# rules/index
+  new_rule: ルールを新規作成
+
+# rules/edit
+  edit_rule: ルール変更
+  delete_rule: ルール削除
+  are_you_sure: よろしいですか?
+
+# controllers/rules
+  rule_added: ルールを作成しました
+  rule_modified: ルールを変更しました
+  rule_deleted: ルールを削除しました
+
+# email_addresses/index
+  new_email_address: New outgoing email address
+  email_addresses: Email addresses for outgoing email
+
+# email_addresses/edit
+  modify_email_address: Modify outgoing email address
+
+# email_addresses/new
+  verification_mail_will_be_sent: Make sure this email address is forwarded correctly to Brimir. An automated verification email will be sent when you click save. Only verified email addresses can be used for outgoing mail.
+  mark_spam_spf: Brimir mails might be marked as spam when you don't add this server to the SPF DNS record of the above mail address.
+
+# email_templates/index
+  already_active_template: There is already an active template for a %{kind} email, setting this option will unset the now active template.
+  new_email_template: New email template
+  email_templates: Email templates
+  deleting_this_item_will_unset_option: 'Deleting this template will unset the following option:'
+  set_active: Set active
+  status: Status
+
+# email_templates/edit
+  modify_email_template: Modify email template
+  tooltip: Brackets inside the textarea will automatically be replaced by the necessary values.
+
+# controllers/email_addresses
+  email_address_modified: Email address modified
+  email_address_added: Email address added
+  email_address_removed: Email address removed
+
+# controllers/email_templates
+  email_template_modified: Email template modified
+  email_template_added: Email template added
+  email_template_removed: Email template removed
+
+  activerecord:
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認)
+        signature: Email signature
+        remember_me: 次回から自動的にログイン
+        label_ids: ラベル
+        locale: 言語
+        time_zone: タイムゾーン
+        per_page: 1ページあたりのチケット表示件数
+        schedule_enabled_false: Always 24/7/365
+        schedule_enabled_true: Work can wait, only during my work hours!
+        prefer_plain_text: 送受信にテキストメールを使用する
+        include_quote_in_reply: 返信に元メールの引用を含む
+
+      ticket:
+        from: Fromメールアドレス
+        subject: タイトル
+        content: 本文
+        status: ステータス
+        statuses:
+          open: 対応中
+          closed: 解決済み
+          deleted: 削除済み
+          waiting: 待ち
+        priority: 優先度
+        assignee_id: 担当者
+        created_at: 作成日時
+        to: Toメールアドレス(確認済み)
+        orig_to: Toメールアドレス
+        orig_cc: CCメールアドレス
+
+      reply:
+        from: Fromメールアドレス
+
+      rule:
+        filter_field: フィールド
+        filter_operation: オペレーター
+        filter_operations:
+          contains: 含む
+          equals: 一致する
+        filter_value: 値
+        action_operation: 実行するアクション
+        action_operations:
+          assign_label: ラベル割り当て
+          notify_user: ユーザーに通知
+          change_status: ステータスを変更
+          change_priority: 優先度を変更
+          assign_user: 担当者を割り当て
+
+      email_address:
+        email: Email address
+        name: Name
+        default: Use as default outgoing mail address
+        verification_token: Verified
+
+      email_template:
+        name: Template name
+        from: From
+        kind: Kind
+        message: Message
+        kinds:
+          user_welcome:
+            template_name: Default user welcome
+            message: |
+              <div>
+              Dear [name],
+              <br />
+              <br />
+              Your account for the ticket system Brimir has just been created!
+              <br />
+              <br />
+              To sign in you will need the following information:
+              <br />
+              E-mail: [email]
+              <br />
+              Password: [password]
+              <br />
+              <br />
+              <strong>IMPORTANT!</strong>
+              <br />
+              This information will be provided only once, keep it safe!
+              <br />
+              <br />
+              Lost or forgot password? Reset your password at:
+              <br />
+              http://[domain]/users/password/new
+              <br />
+              <br />
+              With kind regards,
+              <br />
+              Webmaster [domain]
+              <br />
+              <br />
+              *** this is an automatically generated email, please do not reply ***
+              </div>
+
+          ticket_received:
+            template_name: Default ticket received
+            message: |
+              <div>
+              Dear [name],
+              <br />
+              <br />
+              On [created_at], you wrote:
+              <br />
+              [content]
+              <br />
+              <br />
+              You are receiving this email to let you know that your ticket with the number [id], has been received.
+              <br />
+              <br />
+              With kind regards,
+              <br />
+              Webmaster [domain]
+              <br />
+              <br />
+              </div>
+
+      tenant:
+        default_locale: デフォルト言語
+        ignore_user_agent_locale: ブラウザの言語設定を無視する
+        default_time_zone: デフォルトタイムゾーン
+        share_drafts: 他の担当者と下書きを共有する
+        first_reply_ignores_notified_agents: 他の担当者に初回の返信を通知しない
+        notify_client_when_ticket_is_assigned_or_closed: チケットに担当者が割り当てられた時や完了した時に顧客へ通知する
+        notify_client_when_ticket_is_created: 顧客がチケット新規作成時に顧客自身に通知する
+        notify_user_when_account_is_created: アカウントが作成された時にユーザーに通知する
+        stylesheet_url: デザインカスタマイズ用スタイルシートのパス
+        ticket_creation_is_open_to_the_world: チケット作成を全員に許可する
