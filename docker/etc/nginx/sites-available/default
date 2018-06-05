@@ -16,6 +16,10 @@ server {
   charset utf-8;
   try_files $uri @unicorn;
 
+  location ~ ^__%RAILS_RELATIVE_URL_ROOT%__/assets/ {
+    root   /home/brimir/brimir/public;
+  }
+
   location @unicorn {
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
