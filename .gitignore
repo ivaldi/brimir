@@ -12,6 +12,7 @@
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
+/log/*.gz
 /tmp
 
 # No scaffold css
@@ -20,6 +21,9 @@ app/assets/stylesheets/scaffolds.css.scss
 # temp files
 *.swp
 .DS_Store
+
+# assets
+public/assets
 
 # uploads
 public/system
@@ -37,3 +41,14 @@ coverage
 # ignore rubymine
 .idea
 .byebug_history
+*~
+
+# dotenv
+.env*
+!.env.sample
+
+# ebextensions
+.ebextensions/00_setup_security_group.config*
+!.ebextensions/00_setup_security_group.config.sample
+.ebextensions/20_setup_https.config*
+!.ebextensions/20_setup_https.config.sample

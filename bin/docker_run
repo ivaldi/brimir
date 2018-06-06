@@ -1,0 +1,17 @@
+ROOT_DIR=$(cd $(dirname $0)/..;pwd)
+. $ROOT_DIR/.env
+
+if [ -n "$1" ]; then
+  PORT=$1
+elif [ -n "$DOCKER_PORT" ]; then
+  PORT=$DOCKER_PORT
+else
+  PORT=4000
+fi
+
+docker ps -a | grep brimir > /dev/null
+if [ $? -eq 0 ]; then
+  echo "restart container"
+  docker rm -f brimir
+fi
+docker run -d --name brimir -p $PORT:80 -v  $ROOT_DIR:/home/brimir/brimir/ gcloud/brimir:0.3

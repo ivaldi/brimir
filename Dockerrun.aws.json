@@ -1,0 +1,18 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image" : {
+      "Name" : "gcloud/brimir:0.3",
+      "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "80"
+    }
+  ],
+  "Volumes": [
+    {
+      "HostDirectory": "/var/app/current/",
+      "ContainerDirectory": "/home/brimir/brimir"
+    }
+  ]
+}
