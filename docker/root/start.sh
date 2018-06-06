@@ -9,17 +9,10 @@ chown -R brimir:staff $APP_ROOT
 cd $WORK_ROOT
 . $RAILS_ROOT/.env
 
-if test $BASIC_AUTH = "true"; then
-  patch -d / -p 0 < /root/nginx-auth_basic.patch
-fi
-
-if test -n "$RAILS_RELATIVE_URL_ROOT"; then
-  mkdir -p $RAILS_ROOT/public/$RAILS_RELATIVE_URL_ROOT
-  ln -s $RAILS_ROOT/public/assets $RAILS_ROOT/public/$RAILS_RELATIVE_URL_ROOT/assets
-fi
-/home/brimir/.rbenv/versions/*/bin/ruby -pi -e '$_.sub! "__%RAILS_RELATIVE_URL_ROOT%__", "'$RAILS_RELATIVE_URL_ROOT'"' /etc/nginx/sites-available/default
-
 RAILS_ENV=$ENVIRONMENT
+
+. setup_nginx_conf.sh
+
 sudo -u brimir -i bash -c "cd $RAILS_ROOT && bundle install"
 sudo -u brimir -i bash -c "cd $RAILS_ROOT && rake db:migrate RAILS_ENV=$RAILS_ENV"
 if test $RAILS_ENV = "production"; then

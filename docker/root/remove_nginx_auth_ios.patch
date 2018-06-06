@@ -1,0 +1,16 @@
+--- etc/nginx/sites-available/default.back	2018-06-06 17:22:34.902440810 +0900
++++ etc/nginx/sites-available/default	2018-06-06 17:41:04.350626611 +0900
+@@ -20,13 +20,6 @@
+     root   /home/uka/uka/public;
+   }
+ 
+-  location /admin {
+-    if ($http_user_agent !~ __%ALLOW_ONLY_IOS_KEY%__) {
+-      return 403;
+-    }
+-    try_files $uri @unicorn;
+-  }
+-
+   location @unicorn {
+     proxy_set_header X-Real-IP $remote_addr;
+     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

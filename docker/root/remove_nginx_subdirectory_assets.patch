@@ -1,0 +1,13 @@
+--- etc/nginx/sites-available/default.back	2018-06-06 17:22:34.902440810 +0900
++++ etc/nginx/sites-available/default	2018-06-06 17:20:28.105162464 +0900
+@@ -16,10 +16,6 @@
+   charset utf-8;
+   try_files $uri @unicorn;
+ 
+-  location ~ ^__%RAILS_RELATIVE_URL_ROOT%__/assets/ {
+-    root   /home/uka/uka/public;
+-  }
+-
+   location /admin {
+     if ($http_user_agent !~ __%ALLOW_ONLY_IOS_KEY%__) {
+       return 403;

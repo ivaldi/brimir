@@ -1,9 +1,0 @@
---- /etc/nginx/sites-available/default.back	2015-11-02 07:40:01.673697618 +0000
-+++ /etc/nginx/sites-available/default	2015-11-02 07:40:46.613696659 +0000
-@@ -20,4 +20,6 @@
-     proxy_set_header Host $http_host;
-     proxy_pass http://unicorn.localhost;
-   }
-+  auth_basic "auth site";                                                                                         
-+  auth_basic_user_file /etc/nginx/htpasswd; 
- }

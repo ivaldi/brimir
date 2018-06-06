@@ -14,4 +14,4 @@ if [ $? -eq 0 ]; then
   echo "restart container"
   docker rm -f brimir
 fi
-docker run -d --name brimir -p $PORT:80 -v  $ROOT_DIR:/home/brimir/brimir/ gcloud/brimir:0.2
+docker run -d --name brimir -p $PORT:80 -v  $ROOT_DIR:/home/brimir/brimir/ gcloud/brimir:0.3

@@ -20,6 +20,13 @@ server {
     root   /home/brimir/brimir/public;
   }
 
+  location /admin {
+    if ($http_user_agent !~ __%ALLOW_ONLY_IOS_KEY%__) {
+      return 403;
+    }
+    try_files $uri @unicorn;
+  }
+
   location @unicorn {
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -31,4 +38,7 @@ server {
     proxy_connect_timeout 600s;
     proxy_send_timeout 600s;
   }
+
+  auth_basic "auth site";                                                                                         
+  auth_basic_user_file /etc/nginx/htpasswd; 
 }
