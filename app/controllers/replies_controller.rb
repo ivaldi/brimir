@@ -82,7 +82,7 @@ class RepliesController < ApplicationController
           @reply.notification_mails.each(&:deliver_now)
         end
 
-        redirect_to @reply.ticket, notice: I18n::translate(:reply_added)
+        redirect_to tickets_url, notice: I18n::translate(:reply_added)
       end
     rescue => e
       Rails.logger.error 'Exception occured on Reply transaction!'
