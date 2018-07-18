@@ -19,6 +19,8 @@ class RepliesController < ApplicationController
   load_and_authorize_resource
 
   def new
+    @users = User.actives
+    @users = @users.agents if @reply.internal?
     @reply.assign_attributes(reply_params)
   end
 
