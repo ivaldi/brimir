@@ -29,3 +29,11 @@ inactive_user_welcome:
   created_at: <%= Time.now %>
   updated_at: <%= Time.now %>
   draft: true
+
+canned_response:
+  name: Canned response
+  kind: <%= EmailTemplate.kinds[:canned_response] %>
+  message: 'Been there, done that.'
+  created_at: <%= Time.now %>
+  updated_at: <%= Time.now %>
+  draft: false

@@ -69,6 +69,20 @@ jQuery(function() {
     }
   });
 
+  jQuery('#canned-response').on('change', function(){
+    var editor = jQuery(this).parents('form#new_reply').find('trix-editor')[0].editor;
+    var url = this.value;
+    if (url) {
+      jQuery.ajax({
+        url: url
+      }).done(function(response) {
+        editor.loadHTML(response.message);
+      });
+    } else {
+      editor.loadHTML('');
+    }
+  });
+
   if(jQuery('[data-lock-path]').length > 0) {
 
     function keepLock() {

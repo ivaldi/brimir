@@ -113,10 +113,11 @@ fr-FR:
   send_reply: Envoyer réponse
   on_date_author_wrote: 'Le %{date}, %{author} a écrit:'
   notification_will_be_sent_to: Votre notification sera envoyé a
+  canned_response: Réponse préparée
   save_as_draft: Enregistrer comme brouillon
 
 # replies/_reply
-  reply_by: Réponse de 
+  reply_by: Réponse de
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Un billet de support vous a été attribué
@@ -235,7 +236,7 @@ fr-FR:
   email_address_modified: Addresse email modifiée
   email_address_added: Addresse email ajoutée
   email_address_removed: Addresse email supprimée
-  
+
   activerecord:
     attributes:
       user:
@@ -264,7 +265,7 @@ fr-FR:
         assignee_id: Attribué
         created_at: Crée à
         to: Adresse email destinatiaire
-        
+
       reply:
         from: Adresse email source
 
