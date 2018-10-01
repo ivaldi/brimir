@@ -1,9 +1,10 @@
 class EmailTemplate < ApplicationRecord
 
-  enum kind: [:user_welcome, :ticket_received]
+  enum kind: [:user_welcome, :ticket_received, :canned_response]
 
   scope :by_kind, -> (k) { where(kind: kinds[k]) }
   scope :active, -> { where.not(draft: true) }
+  scope :canned_responses, -> { where(kind: :canned_response) }
 
   validates_presence_of :kind
 
@@ -15,7 +16,7 @@ class EmailTemplate < ApplicationRecord
   end
 
   def is_active?
-    !draft?
+    kind == 'canned_response' || !draft?
   end
 
   def all_others_to_draft(kind)

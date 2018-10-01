@@ -130,6 +130,7 @@ en:
   attach_note: Attach note
   on_date_author_wrote: 'On %{date}, %{author} wrote:'
   notification_will_be_sent_to: Your notification will be sent to
+  canned_response: Canned response
   save_as_draft: Save as draft
   internal_note: Internal note
 
@@ -410,4 +411,4 @@ en:
         notify_client_when_ticket_is_created: Notify the client when his newly created ticket is received.
         notify_user_when_account_is_created: Notify user when account is created.
         stylesheet_url: Add the path to your own custom stylesheet.
-        ticket_creation_is_open_to_the_world: Tickets creation is open to everybody. 
+        ticket_creation_is_open_to_the_world: Tickets creation is open to everybody.

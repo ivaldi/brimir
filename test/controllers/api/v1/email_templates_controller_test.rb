@@ -1,5 +1,5 @@
 # Brimir is a helpdesk system to handle email support requests.
-# Copyright (C) 2012-2016 Ivaldi https://ivaldi.nl/
+# Copyright (C) 2012-2015 Ivaldi https://ivaldi.nl/
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -14,24 +14,23 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-class Api::V1::ApplicationController < ActionController::Base
-  include MultiTenancy
+require 'test_helper'
 
-  protect_from_forgery with: :null_session
+class Api::V1::EmailTemplatesControllerTest < ActionController::TestCase
 
-  before_action :authenticate_user_from_token!, unless: -> { current_user }
-  before_action :load_tenant
-
-  check_authorization
-
-  def authenticate_user_from_token!
-    user_token = params[:auth_token].presence
-    user = user_token && User.where(authentication_token: user_token.to_s).first
-
-    if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
-      sign_in user, store: false
-    else
-      render nothing: true, status: :unauthorized
-    end
+  setup do
+    @email_template = email_templates(:canned_response)
   end
+
+  test 'should show email template' do
+    sign_in users(:alice)
+
+    get :show, params: {
+      auth_token: users(:bob).authentication_token,
+      id: @email_template.id,
+      format: :json
+    }
+    assert_response :success
+  end
+
 end

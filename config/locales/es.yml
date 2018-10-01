@@ -1,6 +1,6 @@
 # author: https://www.facebook.com/aunsinpagina & daniel.seijo_at_urbincasa.es
 # revisions: http://colina.net.ve e1th0r
-# 
+#
 es:
   language_name: Español
 # layouts/application
@@ -23,7 +23,7 @@ es:
   change_password: Cambiar contraseña
   new_password: Nueva contraseña
   new_password_confirmation: Confirmar nueva contraseña
-  
+
 # devise/mailer/reset_password_instructions
   hello: Hola
   someone_requested_link: Alguien ha solicitado un enlace para cambiar tu contraseña, puedes proceder haciendo click en el siguiente enlace.
@@ -89,7 +89,7 @@ es:
 # notification_mailer/new_reply
   new_reply: Nueva respuesta
   view_new_reply: Ver nueva respuesta
-  
+
 # attachments/_attachment
   download: Descargar
 
@@ -197,6 +197,7 @@ es:
   new_rule: Nueva regla
   no_notifications_sent: 'Ninguna notificación ha sido enviada'
   notification_will_be_sent_to: Tus notificaciones serán enviadas a
+  canned_response: Respuesta preparada
   personal_settings: Configuración personal
   rule_added: Regla añadida
   rule_modified: Regla modificada

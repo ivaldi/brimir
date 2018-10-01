@@ -27,7 +27,7 @@
             <td><%= email_template.name %></td>
             <td><%= email_template.kind.humanize %></td>
             <td>
-              <% if email_template.is_active?  %>
+              <% if email_template.is_active? %>
                   <%= fa_icon 'check' %>
               <% else %>
                 <%= link_to t(:set_active), email_template_path(
@@ -54,4 +54,3 @@
     </div>
   </div>
 </div>
-

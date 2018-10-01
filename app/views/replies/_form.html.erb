@@ -37,6 +37,17 @@
         </div>
       </div>
 
+      <% if @canned_responses.any? %>
+        <div class="row collapse mbl">
+          <div class="medium-4 columns">
+            <label><%= t(:canned_response) %></label>
+          </div>
+          <div class="medium-8 columns">
+            <%= render 'replies/canned_responses' %>
+          </div>
+        </div>
+      <% end %>
+
       <%
         if @reply.content.blank? && @reply.errors.count == 0 # not on reply error view
 

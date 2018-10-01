@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Ability to import .eml files for mails sent to wrong email address. Contributed by @fiedl.
 - Ability to rename tickets. Contributed by @fiedl.
+- Canned responses. Contributed by @svoop.
 
 ### Changed
 - Better error messages when an invalid input is given for non-signed in users. Contributed by @mickael-kerjean.

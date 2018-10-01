@@ -13,25 +13,11 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+class Api::V1::EmailTemplatesController < Api::V1::ApplicationController
 
-class Api::V1::ApplicationController < ActionController::Base
-  include MultiTenancy
+  load_and_authorize_resource :email_template
 
-  protect_from_forgery with: :null_session
-
-  before_action :authenticate_user_from_token!, unless: -> { current_user }
-  before_action :load_tenant
-
-  check_authorization
-
-  def authenticate_user_from_token!
-    user_token = params[:auth_token].presence
-    user = user_token && User.where(authentication_token: user_token.to_s).first
-
-    if user && Devise.secure_compare(user.authentication_token, params[:auth_token])
-      sign_in user, store: false
-    else
-      render nothing: true, status: :unauthorized
-    end
+  def show
+    render json: @email_template.to_json
   end
 end
