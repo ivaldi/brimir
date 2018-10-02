@@ -92,6 +92,12 @@ gem 'gravatar_image_tag', "~> 1.2"
 # Captcha for brimir
 gem 'recaptcha', "~> 4.0", require: 'recaptcha/rails'
 
+# talk to RESTful services
+gem 'rest-client', '~> 2.0'
+
+# secure digest
+gem 'digest-sha3'
+
 # Trix WYSIWYG editor
 gem 'trix', "~> 0.10", ">= 0.10.1"
 

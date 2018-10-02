@@ -63,7 +63,7 @@ First download the new code in the same directory by unpacking a release tarball
     bundle install
     bin/rake db:migrate RAILS_ENV=production
     bin/rake assets:precompile RAILS_ENV=production
-    
+
 Don't forget to restart your application server (`touch tmp/restart.txt` for Passenger).
 
 Customization
@@ -74,11 +74,40 @@ Brimir is available in several languages. By default, it will use the locale cor
 
 Incoming email
 --------------
-Incoming emails can be posted to the tickets url by using the script found in scripts/post-mail. Create an alias in your `/etc/aliases` file like this:
 
-    brimir: "|/bin/sh /path/to/your/brimir/repo/script/post-mail http://yoururl.com/tickets.json"
+Brimir features several hooks to receive incoming mail. These hook URLs are protected by a mail_key which can be retrieved with:
 
-Now sending an email to brimir@yoururl.com should start curl and post the email to your brimir installation.
+    rake secret:mail_key
+
+Make sure you replace `{MAIL_KEY}` in the examples below with the output from the above command.
+
+:warning: The mail_key is derived from the secret\_key\_base. Whenever you modify the latter in the secrets.yml file, you have to update the hook URLs as well!
+
+### MTA Alias
+
+Incoming emails can be posted to Brimir by use of `scripts/post-mail`. Create an alias in the `aliases` file of your MTA as follows:
+
+    brimir: "|/bin/sh /path/to/your/brimir/repo/script/post-mail http://yoururl.com/post-mail/{MAIL_KEY}/tickets.json"
+
+Now sending an email to brimir@yoururl.com should execute curl and post the email to your Brimir installation.
+
+### Mailgun
+
+On Mailgun, add the IP of the server running Brimir to the [IP whitelist](https://app.mailgun.com/app/account/security). Then copy your [private API key](https://app.mailgun.com/app/account/security) and either paste it after "mailgun_private_api_key:" in `config/secrets.yml` or set the `MAILGUN_PRIVATE_API_KEY` environment variable accordingly. Finally, [create a route](https://app.mailgun.com/app/routes) with action "store and notify" and assign the following URL to this action:
+
+    http://yoururl.com/mailgun/{MAIL_KEY}/tickets.json
+
+Since you are receiving mails via Mailgun now, you might want to use the same provider to send mails as well. This can be set in `config/environments/production.rb` by adding the following lines *before* the keyword `end`:
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      port: 587,
+      address: 'smtp.mailgun.org',
+      user_name: 'postmaster@yoururl.com',
+      password: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-xxxxxxxx-xxxxxxxx'
+    }
+
+The above `address`, `user_name` and `password` are examples, you find the real ones on the Mailgun [domain details page](https://app.mailgun.com/app/domains). Also, for this to work you have to be at least on the ["Concept" billing plan](https://app.mailgun.com/app/account/settings).
 
 Contributing
 ------------

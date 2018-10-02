@@ -23,6 +23,7 @@ class TicketsControllerTest < ActionController::TestCase
     # read_fixture doesn't work in ActionController::TestCase, so use File.new
     @simple_email = File.new('test/fixtures/ticket_mailer/simple').read
     @simple_base64_email = File.new('test/fixtures/ticket_mailer/simple_base64').read
+    @mailgun_message_url = 'https://storage.mailgun.net/v3/domains/mg.test.com/messages/eyJwIjpmYWxzZSwiafI6IjJhZGNhMzkxLWVhMTItNDc4OS1iZjg5LTliNjQ1NDEyZWMyMCIsInMiOiJiYmFjNzc1YmIzIiwiYyI6InRhbmtiIn0='
   end
 
   teardown do
@@ -50,6 +51,10 @@ class TicketsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test 'acceptable mail hooks (for extra safety)' do
+    assert_equal TicketsController::MAIL_HOOKS, %w(post-mail mailgun)
+  end
+
   test 'should create ticket when posted from MTA' do
 
     # should ignore this in emails, but use application default
@@ -59,7 +64,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
 
         post :create, params: {
-          message: @simple_email, format: :json
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: @simple_email,
+          format: :json
         }
 
         assert_response :success
@@ -70,7 +78,45 @@ class TicketsControllerTest < ActionController::TestCase
     assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
 
     refute_equal 0, assigns(:ticket).notified_users.count
+  end
 
+  test 'should create ticket when posted from Mailgun' do
+
+    eval <<~END
+      class RestClient::Resource
+        def initialize(url, user:, password:, headers:)
+          fail "bad url" unless url == '#{@mailgun_message_url}'
+          fail "bad user" unless user == 'api'
+          fail "bad headers" unless headers == { accept: 'message/rfc2822' }
+        end
+
+        def get
+          OpenStruct.new(body: File.new('test/fixtures/ticket_mailer/mailgun').read)
+        end
+      end
+    END
+
+    # should ignore this in emails, but use application default
+    I18n.locale = :nl
+
+    assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
+      assert_difference 'Ticket.count' do
+
+        post :create, params: {
+          hook: 'mailgun',
+          mail_key: TicketsController::MAIL_KEY,
+          'message-url': @mailgun_message_url,
+          format: :json,
+        }
+
+        assert_response :success
+      end
+    end
+
+    # should have used English locale
+    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+
+    refute_equal 0, assigns(:ticket).notified_users.count
   end
 
   test 'should accept tickets in Base64 encoding' do
@@ -78,7 +124,12 @@ class TicketsControllerTest < ActionController::TestCase
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
-        post :create, params: { message: @simple_base64_email, format: :json }
+        post :create, params: {
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: @simple_base64_email,
+          format: :json
+        }
 
         assert_response :success
       end
@@ -143,10 +194,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_response :success
@@ -161,12 +212,12 @@ class TicketsControllerTest < ActionController::TestCase
 
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       assert_no_difference 'Ticket.count' do
-        post :create, params: { 
+        post :create, params: {
           ticket: {
-          from: 'invalid',
-          content: '',
-          subject: '',
-        }
+            from: 'invalid',
+            content: '',
+            subject: '',
+          }
         }
 
         assert_response :success
@@ -191,10 +242,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count', 1 do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_redirected_to ticket_url(assigns(:ticket))
@@ -221,12 +272,12 @@ class TicketsControllerTest < ActionController::TestCase
     sign_in users(:alice)
     assert_no_difference 'ActionMailer::Base.deliveries.size' do
       assert_no_difference 'Ticket.count' do
-        post :create, params: { 
+        post :create, params: {
           ticket: {
-          from: 'invalid',
-          content: '',
-          subject: '',
-        }
+            from: 'invalid',
+            content: '',
+            subject: '',
+          }
         }
 
         assert_response :success
@@ -254,10 +305,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count', 1 do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_response :success
@@ -286,10 +337,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_no_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'invalid',
-          content: '',
-          subject: '',
-        }
+            from: 'invalid',
+            content: '',
+            subject: '',
+          }
         }
 
         assert_response :success
@@ -335,7 +386,10 @@ class TicketsControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
         post :create, params: {
-          message: @simple_email, format: :json
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: @simple_email,
+          format: :json
         }
 
         assert_response :success
@@ -357,8 +411,11 @@ class TicketsControllerTest < ActionController::TestCase
 
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
-        post :create, params: { 
-          message: @simple_email, format: :json
+        post :create, params: {
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: @simple_email,
+          format: :json
         }
 
         assert_response :success
@@ -394,7 +451,10 @@ class TicketsControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
         post :create, params: {
-          message: @simple_email, format: :json
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: @simple_email,
+          format: :json
         }
 
         assert_response :success
@@ -430,7 +490,10 @@ class TicketsControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count do
       assert_difference 'Ticket.count' do
         post :create, params: {
-          message: @simple_email, format: :json
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: @simple_email,
+          format: :json
         }
 
         assert_response :success
@@ -470,7 +533,10 @@ class TicketsControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count-1 do
       assert_difference 'Ticket.count' do
         post :create, params: {
-          message: @simple_email, format: :json
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: @simple_email,
+          format: :json
         }
 
         assert_response :success
@@ -503,7 +569,10 @@ class TicketsControllerTest < ActionController::TestCase
     assert_difference 'ActionMailer::Base.deliveries.size', User.agents.count-1 do
       assert_difference 'Ticket.count' do
         post :create, params: {
-          message: @simple_email, format: :json
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: @simple_email,
+          format: :json
         }
 
         assert_response :success
@@ -530,10 +599,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_response :success
@@ -557,10 +626,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_response :success
@@ -598,10 +667,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_response :success
@@ -638,10 +707,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_response :success
@@ -682,10 +751,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_response :success
@@ -719,10 +788,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_response :success
@@ -752,10 +821,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_redirected_to ticket_url(assigns(:ticket))
@@ -780,10 +849,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_redirected_to ticket_url(assigns(:ticket))
@@ -822,10 +891,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_redirected_to ticket_url(assigns(:ticket))
@@ -864,10 +933,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_redirected_to ticket_url(assigns(:ticket))
@@ -908,10 +977,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_redirected_to ticket_url(assigns(:ticket))
@@ -946,10 +1015,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
         post :create, params: {
           ticket: {
-          from: 'test@test.nl',
-          content: @ticket.content,
-          subject: @ticket.subject,
-        }
+            from: 'test@test.nl',
+            content: @ticket.content,
+            subject: @ticket.subject,
+          }
         }
 
         assert_redirected_to ticket_url(assigns(:ticket))
@@ -1055,7 +1124,7 @@ class TicketsControllerTest < ActionController::TestCase
     # assignee should receive notification
     assert_difference 'ActionMailer::Base.deliveries.size' do
 
-      put :update, params: { 
+      put :update, params: {
         id: @ticket.id, ticket: { priority: 'high' }
       }
       assert_redirected_to ticket_path(@ticket)
@@ -1152,7 +1221,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_difference 'Ticket.count' do
 
         post :create, params: {
-          message: email, format: :json
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: email,
+          format: :json
         }
 
         assert_response :success
@@ -1168,7 +1240,10 @@ class TicketsControllerTest < ActionController::TestCase
       assert_no_difference 'Ticket.count' do
 
         post :create, params: {
-          message: email, format: :json
+          hook: 'post-mail',
+          mail_key: TicketsController::MAIL_KEY,
+          message: email,
+          format: :json
         }
 
         assert_response :unprocessable_entity
@@ -1215,7 +1290,10 @@ class TicketsControllerTest < ActionController::TestCase
     assert_difference 'Ticket.count' do
 
       post :create, params: {
-        message: @simple_email, format: :json
+        hook: 'post-mail',
+        mail_key: TicketsController::MAIL_KEY,
+        message: @simple_email,
+        format: :json
       }
 
       assert_response :success
@@ -1247,7 +1325,10 @@ class TicketsControllerTest < ActionController::TestCase
     assert_difference 'Ticket.count' do
 
       post :create, params: {
-        message: @simple_email, format: :json
+        hook: 'post-mail',
+        mail_key: TicketsController::MAIL_KEY,
+        message: @simple_email,
+        format: :json
       }
 
       assert_response :success
