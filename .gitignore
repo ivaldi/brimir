@@ -14,7 +14,7 @@
 /db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
+/log
 /tmp
 
 # No scaffold css
@@ -27,6 +27,10 @@ app/assets/stylesheets/scaffolds.css.scss
 # uploads
 public/system
 data
+
+# manual deploy with Git
+public/assets
+vendor/bundle
 
 # Capistrano deploy details
 config/deploy
