@@ -19,6 +19,9 @@ class TicketsController < ApplicationController
   include TicketsStrongParams
   include ActionView::Helpers::SanitizeHelper # dependency of HtmlTextHelper
 
+  MAIL_KEY = Digest::SHA3.hexdigest(Rails.application.secrets.secret_key_base, 256).freeze
+  MAIL_HOOKS = %w(post-mail mailgun).freeze
+
   before_action :authenticate_user!, except: [:create, :new]
   before_action :current_tenant, only: [:update, :create, :new]
   load_and_authorize_resource :ticket, except: :create
@@ -173,11 +176,13 @@ class TicketsController < ApplicationController
 
   def create
     # the hook that is triggered when receiving an email.
-    if params[:format] == 'json'
+    if params[:hook]
+      unless Devise.secure_compare(params[:mail_key], MAIL_KEY)
+        render status: :forbidden, text: t(:access_denied)
+        return
+      end
       using_hook = true # we assume different policies to create a ticket when we receive an email
-      base64_message = ((params[:base64] == true) || !(params[:message][0,64] =~ /^([A-Za-z0-9+\/]{4})*([A-Za-z0-9+\/]{4}|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{2}==)$/).nil?)
-      message = base64_message ? Base64.decode64(params[:message].strip) : params[:message]
-      @ticket = TicketMailer.receive(message)
+      @ticket = TicketMailer.receive(send("raw_#{params[:hook].underscore}"))
     else
       using_hook = false
       @ticket = Ticket.new(ticket_params)
@@ -224,6 +229,7 @@ class TicketsController < ApplicationController
   end
 
   protected
+
   def can_create_a_ticket(using_hook)
     if @ticket.nil? || !@ticket.valid?
       flash.now[:alert] = I18n::translate(:form_validation_error)
@@ -263,5 +269,24 @@ class TicketsController < ApplicationController
         @reply.try(:notification_mails).try(:each, &:deliver_now)
       end
     end
+  end
+
+  private
+
+  # Raw incoming mail from post-mail script
+  def raw_post_mail
+    base64_message = ((params[:base64] == true) || !(params[:message][0,64] =~ /^([A-Za-z0-9+\/]{4})*([A-Za-z0-9+\/]{4}|[A-Za-z0-9+\/]{3}=|[A-Za-z0-9+\/]{2}==)$/).nil?)
+    base64_message ? Base64.decode64(params[:message].strip) : params[:message]
+  end
+
+  # Raw incoming mail from Mailgun
+  def raw_mailgun
+    response = RestClient::Resource.new(
+      params['message-url'],
+      user: 'api',
+      password: Rails.application.secrets.mailgun_private_api_key,
+      headers: { accept: 'message/rfc2822' }
+    ).get
+    JSON.parse(response.body)['body-mime']
   end
 end
