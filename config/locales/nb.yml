@@ -76,10 +76,6 @@ nb:
     one: '%{count} svar'
     other: '%{count} svar'
   ago: siden
-  high: Høy
-  medium: Middels
-  low: Lav
-  unknown: Ukjent
   labels: Merkelapper
   label_name: Merkelapp
   notification_sent_to: 'En varsling ble sendt til følgende e-postadresse:'
@@ -129,18 +125,18 @@ nb:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket assigned to you
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Ticket priority modified for ticket
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Ticket status modified for ticket
   tickets_status_modified: Ticket status modified for tickets
 
-# notification_mailer/new_ticket
-  view_new_ticket: Vis ny henvendelse
+# notification_mailer
+  view_ticket: Vis henvendelse
+
 # notification_mailer/new_reply
   new_reply: Nytt svar
-  view_new_reply: Vis nytt svar
+  view_reply: Vis svar
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: download
@@ -260,10 +256,15 @@ nb:
         content: Innhold
         status: Status
         statuses:
-          open: Åpen
-          closed: Lukket
-          deleted: Slettet
-          waiting: Venter
+          open: åpen
+          closed: lukket
+          deleted: slettet
+          waiting: venter
+        priorities:
+          high: høy
+          medium: middels
+          low: lav
+          unknown: ukjent
         priority: Prioritet
         assignee_id: Ansvarlig
         created_at: Opprettet

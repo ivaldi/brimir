@@ -1,8 +1,0 @@
-<%# WATCH OUT make sure you don't add whitespace accidentally -%>
-<%= t(:ticket_assigned) %>: <%= ticket_url(@ticket) %>
-
-<%- if @ticket.content_type == 'html' -%>
-<%= html_to_text @ticket.content -%>
-<%- else -%>
-<%= @ticket.content -%>
-<%- end -%>

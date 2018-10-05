@@ -78,10 +78,6 @@ en:
     one: '%{count} reply'
     other: '%{count} replies'
   ago: ago
-  high: High
-  medium: Medium
-  low: Low
-  unknown: Unknown
   labels: Labels
   label_name: Label name
   notification_sent_to: 'A notification was sent to the following addresses:'
@@ -141,23 +137,23 @@ en:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket assigned to you
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Ticket priority modified for ticket
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Ticket status modified for ticket
   tickets_status_modified: Ticket status modified for tickets
 
-# notification_mailer/new_ticket
-  view_new_ticket: View new ticket
+# notification_mailer
+  view_ticket: View ticket
+
 # notification_mailer/new_reply
   new_reply: New reply
-  view_new_reply: View new reply
+  view_reply: View reply
   your_ticket_has_been_closed: "Your support ticket has been closed. If the issue is not resolved, yet, please feel free to reply. For new requests, please send a separate email."
   str_is_working_on_your_ticket: "%{str} will handle your support ticket."
 
 # notificantion_mailer/new_account
   new_account_subject: 'Welcome to Brimir!'
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: download
@@ -303,10 +299,15 @@ en:
         content: Content
         status: Status
         statuses:
-          open: Open
-          closed: Closed
-          deleted: Deleted
-          waiting: Waiting
+          open: open
+          closed: closed
+          deleted: deleted
+          waiting: waiting
+        priorities:
+          unknown: unknown
+          low: low
+          medium: medium
+          high: high
         priority: Priority
         assignee_id: Assignee
         created_at: Created at

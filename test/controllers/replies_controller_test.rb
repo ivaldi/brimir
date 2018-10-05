@@ -73,7 +73,7 @@ class RepliesControllerTest < ActionController::TestCase
     assert_match 'multipart/alternative', mail.content_type
 
     # new reply link in body
-    assert_match(I18n.translate(:view_new_reply), mail.text_part.body.decoded)
+    assert_match(I18n.translate(:view_reply), mail.text_part.body.decoded)
 
     # generated message id stored in db
     assert_not_nil assigns(:reply).message_id

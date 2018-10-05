@@ -26,6 +26,10 @@ dave:
   current_sign_in_at: <%= Time.now %> # this will add the new ticket/reply link to mails
   schedule: default
 
+emile:
+  email: ender@xxxx.com
+  locale: :fr
+
 new_user:
   name: dummy
   email: dummy@person.net

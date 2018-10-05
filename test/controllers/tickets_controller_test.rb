@@ -75,7 +75,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -114,7 +114,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'View ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -397,7 +397,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -423,7 +423,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -462,7 +462,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -501,7 +501,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -610,7 +610,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -637,7 +637,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -678,7 +678,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -718,7 +718,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -832,7 +832,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -860,7 +860,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -902,7 +902,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -944,7 +944,7 @@ class TicketsControllerTest < ActionController::TestCase
     end
 
     # should have used English locale
-    assert_match 'View new ticket', ActionMailer::Base.deliveries.last.html_part.body.decoded
+    assert_match 'New ticket', ActionMailer::Base.deliveries.last.subject
 
     refute_equal 0, assigns(:ticket).notified_users.count
   end
@@ -1095,9 +1095,9 @@ class TicketsControllerTest < ActionController::TestCase
 
     end
 
-    # currently we can check whether the hardcoded word assigned is in the body
+    # currently we can check whether the hardcoded word assigned is in the subject
     # in the future we might use templates or translations...
-    assert_match 'assigned', ActionMailer::Base.deliveries.last.body.decoded
+    assert_match 'Ticket assigned to you', ActionMailer::Base.deliveries.last.subject
   end
 
   test 'should email assignee if status of ticket is changed by somebody else' do
@@ -1113,9 +1113,9 @@ class TicketsControllerTest < ActionController::TestCase
 
     end
 
-    # currently we can check whether the hardcoded word status is in the body
+    # currently we can check whether the hardcoded word status is in the subject
     # in the future we might use templates or translations...
-    assert_match 'status', ActionMailer::Base.deliveries.last.body.decoded
+    assert_match 'Ticket status changed to closed', ActionMailer::Base.deliveries.last.subject
   end
 
   test 'should email assignee if priority of ticket is changed by somebody else' do
@@ -1131,9 +1131,9 @@ class TicketsControllerTest < ActionController::TestCase
 
     end
 
-    # currently we can check whether the hardcoded word priority is in the body
+    # currently we can check whether the hardcoded word priority is in the subject
     # in the future we might use templates or translations...
-    assert_match 'priority', ActionMailer::Base.deliveries.last.body.decoded
+    assert_match 'Ticket priority changed to high', ActionMailer::Base.deliveries.last.subject
 
   end
 

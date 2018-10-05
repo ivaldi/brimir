@@ -1,7 +1,7 @@
 <% unless @user.current_sign_in_at.blank? %>
   <p>
     <a href="<%= ticket_url(@ticket) %>" target="_blank">
-      <%= t(:view_new_ticket, locale: @locale) %> &raquo;
+      <%= t(:view_ticket) %> &raquo;
     </a>
   </p>
 <% end %>

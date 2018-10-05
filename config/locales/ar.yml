@@ -72,10 +72,6 @@ ar:
     one: '%{count} رد'
     other: '%{count} ردود'
   ago: منذ
-  high: عالي
-  medium: متوسط
-  low: منخفضة
-  unknown: غير معروف
   labels: علامات
   label_name: اسم العلامة
   notification_sent_to: 'تم إرسال تنبيه للعناوين التالية:'
@@ -106,17 +102,18 @@ ar:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: شكوي محالة إلي
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: تم تغيير أولوية الشكوى
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: تم تغيير حالة الشكوى
+  tickets_status_modified: 'Ticket status modified for tickets'
 
-# notification_mailer/new_ticket
-  view_new_ticket: عرض الشكوى الجديدة
+# notification_mailer
+  view_ticket: عرض الشكوى
+
 # notification_mailer/new_reply
   new_reply: إضافة رد
-  view_new_reply: عرض الرد الجديد
+  view_reply: عرض الرد
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: تحميل
@@ -221,6 +218,11 @@ ar:
           closed: مغلق
           deleted: محذوف
           waiting: قيد الانتظار
+        priorities:
+          unknown: غير معروف
+          low: منخفضة
+          medium: متوسط
+          high: عالي
         priority: الأولوية
         assignee_id: المسئول
         created_at: تاريخ الإضافة

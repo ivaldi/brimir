@@ -46,10 +46,6 @@ fi:
   num_replies:
     one: '%{count} vastaus'
     other: '%{count} vastausta'
-  high: Korkea
-  medium: Normaali
-  low: Alhainen
-  unknown: Tuntematon
   labels: Aiheet
   label_name: Aiheen nimi
   notification_sent_to: 'Viesti lähetettiin seuraaville vastaanottajille:'
@@ -77,17 +73,18 @@ fi:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Tiketti siirrettiin sinulle
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Prioriteetti muutettiin tiketille
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Tila muutettiin tiketille
+  tickets_status_modified: 'Ticket status modified for tickets'
 
-# notification_mailer/new_ticket
-  view_new_ticket: Näytä uusi tiketti
+# notification_mailer
+  view_ticket: Näytä tiketti
+
 # notification_mailer/new_reply
   new_reply: Uusi vastaus
-  view_new_reply: Näytä uusi vastaus
+  view_reply: Näytä vastaus
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: lataa
@@ -144,8 +141,13 @@ fi:
         content: Sisältö
         status: Tila
         statuses:
-          open: Avoin
-          closed: Suljettu
-          deleted: Poistettu
+          open: avoin
+          closed: suljettu
+          deleted: poistettu
+        priorities:
+          unknown: tuntematon
+          low: alhainen
+          medium: normaali
+          high: korkea
         priority: Prioriteetti
         assignee_id: Suorittaja

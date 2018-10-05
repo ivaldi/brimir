@@ -72,10 +72,6 @@ fa:
     one: '%{count} پاسخ'
     other: '%{count} پاسخ'
   ago: قبل
-  high: مهم
-  medium: متوسط
-  low: کم اهمیت
-  unknown: ناشناس
   labels: برچسب‌ها
   label_name: اسم برچسب
   notification_sent_to: 'به اطلاع آدرس‌های زیر رسانده شد:'
@@ -115,18 +111,18 @@ fa:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: تیکت‌هایی که مسؤلش شمایی
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: اولویت این تیکت تغییر کرده
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: وضعیت این تیکت تغییر کرده
   tickets_status_modified: وضعیت این تیکت تغییر کرده
 
-# notification_mailer/new_ticket
-  view_new_ticket: دیدن تیکت جدید
+# notification_mailer
+  view_ticket: دیدن تیکت
+
 # notification_mailer/new_reply
   new_reply: پاسخ جدید
-  view_new_reply: دیدن پاسخ جدید
+  view_reply: دیدن پاسخ
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: دانلود
@@ -141,7 +137,7 @@ fa:
   omniauth_connect_google_text: اتصال با گوگل
 
 # users/index
-  email: ایمیل 
+  email: ایمیل
   role: نقش
   agent: نماینده
   customer: مشتری
@@ -244,6 +240,11 @@ fa:
           closed: بسته شده
           deleted: حذف شده
           waiting: انتظار
+        priorities:
+          unknown: ناشناس
+          low: کم اهمیت
+          medium: متوسط
+          high: مهم
         priority: اولویت
         assignee_id: مسؤل
         created_at: ایجاد شده در
