@@ -67,130 +67,140 @@ class NotificationMailer < ActionMailer::Base
   def new_account(user, template, tenant)
     if tenant.notify_user_when_account_is_created
       return unless template.is_active?
-      @template = template
-      @domain = tenant.domain
-      @user = user
+      @user, @template, @domain = user, template, tenant.domain
 
-      mail(to: user.email, from: tenant.from, subject: I18n.t('new_account_subject'))
+      mail(
+        to: user.email,
+        from: tenant.from,
+        subject: I18n.t('new_account_subject')
+      )
     end
   end
 
   def new_ticket(ticket, user)
-    unless user.locale.blank?
-      @locale = user.locale
-    else
-      @locale = Rails.configuration.i18n.default_locale
-    end
-    title = I18n::translate(:new_ticket, locale: @locale) + ': ' + ticket.subject.to_s
+    @ticket, @user = ticket, user
 
-    add_attachments(ticket)
+    add_attachments(@ticket)
 
     unless ticket.message_id.blank?
-      headers['Message-ID'] = "<#{ticket.message_id}>"
+      headers['Message-ID'] = "<#{@ticket.message_id}>"
     end
 
     # for bounces, we don't use aliases
     headers['Return-Path'] = Tenant.current_tenant.from
 
-    @ticket = ticket
-    @user = user
-
-    mail(to: user.email, subject: title, from: ticket.reply_from_address)
+    I18n.with_locale @user.locale  do
+      mail(
+        template_name: :ticket,
+        to: @user.email,
+        subject: "#{I18n::t(:new_ticket)}: #{@ticket.subject}",
+        from: @ticket.reply_from_address
+      )
+    end
   end
 
   def new_reply(reply, user)
-    unless user.locale.blank?
-      @locale = user.locale
-    else
-      @locale = Rails.configuration.i18n.default_locale
-    end
-    title =  reply.ticket.subject
-    if user.agent?
-      title = I18n::translate(:new_reply, locale: @locale) + ': ' + title
-    end
+    @reply, @user = reply, user
 
-    add_attachments(reply)
-    add_reference_message_ids(reply)
-    add_in_reply_to_message_id(reply)
+    add_attachments(@reply)
+    add_reference_message_ids(@reply)
+    add_in_reply_to_message_id(@reply)
 
-    unless reply.message_id.blank?
-      headers['Message-ID'] = "<#{reply.message_id}>"
+    unless @reply.message_id.blank?
+      headers['Message-ID'] = "<#{@reply.message_id}>"
     end
 
     # for bounces, we don't use aliases
     headers['Return-Path'] = Tenant.current_tenant.from
 
-    @reply = reply
-    @user = user
-    return if EmailAddress.pluck(:email).include?(user.email.to_s)
+    return if EmailAddress.pluck(:email).include?(@user.email.to_s)
 
-    displayed_to_field = reply.notified_users.where(agent: false).pluck(:email)
-    displayed_to_field = user.email if displayed_to_field.empty?
+    displayed_to_field = @reply.notified_users.where(agent: false).pluck(:email)
+    displayed_to_field = @user.email if displayed_to_field.empty?
 
-    message = mail(smtp_envelope_to: user.email, to: displayed_to_field,
-      subject: title, from: reply.ticket.reply_from_address)
-    message.smtp_envelope_to = user.email
-    return message
-  end
-
-  def status_changed(ticket)
-    @ticket = ticket
-
-    unless ticket.message_id.blank?
-      headers['Message-ID'] = "<#{ticket.message_id}>"
+    message = I18n.with_locale @user.locale  do
+      subject = reply.ticket.subject
+      subject = "#{I18n::t(:new_reply)}: #{subject}" if user.agent?
+      mail(
+        template_name: :reply,
+        smtp_envelope_to: @user.email,
+        to: displayed_to_field,
+        subject: subject,
+        from: @reply.ticket.reply_from_address
+      )
     end
-    mail(to: ticket.assignee.email, subject:
-        'Ticket status modified in ' + ticket.status + ' for: ' \
-        + ticket.subject, from: ticket.reply_from_address)
-  end
-
-  def priority_changed(ticket)
-    @ticket = ticket
-
-    unless ticket.message_id.blank?
-      headers['Message-ID'] = "<#{ticket.message_id}>"
-    end
-    mail(to: ticket.assignee.email, subject:
-        'Ticket priority modified in ' + ticket.priority + ' for: ' \
-        + ticket.subject, from: ticket.reply_from_address)
+    message.smtp_envelope_to = @user.email
+    message
   end
 
   def assigned(ticket)
-    @ticket = ticket
+    @ticket, @user = ticket, ticket.assignee
 
-    unless ticket.message_id.blank?
-      headers['Message-ID'] = "<#{ticket.message_id}>"
+    unless @ticket.message_id.blank?
+      headers['Message-ID'] = "<#{@ticket.message_id}>"
     end
-    mail(to: ticket.assignee.email, subject:
-        'Ticket assigned to you: ' + ticket.subject, from: ticket.reply_from_address)
+
+    I18n.with_locale @user.locale  do
+      mail(
+        template_name: :ticket,
+        to: @user.email,
+        subject: "#{I18n::t(:ticket_assigned)}: #{ticket.subject}",
+        from: @ticket.reply_from_address
+      )
+    end
   end
 
+  %i(status priority).each do |attribute|
+    define_method("#{attribute}_changed") do |ticket|
+      @ticket, @user = ticket, ticket.assignee
+
+      unless @ticket.message_id.blank?
+        headers['Message-ID'] = "<#{@ticket.message_id}>"
+      end
+
+      I18n.with_locale @user.locale  do
+        subject = I18n.t(:attribute_changed,
+          attribute: Ticket.human_attribute_name(attribute),
+          value: I18n.t(@ticket.send(attribute),
+            scope: "activerecord.attributes.ticket.#{attribute.to_s.pluralize}"
+          )
+        ).capitalize + ": #{@ticket.subject}"
+        mail(
+          template_name: :ticket,
+          to: @user.email,
+          subject: subject,
+          from: @ticket.reply_from_address
+        )
+      end
+    end
+  end
 
   protected
-    def add_reference_message_ids(reply)
-      references = reply.other_replies.with_message_id.pluck(:message_id)
 
-      if references.count > 0
-        headers['References'] = '<' + references.join('> <') + '>'
-      end
+  def add_reference_message_ids(reply)
+    references = reply.other_replies.with_message_id.pluck(:message_id)
+
+    if references.count > 0
+      headers['References'] = '<' + references.join('> <') + '>'
+    end
+  end
+
+  def add_in_reply_to_message_id(reply)
+
+    last_reply = reply.other_replies.order(:id).last
+
+    if last_reply.nil?
+      headers['In-Reply-To'] = '<' + reply.ticket.message_id.to_s + '>'
+    else
+      headers['In-Reply-To'] = '<' + last_reply.message_id.to_s + '>'
     end
 
-    def add_in_reply_to_message_id(reply)
+  end
 
-      last_reply = reply.other_replies.order(:id).last
-
-      if last_reply.nil?
-        headers['In-Reply-To'] = '<' + reply.ticket.message_id.to_s + '>'
-      else
-        headers['In-Reply-To'] = '<' + last_reply.message_id.to_s + '>'
-      end
-
+  def add_attachments(ticket_or_reply)
+    ticket_or_reply.attachments.each do |at|
+      attachments[at.file_file_name] = File.read(at.file.path)
     end
-
-    def add_attachments(ticket_or_reply)
-      ticket_or_reply.attachments.each do |at|
-        attachments[at.file_file_name] = File.read(at.file.path)
-      end
-    end
+  end
 
 end

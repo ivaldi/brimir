@@ -69,10 +69,6 @@ ru:
     many: '%{count} ответов'
     other: '%{count} ответов'
   ago: 'назад'
-  high: 'Высокий'
-  medium: 'Средний'
-  low: 'Низкий'
-  unknown: 'Не известно'
   labels: 'Метки'
   label_name: 'Добавить метку'
   notification_sent_to: 'Уведомление было направлено по следующим адресам:'
@@ -101,18 +97,18 @@ ru:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: 'Заявка назначена вам'
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: 'Приоритет заявки изменен'
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: 'Статус заявки изменен'
+  tickets_status_modified: 'Ticket status modified for tickets'
 
-# notification_mailer/new_ticket
-  view_new_ticket: 'Посмотреть новую заявку'
+# notification_mailer
+  view_ticket: 'Посмотреть заявку'
 
 # notification_mailer/new_reply
   new_reply: 'Новый ответ'
-  view_new_reply: 'Посмотреть новый ответ'
+  view_reply: 'Посмотреть ответ'
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: 'скачать'
@@ -197,6 +193,11 @@ ru:
           closed: 'Закрыт'
           deleted: 'Удален'
           waiting: 'Отложенные'
+        priorities:
+          unknown: 'Не известно'
+          low: 'Низкий'
+          medium: 'Средний'
+          high: 'Высокий'
         priority: 'Приоритет'
         assignee_id: 'Назначить сотрудника ответственного за исполнение заявки'
 
@@ -213,5 +214,3 @@ ru:
           change_status: 'Изменить статус'
           change_priority: 'Изменить приоритет'
         action_value: 'Параметры действий'
-
-

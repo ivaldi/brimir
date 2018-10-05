@@ -36,8 +36,10 @@
     </p>
 
     <p>
-      <%= f.select :priority, options_for_select(
-        Ticket.priorities.keys.map { |k| [t(k.to_sym), k] }, f.object.priority), {}, tabindex: tabindex %>
+      <%
+        options = Ticket.priorities.keys.map { |k| [t(k, scope: 'activerecord.attributes.ticket.priorities'), k] }
+      %>
+      <%= f.select :priority, options_for_select(options, f.object.priority), {}, tabindex: tabindex %>
     </p>
   <% end %>
 

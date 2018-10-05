@@ -78,10 +78,6 @@ nl:
     one: '%{count} reactie'
     other: '%{count} reacties'
   ago: geleden
-  high: Hoog
-  medium: Gemiddeld
-  low: Laag
-  unknown: Onbekend
   labels: Labels
   label_name: Label naam
   notification_sent_to: 'Een notificatie is verstuurd aan de volgende adressen:'
@@ -128,23 +124,23 @@ nl:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket aan jou toegewezen
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Prioriteit van ticket is gewijzigd
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Status van ticket is gewijzigd
   tickets_status_modified: Status van tickets is gewijzigd
 
-# notification_mailer/new_ticket
-  view_new_ticket: Nieuw ticket bekijken
+# notification_mailer
+  view_ticket: Ticket bekijken
+
 # notification_mailer/new_reply
   new_reply: Nieuwe reactie
-  view_new_reply: Nieuwe reactie bekijken
+  view_reply: Reactie bekijken
   your_ticket_has_been_closed: "Uw ticket is gesloten. Reageer op deze e-mail als het probleem niet is opgelost. Voor een nieuw probleem kunt u een losse e-mail sturen."
   str_is_working_on_your_ticket: "%{str} zal uw ticket behandelen."
 
 # notificantion_mailer/new_account
   new_account_subject: 'Welkom bij Brimir!'
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: download
@@ -284,10 +280,15 @@ nl:
         content: Inhoud
         status: Status
         statuses:
-          open: Open
-          closed: Gesloten
-          deleted: Verwijderd
-          waiting: Afwachtend
+          open: open
+          closed: gesloten
+          deleted: verwijderd
+          waiting: afwachtend
+        priorities:
+          unknown: onbekend
+          low: laag
+          medium: gemiddeld
+          high: hoog
         priority: Prioriteit
         assignee_id: Toegewezen aan
         created_at: Aangemaakt op

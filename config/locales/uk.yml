@@ -59,10 +59,6 @@ uk:
     many: '%{count} відповіді'
     other: '%{count} відповіді'
   ago: назад
-  high: Високий
-  medium: Середній
-  low: Низький
-  unknown: Невідомо
   labels: Мітки
   label_name: Назва мітки
   notification_sent_to: 'A notification was sent to the following addresses:'
@@ -91,17 +87,18 @@ uk:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ваші назначені тікети
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Пріорітет тікету змінено 
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Статус тікету змінено
+  tickets_status_modified: 'Ticket status modified for tickets'
 
-# notification_mailer/new_ticket
-  view_new_ticket: Переглянути новий тікет
+# notification_mailer
+  view_ticket: Переглянути тікет
+
 # notification_mailer/new_reply
   new_reply: Нова відповідь
-  view_new_reply: Переглянути нову відповідь
+  view_reply: Переглянути відповідь
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: скачати
@@ -177,6 +174,11 @@ uk:
           closed: Закрито
           deleted: Видалено
           waiting: Очікує
+        priorities:
+          unknown: Невідомо
+          low: Низький
+          medium: Середній
+          high: Високий
         priority: Пріоритет
         assignee_id: Назначено
 

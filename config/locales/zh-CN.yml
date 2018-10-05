@@ -73,10 +73,6 @@ zh-CN:
     one: '%{count} 回复'
     other: '%{count} 回复'
   ago: 之前
-  high: 高
-  medium: 中
-  low: 低
-  unknown: 未知
   labels: 标签
   label_name: 标签名称
   notification_sent_to: '一条提醒将会发送到以下地址:'
@@ -107,17 +103,18 @@ zh-CN:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: 分配给您的咨询
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: 咨询优先级设置
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: 咨询状态设置
+  tickets_status_modified: 'Ticket status modified for tickets'
 
-# notification_mailer/new_ticket
-  view_new_ticket: 查看新咨询
+# notification_mailer
+  view_ticket: 查看咨询
+
 # notification_mailer/new_reply
   new_reply: 新回复
-  view_new_reply: 查看新回复
+  view_reply: 查看回复
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: 下载
@@ -223,6 +220,11 @@ zh-CN:
           closed: 关闭状态
           deleted: 删除状态
           waiting: 等待中
+        priorities:
+          unknown: 未知
+          low: 低
+          medium: 中
+          high: 高
         priority: 优先级
         assignee_id: 分配给
         created_at: 创建于

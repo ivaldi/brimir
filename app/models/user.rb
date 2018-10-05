@@ -81,6 +81,10 @@ class User < ApplicationRecord
     super || name_from_email_address
   end
 
+  def locale
+    (super.blank? ? Rails.configuration.i18n.default_locale : super).to_sym
+  end
+
   def is_working?
     #sanity checks for default behaviour
     return true unless schedule_enabled # this is the default behaviour

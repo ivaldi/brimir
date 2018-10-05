@@ -8,7 +8,7 @@
   jQuery('[data-dropdown="priorities-<%= @ticket.id %>"]')
       .empty()
       .append('<span class="cc-priority-<%= @ticket.priority %> fa fa-circle-o"></span> ' +
-          '<%= j(t(@ticket.priority)) unless params[:short] == 'true' %>');
+          '<%= j(t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities')) unless params[:short] == 'true' %>');
 
 <% else %>
   window.location.reload();

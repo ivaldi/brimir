@@ -56,13 +56,13 @@
               <a href="#" data-dropdown="priorities-<%= @ticket.id %>">
                 <span class="cc-priority-<%= @ticket.priority %> fa fa-fw fa-circle-o"></span>
                 <span class="show-for-print hide"><%= t(:priority) %>:</span>
-                <%= t(@ticket.priority) %>
+                <%= t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities') %>
               </a>
               <%= render 'priority_dropdown', ticket: @ticket, short: false %>
             <% else %>
               <span class="priority-<%= @ticket.priority %> fa fa-fw fa-circle"></span>
               <span class="show-for-print hide"><%= t(:priority) %>:</span>
-              <%= t(@ticket.priority) %>
+              <%= t(@ticket.priority, scope: 'activerecord.attributes.ticket.priorities') %>
             <% end %>
           </li>
           <li class="ib mrl">

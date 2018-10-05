@@ -47,10 +47,6 @@ es:
   num_replies:
     one: '%{count} respuesta'
     other: '%{count} respuestas'
-  high: Alta
-  medium: Media
-  low: Baja
-  unknown: Desconocido
   labels: Etiquetas
   label_name: Nombre de etiqueta
   notification_sent_to: 'Las notificaciones fueron enviadas a las siguientes direcciones:'
@@ -76,19 +72,20 @@ es:
   on_date_author_wrote: 'En %{date}, %{author} escribió:'
 
 # ticket_mailer/notify_assigned.text.erb
-  ticket_assigned: Te asignaron un Ticket
-
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Prioridad del ticket modificada
+  ticket_assigned: Te asignaron un ticket
 
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Estado del ticket modificado
+  tickets_status_modified: Estado de los tickets modificado
 
-# notification_mailer/new_ticket
-  view_new_ticket: Ver nuevo ticket
+# notification_mailer
+  view_ticket: Ver ticket
+
 # notification_mailer/new_reply
   new_reply: Nueva respuesta
-  view_new_reply: Ver nueva respuesta
+  view_reply: Ver respuesta
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} modificado a %{value}"
 
 # attachments/_attachment
   download: Descargar
@@ -144,10 +141,15 @@ es:
         content: Contenido
         status: Estado
         statuses:
-          open: Abierto
-          closed: Cerrado
-          deleted: Borrado
-          waiting: En espera
+          open: abierto
+          closed: cerrado
+          deleted: borrado
+          waiting: en espera
+        priorities:
+          unknown: desconocido
+          low: baja
+          medium: media
+          high: alta
         priority: Prioridad
         assignee_id: Delegado
       rule:

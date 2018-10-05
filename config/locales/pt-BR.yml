@@ -80,10 +80,6 @@ pt-BR:
     one: '%{count} resposta'
     other: '%{count} respostas'
   ago: atrás
-  high: Alta
-  medium: Média
-  low: Baixa
-  unknown: Desconhecida
   labels: Etiquetas
   label_name: Nome da etiqueta
   notification_sent_to: 'Uma notificação foi enviada para os seguintes endereços:'
@@ -130,23 +126,23 @@ pt-BR:
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Chamado atribuído a você
 
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Prioridade modificada para o chamado
-
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Status modificado para o chamado
   tickets_status_modified: Status modificado para os chamados
 
-# notification_mailer/new_ticket
-  view_new_ticket: Ver novo chamado
+# notification_mailer
+  view_ticket: Ver chamado
+
 # notification_mailer/new_reply
   new_reply: Nova resposta
-  view_new_reply: Ver nova resposta
+  view_reply: Ver resposta
   your_ticket_has_been_closed: "O seu chamado foi fechado. Se o problema ainda não foi resolvido, sinta-se livre para incluir uma resposta. Para novos pedidos, por gentileza abra outro chamado."
   str_is_working_on_your_ticket: "%{str} irá cuidar do seu chamado."
 
 # notificantion_mailer/new_account
   new_account_subject: 'Bem-vindo ao Brimir!'
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket %{attribute} changed to %{value}"
 
 # attachments/_attachment
   download: download
@@ -291,10 +287,15 @@ pt-BR:
         content: Conteúdo
         status: Status
         statuses:
-          open: Aberto
-          closed: Fechado
-          deleted: Deletado
-          waiting: Aguardando
+          open: aberto
+          closed: fechado
+          deleted: deletado
+          waiting: aguardando
+        priorities:
+          unknown: desconhecida
+          low: baixa
+          medium: média
+          high: alta
         priority: Prioridade
         assignee_id: Responsável
         created_at: Criado em

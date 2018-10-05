@@ -1,7 +1,7 @@
 de:
   language_name: Deutsch
 # layouts/application
-  new_ticket: Ticket erstellen
+  new_ticket: Neues Ticket
   inbox: Offene Tickets
   mine: Meine Tickets
   closed_tickets: Geschlossene Tickets
@@ -74,10 +74,6 @@ de:
     one: '%{count} Antwort'
     other: '%{count} Antworten'
   ago: vor
-  high: hoch
-  medium: normal
-  low: gering
-  unknown: unbekannt
   labels: Label
   label_name: Label
   notification_sent_to: 'Es wurde eine Benachrichtigung an folgende E-Mail-Adressen gesendet:'
@@ -131,22 +127,22 @@ de:
   split_off_ticket: Ticket abspalten
 
 # ticket_mailer/notify_assigned.text.erb
-  ticket_assigned: Ihnen wurde ein Ticket zugewiesen
-
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Die Priorität des Tickets wurde geändert
+  ticket_assigned: Ticket Ihnen zugewiesen
 
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Der Status des Tickets geändert
+  tickets_status_modified: Der Status der Tickets wurde geändert
 
-# notification_mailer/new_ticket
-  view_new_ticket: Ticket anzeigen
+# notification_mailer
+  view_ticket: Ticket anzeigen
 
 # notification_mailer/new_reply
-  new_reply: Antwort
-  view_new_reply: Antwort anzeigen
+  new_reply: Neue Antwort
+  view_reply: Antwort anzeigen
   your_ticket_has_been_closed: 'Ihr Support-Ticket wurde geschlossen. Wenn das Problem noch nicht gelöst wurde, antworten Sie einfach auf diese Nachricht. Für neue Anliegen schreiben Sie bitte eine separate E-Mail. Danke!'
   str_is_working_on_your_ticket: "%{str} bearbeitet jetzt Ihr Anliegen."
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "Ticket%{attribute} geändert auf %{value}"
 
 # attachments/_attachment
   download: Öffnen
@@ -241,7 +237,6 @@ de:
   ticket_locked_by_somebody_else: Das Ticket wird zur Zeit schon durch einen anderen Agenten bearbeitet
   save_as_draft: Als Entwurf speichern
   reply_by: Antwort durch
-  ticket_status_modified: Ticket Status wurde geändert
   change_settings: Einstellungen ändern
   localization_settings: Spracheinstellungen
   trash_emptied: Alle Tickets wurden aus dem Papierborb gelöscht
@@ -281,7 +276,12 @@ de:
           open: offen
           closed: geschlossen
           deleted: gelöscht
-          waiting: Ausstehend
+          waiting: ausstehend
+        priorities:
+          unknown: unbekannt
+          low: gering
+          medium: normal
+          high: hoch
         priority: Priorität
         assignee_id: Bearbeiter
 

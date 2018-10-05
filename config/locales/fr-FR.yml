@@ -78,10 +78,6 @@ fr-FR:
     one: '%{count} réponse'
     other: '%{count} réponses'
   ago: il y a
-  high: Haute
-  medium: Moyenne
-  low: Basse
-  unknown: Inconnu
   labels: Étiquettes
   label_name: Nom étiquette
   notification_sent_to: 'Une notification a été envoyé aux addresses suivantes:'
@@ -120,20 +116,20 @@ fr-FR:
   reply_by: Réponse de
 
 # ticket_mailer/notify_assigned.text.erb
-  ticket_assigned: Un ticket de support vous a été attribué
-
-# ticket_mailer/notify_priority_changed.text.erb
-  ticket_priority_changed: Priorité modifié pour le ticket
+  ticket_assigned: Ticket attribué à vous
 
 # ticket_mailer/notify_status_changed.text.erb
-  ticket_status_modified: Statut modifié pour le ticket
   tickets_status_modified: Statut modifié pour les tickets
 
-# notification_mailer/new_ticket
-  view_new_ticket: Voir le nouveau ticket
+# notification_mailer
+  view_ticket: Voir le ticket
+
 # notification_mailer/new_reply
   new_reply: Nouvelle réponse
-  view_new_reply: Voir la nouvelle réponse
+  view_reply: Voir la réponse
+
+# notification_mailer/priority_changed,status_changed
+  attribute_changed: "%{attribute} de ticket changé à %{value}"
 
 # attachments/_attachment
   download: télécharger
@@ -261,6 +257,11 @@ fr-FR:
           closed: Fermé
           deleted: Supprimé
           waiting: En attente
+        priorities:
+          unknown: inconnu
+          low: basse
+          medium: moyenne
+          high: haute
         priority: Priorité
         assignee_id: Attribué
         created_at: Crée à
