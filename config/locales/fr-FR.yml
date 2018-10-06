@@ -66,6 +66,9 @@ fr-FR:
   locked_by_user: Ticket actuellement géré par %{user}
   ticket_id_created_by_at: '#%{id} créé par %{user} à %{at}'
 
+# tickets create
+  create_ticket: Créer ticket
+
 # tickets/show
   add: Ajouter
   ticket_by_at: Par %{email} a %{at}

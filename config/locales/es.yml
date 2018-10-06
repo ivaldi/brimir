@@ -39,6 +39,9 @@ es:
   search: Buscar
   minutes: minutos
 
+# tickets create
+  create_ticket: Crear ticket
+
 # tickets/show
   ticket_by_at: Por %{email} en %{at}
   no_content: Sin contenido

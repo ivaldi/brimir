@@ -62,6 +62,8 @@ de:
   locked_by_user: 'Das Ticket wird derzeit von %{user} bearbeitet.'
   ticket_id_created_by_at: '#%{id} erstellt von %{user} am %{at}'
 
+# tickets create
+  create_ticket: Ticket erstellen
 
 # tickets/show
   add: Neu
