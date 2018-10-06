@@ -48,6 +48,9 @@ fr-CA:
   search: Recherche
   minutes: minutes
 
+# tickets create
+  create_ticket: Créer billet
+
 # tickets/show
   ticket_by_at: Par %{email} a %{at}
   no_content: Aucun contenu
