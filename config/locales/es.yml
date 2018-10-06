@@ -197,7 +197,7 @@ es:
   new_rule: Nueva regla
   no_notifications_sent: 'Ninguna notificación ha sido enviada'
   notification_will_be_sent_to: Tus notificaciones serán enviadas a
-  canned_response: Respuesta preparada
+  canned_reply: Respuesta preparada
   personal_settings: Configuración personal
   rule_added: Regla añadida
   rule_modified: Regla modificada

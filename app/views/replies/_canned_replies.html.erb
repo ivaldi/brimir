@@ -1,0 +1,4 @@
+<div data-canned-replies>
+  <% options = options_for_select @canned_replies.map { |c| [c.name, api_v1_email_template_path(c)] } %>
+  <%= select_tag nil, options, id: 'canned-reply', include_blank: true %>
+</div>

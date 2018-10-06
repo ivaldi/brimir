@@ -19,7 +19,7 @@ require 'test_helper'
 class Api::V1::EmailTemplatesControllerTest < ActionController::TestCase
 
   setup do
-    @email_template = email_templates(:canned_response)
+    @email_template = email_templates(:canned_reply)
   end
 
   test 'should show email template' do

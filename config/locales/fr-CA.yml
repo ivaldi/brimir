@@ -85,7 +85,7 @@ fr-CA:
   send_reply: Envoyer réponse
   on_date_author_wrote: 'Le %{date}, %{author} a écrit:'
   notification_will_be_sent_to: Votre notification sera envoyé a
-  canned_response: Réponse préparée
+  canned_reply: Réponse préparée
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Un billet de support vous a été attribué
