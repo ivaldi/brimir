@@ -69,7 +69,7 @@ jQuery(function() {
     }
   });
 
-  jQuery('#canned-response').on('change', function(){
+  jQuery('#canned-reply').on('change', function(){
     var editor = jQuery(this).parents('form#new_reply').find('trix-editor')[0].editor;
     var url = this.value;
     if (url) {

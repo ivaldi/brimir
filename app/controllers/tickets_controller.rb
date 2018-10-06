@@ -32,7 +32,6 @@ class TicketsController < ApplicationController
 
   def show
     @users = User.actives
-    @canned_responses = EmailTemplate.canned_responses.order(:name)
 
     # first time seeing this ticket?
     @ticket.mark_read current_user if @ticket.is_unread? current_user
