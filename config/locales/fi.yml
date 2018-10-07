@@ -1,6 +1,10 @@
 # author: https://github.com/JanneMantyharju
 fi:
   language_name: Suomi
+
+# helpers
+  time_ago_as_phrase: "%{timespan} sitten"
+
 # layouts/application
   new_ticket: Uusi tiketti
   inbox: Saapuneet

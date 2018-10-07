@@ -1,6 +1,10 @@
 # author: https://github.com/stormsw
 uk:
   language_name: Український
+
+# helpers
+  time_ago_as_phrase: "%{timespan} назад"
+
 # layouts/application
   new_ticket: Новий тікет
   inbox: Вхідні
@@ -58,7 +62,6 @@ uk:
     few: '%{count} відповіді'
     many: '%{count} відповіді'
     other: '%{count} відповіді'
-  ago: назад
   labels: Мітки
   label_name: Назва мітки
   notification_sent_to: 'A notification was sent to the following addresses:'

@@ -1,6 +1,10 @@
 # author: https://github.com/lemial
 ru:
   language_name: русский
+
+# helpers
+  time_ago_as_phrase: "%{timespan} назад"
+
 # layouts/application
   new_ticket: 'Новая заявка'
   inbox: 'Входящие'
@@ -68,7 +72,6 @@ ru:
     few: '%{count} ответа'
     many: '%{count} ответов'
     other: '%{count} ответов'
-  ago: 'назад'
   labels: 'Метки'
   label_name: 'Добавить метку'
   notification_sent_to: 'Уведомление было направлено по следующим адресам:'

@@ -1,5 +1,9 @@
 nb:
   language_name: Norsk (Bokmål)
+
+# helpers
+  time_ago_as_phrase: "%{timespan} siden"
+
 # layouts/application
   new_ticket: Ny henvendelse
   inbox: Innboks
@@ -75,7 +79,6 @@ nb:
   num_replies:
     one: '%{count} svar'
     other: '%{count} svar'
-  ago: siden
   labels: Merkelapper
   label_name: Merkelapp
   notification_sent_to: 'En varsling ble sendt til følgende e-postadresse:'

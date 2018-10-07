@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class TicketsController < ApplicationController
+  include TimeHelper
   include HtmlTextHelper
   include TicketsStrongParams
   include ActionView::Helpers::SanitizeHelper # dependency of HtmlTextHelper

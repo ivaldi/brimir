@@ -3,6 +3,10 @@
 
 pt-BR:
   language_name: Português do Brasil
+
+# helpers
+  time_ago_as_phrase: "%{timespan} atrás"
+
 # layouts/application
   new_ticket: Novo Chamado
   inbox: Caixa de Entrada
@@ -79,7 +83,6 @@ pt-BR:
   num_replies:
     one: '%{count} resposta'
     other: '%{count} respostas'
-  ago: atrás
   labels: Etiquetas
   label_name: Nome da etiqueta
   notification_sent_to: 'Uma notificação foi enviada para os seguintes endereços:'

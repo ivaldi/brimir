@@ -1,5 +1,9 @@
 de:
   language_name: Deutsch
+
+# helpers
+  time_ago_as_phrase: "%{timespan} alt"
+
 # layouts/application
   new_ticket: Neues Ticket
   inbox: Offene Tickets
@@ -75,7 +79,6 @@ de:
   num_replies:
     one: '%{count} Antwort'
     other: '%{count} Antworten'
-  ago: vor
   labels: Label
   label_name: Label
   notification_sent_to: 'Es wurde eine Benachrichtigung an folgende E-Mail-Adressen gesendet:'

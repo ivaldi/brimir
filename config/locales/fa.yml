@@ -1,5 +1,9 @@
 fa:
   language_name: فارسی
+
+# helpers
+  time_ago_as_phrase: "%{timespan} قبل"
+
 # layouts/application
   new_ticket: تیکت جدید
   inbox: صندوق
@@ -71,7 +75,6 @@ fa:
   num_replies:
     one: '%{count} پاسخ'
     other: '%{count} پاسخ'
-  ago: قبل
   labels: برچسب‌ها
   label_name: اسم برچسب
   notification_sent_to: 'به اطلاع آدرس‌های زیر رسانده شد:'

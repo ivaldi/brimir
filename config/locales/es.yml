@@ -3,6 +3,10 @@
 #
 es:
   language_name: Español
+
+# helpers
+  time_ago_as_phrase: "hace %{timespan}"
+
 # layouts/application
   new_ticket: Nuevo Ticket
   inbox: Bandeja
@@ -175,7 +179,6 @@ es:
 
 
   add: Añadir
-  ago: hace
   are_you_sure: ¿Estás seguro?
   count_tickets:
     one: '%{count} ticket'
