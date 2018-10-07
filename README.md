@@ -117,6 +117,30 @@ We appreciate all contributions! If you would like to contribute, please follow 
 - Make your changes in the branch.
 - Submit a pull-request to merge your feature-branch in our master branch.
 
+Localization
+------------
+English (en) is the primary and default locale which should always be up-to-date and contain all translation keys currently in use. To keep the other locale files up to date, use the `locales:completeness` task to diff the translation keys of all available locales against English. Here's a commented example:
+
+```
+$ rake locales:completeness
+Diffing against default locale files (en.yml).
+
+WARNING: `it.yml' does not exist    <-- available locale :it has no YAML file
+
+--- config/locales/en.yml
++++ config/locales/de.yml
+  - close                           <-- translation for :de missing
+  - wait
+  + prefer_plain_text               <-- superfluous translation in :de or key
+  + created_at                          removed from :en by mistake
+```
+
+More translations are welcome! To work on a new language, say Esperanto (eo), simply copy English as a template and start working on it:
+
+    cp config/locales/en.yml config/locales/eo.yml
+
+Once finished and quality checked, make sure you add the new locale to `config.i18n.available_locales` in `config/application.rb`. To disable a no longer maintained locale, simply remove it from `config.i18n.available_locales`, but leave the locale file checked in for future reference.
+
 Requested features
 ------------------
 Some users have made requests for the following features. If you would like to contribute, you could add any of these.
