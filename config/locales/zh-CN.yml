@@ -1,5 +1,9 @@
 zh-CN:
   language_name: 简体中文
+
+# helpers
+  time_ago_as_phrase: "%{timespan} 之前"
+
 # layouts/application
   new_ticket: 新建咨询
   inbox: 咨询夹
@@ -72,7 +76,6 @@ zh-CN:
   num_replies:
     one: '%{count} 回复'
     other: '%{count} 回复'
-  ago: 之前
   labels: 标签
   label_name: 标签名称
   notification_sent_to: '一条提醒将会发送到以下地址:'

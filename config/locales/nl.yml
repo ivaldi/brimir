@@ -1,6 +1,10 @@
 # author: https://github.com/frenkel
 nl:
   language_name: Nederlands
+
+# helpers
+  time_ago_as_phrase: "%{timespan} geleden"
+
 # layouts/application
   new_ticket: Nieuw ticket
   inbox: Inbox
@@ -80,7 +84,6 @@ nl:
   num_replies:
     one: '%{count} reactie'
     other: '%{count} reacties'
-  ago: geleden
   labels: Labels
   label_name: Label naam
   notification_sent_to: 'Een notificatie is verstuurd aan de volgende adressen:'

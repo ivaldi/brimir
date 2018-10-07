@@ -1,6 +1,10 @@
 # author: https://github.com/social-org and https://github.com/sapk
 fr-FR:
   language_name: Français
+
+# helpers
+  time_ago_as_phrase: "il y a %{timespan}"
+
 # layouts/application
   new_ticket: Nouveau ticket
   inbox: Boîte de réception
@@ -80,7 +84,6 @@ fr-FR:
   num_replies:
     one: '%{count} réponse'
     other: '%{count} réponses'
-  ago: il y a
   labels: Étiquettes
   label_name: Nom étiquette
   notification_sent_to: 'Une notification a été envoyé aux addresses suivantes:'

@@ -1,5 +1,9 @@
 en:
   language_name: English
+
+# helpers
+  time_ago_as_phrase: "%{timespan} ago"
+
 # layouts/application
   new_ticket: New ticket
   inbox: Inbox
@@ -80,7 +84,6 @@ en:
   num_replies:
     one: '%{count} reply'
     other: '%{count} replies'
-  ago: ago
   labels: Labels
   label_name: Label name
   notification_sent_to: 'A notification was sent to the following addresses:'

@@ -1,5 +1,9 @@
 ar:
   language_name: العربية
+
+# helpers
+  time_ago_as_phrase: "%{timespan} منذ"
+
 # layouts/application
   new_ticket: شكوى جديدة
   inbox: صندوق الوارد
@@ -71,7 +75,6 @@ ar:
   num_replies:
     one: '%{count} رد'
     other: '%{count} ردود'
-  ago: منذ
   labels: علامات
   label_name: اسم العلامة
   notification_sent_to: 'تم إرسال تنبيه للعناوين التالية:'

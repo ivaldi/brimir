@@ -1,6 +1,10 @@
 # author: https://github.com/social-org
 fr-CA:
   language_name: Canadienne-Française
+
+# helpers
+  time_ago_as_phrase: "il y a %{timespan}"
+
 # layouts/application
   new_ticket: Nouveau Billet
   inbox: Boîte de réception
@@ -59,7 +63,6 @@ fr-CA:
   num_replies:
     one: '%{count} réponse'
     other: '%{count} réponses'
-  ago: il y a
   labels: Étiquettes
   label_name: Nom étiquette
   notification_sent_to: 'Une notification a été envoyé aux addresses suivantes:'
