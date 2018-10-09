@@ -15,8 +15,8 @@
     <table class="full">
       <thead>
         <tr>
-          <th><%= t('activerecord.attributes.email_template.name') %></th>
-          <th><%= t('activerecord.attrib!utes.email_template.kind') %></th>
+          <th><%= EmailTemplate.human_attribute_name(:name) %></th>
+          <th><%= EmailTemplate.human_attribute_name(:kind) %></th>
           <th><%= t(:status) %></th>
           <th></th>
         </tr>
@@ -25,7 +25,7 @@
         <% @email_templates.each do |email_template| %>
           <tr>
             <td><%= email_template.name %></td>
-            <td><%= email_template.kind.humanize %></td>
+            <td><%= t(:"activerecord.attributes.email_template.kinds.#{email_template.kind}.template_name") %></td>
             <td>
               <% if email_template.is_active? %>
                   <%= fa_icon 'check' %>
