@@ -7,9 +7,10 @@ fa:
 # layouts/application
   new_ticket: تیکت جدید
   inbox: صندوق
-  mine: مال من
+  my_tickets: مال من
+  waiting_tickets: انتظار
   closed_tickets: بسته
-  trashed: پاک‌شده
+  trashed_tickets: پاک‌شده
   users: کاربران
   rules: قوانین
   personal_settings: تنظیمات شخصی

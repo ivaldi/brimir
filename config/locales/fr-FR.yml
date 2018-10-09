@@ -1,4 +1,4 @@
-# author: https://github.com/social-org and https://github.com/sapk
+# authors: social-org, sapk, svoop
 fr-FR:
   language_name: Français
 
@@ -8,34 +8,36 @@ fr-FR:
 # layouts/application
   new_ticket: Nouveau ticket
   inbox: Boîte de réception
-  mine: Mes tickets
+  my_tickets: Mes tickets
+  waiting_tickets: En attente
   closed_tickets: Fermé
-  trashed: Corbeille
+  trashed_tickets: Corbeille
   users: Utilisateurs
   rules: Règles
-  personal_settings: Règlages personnel
+  personal_settings: Réglages personnels
   sign_out: Se déconnecter
   delete: Supprimer
   close: Fermer
   wait: En attente
-  merge: Fusionner
+  to: À
+  inactive: Inactif
 
   joyride:
-    tickets: Tous le monde peut créer des tickets avec ce bouton.
-    personal_settings: Definissez votre signature, fuseau horaire et autres préférences à partir de ce menu.
-    labels: Après modification des étiquettes des tickets ou des utilisateurs, ils apparaîtront ici. Vous pourrez ensuite les utiliser comme filtre.
-    rules: Ajouter automatiquement des étiquettes, responsables, changer de status et autres.
-    users: Ajouter d'autres agents utilisateurs.
-    final: Merci d'utiliser Brimir!
+    tickets: N'importe qui peut créer des tickets en utilisant ce bouton.
+    personal_settings: Cofigurez votre signature, fuseau horaire et d'autres préférences à partir de ce menu.
+    labels: Après la création d'une étiquette de tickets ou d'utilisateur, elle apparaît ici et vous pouvez ensuite la utiliser comme filtre.
+    rules: Ajouter des étiquettes ou des responsables, changer de statut etc de manière automatique.
+    users: Ajouter plus d'agents ou d'utilisateurs.
+    final: Merci d'utiliser Brimir !
     next: Suivant
     previous: Précédent
     end: Allons-y !
 
 # devise/sessions/new
-  sign_in: S'authentifier au Brimir
+  sign_in: Se connecter
 
 # devise/shared/links
-  forgot_password: Mot de passe oublié?
+  forgot_password: Mot de passe oublié ?
 
 # devise/passwords/new
   send_instructions: Envoyez-moi les instructions
@@ -43,96 +45,123 @@ fr-FR:
 # devise/passwords/edit
   change_password: Changer de mot de passe
   new_password: Nouveau mot de passe
-  new_password_confirmation: Confirmez nouveau mot de passe
+  new_password_confirmation: Confirmer nouveau mot de passe
 
 # devise/mailer/reset_password_instructions
   hello: Bonjour
-  someone_requested_link: Quelqu'un a demandé un lien pour changer votre mot de passe, et vous pouvez le faire via le lien ci-dessous.
+  someone_requested_link: Quelqu'un a demandé de changer votre mot de passe, utilisez le lien ci-dessous pour le réaliser.
   ignore_if_not_requested: Si vous n'avez pas demandé ceci, vous pouvez ignorer ce courriel.
-  password_wont_change_without_opening_link: Votre mot de passe ne changera pas jusqu'à ce que vous accédiez au lien ci-dessus et en créer un nouveau.
+  password_wont_change_without_opening_link: Votre mot de passe ne changera pas avant d'accéder le lien ci-dessus et d'en créer un nouveau.
 
 # tickets/index
   count_tickets:
+    zero: 'Aucun ticket'
     one: '%{count} ticket'
     other: '%{count} tickets'
   count_tickets_containing:
+    zero: 'Aucun ticket contenant'
     one: '%{count} ticket contenant'
     other: '%{count} tickets contenant'
   priority: Priorité
   replies: réponses
   no_subject: Aucun sujet
-  unassigned: Non affecté
+  unassigned: non attribué
   no_tickets_found: Aucun ticket trouvé.
   search: Recherche
   filter: Filtre
   minutes: minutes
-  are_you_sure_empty_trash: Supprimer tous les tickets dans la corbeille?
+  are_you_sure_empty_trash: Supprimer tous les tickets dans la corbeille ?
   locked_by_user: Ticket actuellement géré par %{user}
-  ticket_id_created_by_at: '#%{id} créé par %{user} à %{at}'
+  ticket_id_created_by_at: '#%{id} créé par %{user} le %{at}'
 
 # tickets create
   create_ticket: Créer ticket
 
 # tickets/show
   add: Ajouter
-  ticket_by_at: Par %{email} a %{at}
+  ticket_by_at: Par %{email} le %{at}
   to_email: pour %{email}
   no_content: Aucun contenu
   ticket_id: Numéro de ticket
   status: Statut
   assignee: Attribué
   num_replies:
+    zero: 'aucune réponse'
     one: '%{count} réponse'
     other: '%{count} réponses'
   labels: Étiquettes
-  label_name: Nom étiquette
-  notification_sent_to: 'Une notification a été envoyé aux addresses suivantes:'
-  no_notifications_sent: 'Aucune notification a été envoyé'
+  label_name: Nom d'étiquette
+  notification_sent_to: 'Une notification a été envoyé aux addresses suivantes :'
+  no_notifications_sent: 'Aucune notification a été envoyé.'
   assign_label: Attribuer l'étiquette
-  take_ticket_lock_from_user: Prendre la gestion du ticket à %{user}
+  take_ticket_lock_from_user: Reprendre la gestion du ticket de %{user}
 
 # tickets/_change_priority_form
   change: Changer
   change_priority: Changer la priorité
 
 # tickets/_change_status_form
-  change_status: Changer le statut
+  change_status: Changer le statut à
 
 # tickets/_change_assignee_form
   change_assignee: Attribuer un ticket
   assign: Attribuer
 
+# tickets/_change_subject_form
+  change_subject: Modifier le sujet
+  str1_has_renamed_ticket_from_str2_to_str3: "%{str1} a modifié le sujet du ticket de '%{str2}' à '%{str3}'."
+
 # tickets/locks/create
-  ticket_locked_by_somebody_else: Ce ticket est actuellement déjà traitée par quelqu'un d'autre
+  ticket_locked_by_somebody_else: Ce ticket est actuellement géré par quelqu'un d'autre.
+
+# tickets/merge
+  ticket_has_been_merged_to: "Ce ticket a été fusionné avec le ticket #%{ticket_id}."
+  merge: Fusionner
+  merge_explanation: "Fusionner les tickets sélectionnés. Ceci ajoute toutes les réponses au plus récent des tickets et ferme les autres tickets."
+  tickets_have_been_merged: "Les tickets ont été fusionnés."
+
+# email_imports/new
+  import_emails: Importer courriels
+  upload_eml_files_to_import_them_as_new_tickets: 'Téléchargez des fichiers *.eml pour les importer comme nouveaux tickets.'
+  upload_files: Télécharger fichiers
+  perform_email_import: Effectuer import
 
 # replies/new
   add_reply: Ajouter une réponse
 
 # replies/_form
-  reply: Répondre
-  attach_files: Attacher fichier(s)
+  reply: Réponse
+  attach_files: Attacher fichiers
   attach_file: Attacher fichier
   send_reply: Envoyer réponse
-  on_date_author_wrote: 'Le %{date}, %{author} a écrit:'
-  notification_will_be_sent_to: Votre notification sera envoyé a
+  attach_note: Attacher note
+  on_date_author_wrote: 'Le %{date}, %{author} a écrit :'
+  notification_will_be_sent_to: Votre notification sera envoyé à
   canned_reply: Réponse préparée
-  save_as_draft: Enregistrer comme brouillon
+  save_as_draft: Sauvegarder comme brouillon
+  internal_note: Note interne
 
 # replies/_reply
   reply_by: Réponse de
+  split_off_ticket: Répartir ticket
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Ticket attribué à vous
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Statut modifié pour les tickets
+  tickets_status_modified: Statuts des tickets modifiés.
 
 # notification_mailer
-  view_ticket: Voir le ticket
+  view_ticket: Voir ticket
 
 # notification_mailer/new_reply
   new_reply: Nouvelle réponse
-  view_reply: Voir la réponse
+  view_reply: Voir réponse
+  your_ticket_has_been_closed: "Votre ticket a été fermé. Pour rouvrir le même sujet, envoyez une réponse. Pour tout autres sujets, merci d'envoyer un nouveau courriel."
+  str_is_working_on_your_ticket: "%{str} va gérer votre ticket."
+
+# notificantion_mailer/new_account
+  new_account_subject: 'Bienvenue chez Brimir !'
 
 # notification_mailer/priority_changed,status_changed
   attribute_changed: "%{attribute} de ticket changé à %{value}"
@@ -145,31 +174,35 @@ fr-FR:
 
 # users/edit
   edit_user: Modifier l'utilisateur
-  omniauth_connect_title: Authentification en utilisant Google
-  omniauth_connect_text: Activer l'authentification en utilisant un compte Google. Ensuite, vous pouvez utiliser "Connectez-vous avec Google" comme une alternative à l'adresse e-mail et mot de passe de connexion.
-  omniauth_connect_google_text: Connectez-vous avec votre compte Google
+  omniauth_connect_title: Connexion par Google
+  omniauth_connect_text: Activer l'authentification par Google. Ensuite, vous pouvez utiliser "connectez-vous par Google" d'alternative à l'adresse courriel et le mot de passe.
+  omniauth_connect_google_text: Connectez-vous par Google
   remove_user: Supprimer l'utilisateur
 
 # users/index
   email: Courriel
   role: Rôle
   agent: Agent
+  agents: Agents
   customer: Client
 
 # users/_form
   account_settings: Paramètres du compte
-  only_fill_in_passwords_when_modifying: Remplir ces deux champs seulement si vous souhaitez modifier votre mot de passe.
+  only_fill_in_passwords_when_modifying: Remplissez ces deux champs uniquement si vous souhaitez modifier votre mot de passe.
   user_is_an_agent: L'utilisateur est un agent
-  receive_new_ticket_notifications: Recevoir les notifications des nouveaux tickets
+  active: L'utilisateur est actif
+  until: jusqu'à
+  receive_new_ticket_notifications: Recevoir les notifications de nouveaux tickets.
   email_settings: Paramètres du courriel
-  save: Enregister
-  access_control: Contrôle d'accés
-  have_access_to_label: L'utilisateur a accés à tous les tickets avec l'une de ces étiquettes.
+  save: Sauvegarder
+  access_control: Contrôle d'accès
+  have_access_to_label: L'utilisateur a accès à tous les tickets avec une de ces étiquettes.
 
 # settings/edit
   change_settings: Modifier les paramètres
   localization_settings: Paramètres de localisation
   permissions: Autorisations
+  notification_settings: Paramètres de notification
   look_and_feel: Présentation
 
 # controllers/settings
@@ -179,32 +212,29 @@ fr-FR:
   file_not_found: Fichier introuvable
 
 # controllers/users
-  settings_saved: Paramètres enregistés
   user_added: Utilisateur ajouté
   user_removed: Utilisateur supprimé
 
 # controllers/tickets
-  ticket_added_public: Votre demande a été transmise au service compétent, qui ne manquera pas de vous apporter une réponse dès que possible
   ticket_added: Ticket ajouté
+  ticket_added_public: Votre demande a été transmise, nous reviendrons vers vous dès que possible.
+  form_validation_error: Merci de bien remplir le formulaire correctement.
+  captcha_error: Merci de résoudre le captcha correctement.
   ticket_updated: Ticket mise à jour
-  ticket_error: Merci de bien remplir le formulaire correctement
-  captcha_error: Merci de résoudre le captcha correctement
-
-  ticket_added: Ticket ajouté
-  ticket_updated: Ticket mise à jour
+  access_denied: Accès refusé
 
 # controllers/tickets/deleted
-  trash_emptied: Tous les tickets ont été supprimés de la corbeille
+  trash_emptied: Tous les tickets dans la corbeille ont été supprimés.
 
 # controllers/replies
   reply_added: Réponse ajoutée
   draft_saved: Brouillon sauvegardé
 
 # controllers/omniauth
-  already_linked_accounts: Déjà lié au compte Google
-  successfully_linked_account: Connection au compte Google réussie
-  not_linked_account_cant_login: Il n'y a pas encore utilisateur attaché à ce fournisseur. S'il vous plaît connectez-vous une première fois et lier se compte via l'écran des paramètres personnels.
-  third_party_failure: Une erreur est survenue lors de l'authentification. Avez-vous activé "Contacts API" et "Google+ API" via la console Google API?
+  already_linked_accounts: Déjà lié à un compte Google.
+  successfully_linked_account: Liaison au compte Google réussie.
+  not_linked_account_cant_login: Aucun utilisateur lié à ce fournisseur. Connectez-vous et liez ce compte par vos paramètres personnels s'il vous plaît.
+  third_party_failure: Une erreur s'est produite lors de l'authentification. Avez-vous activé "Contacts API" et "Google+ API" par la console Google API ?
 
 # user/sign_in (omniauth)
   omniauth_sign_in_title: Authentification alternative
@@ -216,7 +246,7 @@ fr-FR:
 # rules/edit
   edit_rule: Modifier règle
   delete_rule: Supprimer règle
-  are_you_sure: En êtes-vous sûr?
+  are_you_sure: En êtes-vous sûr ?
 
 # controllers/rules
   rule_added: Règle ajoutée
@@ -224,24 +254,42 @@ fr-FR:
   rule_deleted: Règle supprimée
 
 # email_addresses/index
-  new_email_address: Nouvelle adresse de courrier sortant
-  email_addresses: Les adresses email de courrier sortant
+  new_email_address: Nouvelle adresse courriel
+  email_addresses: Adresses courriels sortantes
 
 # email_addresses/edit
-  modify_email_address: Modifier l'adresse du courrier électronique sortant
+  modify_email_address: Modifier l'adresse courriel sortante
 
 # email_addresses/new
-  verification_mail_will_be_sent: Assurez-vous que cette adresse e-mail est transmise correctement à Brimir. Un email automatique de vérification sera envoyé lorsque vous cliquerez sur Enregistrer. Seules les adresses électroniques vérifiées peuvent être utilisées pour le courrier sortant.
-  mark_spam_spf: L'email de Brimir pourraient être identifié comme spam si vous n'ajouter pas ce serveur à l'entrée SPF des DNS pour l'adresse mail ci-dessus.
+  verification_mail_will_be_sent: Pour assurer que cette adresse courriel soit transmise correctement, un message de vérification automatique sera envoyé lorsque vous cliquez sur "sauvegarder". Uniquement les adresses courriels vérifiées peuvent être utilisées pour des messages sortants.
+  mark_spam_spf: Les messages sortants peuvent être identifié comme spam si vous n'ajoutez pas un enregistrement DNS type SPF pour le nom de domaine de l'adresse courriel ci-dessus.
+
+# email_templates/index
+  already_active_template: Il y a déjà un autre modèle actif de type %{kind} qui sera désélectionné si vous continuez.
+  new_email_template: Nouveau modèle
+  email_templates: Modèles de courriels
+  deleting_this_item_will_unset_option: 'La suppression de ce modèle va désélectonner les options suivantes :'
+  set_active: Activer
+  status: Statut
+
+# email_templates/edit
+  modify_email_template: Modifier modèle de courriel
+  tooltip: Texte de substitution entre crochets sera remplacé par le contenu correspondant.
 
 # controllers/email_addresses
-  email_address_modified: Addresse email modifiée
-  email_address_added: Addresse email ajoutée
-  email_address_removed: Addresse email supprimée
+  email_address_modified: Addresse courriel modifiée
+  email_address_added: Addresse courriel ajoutée
+  email_address_removed: Addresse courriel supprimée
+
+# controllers/email_templates
+  email_template_modified: Modèle de courriel modifié
+  email_template_added: Modèle de courriel ajouté
+  email_template_removed: Modèle de courriel supprimé
 
   activerecord:
     attributes:
       user:
+        name: Nom
         email: Courriel
         password: Mot de passe
         password_confirmation: Confirmation de mot de passe
@@ -251,7 +299,10 @@ fr-FR:
         locale: Langue
         time_zone: Fuseau horaire
         per_page: Tickets par page
-        prefer_plain_text: Envoyer et recevoir les réponse au format texte
+        schedule_enabled_false: Tout le temps 24/7
+        schedule_enabled_true: Il n'y a que le travail, pendant mes heures de travail uniquement !
+        prefer_plain_text: Envoyer et recevoir les réponses au format texte.
+        include_quote_in_reply: Insérer la citation du message original dans les réponses.
 
       ticket:
         from: De l'adresse courriel
@@ -259,10 +310,10 @@ fr-FR:
         content: Objet
         status: Statut
         statuses:
-          open: Ouvert
-          closed: Fermé
-          deleted: Supprimé
-          waiting: En attente
+          open: ouvert
+          closed: fermé
+          deleted: supprimé
+          waiting: en attente
         priorities:
           unknown: inconnu
           low: basse
@@ -271,35 +322,109 @@ fr-FR:
         priority: Priorité
         assignee_id: Attribué
         created_at: Crée à
-        to: Adresse email destinatiaire
+        to: Destinatiaire verifié
+        orig_to: Destinataire
+        orig_cc: Cc
 
       reply:
-        from: Adresse email source
+        from: Émetteur
 
       rule:
         filter_field: Champ
         filter_operation: Opérateur
         filter_operations:
           contains: contient
-          equals: est égal à
+          equals: est égal(e) à
         filter_value: Valeur
         action_operation: Action à effectuer
         action_operations:
-          assign_label: attribuer étiquette
-          notify_user: envoyer une notification a
-          change_status: changer le statut a
-          change_priority: changer la priorité a
-          assign_user: attribué à
-        action_value: Paramètres de l’action
+          assign_label: ajouter étiquette
+          notify_user: envoyer une notification à
+          change_status: changer le statut
+          change_priority: changer la priorité
+          assign_user: attribuer à
+        action_value: Paramètres de l'action
 
       email_address:
-        email: Adresse email
+        email: Adresse courriel
         name: Nom
-        default: Utiliser comme adresse de courrier sortant par défaut
-        verification_token: Validé
+        default: Défaut sortant
+        verification_token: Vérifié
+
+      email_template:
+        name: Nom de modèle
+        from: De
+        kind: Type
+        message: Message
+        kinds:
+          user_welcome:
+            template_name: Bienvenue nouvel utilisateur
+            message: |
+              <div>
+              Bonjour [name],
+              <br />
+              <br />
+              Votre compte pour le système de ticket Brimir vient d'être créé !
+              <br />
+              <br />
+              Pour vous connecter, vous avez besoin des identifiants suivants :
+              <br />
+              Courriel: [email]
+              <br />
+              Mot de passe: [password]
+              <br />
+              <br />
+              <strong>IMPORTANT !</strong>
+              <br />
+              Ces identifiants ne seront plus communiqués, conservez-les !
+              <br />
+              <br />
+              Vous avez oublié votre mot de passe ? Mettez un nouveau :
+              <br />
+              http://[domain]/users/password/new
+              <br />
+              <br />
+              Cordialement,
+              <br />
+              Webmaster [domain]
+              <br />
+              <br />
+              *** Ceci est un message automatique, ne répondez pas ! ***
+              </div>
+
+          ticket_received:
+            template_name: Ticket reçu
+            message: |
+              <div>
+              Bonjour [name],
+              <br />
+              <br />
+              Votre message de [created_at] :
+              <br />
+              [content]
+              <br />
+              <br />
+              Vous recevez cette notification pour vous informer que votre ticket avec le numéro [id] a bien été enregistré.
+              <br />
+              <br />
+              Cordialement,
+              <br />
+              Webmaster [domain]
+              <br />
+              <br />
+              </div>
+
+          canned_reply:
+            template_name: Réponse préparée
 
       tenant:
-        default_locale: Langage par défaut
+        default_locale: Langue par défaut
         ignore_user_agent_locale: Ignorer la langue préférée du navigateur
         default_time_zone: Fuseau horaire par défaut
         share_drafts: Partager les brouillons avec les autres agents
+        first_reply_ignores_notified_agents: Pas de notifications aux autres agents pour la première réponse.
+        notify_client_when_ticket_is_assigned_or_closed: Notifier l'utilisateur après avoir attribué ou fermé son ticket.
+        notify_client_when_ticket_is_created: Notifier l'utilisateur après avoir reçu et créé un nouveau ticket pour lui.
+        notify_user_when_account_is_created: Notifier l'utilisateur après avoir créé son compte utilisateur.
+        stylesheet_url: Ajouter chemin pour feuille de style personalisée.
+        ticket_creation_is_open_to_the_world: Création de tickets autorisée à tout le monde.

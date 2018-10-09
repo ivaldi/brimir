@@ -7,9 +7,10 @@ zh-CN:
 # layouts/application
   new_ticket: 新建咨询
   inbox: 咨询夹
-  mine: 我的
+  my_tickets: 我的
+  waiting_tickets: 等待中
   closed_tickets: 关闭
-  trashed: 丢弃
+  trashed_tickets: 丢弃
   users: 用户
   rules: 规则
   personal_settings: 个人设置

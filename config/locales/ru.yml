@@ -8,9 +8,10 @@ ru:
 # layouts/application
   new_ticket: 'Новая заявка'
   inbox: 'Входящие'
-  mine: 'Назначенные мне'
+  my_tickets: 'Назначенные мне'
+  waiting_tickets: 'Отложенные'
   closed_tickets: 'Закрытые'
-  trashed: 'Архивные'
+  trashed_tickets: 'Архивные'
   users: 'Сотрудники'
   rules: 'Правила'
   personal_settings: 'Личные настройки'

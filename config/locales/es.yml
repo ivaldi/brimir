@@ -10,9 +10,10 @@ es:
 # layouts/application
   new_ticket: Nuevo Ticket
   inbox: Bandeja
-  mine: Mios
+  my_tickets: Mios
+  waiting_tickets: En espera
   closed_tickets: Cerrados
-  trashed: Borrados
+  trashed_tickets: Borrados
 
 # devise/sessions/new
   sign_in: Entrar Brimir
@@ -114,6 +115,7 @@ es:
   only_fill_in_passwords_when_modifying: Rellena solo los siguientes dos campos si deseas modificar tu contraseña.
   user_is_an_agent: El usuario es un agente
   receive_new_ticket_notifications: Recibir notificaciones para nuevos tickets
+  until: hasta
   email_settings: Configuración de Correo
   save: Guardar
   access_control: Control de Acceso
