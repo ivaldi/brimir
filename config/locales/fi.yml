@@ -8,9 +8,10 @@ fi:
 # layouts/application
   new_ticket: Uusi tiketti
   inbox: Saapuneet
-  mine: Omat
+  my_tickets: Omat
+  waiting_tickets: Odotus
   closed_tickets: Suljetut
-  trashed: Poistetut
+  trashed_tickets: Poistetut
   users: Käyttäjät
 
 # devise/sessions/new
@@ -147,6 +148,7 @@ fi:
         statuses:
           open: avoin
           closed: suljettu
+          waiting: odotus
           deleted: poistettu
         priorities:
           unknown: tuntematon

@@ -10,9 +10,10 @@ pt-BR:
 # layouts/application
   new_ticket: Novo Chamado
   inbox: Caixa de Entrada
-  mine: Meu
+  my_tickets: Meu
+  waiting_tickets: Aguardando
   closed_tickets: Fechado
-  trashed: Excluído
+  trashed_tickets: Excluído
   users: Usuários
   rules: Regras
   personal_settings: Configurações Pessoais

@@ -7,9 +7,10 @@ ar:
 # layouts/application
   new_ticket: شكوى جديدة
   inbox: صندوق الوارد
-  mine: الخاصة بي
+  my_tickets: الخاصة بي
+  waiting_tickets: قيد الانتظار
   closed_tickets: مغلقة
-  trashed: محذوفة
+  trashed_tickets: محذوفة
   users: مستخدمين
   rules: القواعد
   personal_settings: الاعدادات الخاصة

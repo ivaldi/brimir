@@ -7,9 +7,10 @@ nb:
 # layouts/application
   new_ticket: Ny henvendelse
   inbox: Innboks
-  mine: Tildelt meg
+  my_tickets: Tildelt meg
+  waiting_tickets: Venter
   closed_tickets: Lukket
-  trashed: Kastet
+  trashed_tickets: Kastet
   users: Brukere
   rules: Regler
   personal_settings: Personlige innstillinger

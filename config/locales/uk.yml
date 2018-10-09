@@ -8,9 +8,10 @@ uk:
 # layouts/application
   new_ticket: Новий тікет
   inbox: Вхідні
-  mine: Мої
+  my_tickets: Мої
+  waiting_tickets: Очікує
   closed_tickets: Закриті
-  trashed: Видалені
+  trashed_tickets: Видалені
   users: Користувачі
   rules: Правила
   personal_settings: Налаштування

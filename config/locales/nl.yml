@@ -8,9 +8,10 @@ nl:
 # layouts/application
   new_ticket: Nieuw ticket
   inbox: Inbox
-  mine: Van mij
+  my_tickets: Van mij
+  waiting_tickets: afwachtend
   closed_tickets: Gesloten
-  trashed: Prullenbak
+  trashed_tickets: Prullenbak
   users: Gebruikers
   rules: Regels
   personal_settings: Persoonlijke instellingen
