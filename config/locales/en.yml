@@ -352,7 +352,7 @@ en:
         message: Message
         kinds:
           user_welcome:
-            template_name: Default user welcome
+            template_name: User welcome
             message: |
               <div>
               Dear [name],
@@ -387,7 +387,7 @@ en:
               </div>
 
           ticket_received:
-            template_name: Default ticket received
+            template_name: Ticket received
             message: |
               <div>
               Dear [name],
@@ -407,6 +407,9 @@ en:
               <br />
               <br />
               </div>
+
+          canned_reply:
+            template_name: Canned reply
 
       tenant:
         default_locale: Default language
