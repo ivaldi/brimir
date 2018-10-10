@@ -194,6 +194,7 @@ en:
   until: until
   receive_new_ticket_notifications: Receive notifications for new tickets.
   email_settings: Email Settings
+  signature: Signature
   save: Save
   access_control: Access Control
   have_access_to_label: User has access to all tickets with any of these labels.

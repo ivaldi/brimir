@@ -121,6 +121,7 @@
           <%= f.check_box :notify,
               label: t(:receive_new_ticket_notifications), tabindex: tabindex %>
 
+          <h5><%= t(:signature) %></h5>
           <%= f.trix_editor :signature, class: 'mbl', tabindex: tabindex %>
         <% end %>
 

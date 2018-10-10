@@ -193,7 +193,8 @@ fr-FR:
   active: L'utilisateur est actif
   until: jusqu'à
   receive_new_ticket_notifications: Recevoir les notifications de nouveaux tickets.
-  email_settings: Paramètres du courriel
+  email_settings: Paramètres de courriel
+  signature: Signature
   save: Sauvegarder
   access_control: Contrôle d'accès
   have_access_to_label: L'utilisateur a accès à tous les tickets avec une de ces étiquettes.
