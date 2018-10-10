@@ -62,13 +62,8 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     @time_zones = ActiveSupport::TimeZone.all.map(&:name).sort
-    @locales = []
-
-    Dir.open("#{Rails.root}/config/locales").each do |file|
-      unless ['.', '..'].include?(file) || file[0] == '.'
-        code = file[0...-4] # strip of .yml
-        @locales << [I18n.translate(:language_name, locale: code), code]
-      end
+    @locales = I18n.available_locales.map do |locale|
+      [I18n.translate(:language_name, locale: locale), locale]
     end
 
     if user_signed_in? && !current_user.locale.blank?
