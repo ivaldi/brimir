@@ -195,6 +195,7 @@ de:
   until: bis
   receive_new_ticket_notifications: Benachrichtigen, wenn ein neues Ticket erstellt wurde.
   email_settings: E-Mail Einstellungen
+  signature: Signatur
   save: Speichern
   access_control: Berechtigungen
   have_access_to_label: 'Der Benutzer darf nur auf Tickets mit diesen Tags zugreifen:'
