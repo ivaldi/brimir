@@ -2,6 +2,10 @@ default: &defaults
   display_user_avatars: true
   default_user_avatar: 'mm'
   user_avatar_api_url: ''
+  enable_custom_stylesheet: true
+  custom_stylesheet_url:
+  enable_custom_javascript: false
+  custom_javascript_url:
 
 development:
   <<: *defaults
