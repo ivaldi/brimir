@@ -308,6 +308,7 @@ de:
 
       ticket:
         from: E-Mail Adresse Absender
+        name: Name
         subject: Betreff
         content: Inhalt
         status: Status
@@ -430,3 +431,4 @@ de:
         notify_user_when_account_is_created: Benutzer benachrichtigen nachdem das Benutzerkonto erstellt wurde.
         stylesheet_url: Pfad zu eigenem Stylesheet.
         ticket_creation_is_open_to_the_world: Jeder ist berechtigt, Tickets zu erstellen.
+        ask_for_name: Auf Formularen zum Erstellen von Tickets nach dem Namen fragen.

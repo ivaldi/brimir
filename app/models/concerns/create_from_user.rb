@@ -18,10 +18,9 @@ module CreateFromUser
   extend ActiveSupport::Concern
 
   included do
-    attr_accessor :from
+    attr_accessor :from, :name
 
     def from=(email)
-
       unless email.blank?
 
         # search using the same method as Devise validation
@@ -29,7 +28,6 @@ module CreateFromUser
 
         unless from_user
           from_user = User.where(email: email).first_or_create
-
           unless from_user
             errors.add(:from, :invalid)
           end
@@ -37,12 +35,21 @@ module CreateFromUser
 
         self.user = from_user
       end
-
     end
 
     def from
-      user.email unless user.nil?
+      # TODO: Use "user&.email" as Ruby 2.2 has reached EOL on 2018-03-31?
+      user.email if user
     end
+
+    def name=(name)
+      self.user.update_attribute(:name, name) unless name.blank?
+    end
+
+    def name
+      user.name if user
+    end
+
   end
 
 end

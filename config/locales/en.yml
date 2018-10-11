@@ -307,6 +307,7 @@ en:
 
       ticket:
         from: From email address
+        name: Name
         subject: Subject
         content: Content
         status: Status
@@ -429,3 +430,4 @@ en:
         notify_user_when_account_is_created: Notify user when account is created.
         stylesheet_url: Add the path to your own custom stylesheet.
         ticket_creation_is_open_to_the_world: Tickets creation is open to everybody.
+        ask_for_name: Ask for name on new ticket forms.

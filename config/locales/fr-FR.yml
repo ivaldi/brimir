@@ -307,6 +307,7 @@ fr-FR:
 
       ticket:
         from: De l'adresse courriel
+        name: Nom
         subject: Sujet
         content: Objet
         status: Statut
@@ -429,3 +430,4 @@ fr-FR:
         notify_user_when_account_is_created: Notifier l'utilisateur après avoir créé son compte utilisateur.
         stylesheet_url: Ajouter chemin pour feuille de style personalisée.
         ticket_creation_is_open_to_the_world: Création de tickets autorisée à tout le monde.
+        ask_for_name: Demander pour le nom sur les formulaires pour créer un ticket.
