@@ -429,4 +429,5 @@ de:
         notify_client_when_ticket_is_created: Benutzer benachrichtigen nachdem ein neues Ticket erstellt wurde.
         notify_user_when_account_is_created: Benutzer benachrichtigen nachdem das Benutzerkonto erstellt wurde.
         stylesheet_url: Pfad zu eigenem Stylesheet.
+        javascript_url: Pfad zur eigenen Javascript-Datei.
         ticket_creation_is_open_to_the_world: Jeder ist berechtigt, Tickets zu erstellen.

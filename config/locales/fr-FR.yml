@@ -427,5 +427,6 @@ fr-FR:
         notify_client_when_ticket_is_assigned_or_closed: Notifier l'utilisateur après avoir attribué ou fermé son ticket.
         notify_client_when_ticket_is_created: Notifier l'utilisateur après avoir reçu et créé un nouveau ticket pour lui.
         notify_user_when_account_is_created: Notifier l'utilisateur après avoir créé son compte utilisateur.
-        stylesheet_url: Ajouter chemin pour feuille de style personalisée.
+        stylesheet_url: Chemin pour feuille de style personalisée.
+        javascript_url: Chemin pour fichier javascript personalisé.
         ticket_creation_is_open_to_the_world: Création de tickets autorisée à tout le monde.

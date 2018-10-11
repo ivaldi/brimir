@@ -34,9 +34,25 @@
 
       <%= f.check_box :notify_user_when_account_is_created %>
 
-      <h5><%= t(:look_and_feel) %></h5>
+      <% if AppSettings.enable_custom_stylesheet || AppSettings.enable_custom_javascript %>
+        <h5><%= t(:look_and_feel) %></h5>
 
-      <%= f.text_field :stylesheet_url %>
+        <% if AppSettings.enable_custom_stylesheet %>
+          <% if AppSettings.custom_stylesheet_url %>
+            <%= f.text_field(:stylesheet_url, value: AppSettings.custom_stylesheet_url, disabled: true) %>
+          <% else %>
+            <%= f.text_field(:stylesheet_url) %>
+          <% end %>
+        <% end %>
+
+        <% if AppSettings.enable_custom_javascript %>
+          <% if AppSettings.custom_javascript_url %>
+            <%= f.text_field(:javascript_url, value: AppSettings.custom_javascript_url, disabled: true) %>
+          <% else %>
+            <%= f.text_field(:javascript_url) %>
+          <% end %>
+        <% end %>
+      <% end %>
 
     </div>
 

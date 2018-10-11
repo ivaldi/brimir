@@ -44,4 +44,23 @@ module ApplicationHelper
     @tabindex += 1
   end
 
+  # Tag to link the custom stylesheet if enabled and either set by application
+  # setting (higher priority) or tenant setting (lower priority)
+  def custom_stylesheet_link_tag
+    if AppSettings.enable_custom_stylesheet
+      if url = AppSettings.custom_stylesheet_url || Tenant.current_tenant.stylesheet_url
+        stylesheet_link_tag url
+      end
+    end
+  end
+
+  # Tag to include the custom javascript if enabled and either set by application
+  # setting (higher priority) or tenant setting (lower priority)
+  def custom_javascript_include_tag
+    if AppSettings.enable_custom_javascript
+      if url = AppSettings.custom_javascript_url || Tenant.current_tenant.javascript_url
+        javascript_include_tag url
+      end
+    end
+  end
 end
