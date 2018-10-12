@@ -47,6 +47,7 @@ class SettingsController < ApplicationController
       :ticket_creation_is_open_to_the_world,
       :ask_for_name,
       :stylesheet_url,
+      :javascript_url,
       :always_notify_me,
       :work_can_wait
     )

@@ -16,11 +16,8 @@
     <% else %>
       <%= stylesheet_link_tag 'application' %>
     <% end %>
-
     <%= stylesheet_link_tag 'application-print', media: 'print' %>
-    <% if Tenant.current_tenant.stylesheet_url? %>
-      <%= stylesheet_link_tag Tenant.current_tenant.stylesheet_url %>
-    <% end %>
+    <%= custom_stylesheet_link_tag %>
 
     <%= javascript_include_tag 'vendor/modernizr' %>
     <%= csrf_meta_tags %>
@@ -126,6 +123,7 @@
     </div>
 
     <%= javascript_include_tag 'application' %>
+    <%= custom_javascript_include_tag %>
 
     <% if user_signed_in? && @show_joyride %>
       <ol class="joyride-list" data-joyride data-options="expose: true;scroll_speed: 1000;">
