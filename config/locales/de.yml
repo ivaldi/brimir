@@ -308,6 +308,7 @@ de:
 
       ticket:
         from: E-Mail Adresse Absender
+        name: Name
         subject: Betreff
         content: Inhalt
         status: Status
@@ -431,3 +432,4 @@ de:
         stylesheet_url: Pfad zu eigenem Stylesheet.
         javascript_url: Pfad zur eigenen Javascript-Datei.
         ticket_creation_is_open_to_the_world: Jeder ist berechtigt, Tickets zu erstellen.
+        ask_for_name: Auf Formularen zum Erstellen von Tickets nach dem Namen fragen.

@@ -307,6 +307,7 @@ en:
 
       ticket:
         from: From email address
+        name: Name
         subject: Subject
         content: Content
         status: Status
@@ -430,3 +431,4 @@ en:
         stylesheet_url: Path to custom stylesheet.
         javascript_url: Path to custom javascript file.
         ticket_creation_is_open_to_the_world: Tickets creation is open to everybody.
+        ask_for_name: Ask for name on new ticket forms.

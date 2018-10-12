@@ -307,6 +307,7 @@ fr-CA:
 
       ticket:
         from: De l'adresse courriel
+        name: Nom
         subject: Sujet
         content: Objet
         status: Statut
@@ -430,3 +431,4 @@ fr-CA:
         stylesheet_url: Chemin pour feuille de style personalisée.
         javascript_url: Chemin pour fichier javascript personalisé.
         ticket_creation_is_open_to_the_world: Création de billets autorisée à tout le monde.
+        ask_for_name: Demander pour le nom sur les formulaires pour créer un billet.

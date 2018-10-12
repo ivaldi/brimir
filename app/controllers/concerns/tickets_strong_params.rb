@@ -21,6 +21,7 @@ module TicketsStrongParams
     if !current_user.nil? && current_user.agent?
       params.require(:ticket).permit(
         :from,
+        :name,
         :to_email_address_id,
         :content,
         :subject,
@@ -35,6 +36,7 @@ module TicketsStrongParams
     else
       params.require(:ticket).permit(
         :from,
+        :name,
         :content,
         :subject,
         :priority,

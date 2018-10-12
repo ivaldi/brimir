@@ -9,6 +9,12 @@
     <%= f.text_field :from, tabindex: tabindex %>
   </p>
 
+  <% if Tenant.current_tenant.ask_for_name %>
+    <p>
+      <%= f.text_field :name, tabindex: tabindex %>
+    </p>
+  <% end %>
+
   <% if !current_user.nil? && current_user.agent? %>
     <p>
       <% blank = @email_addresses.count == 0 ? EmailAddress.default_email : nil %>

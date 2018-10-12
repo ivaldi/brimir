@@ -136,6 +136,32 @@ class TicketsControllerTest < ActionController::TestCase
     end
   end
 
+  test 'should render name input for new tickets if told so by tenant settings' do
+    sign_in users(:alice)
+    Tenant.current_domain = tenants(:main).domain
+    Tenant.current_tenant.ask_for_name = true
+    Tenant.current_tenant.save!
+    assert_match %r(<input[^>]+ticket\[name\]), get(:new).body
+    Tenant.current_tenant.ask_for_name = false
+    Tenant.current_tenant.save!
+    refute_match %r(<input[^>]+ticket\[name\]), get(:new).body
+  end
+
+  test 'should write email and name to user' do
+    sign_in users(:alice)
+    post :create, params: {
+      ticket: {
+        from: 'test@test.nl',
+        name: 'Tester',
+        content: 'Foobar',
+        subject: 'Foobar',
+      }
+    }
+    user = Ticket.last.user
+    assert_equal user.email, 'test@test.nl'
+    assert_equal user.name, 'Tester'
+  end
+
   # BEGIN OF TESTS FOR TICKET CREATION
   # SITUATIONS:
   # 1) CAPTCHA / NO CAPTCHA
