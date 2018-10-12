@@ -74,7 +74,7 @@
 
   <% if Ticket.recaptcha_keys_present? && !user_signed_in? %>
     <p>
-      <%= recaptcha_tags %>
+      <%= recaptcha_tags hl: I18n.locale %>
     </p>
   <% end %>
 
