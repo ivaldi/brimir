@@ -43,7 +43,7 @@ module CreateFromUser
     end
 
     def name=(name)
-      self.user.update_attribute(:name, name) unless name.blank?
+      self.user.update_attribute(:name, name) if user && !name.blank?
     end
 
     def name
