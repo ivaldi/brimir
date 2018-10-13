@@ -71,7 +71,6 @@ class Reply < ApplicationRecord
     Ticket.new(
       content: self.content,
       subject: self.ticket.subject,
-      text_content: self.text_content,
       created_at: self.created_at,
       updated_at: self.updated_at,
       user_id: self.user_id,
