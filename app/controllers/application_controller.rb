@@ -78,10 +78,6 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    if I18n.locale == :fa
-      @rtl = true
-    else
-      @rtl = false
-    end
+    @rtl = %i(ar fa).include?(I18n.locale)
   end
 end
