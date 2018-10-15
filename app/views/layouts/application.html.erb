@@ -23,7 +23,7 @@
     <%= csrf_meta_tags %>
   </head>
 
-  <body class="<%= ["#{controller_name}-#{action_name}", ('user-signed-in' if user_signed_in?)].compact.join(',') %>" style="<%= 'direction: rtl' if @rtl %>">
+  <body class="<%= ["#{controller_name}-#{action_name}", ('user-signed-in' if user_signed_in?)].compact.join(' ') %>" style="<%= 'direction: rtl' if @rtl %>">
 
     <% if user_signed_in? %>
       <nav class="top-bar" data-topbar>
