@@ -15,7 +15,7 @@ Brimir::Application.routes.draw do
     resource :lock, only: [:destroy, :create], module: :tickets
   end
 
-  get "/:hook/:mail_key/tickets",
+  post "/:hook/:mail_key/tickets",
     controller: 'tickets',
     action: 'create',
     constraints: ->(r) { r.path_parameters[:hook].in? TicketsController::MAIL_HOOKS },
