@@ -8,26 +8,27 @@ pt-BR:
   time_ago_as_phrase: "%{timespan} atrás"
 
 # layouts/application
-  new_ticket: Novo Chamado
-  inbox: Caixa de Entrada
+  new_ticket: Novo chamado
+  inbox: Caixa de entrada
   my_tickets: Meu
   waiting_tickets: Aguardando
   closed_tickets: Fechado
   trashed_tickets: Excluído
   users: Usuários
   rules: Regras
-  personal_settings: Configurações Pessoais
+  personal_settings: Configurações pessoais
   sign_out: Sair
   delete: Excluir
   close: Fechar
   wait: Aguardar
   to: Para
+  inactive: Inativo
 
   joyride:
     tickets: Qualquer pessoa pode criar chamados usando este botão.
     personal_settings: Defina sua assinatura, timezone e outras preferências via este menu.
-    labels: Depois de adicionar etiquetas para chamados ou usuários, eles aparecerão aqui. Você pode, em seguida, usá-los como filtros.
-    rules: Adicione, automaticamente, etiquetas, responsáveis, mudanças de status e muito mais.
+    labels: Depois de adicionar etiquetas para chamados ou usuários, eles aparecerão aqui. Você pode, em seguida, usá-los como filtros. Novas etiquetas podem ser criadas dentro de qualquer chamado.
+    rules: Adicione, automaticamente, etiquetas, responsáveis, mudanças de situação e muito mais.
     users: Adicione mais agentes ou usuários normais.
     final: Obrigado por usar o Brimir!
     next: Próximo
@@ -56,9 +57,11 @@ pt-BR:
 
 # tickets/index
   count_tickets:
+    zero: 'Sem chamados'
     one: '%{count} chamado'
     other: '%{count} chamados'
   count_tickets_containing:
+    zero: 'Não há chamados'
     one: 'Contém %{count} chamados'
     other: 'Contém %{count} chamados'
   priority: Prioridade
@@ -73,15 +76,19 @@ pt-BR:
   locked_by_user: O chamado está sob a responsabilidade de %{user}
   ticket_id_created_by_at: '#%{id} criado por %{user} em %{at}'
 
+# tickets create
+  create_ticket: Criar Chamado
+
 # tickets/show
   add: Adicionar
   ticket_by_at: Por %{email} em %{at}
   to_email: para %{email}
   no_content: Sem conteúdo
   ticket_id: Número do chamado
-  status: Status
+  status: Situação
   assignee: Responsável
   num_replies:
+    zero: 'sem respostas'
     one: '%{count} resposta'
     other: '%{count} respostas'
   labels: Etiquetas
@@ -96,11 +103,15 @@ pt-BR:
   change_priority: Mudar prioridade
 
 # tickets/_change_status_form
-  change_status: Mudar status
+  change_status: Mudar situação
 
 # tickets/_change_assignee_form
   change_assignee: Atribuir chamado
   assign: Atribuir
+
+# tickets/_change_subject_form
+  change_subject: Renomear chamado
+  str1_has_renamed_ticket_from_str2_to_str3: "%{str1} renomeou o chamado de '%{str2}' para '%{str3}'."
 
 # tickets/locks/create
   ticket_locked_by_somebody_else: O chamado já está sob a responsabilidade de alguém.
@@ -108,8 +119,14 @@ pt-BR:
 # tickets/merge
   ticket_has_been_merged_to: "Este chamado já foi mesclado com o chamado #%{ticket_id}."
   merge: Mesclar
-  merge_explanation: "Mesclar os chamados selecionados. Isto irá copiar todas as interações para o chamado mais velho e fechará os outros tickets."
+  merge_explanation: "Mesclar os chamados selecionados. Isto irá copiar todas as interações para o chamado mais velho e fechará os outros chamados."
   tickets_have_been_merged: "Os chamados foram mesclados."
+
+# email_imports/new
+  import_emails: Importar e-mails
+  upload_eml_files_to_import_them_as_new_tickets: "Envie arquivos *.eml aqui para importá-los como novos chamados."
+  upload_files: Enviar arquivos
+  perform_email_import: Executar a importação de e-mails
 
 # replies/new
   add_reply: Adicionar resposta
@@ -119,19 +136,22 @@ pt-BR:
   attach_files: Anexar arquivos
   attach_file: Anexar arquivo
   send_reply: Enviar resposta
+  attach_note: Anexar nota
   on_date_author_wrote: 'Em %{date}, %{author} escreveu:'
   notification_will_be_sent_to: Sua notificação será enviada para
+  canned_reply: Resposta automática
   save_as_draft: Salvar como rascunho
   internal_note: Nota interna
 
 # replies/_reply
   reply_by: Respondido por
+  split_off_ticket: Dividir chamado
 
 # ticket_mailer/notify_assigned.text.erb
   ticket_assigned: Chamado atribuído a você
 
 # ticket_mailer/notify_status_changed.text.erb
-  tickets_status_modified: Status modificado para os chamados
+  tickets_status_modified: Situação modificada para os chamados
 
 # notification_mailer
   view_ticket: Ver chamado
@@ -169,11 +189,14 @@ pt-BR:
   customer: Cliente
 
 # users/_form
-  account_settings: Configurações da conta
+  account_settings: Configurações da Conta
   only_fill_in_passwords_when_modifying: Somente preencha estes dois campos se você deseja modificar sua senha.
   user_is_an_agent: Usuário é um agente
+  active: Usuário está ativo
+  until: até
   receive_new_ticket_notifications: Receba notificações de novos chamados
   email_settings: Configurações de E-mail
+  signature: Assinatura
   save: Salvar
   access_control: Controle de acesso
   have_access_to_label: O usuário tem acesso a todos chamados com qualquer uma destas etiquetas.
@@ -192,7 +215,6 @@ pt-BR:
   file_not_found: Arquivo não encontrado
 
 # controllers/users
-  settings_saved: Configurações salvas
   user_added: Usuário adicionado
   user_removed: Usuário removido
 
@@ -286,10 +308,11 @@ pt-BR:
         include_quote_in_reply: Incluir citação da mensagem original na resposta
 
       ticket:
-        from: De
+        from: De (endereço de e-mail)
+        name: Nome
         subject: Assunto
         content: Conteúdo
-        status: Status
+        status: Situação
         statuses:
           open: aberto
           closed: fechado
@@ -303,9 +326,9 @@ pt-BR:
         priority: Prioridade
         assignee_id: Responsável
         created_at: Criado em
-        to: Responsável
-        orig_to: Para o e-mail
-        orig_cc: Com cópia para o e-mail
+        to: Destinatário verificado
+        orig_to: Para o destinatário
+        orig_cc: Com cópia
 
       reply:
         from: De
@@ -321,14 +344,15 @@ pt-BR:
         action_operations:
           assign_label: Atribuir etiqueta
           notify_user: Enviar notificação para
-          change_status: Alterar status para
+          change_status: Alterar situação para
           change_priority: Alterar prioridade para
           assign_user: Atribir para
+        action_value: Valor da ação
 
       email_address:
         email: Endereço de e-mail
         name: Nome
-        default: Usar como endereço de e-mail de envio padrão
+        default: Endereço de e-mail de envio padrão
         verification_token: Verificado
 
       email_template:
@@ -338,7 +362,7 @@ pt-BR:
         message: Mensagem
         kinds:
           user_welcome:
-            template_name: Padrão de boas-vindas
+            template_name: Boas-vindas
             message: |
               <div>
               Olá, [name].
@@ -369,11 +393,11 @@ pt-BR:
               Webmaster [domain]
               <br />
               <br />
-              *** este e-mail foi automaticamente gerado, por gentileza, não responda ***
+              *** este e-mail foi automaticamente gerado, por gentileza, não responda! ***
               </div>
 
           ticket_received:
-            template_name: Padrão de chamado recebido
+            template_name: Chamado recebido
             message: |
               <div>
               Olá, [name].
@@ -394,6 +418,9 @@ pt-BR:
               <br />
               </div>
 
+          canned_reply:
+            template_name: Resposta automática
+
       tenant:
         default_locale: Idioma Principal
         ignore_user_agent_locale: Ignorar o idioma padrão do navegador
@@ -404,4 +431,6 @@ pt-BR:
         notify_client_when_ticket_is_created: Notificar o cliente quando um novo chamado criado é recebido.
         notify_user_when_account_is_created: Notificar quando uma conta de usuário for criada.
         stylesheet_url: Adicione o caminho do seu estilo personalizado.
-        ticket_creation_is_open_to_the_world: Criação de tickets aberta para todos.
+        javascript_url: Adicione o caminho do seu arquivo JavaScript personalizado.
+        ticket_creation_is_open_to_the_world: Criação de chamados aberto para todos.
+        ask_for_name: Perguntar pelo nome em novos formulários de chamado.
