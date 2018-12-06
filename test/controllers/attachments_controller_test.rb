@@ -14,38 +14,80 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+require 'test_helper'
+
 class AttachmentsControllerTest < ActionController::TestCase
 
-  setup do
-    sign_in users(:alice)
-    Tenant.current_domain = Tenant.first.domain
-    @attachment = attachments(:default_page)
-    @attachment.update_attributes!({
-      file: fixture_file_upload('attachments/default-testpage.pdf', 'application/pdf')
-    })
+  class AttachingJpegs < ActionController::TestCase
+
+    setup do
+      sign_in users(:alice)
+      Tenant.current_domain = Tenant.first.domain
+      @attachment = attachments(:default_page)
+      @attachment.update_attributes!({
+        file: fixture_file_upload('attachments/default-testpage.jpg', 'image/jpeg')
+      })
+    end
+
+    test 'should get new' do
+      sign_out users(:alice)
+      get :new, xhr: true
+      assert_response :success
+    end
+
+    test 'should show thumb' do
+      get :show, params: {
+        format: :thumb,
+        id: @attachment.id
+      }
+      assert_response :success
+    end
+
+
+    test 'should download original' do
+      get :show, params: {
+        format: :original,
+        id: @attachment.id
+      }
+      assert_response :success
+    end
+
   end
 
-  test 'should get new' do
-    sign_out users(:alice)
-    get :new, xhr: true
-    assert_response :success
-  end
+  class AttachingPdfs < ActionController::TestCase
 
-  test 'should show thumb' do
-    get :show, params: {
-      format: :thumb,
-      id: @attachment.id
-    }
-    assert_response :success
-  end
+    setup do
+      sign_in users(:charlie)
+      Tenant.current_domain = Tenant.first.domain
+      @attachment = attachments(:default_page)
+      @attachment.update_attributes!({
+        file: fixture_file_upload('attachments/default-testpage.pdf', 'application/pdf')
+      })
+    end
+
+    test 'should get new' do
+      sign_out users(:alice)
+      get :new, xhr: true
+      assert_response :success
+    end
+
+    test 'should show thumb' do
+      get :show, params: {
+        format: :thumb,
+        id: @attachment.id
+      }
+      assert_response :success
+    end
 
 
-  test 'should download original' do
-    get :show, params: {
-      format: :original,
-      id: @attachment.id
-    }
-    assert_response :success
+    test 'should download original' do
+      get :show, params: {
+        format: :original,
+        id: @attachment.id
+      }
+      assert_response :success
+    end
+
   end
 
 end
