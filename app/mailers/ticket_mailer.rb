@@ -153,8 +153,18 @@ class TicketMailer < ActionMailer::Base
           content_id = attachment.content_id[1..-2]
           content_id = nil unless incoming.content.include?(content_id)
         end
-        incoming.attachments.create(file: file,
-            content_id: content_id)
+
+        attachment = incoming.attachments.new
+        attachment.content_id = content_id
+        begin
+          attachment.file = file
+          attachment.save!
+        rescue
+          file.rewind
+          attachment.disable_thumbnail_generation = true
+          attachment.file = file
+          attachment.save!
+        end
       end
 
     end
