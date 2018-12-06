@@ -35,7 +35,11 @@ class Attachment < ApplicationRecord
   do_not_validate_attachment_file_type :file
   before_post_process :thumbnail?
 
+  attr_accessor :disable_thumbnail_generation
+
   def thumbnail?
+
+    return false if disable_thumbnail_generation
 
     unless file_content_type.nil?
 
