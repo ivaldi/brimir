@@ -66,7 +66,7 @@ gem 'cancancan', '~> 2.1', '>= 2.1.4'
 gem 'will_paginate', "~> 3.1"
 
 # attachments, thumbnails etc
-gem 'paperclip', "~> 5.3"
+gem 'paperclip', "~> 6.1"
 
 # select2 replacement for selectboxes
 gem 'select2-rails', '~> 3.5' # newer breaks Foundation Reveal on tickets#show
